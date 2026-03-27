@@ -89,12 +89,14 @@ jobs:
 
             echo "📥 Pulling latest code from main"
             git pull origin main
+            
+            PNPM=/home/madhu/.nvm/versions/node/v24.14.1/bin/pnpm
 
             echo "📦 Installing dependencies"
-            pnpm install --frozen-lockfile
+            $PNPM install --frozen-lockfile
 
             echo "🏗️ Building project"
-            pnpm build
+            $PNPM build
 
             echo "🔁 Managing PM2 process"
   
