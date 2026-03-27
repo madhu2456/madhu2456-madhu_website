@@ -90,13 +90,22 @@ jobs:
             echo "📥 Pulling latest code from main"
             git pull origin main
             
-            PNPM=/home/madhu/.nvm/versions/node/v24.14.1/bin/pnpm
+            # 👇 LOAD NVM (CRITICAL FIX)
+            export NVM_DIR="$HOME/.nvm"
+            . "$NVM_DIR/nvm.sh"
+            
+            # 👇 Use correct Node version
+            nvm use 24.14.1
+            
+            # 👇 Verify
+            node -v
+            pnpm -v
 
             echo "📦 Installing dependencies"
-            $PNPM install --frozen-lockfile
+            pnpm install --frozen-lockfile
 
             echo "🏗️ Building project"
-            $PNPM build
+            pnpm build
 
             echo "🔁 Managing PM2 process"
   
