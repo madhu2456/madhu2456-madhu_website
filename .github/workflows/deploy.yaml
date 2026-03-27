@@ -79,6 +79,7 @@ jobs:
           host: madhudadi.in
           username: madhu
           key: ${{ secrets.SSH_KEY }}
+          command_timeout: '20m'
           script: |
             set -e
 
@@ -102,7 +103,7 @@ jobs:
             pnpm -v
 
             echo "📦 Installing dependencies"
-            pnpm install --frozen-lockfile
+            pnpm install --frozen-lockfile --prefer-offline
 
             echo "🏗️ Building project"
             pnpm build
