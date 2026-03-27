@@ -1,0 +1,81 @@
+name: NextJS CI + Auto PR + Deploy (pnpm)
+
+on:
+  push:
+    branches:
+      - dev   # change if needed
+
+jobs:
+  build-and-pr:
+    name: Build & Create PR
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build Next.js app
+        run: pnpm build
+
+      - name: Create Pull Request (Dev → Main)
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: main
+          head: dev
+          title: "🚀 Auto PR: Dev → Main"
+          body: Auto PR created after push to dev
+
+  deploy:
+    name: Deploy to VPS
+    runs-on: ubuntu-latest
+    needs: build-and-pr
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build Next.js app
+        run: pnpm build
+
+      # Required ONLY if using static export
+      - name: Export static build
+        run: pnpm exec next export
+
+      - name: Deploy via Rsync
+        uses: burnett01/rsync-deployments@7.0.1
+        with:
+          switches: -avzr --delete
+          path: out/
+          remote_path: /var/www/Portfolio/html   # change this
+          remote_host: madhudadi.in
+          remote_user: madhu
+          remote_key: ${{ secrets.SSH_KEY }}
