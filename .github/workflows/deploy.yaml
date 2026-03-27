@@ -106,7 +106,7 @@ jobs:
             pnpm install --frozen-lockfile --prefer-offline --reporter=append-only
 
             echo "🏗️ Building project"
-            NODE_OPTIONS="--max-old-space-size=1024" pnpm build --no-turbo
+            NODE_OPTIONS="--max-old-space-size=1024" pnpm build
 
             echo "🔁 Managing PM2 process"
   
