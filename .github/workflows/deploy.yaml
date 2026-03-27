@@ -1,13 +1,21 @@
-name: NextJS CI + Auto PR + Deploy (pnpm)
+name: NextJS CI & Deploy (pnpm + PM2)
 
 on:
   push:
     branches:
-      - dev   # change if needed
+      - dev
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
-  build-and-pr:
-    name: Build & Create PR
+  # =========================
+  # JOB 1: BUILD + AUTO PR
+  # =========================
+  test-and-pr:
+    if: github.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
     environment: Portfolio
 
@@ -15,69 +23,7 @@ jobs:
       NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
       NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}
       NEXT_PUBLIC_SANITY_STUDIO_URL: ${{ secrets.NEXT_PUBLIC_SANITY_STUDIO_URL }}
-
       NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
-      CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
-
-      NEXT_PUBLIC_CHATKIT_WORKFLOW_ID: ${{ secrets.NEXT_PUBLIC_CHATKIT_WORKFLOW_ID }}
-
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-
-      SANITY_API_TOKEN: ${{ secrets.SANITY_API_TOKEN }}
-      SANITY_VIEWER_TOKEN: ${{ secrets.SANITY_VIEWER_TOKEN }}
-      SANITY_STUDIO_PREVIEW_ORIGIN: ${{ secrets.SANITY_STUDIO_PREVIEW_ORIGIN }}
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '24'
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Build Next.js app
-        run: pnpm build
-
-      - name: Create Pull Request (Dev → Main)
-        uses: peter-evans/create-pull-request@v6
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          base: main
-          head: dev
-          title: "🚀 Auto PR: Dev → Main"
-          body: Auto PR created after push to dev
-
-  deploy:
-    name: Deploy to VPS
-    runs-on: ubuntu-latest
-    needs: build-and-pr
-    environment: Portfolio
-
-    env:
-      NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
-      NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}
-      NEXT_PUBLIC_SANITY_STUDIO_URL: ${{ secrets.NEXT_PUBLIC_SANITY_STUDIO_URL }}
-
-      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
-      CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
-
-      NEXT_PUBLIC_CHATKIT_WORKFLOW_ID: ${{ secrets.NEXT_PUBLIC_CHATKIT_WORKFLOW_ID }}
-
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-
-      SANITY_API_TOKEN: ${{ secrets.SANITY_API_TOKEN }}
-      SANITY_VIEWER_TOKEN: ${{ secrets.SANITY_VIEWER_TOKEN }}
-      SANITY_STUDIO_PREVIEW_ORIGIN: ${{ secrets.SANITY_STUDIO_PREVIEW_ORIGIN }}
 
     steps:
       - name: Checkout code
@@ -100,12 +46,56 @@ jobs:
       - name: Build Next.js app
         run: pnpm build
 
-      - name: Deploy via Rsync
-        uses: burnett01/rsync-deployments@7.0.1
+      - name: Create Pull Request (Dev → Main)
+        uses: peter-evans/create-pull-request@v6
         with:
-          switches: -avzr --delete
-          path: out/
-          remote_path: /var/www/Portfolio/html   # change this
-          remote_host: madhudadi.in
-          remote_user: madhu
-          remote_key: ${{ secrets.SSH_KEY }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: main
+          head: dev
+          title: "🚀 Auto PR: Dev → Main"
+          body: Auto PR created after push to dev
+
+  # =========================
+  # JOB 2: DEPLOY TO VPS
+  # =========================
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: madhudadi.in
+          username: madhu
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            set -e
+
+            export PATH=$HOME/.local/share/pnpm:$PATH
+
+            echo "📂 Navigating to project directory"
+            cd /home/madhu/madhu2456-madhu_website
+
+            echo "📥 Pulling latest code from main"
+            git pull origin main
+
+            echo "📦 Installing dependencies"
+            pnpm install --frozen-lockfile
+
+            echo "🏗️ Building project"
+            pnpm build
+
+            echo "🔁 Managing PM2 process"
+  
+            if pm2 describe portfolio > /dev/null 2>&1; then
+            echo "🔁 Reloading existing app"
+            pm2 reload portfolio --update-env
+            else
+            echo "🚀 Starting new app"
+            pm2 start "pnpm start" --name portfolio
+            fi
+            
+            pm2 save
+
+            echo "✅ Deployment successful"
