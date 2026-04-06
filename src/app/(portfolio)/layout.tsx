@@ -56,10 +56,18 @@ export async function generateMetadata(): Promise<Metadata> {
     [profile?.firstName, profile?.lastName].filter(Boolean).join(" ") ||
     "Madhu Dadi";
   const title = settings?.siteTitle || `${fullName} - Portfolio`;
-  const description =
+
+  // Google truncates meta descriptions beyond ~155 chars; audit tools flag >130.
+  // Truncate at the last word boundary within 130 chars to stay clean.
+  const rawDescription =
     settings?.siteDescription ||
     profile?.shortBio ||
     `Portfolio of ${fullName} — developer, builder, and problem solver.`;
+  const description =
+    rawDescription.length > 130
+      ? `${rawDescription.slice(0, rawDescription.lastIndexOf(" ", 130))}…`
+      : rawDescription;
+
   const keywords = (settings?.siteKeywords as string[] | undefined) ?? [];
 
   const ogImageUrl =
@@ -93,6 +101,11 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     alternates: {
       canonical: "/",
+      // Hreflang — single English site; x-default + en covers both Google requirements
+      languages: {
+        "en": siteUrl,
+        "x-default": siteUrl,
+      },
     },
     openGraph: {
       type: "profile",
