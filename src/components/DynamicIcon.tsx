@@ -21,7 +21,7 @@ function getIconComponent(name: string): IconComp {
     const Loaded = dynamic<{ className?: string }>(
       () =>
         import("@tabler/icons-react").then((mod) => {
-          const Icon = (mod as Record<string, IconComp>)[name];
+          const Icon = (mod as unknown as Record<string, IconComp>)[name];
           // Fall back to question-mark if the name doesn't exist in the library
           return { default: Icon ?? IconQuestionMark };
         }),
