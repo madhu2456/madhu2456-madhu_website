@@ -1,5 +1,5 @@
 import { defineQuery } from "next-sanity";
-import Chat from "@/components/chat/Chat";
+import ChatGate from "@/components/chat/ChatGate";
 import { sanityFetch } from "@/sanity/lib/live";
 import SidebarToggle from "../SidebarToggle";
 
@@ -31,7 +31,7 @@ async function ChatWrapper() {
         <SidebarToggle />
       </div>
 
-      <Chat profile={profile} />
+      <ChatGate profile={profile} />
     </div>
   );
 }
