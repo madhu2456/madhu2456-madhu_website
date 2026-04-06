@@ -1,7 +1,9 @@
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { SanityLive } from "@/sanity/lib/live";
+import { defineQuery } from "next-sanity";
+import { SanityLive, sanityFetch } from "@/sanity/lib/live";
+import { urlFor } from "@/sanity/lib/image";
 import "../globals.css";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { draftMode } from "next/headers";
@@ -25,10 +27,101 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Madhu Dadi",
-  description: "Portfolio of Madhu Dadi with AI Enabled",
-};
+const METADATA_QUERY = defineQuery(`{
+  "settings": *[_type == "siteSettings"][0]{
+    siteTitle,
+    siteDescription,
+    siteKeywords,
+    ogImage,
+    twitterHandle,
+  },
+  "profile": *[_id == "singleton-profile"][0]{
+    firstName,
+    lastName,
+    headline,
+    shortBio,
+    profileImage,
+    socialLinks,
+    location,
+  }
+}`);
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { data } = await sanityFetch({ query: METADATA_QUERY });
+  const settings = data?.settings;
+  const profile = data?.profile;
+
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.com";
+  const fullName =
+    [profile?.firstName, profile?.lastName].filter(Boolean).join(" ") ||
+    "Madhu Dadi";
+  const title = settings?.siteTitle || `${fullName} - Portfolio`;
+  const description =
+    settings?.siteDescription ||
+    profile?.shortBio ||
+    `Portfolio of ${fullName} — developer, builder, and problem solver.`;
+  const keywords = (settings?.siteKeywords as string[] | undefined) ?? [];
+
+  const ogImageUrl =
+    settings?.ogImage
+      ? urlFor(settings.ogImage).width(1200).height(630).url()
+      : profile?.profileImage
+        ? urlFor(profile.profileImage).width(1200).height(630).url()
+        : undefined;
+
+  return {
+    metadataBase: new URL(siteUrl),
+    title: {
+      default: title,
+      template: `%s | ${fullName}`,
+    },
+    description,
+    ...(keywords.length > 0 && { keywords }),
+    authors: [{ name: fullName, url: siteUrl }],
+    creator: fullName,
+    publisher: fullName,
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+    alternates: {
+      canonical: "/",
+    },
+    openGraph: {
+      type: "profile",
+      locale: "en_US",
+      url: siteUrl,
+      siteName: title,
+      title,
+      description,
+      ...(ogImageUrl && {
+        images: [{ url: ogImageUrl, width: 1200, height: 630, alt: title }],
+      }),
+      ...(profile?.firstName && { firstName: profile.firstName }),
+      ...(profile?.lastName && { lastName: profile.lastName }),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      ...(settings?.twitterHandle && {
+        creator: `@${settings.twitterHandle}`,
+        site: `@${settings.twitterHandle}`,
+      }),
+      ...(ogImageUrl && { images: [ogImageUrl] }),
+    },
+    other: {
+      "theme-color": "#7c3aed",
+    },
+  };
+}
 
 export default async function RootLayout({
   children,
