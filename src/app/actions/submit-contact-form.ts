@@ -3,6 +3,15 @@
 import { serverClient } from "@/sanity/lib/serverClient";
 
 export async function submitContactForm(formData: FormData) {
+  // Guard: catch missing token early with a clear message
+  if (!process.env.SANITY_SERVER_API_TOKEN) {
+    console.error("Contact form error: SANITY_SERVER_API_TOKEN is not set");
+    return {
+      success: false,
+      error: "Server configuration error: missing API token",
+    };
+  }
+
   try {
     const name = formData.get("name") as string;
     const email = formData.get("email") as string;
@@ -33,10 +42,15 @@ export async function submitContactForm(formData: FormData) {
       data: result,
     };
   } catch (error) {
-    console.error("Error submitting contact form:", error);
+    const message =
+      error instanceof Error ? error.message : "Unknown error";
+    console.error("Contact form submission failed:", message, error);
     return {
       success: false,
-      error: "Failed to submit the form. Please try again later.",
+      error:
+        process.env.NODE_ENV === "development"
+          ? `Submission failed: ${message}`
+          : "Failed to submit the form. Please try again later.",
     };
   }
 }
