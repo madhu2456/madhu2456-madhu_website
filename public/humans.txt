@@ -1,0 +1,18 @@
+/* TEAM */
+Developer & Designer: Madhu Dadi
+Site: https://madhudadi.com
+Location: See portfolio for current location
+
+/* THANKS */
+Next.js — https://nextjs.org
+Sanity CMS — https://sanity.io
+Clerk — https://clerk.dev
+Tailwind CSS — https://tailwindcss.com
+OpenAI ChatKit — https://platform.openai.com
+
+/* SITE */
+Last update: 2026/04
+Language: English
+Doctype: HTML5
+IDE: VS Code
+CMS: Sanity
