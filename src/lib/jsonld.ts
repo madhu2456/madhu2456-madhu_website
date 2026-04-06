@@ -54,13 +54,24 @@ export function buildPersonSchema({
     (v): v is string => typeof v === "string" && v.length > 0,
   );
 
+  // Build a single description — prefer the short bio, fall back to headline,
+  // append years of experience if available. Multiple spread of the same key
+  // produces invalid JSON-LD so we consolidate here.
+  const descriptionParts: string[] = [];
+  if (bio) descriptionParts.push(bio);
+  else if (headline) descriptionParts.push(headline);
+  if (yearsOfExperience) {
+    descriptionParts.push(`${yearsOfExperience}+ years of professional experience.`);
+  }
+  const description = descriptionParts.join(" ") || undefined;
+
   return {
     "@type": "Person",
     "@id": `${siteUrl}/#person`,
     name: fullName,
     url: siteUrl,
-    ...(headline && { description: headline }),
-    ...(bio && { description: bio }),
+    ...(description && { description }),
+    ...(headline && { jobTitle: headline }),
     ...(email && { email }),
     ...(location && {
       address: {
@@ -76,14 +87,8 @@ export function buildPersonSchema({
         contentUrl: profileImageUrl,
       },
     }),
-    ...(headline && { jobTitle: headline }),
-    ...(yearsOfExperience && {
-      description: `${yearsOfExperience}+ years of professional software engineering experience`,
-    }),
     ...(sameAs.length > 0 && { sameAs }),
-    hasOccupation: {
-      "@id": `${siteUrl}/#occupation`,
-    },
+    hasOccupation: { "@id": `${siteUrl}/#occupation` },
   };
 }
 
@@ -109,7 +114,6 @@ export function buildOccupationSchema({
     },
     skills:
       "Full-Stack Development, React, Next.js, TypeScript, Node.js, AI/ML, Cloud Infrastructure",
-    estimatedSalary: [],
   };
 }
 
