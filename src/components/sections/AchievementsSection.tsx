@@ -103,6 +103,7 @@ export async function AchievementsSection() {
                             .url()}
                           alt={achievement.title || "Achievement"}
                           fill
+                          sizes="(max-width: 640px) calc(100vw - 48px), (max-width: 1024px) 45vw, 400px"
                           className="object-cover"
                         />
                       </div>
@@ -179,6 +180,7 @@ export async function AchievementsSection() {
                             .url()}
                           alt={achievement.title || "Achievement"}
                           fill
+                          sizes="(max-width: 640px) calc(100vw - 48px), (max-width: 1024px) 45vw, 300px"
                           className="object-cover"
                         />
                       </div>

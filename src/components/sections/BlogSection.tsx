@@ -60,6 +60,7 @@ export async function BlogSection() {
                         .url()}
                       alt={post.title || "Blog post"}
                       fill
+                      sizes="(max-width: 640px) calc(100vw - 48px), (max-width: 1024px) 45vw, 400px"
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
