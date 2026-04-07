@@ -104,7 +104,6 @@ export default async function OGImage() {
                 borderRadius: "100px",
                 padding: "6px 22px",
                 marginBottom: "26px",
-                width: "fit-content",
               }}
             >
               <span style={{ color: "#c4b5fd", fontSize: "19px", fontWeight: 500, display: "flex" }}>
