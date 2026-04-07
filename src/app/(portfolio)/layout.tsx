@@ -1,4 +1,3 @@
-import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { defineQuery } from "next-sanity";
@@ -142,8 +141,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
         <GoogleTagManager gtmId="GTM-PBB2W9VG" />
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -187,6 +185,5 @@ export default async function RootLayout({
           </ThemeProvider>
         </body>
       </html>
-    </ClerkProvider>
   );
 }
