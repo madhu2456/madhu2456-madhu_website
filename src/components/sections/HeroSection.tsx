@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { defineQuery } from "next-sanity";
-import { BackgroundRippleEffect } from "@/components/ui/background-ripple-effect";
+import { LazyBackgroundRippleEffect } from "@/components/ui/background-ripple-effect-lazy";
 import { LayoutTextFlip } from "@/components/ui/layout-text-flip";
+import { ObfuscatedEmail } from "@/components/ObfuscatedEmail";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
 import { ProfileImage } from "./ProfileImage";
@@ -36,7 +37,7 @@ export async function HeroSection() {
       className="relative min-h-screen flex items-center justify-center px-6 py-20 overflow-hidden"
     >
       {/* Background Ripple Effect */}
-      <BackgroundRippleEffect rows={8} cols={27} cellSize={56} />
+      <LazyBackgroundRippleEffect rows={8} cols={27} cellSize={56} />
 
       <div className="relative z-10 container mx-auto max-w-6xl">
         <div className="@container">
@@ -116,7 +117,7 @@ export async function HeroSection() {
                 {profile.email && (
                   <div className="flex items-center gap-2">
                     <span>📧</span>
-                    <span className="truncate">{profile.email}</span>
+                    <ObfuscatedEmail email={profile.email} className="truncate" />
                   </div>
                 )}
                 {profile.location && (

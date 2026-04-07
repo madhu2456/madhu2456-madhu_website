@@ -52,7 +52,7 @@ export async function ContactSection() {
                       href={`mailto:${profile.email}`}
                       className="text-muted-foreground hover:text-primary transition-colors text-xs @md/info:text-sm truncate block"
                     >
-                      {profile.email}
+                      Send me an email
                     </Link>
                   </div>
                 </div>

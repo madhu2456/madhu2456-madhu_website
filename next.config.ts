@@ -16,6 +16,18 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      // Eliminate the www → non-www redirect chain (saves ~0.6 s round-trip)
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.madhudadi.in" }],
+        destination: "https://madhudadi.in/:path*",
+        permanent: true,
+      },
+    ];
+  },
+
   images: {
     remotePatterns: [
       {
