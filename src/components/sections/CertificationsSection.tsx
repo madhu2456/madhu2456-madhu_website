@@ -115,9 +115,9 @@ export async function CertificationsSection() {
 
                       {/* Certificate Title - Small and Gold at top */}
                       <div className="mb-5">
-                        <h4 className="text-lg font-bold text-yellow-600/80 mb-1 uppercase tracking-wide">
+                        <p className="text-lg font-bold text-yellow-600/80 mb-1 uppercase tracking-wide">
                           CERTIFICATE
-                        </h4>
+                        </p>
                         <p className="text-xs text-yellow-600/80 italic">for</p>
                       </div>
 

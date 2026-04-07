@@ -1,6 +1,6 @@
 import { defineQuery } from "next-sanity";
 import { sanityFetch } from "@/sanity/lib/live";
-import Chat from "@/components/chat/Chat";
+import { ChatMount } from "@/components/chat/ChatMount";
 
 const CHAT_PROFILE_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
     _id,
@@ -26,7 +26,7 @@ async function ChatWrapper() {
 
   return (
     <div className="h-full w-full">
-      <Chat profile={profile} />
+      <ChatMount profile={profile} />
     </div>
   );
 }
