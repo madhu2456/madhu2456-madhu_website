@@ -147,8 +147,8 @@ export async function AchievementsSection() {
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 text-xs @md/card:text-sm text-primary hover:underline"
                       >
-                        Learn More
-                        <IconExternalLink className="w-3.5 h-3.5 @md/card:w-4 @md/card:h-4" />
+                        Learn more about {achievement.title || "this achievement"}
+                        <IconExternalLink className="w-3.5 h-3.5 @md/card:w-4 @md/card:h-4" aria-hidden="true" />
                       </Link>
                     )}
                   </div>
@@ -226,8 +226,8 @@ export async function AchievementsSection() {
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 text-xs @md/card:text-sm text-primary hover:underline mt-4 pt-4 border-t"
                       >
-                        Learn More
-                        <IconExternalLink className="w-3.5 h-3.5 @md/card:w-4 @md/card:h-4" />
+                        Learn more about {achievement.title || "this achievement"}
+                        <IconExternalLink className="w-3.5 h-3.5 @md/card:w-4 @md/card:h-4" aria-hidden="true" />
                       </Link>
                     )}
                   </div>

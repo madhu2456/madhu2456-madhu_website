@@ -75,7 +75,8 @@ export async function HeroSection() {
                       href={profile.socialLinks.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-4 py-2 @md/hero:px-6 @md/hero:py-3 rounded-lg border hover:bg-accent transition-colors text-sm @md/hero:text-base"
+                      aria-label="View GitHub profile (opens in new tab)"
+                      className="px-4 py-3 @md/hero:px-6 rounded-lg border hover:bg-accent transition-colors text-sm @md/hero:text-base min-h-[44px] flex items-center"
                     >
                       GitHub
                     </Link>
@@ -85,7 +86,8 @@ export async function HeroSection() {
                       href={profile.socialLinks.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-4 py-2 @md/hero:px-6 @md/hero:py-3 rounded-lg border hover:bg-accent transition-colors text-sm @md/hero:text-base"
+                      aria-label="View LinkedIn profile (opens in new tab)"
+                      className="px-4 py-3 @md/hero:px-6 rounded-lg border hover:bg-accent transition-colors text-sm @md/hero:text-base min-h-[44px] flex items-center"
                     >
                       LinkedIn
                     </Link>
@@ -95,7 +97,8 @@ export async function HeroSection() {
                       href={profile.socialLinks.twitter}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-4 py-2 @md/hero:px-6 @md/hero:py-3 rounded-lg border hover:bg-accent transition-colors text-sm @md/hero:text-base"
+                      aria-label="View Twitter profile (opens in new tab)"
+                      className="px-4 py-3 @md/hero:px-6 rounded-lg border hover:bg-accent transition-colors text-sm @md/hero:text-base min-h-[44px] flex items-center"
                     >
                       Twitter
                     </Link>
@@ -105,7 +108,8 @@ export async function HeroSection() {
                       href={profile.socialLinks.website}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-4 py-2 @md/hero:px-6 @md/hero:py-3 rounded-lg border hover:bg-accent transition-colors text-sm @md/hero:text-base"
+                      aria-label="Visit personal website (opens in new tab)"
+                      className="px-4 py-3 @md/hero:px-6 rounded-lg border hover:bg-accent transition-colors text-sm @md/hero:text-base min-h-[44px] flex items-center"
                     >
                       Website
                     </Link>
