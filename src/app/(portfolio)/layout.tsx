@@ -6,7 +6,6 @@ import { urlFor } from "@/sanity/lib/image";
 import "../globals.css";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { draftMode } from "next/headers";
-import Script from "next/script";
 import { VisualEditing } from "next-sanity/visual-editing";
 import { AppSidebar } from "@/components/app-sidebar";
 import { ModeToggle } from "@/components/DarkModeToggle";
@@ -152,11 +151,6 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <Script
-              src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js"
-              strategy="afterInteractive"
-            />
-
             <SidebarProvider defaultOpen={false}>
               <SidebarInset className="">{children}</SidebarInset>
 

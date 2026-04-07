@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Script from "next/script";
 import { ChatKit, useChatKit } from "@openai/chatkit-react";
 import type { CHAT_PROFILE_QUERYResult } from "@/../sanity.types";
 import { createSession } from "@/app/actions/create-session";
@@ -142,6 +143,11 @@ export function Chat({
 
   return (
     <div className="relative h-full w-full">
+      {/* Load ChatKit script only when the sidebar is open */}
+      <Script
+        src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js"
+        strategy="lazyOnload"
+      />
       {/* Skeleton overlays on top until ChatKit signals it's ready */}
       {!isReady && (
         <div className="absolute inset-0 z-10">
