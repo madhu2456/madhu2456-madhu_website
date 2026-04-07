@@ -13,6 +13,17 @@ const securityHeaders = [
     key: "Strict-Transport-Security",
     value: "max-age=63072000; includeSubDomains; preload",
   },
+  // Isolates the browsing context to prevent cross-origin attacks (Spectre etc.)
+  // "same-origin-allow-popups" lets OAuth/payment popups still work
+  {
+    key: "Cross-Origin-Opener-Policy",
+    value: "same-origin-allow-popups",
+  },
+  // Prevents the page from being loaded in a cross-origin iframe
+  {
+    key: "Cross-Origin-Embedder-Policy",
+    value: "unsafe-none",
+  },
 ];
 
 const nextConfig: NextConfig = {

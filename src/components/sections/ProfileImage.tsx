@@ -35,6 +35,7 @@ export function ProfileImage({
         sizes="(max-width: 768px) calc(100vw - 48px), (max-width: 1280px) 45vw, 560px"
         className="object-cover transition-transform duration-300 group-hover:scale-105"
         priority
+        fetchPriority="high"
       />
 
       {/* Online Badge */}
