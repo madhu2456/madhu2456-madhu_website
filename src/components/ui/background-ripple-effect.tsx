@@ -111,13 +111,17 @@ const DivGrid = ({
           : {};
 
         return (
-          <button
-            type="button"
+          // Decorative cell — removed from the accessibility tree so screen readers
+          // and Lighthouse don't see 216 meaningless "button" announcements or flag
+          // their 0.5px spacing as an insufficient touch-target gap.
+          <div
+            role="presentation"
+            aria-hidden="true"
             key={idx}
             className={cn(
               "cell relative border-[0.5px] opacity-40 transition-opacity duration-150 will-change-transform hover:opacity-80 dark:shadow-[0px_0px_40px_1px_var(--cell-shadow-color)_inset]",
               clickedCell && "animate-cell-ripple [animation-fill-mode:none]",
-              !interactive && "pointer-events-none",
+              interactive ? "cursor-pointer" : "pointer-events-none",
             )}
             style={{
               backgroundColor: fillColor,
@@ -127,7 +131,6 @@ const DivGrid = ({
             onClick={
               interactive ? () => onCellClick?.(rowIdx, colIdx) : undefined
             }
-            aria-label={`Cell ${rowIdx}-${colIdx}`}
           />
         );
       })}

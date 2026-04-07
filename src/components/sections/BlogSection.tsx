@@ -113,6 +113,7 @@ export async function BlogSection() {
 
                   <Link
                     href={`/blog/${post.slug?.current}`}
+                    aria-label={`Read full article: ${post.title || "blog post"}`}
                     className="inline-flex items-center text-primary hover:underline text-xs @md/card:text-sm font-medium"
                   >
                     Read More →

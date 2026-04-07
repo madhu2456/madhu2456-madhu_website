@@ -104,6 +104,7 @@ export async function ContactSection() {
                         href={profile.socialLinks.github}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label="Follow on GitHub (opens in new tab)"
                         className="px-3 py-1.5 @md/info:px-4 @md/info:py-2 rounded-lg border hover:bg-accent transition-colors text-xs @md/info:text-sm"
                       >
                         GitHub
@@ -114,6 +115,7 @@ export async function ContactSection() {
                         href={profile.socialLinks.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label="Connect on LinkedIn (opens in new tab)"
                         className="px-3 py-1.5 @md/info:px-4 @md/info:py-2 rounded-lg border hover:bg-accent transition-colors text-xs @md/info:text-sm"
                       >
                         LinkedIn
@@ -124,6 +126,7 @@ export async function ContactSection() {
                         href={profile.socialLinks.twitter}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label="Follow on Twitter (opens in new tab)"
                         className="px-3 py-1.5 @md/info:px-4 @md/info:py-2 rounded-lg border hover:bg-accent transition-colors text-xs @md/info:text-sm"
                       >
                         Twitter
@@ -134,6 +137,7 @@ export async function ContactSection() {
                         href={profile.socialLinks.website}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label="Visit personal website (opens in new tab)"
                         className="px-3 py-1.5 @md/info:px-4 @md/info:py-2 rounded-lg border hover:bg-accent transition-colors text-xs @md/info:text-sm"
                       >
                         Website
@@ -144,6 +148,7 @@ export async function ContactSection() {
                         href={profile.socialLinks.medium}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label="Follow on Medium (opens in new tab)"
                         className="px-3 py-1.5 @md/info:px-4 @md/info:py-2 rounded-lg border hover:bg-accent transition-colors text-xs @md/info:text-sm"
                       >
                         Medium
@@ -154,6 +159,7 @@ export async function ContactSection() {
                         href={profile.socialLinks.devto}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label="Follow on Dev.to (opens in new tab)"
                         className="px-3 py-1.5 @md/info:px-4 @md/info:py-2 rounded-lg border hover:bg-accent transition-colors text-xs @md/info:text-sm"
                       >
                         Dev.to
@@ -164,6 +170,7 @@ export async function ContactSection() {
                         href={profile.socialLinks.youtube}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label="Subscribe on YouTube (opens in new tab)"
                         className="px-3 py-1.5 @md/info:px-4 @md/info:py-2 rounded-lg border hover:bg-accent transition-colors text-xs @md/info:text-sm"
                       >
                         YouTube

@@ -2,7 +2,7 @@ import { IconExternalLink } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { defineQuery } from "next-sanity";
-import { CometCard } from "@/components/ui/comet-card";
+import { LazyCometCard as CometCard } from "@/components/ui/comet-card-lazy";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
 
@@ -224,10 +224,11 @@ export async function CertificationsSection() {
                               href={cert.credentialUrl}
                               target="_blank"
                               rel="noopener noreferrer"
+                              aria-label={`Verify ${cert.name || "credential"} certificate (opens in new tab)`}
                               className="inline-flex items-center justify-center gap-1.5 px-5 py-2 text-xs font-semibold text-zinc-900 bg-yellow-600/90 hover:bg-yellow-500 transition-all shadow-md hover:shadow-lg"
                             >
                               Verify Credential
-                              <IconExternalLink className="w-3.5 h-3.5" />
+                              <IconExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
                             </Link>
                           </div>
                         )}

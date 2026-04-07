@@ -1,5 +1,5 @@
 import { defineQuery } from "next-sanity";
-import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
+import { LazyAnimatedTestimonials as AnimatedTestimonials } from "@/components/ui/animated-testimonials-lazy";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
 

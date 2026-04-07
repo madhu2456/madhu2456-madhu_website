@@ -12,9 +12,9 @@ function SidebarToggle() {
 
   return (
     <div className="fixed bottom-6 right-6 z-50 group">
-      {/* Animated rings */}
-      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500 opacity-20 blur-2xl animate-ping [animation-duration:2s]" />
-      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 opacity-30 blur-xl animate-pulse [animation-duration:3s]" />
+      {/* Animated rings — transform+opacity only so they stay on the GPU compositing layer */}
+      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500 opacity-25 animate-ping [animation-duration:2s] will-change-transform" />
+      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 opacity-30 animate-pulse [animation-duration:3s] will-change-transform" />
 
       {/* Sparkle badge */}
       <div className="absolute -top-1 -right-1 z-10">
@@ -32,7 +32,7 @@ function SidebarToggle() {
       <button
         type="button"
         onClick={toggleSidebar}
-        className="relative w-16 h-16 rounded-full bg-gradient-to-br from-violet-500 via-purple-500 to-fuchsia-500 dark:from-violet-600 dark:via-purple-600 dark:to-fuchsia-600 shadow-[0_0_40px_rgba(168,85,247,0.4)] hover:shadow-[0_0_60px_rgba(168,85,247,0.6)] transition-all duration-500 hover:scale-110 hover:rotate-12 flex items-center justify-center"
+        className="relative w-16 h-16 rounded-full bg-gradient-to-br from-violet-500 via-purple-500 to-fuchsia-500 dark:from-violet-600 dark:via-purple-600 dark:to-fuchsia-600 shadow-[0_0_48px_12px_rgba(168,85,247,0.45)] hover:shadow-[0_0_64px_16px_rgba(168,85,247,0.65)] transition-all duration-500 hover:scale-110 hover:rotate-12 flex items-center justify-center"
         aria-label="Chat with AI Twin"
       >
         <MessageSquare className="h-7 w-7 text-white transition-transform group-hover:scale-110" />

@@ -4,7 +4,7 @@ import { defineQuery } from "next-sanity";
 import { SanityLive, sanityFetch } from "@/sanity/lib/live";
 import { urlFor } from "@/sanity/lib/image";
 import "../globals.css";
-import { GoogleTagManager } from "@next/third-parties/google";
+import { DeferredGTM } from "@/components/DeferredGTM";
 import { draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity/visual-editing";
 import { AppSidebar } from "@/components/app-sidebar";
@@ -141,7 +141,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-        <GoogleTagManager gtmId="GTM-PBB2W9VG" />
+        <DeferredGTM gtmId="GTM-PBB2W9VG" />
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
@@ -161,7 +161,7 @@ export default async function RootLayout({
 
               {/* Mode Toggle - Desktop: bottom right next to AI chat, Mobile: top right next to burger menu */}
               <div className="fixed md:bottom-6 md:right-24 top-4 right-18 md:top-auto md:left-auto z-20">
-                <div className="w-10 h-10 md:w-12 md:h-12">
+                <div className="w-11 h-11 md:w-12 md:h-12">
                   <ModeToggle />
                 </div>
               </div>

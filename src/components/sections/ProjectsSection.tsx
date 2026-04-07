@@ -108,6 +108,7 @@ export async function ProjectsSection() {
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label={`Live demo of ${project.title || "project"} (opens in new tab)`}
                         className="flex-1 text-center px-3 py-2 @md/card:px-4 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-xs @md/card:text-sm"
                       >
                         Live Demo
@@ -118,6 +119,7 @@ export async function ProjectsSection() {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label={`GitHub repository for ${project.title || "project"} (opens in new tab)`}
                         className="px-3 py-2 @md/card:px-4 rounded-lg border hover:bg-accent transition-colors text-xs @md/card:text-sm text-center"
                       >
                         GitHub
