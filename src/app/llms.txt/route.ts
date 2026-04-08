@@ -70,7 +70,7 @@ export async function GET() {
     ]);
 
   const siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://madhudadi.com";
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://madhudadi.in";
   const fullName =
     [profile?.firstName, profile?.lastName].filter(Boolean).join(" ") ||
     "Madhu Dadi";

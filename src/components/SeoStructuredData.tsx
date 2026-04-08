@@ -54,7 +54,7 @@ export async function SeoStructuredData() {
   const projects = data?.projects ?? [];
   const experience = data?.experience ?? [];
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.com";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in";
   const fullName =
     [profile?.firstName, profile?.lastName].filter(Boolean).join(" ") ||
     "Madhu Dadi";
