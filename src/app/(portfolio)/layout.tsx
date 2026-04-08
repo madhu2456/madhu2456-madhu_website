@@ -49,7 +49,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const settings = data?.settings;
   const profile = data?.profile;
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.com";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in";
   const fullName =
     [profile?.firstName, profile?.lastName].filter(Boolean).join(" ") ||
     "Madhu Dadi";

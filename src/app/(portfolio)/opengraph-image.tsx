@@ -30,7 +30,7 @@ export default async function OGImage() {
     "Portfolio";
   const headline = profile?.headline ?? "";
   const siteLabel = (
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://madhudadi.com"
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://madhudadi.in"
   ).replace(/^https?:\/\//, "");
 
   const profileImageUrl = profile?.profileImage

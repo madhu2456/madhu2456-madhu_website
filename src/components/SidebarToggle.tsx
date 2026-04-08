@@ -18,7 +18,7 @@ function SidebarToggle() {
 
       {/* Sparkle badge */}
       <div className="absolute -top-1 -right-1 z-10">
-        <div className="h-6 w-6 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 shadow-lg flex items-center justify-center animate-bounce [animation-duration:2s]">
+        <div className="h-6 w-6 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center animate-bounce [animation-duration:2s] will-change-transform">
           <Sparkles className="h-3 w-3 text-white" />
         </div>
       </div>

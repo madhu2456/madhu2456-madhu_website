@@ -27,6 +27,23 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  experimental: {
+    // Inlines CSS needed for above-the-fold content and loads the rest
+    // asynchronously, eliminating the 520 ms render-blocking CSS penalty.
+    // Requires the `critters` package (added to devDependencies).
+    optimizeCss: true,
+  },
+
+  compiler: {
+    // Strip console.log / console.info / console.debug from production builds.
+    // Errors and warnings are preserved for observability.
+    // This also removes any accidental debug output that Lighthouse's
+    // "Browser errors were logged to the console" audit might flag.
+    removeConsole: process.env.NODE_ENV === "production"
+      ? { exclude: ["error", "warn"] }
+      : false,
+  },
+
   async redirects() {
     return [
       // Eliminate the www → non-www redirect chain (saves ~0.6 s round-trip)
