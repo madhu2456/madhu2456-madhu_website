@@ -43,6 +43,8 @@ type SidebarContextProps = {
 
 const SidebarContext = React.createContext<SidebarContextProps | null>(null);
 
+export { SidebarContext };
+
 function useSidebar() {
   const context = React.useContext(SidebarContext);
   if (!context) {

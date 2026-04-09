@@ -30,11 +30,15 @@ const nextConfig: NextConfig = {
   experimental: {
     // Inlines CSS needed for above-the-fold content and loads the rest
     // asynchronously, eliminating the 520 ms render-blocking CSS penalty.
-    // Requires the `critters` package (added to devDependencies).
+    // Requires the `critters` package (moved to dependencies).
     optimizeCss: true,
   },
 
   compiler: {
+    // Enable the styled-components compiler pass to reduce runtime overhead
+    // and prevent hydration mismatches.
+    styledComponents: true,
+
     // Strip console.log / console.info / console.debug from production builds.
     // Errors and warnings are preserved for observability.
     // This also removes any accidental debug output that Lighthouse's

@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { X } from "lucide-react";
 import Script from "next/script";
 import { ChatKit, useChatKit } from "@openai/chatkit-react";
 import type { CHAT_PROFILE_QUERYResult } from "@/../sanity.types";
 import { createSession } from "@/app/actions/create-session";
-import { useSidebar } from "../ui/sidebar";
+import { SidebarContext } from "../ui/sidebar";
 
 function ChatInitSkeleton({ name }: { name?: string }) {
   return (
@@ -50,7 +50,8 @@ export function Chat({
 }: {
   profile: CHAT_PROFILE_QUERYResult | null;
 }) {
-  const { toggleSidebar } = useSidebar();
+  const context = useContext(SidebarContext);
+  const toggleSidebar = context?.toggleSidebar ?? (() => {});
   const [isReady, setIsReady] = useState(false);
   const [sessionError, setSessionError] = useState<string | null>(null);
 
