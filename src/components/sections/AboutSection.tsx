@@ -41,12 +41,12 @@ export async function AboutSection() {
                     </p>
                   ),
                   h2: ({ children }) => (
-                    <h2 className="text-3xl font-bold mt-8 mb-4">{children}</h2>
+                    <h3 className="text-3xl font-bold mt-8 mb-4">{children}</h3>
                   ),
                   h3: ({ children }) => (
-                    <h3 className="text-2xl font-semibold mt-6 mb-3">
+                    <h4 className="text-2xl font-semibold mt-6 mb-3">
                       {children}
-                    </h3>
+                    </h4>
                   ),
                   blockquote: ({ children }) => (
                     <blockquote className="border-l-4 border-primary pl-4 italic my-4">

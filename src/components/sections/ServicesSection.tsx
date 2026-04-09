@@ -102,9 +102,9 @@ export async function ServicesSection() {
                       </div>
                     )}
 
-                    <h3 className="text-xl @md/card:text-2xl font-bold mb-3">
+                    <h4 className="text-xl @md/card:text-2xl font-bold mb-3">
                       {service.title}
-                    </h3>
+                    </h4>
 
                     {service.shortDescription && (
                       <p className="text-muted-foreground mb-4 text-base @md/card:text-lg">
@@ -211,9 +211,9 @@ export async function ServicesSection() {
                       </div>
                     )}
 
-                    <h3 className="text-lg @md/card:text-xl font-bold mb-2">
+                    <h4 className="text-lg @md/card:text-xl font-bold mb-2">
                       {service.title}
-                    </h3>
+                    </h4>
 
                     {service.shortDescription && (
                       <p className="text-muted-foreground mb-4 text-sm @md/card:text-base flex-1 line-clamp-3">
