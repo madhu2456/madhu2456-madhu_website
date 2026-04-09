@@ -6,6 +6,8 @@ export const serverClient = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: false,
+  // Enable CDN for faster, edge-cached responses on the server.
+  // This is safe for public portfolio data.
+  useCdn: true,
   token: process.env.SANITY_SERVER_API_TOKEN,
 });

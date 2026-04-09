@@ -149,6 +149,8 @@ export function Chat({
       <Script
         src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js"
         strategy="lazyOnload"
+        // @ts-ignore
+        fetchPriority="low"
       />
       {/* Skeleton overlays on top until ChatKit signals it's ready */}
       {!isReady && (
