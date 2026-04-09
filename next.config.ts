@@ -32,6 +32,8 @@ const nextConfig: NextConfig = {
     // asynchronously, eliminating the 520 ms render-blocking CSS penalty.
     // Requires the `critters` package (moved to dependencies).
     optimizeCss: true,
+    // Enable scroll restoration for better UX on navigation
+    scrollRestoration: true,
   },
 
   compiler: {
@@ -40,9 +42,6 @@ const nextConfig: NextConfig = {
     styledComponents: true,
 
     // Strip console.log / console.info / console.debug from production builds.
-    // Errors and warnings are preserved for observability.
-    // This also removes any accidental debug output that Lighthouse's
-    // "Browser errors were logged to the console" audit might flag.
     removeConsole: process.env.NODE_ENV === "production"
       ? { exclude: ["error", "warn"] }
       : false,
@@ -50,7 +49,6 @@ const nextConfig: NextConfig = {
 
   async redirects() {
     return [
-      // Eliminate the www → non-www redirect chain (saves ~0.6 s round-trip)
       {
         source: "/:path*",
         has: [{ type: "host", value: "www.madhudadi.in" }],
@@ -75,10 +73,16 @@ const nextConfig: NextConfig = {
 
   async headers() {
     return [
-      // Security headers on all routes
       {
         source: "/(.*)",
-        headers: securityHeaders,
+        headers: [
+          ...securityHeaders,
+          // Preconnect to Sanity CDN to speed up image and content delivery
+          {
+            key: "Link",
+            value: "<https://cdn.sanity.io>; rel=preconnect",
+          },
+        ],
       },
       // SEO/GEO discovery files — serve as plain text with generous caching
       {
