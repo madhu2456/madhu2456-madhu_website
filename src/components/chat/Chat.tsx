@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { X } from "lucide-react";
 import Script from "next/script";
 import { ChatKit, useChatKit } from "@openai/chatkit-react";
 import type { CHAT_PROFILE_QUERYResult } from "@/../sanity.types";
