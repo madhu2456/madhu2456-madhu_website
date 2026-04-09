@@ -1,19 +1,13 @@
 "use client";
 
 import { useEffect, useState, useContext } from "react";
+import Script from "next/script";
 import { SidebarContext } from "@/components/ui/sidebar";
 import Chat from "@/components/chat/Chat";
 import type { CHAT_PROFILE_QUERYResult } from "@/../sanity.types";
 
 /**
  * Defers mounting <Chat> until the sidebar is opened for the first time.
- *
- * Without this, Chat mounts on every page load and immediately:
- *  - Loads 1.1 MB of ChatKit CDN JS
- *  - Calls createSession() → OpenAI API
- *  - Adds ~4.7 s to the critical network path
- *
- * Once opened, the component stays mounted (chat state is preserved on close/reopen).
  */
 export function ChatMount({ profile }: { profile: CHAT_PROFILE_QUERYResult | null }) {
   const context = useContext(SidebarContext);
@@ -31,11 +25,21 @@ export function ChatMount({ profile }: { profile: CHAT_PROFILE_QUERYResult | nul
     }
   }, [isOpen, hasOpened]);
 
-  if (!hasOpened) {
-    // Sidebar has never been opened — render nothing so no scripts or API
-    // calls are triggered. The SidebarSkeleton in AppSidebar covers the UI.
-    return null;
-  }
+  return (
+    <>
+      {/* 
+        Pre-warm the ChatKit library as soon as the Sidebar chunk is loaded.
+        This overlaps script download (~1.1MB) with user idle time so it's
+        ready instantly when they click.
+      */}
+      <Script
+        src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js"
+        strategy="afterInteractive"
+      />
 
-  return <Chat profile={profile} />;
+      {hasOpened ? (
+        <Chat profile={profile} />
+      ) : null}
+    </>
+  );
 }
