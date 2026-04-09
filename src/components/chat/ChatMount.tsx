@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useSidebar } from "@/components/ui/sidebar";
 import Chat from "@/components/chat/Chat";
+import type { CHAT_PROFILE_QUERYResult } from "@/../sanity.types";
 
 /**
  * Defers mounting <Chat> until the sidebar is opened for the first time.
@@ -14,7 +15,7 @@ import Chat from "@/components/chat/Chat";
  *
  * Once opened, the component stays mounted (chat state is preserved on close/reopen).
  */
-export function ChatMount({ profile }: { profile: any }) {
+export function ChatMount({ profile }: { profile: CHAT_PROFILE_QUERYResult | null }) {
   const { open, openMobile, isMobile } = useSidebar();
   const [hasOpened, setHasOpened] = useState(false);
 
