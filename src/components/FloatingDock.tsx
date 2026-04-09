@@ -3,7 +3,7 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { FloatingDockClient } from "./FloatingDockClient";
 
 const NAVIGATION_QUERY =
-  defineQuery(`*[_type == "navigation"] | order(order asc){
+  defineQuery(`*[_type == "navigation" && !(title in ["Achievements", "Testimonials"])] | order(order asc){
   title,
   href,
   icon,

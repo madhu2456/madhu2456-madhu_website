@@ -4,7 +4,7 @@ The portfolio contains:
 - Professional experience and roles
 - Technical skills and technologies
 - Projects and case studies
-- Education, certifications, and achievements
+- Education and certifications
 - Services offered and contact information
 - Professional background and bio
 
