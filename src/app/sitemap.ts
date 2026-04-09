@@ -12,7 +12,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     [
       *[_id == "singleton-profile"][0]._updatedAt,
       *[_type == "project"] | order(_updatedAt desc)[0]._updatedAt,
-      *[_type == "blog"] | order(_updatedAt desc)[0]._updatedAt,
       *[_type == "experience"] | order(_updatedAt desc)[0]._updatedAt
     ]
   `);

@@ -3,8 +3,6 @@ import {
   BookIcon,
   CaseIcon,
   CogIcon,
-  CommentIcon,
-  ComposeIcon,
   DocumentIcon,
   DocumentsIcon,
   InlineIcon,
@@ -100,30 +98,6 @@ export const structure: StructureResolver = (S) =>
                     "Achievements & Awards",
                   ),
                 ),
-            ]),
-        ),
-
-      S.divider(),
-
-      // Content & Community
-      S.listItem()
-        .title("Content & Community")
-        .icon(DocumentsIcon)
-        .child(
-          S.list()
-            .title("Content & Community")
-            .items([
-              S.listItem()
-                .title("Blog Posts")
-                .icon(ComposeIcon)
-                .schemaType("blog")
-                .child(S.documentTypeList("blog").title("Blog Posts")),
-
-              S.listItem()
-                .title("Testimonials")
-                .icon(CommentIcon)
-                .schemaType("testimonial")
-                .child(S.documentTypeList("testimonial").title("Testimonials")),
             ]),
         ),
 

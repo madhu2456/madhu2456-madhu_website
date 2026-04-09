@@ -1,6 +1,5 @@
 import type { SchemaTypeDefinition } from "sanity";
 import achievement from "./achievement";
-import blog from "./blog";
 import certification from "./certification";
 import contact from "./contact";
 import education from "./education";
@@ -11,7 +10,6 @@ import project from "./project";
 import service from "./service";
 import siteSettings from "./siteSettings";
 import skill from "./skill";
-import testimonial from "./testimonial";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -20,10 +18,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     skill,
     experience,
     education,
-    testimonial,
     certification,
     achievement,
-    blog,
     service,
     contact,
     siteSettings,
