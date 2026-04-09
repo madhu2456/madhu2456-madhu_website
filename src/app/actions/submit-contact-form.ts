@@ -13,6 +13,12 @@ export async function submitContactForm(formData: FormData) {
   }
 
   try {
+    // Check honeypot field — if filled, silently fail to confuse bots
+    if (formData.get("hp_field")) {
+      console.warn("Honeypot field filled. Potential bot submission blocked.");
+      return { success: true }; // Return success to bot to prevent retries
+    }
+
     const name = formData.get("name") as string;
     const email = formData.get("email") as string;
     const subject = formData.get("subject") as string;
