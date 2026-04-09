@@ -33,10 +33,6 @@ const nextConfig: NextConfig = {
   },
 
   compiler: {
-    // Enable the styled-components compiler pass to reduce runtime overhead
-    // and prevent hydration mismatches.
-    styledComponents: true,
-
     // Strip console.log / console.info / console.debug from production builds.
     removeConsole: process.env.NODE_ENV === "production"
       ? { exclude: ["error", "warn"] }

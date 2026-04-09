@@ -67,7 +67,7 @@ export async function ProjectsSection() {
                         .url()}
                       alt={project.title || "Project image"}
                       fill
-                      sizes="(max-width: 640px) calc(100vw - 48px), (max-width: 1024px) 45vw, 400px"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                       placeholder={project.coverImage?.lqip ? "blur" : "empty"}
                       blurDataURL={project.coverImage?.lqip}
