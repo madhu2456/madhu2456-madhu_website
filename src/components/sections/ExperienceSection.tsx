@@ -4,6 +4,25 @@ import { defineQuery } from "next-sanity";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
 
+interface Experience {
+  company: string;
+  position: string;
+  employmentType?: string;
+  location?: string;
+  startDate?: string;
+  endDate?: string;
+  current?: boolean;
+  description?: any;
+  responsibilities?: string[];
+  achievements?: string[];
+  technologies?: Array<{ name?: string; category?: string }>;
+  companyLogo?: {
+    asset?: any;
+    lqip?: string;
+  };
+  companyWebsite?: string;
+}
+
 const EXPERIENCE_QUERY =
   defineQuery(`*[_type == "experience"] | order(startDate desc){
   company,
@@ -27,7 +46,7 @@ const EXPERIENCE_QUERY =
 export async function ExperienceSection() {
   const { data: experiences } = await sanityFetch({ query: EXPERIENCE_QUERY });
 
-  if (!experiences || experiences.length === 0) {
+  if (!experiences || (experiences as Experience[]).length === 0) {
     return null;
   }
 
@@ -51,7 +70,7 @@ export async function ExperienceSection() {
         </div>
 
         <div className="space-y-8">
-          {experiences.map((exp) => (
+          {(experiences as Experience[]).map((exp) => (
             <div
               key={`${exp.company}-${exp.position}-${exp.startDate}`}
               className="relative pl-8 pb-8 border-l-2 border-muted last:border-l-0"
