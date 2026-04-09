@@ -169,7 +169,6 @@ ${certLines ? `## Certifications\n\n${certLines}\n` : ""}
 - **Education** — Academic qualifications and institutions
 - **Projects** — Portfolio of software projects with live demos and source code
 - **Certifications** — Professional credentials and issuing organisations
-- **Achievements** — Awards, recognitions, and milestones
 - **Services** — Offerings available for hire or collaboration
 - **Contact** — Direct enquiry form
 

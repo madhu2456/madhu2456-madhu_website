@@ -9,7 +9,6 @@ const ExperienceSection = dynamic(() => import("@/components/sections/Experience
 const EducationSection = dynamic(() => import("@/components/sections/EducationSection").then(m => m.EducationSection));
 const ProjectsSection = dynamic(() => import("@/components/sections/ProjectsSection").then(m => m.ProjectsSection));
 const CertificationsSection = dynamic(() => import("@/components/sections/CertificationsSection").then(m => m.CertificationsSection));
-const AchievementsSection = dynamic(() => import("@/components/sections/AchievementsSection").then(m => m.AchievementsSection));
 const ServicesSection = dynamic(() => import("@/components/sections/ServicesSection").then(m => m.ServicesSection));
 const ContactSection = dynamic(() => import("@/components/sections/ContactSection").then(m => m.ContactSection));
 
@@ -56,10 +55,6 @@ async function PortfolioContent() {
 
       <Suspense fallback={<SectionSkeleton />}>
         <CertificationsSection />
-      </Suspense>
-
-      <Suspense fallback={<SectionSkeleton />}>
-        <AchievementsSection />
       </Suspense>
 
       <Suspense fallback={<SectionSkeleton />}>

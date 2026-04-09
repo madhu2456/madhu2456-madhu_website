@@ -88,16 +88,6 @@ export const structure: StructureResolver = (S) =>
                 .child(
                   S.documentTypeList("certification").title("Certifications"),
                 ),
-
-              S.listItem()
-                .title("Achievements & Awards")
-                .icon(StarIcon)
-                .schemaType("achievement")
-                .child(
-                  S.documentTypeList("achievement").title(
-                    "Achievements & Awards",
-                  ),
-                ),
             ]),
         ),
 
