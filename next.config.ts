@@ -28,10 +28,6 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   experimental: {
-    // Inlines CSS needed for above-the-fold content and loads the rest
-    // asynchronously, eliminating the 520 ms render-blocking CSS penalty.
-    // Requires the `critters` package (moved to dependencies).
-    optimizeCss: true,
     // Enable scroll restoration for better UX on navigation
     scrollRestoration: true,
   },
@@ -80,7 +76,11 @@ const nextConfig: NextConfig = {
           // Preconnect to Sanity CDN to speed up image and content delivery
           {
             key: "Link",
-            value: "<https://cdn.sanity.io>; rel=preconnect",
+            value: [
+              "<https://cdn.sanity.io>; rel=preconnect",
+              "<https://www.googletagmanager.com>; rel=preconnect",
+              "<https://www.google-analytics.com>; rel=preconnect"
+            ].join(", "),
           },
         ],
       },
