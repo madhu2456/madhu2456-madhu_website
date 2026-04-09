@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { defineQuery } from "next-sanity";
@@ -7,13 +8,14 @@ import "../globals.css";
 import { DeferredGTM } from "@/components/DeferredGTM";
 import { draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity/visual-editing";
-import { AppSidebar } from "@/components/app-sidebar";
-import { ModeToggle } from "@/components/DarkModeToggle";
-import { DisableDraftMode } from "@/components/DisableDraftMode";
-import { FloatingDock } from "@/components/FloatingDock";
-import SidebarToggle from "@/components/SidebarToggle";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+
+const AppSidebar = dynamic(() => import("@/components/app-sidebar").then(m => m.AppSidebar));
+const ModeToggle = dynamic(() => import("@/components/DarkModeToggle").then(m => m.ModeToggle));
+const FloatingDock = dynamic(() => import("@/components/FloatingDock").then(m => m.FloatingDock));
+const SidebarToggle = dynamic(() => import("@/components/SidebarToggle"));
+const DisableDraftMode = dynamic(() => import("@/components/DisableDraftMode").then(m => m.DisableDraftMode));
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -157,10 +159,15 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-        <DeferredGTM gtmId="GTM-PBB2W9VG" />
+        <head>
+          <link rel="dns-prefetch" href="https://cdn.sanity.io" />
+          <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+          <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        </head>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
+          <DeferredGTM gtmId="GTM-PBB2W9VG" />
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
