@@ -171,7 +171,6 @@ ${certLines ? `## Certifications\n\n${certLines}\n` : ""}
 - **Certifications** — Professional credentials and issuing organisations
 - **Achievements** — Awards, recognitions, and milestones
 - **Services** — Offerings available for hire or collaboration
-- **Blog** — Technical articles, tutorials, and engineering insights
 - **Contact** — Direct enquiry form
 
 ## Technical Stack

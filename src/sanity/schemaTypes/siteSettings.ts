@@ -102,20 +102,8 @@ export default defineType({
       },
     }),
     defineField({
-      name: "showBlog",
-      title: "Show Blog Section",
-      type: "boolean",
-      initialValue: true,
-    }),
-    defineField({
       name: "showServices",
       title: "Show Services Section",
-      type: "boolean",
-      initialValue: true,
-    }),
-    defineField({
-      name: "showTestimonials",
-      title: "Show Testimonials Section",
       type: "boolean",
       initialValue: true,
     }),

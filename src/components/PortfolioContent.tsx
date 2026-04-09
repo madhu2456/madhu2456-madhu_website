@@ -1,17 +1,17 @@
+import dynamic from "next/dynamic";
 import { Suspense } from "react";
-import {
-  AboutSection,
-  AchievementsSection,
-  BlogSection,
-  CertificationsSection,
-  ContactSection,
-  EducationSection,
-  ExperienceSection,
-  HeroSection,
-  ProjectsSection,
-  ServicesSection,
-  TestimonialsSection,
-} from "@/components/sections";
+import { HeroSection } from "@/components/sections";
+
+// Above-the-fold: Keep HeroSection synchronous for LCP.
+// Below-the-fold: Dynamic import to keep initial bundle lean.
+const AboutSection = dynamic(() => import("@/components/sections/AboutSection").then(m => m.AboutSection));
+const ExperienceSection = dynamic(() => import("@/components/sections/ExperienceSection").then(m => m.ExperienceSection));
+const EducationSection = dynamic(() => import("@/components/sections/EducationSection").then(m => m.EducationSection));
+const ProjectsSection = dynamic(() => import("@/components/sections/ProjectsSection").then(m => m.ProjectsSection));
+const CertificationsSection = dynamic(() => import("@/components/sections/CertificationsSection").then(m => m.CertificationsSection));
+const AchievementsSection = dynamic(() => import("@/components/sections/AchievementsSection").then(m => m.AchievementsSection));
+const ServicesSection = dynamic(() => import("@/components/sections/ServicesSection").then(m => m.ServicesSection));
+const ContactSection = dynamic(() => import("@/components/sections/ContactSection").then(m => m.ContactSection));
 
 function SectionSkeleton() {
   return (
@@ -43,10 +43,6 @@ async function PortfolioContent() {
       </Suspense>
 
       <Suspense fallback={<SectionSkeleton />}>
-        <TestimonialsSection />
-      </Suspense>
-
-      <Suspense fallback={<SectionSkeleton />}>
         <ExperienceSection />
       </Suspense>
 
@@ -68,10 +64,6 @@ async function PortfolioContent() {
 
       <Suspense fallback={<SectionSkeleton />}>
         <ServicesSection />
-      </Suspense>
-
-      <Suspense fallback={<SectionSkeleton />}>
-        <BlogSection />
       </Suspense>
 
       <Suspense fallback={<SectionSkeleton />}>

@@ -7,8 +7,6 @@ You ARE the digital twin of the portfolio owner. You represent them authenticall
 You are embedded in a Next.js portfolio website built with:
 - **Frontend**: Next.js 15, React 19, TypeScript, Tailwind CSS
 - **CMS**: Sanity.io for content management
-- **Authentication**: Clerk for user management
-- **Chat Interface**: OpenAI ChatKit
 - **Data Access**: Sanity MCP (Model Context Protocol) server
 
 SANITY_DATASET = development
@@ -148,28 +146,6 @@ Use these patterns to query portfolio data:
   expiryDate,
   credentialUrl,
   description
-}
-
-// Get recent blog posts
-*[_type == "blog"] | order(publishedAt desc)[0...5]{
-  _id,
-  title,
-  slug,
-  excerpt,
-  publishedAt,
-  categories,
-  featured
-}
-
-// Get testimonials
-*[_type == "testimonial"]{
-  _id,
-  name,
-  role,
-  company,
-  content,
-  rating,
-  date
 }
 
 // Get services offered
