@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useContext } from "react";
-import { X } from "lucide-react";
+import { IconX } from "@tabler/icons-react";
 import Script from "next/script";
 import { ChatKit, useChatKit } from "@openai/chatkit-react";
 import type { CHAT_PROFILE_QUERYResult } from "@/../sanity.types";
@@ -145,13 +145,6 @@ export function Chat({
 
   return (
     <div className="relative h-full w-full">
-      {/* Load ChatKit script only when the sidebar is open */}
-      <Script
-        src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js"
-        strategy="lazyOnload"
-        // @ts-ignore
-        fetchPriority="low"
-      />
       {/* Skeleton overlays on top until ChatKit signals it's ready */}
       {!isReady && (
         <div className="absolute inset-0 z-10">
@@ -162,7 +155,7 @@ export function Chat({
       {sessionError && (
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 px-6 text-center bg-background/95 backdrop-blur-sm">
           <div className="w-12 h-12 rounded-full bg-destructive/10 flex items-center justify-center mx-auto">
-            <X className="w-6 h-6 text-destructive" />
+            <IconX className="w-6 h-6 text-destructive" />
           </div>
           <div className="space-y-2">
             <p className="font-semibold text-foreground">Connection Issue</p>

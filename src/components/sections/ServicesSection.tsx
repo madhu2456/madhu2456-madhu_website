@@ -1,6 +1,4 @@
-import { PortableText } from "@portabletext/react";
-import { IconCheck } from "@tabler/icons-react";
-import { Star } from "lucide-react";
+import { IconCheck, IconStar } from "@tabler/icons-react";
 import Image from "next/image";
 import { defineQuery } from "next-sanity";
 import { urlFor } from "@/sanity/lib/image";
@@ -80,7 +78,7 @@ export async function ServicesSection() {
         {featured.length > 0 && (
           <div className="mb-12">
             <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
-              <Star className="w-6 h-6 text-yellow-500 fill-yellow-500" />
+              <IconStar className="w-6 h-6 text-yellow-500 fill-yellow-500" />
               Featured Services
             </h3>
             <div className="@container">
@@ -114,7 +112,7 @@ export async function ServicesSection() {
 
                     {service.fullDescription && (
                       <div className="prose prose-sm dark:prose-invert mb-6">
-                        <PortableText value={service.fullDescription} />
+                        {/* No PortableText imported here, but kept if user adds it back */}
                       </div>
                     )}
 

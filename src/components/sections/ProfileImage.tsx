@@ -1,6 +1,6 @@
 "use client";
 
-import { MessageCircle, X } from "lucide-react";
+import { IconMessageCircle, IconX } from "@tabler/icons-react";
 import Image from "next/image";
 import { useState } from "react";
 import { useSidebar } from "../ui/sidebar";
@@ -55,9 +55,9 @@ export function ProfileImage({
       >
         <div className="text-center space-y-3">
           {open ? (
-            <X className="w-12 h-12 text-white mx-auto" />
+            <IconX className="w-12 h-12 text-white mx-auto" />
           ) : (
-            <MessageCircle className="w-12 h-12 text-white mx-auto" />
+            <IconMessageCircle className="w-12 h-12 text-white mx-auto" />
           )}
 
           <div className="text-white text-xl font-semibold">

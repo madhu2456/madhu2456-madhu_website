@@ -1,6 +1,6 @@
 "use client";
 
-import { MessageSquare, Sparkles } from "lucide-react";
+import { IconMessage2, IconSparkles } from "@tabler/icons-react";
 import { useSidebar } from "./ui/sidebar";
 
 function SidebarToggle() {
@@ -19,7 +19,7 @@ function SidebarToggle() {
       {/* Sparkle badge */}
       <div className="absolute -top-1 -right-1 z-10">
         <div className="h-6 w-6 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center animate-bounce [animation-duration:2s] will-change-transform">
-          <Sparkles className="h-3 w-3 text-white" />
+          <IconSparkles className="h-3 w-3 text-white" />
         </div>
       </div>
 
@@ -35,7 +35,7 @@ function SidebarToggle() {
         className="relative w-16 h-16 rounded-full bg-gradient-to-br from-violet-500 via-purple-500 to-fuchsia-500 dark:from-violet-600 dark:via-purple-600 dark:to-fuchsia-600 shadow-[0_0_48px_12px_rgba(168,85,247,0.45)] hover:shadow-[0_0_64px_16px_rgba(168,85,247,0.65)] transition-all duration-500 hover:scale-110 hover:rotate-12 flex items-center justify-center"
         aria-label="Chat with AI Twin"
       >
-        <MessageSquare className="h-7 w-7 text-white transition-transform group-hover:scale-110" />
+        <IconMessage2 className="h-7 w-7 text-white transition-transform group-hover:scale-110" />
       </button>
     </div>
   );

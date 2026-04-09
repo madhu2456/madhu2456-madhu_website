@@ -12,7 +12,7 @@ import {
   IconBrandGithub,
   IconBrandX,
   IconQuestionMark,
-  IconMessageCircle,
+  IconMessage2,
 } from "@tabler/icons-react";
 import { memo } from "react";
 
@@ -36,7 +36,7 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   IconMail,
   IconBrandGithub,
   IconBrandX,
-  IconMessageCircle,
+  IconMessage2,
 };
 
 export const DynamicIcon = memo(function DynamicIcon({
