@@ -98,10 +98,10 @@ export async function generateMetadata(): Promise<Metadata> {
       },
     },
     alternates: {
-      canonical: "/",
+      canonical: siteUrl,
       // Hreflang — single English site; x-default + en covers both Google requirements
       languages: {
-        "en": siteUrl,
+        "en-US": siteUrl,
         "x-default": siteUrl,
       },
     },

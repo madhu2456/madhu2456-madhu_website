@@ -13,42 +13,22 @@ export default function robots(): MetadataRoute.Robots {
       },
       // AI search engines — explicitly welcomed for GEO
       {
-        userAgent: "GPTBot",
-        allow: "/",
-        disallow: ["/studio/", "/api/"],
-      },
-      {
-        userAgent: "ChatGPT-User",
-        allow: "/",
-        disallow: ["/studio/", "/api/"],
-      },
-      {
-        userAgent: "anthropic-ai",
-        allow: "/",
-        disallow: ["/studio/", "/api/"],
-      },
-      {
-        userAgent: "Claude-Web",
-        allow: "/",
-        disallow: ["/studio/", "/api/"],
-      },
-      {
-        userAgent: "PerplexityBot",
-        allow: "/",
-        disallow: ["/studio/", "/api/"],
-      },
-      {
-        userAgent: "Googlebot-Extended",
-        allow: "/",
-        disallow: ["/studio/", "/api/"],
-      },
-      {
-        userAgent: "Applebot-Extended",
-        allow: "/",
-        disallow: ["/studio/", "/api/"],
-      },
-      {
-        userAgent: "Gemini",
+        userAgent: [
+          "GPTBot",
+          "ChatGPT-User",
+          "anthropic-ai",
+          "Claude-Web",
+          "PerplexityBot",
+          "Googlebot-Extended",
+          "Applebot-Extended",
+          "Gemini",
+          "YouBot",
+          "CCBot",
+          "Cisco-AIBot",
+          "Meta-ExternalAgent",
+          "Meta-ExternalFetcher",
+          "Amazonbot",
+        ],
         allow: "/",
         disallow: ["/studio/", "/api/"],
       },

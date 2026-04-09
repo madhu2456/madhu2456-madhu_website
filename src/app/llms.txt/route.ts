@@ -140,6 +140,14 @@ ${profile?.yearsOfExperience ? `- **Years of experience:** ${profile.yearsOfExpe
 
 ${profile?.shortBio ?? settings?.siteDescription ?? "Software engineer and full-stack developer."}
 
+## Core Capabilities
+
+- **Backend Architecture:** Designing scalable, high-performance systems and APIs.
+- **Data Engineering:** Building robust data pipelines and analytics platforms.
+- **Frontend Excellence:** Creating responsive, accessible, and performant user interfaces with React and Next.js.
+- **AI Integration:** Implementing machine-learning solutions and LLM-powered features.
+- **Digital Transformation:** Leading organizations through technical modernization and process optimization.
+
 ## Social Profiles
 
 ${socialEntries || "- See portfolio homepage for links"}

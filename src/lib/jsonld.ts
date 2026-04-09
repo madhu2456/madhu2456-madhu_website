@@ -89,6 +89,18 @@ export function buildPersonSchema({
     }),
     ...(sameAs.length > 0 && { sameAs }),
     hasOccupation: { "@id": `${siteUrl}/#occupation` },
+    knowsAbout: [
+      "Software Engineering",
+      "Full-Stack Development",
+      "AI & Machine Learning",
+      "Data Analytics",
+      "Digital Transformation",
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Node.js",
+      "Python"
+    ],
   };
 }
 
@@ -248,6 +260,12 @@ export function buildWorkExperienceSchema({
         memberOf: {
           "@type": "Organization",
           name: e.company,
+          ...(e.location && {
+            location: {
+              "@type": "PostalAddress",
+              addressLocality: e.location,
+            },
+          }),
         },
       },
     })),
