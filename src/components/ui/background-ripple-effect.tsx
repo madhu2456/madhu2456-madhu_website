@@ -17,9 +17,16 @@ export const BackgroundRippleEffect = ({
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Optimization: Don't initialize or run logic on mobile/tablets.
+    // This is the biggest factor in boosting the mobile performance score.
+    if (window.innerWidth < 1024) return;
+
+    // Optimization: Respect user's OS preference for reduced motion.
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
     const updateDimensions = () => {
       // Calculate exactly how many cells we need to fill the viewport
-      // Add +1 buffer to ensure no gaps at edges
       const cols = Math.ceil(window.innerWidth / cellSize) + 1;
       const rows = Math.ceil(window.innerHeight / cellSize) + 1;
       setDimensions({ rows, cols });
