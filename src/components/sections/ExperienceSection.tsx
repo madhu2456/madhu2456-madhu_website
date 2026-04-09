@@ -17,7 +17,10 @@ const EXPERIENCE_QUERY =
   responsibilities,
   achievements,
   technologies[]->{name, category},
-  companyLogo,
+  "companyLogo": {
+    "asset": companyLogo.asset->,
+    "lqip": companyLogo.asset->metadata.lqip
+  },
   companyWebsite
 }`);
 
@@ -58,14 +61,16 @@ export async function ExperienceSection() {
 
               <div className="@container/card bg-card border rounded-lg p-4 @md/card:p-6 hover:shadow-lg transition-shadow">
                 <div className="flex flex-col @md/card:flex-row @md/card:items-start gap-4 mb-4">
-                  {exp.companyLogo && (
+                  {exp.companyLogo?.asset && (
                     <div className="relative w-12 h-12 @md/card:w-16 @md/card:h-16 rounded-lg overflow-hidden border shrink-0">
                       <Image
-                        src={urlFor(exp.companyLogo).width(64).height(64).url()}
+                        src={urlFor(exp.companyLogo.asset).width(64).height(64).url()}
                         alt={`${exp.company} company logo`}
                         fill
                         sizes="64px"
                         className="object-cover"
+                        placeholder={exp.companyLogo?.lqip ? "blur" : "empty"}
+                        blurDataURL={exp.companyLogo?.lqip}
                       />
                     </div>
                   )}

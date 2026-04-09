@@ -12,7 +12,10 @@ const PROJECTS_QUERY =
   category,
   liveUrl,
   githubUrl,
-  coverImage,
+  "coverImage": {
+    "asset": coverImage.asset->,
+    "lqip": coverImage.asset->metadata.lqip
+  },
   technologies[]->{name, category, color}
 }`);
 
@@ -41,10 +44,10 @@ export async function ProjectsSection() {
                 className="@container/card group bg-card border rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300"
               >
                 {/* Project Image */}
-                {project.coverImage && (
+                {project.coverImage?.asset && (
                   <div className="relative aspect-video overflow-hidden bg-muted">
                     <Image
-                      src={urlFor(project.coverImage)
+                      src={urlFor(project.coverImage.asset)
                         .width(600)
                         .height(400)
                         .url()}
@@ -52,6 +55,8 @@ export async function ProjectsSection() {
                       fill
                       sizes="(max-width: 640px) calc(100vw - 48px), (max-width: 1024px) 45vw, 400px"
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      placeholder={project.coverImage?.lqip ? "blur" : "empty"}
+                      blurDataURL={project.coverImage?.lqip}
                     />
                     {/* Glass overlay that fades on hover */}
                     <div className="absolute inset-0 bg-background/40 backdrop-blur-[2px] group-hover:opacity-0 transition-opacity duration-300" />

@@ -56,6 +56,16 @@ export function ContactForm() {
       )}
 
       <form className="space-y-3 @md/form:space-y-4" onSubmit={handleSubmit}>
+        {/* Honeypot field — hidden from users, but filled by bots */}
+        <div className="hidden" aria-hidden="true">
+          <input
+            type="text"
+            name="hp_field"
+            tabIndex={-1}
+            autoComplete="off"
+          />
+        </div>
+
         <div>
           <label
             htmlFor="name"
