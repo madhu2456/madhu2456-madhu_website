@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useSidebar } from "@/components/ui/sidebar";
+import { useEffect, useState, useContext } from "react";
+import { SidebarContext } from "@/components/ui/sidebar";
 import Chat from "@/components/chat/Chat";
 import type { CHAT_PROFILE_QUERYResult } from "@/../sanity.types";
 
@@ -16,8 +16,12 @@ import type { CHAT_PROFILE_QUERYResult } from "@/../sanity.types";
  * Once opened, the component stays mounted (chat state is preserved on close/reopen).
  */
 export function ChatMount({ profile }: { profile: CHAT_PROFILE_QUERYResult | null }) {
-  const { open, openMobile, isMobile } = useSidebar();
+  const context = useContext(SidebarContext);
   const [hasOpened, setHasOpened] = useState(false);
+
+  const open = context?.open ?? false;
+  const openMobile = context?.openMobile ?? false;
+  const isMobile = context?.isMobile ?? false;
 
   const isOpen = isMobile ? openMobile : open;
 
