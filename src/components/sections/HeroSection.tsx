@@ -37,7 +37,7 @@ export async function HeroSection() {
       className="relative min-h-screen flex items-center justify-center px-6 py-20 overflow-hidden"
     >
       {/* Background Ripple Effect */}
-      <LazyBackgroundRippleEffect rows={8} cols={27} cellSize={56} />
+      <LazyBackgroundRippleEffect cellSize={56} />
 
       <div className="relative z-10 container mx-auto max-w-6xl">
         <div className="@container">

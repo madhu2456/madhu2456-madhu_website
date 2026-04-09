@@ -1,24 +1,11 @@
 import { defineQuery } from "next-sanity";
 import { sanityFetch } from "@/sanity/lib/live";
 import { ChatMount } from "@/components/chat/ChatMount";
+import { ChatProvider } from "./ChatProvider";
 
 const CHAT_PROFILE_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
-    _id,
-    _type,
-    _createdAt,
-    _updatedAt,
-    _rev,
     firstName,
-    lastName,
-    headline,
-    shortBio,
-    email,
-    phone,
-    location,
-    availability,
-    socialLinks,
-    yearsOfExperience,
-    profileImage
+    lastName
   }`);
 
 async function ChatWrapper() {
@@ -26,7 +13,9 @@ async function ChatWrapper() {
 
   return (
     <div className="h-full w-full">
-      <ChatMount profile={profile} />
+      <ChatProvider profile={profile}>
+        <ChatMount profile={profile} />
+      </ChatProvider>
     </div>
   );
 }
