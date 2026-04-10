@@ -7,12 +7,14 @@ import { useSidebar } from "../ui/sidebar";
 
 interface ProfileImageProps {
   imageUrl: string;
+  lqip?: string;
   firstName: string;
   lastName: string;
 }
 
 export function ProfileImage({
   imageUrl,
+  lqip,
   firstName,
   lastName,
 }: ProfileImageProps) {
@@ -36,6 +38,8 @@ export function ProfileImage({
         className="object-cover transition-transform duration-300 group-hover:scale-105"
         priority
         fetchPriority="high"
+        placeholder={lqip ? "blur" : "empty"}
+        blurDataURL={lqip}
       />
 
       {/* Online Badge */}
