@@ -74,8 +74,6 @@ const nextConfig: NextConfig = {
             key: "Link",
             value: [
               "<https://cdn.sanity.io>; rel=preconnect",
-              "<https://www.googletagmanager.com>; rel=preconnect",
-              "<https://www.google-analytics.com>; rel=preconnect"
             ].join(", "),
           },
         ],

@@ -1,6 +1,12 @@
+"use client";
+
 import { Suspense } from "react";
+import dynamic from "next/dynamic";
 import { Sidebar, SidebarContent, SidebarRail } from "@/components/ui/sidebar";
-import ChatWrapper from "./chat/ChatWrapper";
+
+const ChatWrapper = dynamic(() => import("./chat/ChatWrapper"), {
+  ssr: false,
+});
 
 function SidebarSkeleton() {
   return (

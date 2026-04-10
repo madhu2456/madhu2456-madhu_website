@@ -1,15 +1,21 @@
-import { defineQuery } from "next-sanity";
+"use client";
+
+import { useEffect, useState } from "react";
+import { client } from "@/sanity/lib/client";
 import { ChatMount } from "@/components/chat/ChatMount";
-import { sanityFetch } from "@/sanity/lib/live";
 import { ChatProvider } from "./ChatProvider";
 
-const CHAT_PROFILE_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
+const CHAT_PROFILE_QUERY = `*[_id == "singleton-profile"][0]{
     firstName,
     lastName
-  }`);
+  }`;
 
-async function ChatWrapper() {
-  const { data: profile } = await sanityFetch({ query: CHAT_PROFILE_QUERY });
+function ChatWrapper() {
+  const [profile, setProfile] = useState<any>(null);
+
+  useEffect(() => {
+    client.fetch(CHAT_PROFILE_QUERY).then(setProfile);
+  }, []);
 
   return (
     <div className="h-full w-full">
