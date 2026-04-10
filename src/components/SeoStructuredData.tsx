@@ -101,7 +101,7 @@ export async function SeoStructuredData() {
   return (
     <script
       type="application/ld+json"
-      // biome-ignore lint/suspicious/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
       dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
     />
   );
