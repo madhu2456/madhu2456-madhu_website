@@ -56,7 +56,7 @@ const METADATA_QUERY = defineQuery(`{
 }`);
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { data } = await sanityFetch({ query: METADATA_QUERY });
+  const { data } = await sanityFetch({ query: METADATA_QUERY, stega: false });
   const settings = data?.settings;
   const profile = data?.profile;
 
