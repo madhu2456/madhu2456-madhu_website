@@ -36,12 +36,15 @@ export function ChatMount({
 
   return (
     <>
-      <Script
-        src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js"
-        strategy="afterInteractive"
-      />
-
-      {hasOpened ? <Chat name={profile?.firstName ?? undefined} /> : null}
+      {hasOpened && (
+        <>
+          <Script
+            src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js"
+            strategy="afterInteractive"
+          />
+          <Chat name={profile?.firstName ?? undefined} />
+        </>
+      )}
     </>
   );
 }
