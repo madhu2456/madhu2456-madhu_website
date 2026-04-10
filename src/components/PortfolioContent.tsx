@@ -38,16 +38,16 @@ const ContactSection = dynamic(() =>
 
 function SectionSkeleton() {
   return (
-    <div className="py-20 px-6 animate-pulse">
+    <div className="py-20 px-6">
       <div className="container mx-auto max-w-6xl">
         <div className="flex flex-col items-center mb-16 space-y-4">
-          <div className="h-10 w-64 bg-muted rounded-lg" />
-          <div className="h-6 w-48 bg-muted rounded-lg opacity-50" />
+          <div className="h-10 w-64 bg-muted animate-pulse rounded-lg" />
+          <div className="h-6 w-48 bg-muted animate-pulse rounded-lg opacity-50" />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div className="h-64 bg-muted/50 rounded-2xl" />
-          <div className="h-64 bg-muted/50 rounded-2xl" />
-          <div className="h-64 bg-muted/50 rounded-2xl" />
+          <div className="h-80 bg-muted/30 animate-pulse rounded-2xl" />
+          <div className="h-80 bg-muted/30 animate-pulse rounded-2xl" />
+          <div className="h-80 bg-muted/30 animate-pulse rounded-2xl" />
         </div>
       </div>
     </div>
@@ -57,9 +57,7 @@ function SectionSkeleton() {
 async function PortfolioContent() {
   return (
     <>
-      <Suspense fallback={<div className="min-h-screen bg-background" />}>
-        <HeroSection />
-      </Suspense>
+      <HeroSection />
 
       <Suspense fallback={<SectionSkeleton />}>
         <AboutSection />

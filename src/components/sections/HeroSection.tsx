@@ -16,12 +16,17 @@ const HERO_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
   headlineAnimationDuration,
   shortBio,
   email,
-  phone,
   location,
   availability,
   socialLinks,
-  yearsOfExperience,
-  profileImage
+  profileImage {
+    asset->{
+      _id,
+      metadata {
+        lqip
+      }
+    }
+  }
 }`);
 
 export async function HeroSection() {
@@ -149,6 +154,9 @@ export async function HeroSection() {
                   .width(600)
                   .height(600)
                   .url()}
+                lqip={
+                  (profile.profileImage as any).asset?.metadata?.lqip || ""
+                }
                 firstName={profile.firstName || ""}
                 lastName={profile.lastName || ""}
               />
