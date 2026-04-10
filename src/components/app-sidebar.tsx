@@ -1,12 +1,13 @@
-"use client";
-
 import { Suspense } from "react";
-import dynamic from "next/dynamic";
 import { Sidebar, SidebarContent, SidebarRail } from "@/components/ui/sidebar";
+import { defineQuery } from "next-sanity";
+import { sanityFetch } from "@/sanity/lib/live";
+import { ChatSidebarSection } from "./chat/ChatSidebarSection";
 
-const ChatWrapper = dynamic(() => import("./chat/ChatWrapper"), {
-  ssr: false,
-});
+const CHAT_PROFILE_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
+    firstName,
+    lastName
+  }`);
 
 function SidebarSkeleton() {
   return (
@@ -36,12 +37,14 @@ function SidebarSkeleton() {
   );
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { data: profile } = await sanityFetch({ query: CHAT_PROFILE_QUERY });
+
   return (
     <Sidebar {...props}>
       <SidebarContent className="h-full w-full">
         <Suspense fallback={<SidebarSkeleton />}>
-          <ChatWrapper />
+          <ChatSidebarSection profile={profile} />
         </Suspense>
       </SidebarContent>
       <SidebarRail />

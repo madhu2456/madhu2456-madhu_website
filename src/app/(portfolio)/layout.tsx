@@ -11,9 +11,8 @@ import { DeferredGTM } from "@/components/DeferredGTM";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
-const AppSidebar = dynamic(() =>
-  import("@/components/app-sidebar").then((m) => m.AppSidebar),
-);
+import { AppSidebar } from "@/components/app-sidebar";
+
 const ModeToggle = dynamic(() =>
   import("@/components/DarkModeToggle").then((m) => m.ModeToggle),
 );

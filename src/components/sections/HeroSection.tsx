@@ -1,20 +1,13 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
 import Link from "next/link";
-import { client } from "@/sanity/lib/client";
+import { defineQuery } from "next-sanity";
 import { ObfuscatedEmail } from "@/components/ObfuscatedEmail";
 import { LazyBackgroundRippleEffect } from "@/components/ui/background-ripple-effect-lazy";
 import { urlFor } from "@/sanity/lib/image";
+import { sanityFetch } from "@/sanity/lib/live";
 import { ProfileImage } from "./ProfileImage";
+import { AnimatedHeadline } from "./AnimatedHeadline";
 
-const LayoutTextFlip = dynamic(
-  () => import("@/components/ui/layout-text-flip").then((m) => m.LayoutTextFlip),
-  { ssr: false },
-);
-
-const HERO_QUERY = `*[_id == "singleton-profile"][0]{
+const HERO_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
   firstName,
   lastName,
   headline,
@@ -34,14 +27,10 @@ const HERO_QUERY = `*[_id == "singleton-profile"][0]{
       }
     }
   }
-}`;
+}`);
 
-export function HeroSection() {
-  const [profile, setProfile] = useState<any>(null);
-
-  useEffect(() => {
-    client.fetch(HERO_QUERY).then(setProfile);
-  }, []);
+export async function HeroSection() {
+  const { data: profile } = await sanityFetch({ query: HERO_QUERY });
 
   if (!profile) {
     return (
@@ -49,8 +38,15 @@ export function HeroSection() {
     );
   }
 
+  const profileImageUrl = profile.profileImage
+    ? urlFor(profile.profileImage).width(600).height(600).url()
+    : "";
+  
+  const lqip = (profile.profileImage as any)?.asset?.metadata?.lqip || "";
+
   return (
     <section
+      id="home"
       className="relative min-h-screen flex items-center justify-center px-6 py-20 overflow-hidden"
     >
       {/* Background Ripple Effect */}
@@ -65,22 +61,14 @@ export function HeroSection() {
                 {profile.firstName}{" "}
                 <span className="text-primary">{profile.lastName}</span>
               </h1>
-              {profile.headlineStaticText &&
-              profile.headlineAnimatedWords &&
-              profile.headlineAnimatedWords.length > 0 ? (
-                <h2 className="text-xl @md/hero:text-2xl @lg/hero:text-3xl text-muted-foreground font-medium">
-                  <LayoutTextFlip
-                    text={profile.headlineStaticText}
-                    words={profile.headlineAnimatedWords}
-                    duration={profile.headlineAnimationDuration || 3000}
-                    className="text-xl @md/hero:text-2xl @lg/hero:text-3xl text-muted-foreground font-medium"
-                  />
-                </h2>
-              ) : (
-                <h2 className="text-xl @md/hero:text-2xl @lg/hero:text-3xl text-muted-foreground font-medium">
-                  {profile.headline}
-                </h2>
-              )}
+              
+              <AnimatedHeadline 
+                staticText={profile.headlineStaticText || ""}
+                words={profile.headlineAnimatedWords || []}
+                duration={profile.headlineAnimationDuration || 3000}
+                fallbackText={profile.headline || ""}
+              />
+
               <p className="text-base @md/hero:text-lg text-muted-foreground leading-relaxed">
                 {profile.shortBio}
               </p>
@@ -162,13 +150,8 @@ export function HeroSection() {
             {/* Profile Image */}
             {profile.profileImage && (
               <ProfileImage
-                imageUrl={urlFor(profile.profileImage)
-                  .width(600)
-                  .height(600)
-                  .url()}
-                lqip={
-                  (profile.profileImage as any).asset?.metadata?.lqip || ""
-                }
+                imageUrl={profileImageUrl}
+                lqip={lqip}
                 firstName={profile.firstName || ""}
                 lastName={profile.lastName || ""}
               />
