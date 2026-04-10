@@ -1,6 +1,6 @@
 "use client";
 import type React from "react";
-import { useMemo, useRef, useState, useEffect } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 export const BackgroundRippleEffect = ({
@@ -22,7 +22,9 @@ export const BackgroundRippleEffect = ({
     if (window.innerWidth < 1024) return;
 
     // Optimization: Respect user's OS preference for reduced motion.
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     if (prefersReducedMotion) return;
 
     const updateDimensions = () => {

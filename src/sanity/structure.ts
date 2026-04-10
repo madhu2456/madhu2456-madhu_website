@@ -8,7 +8,6 @@ import {
   InlineIcon,
   ProjectsIcon,
   RocketIcon,
-  StarIcon,
   TagIcon,
   UserIcon,
 } from "@sanity/icons";

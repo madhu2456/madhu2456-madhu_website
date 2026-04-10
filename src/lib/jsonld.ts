@@ -61,7 +61,9 @@ export function buildPersonSchema({
   if (bio) descriptionParts.push(bio);
   else if (headline) descriptionParts.push(headline);
   if (yearsOfExperience) {
-    descriptionParts.push(`${yearsOfExperience}+ years of professional experience.`);
+    descriptionParts.push(
+      `${yearsOfExperience}+ years of professional experience.`,
+    );
   }
   const description = descriptionParts.join(" ") || undefined;
 
@@ -99,7 +101,7 @@ export function buildPersonSchema({
       "React",
       "TypeScript",
       "Node.js",
-      "Python"
+      "Python",
     ],
   };
 }

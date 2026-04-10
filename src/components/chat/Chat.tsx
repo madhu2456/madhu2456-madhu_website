@@ -1,7 +1,7 @@
 "use client";
 
-import { IconX } from "@tabler/icons-react";
 import { ChatKit } from "@openai/chatkit-react";
+import { IconX } from "@tabler/icons-react";
 import { useChat } from "./ChatProvider";
 
 function ChatInitSkeleton({ name }: { name?: string }) {
@@ -41,11 +41,7 @@ function ChatInitSkeleton({ name }: { name?: string }) {
   );
 }
 
-export function Chat({
-  name,
-}: {
-  name?: string;
-}) {
+export function Chat({ name }: { name?: string }) {
   const { control, isReady, sessionError } = useChat();
 
   return (
@@ -65,7 +61,8 @@ export function Chat({
           <div className="space-y-2">
             <p className="font-semibold text-foreground">Connection Issue</p>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              I couldn't start the chat session. This usually happens due to a network glitch or configuration limit.
+              I couldn't start the chat session. This usually happens due to a
+              network glitch or configuration limit.
             </p>
             {sessionError && (
               <p className="text-[10px] font-mono text-muted-foreground/50 bg-muted p-2 rounded break-all">

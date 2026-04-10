@@ -16,7 +16,11 @@ function SidebarSkeleton() {
       </div>
       <div className="flex flex-col gap-2 px-4 pb-2">
         {[80, 65, 72, 60].map((w, i) => (
-          <div key={i} className="h-10 rounded-xl bg-foreground/10 animate-pulse" style={{ width: `${w}%` }} />
+          <div
+            key={i}
+            className="h-10 rounded-xl bg-foreground/10 animate-pulse"
+            style={{ width: `${w}%` }}
+          />
         ))}
       </div>
       <div className="px-4 pb-4 pt-2">

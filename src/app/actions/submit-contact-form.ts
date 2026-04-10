@@ -48,8 +48,7 @@ export async function submitContactForm(formData: FormData) {
       data: result,
     };
   } catch (error) {
-    const message =
-      error instanceof Error ? error.message : "Unknown error";
+    const message = error instanceof Error ? error.message : "Unknown error";
     console.error("Contact form submission failed:", message, error);
     return {
       success: false,

@@ -80,7 +80,11 @@ export function FloatingDockClient({ navItems }: FloatingDockClientProps) {
               <button
                 type="button"
                 onClick={() => setDesktopMoreMenuOpen(!desktopMoreMenuOpen)}
-                aria-label={desktopMoreMenuOpen ? "Show fewer navigation items" : "Show more navigation items"}
+                aria-label={
+                  desktopMoreMenuOpen
+                    ? "Show fewer navigation items"
+                    : "Show more navigation items"
+                }
                 aria-expanded={desktopMoreMenuOpen}
                 className="group relative flex items-center justify-center w-12 h-12 md:w-12 md:h-12"
               >
@@ -123,7 +127,9 @@ export function FloatingDockClient({ navItems }: FloatingDockClientProps) {
         <button
           type="button"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-label={
+            mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"
+          }
           aria-expanded={mobileMenuOpen}
           className="w-12 h-12 rounded-full bg-white/20 dark:bg-black/30 hover:bg-white/30 dark:hover:bg-black/40 backdrop-blur-xl border border-white/30 dark:border-white/20 hover:border-white/40 dark:hover:border-white/30 shadow-[0_8px_32px_0_rgba(0,0,0,0.15)] dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.5)] flex items-center justify-center text-neutral-500 dark:text-neutral-300 hover:text-neutral-600 dark:hover:text-neutral-200 transition-all duration-300"
         >
@@ -152,7 +158,9 @@ export function FloatingDockClient({ navItems }: FloatingDockClientProps) {
                 <button
                   type="button"
                   onClick={() => setMobileMoreMenuOpen(!mobileMoreMenuOpen)}
-                  aria-label={mobileMoreMenuOpen ? "Show fewer items" : "Show more items"}
+                  aria-label={
+                    mobileMoreMenuOpen ? "Show fewer items" : "Show more items"
+                  }
                   aria-expanded={mobileMoreMenuOpen}
                   className="group relative flex items-center justify-center w-12 h-12"
                 >
@@ -262,7 +270,12 @@ function DockIcon({
     "group relative flex items-center justify-center w-12 h-12 md:w-12 md:h-12";
 
   return item.onClick ? (
-    <button type="button" onClick={handleClick} aria-label={item.title} className={wrapperClasses}>
+    <button
+      type="button"
+      onClick={handleClick}
+      aria-label={item.title}
+      className={wrapperClasses}
+    >
       {content}
     </button>
   ) : (
@@ -270,7 +283,9 @@ function DockIcon({
       href={item.href || "#"}
       target={item.isExternal ? "_blank" : undefined}
       rel={item.isExternal ? "noopener noreferrer" : undefined}
-      aria-label={item.isExternal ? `${item.title} (opens in new tab)` : item.title}
+      aria-label={
+        item.isExternal ? `${item.title} (opens in new tab)` : item.title
+      }
       className={wrapperClasses}
       scroll={!item.isExternal}
       onClick={onItemClick}

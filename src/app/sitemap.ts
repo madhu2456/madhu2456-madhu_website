@@ -1,5 +1,5 @@
-import { client } from "@/sanity/lib/client";
 import type { MetadataRoute } from "next";
+import { client } from "@/sanity/lib/client";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = (
@@ -17,10 +17,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   `);
 
   // Filter out nulls and get the most recent one
-  const validTimestamps = timestamps.filter(Boolean).map(t => new Date(t));
-  const latestDate = validTimestamps.length > 0
-    ? new Date(Math.max(...validTimestamps.map(d => d.getTime())))
-    : new Date();
+  const validTimestamps = timestamps.filter(Boolean).map((t) => new Date(t));
+  const latestDate =
+    validTimestamps.length > 0
+      ? new Date(Math.max(...validTimestamps.map((d) => d.getTime())))
+      : new Date();
 
   return [
     {

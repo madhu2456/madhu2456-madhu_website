@@ -32,7 +32,8 @@ export function DeferredGTM({ gtmId }: { gtmId: string }) {
       }
     };
 
-    for (const ev of EVENTS) window.addEventListener(ev, load, { passive: true, once: true });
+    for (const ev of EVENTS)
+      window.addEventListener(ev, load, { passive: true, once: true });
 
     return () => {
       for (const ev of EVENTS) window.removeEventListener(ev, load);

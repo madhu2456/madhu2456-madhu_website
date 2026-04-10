@@ -83,7 +83,10 @@ export async function ExperienceSection() {
                   {exp.companyLogo?.asset && (
                     <div className="relative w-12 h-12 @md/card:w-16 @md/card:h-16 rounded-lg overflow-hidden border shrink-0">
                       <Image
-                        src={urlFor(exp.companyLogo.asset).width(64).height(64).url()}
+                        src={urlFor(exp.companyLogo.asset)
+                          .width(64)
+                          .height(64)
+                          .url()}
                         alt={`${exp.company} company logo`}
                         fill
                         sizes="64px"

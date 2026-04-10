@@ -4,13 +4,37 @@ import { HeroSection } from "@/components/sections";
 
 // Above-the-fold: Keep HeroSection synchronous for LCP.
 // Below-the-fold: Dynamic import to keep initial bundle lean.
-const AboutSection = dynamic(() => import("@/components/sections/AboutSection").then(m => m.AboutSection));
-const ExperienceSection = dynamic(() => import("@/components/sections/ExperienceSection").then(m => m.ExperienceSection));
-const EducationSection = dynamic(() => import("@/components/sections/EducationSection").then(m => m.EducationSection));
-const ProjectsSection = dynamic(() => import("@/components/sections/ProjectsSection").then(m => m.ProjectsSection));
-const CertificationsSection = dynamic(() => import("@/components/sections/CertificationsSection").then(m => m.CertificationsSection));
-const ServicesSection = dynamic(() => import("@/components/sections/ServicesSection").then(m => m.ServicesSection));
-const ContactSection = dynamic(() => import("@/components/sections/ContactSection").then(m => m.ContactSection));
+const AboutSection = dynamic(() =>
+  import("@/components/sections/AboutSection").then((m) => m.AboutSection),
+);
+const ExperienceSection = dynamic(() =>
+  import("@/components/sections/ExperienceSection").then(
+    (m) => m.ExperienceSection,
+  ),
+);
+const EducationSection = dynamic(() =>
+  import("@/components/sections/EducationSection").then(
+    (m) => m.EducationSection,
+  ),
+);
+const ProjectsSection = dynamic(() =>
+  import("@/components/sections/ProjectsSection").then(
+    (m) => m.ProjectsSection,
+  ),
+);
+const CertificationsSection = dynamic(() =>
+  import("@/components/sections/CertificationsSection").then(
+    (m) => m.CertificationsSection,
+  ),
+);
+const ServicesSection = dynamic(() =>
+  import("@/components/sections/ServicesSection").then(
+    (m) => m.ServicesSection,
+  ),
+);
+const ContactSection = dynamic(() =>
+  import("@/components/sections/ContactSection").then((m) => m.ContactSection),
+);
 
 function SectionSkeleton() {
   return (

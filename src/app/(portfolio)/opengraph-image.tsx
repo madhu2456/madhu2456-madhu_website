@@ -7,7 +7,7 @@ export const contentType = "image/png";
 export const alt = "Portfolio";
 
 export default async function OGImage() {
-  const [profile, settings] = await Promise.all([
+  const [profile, _settings] = await Promise.all([
     client.fetch<{
       firstName?: string;
       lastName?: string;
@@ -38,158 +38,164 @@ export default async function OGImage() {
     : null;
 
   return new ImageResponse(
-    (
+    <div
+      style={{
+        width: "1200px",
+        height: "630px",
+        display: "flex",
+        flexDirection: "column",
+        background:
+          "linear-gradient(135deg, #0f172a 0%, #1e1b4b 55%, #4c1d95 100%)",
+        fontFamily: "sans-serif",
+        position: "relative",
+      }}
+    >
+      {/* Decorative blobs — positioned absolute so they don't affect flex flow */}
       <div
         style={{
-          width: "1200px",
-          height: "630px",
+          position: "absolute",
+          top: "-160px",
+          right: "-120px",
+          width: "520px",
+          height: "520px",
+          borderRadius: "50%",
+          background: "rgba(124,58,237,0.18)",
           display: "flex",
-          flexDirection: "column",
-          background: "linear-gradient(135deg, #0f172a 0%, #1e1b4b 55%, #4c1d95 100%)",
-          fontFamily: "sans-serif",
-          position: "relative",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          bottom: "-120px",
+          left: "60px",
+          width: "320px",
+          height: "320px",
+          borderRadius: "50%",
+          background: "rgba(167,139,250,0.10)",
+          display: "flex",
+        }}
+      />
+
+      {/* Main row */}
+      <div
+        style={{
+          display: "flex",
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "60px 80px",
         }}
       >
-        {/* Decorative blobs — positioned absolute so they don't affect flex flow */}
-        <div
-          style={{
-            position: "absolute",
-            top: "-160px",
-            right: "-120px",
-            width: "520px",
-            height: "520px",
-            borderRadius: "50%",
-            background: "rgba(124,58,237,0.18)",
-            display: "flex",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            bottom: "-120px",
-            left: "60px",
-            width: "320px",
-            height: "320px",
-            borderRadius: "50%",
-            background: "rgba(167,139,250,0.10)",
-            display: "flex",
-          }}
-        />
-
-        {/* Main row */}
+        {/* Left — text */}
         <div
           style={{
             display: "flex",
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "space-between",
-            padding: "60px 80px",
+            flexDirection: "column",
+            maxWidth: profileImageUrl ? "680px" : "1020px",
           }}
         >
-          {/* Left — text */}
+          {/* URL pill */}
           <div
             style={{
               display: "flex",
-              flexDirection: "column",
-              maxWidth: profileImageUrl ? "680px" : "1020px",
+              alignItems: "center",
+              background: "rgba(124,58,237,0.28)",
+              border: "1px solid rgba(167,139,250,0.4)",
+              borderRadius: "100px",
+              padding: "6px 22px",
+              marginBottom: "26px",
             }}
           >
-            {/* URL pill */}
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                background: "rgba(124,58,237,0.28)",
-                border: "1px solid rgba(167,139,250,0.4)",
-                borderRadius: "100px",
-                padding: "6px 22px",
-                marginBottom: "26px",
-              }}
-            >
-              <span style={{ color: "#c4b5fd", fontSize: "19px", fontWeight: 500, display: "flex" }}>
-                {siteLabel}
-              </span>
-            </div>
-
-            {/* Name */}
             <span
               style={{
-                fontSize: "74px",
-                fontWeight: 800,
-                color: "#ffffff",
-                lineHeight: 1.05,
-                letterSpacing: "-2px",
+                color: "#c4b5fd",
+                fontSize: "19px",
+                fontWeight: 500,
                 display: "flex",
-                marginBottom: "14px",
               }}
             >
-              {fullName}
+              {siteLabel}
             </span>
-
-            {/* Headline */}
-            {headline ? (
-              <span
-                style={{
-                  fontSize: "29px",
-                  fontWeight: 500,
-                  color: "#a78bfa",
-                  display: "flex",
-                  marginBottom: "28px",
-                }}
-              >
-                {headline}
-              </span>
-            ) : (
-              <div style={{ display: "flex", marginBottom: "28px" }} />
-            )}
-
-            {/* Accent bar */}
-            <div
-              style={{
-                width: "80px",
-                height: "5px",
-                borderRadius: "3px",
-                background: "linear-gradient(90deg, #7c3aed, #a78bfa)",
-                display: "flex",
-              }}
-            />
           </div>
 
-          {/* Right — avatar */}
-          {profileImageUrl && (
-            <div
+          {/* Name */}
+          <span
+            style={{
+              fontSize: "74px",
+              fontWeight: 800,
+              color: "#ffffff",
+              lineHeight: 1.05,
+              letterSpacing: "-2px",
+              display: "flex",
+              marginBottom: "14px",
+            }}
+          >
+            {fullName}
+          </span>
+
+          {/* Headline */}
+          {headline ? (
+            <span
               style={{
+                fontSize: "29px",
+                fontWeight: 500,
+                color: "#a78bfa",
                 display: "flex",
-                width: "220px",
-                height: "220px",
-                borderRadius: "50%",
-                overflow: "hidden",
-                border: "5px solid #7c3aed",
-                flexShrink: 0,
+                marginBottom: "28px",
               }}
             >
-              {/* biome-ignore lint/performance/noImgElement: required by Satori/ImageResponse */}
-              <img
-                src={profileImageUrl}
-                width={220}
-                height={220}
-                style={{ objectFit: "cover", display: "flex" }}
-                alt={fullName}
-              />
-            </div>
+              {headline}
+            </span>
+          ) : (
+            <div style={{ display: "flex", marginBottom: "28px" }} />
           )}
+
+          {/* Accent bar */}
+          <div
+            style={{
+              width: "80px",
+              height: "5px",
+              borderRadius: "3px",
+              background: "linear-gradient(90deg, #7c3aed, #a78bfa)",
+              display: "flex",
+            }}
+          />
         </div>
 
-        {/* Bottom gradient bar */}
-        <div
-          style={{
-            height: "5px",
-            background: "linear-gradient(90deg, #7c3aed, #a855f7, #ec4899)",
-            display: "flex",
-          }}
-        />
+        {/* Right — avatar */}
+        {profileImageUrl && (
+          <div
+            style={{
+              display: "flex",
+              width: "220px",
+              height: "220px",
+              borderRadius: "50%",
+              overflow: "hidden",
+              border: "5px solid #7c3aed",
+              flexShrink: 0,
+            }}
+          >
+            {/* biome-ignore lint/performance/noImgElement: required by Satori/ImageResponse */}
+            <img
+              src={profileImageUrl}
+              width={220}
+              height={220}
+              style={{ objectFit: "cover", display: "flex" }}
+              alt={fullName}
+            />
+          </div>
+        )}
       </div>
-    ),
+
+      {/* Bottom gradient bar */}
+      <div
+        style={{
+          height: "5px",
+          background: "linear-gradient(90deg, #7c3aed, #a855f7, #ec4899)",
+          display: "flex",
+        }}
+      />
+    </div>,
     { width: 1200, height: 630 },
   );
 }

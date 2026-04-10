@@ -9,6 +9,6 @@ import dynamic from "next/dynamic";
 // server component that passes children JSX into CometCard. Using ssr:false
 // on a wrapper component that receives server-rendered children causes React
 // hydration mismatches and console errors.
-export const LazyCometCard = dynamic(
-  () => import("@/components/ui/comet-card").then((m) => m.CometCard)
+export const LazyCometCard = dynamic(() =>
+  import("@/components/ui/comet-card").then((m) => m.CometCard),
 );
