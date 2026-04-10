@@ -50,6 +50,16 @@ export const BackgroundRippleEffect = ({
         "dark:[--cell-border-color:var(--color-neutral-700)] dark:[--cell-fill-color:var(--color-neutral-900)] dark:[--cell-shadow-color:var(--color-neutral-800)]",
       )}
     >
+      <style>{`
+        @keyframes cell-ripple {
+          0% { scale: 1; opacity: 0.4; }
+          50% { scale: 0.85; opacity: 0.9; }
+          100% { scale: 1; opacity: 0.4; }
+        }
+        .animate-cell-ripple {
+          animation: cell-ripple var(--duration, 500ms) ease-out var(--delay, 0ms);
+        }
+      `}</style>
       <div className="relative h-auto w-auto overflow-hidden">
         <div className="pointer-events-none absolute inset-0 z-[2] h-full w-full overflow-hidden" />
         <DivGrid
