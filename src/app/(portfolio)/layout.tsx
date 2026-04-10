@@ -1,21 +1,29 @@
-import dynamic from "next/dynamic";
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { Geist, Geist_Mono } from "next/font/google";
 import { defineQuery } from "next-sanity";
-import { SanityLive, sanityFetch } from "@/sanity/lib/live";
 import { urlFor } from "@/sanity/lib/image";
+import { SanityLive, sanityFetch } from "@/sanity/lib/live";
 import "../globals.css";
-import { DeferredGTM } from "@/components/DeferredGTM";
 import { draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity/visual-editing";
+import { DeferredGTM } from "@/components/DeferredGTM";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
-const AppSidebar = dynamic(() => import("@/components/app-sidebar").then(m => m.AppSidebar));
-const ModeToggle = dynamic(() => import("@/components/DarkModeToggle").then(m => m.ModeToggle));
-const FloatingDock = dynamic(() => import("@/components/FloatingDock").then(m => m.FloatingDock));
+const AppSidebar = dynamic(() =>
+  import("@/components/app-sidebar").then((m) => m.AppSidebar),
+);
+const ModeToggle = dynamic(() =>
+  import("@/components/DarkModeToggle").then((m) => m.ModeToggle),
+);
+const FloatingDock = dynamic(() =>
+  import("@/components/FloatingDock").then((m) => m.FloatingDock),
+);
 const SidebarToggle = dynamic(() => import("@/components/SidebarToggle"));
-const DisableDraftMode = dynamic(() => import("@/components/DisableDraftMode").then(m => m.DisableDraftMode));
+const DisableDraftMode = dynamic(() =>
+  import("@/components/DisableDraftMode").then((m) => m.DisableDraftMode),
+);
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -72,12 +80,11 @@ export async function generateMetadata(): Promise<Metadata> {
 
   const keywords = (settings?.siteKeywords as string[] | undefined) ?? [];
 
-  const ogImageUrl =
-    settings?.ogImage
-      ? urlFor(settings.ogImage).width(1200).height(630).url()
-      : profile?.profileImage
-        ? urlFor(profile.profileImage).width(1200).height(630).url()
-        : undefined;
+  const ogImageUrl = settings?.ogImage
+    ? urlFor(settings.ogImage).width(1200).height(630).url()
+    : profile?.profileImage
+      ? urlFor(profile.profileImage).width(1200).height(630).url()
+      : undefined;
 
   return {
     metadataBase: new URL(siteUrl),
@@ -137,13 +144,16 @@ export async function generateMetadata(): Promise<Metadata> {
     icons: {
       icon: [
         { url: "/favicon.ico", sizes: "48x48", type: "image/x-icon" },
-        { url: "/icon.png",    sizes: "192x192", type: "image/png" },
+        { url: "/icon.png", sizes: "192x192", type: "image/png" },
       ],
-      apple: [
-        { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
-      ],
+      apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
       other: [
-        { rel: "icon", url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+        {
+          rel: "icon",
+          url: "/icon-512.png",
+          sizes: "512x512",
+          type: "image/png",
+        },
       ],
     },
     other: {
@@ -159,48 +169,48 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-        <head>
-          <link rel="dns-prefetch" href="https://cdn.sanity.io" />
-          <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-          <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-        </head>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      <head>
+        <link rel="dns-prefetch" href="https://cdn.sanity.io" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+      </head>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <DeferredGTM gtmId="GTM-PBB2W9VG" />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
         >
-          <DeferredGTM gtmId="GTM-PBB2W9VG" />
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <SidebarProvider defaultOpen={false}>
-              <SidebarInset className="">{children}</SidebarInset>
+          <SidebarProvider defaultOpen={false}>
+            <SidebarInset className="">{children}</SidebarInset>
 
-              <AppSidebar side="right" />
+            <AppSidebar side="right" />
 
-              <FloatingDock />
-              <SidebarToggle />
+            <FloatingDock />
+            <SidebarToggle />
 
-              {/* Mode Toggle - Desktop: bottom right next to AI chat, Mobile: top right next to burger menu */}
-              <div className="fixed md:bottom-6 md:right-24 top-4 right-18 md:top-auto md:left-auto z-20">
-                <div className="w-11 h-11 md:w-12 md:h-12">
-                  <ModeToggle />
-                </div>
+            {/* Mode Toggle - Desktop: bottom right next to AI chat, Mobile: top right next to burger menu */}
+            <div className="fixed md:bottom-6 md:right-24 top-4 right-18 md:top-auto md:left-auto z-20">
+              <div className="w-11 h-11 md:w-12 md:h-12">
+                <ModeToggle />
               </div>
-            </SidebarProvider>
+            </div>
+          </SidebarProvider>
 
-            {/* Live content API */}
-            <SanityLive />
+          {/* Live content API */}
+          <SanityLive />
 
-            {(await draftMode()).isEnabled && (
-              <>
-                <VisualEditing />
-                <DisableDraftMode />
-              </>
-            )}
-          </ThemeProvider>
-        </body>
-      </html>
+          {(await draftMode()).isEnabled && (
+            <>
+              <VisualEditing />
+              <DisableDraftMode />
+            </>
+          )}
+        </ThemeProvider>
+      </body>
+    </html>
   );
 }

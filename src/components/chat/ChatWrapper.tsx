@@ -1,6 +1,6 @@
 import { defineQuery } from "next-sanity";
-import { sanityFetch } from "@/sanity/lib/live";
 import { ChatMount } from "@/components/chat/ChatMount";
+import { sanityFetch } from "@/sanity/lib/live";
 import { ChatProvider } from "./ChatProvider";
 
 const CHAT_PROFILE_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{

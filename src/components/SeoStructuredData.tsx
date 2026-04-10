@@ -1,16 +1,16 @@
 import { defineQuery } from "next-sanity";
-import { sanityFetch } from "@/sanity/lib/live";
-import { urlFor } from "@/sanity/lib/image";
 import {
-  buildPersonSchema,
-  buildOccupationSchema,
-  buildWebSiteSchema,
-  buildProfilePageSchema,
-  buildProjectsListSchema,
-  buildWorkExperienceSchema,
   buildBreadcrumbSchema,
   buildFullGraph,
+  buildOccupationSchema,
+  buildPersonSchema,
+  buildProfilePageSchema,
+  buildProjectsListSchema,
+  buildWebSiteSchema,
+  buildWorkExperienceSchema,
 } from "@/lib/jsonld";
+import { urlFor } from "@/sanity/lib/image";
+import { sanityFetch } from "@/sanity/lib/live";
 
 const SEO_GRAPH_QUERY = defineQuery(`{
   "settings": *[_type == "siteSettings"][0]{

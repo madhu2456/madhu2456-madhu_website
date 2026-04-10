@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { defineQuery } from "next-sanity";
+import { ObfuscatedEmail } from "@/components/ObfuscatedEmail";
 import { LazyBackgroundRippleEffect } from "@/components/ui/background-ripple-effect-lazy";
 import { LayoutTextFlip } from "@/components/ui/layout-text-flip";
-import { ObfuscatedEmail } from "@/components/ObfuscatedEmail";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
 import { ProfileImage } from "./ProfileImage";
@@ -121,7 +121,10 @@ export async function HeroSection() {
                 {profile.email && (
                   <div className="flex items-center gap-2">
                     <span>📧</span>
-                    <ObfuscatedEmail email={profile.email} className="truncate" />
+                    <ObfuscatedEmail
+                      email={profile.email}
+                      className="truncate"
+                    />
                   </div>
                 )}
                 {profile.location && (

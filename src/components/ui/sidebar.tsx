@@ -1,8 +1,6 @@
 "use client";
 
-import { IconLayoutSidebarLeftCollapse } from "@tabler/icons-react";
 import * as React from "react";
-import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,

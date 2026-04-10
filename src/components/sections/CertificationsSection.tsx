@@ -228,7 +228,10 @@ export async function CertificationsSection() {
                               className="inline-flex items-center justify-center gap-1.5 px-5 py-2 text-xs font-semibold text-zinc-900 bg-yellow-600/90 hover:bg-yellow-500 transition-all shadow-md hover:shadow-lg"
                             >
                               Verify Credential
-                              <IconExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+                              <IconExternalLink
+                                className="w-3.5 h-3.5"
+                                aria-hidden="true"
+                              />
                             </Link>
                           </div>
                         )}

@@ -69,8 +69,7 @@ export async function GET() {
       ),
     ]);
 
-  const siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://madhudadi.in";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://madhudadi.in";
   const fullName =
     [profile?.firstName, profile?.lastName].filter(Boolean).join(" ") ||
     "Madhu Dadi";
@@ -86,7 +85,7 @@ export async function GET() {
 
   // Build social links section only for links that exist
   const socialEntries = Object.entries(profile?.socialLinks ?? {})
-    .filter(([ , v]) => typeof v === "string" && v.length > 0)
+    .filter(([, v]) => typeof v === "string" && v.length > 0)
     .map(([k, v]) => `- **${k.charAt(0).toUpperCase() + k.slice(1)}:** ${v}`)
     .join("\n");
 
@@ -95,7 +94,12 @@ export async function GET() {
     .map((p) => {
       const parts = [`- **${p.title}**`];
       if (p.tagline) parts.push(`: ${p.tagline}`);
-      const links = [p.liveUrl && `[live](${p.liveUrl})`, p.githubUrl && `[code](${p.githubUrl})`].filter(Boolean).join(", ");
+      const links = [
+        p.liveUrl && `[live](${p.liveUrl})`,
+        p.githubUrl && `[code](${p.githubUrl})`,
+      ]
+        .filter(Boolean)
+        .join(", ");
       if (links) parts.push(` — ${links}`);
       if (p.featured) parts.push(" ⭐");
       return parts.join("");

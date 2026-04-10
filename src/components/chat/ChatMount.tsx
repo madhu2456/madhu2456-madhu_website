@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState, useContext } from "react";
-import Script from "next/script";
 import dynamic from "next/dynamic";
-import { SidebarContext } from "@/components/ui/sidebar";
+import Script from "next/script";
+import { useContext, useEffect, useState } from "react";
 import type { CHAT_PROFILE_QUERYResult } from "@/../sanity.types";
+import { SidebarContext } from "@/components/ui/sidebar";
 
 const Chat = dynamic(() => import("@/components/chat/Chat"), {
   ssr: false,
@@ -13,7 +13,11 @@ const Chat = dynamic(() => import("@/components/chat/Chat"), {
 /**
  * Manages the background script loading and conditional rendering of the Chat UI.
  */
-export function ChatMount({ profile }: { profile: CHAT_PROFILE_QUERYResult | null }) {
+export function ChatMount({
+  profile,
+}: {
+  profile: CHAT_PROFILE_QUERYResult | null;
+}) {
   const context = useContext(SidebarContext);
   const [hasOpened, setHasOpened] = useState(false);
 
@@ -37,9 +41,7 @@ export function ChatMount({ profile }: { profile: CHAT_PROFILE_QUERYResult | nul
         strategy="afterInteractive"
       />
 
-      {hasOpened ? (
-        <Chat name={profile?.firstName ?? undefined} />
-      ) : null}
+      {hasOpened ? <Chat name={profile?.firstName ?? undefined} /> : null}
     </>
   );
 }

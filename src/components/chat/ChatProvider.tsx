@@ -1,10 +1,16 @@
 "use client";
 
-import type React from "react";
-import { createContext, useContext, useState, useCallback, useMemo } from "react";
 import { useChatKit } from "@openai/chatkit-react";
-import { createSession } from "@/app/actions/create-session";
+import type React from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
 import type { CHAT_PROFILE_QUERYResult } from "@/../sanity.types";
+import { createSession } from "@/app/actions/create-session";
 import { SidebarContext } from "../ui/sidebar";
 
 type ChatContextType = {
@@ -16,16 +22,16 @@ type ChatContextType = {
 
 const ChatContext = createContext<ChatContextType | null>(null);
 
-export function ChatProvider({ 
-  children, 
-  profile 
-}: { 
+export function ChatProvider({
+  children,
+  profile,
+}: {
   children: React.ReactNode;
   profile: CHAT_PROFILE_QUERYResult | null;
 }) {
   const sidebarContext = useContext(SidebarContext);
   const toggleSidebar = sidebarContext?.toggleSidebar ?? (() => {});
-  
+
   const [isReady, setIsReady] = useState(false);
   const [sessionError, setSessionError] = useState<string | null>(null);
 
@@ -47,7 +53,8 @@ export function ChatProvider({
           setIsReady(true);
           return secret;
         } catch (err) {
-          const msg = err instanceof Error ? err.message : "Failed to start chat session";
+          const msg =
+            err instanceof Error ? err.message : "Failed to start chat session";
           setSessionError(msg);
           setIsReady(true);
           throw err;
@@ -65,17 +72,39 @@ export function ChatProvider({
     startScreen: {
       greeting: getGreeting(),
       prompts: [
-        { icon: "suitcase", label: "What's your experience?", prompt: "Tell me about your professional experience and previous roles" },
-        { icon: "square-code", label: "What skills do you have?", prompt: "What technologies and programming languages do you specialize in?" },
-        { icon: "cube", label: "What have you built?", prompt: "Show me some of your most interesting projects" },
-        { icon: "profile", label: "Who are you?", prompt: "Tell me more about yourself and your background" },
+        {
+          icon: "suitcase",
+          label: "What's your experience?",
+          prompt:
+            "Tell me about your professional experience and previous roles",
+        },
+        {
+          icon: "square-code",
+          label: "What skills do you have?",
+          prompt:
+            "What technologies and programming languages do you specialize in?",
+        },
+        {
+          icon: "cube",
+          label: "What have you built?",
+          prompt: "Show me some of your most interesting projects",
+        },
+        {
+          icon: "profile",
+          label: "Who are you?",
+          prompt: "Tell me more about yourself and your background",
+        },
       ],
     },
     composer: {
       models: [
         { id: "crisp", label: "Crisp", description: "Concise and factual" },
         { id: "clear", label: "Clear", description: "Focused and helpful" },
-        { id: "chatty", label: "Chatty", description: "Conversational companion" },
+        {
+          id: "chatty",
+          label: "Chatty",
+          description: "Conversational companion",
+        },
       ],
     },
     disclaimer: {
@@ -86,22 +115,21 @@ export function ChatProvider({
   const resetSession = useCallback(() => {
     setIsReady(false);
     setSessionError(null);
-    // Note: ChatKit usually handles reconnection, 
+    // Note: ChatKit usually handles reconnection,
     // but we can add manual logic here if needed.
   }, []);
 
-  const value = useMemo(() => ({
-    control,
-    isReady,
-    sessionError,
-    resetSession
-  }), [control, isReady, sessionError, resetSession]);
-
-  return (
-    <ChatContext.Provider value={value}>
-      {children}
-    </ChatContext.Provider>
+  const value = useMemo(
+    () => ({
+      control,
+      isReady,
+      sessionError,
+      resetSession,
+    }),
+    [control, isReady, sessionError, resetSession],
   );
+
+  return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;
 }
 
 export function useChat() {

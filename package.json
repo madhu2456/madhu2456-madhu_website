@@ -10,15 +10,12 @@
     "format": "biome format --write"
   },
   "dependencies": {
-    "@clerk/nextjs": "^7.0.6",
     "@next/third-parties": "^16.2.1",
     "@openai/chatkit-react": "^1.5.0",
     "@portabletext/react": "^6.0.3",
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-dropdown-menu": "^2.1.16",
-    "@radix-ui/react-separator": "^1.1.8",
     "@radix-ui/react-slot": "^1.2.4",
-    "@radix-ui/react-tooltip": "^1.2.8",
     "@sanity/client": "^7.20.0",
     "@sanity/icons": "^3.7.4",
     "@sanity/image-url": "^2.0.3",
@@ -26,7 +23,6 @@
     "@tabler/icons-react": "^3.40.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "dotted-map": "^3.1.0",
     "motion": "^12.38.0",
     "next": "16.2.0",
     "next-sanity": "^12.1.6",

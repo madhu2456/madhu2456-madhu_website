@@ -8,9 +8,9 @@ import dynamic from "next/dynamic";
 const BackgroundRippleEffect = dynamic(
   () =>
     import("@/components/ui/background-ripple-effect").then(
-      (m) => m.BackgroundRippleEffect
+      (m) => m.BackgroundRippleEffect,
     ),
-  { ssr: false }
+  { ssr: false },
 );
 
 export { BackgroundRippleEffect as LazyBackgroundRippleEffect };
