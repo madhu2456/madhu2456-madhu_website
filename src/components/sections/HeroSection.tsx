@@ -1,13 +1,20 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
-import { defineQuery } from "next-sanity";
+import { client } from "@/sanity/lib/client";
 import { ObfuscatedEmail } from "@/components/ObfuscatedEmail";
 import { LazyBackgroundRippleEffect } from "@/components/ui/background-ripple-effect-lazy";
-import { LayoutTextFlip } from "@/components/ui/layout-text-flip";
 import { urlFor } from "@/sanity/lib/image";
-import { sanityFetch } from "@/sanity/lib/live";
 import { ProfileImage } from "./ProfileImage";
 
-const HERO_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
+const LayoutTextFlip = dynamic(
+  () => import("@/components/ui/layout-text-flip").then((m) => m.LayoutTextFlip),
+  { ssr: false },
+);
+
+const HERO_QUERY = `*[_id == "singleton-profile"][0]{
   firstName,
   lastName,
   headline,
@@ -27,18 +34,23 @@ const HERO_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
       }
     }
   }
-}`);
+}`;
 
-export async function HeroSection() {
-  const { data: profile } = await sanityFetch({ query: HERO_QUERY });
+export function HeroSection() {
+  const [profile, setProfile] = useState<any>(null);
+
+  useEffect(() => {
+    client.fetch(HERO_QUERY).then(setProfile);
+  }, []);
 
   if (!profile) {
-    return null;
+    return (
+      <section className="min-h-screen flex items-center justify-center px-6 py-20 bg-background" />
+    );
   }
 
   return (
     <section
-      id="home"
       className="relative min-h-screen flex items-center justify-center px-6 py-20 overflow-hidden"
     >
       {/* Background Ripple Effect */}

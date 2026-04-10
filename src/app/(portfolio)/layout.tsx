@@ -172,8 +172,6 @@ export default async function RootLayout({
       <head>
         <link rel="preconnect" href="https://cdn.sanity.io" />
         <link rel="dns-prefetch" href="https://cdn.sanity.io" />
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
