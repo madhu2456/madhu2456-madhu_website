@@ -47,7 +47,7 @@ const SEO_GRAPH_QUERY = defineQuery(`{
 }`);
 
 export async function SeoStructuredData() {
-  const { data } = await sanityFetch({ query: SEO_GRAPH_QUERY });
+  const { data } = await sanityFetch({ query: SEO_GRAPH_QUERY, stega: false });
 
   const profile = data?.profile;
   const settings = data?.settings;

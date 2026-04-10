@@ -95,6 +95,10 @@ export function buildPersonSchema({
       "Software Engineering",
       "Full-Stack Development",
       "AI & Machine Learning",
+      "Large Language Models",
+      "Generative AI",
+      "RAG (Retrieval-Augmented Generation)",
+      "MLOps",
       "Data Analytics",
       "Digital Transformation",
       "Next.js",
@@ -121,13 +125,13 @@ export function buildOccupationSchema({
   return {
     "@type": "Occupation",
     "@id": `${siteUrl}/#occupation`,
-    name: jobTitle || "Software Engineer",
+    name: jobTitle || "AI Developer & ML Engineer",
     occupationLocation: {
       "@type": "AdministrativeArea",
       name: location ?? "Remote",
     },
     skills:
-      "Full-Stack Development, React, Next.js, TypeScript, Node.js, AI/ML, Cloud Infrastructure",
+      "AI/ML Development, LLM Engineering, Full-Stack Development, React, Next.js, TypeScript, Node.js, Cloud Infrastructure",
   };
 }
 
