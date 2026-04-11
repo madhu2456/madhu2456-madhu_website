@@ -20,9 +20,6 @@ export function ClientChrome() {
   useEffect(() => {
     if (enabled) return;
 
-    let timeoutId: number | null = null;
-    let idleId: number | null = null;
-
     const activate = () => setEnabled(true);
 
     const handleIntent = () => {
@@ -39,21 +36,9 @@ export function ClientChrome() {
       });
     }
 
-    if (typeof requestIdleCallback !== "undefined") {
-      idleId = requestIdleCallback(activate, { timeout: 1600 });
-    } else {
-      timeoutId = window.setTimeout(activate, 500);
-    }
-
     return () => {
       for (const eventName of ENABLE_EVENTS) {
         window.removeEventListener(eventName, handleIntent);
-      }
-      if (idleId !== null && typeof cancelIdleCallback !== "undefined") {
-        cancelIdleCallback(idleId);
-      }
-      if (timeoutId !== null) {
-        window.clearTimeout(timeoutId);
       }
     };
   }, [enabled]);

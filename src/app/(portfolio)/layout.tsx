@@ -29,15 +29,28 @@ const resolveSiteUrl = (rawUrl?: string) =>
   (rawUrl?.trim() || DEFAULT_SITE_URL).replace(/\/+$/, "");
 const SITE_URL = resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL);
 
-const truncateDescription = (text: string, maxLength: number) => {
-  if (text.length <= maxLength) {
-    return text;
+const normalizeWhitespace = (value: string) =>
+  value.replace(/\s+/g, " ").trim();
+
+const toMetaDescription = (text: string, maxLength: number) => {
+  const normalized = normalizeWhitespace(text);
+  if (normalized.length <= maxLength) {
+    return normalized;
   }
 
-  const boundary = text.lastIndexOf(" ", maxLength);
-  const safeBoundary = boundary > 0 ? boundary : maxLength;
+  const sentenceBoundary = normalized.lastIndexOf(".", maxLength);
+  if (sentenceBoundary >= 80) {
+    return normalized.slice(0, sentenceBoundary + 1).trim();
+  }
 
-  return `${text.slice(0, safeBoundary).trimEnd()}…`;
+  const boundary = normalized.lastIndexOf(" ", maxLength);
+  const safeBoundary = boundary > 0 ? boundary : maxLength;
+  const clipped = normalized
+    .slice(0, safeBoundary)
+    .trim()
+    .replace(/[\s,;:!?-]+$/, "");
+
+  return clipped.endsWith(".") ? clipped : `${clipped}.`;
 };
 
 const geistSans = Geist({
@@ -90,7 +103,7 @@ export async function generateMetadata(): Promise<Metadata> {
     settings?.siteDescription ||
     profile?.shortBio ||
     `Portfolio of ${fullName} — developer, builder, and problem solver.`;
-  const description = truncateDescription(
+  const description = toMetaDescription(
     rawDescription,
     MAX_META_DESCRIPTION_LENGTH,
   );

@@ -94,6 +94,87 @@ export default defineType({
       initialValue: false,
     }),
     defineField({
+      name: "problemStatement",
+      title: "Case Study: Problem",
+      type: "text",
+      rows: 3,
+      description: "What business or user problem did this project solve?",
+      validation: (Rule) => Rule.max(400),
+    }),
+    defineField({
+      name: "solutionApproach",
+      title: "Case Study: Solution",
+      type: "text",
+      rows: 4,
+      description: "How the architecture, stack, and workflow solved the problem.",
+      validation: (Rule) => Rule.max(800),
+    }),
+    defineField({
+      name: "impactSummary",
+      title: "Case Study: Impact",
+      type: "text",
+      rows: 3,
+      description: "Outcome in measurable terms where possible.",
+      validation: (Rule) => Rule.max(400),
+    }),
+    defineField({
+      name: "impactMetrics",
+      title: "Impact Metrics",
+      type: "array",
+      description: "Optional measurable outcomes for this case study.",
+      of: [
+        defineField({
+          name: "metric",
+          title: "Metric",
+          type: "object",
+          fields: [
+            defineField({
+              name: "label",
+              title: "Label",
+              type: "string",
+              validation: (Rule) => Rule.required().max(60),
+            }),
+            defineField({
+              name: "value",
+              title: "Value",
+              type: "string",
+              validation: (Rule) => Rule.required().max(60),
+            }),
+          ],
+        }),
+      ],
+      validation: (Rule) => Rule.max(6),
+    }),
+    defineField({
+      name: "citations",
+      title: "Citations / Evidence Links",
+      type: "array",
+      description:
+        "Links that support claims in this case study (repo, live app, docs, write-up).",
+      of: [
+        defineField({
+          name: "citation",
+          title: "Citation",
+          type: "object",
+          fields: [
+            defineField({
+              name: "label",
+              title: "Label",
+              type: "string",
+              validation: (Rule) => Rule.required().max(80),
+            }),
+            defineField({
+              name: "url",
+              title: "URL",
+              type: "url",
+              validation: (Rule) => Rule.required(),
+            }),
+          ],
+        }),
+      ],
+      validation: (Rule) => Rule.max(8),
+    }),
+    defineField({
       name: "order",
       title: "Display Order",
       type: "number",

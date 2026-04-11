@@ -18,6 +18,8 @@ export function LazyBackgroundRippleEffect({ cellSize = 56 }: { cellSize?: numbe
   const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
+    if (enabled) return;
+
     const shouldEnable = () => {
       const prefersReducedMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
@@ -30,14 +32,32 @@ export function LazyBackgroundRippleEffect({ cellSize = 56 }: { cellSize?: numbe
         return;
       }
       setEnabled(true);
+      for (const eventName of interactionEvents) {
+        window.removeEventListener(eventName, activate);
+      }
     };
 
-    if (typeof requestIdleCallback !== "undefined") {
-      requestIdleCallback(activate, { timeout: 3000 });
-    } else {
-      setTimeout(activate, 0);
+    const interactionEvents = [
+      "pointermove",
+      "pointerdown",
+      "keydown",
+      "touchstart",
+      "scroll",
+    ] as const;
+
+    for (const eventName of interactionEvents) {
+      window.addEventListener(eventName, activate, {
+        passive: true,
+        once: true,
+      });
     }
-  }, []);
+
+    return () => {
+      for (const eventName of interactionEvents) {
+        window.removeEventListener(eventName, activate);
+      }
+    };
+  }, [enabled]);
 
   if (!enabled) {
     return null;

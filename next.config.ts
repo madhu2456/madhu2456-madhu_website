@@ -30,6 +30,8 @@ const nextConfig: NextConfig = {
   experimental: {
     // Enable scroll restoration for better UX on navigation
     scrollRestoration: true,
+    // Ensure unmatched routes use a single global 404 with multiple root layouts.
+    globalNotFound: true,
   },
 
   compiler: {
@@ -47,6 +49,17 @@ const nextConfig: NextConfig = {
         destination: "https://madhudadi.in/:path*",
         permanent: true,
       },
+      // Ensure direct canonical HTTPS redirect for apex host when a proxy
+      // forwards protocol information to the app.
+      {
+        source: "/:path*",
+        has: [
+          { type: "host", value: "madhudadi.in" },
+          { type: "header", key: "x-forwarded-proto", value: "http" },
+        ],
+        destination: "https://madhudadi.in/:path*",
+        permanent: true,
+      },
     ];
   },
 
@@ -61,6 +74,9 @@ const nextConfig: NextConfig = {
         hostname: "images.unsplash.com",
       },
     ],
+    // Sanity asset URLs are content-addressed, so a long cache TTL is safe and
+    // reduces repeat optimization work for returning users and crawlers.
+    minimumCacheTTL: 2678400, // 31 days
     qualities: [60, 75],
     deviceSizes: [360, 420, 640, 768, 1024, 1280, 1536, 1920],
   },

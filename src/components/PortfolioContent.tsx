@@ -7,6 +7,11 @@ import { HeroSection } from "@/components/sections";
 const AboutSection = dynamic(() =>
   import("@/components/sections/AboutSection").then((m) => m.AboutSection),
 );
+const QuickAnswersSection = dynamic(() =>
+  import("@/components/sections/QuickAnswersSection").then(
+    (m) => m.QuickAnswersSection,
+  ),
+);
 const ExperienceSection = dynamic(() =>
   import("@/components/sections/ExperienceSection").then(
     (m) => m.ExperienceSection,
@@ -65,6 +70,12 @@ async function PortfolioContent() {
         </Suspense>
       </div>
 
+      <div className="[content-visibility:auto] [contain-intrinsic-size:900px]">
+        <Suspense fallback={<SectionSkeleton />}>
+          <QuickAnswersSection />
+        </Suspense>
+      </div>
+
       <div className="[content-visibility:auto] [contain-intrinsic-size:1200px]">
         <Suspense fallback={<SectionSkeleton />}>
           <ExperienceSection />
@@ -95,7 +106,10 @@ async function PortfolioContent() {
         </Suspense>
       </div>
 
-      <div className="[content-visibility:auto] [contain-intrinsic-size:1100px]">
+      <div
+        id="contact"
+        className="[content-visibility:auto] [contain-intrinsic-size:1100px]"
+      >
         <Suspense fallback={<SectionSkeleton />}>
           <ContactSection />
         </Suspense>

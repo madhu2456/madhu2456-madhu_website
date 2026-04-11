@@ -11,6 +11,7 @@ type SocialLinks = {
 
 type Project = {
   title: string;
+  slug?: string | null;
   tagline?: string | null;
   liveUrl?: string | null;
   githubUrl?: string | null;
@@ -371,7 +372,8 @@ export function buildProjectsListSchema({
         "@type": "SoftwareApplication",
         name: p.title,
         ...(p.tagline && { description: p.tagline }),
-        ...(p.liveUrl && { url: p.liveUrl }),
+        ...((p.slug && { url: `${siteUrl}/case-studies/${p.slug}` }) ||
+          (p.liveUrl && { url: p.liveUrl })),
         ...(p.githubUrl && { codeRepository: p.githubUrl }),
         ...(p.category && { applicationCategory: p.category }),
         author: { "@id": `${siteUrl}/#person` },
@@ -505,7 +507,7 @@ export function buildFaqSchema({
           "@type": "Answer",
           text:
             projectCount > 0
-              ? `${fullName}'s portfolio features ${projectCount} highlighted software projects across product and engineering domains.`
+              ? `${fullName}'s portfolio features ${projectCount} highlighted software projects across product and engineering domains. Detailed case studies are available at ${siteUrl}/case-studies.`
               : `${fullName}'s portfolio includes practical software projects with implementation and outcomes.`,
         },
       },

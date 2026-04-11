@@ -32,7 +32,8 @@ export function ProfileImage({
         fill
         sizes="(max-width: 768px) min(86vw, 300px), (max-width: 1280px) 340px, 380px"
         className="object-cover object-[center_35%] transition-transform duration-300 group-hover:scale-105"
-        preload
+        loading="eager"
+        fetchPriority="high"
         quality={60}
         placeholder={lqip ? "blur" : "empty"}
         blurDataURL={lqip}
