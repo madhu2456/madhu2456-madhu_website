@@ -6,18 +6,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in"
   ).replace(/\/$/, ""); // strip trailing slash for consistent canonical form
 
-  // Fetch the latest modification dates from all major content types
-  // to provide Google with a truly accurate 'lastmod' signal.
-  const timestamps = await client.fetch<string[]>(`
+  const timestamps = await client.fetch<Array<string | null>>(`
     [
+      *[_type == "siteSettings"][0]._updatedAt,
       *[_id == "singleton-profile"][0]._updatedAt,
       *[_type == "project"] | order(_updatedAt desc)[0]._updatedAt,
-      *[_type == "experience"] | order(_updatedAt desc)[0]._updatedAt
+      *[_type == "experience"] | order(_updatedAt desc)[0]._updatedAt,
+      *[_type == "service"] | order(_updatedAt desc)[0]._updatedAt,
+      *[_type == "education"] | order(_updatedAt desc)[0]._updatedAt,
+      *[_type == "certification"] | order(_updatedAt desc)[0]._updatedAt
     ]
   `);
 
-  // Filter out nulls and get the most recent one
-  const validTimestamps = timestamps.filter(Boolean).map((t) => new Date(t));
+  const validTimestamps = timestamps
+    .filter((value): value is string => typeof value === "string")
+    .map((value) => new Date(value))
+    .filter((date) => !Number.isNaN(date.getTime()));
   const latestDate =
     validTimestamps.length > 0
       ? new Date(Math.max(...validTimestamps.map((d) => d.getTime())))
@@ -25,11 +29,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     {
-      // Homepage — the single canonical URL for this single-page portfolio
-      url: `${siteUrl}/`,
+      url: siteUrl,
       lastModified: latestDate,
-      // "monthly" is honest for a portfolio; "weekly" makes Google
-      // expect frequent updates that never come, reducing crawl trust.
       changeFrequency: "monthly",
       priority: 1,
     },

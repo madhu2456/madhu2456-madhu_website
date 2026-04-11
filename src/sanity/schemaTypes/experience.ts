@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { portableTextStyles } from "@/sanity/lib/portableTextStyles";
 
 export default defineType({
   name: "experience",
@@ -59,7 +60,12 @@ export default defineType({
       name: "description",
       title: "Description",
       type: "array",
-      of: [{ type: "block" }],
+      of: [
+        {
+          type: "block",
+          styles: portableTextStyles,
+        },
+      ],
       description: "Detailed job responsibilities and achievements",
     }),
     defineField({

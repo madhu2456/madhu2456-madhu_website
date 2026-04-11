@@ -2,7 +2,6 @@
 
 import { IconMessageCircle, IconX } from "@tabler/icons-react";
 import Image from "next/image";
-import { useState } from "react";
 import { useSidebar } from "../ui/sidebar";
 
 interface ProfileImageProps {
@@ -18,24 +17,21 @@ export function ProfileImage({
   firstName,
   lastName,
 }: ProfileImageProps) {
-  const [isHovered, setIsHovered] = useState(false);
   const { toggleSidebar, open } = useSidebar();
 
   return (
     <button
       type="button"
       onClick={toggleSidebar}
-      className="relative aspect-square rounded-2xl overflow-hidden border-4 border-primary/20 block group cursor-pointer w-full"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className="relative rounded-xl overflow-hidden border-4 border-primary/20 block group cursor-pointer w-full h-full mx-auto"
       aria-label="Toggle AI Chat Sidebar"
     >
       <Image
         src={imageUrl}
         alt={`${firstName} ${lastName}`}
         fill
-        sizes="(max-width: 768px) calc(100vw - 48px), (max-width: 1280px) 45vw, 560px"
-        className="object-cover transition-transform duration-300 group-hover:scale-105"
+        sizes="(max-width: 768px) min(86vw, 300px), (max-width: 1280px) 340px, 380px"
+        className="object-cover object-[center_35%] transition-transform duration-300 group-hover:scale-105"
         priority
         fetchPriority="high"
         placeholder={lqip ? "blur" : "empty"}
@@ -52,22 +48,18 @@ export function ProfileImage({
       </div>
 
       {/* Hover Overlay */}
-      <div
-        className={`absolute inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center transition-opacity duration-300 ${
-          isHovered ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        <div className="text-center space-y-3">
+      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+        <div className="flex flex-col items-center text-center gap-3 px-4 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
           {open ? (
-            <IconX className="w-12 h-12 text-white mx-auto" />
+            <IconX className="w-12 h-12 text-white" />
           ) : (
-            <IconMessageCircle className="w-12 h-12 text-white mx-auto" />
+            <IconMessageCircle className="w-12 h-12 text-white" />
           )}
 
-          <div className="text-white text-xl font-semibold">
+          <div className="text-white text-lg font-semibold leading-tight">
             {open ? "Close Chat" : "Chat with AI Twin"}
           </div>
-          <div className="text-white/80 text-sm">
+          <div className="text-white/80 text-sm leading-tight">
             {open ? "Click to close chat" : "Click to open chat"}
           </div>
         </div>

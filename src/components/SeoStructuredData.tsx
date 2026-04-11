@@ -1,11 +1,13 @@
 import { defineQuery } from "next-sanity";
 import {
   buildBreadcrumbSchema,
+  buildCertificationsListSchema,
   buildFullGraph,
   buildOccupationSchema,
   buildPersonSchema,
   buildProfilePageSchema,
   buildProjectsListSchema,
+  buildServicesListSchema,
   buildWebSiteSchema,
   buildWorkExperienceSchema,
 } from "@/lib/jsonld";
@@ -16,6 +18,7 @@ const SEO_GRAPH_QUERY = defineQuery(`{
   "settings": *[_type == "siteSettings"][0]{
     siteTitle,
     siteDescription,
+    _updatedAt,
   },
   "profile": *[_id == "singleton-profile"][0]{
     firstName,
@@ -35,6 +38,7 @@ const SEO_GRAPH_QUERY = defineQuery(`{
     liveUrl,
     githubUrl,
     category,
+    _updatedAt,
   },
   "experience": *[_type == "experience"] | order(order asc)[0...5]{
     company,
@@ -43,6 +47,23 @@ const SEO_GRAPH_QUERY = defineQuery(`{
     endDate,
     current,
     location,
+    _updatedAt,
+  },
+  "services": *[_type == "service"] | order(featured desc, order asc)[0...8]{
+    title,
+    shortDescription,
+    pricing,
+    _updatedAt,
+  },
+  "certifications": *[_type == "certification"] | order(issueDate desc)[0...8]{
+    name,
+    issuer,
+    issueDate,
+    expiryDate,
+    credentialId,
+    credentialUrl,
+    description,
+    _updatedAt,
   }
 }`);
 
@@ -53,8 +74,12 @@ export async function SeoStructuredData() {
   const settings = data?.settings;
   const projects = data?.projects ?? [];
   const experience = data?.experience ?? [];
+  const services = data?.services ?? [];
+  const certifications = data?.certifications ?? [];
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in";
+  const siteUrl = (
+    process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in"
+  ).replace(/\/+$/, "");
   const fullName =
     [profile?.firstName, profile?.lastName].filter(Boolean).join(" ") ||
     "Madhu Dadi";
@@ -63,6 +88,21 @@ export async function SeoStructuredData() {
   const profileImageUrl = profile?.profileImage
     ? urlFor(profile.profileImage).width(800).height(800).url()
     : undefined;
+  const updatedAtValues = [
+    settings?._updatedAt,
+    profile?._updatedAt,
+    ...projects.map((item: { _updatedAt?: string | null }) => item?._updatedAt),
+    ...experience.map((item: { _updatedAt?: string | null }) => item?._updatedAt),
+    ...services.map((item: { _updatedAt?: string | null }) => item?._updatedAt),
+    ...certifications.map((item: { _updatedAt?: string | null }) => item?._updatedAt),
+  ].filter((value): value is string => typeof value === "string");
+  const updatedAtTimestamps = updatedAtValues
+    .map((value) => new Date(value).getTime())
+    .filter((value) => !Number.isNaN(value));
+  const dateModified =
+    updatedAtTimestamps.length > 0
+      ? new Date(Math.max(...updatedAtTimestamps)).toISOString()
+      : undefined;
 
   const graph = buildFullGraph([
     buildPersonSchema({
@@ -91,10 +131,12 @@ export async function SeoStructuredData() {
       url: siteUrl,
       description,
       profileImageUrl,
-      dateModified: profile?._updatedAt,
+      dateModified,
     }),
     buildProjectsListSchema({ siteUrl, projects }),
+    buildServicesListSchema({ siteUrl, services }),
     buildWorkExperienceSchema({ siteUrl, experiences: experience }),
+    buildCertificationsListSchema({ siteUrl, certifications }),
     buildBreadcrumbSchema(siteUrl),
   ]);
 
