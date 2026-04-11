@@ -39,7 +39,7 @@ export async function HeroSection() {
   }
 
   const profileImageUrl = profile.profileImage
-    ? urlFor(profile.profileImage).width(900).height(1200).fit("crop").url()
+    ? urlFor(profile.profileImage).width(694).height(925).fit("crop").url()
     : "";
   
   const lqip = (profile.profileImage as any)?.asset?.metadata?.lqip || "";

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import dynamic from "next/dynamic";
 import { Geist, Geist_Mono } from "next/font/google";
 import { defineQuery } from "next-sanity";
+import { ClientChrome } from "@/components/ClientChrome";
 import { urlFor } from "@/sanity/lib/image";
 import { SanityLive, sanityFetch } from "@/sanity/lib/live";
 import "../globals.css";
@@ -13,13 +14,9 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 import { AppSidebar } from "@/components/app-sidebar";
 
-const ModeToggle = dynamic(() =>
-  import("@/components/DarkModeToggle").then((m) => m.ModeToggle),
-);
 const FloatingDock = dynamic(() =>
   import("@/components/FloatingDock").then((m) => m.FloatingDock),
 );
-const SidebarToggle = dynamic(() => import("@/components/SidebarToggle"));
 const DisableDraftMode = dynamic(() =>
   import("@/components/DisableDraftMode").then((m) => m.DisableDraftMode),
 );
@@ -221,6 +218,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isDraftEnabled = (await draftMode()).isEnabled;
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -243,20 +242,12 @@ export default async function RootLayout({
             <AppSidebar side="right" />
 
             <FloatingDock />
-            <SidebarToggle />
-
-            {/* Mode Toggle - Desktop: bottom right next to AI chat, Mobile: top right next to burger menu */}
-            <div className="fixed md:bottom-6 md:right-24 top-4 right-18 md:top-auto md:left-auto z-20">
-              <div className="w-11 h-11 md:w-12 md:h-12">
-                <ModeToggle />
-              </div>
-            </div>
+            <ClientChrome />
           </SidebarProvider>
 
-          {/* Live content API */}
-          <SanityLive />
+          {isDraftEnabled && <SanityLive />}
 
-          {(await draftMode()).isEnabled && (
+          {isDraftEnabled && (
             <>
               <VisualEditing />
               <DisableDraftMode />

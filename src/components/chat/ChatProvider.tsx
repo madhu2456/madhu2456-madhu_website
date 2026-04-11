@@ -7,11 +7,16 @@ import {
   useCallback,
   useContext,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import type { CHAT_PROFILE_QUERYResult } from "@/../sanity.types";
-import { createSession } from "@/app/actions/create-session";
+import { CREATE_SESSION_ENDPOINT } from "@/lib/config";
 import { SidebarContext } from "../ui/sidebar";
+import {
+  clearPrefetchedClientSecret,
+  readPrefetchedClientSecret,
+} from "./session-cache";
 
 type ChatContextType = {
   control: any;
@@ -34,6 +39,7 @@ export function ChatProvider({
 
   const [isReady, setIsReady] = useState(false);
   const [sessionError, setSessionError] = useState<string | null>(null);
+  const sessionPromiseRef = useRef<Promise<string> | null>(null);
 
   const getGreeting = useCallback(() => {
     if (!profile?.firstName) {
@@ -45,21 +51,75 @@ export function ChatProvider({
     return `Hi! I'm ${fullName}. Ask me anything about my work, experience, or projects.`;
   }, [profile]);
 
+  const requestClientSecret = useCallback(async () => {
+    const prefetchedSecret = readPrefetchedClientSecret();
+    if (prefetchedSecret) {
+      clearPrefetchedClientSecret();
+      return prefetchedSecret;
+    }
+
+    const response = await fetch(CREATE_SESSION_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      cache: "no-store",
+    });
+
+    const data = (await response.json().catch(() => null)) as
+      | { clientSecret?: string; error?: string }
+      | null;
+
+    if (!response.ok) {
+      const errorMessage =
+        data?.error ||
+        `Failed to create session (HTTP ${response.status.toString()})`;
+      throw new Error(errorMessage);
+    }
+
+    if (
+      !data ||
+      typeof data.clientSecret !== "string" ||
+      data.clientSecret.length === 0
+    ) {
+      throw new Error("Missing client secret from session endpoint");
+    }
+
+    return data.clientSecret;
+  }, []);
+
+  const getClientSecret = useCallback(
+    async (existingSecret: string | null) => {
+      try {
+        if (existingSecret) {
+          setSessionError(null);
+          setIsReady(true);
+          return existingSecret;
+        }
+
+        if (!sessionPromiseRef.current) {
+          sessionPromiseRef.current = requestClientSecret();
+        }
+
+        const secret = await sessionPromiseRef.current;
+        setSessionError(null);
+        setIsReady(true);
+        return secret;
+      } catch (err) {
+        const msg =
+          err instanceof Error ? err.message : "Failed to start chat session";
+        setSessionError(msg);
+        setIsReady(true);
+        sessionPromiseRef.current = null;
+        throw err;
+      }
+    },
+    [requestClientSecret],
+  );
+
   const { control } = useChatKit({
     api: {
-      getClientSecret: async (_existingSecret) => {
-        try {
-          const secret = await createSession();
-          setIsReady(true);
-          return secret;
-        } catch (err) {
-          const msg =
-            err instanceof Error ? err.message : "Failed to start chat session";
-          setSessionError(msg);
-          setIsReady(true);
-          throw err;
-        }
-      },
+      getClientSecret,
     },
     theme: {},
     header: {
@@ -115,6 +175,8 @@ export function ChatProvider({
   const resetSession = useCallback(() => {
     setIsReady(false);
     setSessionError(null);
+    sessionPromiseRef.current = null;
+    clearPrefetchedClientSecret();
     // Note: ChatKit usually handles reconnection,
     // but we can add manual logic here if needed.
   }, []);
