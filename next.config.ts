@@ -95,6 +95,16 @@ const nextConfig: NextConfig = {
           { key: "Cache-Control", value: "public, max-age=86400" },
         ],
       },
+      {
+        source: "/ai-profile.json",
+        headers: [
+          { key: "Content-Type", value: "application/json; charset=utf-8" },
+          {
+            key: "Cache-Control",
+            value: "public, max-age=3600, stale-while-revalidate=86400",
+          },
+        ],
+      },
       // Sitemap — revalidate hourly, serve stale for a day
       {
         source: "/sitemap.xml",

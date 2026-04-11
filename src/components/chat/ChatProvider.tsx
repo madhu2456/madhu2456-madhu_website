@@ -10,9 +10,9 @@ import {
   useRef,
   useState,
 } from "react";
-import type { CHAT_PROFILE_QUERYResult } from "@/../sanity.types";
 import { CREATE_SESSION_ENDPOINT } from "@/lib/config";
 import { SidebarContext } from "../ui/sidebar";
+import type { ChatProfile } from "./chat-profile";
 import {
   clearPrefetchedClientSecret,
   readPrefetchedClientSecret,
@@ -32,7 +32,7 @@ export function ChatProvider({
   profile,
 }: {
   children: React.ReactNode;
-  profile: CHAT_PROFILE_QUERYResult | null;
+  profile: ChatProfile | null;
 }) {
   const sidebarContext = useContext(SidebarContext);
   const toggleSidebar = sidebarContext?.toggleSidebar ?? (() => {});

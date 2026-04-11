@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { useContext, useEffect, useState } from "react";
 import { CREATE_SESSION_ENDPOINT } from "@/lib/config";
 import { SidebarContext } from "@/components/ui/sidebar";
+import type { ChatProfile } from "./chat-profile";
 import {
   readPrefetchedClientSecret,
   writePrefetchedClientSecret,
@@ -13,7 +14,7 @@ const ChatWrapper = dynamic(() => import("./ChatWrapper"), {
   ssr: false,
 });
 
-export function ChatSidebarSection({ profile }: { profile: any }) {
+export function ChatSidebarSection({ profile }: { profile: ChatProfile | null }) {
   const sidebarContext = useContext(SidebarContext);
   const [hasOpened, setHasOpened] = useState(false);
 

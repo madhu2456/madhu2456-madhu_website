@@ -2,6 +2,7 @@ import { defineQuery } from "next-sanity";
 import {
   buildBreadcrumbSchema,
   buildCertificationsListSchema,
+  buildFaqSchema,
   buildFullGraph,
   buildOccupationSchema,
   buildPersonSchema,
@@ -138,6 +139,15 @@ export async function SeoStructuredData() {
     buildWorkExperienceSchema({ siteUrl, experiences: experience }),
     buildCertificationsListSchema({ siteUrl, certifications }),
     buildBreadcrumbSchema(siteUrl),
+    buildFaqSchema({
+      siteUrl,
+      fullName,
+      headline: profile?.headline,
+      location: profile?.location,
+      yearsOfExperience: profile?.yearsOfExperience,
+      projects,
+      services,
+    }),
   ]);
 
   return (

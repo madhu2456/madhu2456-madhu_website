@@ -1,10 +1,45 @@
 "use client";
 
 import { ChatKit } from "@openai/chatkit-react";
-import { IconX } from "@tabler/icons-react";
+import { IconSparkles, IconX } from "@tabler/icons-react";
+import { useEffect, useMemo, useState } from "react";
+import type { ChatProfile } from "./chat-profile";
+import { buildProfileFacts } from "./profile-facts";
 import { useChat } from "./ChatProvider";
 
-function ChatInitSkeleton({ name }: { name?: string }) {
+const FACT_ROTATION_INTERVAL_MS = 2600;
+
+function ChatInitSkeleton({ profile }: { profile: ChatProfile | null }) {
+  const facts = useMemo(() => buildProfileFacts(profile), [profile]);
+  const [factIndex, setFactIndex] = useState(() =>
+    Math.floor(Math.random() * facts.length),
+  );
+
+  useEffect(() => {
+    setFactIndex(Math.floor(Math.random() * facts.length));
+  }, [facts]);
+
+  useEffect(() => {
+    if (facts.length < 2) {
+      return;
+    }
+
+    const timer = window.setInterval(() => {
+      setFactIndex((current) => {
+        let next = current;
+        while (next === current) {
+          next = Math.floor(Math.random() * facts.length);
+        }
+        return next;
+      });
+    }, FACT_ROTATION_INTERVAL_MS);
+
+    return () => window.clearInterval(timer);
+  }, [facts]);
+
+  const activeFact = facts[factIndex] ?? facts[0] ?? "Loading profile insights…";
+  const name = profile?.firstName;
+
   return (
     <div className="flex flex-col h-full w-full overflow-hidden bg-background">
       {/* Header */}
@@ -20,6 +55,15 @@ function ChatInitSkeleton({ name }: { name?: string }) {
         <p className="text-xs text-foreground/40 mt-2">
           {name ? `Connecting to ${name}'s AI…` : "Connecting…"}
         </p>
+        <div className="mt-2 w-full max-w-sm rounded-xl border border-primary/20 bg-primary/5 px-4 py-3 text-left">
+          <p className="text-[10px] uppercase tracking-wide text-primary/80 font-semibold flex items-center gap-1.5">
+            <IconSparkles className="h-3.5 w-3.5" />
+            Did you know?
+          </p>
+          <p className="mt-1.5 text-sm text-foreground/85 leading-relaxed">
+            {activeFact}
+          </p>
+        </div>
       </div>
 
       {/* Prompt chips */}
@@ -41,7 +85,7 @@ function ChatInitSkeleton({ name }: { name?: string }) {
   );
 }
 
-export function Chat({ name }: { name?: string }) {
+export function Chat({ profile }: { profile: ChatProfile | null }) {
   const { control, isReady, sessionError } = useChat();
 
   return (
@@ -49,7 +93,7 @@ export function Chat({ name }: { name?: string }) {
       {/* Skeleton overlays on top until ChatKit signals it's ready */}
       {!isReady && (
         <div className="absolute inset-0 z-10">
-          <ChatInitSkeleton name={name} />
+          <ChatInitSkeleton profile={profile} />
         </div>
       )}
 
