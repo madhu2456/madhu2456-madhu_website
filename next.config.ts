@@ -61,6 +61,8 @@ const nextConfig: NextConfig = {
         hostname: "images.unsplash.com",
       },
     ],
+    qualities: [60, 75],
+    deviceSizes: [360, 420, 640, 768, 1024, 1280, 1536, 1920],
   },
 
   async headers() {

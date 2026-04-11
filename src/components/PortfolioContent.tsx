@@ -59,33 +59,47 @@ async function PortfolioContent() {
     <>
       <HeroSection />
 
-      <Suspense fallback={<SectionSkeleton />}>
-        <AboutSection />
-      </Suspense>
+      <div className="[content-visibility:auto] [contain-intrinsic-size:1000px]">
+        <Suspense fallback={<SectionSkeleton />}>
+          <AboutSection />
+        </Suspense>
+      </div>
 
-      <Suspense fallback={<SectionSkeleton />}>
-        <ExperienceSection />
-      </Suspense>
+      <div className="[content-visibility:auto] [contain-intrinsic-size:1200px]">
+        <Suspense fallback={<SectionSkeleton />}>
+          <ExperienceSection />
+        </Suspense>
+      </div>
 
-      <Suspense fallback={<SectionSkeleton />}>
-        <EducationSection />
-      </Suspense>
+      <div className="[content-visibility:auto] [contain-intrinsic-size:1000px]">
+        <Suspense fallback={<SectionSkeleton />}>
+          <EducationSection />
+        </Suspense>
+      </div>
 
-      <Suspense fallback={<SectionSkeleton />}>
-        <ProjectsSection />
-      </Suspense>
+      <div className="[content-visibility:auto] [contain-intrinsic-size:1200px]">
+        <Suspense fallback={<SectionSkeleton />}>
+          <ProjectsSection />
+        </Suspense>
+      </div>
 
-      <Suspense fallback={<SectionSkeleton />}>
-        <CertificationsSection />
-      </Suspense>
+      <div className="[content-visibility:auto] [contain-intrinsic-size:1200px]">
+        <Suspense fallback={<SectionSkeleton />}>
+          <CertificationsSection />
+        </Suspense>
+      </div>
 
-      <Suspense fallback={<SectionSkeleton />}>
-        <ServicesSection />
-      </Suspense>
+      <div className="[content-visibility:auto] [contain-intrinsic-size:1100px]">
+        <Suspense fallback={<SectionSkeleton />}>
+          <ServicesSection />
+        </Suspense>
+      </div>
 
-      <Suspense fallback={<SectionSkeleton />}>
-        <ContactSection />
-      </Suspense>
+      <div className="[content-visibility:auto] [contain-intrinsic-size:1100px]">
+        <Suspense fallback={<SectionSkeleton />}>
+          <ContactSection />
+        </Suspense>
+      </div>
     </>
   );
 }
