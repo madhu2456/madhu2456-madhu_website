@@ -39,7 +39,7 @@ export async function HeroSection() {
   }
 
   const profileImageUrl = profile.profileImage
-    ? urlFor(profile.profileImage).width(600).height(600).url()
+    ? urlFor(profile.profileImage).width(900).height(1200).fit("crop").url()
     : "";
   
   const lqip = (profile.profileImage as any)?.asset?.metadata?.lqip || "";
@@ -149,12 +149,16 @@ export async function HeroSection() {
 
             {/* Profile Image */}
             {profile.profileImage && (
-              <ProfileImage
-                imageUrl={profileImageUrl}
-                lqip={lqip}
-                firstName={profile.firstName || ""}
-                lastName={profile.lastName || ""}
-              />
+              <div className="w-full flex justify-center">
+                <div className="w-full max-w-[300px] h-[400px] @md:max-w-[340px] @md:h-[460px] @3xl:max-w-[380px] @3xl:h-[520px]">
+                  <ProfileImage
+                    imageUrl={profileImageUrl}
+                    lqip={lqip}
+                    firstName={profile.firstName || ""}
+                    lastName={profile.lastName || ""}
+                  />
+                </div>
+              </div>
             )}
           </div>
         </div>

@@ -1,12 +1,11 @@
 /* TEAM */
 Developer & Designer: Madhu Dadi
-Site: https://madhudadi.com
+Site: https://madhudadi.in
 Location: See portfolio for current location
 
 /* THANKS */
 Next.js — https://nextjs.org
 Sanity CMS — https://sanity.io
-Clerk — https://clerk.dev
 Tailwind CSS — https://tailwindcss.com
 OpenAI ChatKit — https://platform.openai.com
 

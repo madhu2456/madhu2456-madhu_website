@@ -12,6 +12,7 @@ import {
   UserIcon,
 } from "@sanity/icons";
 import type { StructureResolver } from "sanity/structure";
+import { apiVersion } from "@/sanity/env";
 
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
 export const structure: StructureResolver = (S) =>
@@ -106,6 +107,7 @@ export const structure: StructureResolver = (S) =>
                 .child(
                   S.documentTypeList("contact")
                     .title("New Submissions")
+                    .apiVersion(apiVersion)
                     .filter('_type == "contact" && status == "new"'),
                 ),
 
@@ -115,6 +117,7 @@ export const structure: StructureResolver = (S) =>
                 .child(
                   S.documentTypeList("contact")
                     .title("Archived Submissions")
+                    .apiVersion(apiVersion)
                     .filter('_type == "contact" && status == "archived"'),
                 ),
             ]),

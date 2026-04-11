@@ -26,6 +26,25 @@ type Experience = {
   location?: string | null;
 };
 
+type Service = {
+  title: string;
+  shortDescription?: string | null;
+  pricing?: {
+    startingPrice?: number | null;
+    priceType?: string | null;
+  } | null;
+};
+
+type Certification = {
+  name: string;
+  issuer?: string | null;
+  issueDate?: string | null;
+  expiryDate?: string | null;
+  credentialId?: string | null;
+  credentialUrl?: string | null;
+  description?: string | null;
+};
+
 // ---------------------------------------------------------------------------
 // Person
 // ---------------------------------------------------------------------------
@@ -75,6 +94,17 @@ export function buildPersonSchema({
     ...(description && { description }),
     ...(headline && { jobTitle: headline }),
     ...(email && { email }),
+    ...(email && {
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          contactType: "professional",
+          email,
+          url: `${siteUrl}/#contact`,
+          availableLanguage: ["English"],
+        },
+      ],
+    }),
     ...(location && {
       address: {
         "@type": "PostalAddress",
@@ -90,6 +120,8 @@ export function buildPersonSchema({
       },
     }),
     ...(sameAs.length > 0 && { sameAs }),
+    inLanguage: "en-US",
+    mainEntityOfPage: { "@id": `${siteUrl}/#profilepage` },
     hasOccupation: { "@id": `${siteUrl}/#occupation` },
     knowsAbout: [
       "Software Engineering",
@@ -154,14 +186,6 @@ export function buildWebSiteSchema({
     url,
     ...(description && { description }),
     inLanguage: "en-US",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${url}/?s={search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
-    },
   };
 }
 
@@ -191,6 +215,7 @@ export function buildProfilePageSchema({
     isPartOf: { "@id": `${url}/#website` },
     about: { "@id": `${url}/#person` },
     mainEntity: { "@id": `${url}/#person` },
+    breadcrumb: { "@id": `${url}/#breadcrumb` },
     dateModified: dateModified ?? new Date().toISOString(),
     ...(profileImageUrl && {
       primaryImageOfPage: {
@@ -202,6 +227,122 @@ export function buildProfilePageSchema({
       "@type": "SpeakableSpecification",
       cssSelector: ["#home", "#about", "#experience"],
     },
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Services — ItemList of Service nodes
+// ---------------------------------------------------------------------------
+export function buildServicesListSchema({
+  siteUrl,
+  services,
+}: {
+  siteUrl: string;
+  services: Service[];
+}) {
+  if (services.length === 0) return null;
+
+  const unitTextByPriceType: Record<string, string> = {
+    hourly: "hour",
+    project: "project",
+    monthly: "month",
+  };
+
+  return {
+    "@type": "ItemList",
+    "@id": `${siteUrl}/#services`,
+    name: "Professional Services",
+    description: "Consulting and development services offered by Madhu Dadi",
+    numberOfItems: services.length,
+    itemListElement: services.map((service, i) => {
+      const startingPrice = service.pricing?.startingPrice;
+      const priceType = service.pricing?.priceType ?? undefined;
+      const hasPrice =
+        typeof startingPrice === "number" &&
+        startingPrice > 0 &&
+        priceType !== "custom";
+
+      return {
+        "@type": "ListItem",
+        position: i + 1,
+        item: {
+          "@type": "Service",
+          "@id": `${siteUrl}/#service-${i + 1}`,
+          name: service.title,
+          serviceType: service.title,
+          url: `${siteUrl}/#services`,
+          provider: { "@id": `${siteUrl}/#person` },
+          ...(service.shortDescription && { description: service.shortDescription }),
+          ...(hasPrice && {
+            offers: {
+              "@type": "Offer",
+              price: startingPrice,
+              priceCurrency: "USD",
+              availability: "https://schema.org/InStock",
+              url: `${siteUrl}/#services`,
+              ...(priceType &&
+                unitTextByPriceType[priceType] && {
+                  priceSpecification: {
+                    "@type": "UnitPriceSpecification",
+                    price: startingPrice,
+                    priceCurrency: "USD",
+                    unitText: unitTextByPriceType[priceType],
+                  },
+                }),
+            },
+          }),
+        },
+      };
+    }),
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Certifications — ItemList of EducationalOccupationalCredential nodes
+// ---------------------------------------------------------------------------
+export function buildCertificationsListSchema({
+  siteUrl,
+  certifications,
+}: {
+  siteUrl: string;
+  certifications: Certification[];
+}) {
+  if (certifications.length === 0) return null;
+
+  return {
+    "@type": "ItemList",
+    "@id": `${siteUrl}/#certifications`,
+    name: "Professional Certifications",
+    numberOfItems: certifications.length,
+    itemListElement: certifications.map((certification, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "EducationalOccupationalCredential",
+        "@id": `${siteUrl}/#credential-${i + 1}`,
+        name: certification.name,
+        credentialCategory: "Professional Certification",
+        ...(certification.description && {
+          description: certification.description,
+        }),
+        ...(certification.issueDate && { dateCreated: certification.issueDate }),
+        ...(certification.expiryDate && { expires: certification.expiryDate }),
+        ...(certification.credentialId && {
+          identifier: {
+            "@type": "PropertyValue",
+            name: "Credential ID",
+            value: certification.credentialId,
+          },
+        }),
+        ...(certification.credentialUrl && { url: certification.credentialUrl }),
+        ...(certification.issuer && {
+          recognizedBy: {
+            "@type": "Organization",
+            name: certification.issuer,
+          },
+        }),
+      },
+    })),
   };
 }
 
@@ -255,6 +396,8 @@ export function buildWorkExperienceSchema({
     "@type": "ItemList",
     "@id": `${siteUrl}/#workexperience`,
     name: "Work Experience",
+    numberOfItems: experiences.length,
+    description: "Professional roles and responsibilities held by Madhu Dadi",
     itemListElement: experiences.map((e, i) => ({
       "@type": "ListItem",
       position: i + 1,
@@ -304,6 +447,6 @@ export function buildBreadcrumbSchema(url: string) {
 export function buildFullGraph(nodes: (object | null)[]) {
   return {
     "@context": "https://schema.org",
-    "@graph": nodes.filter(Boolean),
+    "@graph": nodes.filter((node): node is object => Boolean(node)),
   };
 }
