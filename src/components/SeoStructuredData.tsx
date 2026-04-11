@@ -35,6 +35,7 @@ const SEO_GRAPH_QUERY = defineQuery(`{
   },
   "projects": *[_type == "project" && featured == true] | order(order asc)[0...6]{
     title,
+    "slug": slug.current,
     tagline,
     liveUrl,
     githubUrl,

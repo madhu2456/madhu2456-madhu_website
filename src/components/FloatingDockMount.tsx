@@ -24,9 +24,6 @@ export function FloatingDockMount({ navItems }: { navItems: NavItem[] }) {
   useEffect(() => {
     if (enabled) return;
 
-    let timeoutId: number | null = null;
-    let idleId: number | null = null;
-
     const activate = () => setEnabled(true);
 
     const handleIntent = () => {
@@ -43,21 +40,9 @@ export function FloatingDockMount({ navItems }: { navItems: NavItem[] }) {
       });
     }
 
-    if (typeof requestIdleCallback !== "undefined") {
-      idleId = requestIdleCallback(activate, { timeout: 1800 });
-    } else {
-      timeoutId = window.setTimeout(activate, 600);
-    }
-
     return () => {
       for (const eventName of ENABLE_EVENTS) {
         window.removeEventListener(eventName, handleIntent);
-      }
-      if (idleId !== null && typeof cancelIdleCallback !== "undefined") {
-        cancelIdleCallback(idleId);
-      }
-      if (timeoutId !== null) {
-        window.clearTimeout(timeoutId);
       }
     };
   }, [enabled]);

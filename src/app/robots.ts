@@ -17,7 +17,14 @@ export default function robots(): MetadataRoute.Robots {
       // Standard crawlers — full access except admin/API paths
       {
         userAgent: "*",
-        allow: ["/", "/sitemap.xml", "/llms.txt", "/ai-profile.json", "/humans.txt"],
+        allow: [
+          "/",
+          "/case-studies",
+          "/sitemap.xml",
+          "/llms.txt",
+          "/ai-profile.json",
+          "/humans.txt",
+        ],
         disallow: ["/studio/", "/api/"],
       },
       // AI search engines — explicitly welcomed for GEO
@@ -38,7 +45,7 @@ export default function robots(): MetadataRoute.Robots {
           "Meta-ExternalFetcher",
           "Amazonbot",
         ],
-        allow: ["/", "/llms.txt", "/ai-profile.json", "/humans.txt"],
+        allow: ["/", "/case-studies", "/llms.txt", "/ai-profile.json", "/humans.txt"],
         disallow: ["/studio/", "/api/"],
       },
     ],
