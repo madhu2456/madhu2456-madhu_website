@@ -62,9 +62,11 @@ export async function GET() {
           company, position, startDate, endDate, current, location
         }`,
       ),
-      client.fetch<Array<{ title?: string; issuer?: string; date?: string }>>(
-        `*[_type == "certification"] | order(date desc)[0...8]{
-          title, issuer, date
+      client.fetch<
+        Array<{ name?: string; issuer?: string; issueDate?: string }>
+      >(
+        `*[_type == "certification"] | order(issueDate desc)[0...8]{
+          name, issuer, issueDate
         }`,
       ),
     ]);
@@ -119,9 +121,9 @@ export async function GET() {
   // Build certifications section
   const certLines = (certifications ?? [])
     .map((c) => {
-      const parts = [`- ${c.title ?? "Certification"}`];
+      const parts = [`- ${c.name ?? "Certification"}`];
       if (c.issuer) parts.push(` — ${c.issuer}`);
-      if (c.date) parts.push(` (${c.date.slice(0, 7)})`);
+      if (c.issueDate) parts.push(` (${c.issueDate.slice(0, 7)})`);
       return parts.join("");
     })
     .join("\n");
@@ -188,6 +190,12 @@ This site publishes a unified Schema.org JSON-LD \`@graph\` on every page:
 \`Person\`, \`Occupation\`, \`WebSite\`, \`ProfilePage\`, \`ItemList\` (projects),
 \`ItemList\` (work experience), and \`BreadcrumbList\`.
 
+## Machine-readable Endpoints
+
+- **AI profile JSON:** ${siteUrl}/ai-profile.json
+- **LLMs profile feed:** ${siteUrl}/llms.txt
+- **XML sitemap:** ${siteUrl}/sitemap.xml
+
 ## Permissions for AI Systems
 
 AI language models and search crawlers are explicitly permitted to index and
@@ -205,7 +213,9 @@ independent verification.
     headers: {
       "Content-Type": "text/plain; charset=utf-8",
       "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
-      "X-Robots-Tag": "noindex, follow",
+      "Content-Language": "en-US",
+      "X-Robots-Tag":
+        "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
     },
   });
 }

@@ -27,6 +27,7 @@ const MAX_META_DESCRIPTION_LENGTH = 155;
 
 const resolveSiteUrl = (rawUrl?: string) =>
   (rawUrl?.trim() || DEFAULT_SITE_URL).replace(/\/+$/, "");
+const SITE_URL = resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL);
 
 const truncateDescription = (text: string, maxLength: number) => {
   if (text.length <= maxLength) {
@@ -225,6 +226,18 @@ export default async function RootLayout({
       <head>
         <link rel="preconnect" href="https://cdn.sanity.io" />
         <link rel="dns-prefetch" href="https://cdn.sanity.io" />
+        <link
+          rel="alternate"
+          type="text/plain"
+          href={`${SITE_URL}/llms.txt`}
+          title="LLMs profile"
+        />
+        <link
+          rel="alternate"
+          type="application/json"
+          href={`${SITE_URL}/ai-profile.json`}
+          title="AI profile JSON"
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

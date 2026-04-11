@@ -3,8 +3,8 @@
 import dynamic from "next/dynamic";
 import Script from "next/script";
 import { useContext, useEffect, useState } from "react";
-import type { CHAT_PROFILE_QUERYResult } from "@/../sanity.types";
 import { SidebarContext } from "@/components/ui/sidebar";
+import type { ChatProfile } from "./chat-profile";
 
 const Chat = dynamic(() => import("@/components/chat/Chat"), {
   ssr: false,
@@ -16,7 +16,7 @@ const Chat = dynamic(() => import("@/components/chat/Chat"), {
 export function ChatMount({
   profile,
 }: {
-  profile: CHAT_PROFILE_QUERYResult | null;
+  profile: ChatProfile | null;
 }) {
   const context = useContext(SidebarContext);
   const [hasOpened, setHasOpened] = useState(false);
@@ -42,7 +42,7 @@ export function ChatMount({
             src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js"
             strategy="afterInteractive"
           />
-          <Chat name={profile?.firstName ?? undefined} />
+          <Chat profile={profile} />
         </>
       )}
     </>

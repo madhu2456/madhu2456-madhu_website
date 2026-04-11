@@ -4,13 +4,20 @@ export default function robots(): MetadataRoute.Robots {
   const siteUrl = (
     process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in"
   ).replace(/\/+$/, "");
+  const siteHost = (() => {
+    try {
+      return new URL(siteUrl).host;
+    } catch {
+      return siteUrl.replace(/^https?:\/\//, "");
+    }
+  })();
 
   return {
     rules: [
       // Standard crawlers — full access except admin/API paths
       {
         userAgent: "*",
-        allow: ["/", "/sitemap.xml", "/llms.txt", "/humans.txt"],
+        allow: ["/", "/sitemap.xml", "/llms.txt", "/ai-profile.json", "/humans.txt"],
         disallow: ["/studio/", "/api/"],
       },
       // AI search engines — explicitly welcomed for GEO
@@ -31,11 +38,11 @@ export default function robots(): MetadataRoute.Robots {
           "Meta-ExternalFetcher",
           "Amazonbot",
         ],
-        allow: ["/", "/llms.txt", "/humans.txt"],
+        allow: ["/", "/llms.txt", "/ai-profile.json", "/humans.txt"],
         disallow: ["/studio/", "/api/"],
       },
     ],
     sitemap: `${siteUrl}/sitemap.xml`,
-    host: siteUrl,
+    host: siteHost,
   };
 }

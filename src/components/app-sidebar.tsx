@@ -3,11 +3,22 @@ import { Sidebar, SidebarContent, SidebarRail } from "@/components/ui/sidebar";
 import { defineQuery } from "next-sanity";
 import { sanityFetch } from "@/sanity/lib/live";
 import { ChatSidebarSection } from "./chat/ChatSidebarSection";
+import type { ChatProfile } from "./chat/chat-profile";
 
 const CHAT_PROFILE_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
-    firstName,
-    lastName
-  }`);
+  firstName,
+  lastName,
+  headline,
+  shortBio,
+  location,
+  availability,
+  yearsOfExperience,
+  socialLinks,
+  stats[]{
+    label,
+    value
+  }
+}`);
 
 function SidebarSkeleton() {
   return (
@@ -38,7 +49,8 @@ function SidebarSkeleton() {
 }
 
 export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const { data: profile } = await sanityFetch({ query: CHAT_PROFILE_QUERY });
+  const { data } = await sanityFetch({ query: CHAT_PROFILE_QUERY });
+  const profile = data as ChatProfile | null;
 
   return (
     <Sidebar {...props}>

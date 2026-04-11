@@ -440,6 +440,88 @@ export function buildBreadcrumbSchema(url: string) {
 }
 
 // ---------------------------------------------------------------------------
+// FAQPage — answer-engine friendly Q&A summary for portfolio intent
+// ---------------------------------------------------------------------------
+export function buildFaqSchema({
+  siteUrl,
+  fullName,
+  headline,
+  location,
+  yearsOfExperience,
+  projects,
+  services,
+}: {
+  siteUrl: string;
+  fullName: string;
+  headline?: string | null;
+  location?: string | null;
+  yearsOfExperience?: number | null;
+  projects: Project[];
+  services: Service[];
+}) {
+  const projectCount = projects.length;
+  const topServices = services
+    .map((service) => service.title)
+    .filter(Boolean)
+    .slice(0, 3);
+  const serviceSummary =
+    topServices.length > 0
+      ? topServices.join(", ")
+      : "AI engineering, full-stack development, and technical consulting";
+  const experienceSummary =
+    typeof yearsOfExperience === "number" && yearsOfExperience > 0
+      ? `${yearsOfExperience}+ years of professional experience`
+      : "strong hands-on professional experience";
+  const profileSummary = [headline, experienceSummary, location]
+    .filter(Boolean)
+    .join(" · ");
+
+  return {
+    "@type": "FAQPage",
+    "@id": `${siteUrl}/#faq`,
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: `Who is ${fullName}?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: profileSummary
+            ? `${fullName} is a technology professional focused on ${profileSummary}.`
+            : `${fullName} is a technology professional focused on AI and software engineering.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: `What services does ${fullName} provide?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `${fullName} provides services including ${serviceSummary}.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: `What projects has ${fullName} built?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text:
+            projectCount > 0
+              ? `${fullName}'s portfolio features ${projectCount} highlighted software projects across product and engineering domains.`
+              : `${fullName}'s portfolio includes practical software projects with implementation and outcomes.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: `How can I contact ${fullName}?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `Use the contact section on ${siteUrl} or connect via the linked professional profiles for hiring and collaboration.`,
+        },
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
 // Unified @graph — bundles all schemas into one linked-data document
 // This lets search engines and AI models understand the full knowledge graph
 // in a single <script> rather than multiple disconnected ones.
