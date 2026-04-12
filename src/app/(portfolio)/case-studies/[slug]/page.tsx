@@ -220,25 +220,43 @@ export default async function CaseStudyPage({
   const caseStudyUrl = `${siteUrl}/case-studies/${slug}`;
   const description = toDescription(project.impactSummary, project.tagline);
 
-  const articleSchema = {
+  const graph = {
     "@context": "https://schema.org",
-    "@type": "Article",
-    "@id": `${caseStudyUrl}#case-study`,
-    headline: title,
-    description,
-    dateModified: project._updatedAt ?? new Date().toISOString(),
-    url: caseStudyUrl,
-    author: {
-      "@type": "Person",
-      "@id": `${siteUrl}/#person`,
-      name: "Madhu Dadi",
-      url: siteUrl,
-    },
-    isPartOf: {
-      "@type": "CollectionPage",
-      "@id": `${siteUrl}/case-studies`,
-    },
-    citation: evidenceLinks.map((link) => link.url),
+    "@graph": [
+      {
+        "@type": "Article",
+        "@id": `${caseStudyUrl}#case-study`,
+        headline: title,
+        description,
+        dateModified: project._updatedAt ?? new Date().toISOString(),
+        url: caseStudyUrl,
+        author: {
+          "@type": "Person",
+          "@id": `${siteUrl}/#person`,
+          name: "Madhu Dadi",
+          url: siteUrl,
+        },
+        isPartOf: {
+          "@type": "CollectionPage",
+          "@id": `${siteUrl}/case-studies`,
+        },
+        citation: evidenceLinks.map((link) => link.url),
+      },
+      ...(project.githubUrl
+        ? [
+            {
+              "@type": ["SoftwareApplication", "SoftwareSourceCode"],
+              "@id": `${caseStudyUrl}#software`,
+              name: title,
+              description,
+              url: project.liveUrl || caseStudyUrl,
+              codeRepository: project.githubUrl,
+              applicationCategory: project.category || "WebApplication",
+              author: { "@id": `${siteUrl}/#person` },
+            },
+          ]
+        : []),
+    ],
   };
 
   return (
@@ -246,7 +264,7 @@ export default async function CaseStudyPage({
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: server-side JSON-LD
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
       />
 
       <div className="container mx-auto max-w-4xl space-y-8 md:space-y-10">

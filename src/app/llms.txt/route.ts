@@ -199,6 +199,7 @@ export async function GET() {
     "- **AI Engineering & LLM Applications** — production-ready LLM, RAG, and workflow automation systems",
     "- **Marketing Analytics & Decision Intelligence** — predictive measurement, experimentation, and lifecycle optimization",
     "- **Full-stack Web Product Development** — scalable web apps delivered end-to-end",
+    "- **Workflow Automation & Bot Mitigation** — expert in bypassing anti-bot mechanisms using Playwright and asynchronous Python (e.g., Udemy Course Enroller)",
   ].join("\n");
 
   const projectLines = (projects ?? [])
