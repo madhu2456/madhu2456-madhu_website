@@ -13,7 +13,7 @@ import {
   buildWorkExperienceSchema,
 } from "@/lib/jsonld";
 import { urlFor } from "@/sanity/lib/image";
-import { sanityFetch } from "@/sanity/lib/live";
+import { sanityFetch } from "@/sanity/lib/fetch";
 
 const SEO_GRAPH_QUERY = defineQuery(`{
   "settings": *[_type == "siteSettings"][0]{

@@ -1,5 +1,3 @@
-"use client";
-
 /**
  * Renders an email address in a way that defeats most regex-based scrapers.
  *

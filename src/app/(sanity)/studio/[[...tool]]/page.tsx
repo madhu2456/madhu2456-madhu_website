@@ -7,16 +7,39 @@
  * https://github.com/sanity-io/next-sanity
  */
 
-import { NextStudio } from "next-sanity/studio";
-import config from "@/../sanity.config";
+import type { Metadata, Viewport } from "next";
+import { notFound } from "next/navigation";
 
-export { metadata, viewport } from "next-sanity/studio";
+export const metadata: Metadata = {
+  title: "Content Studio",
+  description: "Sanity Studio content authoring interface.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
+const isStudioEnabled = () => process.env.ENABLE_SANITY_STUDIO !== "false";
 
 // Generate the base studio route for static generation
 export function generateStaticParams() {
   return [{ tool: [] }];
 }
 
-export default function StudioPage() {
+export default async function StudioPage() {
+  if (!isStudioEnabled()) {
+    notFound();
+  }
+
+  const [{ NextStudio }, { default: config }] = await Promise.all([
+    import("next-sanity/studio"),
+    import("@/../sanity.config"),
+  ]);
+
   return <NextStudio config={config} />;
 }

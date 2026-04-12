@@ -2,9 +2,8 @@ import { IconExternalLink } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { defineQuery } from "next-sanity";
-import { LazyCometCard as CometCard } from "@/components/ui/comet-card-lazy";
+import { sanityFetch } from "@/sanity/lib/fetch";
 import { urlFor } from "@/sanity/lib/image";
-import { sanityFetch } from "@/sanity/lib/live";
 
 const CERTIFICATIONS_QUERY =
   defineQuery(`*[_type == "certification"] | order(issueDate desc){
@@ -60,10 +59,8 @@ export async function CertificationsSection() {
         <div className="@container">
           <div className="grid grid-cols-1 @2xl:grid-cols-2 gap-10">
             {certifications.map((cert) => (
-              <CometCard
+              <div
                 key={`${cert.issuer}-${cert.name}-${cert.issueDate}`}
-                rotateDepth={8}
-                translateDepth={10}
                 className="w-full"
               >
                 {/* Outer Frame - Light Matting */}
@@ -239,7 +236,7 @@ export async function CertificationsSection() {
                     </div>
                   </div>
                 </div>
-              </CometCard>
+              </div>
             ))}
           </div>
         </div>

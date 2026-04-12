@@ -2,8 +2,8 @@ import { IconAward, IconCalendar, IconExternalLink } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { defineQuery } from "next-sanity";
+import { sanityFetch } from "@/sanity/lib/fetch";
 import { urlFor } from "@/sanity/lib/image";
-import { sanityFetch } from "@/sanity/lib/live";
 
 const EDUCATION_QUERY =
   defineQuery(`*[_type == "education"] | order(endDate desc, startDate desc){

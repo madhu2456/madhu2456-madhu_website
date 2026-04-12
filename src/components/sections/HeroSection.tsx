@@ -1,11 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 import { defineQuery } from "next-sanity";
 import { ObfuscatedEmail } from "@/components/ObfuscatedEmail";
-import { LazyBackgroundRippleEffect } from "@/components/ui/background-ripple-effect-lazy";
+import { sanityFetch } from "@/sanity/lib/fetch";
 import { urlFor } from "@/sanity/lib/image";
-import { sanityFetch } from "@/sanity/lib/live";
-import { ProfileImage } from "./ProfileImage";
-import { AnimatedHeadline } from "./AnimatedHeadline";
 
 const HERO_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
   firstName,
@@ -41,16 +39,26 @@ export async function HeroSection() {
   const profileImageUrl = profile.profileImage
     ? urlFor(profile.profileImage).width(694).height(925).fit("crop").url()
     : "";
-  
-  const lqip = (profile.profileImage as any)?.asset?.metadata?.lqip || "";
+  const lqip =
+    (
+      profile.profileImage as
+        | { asset?: { metadata?: { lqip?: string } } }
+        | undefined
+    )?.asset?.metadata?.lqip || "";
+  const primaryHeadline =
+    profile.headline ||
+    [profile.headlineStaticText, profile.headlineAnimatedWords?.[0]]
+      .filter(Boolean)
+      .join(" ")
+      .trim() ||
+    "Developer and AI builder";
 
   return (
     <section
       id="home"
       className="relative min-h-screen flex items-center justify-center px-6 py-20 overflow-hidden"
     >
-      {/* Background Ripple Effect */}
-      <LazyBackgroundRippleEffect cellSize={56} />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
 
       <div className="relative z-10 container mx-auto max-w-6xl">
         <div className="@container">
@@ -61,13 +69,9 @@ export async function HeroSection() {
                 {profile.firstName}{" "}
                 <span className="text-primary">{profile.lastName}</span>
               </h1>
-              
-              <AnimatedHeadline 
-                staticText={profile.headlineStaticText || ""}
-                words={profile.headlineAnimatedWords || []}
-                duration={profile.headlineAnimationDuration || 3000}
-                fallbackText={profile.headline || ""}
-              />
+              <h2 className="text-xl @md/hero:text-2xl @lg/hero:text-3xl text-muted-foreground font-medium min-h-[1.5em]">
+                {primaryHeadline}
+              </h2>
 
               <p className="text-base @md/hero:text-lg text-muted-foreground leading-relaxed">
                 {profile.shortBio}
@@ -151,12 +155,36 @@ export async function HeroSection() {
             {profile.profileImage && (
               <div className="w-full flex justify-center">
                 <div className="w-full max-w-[300px] h-[400px] @md:max-w-[340px] @md:h-[460px] @3xl:max-w-[380px] @3xl:h-[520px]">
-                  <ProfileImage
-                    imageUrl={profileImageUrl}
-                    lqip={lqip}
-                    firstName={profile.firstName || ""}
-                    lastName={profile.lastName || ""}
-                  />
+                  <div className="relative h-full rounded-xl overflow-hidden border-4 border-primary/20">
+                    <Image
+                      src={profileImageUrl}
+                      alt={
+                        `${profile.firstName || ""} ${profile.lastName || ""}`.trim() ||
+                        "Madhu Dadi"
+                      }
+                      fill
+                      sizes="(max-width: 768px) min(86vw, 300px), (max-width: 1280px) 340px, 380px"
+                      className="object-cover object-[center_35%]"
+                      quality={60}
+                      loading="eager"
+                      placeholder={lqip ? "blur" : "empty"}
+                      blurDataURL={lqip}
+                    />
+
+                    <div className="absolute top-4 right-4 flex items-center gap-2 bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                      <div className="w-2.5 h-2.5 bg-green-500 rounded-full" />
+                      <span className="text-xs font-medium text-white">Online</span>
+                    </div>
+
+                    <div className="absolute inset-x-4 bottom-4 rounded-lg bg-black/55 backdrop-blur-sm px-4 py-3">
+                      <p className="text-sm font-semibold text-white">
+                        Let&apos;s build something meaningful.
+                      </p>
+                      <p className="text-xs text-white/80">
+                        Use the chat bubble to talk to my AI twin.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             )}

@@ -1,8 +1,8 @@
 import { IconCheck, IconStar } from "@tabler/icons-react";
 import Image from "next/image";
 import { defineQuery } from "next-sanity";
+import { sanityFetch } from "@/sanity/lib/fetch";
 import { urlFor } from "@/sanity/lib/image";
-import { sanityFetch } from "@/sanity/lib/live";
 
 const SERVICES_QUERY =
   defineQuery(`*[_type == "service"] | order(order asc, _createdAt desc){

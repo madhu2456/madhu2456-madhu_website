@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "biome check",
     "format": "biome format --write"
@@ -33,11 +33,10 @@
     "tailwind-merge": "^3.5.0"
   },
   "browserslist": [
-    "last 1 Chrome version",
-    "last 1 Firefox version",
-    "last 1 Safari version",
-    "last 1 Edge version",
-    "not dead"
+    "chrome 111",
+    "edge 111",
+    "firefox 111",
+    "safari 16.4"
   ],
   "devDependencies": {
     "@biomejs/biome": "^2.2.0",

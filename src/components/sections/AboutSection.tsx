@@ -1,7 +1,15 @@
 import { PortableText } from "@portabletext/react";
 import Link from "next/link";
 import { defineQuery } from "next-sanity";
-import { sanityFetch } from "@/sanity/lib/live";
+import { sanityFetch } from "@/sanity/lib/fetch";
+
+type AboutProfile = {
+  fullBio?: any;
+  stats?: Array<{
+    label?: string;
+    value?: string;
+  }>;
+};
 
 const ABOUT_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
   firstName,
@@ -15,7 +23,8 @@ const ABOUT_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
 }`);
 
 export async function AboutSection() {
-  const { data: profile } = await sanityFetch({ query: ABOUT_QUERY });
+  const { data } = await sanityFetch({ query: ABOUT_QUERY });
+  const profile = (data ?? null) as AboutProfile | null;
 
   if (!profile) {
     return null;

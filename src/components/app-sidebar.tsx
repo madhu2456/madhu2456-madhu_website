@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { Sidebar, SidebarContent, SidebarRail } from "@/components/ui/sidebar";
 import { defineQuery } from "next-sanity";
-import { sanityFetch } from "@/sanity/lib/live";
+import { sanityFetch } from "@/sanity/lib/fetch";
 import { ChatSidebarSection } from "./chat/ChatSidebarSection";
 import type { ChatProfile } from "./chat/chat-profile";
 
