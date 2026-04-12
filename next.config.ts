@@ -30,6 +30,8 @@ const nextConfig: NextConfig = {
   experimental: {
     // Enable scroll restoration for better UX on navigation
     scrollRestoration: true,
+    // Inline CSS for first-load paint to reduce render-blocking stylesheet requests.
+    inlineCss: true,
     // Ensure unmatched routes use a single global 404 with multiple root layouts.
     globalNotFound: true,
   },
@@ -87,13 +89,6 @@ const nextConfig: NextConfig = {
         source: "/(.*)",
         headers: [
           ...securityHeaders,
-          // Preconnect to Sanity CDN to speed up image and content delivery
-          {
-            key: "Link",
-            value: [
-              "<https://cdn.sanity.io>; rel=preconnect",
-            ].join(", "),
-          },
         ],
       },
       // SEO/GEO discovery files — serve as plain text with generous caching

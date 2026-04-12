@@ -1,6 +1,5 @@
-// Querying with "sanityFetch" will keep content automatically updated
-// Before using it, import and render "<SanityLive />" in your layout, see
-// https://github.com/sanity-io/next-sanity#live-content-api for more information.
+// Querying with "sanityFetch" keeps Draft Mode and live preview behavior wired.
+// Render <SanityLive /> only when draft mode is enabled.
 import { defineLive } from "next-sanity/live";
 import { client } from "./client";
 

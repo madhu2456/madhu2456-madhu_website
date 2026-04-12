@@ -43,19 +43,17 @@ export function ClientChrome() {
     };
   }, [enabled]);
 
-  if (!enabled) {
-    return null;
-  }
-
   return (
     <>
       <SidebarToggle />
 
-      <div className="fixed md:bottom-6 md:right-24 top-4 right-18 md:top-auto md:left-auto z-20">
-        <div className="w-11 h-11 md:w-12 md:h-12">
-          <ModeToggle />
+      {enabled && (
+        <div className="fixed md:bottom-6 md:right-24 top-4 right-18 md:top-auto md:left-auto z-20">
+          <div className="w-11 h-11 md:w-12 md:h-12">
+            <ModeToggle />
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

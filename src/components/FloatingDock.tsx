@@ -1,5 +1,5 @@
 import { defineQuery } from "next-sanity";
-import { sanityFetch } from "@/sanity/lib/live";
+import { sanityFetch } from "@/sanity/lib/fetch";
 import { FloatingDockMount } from "./FloatingDockMount";
 
 const NAVIGATION_QUERY =

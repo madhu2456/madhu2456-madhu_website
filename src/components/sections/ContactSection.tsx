@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { defineQuery } from "next-sanity";
-import { sanityFetch } from "@/sanity/lib/live";
+import { sanityFetch } from "@/sanity/lib/fetch";
 import { ContactForm } from "./ContactForm";
 
 const PROFILE_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{

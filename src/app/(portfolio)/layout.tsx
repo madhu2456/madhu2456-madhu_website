@@ -4,10 +4,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { defineQuery } from "next-sanity";
 import { ClientChrome } from "@/components/ClientChrome";
 import { urlFor } from "@/sanity/lib/image";
-import { SanityLive, sanityFetch } from "@/sanity/lib/live";
+import { sanityFetch } from "@/sanity/lib/fetch";
 import "../globals.css";
 import { draftMode } from "next/headers";
-import { VisualEditing } from "next-sanity/visual-editing";
 import { DeferredGTM } from "@/components/DeferredGTM";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
@@ -16,9 +15,6 @@ import { AppSidebar } from "@/components/app-sidebar";
 
 const FloatingDock = dynamic(() =>
   import("@/components/FloatingDock").then((m) => m.FloatingDock),
-);
-const DisableDraftMode = dynamic(() =>
-  import("@/components/DisableDraftMode").then((m) => m.DisableDraftMode),
 );
 
 const DEFAULT_SITE_URL = "https://madhudadi.in";
@@ -233,12 +229,28 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const isDraftEnabled = (await draftMode()).isEnabled;
+  let draftModeTools: React.ReactNode = null;
+
+  if (isDraftEnabled) {
+    const [{ SanityLive }, { VisualEditing }, { DisableDraftMode }] =
+      await Promise.all([
+        import("@/sanity/lib/live"),
+        import("next-sanity/visual-editing"),
+        import("@/components/DisableDraftMode"),
+      ]);
+
+    draftModeTools = (
+      <>
+        <SanityLive />
+        <VisualEditing />
+        <DisableDraftMode />
+      </>
+    );
+  }
 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://cdn.sanity.io" />
-        <link rel="dns-prefetch" href="https://cdn.sanity.io" />
         <link
           rel="alternate"
           type="text/plain"
@@ -271,14 +283,7 @@ export default async function RootLayout({
             <ClientChrome />
           </SidebarProvider>
 
-          {isDraftEnabled && <SanityLive />}
-
-          {isDraftEnabled && (
-            <>
-              <VisualEditing />
-              <DisableDraftMode />
-            </>
-          )}
+          {draftModeTools}
         </ThemeProvider>
       </body>
     </html>
