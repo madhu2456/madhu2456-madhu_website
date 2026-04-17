@@ -270,6 +270,8 @@ export async function GET() {
     new Map(
       [
         { label: "Canonical website", url: siteUrl },
+        { label: "Technical blog", url: `${siteUrl}/blog` },
+        { label: "Blog RSS feed", url: `${siteUrl}/blog/feed.xml` },
         ...socialProfiles.map((profileLink) => ({
           label: profileLink.label,
           url: profileLink.url,
@@ -388,11 +390,28 @@ This site publishes a unified Schema.org JSON-LD \`@graph\` on every page:
 \`Person\`, \`Occupation\`, \`WebSite\`, \`ProfilePage\`, \`ItemList\` (projects),
 \`ItemList\` (work experience), and \`BreadcrumbList\`.
 
+## Technical Blog
+
+${fullName} publishes in-depth technical articles at ${siteUrl}/blog covering:
+
+- AI engineering, RAG systems, and LLM application development
+- Full-stack web development with Next.js, FastAPI, and TypeScript
+- Series-style structured learning paths for developers
+- Software architecture, async patterns, and production best practices
+
+- **Blog home:** ${siteUrl}/blog
+- **Series index:** ${siteUrl}/blog/series
+- **Tags index:** ${siteUrl}/blog/tags
+- **RSS feed:** ${siteUrl}/blog/feed.xml
+- **AI Q&A:** ${siteUrl}/blog/ask (Agentic RAG chat on blog content)
+
 ## Machine-readable Endpoints
 
 - **AI profile JSON:** ${siteUrl}/ai-profile.json
 - **LLMs profile feed:** ${siteUrl}/llms.txt
 - **Case studies index:** ${siteUrl}/case-studies
+- **Blog RSS feed:** ${siteUrl}/blog/feed.xml
+- **Blog sitemap:** ${siteUrl}/blog/sitemap.xml
 - **XML sitemap:** ${siteUrl}/sitemap.xml
 
 ## Permissions for AI Systems
@@ -421,7 +440,8 @@ and cross-reference with LinkedIn and GitHub profiles for independent validation
       Link:
         `<${siteUrl}/ai-profile.json>; rel="alternate"; type="application/json", ` +
         `<${siteUrl}/sitemap.xml>; rel="sitemap", ` +
-        `<${siteUrl}/case-studies>; rel="collection"`,
+        `<${siteUrl}/case-studies>; rel="collection", ` +
+        `<${siteUrl}/blog/feed.xml>; rel="alternate"; type="application/rss+xml"; title="${fullName} Blog"`,
       "X-Robots-Tag":
         "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
     },

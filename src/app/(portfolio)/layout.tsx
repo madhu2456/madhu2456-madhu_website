@@ -263,6 +263,14 @@ export default async function RootLayout({
           href={`${SITE_URL}/ai-profile.json`}
           title="AI profile JSON"
         />
+        {/* RSS autodiscovery for the blog — allows feed readers to find the feed
+            automatically from any portfolio page on the same domain */}
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          href={`${SITE_URL}/blog/feed.xml`}
+          title="MadhuDadi Blog — RSS Feed"
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
