@@ -1,6 +1,5 @@
 import { IconExternalLink } from "@tabler/icons-react";
 import Image from "next/image";
-import Link from "next/link";
 import { getPortfolioData } from "@/lib/portfolio-data";
 
 export async function CertificationsSection() {
@@ -196,7 +195,7 @@ export async function CertificationsSection() {
                         {/* Verify Credential Button */}
                         {cert.credentialUrl && (
                           <div className="w-full pt-4 border-t border-yellow-600/20">
-                            <Link
+                            <a
                               href={cert.credentialUrl}
                               target="_blank"
                               rel="noopener noreferrer"
@@ -208,7 +207,7 @@ export async function CertificationsSection() {
                                 className="w-3.5 h-3.5"
                                 aria-hidden="true"
                               />
-                            </Link>
+                            </a>
                           </div>
                         )}
                       </div>

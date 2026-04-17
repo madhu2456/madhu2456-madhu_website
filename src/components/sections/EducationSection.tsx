@@ -1,6 +1,5 @@
 import { IconAward, IconCalendar, IconExternalLink } from "@tabler/icons-react";
 import Image from "next/image";
-import Link from "next/link";
 import { getPortfolioData } from "@/lib/portfolio-data";
 
 export async function EducationSection() {
@@ -136,7 +135,7 @@ export async function EducationSection() {
 
                 {/* Website link */}
                 {edu.website && (
-                  <Link
+                  <a
                     href={edu.website}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -144,7 +143,7 @@ export async function EducationSection() {
                   >
                     Visit Website
                     <IconExternalLink className="w-4 h-4" />
-                  </Link>
+                  </a>
                 )}
               </div>
             </div>

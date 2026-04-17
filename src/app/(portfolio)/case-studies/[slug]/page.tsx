@@ -257,24 +257,24 @@ export default async function CaseStudyPage({
         <section className="rounded-2xl border bg-background p-4 shadow-sm">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
             {project.liveUrl ? (
-              <Link
+              <a
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center rounded-xl bg-primary px-4 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
               >
                 Live demo
-              </Link>
+              </a>
             ) : null}
             {project.githubUrl ? (
-              <Link
+              <a
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center rounded-xl border px-4 py-3 text-sm font-medium transition-colors hover:bg-accent"
               >
                 Source code
-              </Link>
+              </a>
             ) : null}
             <Link
               href="#evidence"
@@ -359,14 +359,14 @@ export default async function CaseStudyPage({
             <ul className="space-y-2">
               {evidenceLinks.map((link) => (
                 <li key={link.url}>
-                  <Link
+                  <a
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-primary underline underline-offset-4 break-all"
                   >
                     {link.label}: {link.url}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>

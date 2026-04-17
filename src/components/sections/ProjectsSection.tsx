@@ -96,7 +96,7 @@ export async function ProjectsSection() {
                       </Link>
                     )}
                     {project.liveUrl && (
-                      <Link
+                      <a
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -104,10 +104,10 @@ export async function ProjectsSection() {
                         className="flex-1 text-center px-3 py-2 @md/card:px-4 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-xs @md/card:text-sm"
                       >
                         Live Demo
-                      </Link>
+                      </a>
                     )}
                     {project.githubUrl && (
-                      <Link
+                      <a
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -115,7 +115,7 @@ export async function ProjectsSection() {
                         className="px-3 py-2 @md/card:px-4 rounded-lg border hover:bg-accent transition-colors text-xs @md/card:text-sm text-center"
                       >
                         GitHub
-                      </Link>
+                      </a>
                     )}
                   </div>
                 </div>

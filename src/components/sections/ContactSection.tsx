@@ -85,7 +85,7 @@ export async function ContactSection() {
                   </h4>
                   <div className="flex flex-wrap gap-2 @md/info:gap-3">
                     {profile.socialLinks.github && (
-                      <Link
+                      <a
                         href={profile.socialLinks.github}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -93,10 +93,10 @@ export async function ContactSection() {
                         className="px-3 py-1.5 @md/info:px-4 @md/info:py-2 rounded-lg border hover:bg-accent transition-colors text-xs @md/info:text-sm"
                       >
                         GitHub
-                      </Link>
+                      </a>
                     )}
                     {profile.socialLinks.linkedin && (
-                      <Link
+                      <a
                         href={profile.socialLinks.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -104,10 +104,10 @@ export async function ContactSection() {
                         className="px-3 py-1.5 @md/info:px-4 @md/info:py-2 rounded-lg border hover:bg-accent transition-colors text-xs @md/info:text-sm"
                       >
                         LinkedIn
-                      </Link>
+                      </a>
                     )}
                     {profile.socialLinks.twitter && (
-                      <Link
+                      <a
                         href={profile.socialLinks.twitter}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -115,10 +115,10 @@ export async function ContactSection() {
                         className="px-3 py-1.5 @md/info:px-4 @md/info:py-2 rounded-lg border hover:bg-accent transition-colors text-xs @md/info:text-sm"
                       >
                         Twitter
-                      </Link>
+                      </a>
                     )}
                     {profile.socialLinks.website && (
-                      <Link
+                      <a
                         href={profile.socialLinks.website}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -126,10 +126,10 @@ export async function ContactSection() {
                         className="px-3 py-1.5 @md/info:px-4 @md/info:py-2 rounded-lg border hover:bg-accent transition-colors text-xs @md/info:text-sm"
                       >
                         Website
-                      </Link>
+                      </a>
                     )}
                     {profile.socialLinks.medium && (
-                      <Link
+                      <a
                         href={profile.socialLinks.medium}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -137,10 +137,10 @@ export async function ContactSection() {
                         className="px-3 py-1.5 @md/info:px-4 @md/info:py-2 rounded-lg border hover:bg-accent transition-colors text-xs @md/info:text-sm"
                       >
                         Medium
-                      </Link>
+                      </a>
                     )}
                     {profile.socialLinks.devto && (
-                      <Link
+                      <a
                         href={profile.socialLinks.devto}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -148,10 +148,10 @@ export async function ContactSection() {
                         className="px-3 py-1.5 @md/info:px-4 @md/info:py-2 rounded-lg border hover:bg-accent transition-colors text-xs @md/info:text-sm"
                       >
                         Dev.to
-                      </Link>
+                      </a>
                     )}
                     {profile.socialLinks.youtube && (
-                      <Link
+                      <a
                         href={profile.socialLinks.youtube}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -159,7 +159,7 @@ export async function ContactSection() {
                         className="px-3 py-1.5 @md/info:px-4 @md/info:py-2 rounded-lg border hover:bg-accent transition-colors text-xs @md/info:text-sm"
                       >
                         YouTube
-                      </Link>
+                      </a>
                     )}
                   </div>
                 </div>
