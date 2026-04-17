@@ -278,16 +278,23 @@ function DockIcon({
     >
       {content}
     </button>
+  ) : item.isExternal ? (
+    <a
+      href={item.href || "#"}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${item.title} (opens in new tab)`}
+      className={wrapperClasses}
+      onClick={onItemClick}
+    >
+      {content}
+    </a>
   ) : (
     <Link
       href={item.href || "#"}
-      target={item.isExternal ? "_blank" : undefined}
-      rel={item.isExternal ? "noopener noreferrer" : undefined}
-      aria-label={
-        item.isExternal ? `${item.title} (opens in new tab)` : item.title
-      }
+      aria-label={item.title}
       className={wrapperClasses}
-      scroll={!item.isExternal}
+      scroll={true}
       onClick={onItemClick}
     >
       {content}
