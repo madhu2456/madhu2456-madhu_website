@@ -28,6 +28,7 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   experimental: {
+    optimizePackageImports: ["@tabler/icons-react", "motion"],
     // Enable scroll restoration for better UX on navigation
     scrollRestoration: true,
     // Inline CSS for first-load paint to reduce render-blocking stylesheet requests.

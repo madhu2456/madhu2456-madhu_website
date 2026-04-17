@@ -11,13 +11,15 @@ const FACT_ROTATION_INTERVAL_MS = 2600;
 // ─── Inline Markdown ──────────────────────────────────────────────────────────
 
 function InlineMarkdown({ text }: { text: string }) {
-  const parts = text.split(/(\*\*[^*]+\*\*|\bhttps?:\/\/\S+)/g);
+  const parts = text
+    .split(/(\*\*[^*]+\*\*|\bhttps?:\/\/\S+)/g)
+    .map((part, index) => ({ part, id: String(index) }));
   return (
     <>
-      {parts.map((part, i) => {
+      {parts.map(({ part, id }) => {
         if (part.startsWith("**") && part.endsWith("**") && part.length > 4) {
           return (
-            <strong key={i} className="font-semibold">
+            <strong key={id} className="font-semibold">
               {part.slice(2, -2)}
             </strong>
           );
@@ -25,7 +27,7 @@ function InlineMarkdown({ text }: { text: string }) {
         if (/^https?:\/\//.test(part)) {
           return (
             <a
-              key={i}
+              key={id}
               href={part}
               target="_blank"
               rel="noopener noreferrer"
@@ -35,20 +37,25 @@ function InlineMarkdown({ text }: { text: string }) {
             </a>
           );
         }
-        return <span key={i}>{part}</span>;
+        return <span key={id}>{part}</span>;
       })}
     </>
   );
 }
 
 export function MarkdownText({ text }: { text: string }) {
+  const lines = text
+    .split("\n")
+    .map((line, index) => ({ line, id: String(index) }));
   return (
     <div className="space-y-1">
-      {text.split("\n").map((line, i) => {
-        if (!line.trim()) return <div key={i} className="h-1.5" />;
+      {lines.map(({ line, id }) => {
+        if (!line.trim()) {
+          return <div key={id} className="h-1.5" />;
+        }
         if (/^[-*]\s/.test(line)) {
           return (
-            <div key={i} className="flex items-start gap-2">
+            <div key={id} className="flex items-start gap-2">
               <span className="mt-[5px] h-1.5 w-1.5 shrink-0 rounded-full bg-foreground/40" />
               <span className="leading-relaxed">
                 <InlineMarkdown text={line.replace(/^[-*]\s/, "")} />
@@ -57,7 +64,7 @@ export function MarkdownText({ text }: { text: string }) {
           );
         }
         return (
-          <p key={i} className="leading-relaxed">
+          <p key={id} className="leading-relaxed">
             <InlineMarkdown text={line} />
           </p>
         );
@@ -69,21 +76,24 @@ export function MarkdownText({ text }: { text: string }) {
 // ─── Typing Dots ──────────────────────────────────────────────────────────────
 
 export function TypingDots() {
+  const dots = [0, 1, 2].map((val, index) => ({ val, id: String(index) }));
   return (
     <div className="flex items-center gap-1 px-1 py-0.5">
-      {[0, 1, 2].map((i) => (
-        <motion.span
-          key={i}
-          className="block h-2 w-2 rounded-full bg-foreground/35"
-          animate={{ y: [0, -5, 0], opacity: [0.35, 1, 0.35] }}
-          transition={{
-            duration: 0.75,
-            repeat: Number.POSITIVE_INFINITY,
-            delay: i * 0.15,
-            ease: "easeInOut",
-          }}
-        />
-      ))}
+      {dots.map(({ val, id }) => {
+        return (
+          <motion.span
+            key={id}
+            className="block h-2 w-2 rounded-full bg-foreground/35"
+            animate={{ y: [0, -5, 0], opacity: [0.35, 1, 0.35] }}
+            transition={{
+              duration: 0.75,
+              repeat: Number.POSITIVE_INFINITY,
+              delay: val * 0.15,
+              ease: "easeInOut",
+            }}
+          />
+        );
+      })}
     </div>
   );
 }
@@ -168,6 +178,7 @@ export function ChatInitSkeleton({ profile }: { profile: ChatProfile | null }) {
   const activeFact =
     facts[factIndex] ?? facts[0] ?? "Loading portfolio insights...";
   const name = profile?.firstName;
+  const chips = [75, 60, 68, 52].map((w, index) => ({ w, id: String(index) }));
 
   return (
     <div className="flex h-full w-full flex-col overflow-hidden bg-background">
@@ -208,13 +219,15 @@ export function ChatInitSkeleton({ profile }: { profile: ChatProfile | null }) {
 
       {/* Skeleton prompt chips */}
       <div className="flex flex-col gap-2 px-4 pb-3">
-        {[75, 60, 68, 52].map((w, i) => (
-          <div
-            key={i}
-            className="h-9 animate-pulse rounded-xl bg-foreground/8"
-            style={{ width: `${w}%` }}
-          />
-        ))}
+        {chips.map(({ w, id }) => {
+          return (
+            <div
+              key={id}
+              className="h-9 animate-pulse rounded-xl bg-foreground/8"
+              style={{ width: `${w}%` }}
+            />
+          );
+        })}
       </div>
 
       {/* Skeleton input */}
