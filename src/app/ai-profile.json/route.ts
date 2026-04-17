@@ -128,16 +128,30 @@ export async function GET() {
     return a.name.localeCompare(b.name);
   });
 
-  const expertise = Array.from(
+  const normalizedKeywords = Array.from(
     new Set(
-      normalizedSkills
-        .flatMap((skill) => [skill.name, ...skill.categories])
+      (siteSettings.siteKeywords ?? [])
+        .map((keyword) => keyword?.trim())
         .filter(
-          (value): value is string =>
-            typeof value === "string" && value.trim().length > 0,
+          (keyword): keyword is string =>
+            typeof keyword === "string" && keyword.length > 0,
         ),
     ),
-  ).slice(0, 30);
+  );
+
+  const expertise = Array.from(
+    new Set(
+      [
+        ...normalizedSkills
+          .flatMap((skill) => [skill.name, ...skill.categories])
+          .filter(
+            (value): value is string =>
+              typeof value === "string" && value.trim().length > 0,
+          ),
+        ...normalizedKeywords,
+      ].map((value) => value.trim()),
+    ),
+  ).slice(0, 40);
 
   const servicesPayload = sortedServices.map((item) => ({
     title: item.title,
@@ -221,6 +235,7 @@ export async function GET() {
         description:
           "Technical blog covering AI engineering, full-stack development, RAG systems, and software architecture.",
       },
+      keywords: normalizedKeywords,
       source: "local-data-nextjs",
     },
     person: {
@@ -238,6 +253,7 @@ export async function GET() {
       sameAs,
     },
     expertise,
+    keywords: normalizedKeywords,
     skills: normalizedSkills.map((skill) => ({
       name: skill.name,
       category: skill.category ?? null,
@@ -303,6 +319,9 @@ export async function GET() {
       }),
       ...(sameAs.length > 0 && { sameAs }),
       ...(expertise.length > 0 && { knowsAbout: expertise }),
+      ...(normalizedKeywords.length > 0 && {
+        keywords: normalizedKeywords.join(", "),
+      }),
       mainEntityOfPage: { "@id": `${siteUrl}/#profilepage` },
     },
   };

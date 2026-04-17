@@ -58,6 +58,21 @@ export async function GET() {
     .map((entry) => `- **${entry.label}:** ${entry.url}`)
     .join("\n");
 
+  const normalizedKeywords = Array.from(
+    new Set(
+      (siteSettings.siteKeywords ?? [])
+        .map((keyword) => keyword?.trim())
+        .filter(
+          (keyword): keyword is string =>
+            typeof keyword === "string" && keyword.length > 0,
+        ),
+    ),
+  );
+
+  const keywordLines = normalizedKeywords
+    .map((keyword) => `- ${keyword}`)
+    .join("\n");
+
   const serviceLines = sortedServices
     .map((service) => {
       const details = [
@@ -170,6 +185,10 @@ export async function GET() {
 ## Professional Summary
 
 ${profile.shortBio || siteSettings.siteDescription}
+
+## SEO / GEO / AEO Keywords
+
+${keywordLines || "- See portfolio homepage and /ai-profile.json for expertise terms"}
 
 ## Social Profiles
 

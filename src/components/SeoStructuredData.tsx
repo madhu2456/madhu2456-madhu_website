@@ -69,6 +69,7 @@ export async function SeoStructuredData() {
           name: edu.institution,
           url: edu.website ?? undefined,
         })),
+      seoKeywords: siteSettings.siteKeywords,
     }),
     buildOccupationSchema({
       siteUrl,
@@ -100,6 +101,7 @@ export async function SeoStructuredData() {
       yearsOfExperience: profile?.yearsOfExperience,
       projects,
       services,
+      seoKeywords: siteSettings.siteKeywords,
     }),
   ]);
 
