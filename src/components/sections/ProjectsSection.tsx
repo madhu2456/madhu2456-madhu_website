@@ -19,7 +19,7 @@ interface Project {
 }
 
 const PROJECTS_QUERY =
-  defineQuery(`*[_type == "project" && featured == true] | order(order asc)[0...6]{
+  defineQuery(`*[_type == "project" && featured == true && slug.current != "backroads-app"] | order(order asc)[0...6]{
   title,
   slug,
   tagline,
