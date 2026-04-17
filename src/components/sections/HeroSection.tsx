@@ -1,7 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ObfuscatedEmail } from "@/components/ObfuscatedEmail";
+import dynamic from "next/dynamic";
 import { getPortfolioData } from "@/lib/portfolio-data";
+
+const ObfuscatedEmail = dynamic(() =>
+  import("@/components/ObfuscatedEmail").then((m) => m.ObfuscatedEmail),
+);
 
 export async function HeroSection() {
   const { profile } = await getPortfolioData();
@@ -124,10 +128,11 @@ export async function HeroSection() {
                         "Madhu Dadi"
                       }
                       fill
+                      priority
+                      fetchPriority="high"
                       sizes="(max-width: 768px) min(86vw, 300px), (max-width: 1280px) 340px, 380px"
                       className="object-cover object-[center_35%]"
                       quality={60}
-                      loading="eager"
                     />
 
                     <div className="absolute top-4 right-4 flex items-center gap-2 bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-full">
