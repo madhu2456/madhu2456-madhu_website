@@ -1,37 +1,5 @@
 import Link from "next/link";
-import { defineQuery } from "next-sanity";
-import { sanityFetch } from "@/sanity/lib/fetch";
-
-type Profile = {
-  firstName?: string | null;
-  lastName?: string | null;
-  headline?: string | null;
-  yearsOfExperience?: number | null;
-};
-
-type Service = {
-  title?: string | null;
-};
-
-type Experience = {
-  company?: string | null;
-};
-
-const QUICK_ANSWERS_QUERY = defineQuery(`{
-  "profile": *[_id == "singleton-profile"][0]{
-    firstName,
-    lastName,
-    headline,
-    yearsOfExperience
-  },
-  "services": *[_type == "service"] | order(featured desc, order asc)[0...3]{
-    title
-  },
-  "experience": *[_type == "experience"] | order(startDate desc)[0...5]{
-    company
-  },
-  "projectCount": count(*[_type == "project"])
-}`);
+import { getPortfolioData } from "@/lib/portfolio-data";
 
 const industryByCompany: Record<string, string> = {
   novartis: "healthcare",
@@ -41,27 +9,23 @@ const industryByCompany: Record<string, string> = {
 };
 
 export async function QuickAnswersSection() {
-  const { data } = await sanityFetch({ query: QUICK_ANSWERS_QUERY });
-
-  const profile = (data?.profile ?? null) as Profile | null;
-  const services = (data?.services ?? []) as Service[];
-  const experience = (data?.experience ?? []) as Experience[];
-  const projectCount =
-    typeof data?.projectCount === "number" ? data.projectCount : 0;
+  const { profile, sortedExperiences, sortedProjects, sortedServices } =
+    await getPortfolioData();
+  const projectCount = sortedProjects.length;
 
   const fullName =
-    [profile?.firstName, profile?.lastName].filter(Boolean).join(" ") ||
+    [profile.firstName, profile.lastName].filter(Boolean).join(" ") ||
     "Madhu Dadi";
 
-  const serviceList = services
-    .map((service) => service?.title?.trim())
+  const serviceList = sortedServices
+    .map((service) => service.title?.trim())
     .filter((value): value is string => Boolean(value))
     .slice(0, 3);
 
   const industries = Array.from(
     new Set(
-      experience
-        .map((item) => item.company?.toLowerCase() ?? "")
+      sortedExperiences
+        .map((item) => item.company.toLowerCase())
         .map((company) =>
           Object.entries(industryByCompany).find(([key]) =>
             company.includes(key),
@@ -77,7 +41,8 @@ export async function QuickAnswersSection() {
     : `${fullName} builds production-ready AI web applications, LLM/RAG systems, and analytics platforms.`;
 
   const experienceYears =
-    typeof profile?.yearsOfExperience === "number" && profile.yearsOfExperience > 0
+    typeof profile.yearsOfExperience === "number" &&
+    profile.yearsOfExperience > 0
       ? `${profile.yearsOfExperience}+ years`
       : "strong multi-domain experience";
 
@@ -99,7 +64,10 @@ export async function QuickAnswersSection() {
           <article className="rounded-xl border bg-card p-6 space-y-3">
             <h3 className="text-lg font-semibold">What can Madhu build?</h3>
             <p className="text-sm text-muted-foreground">{buildAnswer}</p>
-            <Link href="/case-studies" className="text-sm text-primary underline">
+            <Link
+              href="/case-studies"
+              className="text-sm text-primary underline"
+            >
               Browse case studies
             </Link>
           </article>
@@ -119,8 +87,8 @@ export async function QuickAnswersSection() {
               How can I hire or collaborate?
             </h3>
             <p className="text-sm text-muted-foreground">
-              Use the contact section for direct outreach, or connect on LinkedIn for
-              project discussions and consulting opportunities.
+              Use the contact section for direct outreach, or connect on
+              LinkedIn for project discussions and consulting opportunities.
             </p>
             <Link href="#contact" className="text-sm text-primary underline">
               Contact now

@@ -1,30 +1,12 @@
 import { IconAward, IconCalendar, IconExternalLink } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
-import { defineQuery } from "next-sanity";
-import { sanityFetch } from "@/sanity/lib/fetch";
-import { urlFor } from "@/sanity/lib/image";
-
-const EDUCATION_QUERY =
-  defineQuery(`*[_type == "education"] | order(endDate desc, startDate desc){
-  institution,
-  degree,
-  fieldOfStudy,
-  startDate,
-  endDate,
-  current,
-  gpa,
-  description,
-  achievements,
-  logo,
-  website,
-  order
-}`);
+import { getPortfolioData } from "@/lib/portfolio-data";
 
 export async function EducationSection() {
-  const { data: education } = await sanityFetch({ query: EDUCATION_QUERY });
+  const { sortedEducation } = await getPortfolioData();
 
-  if (!education || education.length === 0) {
+  if (sortedEducation.length === 0) {
     return null;
   }
 
@@ -65,7 +47,7 @@ export async function EducationSection() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {education.map((edu) => (
+          {sortedEducation.map((edu) => (
             <div
               key={`${edu.institution}-${edu.degree}-${edu.startDate}`}
               className="group relative bg-card border rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300"
@@ -79,7 +61,7 @@ export async function EducationSection() {
                   {edu.logo && (
                     <div className="relative w-16 h-16 rounded-lg overflow-hidden border-2 border-primary/20 shrink-0 group-hover:border-primary/40 transition-colors">
                       <Image
-                        src={urlFor(edu.logo).width(64).height(64).url()}
+                        src={edu.logo}
                         alt={`${edu.institution} logo`}
                         fill
                         sizes="64px"
@@ -139,9 +121,9 @@ export async function EducationSection() {
                       Achievements & Honors
                     </h4>
                     <ul className="space-y-1.5">
-                      {edu.achievements.map((achievement, idx) => (
+                      {edu.achievements.map((achievement) => (
                         <li
-                          key={`${edu.institution}-achievement-${idx}`}
+                          key={`${edu.institution}-${achievement}`}
                           className="text-xs text-muted-foreground flex items-start gap-2"
                         >
                           <span className="text-primary mt-1">▸</span>

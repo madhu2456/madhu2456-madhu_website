@@ -1,21 +1,9 @@
 import Link from "next/link";
-import { defineQuery } from "next-sanity";
-import { sanityFetch } from "@/sanity/lib/fetch";
+import { getPortfolioData } from "@/lib/portfolio-data";
 import { ContactForm } from "./ContactForm";
 
-const PROFILE_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
-  email,
-  phone,
-  location,
-  socialLinks
-}`);
-
 export async function ContactSection() {
-  const { data: profile } = await sanityFetch({ query: PROFILE_QUERY });
-
-  if (!profile) {
-    return null;
-  }
+  const { profile } = await getPortfolioData();
 
   return (
     <section className="py-20 px-6 pb-40 bg-muted/30">

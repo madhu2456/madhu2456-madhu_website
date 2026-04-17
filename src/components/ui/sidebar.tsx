@@ -11,8 +11,7 @@ import {
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 
-const SIDEBAR_COOKIE_NAME = "sidebar_state";
-const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
+const SIDEBAR_STATE_STORAGE_KEY = "sidebar_state";
 const SIDEBAR_WIDTH = "25rem";
 const SIDEBAR_WIDTH_MOBILE = "100%";
 const SIDEBAR_WIDTH_ICON = "3rem";
@@ -68,7 +67,12 @@ function SidebarProvider({
         _setOpen(openState);
       }
 
-      document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem(
+          SIDEBAR_STATE_STORAGE_KEY,
+          JSON.stringify(openState),
+        );
+      }
     },
     [setOpenProp, open],
   );

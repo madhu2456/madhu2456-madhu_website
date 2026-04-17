@@ -1,29 +1,11 @@
 import { IconCheck, IconStar } from "@tabler/icons-react";
 import Image from "next/image";
-import { defineQuery } from "next-sanity";
-import { sanityFetch } from "@/sanity/lib/fetch";
-import { urlFor } from "@/sanity/lib/image";
-
-const SERVICES_QUERY =
-  defineQuery(`*[_type == "service"] | order(order asc, _createdAt desc){
-  title,
-  slug,
-  icon,
-  shortDescription,
-  fullDescription,
-  features,
-  technologies[]->{name, category},
-  deliverables,
-  pricing,
-  timeline,
-  featured,
-  order
-}`);
+import { getPortfolioData } from "@/lib/portfolio-data";
 
 export async function ServicesSection() {
-  const { data: services } = await sanityFetch({ query: SERVICES_QUERY });
+  const { sortedServices } = await getPortfolioData();
 
-  if (!services || services.length === 0) {
+  if (sortedServices.length === 0) {
     return null;
   }
 
@@ -63,8 +45,8 @@ export async function ServicesSection() {
   };
 
   // Separate featured and regular services
-  const featured = services.filter((s) => s.featured);
-  const regular = services.filter((s) => !s.featured);
+  const featured = sortedServices.filter((s) => s.featured);
+  const regular = sortedServices.filter((s) => !s.featured);
 
   return (
     <section id="services" className="py-20 px-6">
@@ -85,13 +67,13 @@ export async function ServicesSection() {
               <div className="grid grid-cols-1 @3xl:grid-cols-2 gap-8">
                 {featured.map((service) => (
                   <div
-                    key={service.slug?.current || service.title}
+                    key={service.slug || service.title}
                     className="@container/card bg-card border-2 border-primary/20 rounded-lg p-6 @lg/card:p-8 hover:shadow-xl transition-all hover:scale-[1.02]"
                   >
                     {service.icon && (
                       <div className="relative w-12 h-12 @md/card:w-16 @md/card:h-16 mb-4 @md/card:mb-6">
                         <Image
-                          src={urlFor(service.icon).width(64).height(64).url()}
+                          src={service.icon}
                           alt={service.title || "Service"}
                           fill
                           sizes="64px"
@@ -111,9 +93,9 @@ export async function ServicesSection() {
                     )}
 
                     {service.fullDescription && (
-                      <div className="prose prose-sm dark:prose-invert mb-6">
-                        {/* No PortableText imported here, but kept if user adds it back */}
-                      </div>
+                      <p className="text-sm text-muted-foreground mb-6">
+                        {service.fullDescription}
+                      </p>
                     )}
 
                     {service.features && service.features.length > 0 && (
@@ -122,9 +104,9 @@ export async function ServicesSection() {
                           Key Features:
                         </h4>
                         <ul className="space-y-2">
-                          {service.features.map((feature, idx) => (
+                          {service.features.map((feature) => (
                             <li
-                              key={`${service.title}-feature-${idx}`}
+                              key={`${service.title}-${feature}`}
                               className="flex items-start gap-2"
                             >
                               <IconCheck className="w-4 h-4 @md/card:w-5 @md/card:h-5 text-primary mt-0.5 flex-shrink-0" />
@@ -161,14 +143,14 @@ export async function ServicesSection() {
                     {service.technologies &&
                       service.technologies.length > 0 && (
                         <div className="flex flex-wrap gap-2">
-                          {service.technologies.map((tech, idx) => {
+                          {service.technologies.map((tech) => {
                             const techData =
                               tech && typeof tech === "object" && "name" in tech
                                 ? tech
                                 : null;
                             return techData?.name ? (
                               <span
-                                key={`${service.title}-tech-${idx}`}
+                                key={`${service.title}-${techData.name}`}
                                 className="px-2 py-1 @md/card:px-3 text-xs rounded-full bg-primary/10 text-primary"
                               >
                                 {techData.name}
@@ -194,13 +176,13 @@ export async function ServicesSection() {
               <div className="grid grid-cols-1 @2xl:grid-cols-2 @5xl:grid-cols-3 gap-6">
                 {regular.map((service) => (
                   <div
-                    key={service.slug?.current || service.title}
+                    key={service.slug || service.title}
                     className="@container/card bg-card border rounded-lg p-6 hover:shadow-lg transition-all hover:scale-105 flex flex-col"
                   >
                     {service.icon && (
                       <div className="relative w-10 h-10 @md/card:w-12 @md/card:h-12 mb-4">
                         <Image
-                          src={urlFor(service.icon).width(48).height(48).url()}
+                          src={service.icon}
                           alt={service.title || "Service"}
                           fill
                           sizes="48px"
@@ -221,9 +203,9 @@ export async function ServicesSection() {
 
                     {service.features && service.features.length > 0 && (
                       <ul className="space-y-1 mb-4">
-                        {service.features.slice(0, 3).map((feature, idx) => (
+                        {service.features.slice(0, 3).map((feature) => (
                           <li
-                            key={`${service.title}-feature-${idx}`}
+                            key={`${service.title}-${feature}`}
                             className="flex items-start gap-2 text-xs @md/card:text-sm"
                           >
                             <IconCheck className="w-3.5 h-3.5 @md/card:w-4 @md/card:h-4 text-primary mt-0.5 flex-shrink-0" />

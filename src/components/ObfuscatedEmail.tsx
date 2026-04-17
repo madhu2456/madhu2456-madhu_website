@@ -16,12 +16,14 @@ export function ObfuscatedEmail({
   const reversed = email.split("").reverse().join("");
 
   return (
-    <span
-      className={className}
-      style={{ unicodeBidi: "bidi-override", direction: "rtl" }}
-      aria-label={email}
-    >
-      {reversed}
+    <span className={className}>
+      <span className="sr-only">{email}</span>
+      <span
+        style={{ unicodeBidi: "bidi-override", direction: "rtl" }}
+        aria-hidden
+      >
+        {reversed}
+      </span>
     </span>
   );
 }

@@ -39,7 +39,9 @@ export function buildProfileFacts(profile: ChatProfile | null): string[] {
   }
 
   const facts: string[] = [];
-  const fullName = [profile.firstName, profile.lastName].filter(Boolean).join(" ");
+  const fullName = [profile.firstName, profile.lastName]
+    .filter(Boolean)
+    .join(" ");
 
   if (profile.headline) {
     facts.push(
@@ -70,7 +72,9 @@ export function buildProfileFacts(profile: ChatProfile | null): string[] {
 
   if (profile.socialLinks) {
     const linkedPlatforms = Object.entries(profile.socialLinks)
-      .filter(([, value]) => typeof value === "string" && value.trim().length > 0)
+      .filter(
+        ([, value]) => typeof value === "string" && value.trim().length > 0,
+      )
       .map(([platform]) => SOCIAL_LABELS[platform] ?? platform);
 
     if (linkedPlatforms.length > 0) {

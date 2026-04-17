@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { defineQuery } from "next-sanity";
-import { sanityFetch } from "@/sanity/lib/fetch";
-import { urlFor } from "@/sanity/lib/image";
+import { getPortfolioData } from "@/lib/portfolio-data";
 
 type CaseStudy = {
   title?: string | null;
-  slug?: { current?: string | null } | null;
+  slug?: string | null;
   tagline?: string | null;
   category?: string | null;
   impactSummary?: string | null;
@@ -15,27 +13,10 @@ type CaseStudy = {
   githubUrl?: string | null;
   featured?: boolean | null;
   coverImage?: {
-    asset?: Parameters<typeof urlFor>[0] | null;
-    lqip?: string | null;
+    asset?: string | null;
   } | null;
   technologies?: Array<{ name?: string | null } | null> | null;
 };
-
-const CASE_STUDIES_QUERY = defineQuery(`*[_type == "project"] | order(featured desc, order asc, _createdAt desc){
-  title,
-  slug,
-  tagline,
-  category,
-  impactSummary,
-  liveUrl,
-  githubUrl,
-  featured,
-  "coverImage": {
-    "asset": coverImage.asset->,
-    "lqip": coverImage.asset->metadata.lqip
-  },
-  technologies[]->{name}
-}`);
 
 const DEFAULT_SITE_URL = "https://madhudadi.in";
 const CASE_STUDIES_DESCRIPTION =
@@ -73,17 +54,16 @@ export const metadata: Metadata = {
 };
 
 export default async function CaseStudiesPage() {
-  const { data } = await sanityFetch({
-    query: CASE_STUDIES_QUERY,
-    stega: false,
-  });
-
-  const caseStudies = (data ?? []) as CaseStudy[];
+  const { sortedProjects } = await getPortfolioData();
+  const caseStudies = sortedProjects.map((project) => ({
+    ...project,
+    coverImage: project.coverImage ? { asset: project.coverImage } : null,
+  })) as CaseStudy[];
   const siteUrl = getSiteUrl();
   const collectionUrl = `${siteUrl}/case-studies`;
   const itemListElement = caseStudies
     .map((project, index) => {
-      const slug = project.slug?.current?.trim();
+      const slug = project.slug?.trim();
       const title = project.title?.trim();
       if (!slug || !title) return null;
 
@@ -94,8 +74,15 @@ export default async function CaseStudiesPage() {
         url: `${collectionUrl}/${slug}`,
       };
     })
-    .filter((item): item is { "@type": "ListItem"; position: number; name: string; url: string } =>
-      Boolean(item),
+    .filter(
+      (
+        item,
+      ): item is {
+        "@type": "ListItem";
+        position: number;
+        name: string;
+        url: string;
+      } => Boolean(item),
     );
 
   const collectionSchema = {
@@ -153,7 +140,7 @@ export default async function CaseStudiesPage() {
         ) : (
           <section className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {caseStudies.map((project) => {
-              const slug = project.slug?.current?.trim();
+              const slug = project.slug?.trim();
               const title = project.title?.trim() || "Untitled Project";
               const summary =
                 project.impactSummary?.trim() ||
@@ -168,13 +155,11 @@ export default async function CaseStudiesPage() {
                   {project.coverImage?.asset ? (
                     <div className="relative aspect-video bg-muted">
                       <Image
-                        src={urlFor(project.coverImage.asset).width(960).height(540).url()}
+                        src={project.coverImage.asset}
                         alt={`${title} preview`}
                         fill
                         className="object-cover"
                         sizes="(max-width: 1024px) 100vw, 50vw"
-                        placeholder={project.coverImage?.lqip ? "blur" : "empty"}
-                        blurDataURL={project.coverImage?.lqip ?? undefined}
                       />
                     </div>
                   ) : null}

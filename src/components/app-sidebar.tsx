@@ -1,24 +1,8 @@
 import { Suspense } from "react";
 import { Sidebar, SidebarContent, SidebarRail } from "@/components/ui/sidebar";
-import { defineQuery } from "next-sanity";
-import { sanityFetch } from "@/sanity/lib/fetch";
+import { getPortfolioData } from "@/lib/portfolio-data";
 import { ChatSidebarSection } from "./chat/ChatSidebarSection";
 import type { ChatProfile } from "./chat/chat-profile";
-
-const CHAT_PROFILE_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
-  firstName,
-  lastName,
-  headline,
-  shortBio,
-  location,
-  availability,
-  yearsOfExperience,
-  socialLinks,
-  stats[]{
-    label,
-    value
-  }
-}`);
 
 function SidebarSkeleton() {
   return (
@@ -33,9 +17,9 @@ function SidebarSkeleton() {
         <p className="text-xs text-foreground/40 mt-2">Loading…</p>
       </div>
       <div className="flex flex-col gap-2 px-4 pb-2">
-        {[80, 65, 72, 60].map((w, i) => (
+        {[80, 65, 72, 60].map((w) => (
           <div
-            key={i}
+            key={`skeleton-width-${w}`}
             className="h-10 rounded-xl bg-foreground/10 animate-pulse"
             style={{ width: `${w}%` }}
           />
@@ -48,15 +32,27 @@ function SidebarSkeleton() {
   );
 }
 
-export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const { data } = await sanityFetch({ query: CHAT_PROFILE_QUERY });
-  const profile = data as ChatProfile | null;
+export async function AppSidebar({
+  ...props
+}: React.ComponentProps<typeof Sidebar>) {
+  const { profile } = await getPortfolioData();
+  const sidebarProfile: ChatProfile = {
+    firstName: profile.firstName,
+    lastName: profile.lastName,
+    headline: profile.headline,
+    shortBio: profile.shortBio,
+    location: profile.location,
+    availability: profile.availability,
+    yearsOfExperience: profile.yearsOfExperience,
+    socialLinks: profile.socialLinks,
+    stats: profile.stats,
+  };
 
   return (
     <Sidebar {...props}>
       <SidebarContent className="h-full w-full">
         <Suspense fallback={<SidebarSkeleton />}>
-          <ChatSidebarSection profile={profile} />
+          <ChatSidebarSection profile={sidebarProfile} />
         </Suspense>
       </SidebarContent>
       <SidebarRail />

@@ -4,7 +4,8 @@ import dynamic from "next/dynamic";
 import { useEffect, useMemo, useState } from "react";
 
 const LayoutTextFlip = dynamic(
-  () => import("@/components/ui/layout-text-flip").then((m) => m.LayoutTextFlip),
+  () =>
+    import("@/components/ui/layout-text-flip").then((m) => m.LayoutTextFlip),
   { ssr: false },
 );
 

@@ -59,6 +59,8 @@ export function buildPersonSchema({
   siteUrl,
   socialLinks,
   yearsOfExperience,
+  nationality,
+  alumniOf,
 }: {
   fullName: string;
   headline?: string | null;
@@ -69,6 +71,8 @@ export function buildPersonSchema({
   siteUrl: string;
   socialLinks?: SocialLinks;
   yearsOfExperience?: number | null;
+  nationality?: string | null;
+  alumniOf?: Array<{ name: string; url?: string }> | null;
 }) {
   const sameAs = Object.values(socialLinks ?? {}).filter(
     (v): v is string => typeof v === "string" && v.length > 0,
@@ -131,6 +135,7 @@ export function buildPersonSchema({
       "Large Language Models",
       "Generative AI",
       "RAG (Retrieval-Augmented Generation)",
+      "Agentic AI Systems",
       "MLOps",
       "Data Analytics",
       "Digital Transformation",
@@ -139,7 +144,24 @@ export function buildPersonSchema({
       "TypeScript",
       "Node.js",
       "Python",
+      "FastAPI",
+      "PostgreSQL",
+      "Cloud Infrastructure",
+      "System Design",
     ],
+    ...(nationality && {
+      nationality: {
+        "@type": "Country",
+        name: nationality,
+      },
+    }),
+    ...(alumniOf && alumniOf.length > 0 && {
+      alumniOf: alumniOf.map((edu) => ({
+        "@type": "CollegeOrUniversity",
+        name: edu.name,
+        ...(edu.url && { url: edu.url }),
+      })),
+    }),
   };
 }
 
@@ -188,6 +210,18 @@ export function buildWebSiteSchema({
     url,
     ...(description && { description }),
     inLanguage: "en-US",
+    publisher: { "@id": `${url}/#person` },
+    // SiteLinksSearchBox — enables rich search in Google SERPs
+    potentialAction: [
+      {
+        "@type": "SearchAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: `${url}/?q={search_term_string}`,
+        },
+        "query-input": "required name=search_term_string",
+      },
+    ],
     // Blog is a sub-site on the same domain — linking them helps search engines
     // and AI crawlers understand the relationship between portfolio and blog
     hasPart: {
@@ -286,7 +320,9 @@ export function buildServicesListSchema({
           serviceType: service.title,
           url: `${siteUrl}/#services`,
           provider: { "@id": `${siteUrl}/#person` },
-          ...(service.shortDescription && { description: service.shortDescription }),
+          ...(service.shortDescription && {
+            description: service.shortDescription,
+          }),
           ...(hasPrice && {
             offers: {
               "@type": "Offer",
@@ -339,7 +375,9 @@ export function buildCertificationsListSchema({
         ...(certification.description && {
           description: certification.description,
         }),
-        ...(certification.issueDate && { dateCreated: certification.issueDate }),
+        ...(certification.issueDate && {
+          dateCreated: certification.issueDate,
+        }),
         ...(certification.expiryDate && { expires: certification.expiryDate }),
         ...(certification.credentialId && {
           identifier: {
@@ -348,7 +386,9 @@ export function buildCertificationsListSchema({
             value: certification.credentialId,
           },
         }),
-        ...(certification.credentialUrl && { url: certification.credentialUrl }),
+        ...(certification.credentialUrl && {
+          url: certification.credentialUrl,
+        }),
         ...(certification.issuer && {
           recognizedBy: {
             "@type": "Organization",
@@ -538,6 +578,22 @@ export function buildFaqSchema({
         acceptedAnswer: {
           "@type": "Answer",
           text: `Use the contact section on ${siteUrl} or connect via the linked professional profiles for hiring and collaboration.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: `Is ${fullName} available for freelance or consulting work?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `${fullName}'s current availability is listed on the portfolio at ${siteUrl}. Services include ${serviceSummary}. Use the contact form or professional profile links to get in touch.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: `What technologies does ${fullName} specialize in?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `${fullName} specializes in AI/ML engineering (LLMs, RAG systems, agentic pipelines), full-stack development with Next.js, React, TypeScript, Node.js, Python, FastAPI, and PostgreSQL, as well as cloud infrastructure and system design.`,
         },
       },
     ],

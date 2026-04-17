@@ -1,43 +1,17 @@
 import type { MetadataRoute } from "next";
-import { client } from "@/sanity/lib/client";
+import { getPortfolioData } from "@/lib/portfolio-data";
+
+// Regenerate sitemap at most once per hour.
+// On-demand revalidation is also triggered by the CMS import webhook.
+export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const { portfolioLastUpdatedAt, sortedProjects } = await getPortfolioData();
   const siteUrl = (
     process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in"
-  ).replace(/\/$/, ""); // strip trailing slash for consistent canonical form
+  ).replace(/\/$/, "");
 
-  const [timestamps, projects] = await Promise.all([
-    client.fetch<Array<string | null>>(`
-      [
-        *[_type == "siteSettings"][0]._updatedAt,
-        *[_id == "singleton-profile"][0]._updatedAt,
-        *[_type == "project"] | order(_updatedAt desc)[0]._updatedAt,
-        *[_type == "experience"] | order(_updatedAt desc)[0]._updatedAt,
-        *[_type == "service"] | order(_updatedAt desc)[0]._updatedAt,
-        *[_type == "education"] | order(_updatedAt desc)[0]._updatedAt,
-        *[_type == "certification"] | order(_updatedAt desc)[0]._updatedAt
-      ]
-    `),
-    client.fetch<
-      Array<{
-        slug?: { current?: string | null } | null;
-        _updatedAt?: string | null;
-      }>
-    >(`*[_type == "project" && defined(slug.current)]{
-      slug,
-      _updatedAt
-    }`),
-  ]);
-
-  const validTimestamps = timestamps
-    .filter((value): value is string => typeof value === "string")
-    .map((value) => new Date(value))
-    .filter((date) => !Number.isNaN(date.getTime()));
-  const latestDate =
-    validTimestamps.length > 0
-      ? new Date(Math.max(...validTimestamps.map((d) => d.getTime())))
-      : new Date();
-
+  const latestDate = new Date(portfolioLastUpdatedAt);
   const blogUrl = `${siteUrl}/blog`;
 
   const baseEntries: MetadataRoute.Sitemap = [
@@ -53,7 +27,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 0.85,
     },
-    // Blog — cross-linked from portfolio (same domain, /blog basePath)
     {
       url: blogUrl,
       lastModified: latestDate,
@@ -72,6 +45,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 0.7,
     },
+    // Blog sub-site pages (crawlers benefit from seeing these in the portfolio sitemap)
+    {
+      url: `${blogUrl}/posts`,
+      lastModified: latestDate,
+      changeFrequency: "daily",
+      priority: 0.85,
+    },
+    {
+      url: `${blogUrl}/ask`,
+      lastModified: latestDate,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    // Machine-readable endpoints — important for AI/LLM crawlers
     {
       url: `${siteUrl}/llms.txt`,
       lastModified: latestDate,
@@ -92,14 +79,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  const caseStudyEntries: MetadataRoute.Sitemap = (projects ?? []).flatMap(
+  const caseStudyEntries: MetadataRoute.Sitemap = sortedProjects.flatMap(
     (project) => {
-      const slug = project.slug?.current?.trim();
+      const slug = project.slug?.trim();
       if (!slug) return [];
 
-      const updatedAt = project._updatedAt ? new Date(project._updatedAt) : null;
-      const lastModified =
-        updatedAt && !Number.isNaN(updatedAt.getTime()) ? updatedAt : latestDate;
+      const updatedAt = new Date(project.updatedAt);
+      const lastModified = !Number.isNaN(updatedAt.getTime())
+        ? updatedAt
+        : latestDate;
 
       return [
         {

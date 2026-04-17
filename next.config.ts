@@ -38,9 +38,10 @@ const nextConfig: NextConfig = {
 
   compiler: {
     // Strip console.log / console.info / console.debug from production builds.
-    removeConsole: process.env.NODE_ENV === "production"
-      ? { exclude: ["error", "warn"] }
-      : false,
+    removeConsole:
+      process.env.NODE_ENV === "production"
+        ? { exclude: ["error", "warn"] }
+        : false,
   },
 
   async redirects() {
@@ -69,15 +70,9 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "cdn.sanity.io",
-      },
-      {
-        protocol: "https",
         hostname: "images.unsplash.com",
       },
     ],
-    // Sanity asset URLs are content-addressed, so a long cache TTL is safe and
-    // reduces repeat optimization work for returning users and crawlers.
     minimumCacheTTL: 2678400, // 31 days
     qualities: [60, 75],
     deviceSizes: [360, 420, 640, 768, 1024, 1280, 1536, 1920],
@@ -87,16 +82,17 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/(.*)",
-        headers: [
-          ...securityHeaders,
-        ],
+        headers: [...securityHeaders],
       },
       // SEO/GEO discovery files — serve as plain text with generous caching
       {
         source: "/llms.txt",
         headers: [
           { key: "Content-Type", value: "text/plain; charset=utf-8" },
-          { key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" },
+          {
+            key: "Cache-Control",
+            value: "public, max-age=86400, stale-while-revalidate=604800",
+          },
         ],
       },
       {
@@ -129,9 +125,7 @@ const nextConfig: NextConfig = {
       // robots.txt — cache for a day
       {
         source: "/robots.txt",
-        headers: [
-          { key: "Cache-Control", value: "public, max-age=86400" },
-        ],
+        headers: [{ key: "Cache-Control", value: "public, max-age=86400" }],
       },
     ];
   },
