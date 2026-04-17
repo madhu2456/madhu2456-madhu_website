@@ -30,6 +30,8 @@ export function ProfileImage({
         src={imageUrl}
         alt={`${firstName} ${lastName}`}
         fill
+        priority
+        fetchPriority="high"
         sizes="(max-width: 768px) min(86vw, 300px), (max-width: 1280px) 340px, 380px"
         className="object-cover object-[center_35%] transition-transform duration-300 group-hover:scale-105"
         quality={60}
