@@ -1,42 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { defineQuery } from "next-sanity";
-import { sanityFetch } from "@/sanity/lib/fetch";
-import { urlFor } from "@/sanity/lib/image";
-
-interface Project {
-  title: string;
-  slug: { current: string };
-  tagline?: string;
-  category?: string;
-  liveUrl?: string;
-  githubUrl?: string;
-  coverImage?: {
-    asset?: any;
-    lqip?: string;
-  };
-  technologies?: Array<{ name?: string; category?: string; color?: string }>;
-}
-
-const PROJECTS_QUERY =
-  defineQuery(`*[_type == "project" && featured == true && slug.current != "backroads-app"] | order(order asc)[0...6]{
-  title,
-  slug,
-  tagline,
-  category,
-  liveUrl,
-  githubUrl,
-  "coverImage": {
-    "asset": coverImage.asset->,
-    "lqip": coverImage.asset->metadata.lqip
-  },
-  technologies[]->{name, category, color}
-}`);
+import { getPortfolioData } from "@/lib/portfolio-data";
 
 export async function ProjectsSection() {
-  const { data: projects } = await sanityFetch({ query: PROJECTS_QUERY });
+  const { featuredProjects } = await getPortfolioData();
 
-  if (!projects || (projects as Project[]).length === 0) {
+  if (featuredProjects.length === 0) {
     return null;
   }
 
@@ -52,25 +21,20 @@ export async function ProjectsSection() {
 
         <div className="@container">
           <div className="grid grid-cols-1 @2xl:grid-cols-2 @5xl:grid-cols-3 gap-8">
-            {(projects as Project[]).map((project) => (
+            {featuredProjects.map((project) => (
               <div
-                key={project.slug?.current}
+                key={project.slug}
                 className="@container/card group bg-card border rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300"
               >
                 {/* Project Image */}
-                {project.coverImage?.asset && (
+                {project.coverImage && (
                   <div className="relative aspect-video overflow-hidden bg-muted">
                     <Image
-                      src={urlFor(project.coverImage.asset)
-                        .width(600)
-                        .height(400)
-                        .url()}
+                      src={project.coverImage}
                       alt={project.title || "Project image"}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      placeholder={project.coverImage?.lqip ? "blur" : "empty"}
-                      blurDataURL={project.coverImage?.lqip}
                     />
                     {/* Glass overlay that fades on hover */}
                     <div className="absolute inset-0 bg-background/40 backdrop-blur-[2px] group-hover:opacity-0 transition-opacity duration-300" />
@@ -98,14 +62,14 @@ export async function ProjectsSection() {
                   {/* Tech Stack */}
                   {project.technologies && project.technologies.length > 0 && (
                     <div className="flex flex-wrap gap-1.5 @md/card:gap-2">
-                      {project.technologies.slice(0, 4).map((tech, idx) => {
+                      {project.technologies.slice(0, 4).map((tech) => {
                         const techData =
                           tech && typeof tech === "object" && "name" in tech
                             ? tech
                             : null;
                         return techData?.name ? (
                           <span
-                            key={`${project.slug?.current}-tech-${idx}`}
+                            key={`${project.slug}-${techData.name}`}
                             className="text-xs px-2 py-0.5 @md/card:py-1 rounded-md bg-muted"
                           >
                             {techData.name}
@@ -122,9 +86,9 @@ export async function ProjectsSection() {
 
                   {/* Actions */}
                   <div className="flex flex-col @xs/card:flex-row gap-2 @xs/card:gap-3 pt-2">
-                    {project.slug?.current && (
+                    {project.slug && (
                       <Link
-                        href={`/case-studies/${project.slug.current}`}
+                        href={`/case-studies/${project.slug}`}
                         aria-label={`Read case study for ${project.title || "project"}`}
                         className="flex-1 text-center px-3 py-2 @md/card:px-4 rounded-lg border hover:bg-accent transition-colors text-xs @md/card:text-sm"
                       >

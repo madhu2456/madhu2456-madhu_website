@@ -2,81 +2,12 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { defineQuery } from "next-sanity";
-import { sanityFetch } from "@/sanity/lib/fetch";
-import { urlFor } from "@/sanity/lib/image";
-import { client } from "@/sanity/lib/client";
+import { getPortfolioData, type ProjectItem } from "@/lib/portfolio-data";
 
 type Citation = {
   label?: string | null;
   url?: string | null;
 };
-
-type ImpactMetric = {
-  label?: string | null;
-  value?: string | null;
-};
-
-type CaseStudy = {
-  title?: string | null;
-  slug?: { current?: string | null } | null;
-  tagline?: string | null;
-  category?: string | null;
-  liveUrl?: string | null;
-  githubUrl?: string | null;
-  featured?: boolean | null;
-  problemStatement?: string | null;
-  solutionApproach?: string | null;
-  impactSummary?: string | null;
-  impactMetrics?: ImpactMetric[] | null;
-  citations?: Citation[] | null;
-  coverImage?: {
-    asset?: Parameters<typeof urlFor>[0] | null;
-    lqip?: string | null;
-    alt?: string | null;
-  } | null;
-  technologies?: Array<{ name?: string | null; category?: string | null } | null> | null;
-  _updatedAt?: string | null;
-};
-
-const CASE_STUDY_QUERY = defineQuery(`*[_type == "project" && slug.current == $slug][0]{
-  title,
-  slug,
-  tagline,
-  category,
-  liveUrl,
-  githubUrl,
-  featured,
-  problemStatement,
-  solutionApproach,
-  impactSummary,
-  impactMetrics[]{
-    label,
-    value
-  },
-  citations[]{
-    label,
-    url
-  },
-  "coverImage": {
-    "asset": coverImage.asset->,
-    "lqip": coverImage.asset->metadata.lqip,
-    "alt": coverImage.alt
-  },
-  technologies[]->{name, category},
-  _updatedAt
-}`);
-
-const CASE_STUDY_META_QUERY = defineQuery(`*[_type == "project" && slug.current == $slug][0]{
-  title,
-  tagline,
-  impactSummary,
-  "coverImage": coverImage.asset->
-}`);
-
-const CASE_STUDY_SLUGS_QUERY = defineQuery(
-  `*[_type == "project" && defined(slug.current)]{ "slug": slug.current }`,
-);
 
 const DEFAULT_SITE_URL = "https://madhudadi.in";
 
@@ -99,11 +30,14 @@ const toDescription = (...values: Array<string | null | undefined>) => {
 
   const boundary = merged.lastIndexOf(" ", 155);
   const safeBoundary = boundary > 0 ? boundary : 155;
-  return `${merged.slice(0, safeBoundary).trim().replace(/[,\s;:!?-]+$/, "")}.`;
+  return `${merged
+    .slice(0, safeBoundary)
+    .trim()
+    .replace(/[,\s;:!?-]+$/, "")}.`;
 };
 
-const makeEvidenceLinks = (project: CaseStudy, siteUrl: string) => {
-  const slug = project.slug?.current?.trim();
+const makeEvidenceLinks = (project: ProjectItem, siteUrl: string) => {
+  const slug = project.slug?.trim();
   const links: Array<{ label: string; url: string }> = [];
 
   if (slug) {
@@ -120,7 +54,7 @@ const makeEvidenceLinks = (project: CaseStudy, siteUrl: string) => {
     links.push({ label: "Source code", url: project.githubUrl });
   }
 
-  for (const citation of project.citations ?? []) {
+  for (const citation of (project.citations ?? []) as Citation[]) {
     if (!citation?.url) continue;
     links.push({
       label: citation.label?.trim() || "Evidence",
@@ -132,11 +66,8 @@ const makeEvidenceLinks = (project: CaseStudy, siteUrl: string) => {
 };
 
 export async function generateStaticParams() {
-  const slugs = await client.fetch<Array<{ slug?: string | null }>>(
-    CASE_STUDY_SLUGS_QUERY,
-  );
-
-  return (slugs ?? [])
+  const { sortedProjects } = await getPortfolioData();
+  return sortedProjects
     .map((item) => item.slug?.trim())
     .filter((value): value is string => Boolean(value))
     .map((slug) => ({ slug }));
@@ -148,11 +79,8 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const { data } = await sanityFetch({
-    query: CASE_STUDY_META_QUERY,
-    params: { slug },
-    stega: false,
-  });
+  const { sortedProjects } = await getPortfolioData();
+  const data = sortedProjects.find((item) => item.slug === slug);
 
   if (!data?.title) {
     return {
@@ -171,7 +99,7 @@ export async function generateMetadata({
   const title = `${data.title} | Case Study`;
   const description = toDescription(data.impactSummary, data.tagline);
   const imageUrl = data.coverImage
-    ? urlFor(data.coverImage).width(1200).height(630).url()
+    ? `${siteUrl}${data.coverImage}`
     : `${siteUrl}/opengraph-image`;
 
   return {
@@ -202,13 +130,8 @@ export default async function CaseStudyPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const { data } = await sanityFetch({
-    query: CASE_STUDY_QUERY,
-    params: { slug },
-    stega: false,
-  });
-
-  const project = (data ?? null) as CaseStudy | null;
+  const { profile, sortedProjects } = await getPortfolioData();
+  const project = sortedProjects.find((item) => item.slug === slug);
 
   if (!project?.title) {
     notFound();
@@ -228,12 +151,12 @@ export default async function CaseStudyPage({
         "@id": `${caseStudyUrl}#case-study`,
         headline: title,
         description,
-        dateModified: project._updatedAt ?? new Date().toISOString(),
+        dateModified: project.updatedAt ?? new Date().toISOString(),
         url: caseStudyUrl,
         author: {
           "@type": "Person",
           "@id": `${siteUrl}/#person`,
-          name: "Madhu Dadi",
+          name: `${profile.firstName} ${profile.lastName}`,
           url: siteUrl,
         },
         isPartOf: {
@@ -309,22 +232,24 @@ export default async function CaseStudyPage({
               </span>
             ) : null}
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight">{title}</h1>
+          <h1 className="text-4xl md:text-5xl font-bold leading-tight">
+            {title}
+          </h1>
           {project.tagline ? (
-            <p className="text-lg text-muted-foreground max-w-3xl">{project.tagline}</p>
+            <p className="text-lg text-muted-foreground max-w-3xl">
+              {project.tagline}
+            </p>
           ) : null}
         </header>
 
-        {project.coverImage?.asset ? (
+        {project.coverImage ? (
           <div className="relative aspect-video rounded-xl overflow-hidden border bg-muted">
             <Image
-              src={urlFor(project.coverImage.asset).width(1280).height(720).url()}
-              alt={project.coverImage.alt?.trim() || `${title} preview`}
+              src={project.coverImage}
+              alt={project.coverImageAlt?.trim() || `${title} preview`}
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 1024px"
-              placeholder={project.coverImage.lqip ? "blur" : "empty"}
-              blurDataURL={project.coverImage.lqip ?? undefined}
             />
           </div>
         ) : null}
@@ -422,8 +347,8 @@ export default async function CaseStudyPage({
                       {tech}
                     </span>
                   ))}
-               </div>
-             </section>
+              </div>
+            </section>
           ) : null}
 
           <section

@@ -1,17 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import dynamic from "next/dynamic";
 import { Geist, Geist_Mono } from "next/font/google";
-import { defineQuery } from "next-sanity";
+import { AppSidebar } from "@/components/app-sidebar";
 import { ClientChrome } from "@/components/ClientChrome";
-import { urlFor } from "@/sanity/lib/image";
-import { sanityFetch } from "@/sanity/lib/fetch";
-import "../globals.css";
-import { draftMode } from "next/headers";
 import { DeferredGTM } from "@/components/DeferredGTM";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-
-import { AppSidebar } from "@/components/app-sidebar";
+import { getPortfolioData } from "@/lib/portfolio-data";
+import "../globals.css";
 
 const FloatingDock = dynamic(() =>
   import("@/components/FloatingDock").then((m) => m.FloatingDock),
@@ -61,51 +57,29 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-const METADATA_QUERY = defineQuery(`{
-  "settings": *[_type == "siteSettings"][0]{
-    siteTitle,
-    siteDescription,
-    siteKeywords,
-    ogImage,
-    twitterHandle,
-  },
-  "profile": *[_id == "singleton-profile"][0]{
-    firstName,
-    lastName,
-    headline,
-    shortBio,
-    profileImage,
-    socialLinks,
-    location,
-  }
-}`);
-
 export const viewport: Viewport = {
   themeColor: THEME_COLOR,
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { data } = await sanityFetch({ query: METADATA_QUERY, stega: false });
-  const settings = data?.settings;
-  const profile = data?.profile;
-
+  const { profile, siteSettings } = await getPortfolioData();
   const siteUrl = resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL);
   const fullName =
-    [profile?.firstName, profile?.lastName].filter(Boolean).join(" ") ||
+    [profile.firstName, profile.lastName].filter(Boolean).join(" ") ||
     "Madhu Dadi";
-  const siteName = settings?.siteTitle || `${fullName} - Portfolio`;
+  const siteName = siteSettings.siteTitle || `${fullName} - Portfolio`;
   const title = siteName;
   const rawDescription =
-    settings?.siteDescription ||
-    profile?.shortBio ||
+    siteSettings.siteDescription ||
+    profile.shortBio ||
     `Portfolio of ${fullName} — developer, builder, and problem solver.`;
   const description = toMetaDescription(
     rawDescription,
     MAX_META_DESCRIPTION_LENGTH,
   );
 
-  const keywords = (settings?.siteKeywords as string[] | undefined) ?? [];
-  const twitterHandle = settings?.twitterHandle?.replace(/^@/, "");
+  const keywords = siteSettings.siteKeywords ?? [];
+  const twitterHandle = siteSettings.twitterHandle?.replace(/^@/, "");
   const googleSiteVerification =
     process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ||
     process.env.GOOGLE_SITE_VERIFICATION;
@@ -129,11 +103,9 @@ export async function generateMetadata(): Promise<Metadata> {
         }
       : undefined;
 
-  const ogImageUrl = settings?.ogImage
-    ? urlFor(settings.ogImage).width(1200).height(630).url()
-    : profile?.profileImage
-      ? urlFor(profile.profileImage).width(1200).height(630).url()
-      : `${siteUrl}/opengraph-image`;
+  const ogImageUrl = profile.profileImage
+    ? `${siteUrl}${profile.profileImage}`
+    : `${siteUrl}/opengraph-image`;
 
   return {
     metadataBase: new URL(siteUrl),
@@ -190,8 +162,8 @@ export async function generateMetadata(): Promise<Metadata> {
           alt: `${title} — Open Graph preview`,
         },
       ],
-      ...(profile?.firstName && { firstName: profile.firstName }),
-      ...(profile?.lastName && { lastName: profile.lastName }),
+      ...(profile.firstName && { firstName: profile.firstName }),
+      ...(profile.lastName && { lastName: profile.lastName }),
     },
     twitter: {
       card: "summary_large_image",
@@ -228,26 +200,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const isDraftEnabled = (await draftMode()).isEnabled;
-  let draftModeTools: React.ReactNode = null;
-
-  if (isDraftEnabled) {
-    const [{ SanityLive }, { VisualEditing }, { DisableDraftMode }] =
-      await Promise.all([
-        import("@/sanity/lib/live"),
-        import("next-sanity/visual-editing"),
-        import("@/components/DisableDraftMode"),
-      ]);
-
-    draftModeTools = (
-      <>
-        <SanityLive />
-        <VisualEditing />
-        <DisableDraftMode />
-      </>
-    );
-  }
-
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -290,8 +242,6 @@ export default async function RootLayout({
             <FloatingDock />
             <ClientChrome />
           </SidebarProvider>
-
-          {draftModeTools}
         </ThemeProvider>
       </body>
     </html>

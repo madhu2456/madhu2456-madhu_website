@@ -1,50 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { defineQuery } from "next-sanity";
 import { ObfuscatedEmail } from "@/components/ObfuscatedEmail";
-import { sanityFetch } from "@/sanity/lib/fetch";
-import { urlFor } from "@/sanity/lib/image";
-
-const HERO_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
-  firstName,
-  lastName,
-  headline,
-  headlineStaticText,
-  headlineAnimatedWords,
-  headlineAnimationDuration,
-  shortBio,
-  email,
-  location,
-  availability,
-  socialLinks,
-  profileImage {
-    asset->{
-      _id,
-      metadata {
-        lqip
-      }
-    }
-  }
-}`);
+import { getPortfolioData } from "@/lib/portfolio-data";
 
 export async function HeroSection() {
-  const { data: profile } = await sanityFetch({ query: HERO_QUERY });
-
-  if (!profile) {
-    return (
-      <section className="min-h-screen flex items-center justify-center px-6 py-20 bg-background" />
-    );
-  }
-
-  const profileImageUrl = profile.profileImage
-    ? urlFor(profile.profileImage).width(694).height(925).fit("crop").url()
-    : "";
-  const lqip =
-    (
-      profile.profileImage as
-        | { asset?: { metadata?: { lqip?: string } } }
-        | undefined
-    )?.asset?.metadata?.lqip || "";
+  const { profile } = await getPortfolioData();
+  const profileImageUrl = profile.profileImage || "/icon-512.png";
   const primaryHeadline =
     profile.headline ||
     [profile.headlineStaticText, profile.headlineAnimatedWords?.[0]]
@@ -167,13 +128,13 @@ export async function HeroSection() {
                       className="object-cover object-[center_35%]"
                       quality={60}
                       loading="eager"
-                      placeholder={lqip ? "blur" : "empty"}
-                      blurDataURL={lqip}
                     />
 
                     <div className="absolute top-4 right-4 flex items-center gap-2 bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-full">
                       <div className="w-2.5 h-2.5 bg-green-500 rounded-full" />
-                      <span className="text-xs font-medium text-white">Online</span>
+                      <span className="text-xs font-medium text-white">
+                        Online
+                      </span>
                     </div>
 
                     <div className="absolute inset-x-4 bottom-4 rounded-lg bg-black/55 backdrop-blur-sm px-4 py-3">

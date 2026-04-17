@@ -14,7 +14,11 @@ const BackgroundRippleEffect = dynamic(
   { ssr: false },
 );
 
-export function LazyBackgroundRippleEffect({ cellSize = 56 }: { cellSize?: number }) {
+export function LazyBackgroundRippleEffect({
+  cellSize = 56,
+}: {
+  cellSize?: number;
+}) {
   const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {

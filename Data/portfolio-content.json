@@ -1,0 +1,583 @@
+{
+  "profile": {
+    "firstName": "Madhu",
+    "lastName": "Dadi",
+    "headline": "AI Developer & Marketing Analytics Leader",
+    "headlineStaticText": "I build",
+    "headlineAnimatedWords": [
+      "AI Engineering & LLM Applications",
+      "Marketing Analytics & Decision Intelligence",
+      "Full-stack Web Product Development"
+    ],
+    "headlineAnimationDuration": 3000,
+    "shortBio": "Passionate AI Developer and ML Engineer with 9+ years of experience building scalable AI-powered web applications and intelligent solutions. Specialized in LLMs, RAG, and modern full-stack development.",
+    "fullBioParagraphs": [
+      "Passionate AI Developer and ML Engineer with 9+ years of experience building scalable AI-powered web applications and intelligent solutions.",
+      "Specialized in LLMs, RAG, and modern full-stack development."
+    ],
+    "email": "madhu.kumar245@gmail.com",
+    "phone": "+91 9985422444",
+    "location": "Visakhapatnam, India",
+    "availability": "open",
+    "socialLinks": {
+      "github": "https://github.com/madhu2456",
+      "linkedin": "https://www.linkedin.com/in/madhu-dadi-54684531",
+      "website": "https://madhudadi.in/blog",
+      "twitter": "https://x.com/madhu245"
+    },
+    "yearsOfExperience": 9,
+    "stats": [
+      {
+        "label": "Projects Completed",
+        "value": "50+"
+      },
+      {
+        "label": "Client Satisfaction",
+        "value": "100%"
+      },
+      {
+        "label": "Years Experience",
+        "value": "9+"
+      },
+      {
+        "label": "Technologies Mastered",
+        "value": "20+"
+      }
+    ],
+    "profileImage": "/uploads/imported/profile-image-a70423e9c352.jpg",
+    "updatedAt": "2026-04-17T09:00:13.712Z"
+  },
+  "siteSettings": {
+    "siteTitle": "Madhu Dadi - Portfolio",
+    "siteDescription": "Passionate AI Developer and ML Engineer with 9+ years of experience building scalable AI-powered web applications and intelligent solutions. Specialized in LLMs, RAG, and modern full-stack development.",
+    "siteKeywords": [
+      "Madhu Dadi",
+      "Python",
+      "Backend",
+      "SQL",
+      "Database",
+      "Campaign Analytics",
+      "Communication",
+      "Soft-Skills",
+      "Git",
+      "GitHub",
+      "Devops",
+      "Portfolio"
+    ],
+    "twitterHandle": "madhu245",
+    "updatedAt": "2026-04-17T09:00:13.712Z"
+  },
+  "navigationItems": [
+    {
+      "title": "Home",
+      "href": "#home",
+      "icon": "IconHome",
+      "order": 1
+    },
+    {
+      "title": "About",
+      "href": "#about",
+      "icon": "IconUser",
+      "order": 2
+    },
+    {
+      "title": "Experience",
+      "href": "#experience",
+      "icon": "IconBriefcase",
+      "order": 3
+    },
+    {
+      "title": "Projects",
+      "href": "#projects",
+      "icon": "IconCode",
+      "order": 4
+    },
+    {
+      "title": "Education",
+      "href": "#education",
+      "icon": "IconSchool",
+      "order": 5
+    },
+    {
+      "title": "Certifications",
+      "href": "#certifications",
+      "icon": "IconCertificate",
+      "order": 6
+    },
+    {
+      "title": "Contact",
+      "href": "#contact",
+      "icon": "IconMail",
+      "order": 7
+    },
+    {
+      "title": "Blog",
+      "href": "https://madhudadi.in/blog",
+      "icon": "IconNews",
+      "isExternal": true,
+      "order": 9
+    },
+    {
+      "title": "GitHub",
+      "href": "https://github.com/madhu2456",
+      "icon": "IconBrandGithub",
+      "isExternal": true,
+      "order": 10
+    }
+  ],
+  "skills": [
+    {
+      "name": "Python",
+      "category": "backend",
+      "proficiency": "expert",
+      "yearsOfExperience": 9,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "SQL",
+      "category": "backend",
+      "proficiency": "expert",
+      "yearsOfExperience": 9,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "Campaign Analytics",
+      "category": "other",
+      "proficiency": "expert",
+      "yearsOfExperience": 8,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "Communication",
+      "category": "soft-skills",
+      "proficiency": "expert",
+      "yearsOfExperience": 8,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "Git",
+      "category": "tools",
+      "proficiency": "expert",
+      "yearsOfExperience": 8,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "GitHub",
+      "category": "devops",
+      "proficiency": "advanced",
+      "yearsOfExperience": 8,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "Problem Solving",
+      "category": "soft-skills",
+      "proficiency": "expert",
+      "yearsOfExperience": 8,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "Agile/Scrum",
+      "category": "soft-skills",
+      "proficiency": "expert",
+      "yearsOfExperience": 7,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "REST API Design",
+      "category": "backend",
+      "proficiency": "expert",
+      "yearsOfExperience": 7,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "Advanced Models",
+      "category": "ai-ml",
+      "proficiency": "expert",
+      "yearsOfExperience": 6,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "FastAPI",
+      "category": "backend",
+      "proficiency": "expert",
+      "yearsOfExperience": 6,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "Responsive Design",
+      "category": "design",
+      "proficiency": "expert",
+      "yearsOfExperience": 6,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "Django",
+      "category": "backend",
+      "proficiency": "advanced",
+      "yearsOfExperience": 5,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "Technical Leadership",
+      "category": "soft-skills",
+      "proficiency": "advanced",
+      "yearsOfExperience": 5,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "Google Analytics",
+      "category": "tools",
+      "proficiency": "expert",
+      "yearsOfExperience": 4,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "Jenkins",
+      "category": "devops",
+      "proficiency": "advanced",
+      "yearsOfExperience": 4,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "Snowflake",
+      "category": "database",
+      "proficiency": "advanced",
+      "yearsOfExperience": 4,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "Web Accessibility",
+      "category": "frontend",
+      "proficiency": "advanced",
+      "yearsOfExperience": 4,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "Dataiku",
+      "category": "tools",
+      "proficiency": "advanced",
+      "yearsOfExperience": 3,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "Figma",
+      "category": "design",
+      "proficiency": "intermediate",
+      "yearsOfExperience": 3,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "Firebase",
+      "category": "cloud",
+      "proficiency": "advanced",
+      "yearsOfExperience": 3,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "GCP",
+      "category": "cloud",
+      "proficiency": "advanced",
+      "yearsOfExperience": 3,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "GraphQL",
+      "category": "backend",
+      "proficiency": "advanced",
+      "yearsOfExperience": 3,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "JavaScript",
+      "category": "frontend",
+      "proficiency": "expert",
+      "yearsOfExperience": 3,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "React Native",
+      "category": "mobile",
+      "proficiency": "advanced",
+      "yearsOfExperience": 3,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "Vercel",
+      "category": "cloud",
+      "proficiency": "expert",
+      "yearsOfExperience": 3,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "WebSockets",
+      "category": "backend",
+      "proficiency": "advanced",
+      "yearsOfExperience": 3,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "AWS",
+      "category": "cloud",
+      "proficiency": "beginner",
+      "yearsOfExperience": 2,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "Elasticsearch",
+      "category": "database",
+      "proficiency": "intermediate",
+      "yearsOfExperience": 2,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "Google Cloud Platform",
+      "category": "cloud",
+      "proficiency": "intermediate",
+      "yearsOfExperience": 2,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "Kubernetes",
+      "category": "devops",
+      "proficiency": "intermediate",
+      "yearsOfExperience": 2,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "LangChain",
+      "category": "ai-ml",
+      "proficiency": "advanced",
+      "yearsOfExperience": 2,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "LangSmith",
+      "category": "ai-ml",
+      "proficiency": "advanced",
+      "yearsOfExperience": 2,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "MongoDB",
+      "category": "database",
+      "proficiency": "intermediate",
+      "yearsOfExperience": 2,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "OpenAI API",
+      "category": "ai-ml",
+      "proficiency": "expert",
+      "yearsOfExperience": 2,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "RAG",
+      "category": "ai-ml",
+      "proficiency": "advanced",
+      "yearsOfExperience": 2,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "Terraform",
+      "category": "devops",
+      "proficiency": "intermediate",
+      "yearsOfExperience": 2,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "Azure",
+      "category": "cloud",
+      "proficiency": "beginner",
+      "yearsOfExperience": 1,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    }
+  ],
+  "experiences": [
+    {
+      "company": "Novartis",
+      "position": "Senior Analytics Manager",
+      "employmentType": "Full-time",
+      "location": "Hyderabad, India",
+      "startDate": "2023-03-20",
+      "current": true,
+      "order": 1,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "company": "RedBus (MMT Group)",
+      "position": "Marketing Analytics Manager",
+      "employmentType": "Full-time",
+      "location": "Bangalore, India",
+      "startDate": "2022-06-13",
+      "endDate": "2023-03-17",
+      "current": false,
+      "order": 2,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "company": "GroupM (WPP Media)",
+      "position": "Analytics Manager",
+      "employmentType": "Full-time",
+      "location": "Gurgaon, India",
+      "startDate": "2020-09-14",
+      "endDate": "2022-05-13",
+      "current": false,
+      "order": 3,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "company": "Absolinsoft",
+      "position": "Web Developer and Penetration Tester",
+      "employmentType": "Full-time",
+      "location": "Visakhapatnam, India",
+      "startDate": "2016-05-02",
+      "endDate": "2018-07-13",
+      "current": false,
+      "order": 4,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    }
+  ],
+  "education": [
+    {
+      "institution": "Indian Institute of Management (IIM), Amritsar",
+      "degree": "Master of Business Administration",
+      "fieldOfStudy": "Marketing & Analytics",
+      "startDate": "2018-07-23",
+      "endDate": "2020-02-28",
+      "current": false,
+      "order": 1,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "institution": "MVGR College of Engineering",
+      "degree": "Batchelor of Technology",
+      "fieldOfStudy": "Electrical and Electronics Engineering",
+      "startDate": "2012-05-21",
+      "endDate": "2016-05-31",
+      "current": false,
+      "order": 2,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    }
+  ],
+  "projects": [
+    {
+      "title": "Udemy Enroller using FastAPI",
+      "slug": "udemy-enroller-fastapi",
+      "tagline": "Udemy Enroller build on FastAPI",
+      "category": "web-app",
+      "impactSummary": "Reduced manual effort by around 90% and enabled users to enroll in multiple courses within seconds. Improved efficiency, eliminated repetitive tasks, and ensured users never miss time-limited learning opportunities. Received 20000+ courses within 6 months for free and estimated cost savings of ₹10,00,000+",
+      "liveUrl": "https://udemyenroller.madhudadi.in",
+      "githubUrl": "https://github.com/madhu2456/udemy_enroller_fastapi",
+      "featured": true,
+      "coverImage": "/uploads/imported/udemy-enroller-fastapi-cover-587e017b6cf1.png",
+      "coverImageAlt": "Udemy Enroller using FastAPI preview",
+      "technologies": [
+        {
+          "name": "Google Analytics"
+        },
+        {
+          "name": "Python"
+        },
+        {
+          "name": "GitHub"
+        },
+        {
+          "name": "REST API Design"
+        },
+        {
+          "name": "FastAPI"
+        },
+        {
+          "name": "GitHub Actions"
+        }
+      ],
+      "problemStatement": "Finding free or discounted Udemy courses is a repetitive and time-sensitive process. Users have to manually browse multiple coupon sites, copy links, and enroll quickly before offers expire. This often leads to missed opportunities and inefficient use of time.",
+      "solutionApproach": "Developed a FastAPI-based automation system that scrapes coupon websites, extracts course links, and automatically enrolls users using session-based authentication. The system uses async processing to handle multiple enrollments efficiently with minimal manual input.",
+      "citations": [
+        {
+          "label": "Live demo",
+          "url": "https://udemyenroller.madhudadi.in/"
+        },
+        {
+          "label": "Source code",
+          "url": "https://github.com/madhu2456/udemy_enroller_fastapi"
+        },
+        {
+          "label": "Case study",
+          "url": "https://madhudadi.in/case-studies/udemy-enroller-fastapi"
+        }
+      ],
+      "order": 1,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    }
+  ],
+  "services": [],
+  "certifications": [
+    {
+      "name": "Ultimate RAG Bootcamp Using Langchain, LangGraph & Langsmith",
+      "issuer": "Udemy",
+      "issueDate": "2026-04-07",
+      "credentialId": "UC-108879e5-e8bb-49fd-bf5a-3b04299802e9",
+      "credentialUrl": "https://www.udemy.com/certificate/UC-108879e5-e8bb-49fd-bf5a-3b04299802e9/",
+      "order": 1,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "Complete Data Science, Machine Learning, DL, NLP Bootcamp",
+      "issuer": "Udemy",
+      "issueDate": "2026-02-01",
+      "credentialId": "UC-2c133425-fc3d-4d86-89e5-6499c0e3669f",
+      "credentialUrl": "https://udemy-certificate.s3.amazonaws.com/image/UC-2c133425-fc3d-4d86-89e5-6499c0e3669f.jpg",
+      "order": 2,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "Microsoft Certified: Azure AI Fundamentals",
+      "issuer": "Microsoft",
+      "issueDate": "2025-06-07",
+      "credentialId": "838CB018ADDA8DC8",
+      "credentialUrl": "https://learn.microsoft.com/en-us/users/madhudadi-6748/credentials/838cb018adda8dc8",
+      "order": 3,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "MongoDB Python Developer Path",
+      "issuer": "MongoDB Inc.",
+      "issueDate": "2025-05-12",
+      "credentialId": "MDBdjgyu6syfv",
+      "credentialUrl": "https://learn.mongodb.com/c/ysblCQ5bShSRgrmsyQy5PQ",
+      "order": 4,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "GitHub Actions Professional Certificate",
+      "issuer": "GitHub",
+      "issueDate": "2025-05-09",
+      "expiryDate": "2028-05-09",
+      "credentialId": "b94f1c7e-6a06-4cd8-ad3b-2ec9012d27e3",
+      "credentialUrl": "https://www.credly.com/badges/b94f1c7e-6a06-4cd8-ad3b-2ec9012d27e3/",
+      "order": 5,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "DataIku Core Designer",
+      "issuer": "DataIku",
+      "issueDate": "2025-05-06",
+      "credentialId": "bm4dvx7mymim",
+      "credentialUrl": "https://verify.skilljar.com/c/bm4dvx7mymim",
+      "logo": "/icon-512.png",
+      "description": "Certification in end-to-end analytics workflow design and execution.",
+      "skills": [
+        {
+          "name": "Dataiku"
+        },
+        {
+          "name": "Analytics"
+        }
+      ],
+      "order": 6,
+      "updatedAt": "2026-04-17T09:00:13.712Z"
+    }
+  ]
+}

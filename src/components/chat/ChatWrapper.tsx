@@ -1,15 +1,12 @@
 "use client";
 
-import { ChatMount } from "@/components/chat/ChatMount";
+import Chat from "./Chat";
 import type { ChatProfile } from "./chat-profile";
-import { ChatProvider } from "./ChatProvider";
 
 function ChatWrapper({ profile }: { profile: ChatProfile | null }) {
   return (
     <div className="h-full w-full">
-      <ChatProvider profile={profile}>
-        <ChatMount profile={profile} />
-      </ChatProvider>
+      <Chat profile={profile} />
     </div>
   );
 }

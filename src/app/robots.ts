@@ -30,22 +30,48 @@ export default function robots(): MetadataRoute.Robots {
       // AI search engines — explicitly welcomed for GEO
       {
         userAgent: [
+          // OpenAI
           "GPTBot",
           "ChatGPT-User",
           "OAI-SearchBot",
+          // Anthropic
           "anthropic-ai",
           "ClaudeBot",
           "Claude-Web",
+          // Perplexity
           "PerplexityBot",
+          // Google AI
           "Google-Extended",
-          "Applebot-Extended",
           "Googlebot-Extended",
-          "CCBot",
+          // Apple
+          "Applebot",
+          "Applebot-Extended",
+          // Meta / Facebook
           "Meta-ExternalAgent",
           "Meta-ExternalFetcher",
+          "facebookexternalhit",
+          // Amazon
           "Amazonbot",
+          // Common Crawl (used by many AI training pipelines)
+          "CCBot",
+          // ByteDance / TikTok
+          "Bytespider",
+          // Cohere
+          "cohere-ai",
+          // Diffbot (knowledge graph / AI)
+          "Diffbot",
+          // You.com AI search
+          "YouBot",
+          // Brave Search
+          "BraveBot",
         ],
-        allow: ["/", "/case-studies", "/llms.txt", "/ai-profile.json", "/humans.txt"],
+        allow: [
+          "/",
+          "/case-studies",
+          "/llms.txt",
+          "/ai-profile.json",
+          "/humans.txt",
+        ],
         disallow: ["/studio/", "/api/"],
       },
     ],

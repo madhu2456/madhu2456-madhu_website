@@ -1,52 +1,10 @@
-import { PortableText } from "@portabletext/react";
 import Image from "next/image";
-import { defineQuery } from "next-sanity";
-import { sanityFetch } from "@/sanity/lib/fetch";
-import { urlFor } from "@/sanity/lib/image";
-
-interface Experience {
-  company: string;
-  position: string;
-  employmentType?: string;
-  location?: string;
-  startDate?: string;
-  endDate?: string;
-  current?: boolean;
-  description?: any;
-  responsibilities?: string[];
-  achievements?: string[];
-  technologies?: Array<{ name?: string; category?: string }>;
-  companyLogo?: {
-    asset?: any;
-    lqip?: string;
-  };
-  companyWebsite?: string;
-}
-
-const EXPERIENCE_QUERY =
-  defineQuery(`*[_type == "experience"] | order(startDate desc){
-  company,
-  position,
-  employmentType,
-  location,
-  startDate,
-  endDate,
-  current,
-  description,
-  responsibilities,
-  achievements,
-  technologies[]->{name, category},
-  "companyLogo": {
-    "asset": companyLogo.asset->,
-    "lqip": companyLogo.asset->metadata.lqip
-  },
-  companyWebsite
-}`);
+import { getPortfolioData } from "@/lib/portfolio-data";
 
 export async function ExperienceSection() {
-  const { data: experiences } = await sanityFetch({ query: EXPERIENCE_QUERY });
+  const { sortedExperiences } = await getPortfolioData();
 
-  if (!experiences || (experiences as Experience[]).length === 0) {
+  if (sortedExperiences.length === 0) {
     return null;
   }
 
@@ -70,7 +28,7 @@ export async function ExperienceSection() {
         </div>
 
         <div className="space-y-8">
-          {(experiences as Experience[]).map((exp) => (
+          {sortedExperiences.map((exp) => (
             <div
               key={`${exp.company}-${exp.position}-${exp.startDate}`}
               className="relative pl-8 pb-8 border-l-2 border-muted last:border-l-0"
@@ -80,19 +38,14 @@ export async function ExperienceSection() {
 
               <div className="@container/card bg-card border rounded-lg p-4 @md/card:p-6 hover:shadow-lg transition-shadow">
                 <div className="flex flex-col @md/card:flex-row @md/card:items-start gap-4 mb-4">
-                  {exp.companyLogo?.asset && (
+                  {exp.companyLogo && (
                     <div className="relative w-12 h-12 @md/card:w-16 @md/card:h-16 rounded-lg overflow-hidden border shrink-0">
                       <Image
-                        src={urlFor(exp.companyLogo.asset)
-                          .width(64)
-                          .height(64)
-                          .url()}
+                        src={exp.companyLogo}
                         alt={`${exp.company} company logo`}
                         fill
                         sizes="64px"
                         className="object-cover"
-                        placeholder={exp.companyLogo?.lqip ? "blur" : "empty"}
-                        blurDataURL={exp.companyLogo?.lqip}
                       />
                     </div>
                   )}
@@ -134,9 +87,9 @@ export async function ExperienceSection() {
                 </div>
 
                 {exp.description && (
-                  <div className="text-muted-foreground mb-4 text-sm @md/card:text-base">
-                    <PortableText value={exp.description} />
-                  </div>
+                  <p className="text-muted-foreground mb-4 text-sm @md/card:text-base">
+                    {exp.description}
+                  </p>
                 )}
 
                 {exp.responsibilities && exp.responsibilities.length > 0 && (
@@ -145,8 +98,8 @@ export async function ExperienceSection() {
                       Key Responsibilities:
                     </h4>
                     <ul className="list-disc list-inside space-y-1 text-muted-foreground text-xs @md/card:text-sm">
-                      {exp.responsibilities.map((resp, idx) => (
-                        <li key={`${exp.company}-resp-${idx}`}>{resp}</li>
+                      {exp.responsibilities.map((resp) => (
+                        <li key={`${exp.company}-${resp}`}>{resp}</li>
                       ))}
                     </ul>
                   </div>
@@ -158,8 +111,8 @@ export async function ExperienceSection() {
                       Achievements:
                     </h4>
                     <ul className="list-disc list-inside space-y-1 text-muted-foreground text-xs @md/card:text-sm">
-                      {exp.achievements.map((achievement, idx) => (
-                        <li key={`${exp.company}-achievement-${idx}`}>
+                      {exp.achievements.map((achievement) => (
+                        <li key={`${exp.company}-${achievement}`}>
                           {achievement}
                         </li>
                       ))}
@@ -169,14 +122,14 @@ export async function ExperienceSection() {
 
                 {exp.technologies && exp.technologies.length > 0 && (
                   <div className="flex flex-wrap gap-1.5 @md/card:gap-2 mt-4">
-                    {exp.technologies.map((tech, techIdx) => {
+                    {exp.technologies.map((tech) => {
                       const techData =
                         tech && typeof tech === "object" && "name" in tech
                           ? tech
                           : null;
                       return techData?.name ? (
                         <span
-                          key={`${exp.company}-tech-${techIdx}`}
+                          key={`${exp.company}-${techData.name}`}
                           className="px-2 py-0.5 @md/card:px-3 @md/card:py-1 text-xs rounded-full bg-primary/10 text-primary"
                         >
                           {techData.name}

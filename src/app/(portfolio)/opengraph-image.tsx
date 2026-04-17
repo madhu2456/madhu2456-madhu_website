@@ -1,41 +1,57 @@
+import { promises as fs } from "node:fs";
+import path from "node:path";
 import { ImageResponse } from "next/og";
-import { client } from "@/sanity/lib/client";
-import { urlFor } from "@/sanity/lib/image";
+import { getPortfolioData } from "@/lib/portfolio-data";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const alt = "Portfolio";
 
-export default async function OGImage() {
-  const [profile, _settings] = await Promise.all([
-    client.fetch<{
-      firstName?: string;
-      lastName?: string;
-      headline?: string;
-      shortBio?: string;
-      location?: string;
-      profileImage?: object;
-    }>(
-      `*[_id == "singleton-profile"][0]{
-        firstName, lastName, headline, shortBio, location, profileImage
-      }`,
-    ),
-    client.fetch<{ siteTitle?: string }>(
-      `*[_type == "siteSettings"][0]{ siteTitle }`,
-    ),
-  ]);
+const IMAGE_MIME_BY_EXTENSION: Record<string, string> = {
+  ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
+  ".png": "image/png",
+  ".webp": "image/webp",
+  ".gif": "image/gif",
+  ".svg": "image/svg+xml",
+  ".avif": "image/avif",
+};
 
+const toDataUrlFromPublicAsset = async (assetPath: string) => {
+  const normalizedPath = assetPath.replace(/^\/+/, "");
+  const absolutePath = path.join(process.cwd(), "public", normalizedPath);
+  const imageBytes = await fs.readFile(absolutePath);
+  const extension = path.extname(normalizedPath).toLowerCase();
+  const mimeType = IMAGE_MIME_BY_EXTENSION[extension] || "image/png";
+
+  return `data:${mimeType};base64,${imageBytes.toString("base64")}`;
+};
+
+export default async function OGImage() {
+  const { profile } = await getPortfolioData();
   const fullName =
-    [profile?.firstName, profile?.lastName].filter(Boolean).join(" ") ||
+    [profile.firstName, profile.lastName].filter(Boolean).join(" ") ||
     "Portfolio";
-  const headline = profile?.headline ?? "";
+  const headline = profile.headline ?? "";
   const siteLabel = (
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://madhudadi.in"
   ).replace(/^https?:\/\//, "");
+  const siteUrl = (
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://madhudadi.in"
+  ).replace(/\/+$/, "");
 
-  const profileImageUrl = profile?.profileImage
-    ? urlFor(profile.profileImage).width(440).height(440).fit("crop").url()
-    : null;
+  let profileImageUrl: string | null = null;
+  if (profile.profileImage) {
+    if (/^https?:\/\//.test(profile.profileImage)) {
+      profileImageUrl = profile.profileImage;
+    } else {
+      try {
+        profileImageUrl = await toDataUrlFromPublicAsset(profile.profileImage);
+      } catch {
+        profileImageUrl = `${siteUrl}${profile.profileImage}`;
+      }
+    }
+  }
 
   return new ImageResponse(
     <div

@@ -1,30 +1,12 @@
 import { IconExternalLink } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
-import { defineQuery } from "next-sanity";
-import { sanityFetch } from "@/sanity/lib/fetch";
-import { urlFor } from "@/sanity/lib/image";
-
-const CERTIFICATIONS_QUERY =
-  defineQuery(`*[_type == "certification"] | order(issueDate desc){
-  name,
-  issuer,
-  issueDate,
-  expiryDate,
-  credentialId,
-  credentialUrl,
-  logo,
-  description,
-  skills[]->{name, category},
-  order
-}`);
+import { getPortfolioData } from "@/lib/portfolio-data";
 
 export async function CertificationsSection() {
-  const { data: certifications } = await sanityFetch({
-    query: CERTIFICATIONS_QUERY,
-  });
+  const { sortedCertifications } = await getPortfolioData();
 
-  if (!certifications || certifications.length === 0) {
+  if (sortedCertifications.length === 0) {
     return null;
   }
 
@@ -58,7 +40,7 @@ export async function CertificationsSection() {
 
         <div className="@container">
           <div className="grid grid-cols-1 @2xl:grid-cols-2 gap-10">
-            {certifications.map((cert) => (
+            {sortedCertifications.map((cert) => (
               <div
                 key={`${cert.issuer}-${cert.name}-${cert.issueDate}`}
                 className="w-full"
@@ -136,10 +118,7 @@ export async function CertificationsSection() {
                           <div className="relative w-16 h-16 p-2 bg-white/10 rounded-full border border-yellow-600/30">
                             <div className="relative w-full h-full">
                               <Image
-                                src={urlFor(cert.logo)
-                                  .width(64)
-                                  .height(64)
-                                  .url()}
+                                src={cert.logo}
                                 alt={`${cert.name} badge`}
                                 fill
                                 sizes="64px"
@@ -163,7 +142,7 @@ export async function CertificationsSection() {
                         {cert.skills && cert.skills.length > 0 && (
                           <div className="mb-4">
                             <div className="flex flex-wrap justify-center gap-1.5">
-                              {cert.skills.slice(0, 4).map((skill, idx) => {
+                              {cert.skills.slice(0, 4).map((skill) => {
                                 const skillData =
                                   skill &&
                                   typeof skill === "object" &&
@@ -172,7 +151,7 @@ export async function CertificationsSection() {
                                     : null;
                                 return skillData?.name ? (
                                   <span
-                                    key={`${cert.name}-skill-${idx}`}
+                                    key={`${cert.name}-${skillData.name}`}
                                     className="px-2.5 py-1 text-[10px] bg-yellow-600/20 text-yellow-500 font-medium border border-yellow-600/30"
                                   >
                                     {skillData.name}
