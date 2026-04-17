@@ -38,6 +38,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       ? new Date(Math.max(...validTimestamps.map((d) => d.getTime())))
       : new Date();
 
+  const blogUrl = `${siteUrl}/blog`;
+
   const baseEntries: MetadataRoute.Sitemap = [
     {
       url: siteUrl,
@@ -50,6 +52,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: latestDate,
       changeFrequency: "weekly",
       priority: 0.85,
+    },
+    // Blog — cross-linked from portfolio (same domain, /blog basePath)
+    {
+      url: blogUrl,
+      lastModified: latestDate,
+      changeFrequency: "daily",
+      priority: 0.9,
+    },
+    {
+      url: `${blogUrl}/series`,
+      lastModified: latestDate,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${blogUrl}/tags`,
+      lastModified: latestDate,
+      changeFrequency: "weekly",
+      priority: 0.7,
     },
     {
       url: `${siteUrl}/llms.txt`,

@@ -180,6 +180,7 @@ export function buildWebSiteSchema({
   url: string;
   description?: string | null;
 }) {
+  const blogUrl = `${url}/blog`;
   return {
     "@type": "WebSite",
     "@id": `${url}/#website`,
@@ -187,6 +188,18 @@ export function buildWebSiteSchema({
     url,
     ...(description && { description }),
     inLanguage: "en-US",
+    // Blog is a sub-site on the same domain — linking them helps search engines
+    // and AI crawlers understand the relationship between portfolio and blog
+    hasPart: {
+      "@type": "Blog",
+      "@id": `${blogUrl}/#blog`,
+      name: `${name} — Technical Blog`,
+      url: blogUrl,
+      description:
+        "A learning-focused technical blog covering AI, full-stack development, RAG systems, and software engineering best practices.",
+      inLanguage: "en-US",
+      author: { "@id": `${url}/#person` },
+    },
   };
 }
 
@@ -509,6 +522,14 @@ export function buildFaqSchema({
             projectCount > 0
               ? `${fullName}'s portfolio features ${projectCount} highlighted software projects across product and engineering domains. Detailed case studies are available at ${siteUrl}/case-studies.`
               : `${fullName}'s portfolio includes practical software projects with implementation and outcomes.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: `Does ${fullName} have a technical blog?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `Yes. ${fullName} writes in-depth technical articles on AI, full-stack development, RAG systems, and software engineering at ${siteUrl}/blog. The blog features series-style learning paths, an AI-powered Q&A assistant, and RSS feed at ${siteUrl}/blog/feed.xml.`,
         },
       },
       {

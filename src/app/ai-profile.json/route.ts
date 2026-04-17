@@ -454,6 +454,14 @@ export async function GET() {
       profileEndpoint: `${siteUrl}/ai-profile.json`,
       llmsEndpoint: `${siteUrl}/llms.txt`,
       caseStudiesEndpoint: `${siteUrl}/case-studies`,
+      blog: {
+        url: `${siteUrl}/blog`,
+        rss: `${siteUrl}/blog/feed.xml`,
+        sitemap: `${siteUrl}/blog/sitemap.xml`,
+        aiChat: `${siteUrl}/blog/ask`,
+        description:
+          "Technical blog covering AI engineering, full-stack development, RAG systems, and software architecture.",
+      },
       source: "sanity-cms-nextjs",
     },
     person: {
@@ -508,6 +516,10 @@ export async function GET() {
     sources: {
       canonical: siteUrl,
       profiles: sourceProfiles,
+      blog: {
+        url: `${siteUrl}/blog`,
+        rss: `${siteUrl}/blog/feed.xml`,
+      },
       caseStudies: caseStudies.slice(0, 12),
       certifications: (certifications ?? [])
         .map((item) => ({
@@ -543,7 +555,8 @@ export async function GET() {
       "Last-Modified": new Date(dateModified).toUTCString(),
       Link:
         `<${siteUrl}/llms.txt>; rel="alternate"; type="text/plain", ` +
-        `<${siteUrl}/case-studies>; rel="collection"`,
+        `<${siteUrl}/case-studies>; rel="collection", ` +
+        `<${siteUrl}/blog/feed.xml>; rel="alternate"; type="application/rss+xml"; title="${fullName} Blog"`,
       "X-Robots-Tag":
         "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
       "Access-Control-Allow-Origin": "*",
