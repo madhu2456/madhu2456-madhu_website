@@ -52,17 +52,6 @@ const nextConfig: NextConfig = {
         destination: "https://madhudadi.in/:path*",
         permanent: true,
       },
-      // Ensure direct canonical HTTPS redirect for apex host when a proxy
-      // forwards protocol information to the app.
-      {
-        source: "/:path*",
-        has: [
-          { type: "host", value: "madhudadi.in" },
-          { type: "header", key: "x-forwarded-proto", value: "http" },
-        ],
-        destination: "https://madhudadi.in/:path*",
-        permanent: true,
-      },
     ];
   },
 

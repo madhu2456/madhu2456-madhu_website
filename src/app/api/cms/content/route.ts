@@ -8,6 +8,7 @@ import {
 } from "@/lib/portfolio-data";
 
 export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null && !Array.isArray(value);
