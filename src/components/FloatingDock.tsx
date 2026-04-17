@@ -23,10 +23,17 @@ export async function FloatingDock() {
     return null;
   }
 
-  // Patch any items that have no href but have a known override
+  // Patch any items that have no href, a bare "#", or a fragment-only href
+  // like "#blog" that doesn't point to a real page.
   type NavItem = (typeof navItems)[number];
+  const needsOverride = (href: string | null | undefined) => {
+    if (!href || !href.trim()) return true;
+    const trimmed = href.trim();
+    // Fragment-only href: "#" or "#something" with no path
+    return trimmed === "#" || /^#[^/]/.test(trimmed);
+  };
   const patchedNavItems = navItems.map((item: NavItem) => {
-    if (item.href && item.href.trim()) return item;
+    if (!needsOverride(item.href)) return item;
     const override = item.title
       ? HREF_OVERRIDES[item.title.toLowerCase()]
       : undefined;
