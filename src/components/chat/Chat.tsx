@@ -1,13 +1,19 @@
 "use client";
 
-import { IconArrowDown, IconLoader2, IconSend2, IconSparkles, IconX } from "@tabler/icons-react";
+import {
+  IconArrowDown,
+  IconLoader2,
+  IconSend2,
+  IconSparkles,
+  IconX,
+} from "@tabler/icons-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useSidebar } from "@/components/ui/sidebar";
+import { MessageBubble } from "./chat-message";
 import type { ChatProfile } from "./chat-profile";
 import type { ChatMessage } from "./chat-types";
-import { MessageBubble } from "./chat-message";
 import { ChatInitSkeleton, TypingDots } from "./chat-ui";
-import { useSidebar } from "@/components/ui/sidebar";
 
 const TYPEWRITER_TICK_MS = 12;
 const TYPEWRITER_MAX_CHARS = 520;
@@ -30,7 +36,9 @@ const createId = () => `${Date.now().toString(36)}-${crypto.randomUUID()}`;
 
 export function Chat({ profile }: { profile: ChatProfile | null }) {
   const displayName = useMemo(
-    () => [profile?.firstName, profile?.lastName].filter(Boolean).join(" ") || "Madhu",
+    () =>
+      [profile?.firstName, profile?.lastName].filter(Boolean).join(" ") ||
+      "Madhu",
     [profile],
   );
 
@@ -72,7 +80,7 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
     if (!isAtBottomRef.current) return;
     const el = viewportRef.current;
     if (el) el.scrollTop = el.scrollHeight;
-  }, [messages, streamedText, sending]);
+  }, []);
 
   const handleScroll = () => {
     const el = viewportRef.current;
@@ -98,7 +106,9 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
       if (fullText.length > TYPEWRITER_MAX_CHARS) {
         setStreamedText(fullText);
         setStreamingId(null);
-        setMessages((p) => p.map((m) => (m.id === msgId ? { ...m, suggestions } : m)));
+        setMessages((p) =>
+          p.map((m) => (m.id === msgId ? { ...m, suggestions } : m)),
+        );
         return;
       }
 
@@ -108,11 +118,15 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
         idx += step;
         setStreamedText(fullText.slice(0, idx));
         if (idx >= fullText.length) {
-          clearInterval(typewriterRef.current!);
+          if (typewriterRef.current) {
+            clearInterval(typewriterRef.current);
+          }
           typewriterRef.current = null;
           setStreamedText(fullText);
           setStreamingId(null);
-          setMessages((p) => p.map((m) => (m.id === msgId ? { ...m, suggestions } : m)));
+          setMessages((p) =>
+            p.map((m) => (m.id === msgId ? { ...m, suggestions } : m)),
+          );
         }
       }, TYPEWRITER_TICK_MS);
     },
@@ -130,7 +144,9 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
     const userMsg: ChatMessage = { id: createId(), role: "user", text };
     const nextMessages = [...messages, userMsg];
     setMessages(nextMessages);
-    const history = nextMessages.slice(-12).map((m) => ({ role: m.role, content: m.text }));
+    const history = nextMessages
+      .slice(-12)
+      .map((m) => ({ role: m.role, content: m.text }));
 
     try {
       const res = await fetch("/api/chat", {
@@ -140,23 +156,34 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
         body: JSON.stringify({ message: text, history }),
       });
       const payload = (await res.json()) as ChatApiResponse;
-      if (!res.ok) throw new Error(payload.error || "Failed to get a response.");
+      if (!res.ok)
+        throw new Error(payload.error || "Failed to get a response.");
 
       const reply =
         typeof payload.reply === "string" && payload.reply.trim()
           ? payload.reply.trim()
           : "I don\u2019t have that detail documented right now.";
       const suggestions = Array.isArray(payload.suggestedPrompts)
-        ? payload.suggestedPrompts.filter((s): s is string => typeof s === "string").slice(0, 3)
+        ? payload.suggestedPrompts
+            .filter((s): s is string => typeof s === "string")
+            .slice(0, 3)
         : [];
 
       const newId = createId();
-      setMessages((p) => [...p, { id: newId, role: "assistant", text: reply, suggestions: [] }]);
+      setMessages((p) => [
+        ...p,
+        { id: newId, role: "assistant", text: reply, suggestions: [] },
+      ]);
       startTypewriter(reply, newId, suggestions);
     } catch (err) {
       const msg =
-        err instanceof Error ? err.message : "I couldn\u2019t answer right now. Please try again.";
-      setMessages((p) => [...p, { id: createId(), role: "assistant", text: msg }]);
+        err instanceof Error
+          ? err.message
+          : "I couldn\u2019t answer right now. Please try again.";
+      setMessages((p) => [
+        ...p,
+        { id: createId(), role: "assistant", text: msg },
+      ]);
     } finally {
       setSending(false);
     }
@@ -166,7 +193,11 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
     <div className="relative h-full w-full overflow-hidden">
       <AnimatePresence>
         {booting && (
-          <motion.div className="absolute inset-0 z-10" exit={{ opacity: 0 }} transition={{ duration: 0.25 }}>
+          <motion.div
+            className="absolute inset-0 z-10"
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+          >
             <ChatInitSkeleton profile={profile} />
           </motion.div>
         )}
@@ -182,7 +213,9 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
             <p className="truncate text-sm font-semibold leading-none">
               Chat with {profile?.firstName || "Me"}
             </p>
-            <p className="mt-0.5 text-[11px] text-muted-foreground">AI &middot; Agentic RAG</p>
+            <p className="mt-0.5 text-[11px] text-muted-foreground">
+              AI &middot; Agentic RAG
+            </p>
           </div>
           <div className="flex items-center gap-2">
             <div className="flex shrink-0 items-center gap-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/8 px-2.5 py-1">
@@ -203,7 +236,11 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
         </div>
 
         {/* Messages */}
-        <div ref={viewportRef} onScroll={handleScroll} className="flex-1 overflow-y-auto px-3 py-5">
+        <div
+          ref={viewportRef}
+          onScroll={handleScroll}
+          className="flex-1 overflow-y-auto px-3 py-5"
+        >
           <div className="space-y-5">
             <AnimatePresence initial={false}>
               {messages.map((msg) => (
@@ -213,7 +250,9 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
                   isStreaming={msg.id === streamingId}
                   streamedText={streamedText}
                   sending={sending}
-                  onSuggestionClick={(s: string) => { sendMessage(s).catch(() => undefined); }}
+                  onSuggestionClick={(s: string) => {
+                    sendMessage(s).catch(() => undefined);
+                  }}
                 />
               ))}
             </AnimatePresence>
@@ -298,7 +337,8 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
             </button>
           </div>
           <p className="mt-1.5 text-[11px] text-muted-foreground/55">
-            Enter to send &middot; Shift+Enter for new line &middot; Portfolio facts only
+            Enter to send &middot; Shift+Enter for new line &middot; Portfolio
+            facts only
           </p>
         </div>
       </div>
