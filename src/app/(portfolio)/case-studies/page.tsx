@@ -209,24 +209,24 @@ export default async function CaseStudiesPage() {
                         </Link>
                       ) : null}
                       {project.liveUrl ? (
-                        <Link
+                        <a
                           href={project.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="px-4 py-2 rounded-lg border hover:bg-accent transition-colors text-sm"
                         >
                           Live demo
-                        </Link>
+                        </a>
                       ) : null}
                       {project.githubUrl ? (
-                        <Link
+                        <a
                           href={project.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="px-4 py-2 rounded-lg border hover:bg-accent transition-colors text-sm"
                         >
                           Source code
-                        </Link>
+                        </a>
                       ) : null}
                     </div>
                   </div>

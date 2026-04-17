@@ -1,6 +1,5 @@
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import Link from "next/link";
 import { getPortfolioData } from "@/lib/portfolio-data";
 
 const ObfuscatedEmail = dynamic(() =>
@@ -45,7 +44,7 @@ export async function HeroSection() {
               {profile.socialLinks && (
                 <div className="flex flex-wrap gap-3 @md/hero:gap-4 pt-4">
                   {profile.socialLinks.github && (
-                    <Link
+                    <a
                       href={profile.socialLinks.github}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -53,10 +52,10 @@ export async function HeroSection() {
                       className="px-4 py-3 @md/hero:px-6 rounded-lg border hover:bg-accent transition-colors text-sm @md/hero:text-base min-h-[44px] flex items-center"
                     >
                       GitHub
-                    </Link>
+                    </a>
                   )}
                   {profile.socialLinks.linkedin && (
-                    <Link
+                    <a
                       href={profile.socialLinks.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -64,10 +63,10 @@ export async function HeroSection() {
                       className="px-4 py-3 @md/hero:px-6 rounded-lg border hover:bg-accent transition-colors text-sm @md/hero:text-base min-h-[44px] flex items-center"
                     >
                       LinkedIn
-                    </Link>
+                    </a>
                   )}
                   {profile.socialLinks.twitter && (
-                    <Link
+                    <a
                       href={profile.socialLinks.twitter}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -75,10 +74,10 @@ export async function HeroSection() {
                       className="px-4 py-3 @md/hero:px-6 rounded-lg border hover:bg-accent transition-colors text-sm @md/hero:text-base min-h-[44px] flex items-center"
                     >
                       Twitter
-                    </Link>
+                    </a>
                   )}
                   {profile.socialLinks.website && (
-                    <Link
+                    <a
                       href={profile.socialLinks.website}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -86,7 +85,7 @@ export async function HeroSection() {
                       className="px-4 py-3 @md/hero:px-6 rounded-lg border hover:bg-accent transition-colors text-sm @md/hero:text-base min-h-[44px] flex items-center"
                     >
                       Blog
-                    </Link>
+                    </a>
                   )}
                 </div>
               )}
