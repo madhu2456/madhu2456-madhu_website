@@ -24,7 +24,8 @@ export async function FloatingDock() {
   }
 
   // Patch any items that have no href but have a known override
-  const patchedNavItems = navItems.map((item) => {
+  type NavItem = (typeof navItems)[number];
+  const patchedNavItems = navItems.map((item: NavItem) => {
     if (item.href && item.href.trim()) return item;
     const override = item.title
       ? HREF_OVERRIDES[item.title.toLowerCase()]
