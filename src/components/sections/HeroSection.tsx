@@ -117,10 +117,10 @@ export async function HeroSection() {
                       href={profile.socialLinks.website}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label="Visit personal website (opens in new tab)"
+                      aria-label="Visit blog (opens in new tab)"
                       className="px-4 py-3 @md/hero:px-6 rounded-lg border hover:bg-accent transition-colors text-sm @md/hero:text-base min-h-[44px] flex items-center"
                     >
-                      Website
+                      Blog
                     </Link>
                   )}
                 </div>
