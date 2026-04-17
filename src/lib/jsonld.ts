@@ -46,6 +46,18 @@ type Certification = {
   description?: string | null;
 };
 
+const normalizeKeywordList = (keywords?: string[] | null) =>
+  Array.from(
+    new Set(
+      (keywords ?? [])
+        .map((keyword) => keyword?.trim())
+        .filter(
+          (keyword): keyword is string =>
+            typeof keyword === "string" && keyword.length > 0,
+        ),
+    ),
+  );
+
 // ---------------------------------------------------------------------------
 // Person
 // ---------------------------------------------------------------------------
@@ -61,6 +73,7 @@ export function buildPersonSchema({
   yearsOfExperience,
   nationality,
   alumniOf,
+  seoKeywords,
 }: {
   fullName: string;
   headline?: string | null;
@@ -73,9 +86,34 @@ export function buildPersonSchema({
   yearsOfExperience?: number | null;
   nationality?: string | null;
   alumniOf?: Array<{ name: string; url?: string }> | null;
+  seoKeywords?: string[] | null;
 }) {
   const sameAs = Object.values(socialLinks ?? {}).filter(
     (v): v is string => typeof v === "string" && v.length > 0,
+  );
+  const staticKnowsAbout = [
+    "Software Engineering",
+    "Full-Stack Development",
+    "AI & Machine Learning",
+    "Large Language Models",
+    "Generative AI",
+    "RAG (Retrieval-Augmented Generation)",
+    "Agentic AI Systems",
+    "MLOps",
+    "Data Analytics",
+    "Digital Transformation",
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Node.js",
+    "Python",
+    "FastAPI",
+    "PostgreSQL",
+    "Cloud Infrastructure",
+    "System Design",
+  ];
+  const knowsAbout = Array.from(
+    new Set([...staticKnowsAbout, ...normalizeKeywordList(seoKeywords)]),
   );
 
   // Build a single description — prefer the short bio, fall back to headline,
@@ -128,27 +166,7 @@ export function buildPersonSchema({
     inLanguage: "en-US",
     mainEntityOfPage: { "@id": `${siteUrl}/#profilepage` },
     hasOccupation: { "@id": `${siteUrl}/#occupation` },
-    knowsAbout: [
-      "Software Engineering",
-      "Full-Stack Development",
-      "AI & Machine Learning",
-      "Large Language Models",
-      "Generative AI",
-      "RAG (Retrieval-Augmented Generation)",
-      "Agentic AI Systems",
-      "MLOps",
-      "Data Analytics",
-      "Digital Transformation",
-      "Next.js",
-      "React",
-      "TypeScript",
-      "Node.js",
-      "Python",
-      "FastAPI",
-      "PostgreSQL",
-      "Cloud Infrastructure",
-      "System Design",
-    ],
+    ...(knowsAbout.length > 0 && { knowsAbout }),
     ...(nationality && {
       nationality: {
         "@type": "Country",
@@ -506,6 +524,7 @@ export function buildFaqSchema({
   yearsOfExperience,
   projects,
   services,
+  seoKeywords,
 }: {
   siteUrl: string;
   fullName: string;
@@ -514,8 +533,21 @@ export function buildFaqSchema({
   yearsOfExperience?: number | null;
   projects: Project[];
   services: Service[];
+  seoKeywords?: string[] | null;
 }) {
   const projectCount = projects.length;
+  const normalizedKeywords = normalizeKeywordList(seoKeywords);
+  const consultingKeywordHighlights = normalizedKeywords
+    .filter((keyword) =>
+      /consult|services|llm|rag|agent|chatbot|automation|strategy/i.test(
+        keyword,
+      ),
+    )
+    .slice(0, 6);
+  const keywordSummary =
+    consultingKeywordHighlights.length > 0
+      ? consultingKeywordHighlights.join(", ")
+      : "generative AI consulting, LLM consulting, RAG development services, AI agent development services, and AI chatbot development services";
   const topServices = services
     .map((service) => service.title)
     .filter(Boolean)
@@ -551,7 +583,7 @@ export function buildFaqSchema({
         name: `What services does ${fullName} provide?`,
         acceptedAnswer: {
           "@type": "Answer",
-          text: `${fullName} provides services including ${serviceSummary}.`,
+          text: `${fullName} provides services including ${serviceSummary}. Common engagement areas include ${keywordSummary}.`,
         },
       },
       {
@@ -575,6 +607,14 @@ export function buildFaqSchema({
       },
       {
         "@type": "Question",
+        name: `Does ${fullName} offer generative AI and LLM consulting?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `Yes. ${fullName} supports consulting and implementation across ${keywordSummary}, with practical delivery focused on measurable outcomes.`,
+        },
+      },
+      {
+        "@type": "Question",
         name: `How can I contact ${fullName}?`,
         acceptedAnswer: {
           "@type": "Answer",
@@ -586,7 +626,7 @@ export function buildFaqSchema({
         name: `Is ${fullName} available for freelance or consulting work?`,
         acceptedAnswer: {
           "@type": "Answer",
-          text: `${fullName}'s current availability is listed on the portfolio at ${siteUrl}. Services include ${serviceSummary}. Use the contact form or professional profile links to get in touch.`,
+          text: `${fullName}'s current availability is listed on the portfolio at ${siteUrl}. Services include ${serviceSummary}, including ${keywordSummary}. Use the contact form or professional profile links to get in touch.`,
         },
       },
       {
