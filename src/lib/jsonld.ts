@@ -155,13 +155,14 @@ export function buildPersonSchema({
         name: nationality,
       },
     }),
-    ...(alumniOf && alumniOf.length > 0 && {
-      alumniOf: alumniOf.map((edu) => ({
-        "@type": "CollegeOrUniversity",
-        name: edu.name,
-        ...(edu.url && { url: edu.url }),
-      })),
-    }),
+    ...(alumniOf &&
+      alumniOf.length > 0 && {
+        alumniOf: alumniOf.map((edu) => ({
+          "@type": "CollegeOrUniversity",
+          name: edu.name,
+          ...(edu.url && { url: edu.url }),
+        })),
+      }),
   };
 }
 

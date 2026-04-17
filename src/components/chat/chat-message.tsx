@@ -34,7 +34,9 @@ export function MessageBubble({
       className="space-y-2"
     >
       {/* Bubble row */}
-      <div className={`flex items-end gap-2 ${isUser ? "justify-end" : "justify-start"}`}>
+      <div
+        className={`flex items-end gap-2 ${isUser ? "justify-end" : "justify-start"}`}
+      >
         {/* AI avatar */}
         {!isUser && (
           <div className="mb-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
@@ -42,7 +44,9 @@ export function MessageBubble({
           </div>
         )}
 
-        <div className={`group relative ${isUser ? "max-w-[82%]" : "max-w-[88%] flex-1"}`}>
+        <div
+          className={`group relative ${isUser ? "max-w-[82%]" : "max-w-[88%] flex-1"}`}
+        >
           <div
             className={`rounded-2xl px-4 py-2.5 text-sm ${
               isUser
@@ -51,7 +55,9 @@ export function MessageBubble({
             }`}
           >
             {isUser ? (
-              <span className="whitespace-pre-wrap leading-relaxed">{displayText}</span>
+              <span className="whitespace-pre-wrap leading-relaxed">
+                {displayText}
+              </span>
             ) : (
               <>
                 <MarkdownText text={displayText || "\u00a0"} />
@@ -82,13 +88,17 @@ export function MessageBubble({
       {/* Suggestion chips — staggered in */}
       {!isUser && !isStreaming && (msg.suggestions?.length ?? 0) > 0 && (
         <div className="ml-8 flex flex-wrap gap-1.5">
-          {msg.suggestions!.map((s, idx) => (
+          {msg.suggestions?.map((s, idx) => (
             <motion.button
               key={`${msg.id}-${s}`}
               type="button"
               initial={{ opacity: 0, scale: 0.88 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: idx * 0.06, duration: 0.18, ease: "easeOut" }}
+              transition={{
+                delay: idx * 0.06,
+                duration: 0.18,
+                ease: "easeOut",
+              }}
               onClick={() => onSuggestionClick(s)}
               disabled={sending}
               className="rounded-full border border-foreground/12 bg-background px-3 py-1.5 text-xs font-medium text-foreground/65 transition-all hover:border-primary/35 hover:bg-primary/6 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-40"

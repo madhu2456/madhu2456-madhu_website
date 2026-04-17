@@ -78,10 +78,14 @@ function buildEmailHtml(opts: {
                   <strong>${name}</strong> &nbsp;<a href="mailto:${email}" style="color:#6366f1;text-decoration:none;">${email}</a>
                 </td>
               </tr>
-              ${subject ? `<tr>
+              ${
+                subject
+                  ? `<tr>
                 <td style="padding:8px 0;border-bottom:1px solid #f0f0f0;color:#888;font-size:13px;vertical-align:top;">Subject</td>
                 <td style="padding:8px 0;border-bottom:1px solid #f0f0f0;font-size:14px;color:#111;">${subject}</td>
-              </tr>` : ""}
+              </tr>`
+                  : ""
+              }
               <tr>
                 <td style="padding:8px 0;color:#888;font-size:13px;vertical-align:top;">Received</td>
                 <td style="padding:8px 0;font-size:14px;color:#111;">${new Date(submittedAt).toLocaleString("en-GB", { dateStyle: "long", timeStyle: "short" })}</td>
