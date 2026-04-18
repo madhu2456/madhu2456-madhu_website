@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { buildDiscoveryKeywords } from "@/lib/discovery-keywords";
 import { getPortfolioData } from "@/lib/portfolio-data";
 
 export const revalidate = 3600;
@@ -128,16 +129,14 @@ export async function GET() {
     return a.name.localeCompare(b.name);
   });
 
-  const normalizedKeywords = Array.from(
-    new Set(
-      (siteSettings.siteKeywords ?? [])
-        .map((keyword) => keyword?.trim())
-        .filter(
-          (keyword): keyword is string =>
-            typeof keyword === "string" && keyword.length > 0,
-        ),
-    ),
-  );
+  const normalizedKeywords = buildDiscoveryKeywords({
+    siteKeywords: siteSettings.siteKeywords,
+    headline: profile.headline,
+    location: profile.location,
+    skills,
+    services: sortedServices,
+    projects: sortedProjects,
+  });
 
   const expertise = Array.from(
     new Set(
@@ -227,6 +226,7 @@ export async function GET() {
       profileEndpoint: `${siteUrl}/ai-profile.json`,
       llmsEndpoint: `${siteUrl}/llms.txt`,
       caseStudiesEndpoint: `${siteUrl}/case-studies`,
+      searchEndpoint: `${siteUrl}/search`,
       blog: {
         url: `${siteUrl}/blog`,
         rss: `${siteUrl}/blog/feed.xml`,

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { buildDiscoveryKeywords } from "@/lib/discovery-keywords";
 import { getPortfolioData } from "@/lib/portfolio-data";
 
 export const revalidate = 3600;
@@ -23,6 +24,7 @@ export async function GET() {
   const {
     portfolioLastUpdatedAt,
     profile,
+    skills,
     siteSettings,
     sortedCertifications,
     sortedExperiences,
@@ -58,16 +60,14 @@ export async function GET() {
     .map((entry) => `- **${entry.label}:** ${entry.url}`)
     .join("\n");
 
-  const normalizedKeywords = Array.from(
-    new Set(
-      (siteSettings.siteKeywords ?? [])
-        .map((keyword) => keyword?.trim())
-        .filter(
-          (keyword): keyword is string =>
-            typeof keyword === "string" && keyword.length > 0,
-        ),
-    ),
-  );
+  const normalizedKeywords = buildDiscoveryKeywords({
+    siteKeywords: siteSettings.siteKeywords,
+    headline: profile.headline,
+    location: profile.location,
+    skills,
+    services: sortedServices,
+    projects: sortedProjects,
+  });
 
   const keywordLines = normalizedKeywords
     .map((keyword) => `- ${keyword}`)
@@ -232,6 +232,7 @@ AI-powered chat assistant using Agentic RAG over local portfolio data.
 - **AI profile JSON:** ${siteUrl}/ai-profile.json
 - **LLMs profile feed:** ${siteUrl}/llms.txt
 - **Case studies index:** ${siteUrl}/case-studies
+- **Portfolio search:** ${siteUrl}/search
 - **Blog RSS feed:** ${siteUrl}/blog/feed.xml
 - **XML sitemap:** ${siteUrl}/sitemap.xml
 

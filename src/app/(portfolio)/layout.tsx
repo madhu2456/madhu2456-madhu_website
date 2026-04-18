@@ -6,6 +6,7 @@ import { ClientChrome } from "@/components/ClientChrome";
 import { DeferredGTM } from "@/components/DeferredGTM";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { buildDiscoveryKeywords } from "@/lib/discovery-keywords";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import "../globals.css";
 
@@ -62,7 +63,8 @@ export const viewport: Viewport = {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { profile, siteSettings } = await getPortfolioData();
+  const { profile, siteSettings, skills, sortedProjects, sortedServices } =
+    await getPortfolioData();
   const siteUrl = resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL);
   const fullName =
     [profile.firstName, profile.lastName].filter(Boolean).join(" ") ||
@@ -78,7 +80,14 @@ export async function generateMetadata(): Promise<Metadata> {
     MAX_META_DESCRIPTION_LENGTH,
   );
 
-  const keywords = siteSettings.siteKeywords ?? [];
+  const keywords = buildDiscoveryKeywords({
+    siteKeywords: siteSettings.siteKeywords,
+    headline: profile.headline,
+    location: profile.location,
+    skills,
+    services: sortedServices,
+    projects: sortedProjects,
+  });
   const twitterHandle = siteSettings.twitterHandle?.replace(/^@/, "");
   const googleSiteVerification =
     process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ||

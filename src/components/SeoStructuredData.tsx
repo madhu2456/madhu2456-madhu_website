@@ -1,3 +1,4 @@
+import { buildDiscoveryKeywords } from "@/lib/discovery-keywords";
 import {
   buildBreadcrumbSchema,
   buildCertificationsListSchema,
@@ -18,6 +19,7 @@ export async function SeoStructuredData() {
     featuredProjects: projects,
     profile,
     siteSettings,
+    skills,
     sortedCertifications: certifications,
     sortedEducation: education,
     sortedExperiences: experience,
@@ -32,6 +34,14 @@ export async function SeoStructuredData() {
     "Madhu Dadi";
   const description =
     siteSettings.siteDescription || profile.shortBio || undefined;
+  const discoveryKeywords = buildDiscoveryKeywords({
+    siteKeywords: siteSettings.siteKeywords,
+    headline: profile.headline,
+    location: profile.location,
+    skills,
+    services,
+    projects,
+  });
   const profileImageUrl = profile.profileImage
     ? `${siteUrl}${profile.profileImage}`
     : undefined;
@@ -69,7 +79,7 @@ export async function SeoStructuredData() {
           name: edu.institution,
           url: edu.website ?? undefined,
         })),
-      seoKeywords: siteSettings.siteKeywords,
+      seoKeywords: discoveryKeywords,
     }),
     buildOccupationSchema({
       siteUrl,
@@ -101,7 +111,7 @@ export async function SeoStructuredData() {
       yearsOfExperience: profile?.yearsOfExperience,
       projects,
       services,
-      seoKeywords: siteSettings.siteKeywords,
+      seoKeywords: discoveryKeywords,
     }),
   ]);
 
