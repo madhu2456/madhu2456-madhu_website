@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  normalizeImageSource,
+  shouldUseUnoptimizedImage,
+} from "@/lib/image-source";
 import { getPortfolioData } from "@/lib/portfolio-data";
 
 type CaseStudy = {
@@ -142,6 +146,9 @@ export default async function CaseStudiesPage() {
             {caseStudies.map((project) => {
               const slug = project.slug?.trim();
               const title = project.title?.trim() || "Untitled Project";
+              const coverImageSource = normalizeImageSource(
+                project.coverImage?.asset,
+              );
               const summary =
                 project.impactSummary?.trim() ||
                 project.tagline?.trim() ||
@@ -152,14 +159,17 @@ export default async function CaseStudiesPage() {
                   key={slug || title}
                   className="rounded-xl border bg-card overflow-hidden flex flex-col"
                 >
-                  {project.coverImage?.asset ? (
+                  {coverImageSource ? (
                     <div className="relative aspect-video bg-muted">
                       <Image
-                        src={project.coverImage.asset}
+                        src={coverImageSource}
                         alt={`${title} preview`}
                         fill
                         className="object-cover"
                         sizes="(max-width: 1024px) 100vw, 50vw"
+                        unoptimized={shouldUseUnoptimizedImage(
+                          coverImageSource,
+                        )}
                       />
                     </div>
                   ) : null}

@@ -8,6 +8,7 @@ export const runtime = "nodejs";
 
 const MAX_FILE_SIZE_BYTES = 8 * 1024 * 1024;
 const ALLOWED_TYPES = new Set([
+  "image/avif",
   "image/jpeg",
   "image/png",
   "image/webp",
@@ -16,6 +17,7 @@ const ALLOWED_TYPES = new Set([
 ]);
 
 const extensionByMime: Record<string, string> = {
+  "image/avif": ".avif",
   "image/jpeg": ".jpg",
   "image/png": ".png",
   "image/webp": ".webp",
@@ -46,7 +48,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         error:
-          "Unsupported file type. Please upload a JPG, PNG, WEBP, GIF, or SVG image.",
+          "Unsupported file type. Please upload a JPG, PNG, WEBP, AVIF, GIF, or SVG image.",
       },
       { status: 400 },
     );

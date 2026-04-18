@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import {
+  normalizeImageSource,
+  shouldUseUnoptimizedImage,
+} from "@/lib/image-source";
 import { getPortfolioData, type ProjectItem } from "@/lib/portfolio-data";
 
 type Citation = {
@@ -34,6 +38,13 @@ const toDescription = (...values: Array<string | null | undefined>) => {
     .slice(0, safeBoundary)
     .trim()
     .replace(/[,\s;:!?-]+$/, "")}.`;
+};
+
+const toAbsoluteImageUrl = (siteUrl: string, value?: string | null) => {
+  const source = normalizeImageSource(value);
+  if (!source) return null;
+  if (/^https?:\/\//i.test(source)) return source;
+  return `${siteUrl}${source}`;
 };
 
 const makeEvidenceLinks = (project: ProjectItem, siteUrl: string) => {
@@ -98,9 +109,9 @@ export async function generateMetadata({
   const siteUrl = getSiteUrl();
   const title = `${data.title} | Case Study`;
   const description = toDescription(data.impactSummary, data.tagline);
-  const imageUrl = data.coverImage
-    ? `${siteUrl}${data.coverImage}`
-    : `${siteUrl}/opengraph-image`;
+  const imageUrl =
+    toAbsoluteImageUrl(siteUrl, data.coverImage) ??
+    `${siteUrl}/opengraph-image`;
 
   return {
     title,
@@ -142,6 +153,7 @@ export default async function CaseStudyPage({
   const evidenceLinks = makeEvidenceLinks(project, siteUrl);
   const caseStudyUrl = `${siteUrl}/case-studies/${slug}`;
   const description = toDescription(project.impactSummary, project.tagline);
+  const coverImageSource = normalizeImageSource(project.coverImage);
 
   const graph = {
     "@context": "https://schema.org",
@@ -242,14 +254,15 @@ export default async function CaseStudyPage({
           ) : null}
         </header>
 
-        {project.coverImage ? (
+        {coverImageSource ? (
           <div className="relative aspect-video rounded-xl overflow-hidden border bg-muted">
             <Image
-              src={project.coverImage}
+              src={coverImageSource}
               alt={project.coverImageAlt?.trim() || `${title} preview`}
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 1024px"
+              unoptimized={shouldUseUnoptimizedImage(coverImageSource)}
             />
           </div>
         ) : null}
