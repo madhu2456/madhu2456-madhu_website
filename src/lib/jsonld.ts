@@ -1,3 +1,5 @@
+import { normalizeKeywordList } from "@/lib/discovery-keywords";
+
 type SocialLinks = {
   github?: string | null;
   linkedin?: string | null;
@@ -45,18 +47,6 @@ type Certification = {
   credentialUrl?: string | null;
   description?: string | null;
 };
-
-const normalizeKeywordList = (keywords?: string[] | null) =>
-  Array.from(
-    new Set(
-      (keywords ?? [])
-        .map((keyword) => keyword?.trim())
-        .filter(
-          (keyword): keyword is string =>
-            typeof keyword === "string" && keyword.length > 0,
-        ),
-    ),
-  );
 
 // ---------------------------------------------------------------------------
 // Person
@@ -236,7 +226,7 @@ export function buildWebSiteSchema({
         "@type": "SearchAction",
         target: {
           "@type": "EntryPoint",
-          urlTemplate: `${url}/?q={search_term_string}`,
+          urlTemplate: `${url}/search?q={search_term_string}`,
         },
         "query-input": "required name=search_term_string",
       },
