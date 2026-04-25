@@ -88,8 +88,9 @@ jobs:
             echo "📂 Navigating to project directory"
             cd /home/madhu/madhu2456-madhu_website
 
-            echo "📥 Pulling latest code from main"
-            git pull origin main
+            echo "📥 Fetching and resetting to latest main"
+            git fetch origin main
+            git reset --hard origin/main
             
             # 👇 LOAD NVM (CRITICAL FIX)
             export NVM_DIR="$HOME/.nvm"
