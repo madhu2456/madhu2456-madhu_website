@@ -473,9 +473,47 @@
   ],
   "projects": [
     {
+      "title": "Technical Blog",
+      "slug": "technical-blog",
+      "tagline": "In-depth articles on AI, RAG, and Modern Web Engineering",
+      "category": "Education",
+      "impactSummary": "Built a learning-focused technical blog with an AI-powered Q&A assistant (Ask), RSS feed, and series-style deep dives. Attracts traffic for high-intent AI and engineering keywords.",
+      "liveUrl": "https://madhudadi.in/blog",
+      "featured": true,
+      "coverImage": "/icon-512.png",
+      "coverImageAlt": "Technical Blog preview",
+      "technologies": [
+        {
+          "name": "Next.js"
+        },
+        {
+          "name": "TypeScript"
+        },
+        {
+          "name": "Tailwind CSS"
+        },
+        {
+          "name": "AI Assistant"
+        }
+      ],
+      "problemStatement": "Technical knowledge on complex topics like RAG and AI engineering is often fragmented or too shallow for implementation.",
+      "solutionApproach": "Created a dedicated platform focusing on series-based learning and interactive AI-driven retrieval to make complex engineering concepts accessible and searchable.",
+      "citations": [
+        {
+          "label": "Visit Blog",
+          "url": "https://madhudadi.in/blog"
+        },
+        {
+          "label": "AI Assistant",
+          "url": "https://madhudadi.in/blog/ask"
+        }
+      ],
+      "order": 1,
+      "updatedAt": "2026-04-25T17:30:00.000Z"
+    },
+    {
       "title": "Udemy Enroller using FastAPI",
-      "slug": "udemy-enroller-fastapi",
-      "tagline": "Udemy Enroller build on FastAPI",
+      "slug": "udemy-enroller-fastapi",      "tagline": "Udemy Enroller build on FastAPI",
       "category": "web-app",
       "impactSummary": "Reduced manual effort by around 90% and enabled users to enroll in multiple courses within seconds. Improved efficiency, eliminated repetitive tasks, and ensured users never miss time-limited learning opportunities. Received 20000+ courses within 6 months for free and estimated cost savings of ₹10,00,000+",
       "liveUrl": "https://udemyenroller.madhudadi.in",
