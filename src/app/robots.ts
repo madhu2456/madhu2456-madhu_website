@@ -19,6 +19,8 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "*",
         allow: [
           "/",
+          "/blog",
+          "/blog/",
           "/case-studies",
           "/sitemap.xml",
           "/llms.txt",
@@ -67,6 +69,8 @@ export default function robots(): MetadataRoute.Robots {
         ],
         allow: [
           "/",
+          "/blog",
+          "/blog/",
           "/case-studies",
           "/llms.txt",
           "/ai-profile.json",

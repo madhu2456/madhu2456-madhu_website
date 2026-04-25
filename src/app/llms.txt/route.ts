@@ -143,7 +143,9 @@ export async function GET() {
       [
         { label: "Canonical website", url: siteUrl },
         { label: "Technical blog", url: `${siteUrl}/blog` },
+        { label: "Blog articles index", url: `${siteUrl}/blog/posts` },
         { label: "Blog RSS feed", url: `${siteUrl}/blog/feed.xml` },
+        { label: "Blog AI assistant", url: `${siteUrl}/blog/ask` },
         ...socialProfiles.map((profileLink) => ({
           label: profileLink.label,
           url: profileLink.url,
@@ -221,6 +223,15 @@ ${certLines ? `## Certifications\n\n${certLines}\n` : ""}## Portfolio Sections
 - **Certifications** — Professional credentials and issuing organisations
 - **Services** — Offerings available for hire or collaboration
 - **Contact** — Direct enquiry form
+
+## Technical Blog
+
+The technical blog is a core part of this knowledge graph, focusing on deep dives into modern engineering.
+
+- **URL:** ${siteUrl}/blog
+- **Primary Topics:** AI Engineering, LLM Application Development, RAG Systems, Agentic AI, Next.js, Python, FastAPI.
+- **Features:** Series-style articles, AI-powered Q&A (Ask), and technical code breakdowns.
+- **RSS Feed:** ${siteUrl}/blog/feed.xml
 
 ## Technical Stack
 

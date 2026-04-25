@@ -56,6 +56,13 @@ const PROFILE_KEYWORDS = new Set([
   "about",
   "linkedin",
   "github",
+  "blog",
+  "article",
+  "post",
+  "write",
+  "writing",
+  "read",
+  "technical",
   "your",
   "yourself",
   // common intro-question words that should always resolve as on-topic
@@ -91,12 +98,12 @@ const PROFILE_INTENT_PHRASES = [
 ];
 
 const OFF_TOPIC_REPLY =
-  "I can only answer questions about my professional profile, experience, projects, skills, services, education, certifications, and contact details.";
+  "I can only answer questions about my professional profile, technical blog, experience, projects, skills, services, education, certifications, and contact details.";
 
 const UNKNOWN_REPLY = "I don't have that detail documented right now.";
 const OPENAI_TIMEOUT_MS = 20_000;
 
-const SECTION_SUGGESTIONS: Record<ChatSection, string[]> = {
+const SECTION_SUGGESTIONS: Record<ChatSection | "blog", string[]> = {
   profile: [
     "Would you like a quick summary of my experience or my main projects?",
     "Want me to break down my skills or services next?",
@@ -136,6 +143,11 @@ const SECTION_SUGGESTIONS: Record<ChatSection, string[]> = {
     "Would you like my preferred contact channel?",
     "Want profile links like GitHub and LinkedIn?",
     "Would you like location and availability details too?",
+  ],
+  blog: [
+    "Would you like to see my latest technical articles?",
+    "Want to know what topics I cover on my blog?",
+    "Would you like to try the AI Q&A assistant on the blog?",
   ],
 };
 
@@ -233,6 +245,19 @@ export const buildKnowledgeChunks = (data: PortfolioData): KnowledgeChunk[] => {
     ]
       .filter(Boolean)
       .join(" | "),
+  });
+
+  pushChunk(chunks, {
+    id: "blog-summary",
+    section: "profile",
+    title: "Technical Blog",
+    content: [
+      "Madhu Dadi runs a technical blog at https://madhudadi.in/blog",
+      "Topics include AI engineering, full-stack development, RAG systems, and software architecture.",
+      "The blog features an AI-powered Q&A assistant called 'Ask' (https://madhudadi.in/blog/ask).",
+      "An RSS feed is available at https://madhudadi.in/blog/feed.xml.",
+      "Articles are often written as learning series for technical depth.",
+    ].join(" | "),
   });
 
   for (const item of data.sortedExperiences) {

@@ -229,6 +229,7 @@ export async function GET() {
       searchEndpoint: `${siteUrl}/search`,
       blog: {
         url: `${siteUrl}/blog`,
+        posts: `${siteUrl}/blog/posts`,
         rss: `${siteUrl}/blog/feed.xml`,
         sitemap: `${siteUrl}/blog/sitemap.xml`,
         aiChat: `${siteUrl}/blog/ask`,
@@ -293,6 +294,7 @@ export async function GET() {
       profiles: sourceProfiles,
       blog: {
         url: `${siteUrl}/blog`,
+        posts: `${siteUrl}/blog/posts`,
         rss: `${siteUrl}/blog/feed.xml`,
       },
       caseStudies: caseStudies.slice(0, 12),
