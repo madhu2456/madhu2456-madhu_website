@@ -239,9 +239,27 @@ export function buildWebSiteSchema({
       name: `${name} — Technical Blog`,
       url: blogUrl,
       description:
-        "A learning-focused technical blog covering AI, full-stack development, RAG systems, and software engineering best practices.",
+        "A learning-focused technical blog covering AI engineering, full-stack development, RAG systems, and software engineering best practices.",
       inLanguage: "en-US",
       author: { "@id": `${url}/#person` },
+      about: [
+        "Artificial Intelligence",
+        "Machine Learning",
+        "Full-Stack Development",
+        "Software Engineering",
+        "RAG Systems",
+        "Agentic AI",
+      ],
+      keywords:
+        "AI engineering, LLM development, RAG systems, Next.js, React, TypeScript, Python, FastAPI, Software Architecture",
+      potentialAction: {
+        "@type": "SearchAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: `${blogUrl}/search?q={search_term_string}`,
+        },
+        "query-input": "required name=search_term_string",
+      },
     },
   };
 }
@@ -592,7 +610,7 @@ export function buildFaqSchema({
         name: `Does ${fullName} have a technical blog?`,
         acceptedAnswer: {
           "@type": "Answer",
-          text: `Yes. ${fullName} writes in-depth technical articles on AI, full-stack development, RAG systems, and software engineering at ${siteUrl}/blog. The blog features series-style learning paths, an AI-powered Q&A assistant, and RSS feed at ${siteUrl}/blog/feed.xml.`,
+          text: `Yes. ${fullName} writes in-depth technical articles on AI engineering, full-stack development, RAG systems, and software architecture at ${siteUrl}/blog. The blog includes dedicated series for deep learning, an AI-powered Q&A assistant for instant answers, and an RSS feed at ${siteUrl}/blog/feed.xml. Topics focus on practical implementation, enterprise AI integration, and modern web engineering.`,
         },
       },
       {
