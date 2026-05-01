@@ -177,6 +177,30 @@ export default async function CaseStudyPage({
         },
         citation: evidenceLinks.map((link) => link.url),
       },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${caseStudyUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: siteUrl,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Case studies",
+            item: `${siteUrl}/case-studies`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: title,
+            item: caseStudyUrl,
+          },
+        ],
+      },
       ...(project.githubUrl
         ? [
             {

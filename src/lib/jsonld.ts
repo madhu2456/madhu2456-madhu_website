@@ -153,6 +153,7 @@ export function buildPersonSchema({
       },
     }),
     ...(sameAs.length > 0 && { sameAs }),
+    publishingPrinciples: `${siteUrl}/blog`,
     inLanguage: "en-US",
     mainEntityOfPage: { "@id": `${siteUrl}/#profilepage` },
     hasOccupation: { "@id": `${siteUrl}/#occupation` },
@@ -242,13 +243,15 @@ export function buildWebSiteSchema({
         "A learning-focused technical blog covering AI engineering, full-stack development, RAG systems, and software engineering best practices.",
       inLanguage: "en-US",
       author: { "@id": `${url}/#person` },
+      copyrightHolder: { "@id": `${url}/#person` },
+      publisher: { "@id": `${url}/#person` },
       about: [
-        "Artificial Intelligence",
-        "Machine Learning",
-        "Full-Stack Development",
-        "Software Engineering",
-        "RAG Systems",
-        "Agentic AI",
+        { "@type": "Thing", name: "Artificial Intelligence" },
+        { "@type": "Thing", name: "Machine Learning" },
+        { "@type": "Thing", name: "Full-Stack Development" },
+        { "@type": "Thing", name: "Software Engineering" },
+        { "@type": "Thing", name: "RAG Systems" },
+        { "@type": "Thing", name: "Agentic AI" },
       ],
       keywords:
         "AI engineering, LLM development, RAG systems, Next.js, React, TypeScript, Python, FastAPI, Software Architecture",
@@ -506,18 +509,22 @@ export function buildWorkExperienceSchema({
 // ---------------------------------------------------------------------------
 // BreadcrumbList
 // ---------------------------------------------------------------------------
-export function buildBreadcrumbSchema(url: string) {
+export function buildBreadcrumbSchema(
+  url: string,
+  items: Array<{ name: string; item: string }> = [],
+) {
+  const baseItems = [{ name: "Home", item: url }];
+  const allItems = [...baseItems, ...items];
+
   return {
     "@type": "BreadcrumbList",
     "@id": `${url}/#breadcrumb`,
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: url,
-      },
-    ],
+    itemListElement: allItems.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      item: item.item,
+    })),
   };
 }
 
@@ -610,7 +617,7 @@ export function buildFaqSchema({
         name: `Does ${fullName} have a technical blog?`,
         acceptedAnswer: {
           "@type": "Answer",
-          text: `Yes. ${fullName} writes in-depth technical articles on AI engineering, full-stack development, RAG systems, and software architecture at ${siteUrl}/blog. The blog includes dedicated series for deep learning, an AI-powered Q&A assistant for instant answers, and an RSS feed at ${siteUrl}/blog/feed.xml. Topics focus on practical implementation, enterprise AI integration, and modern web engineering.`,
+          text: `Yes. ${fullName} maintains an authoritative technical blog at ${siteUrl}/blog, focusing on AI engineering, RAG systems, and LLM application development. The blog provides deep dives into agentic AI, software architecture, and modern web engineering, serving as a core evidence source for his technical expertise. It features an AI-powered Q&A assistant for rapid discovery and an RSS feed at ${siteUrl}/blog/feed.xml.`,
         },
       },
       {
