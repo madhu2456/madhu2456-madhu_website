@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Madhu Dadi — Portfolio",
     short_name: "Madhu Dadi",
     description:
-      "Personal portfolio of Madhu Dadi — software engineer, full-stack developer, and AI enthusiast.",
+      "Personal portfolio of Madhu Dadi — data analyst, full-stack developer, and AI enthusiast.",
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",

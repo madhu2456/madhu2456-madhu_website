@@ -82,7 +82,7 @@ export function buildPersonSchema({
     (v): v is string => typeof v === "string" && v.length > 0,
   );
   const staticKnowsAbout = [
-    "Software Engineering",
+    "Analytics",
     "Full-Stack Development",
     "AI & Machine Learning",
     "Large Language Models",
@@ -240,7 +240,7 @@ export function buildWebSiteSchema({
       name: `${name} — Technical Blog`,
       url: blogUrl,
       description:
-        "A learning-focused technical blog covering AI engineering, full-stack development, RAG systems, and software engineering best practices.",
+        "A learning-focused technical blog covering AI engineering, full-stack development, RAG systems, and analytics best practices.",
       inLanguage: "en-US",
       author: { "@id": `${url}/#person` },
       copyrightHolder: { "@id": `${url}/#person` },
@@ -249,7 +249,7 @@ export function buildWebSiteSchema({
         { "@type": "Thing", name: "Artificial Intelligence" },
         { "@type": "Thing", name: "Machine Learning" },
         { "@type": "Thing", name: "Full-Stack Development" },
-        { "@type": "Thing", name: "Software Engineering" },
+        { "@type": "Thing", name: "Analytics" },
         { "@type": "Thing", name: "RAG Systems" },
         { "@type": "Thing", name: "Agentic AI" },
       ],
@@ -590,7 +590,7 @@ export function buildFaqSchema({
           "@type": "Answer",
           text: profileSummary
             ? `${fullName} is a technology professional focused on ${profileSummary}.`
-            : `${fullName} is a technology professional focused on AI and software engineering.`,
+            : `${fullName} is a technology professional focused on AI and analytics.`,
         },
       },
       {

@@ -418,7 +418,7 @@ export const education: EducationItem[] = [
     endDate: "2018-05-31",
     gpa: "8.2/10",
     description:
-      "Foundation in software engineering, data structures, and analytics.",
+      "Foundation in analytics, data structures, and analytics.",
     achievements: [
       "Built multiple applied software projects.",
       "Participated in technical workshops and hackathons.",
