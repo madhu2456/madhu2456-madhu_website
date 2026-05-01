@@ -71,31 +71,50 @@ export function CmsEditor() {
 
   const methods = useForm<PortfolioContentSchema>({
     resolver: zodResolver(portfolioContentSchema),
-    mode: "onChange",
   });
 
   const { reset, handleSubmit, watch } = methods;
 
-  const currentContent = watch();
+  // Only watch fields needed for the sidebar summary to avoid re-rendering on every keystroke in large text fields
+  const summaryData = watch([
+    "profile.firstName",
+    "profile.lastName",
+    "siteSettings.siteTitle",
+    "navigationItems",
+    "skills",
+    "experiences",
+    "education",
+    "projects",
+    "services",
+    "certifications",
+  ]);
 
   const sectionSummary = useMemo(() => {
-    if (!currentContent?.profile) {
-      return {} as Record<SectionKey, string>;
-    }
+    const [
+      firstName,
+      lastName,
+      siteTitle,
+      navigationItems,
+      skills,
+      experiences,
+      education,
+      projects,
+      services,
+      certifications,
+    ] = summaryData;
 
     return {
-      profile:
-        `${currentContent.profile.firstName} ${currentContent.profile.lastName}`.trim(),
-      siteSettings: currentContent.siteSettings.siteTitle || "Site settings",
-      navigationItems: `${currentContent.navigationItems?.length || 0} items`,
-      skills: `${currentContent.skills?.length || 0} items`,
-      experiences: `${currentContent.experiences?.length || 0} items`,
-      education: `${currentContent.education?.length || 0} items`,
-      projects: `${currentContent.projects?.length || 0} items`,
-      services: `${currentContent.services?.length || 0} items`,
-      certifications: `${currentContent.certifications?.length || 0} items`,
+      profile: `${firstName || ""} ${lastName || ""}`.trim() || "Profile",
+      siteSettings: siteTitle || "Site settings",
+      navigationItems: `${navigationItems?.length || 0} items`,
+      skills: `${skills?.length || 0} items`,
+      experiences: `${experiences?.length || 0} items`,
+      education: `${education?.length || 0} items`,
+      projects: `${projects?.length || 0} items`,
+      services: `${services?.length || 0} items`,
+      certifications: `${certifications?.length || 0} items`,
     };
-  }, [currentContent]);
+  }, [summaryData]);
 
   const loadContent = useCallback(async () => {
     setLoading(true);
