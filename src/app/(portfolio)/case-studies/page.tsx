@@ -30,7 +30,7 @@ const getSiteUrl = () =>
   (process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE_URL).replace(/\/+$/, "");
 
 export const metadata: Metadata = {
-  title: "Case Studies",
+  title: "In-Depth Analytics Case Studies",
   description: CASE_STUDIES_DESCRIPTION,
   alternates: {
     canonical: "/case-studies",
@@ -94,7 +94,7 @@ export default async function CaseStudiesPage() {
     "@type": "CollectionPage",
     "@id": `${collectionUrl}#collection`,
     url: collectionUrl,
-    name: "Case Studies",
+    name: "In-Depth Analytics Case Studies",
     description: CASE_STUDIES_DESCRIPTION,
     inLanguage: "en-US",
     isPartOf: { "@id": `${siteUrl}/#website` },
@@ -122,10 +122,10 @@ export default async function CaseStudiesPage() {
             <span>/</span>
             <span className="text-foreground">Case studies</span>
           </nav>
-          <h1 className="text-4xl md:text-5xl font-bold">Case Studies</h1>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Selected project breakdowns with implementation details, technology
-            decisions, and measurable outcomes.
+          <h1 className="text-4xl md:text-5xl font-bold">In-Depth Analytics Case Studies</h1>
+          <p className="text-lg text-muted-foreground max-w-4xl mx-auto space-y-4">
+            <span>Welcome to the portfolio case studies section. Here you will find detailed breakdowns of comprehensive analytics, AI, and full-stack projects I have successfully delivered from concept to production. Each case study provides an in-depth look into the initial problem statement, the architectural and technology decisions made to address those bottlenecks, and the measurable business impact achieved through these solutions.</span><br/><br/>
+            <span>By exploring these technical deep dives, you can gain a clearer understanding of my pragmatic approach to engineering—focusing on robust backend architectures, scalable data processing pipelines, and intuitive user interfaces. From developing automated intelligent workflows with generative AI to constructing end-to-end data analytics platforms, these projects highlight a commitment to solving complex, real-world challenges through systematic problem-solving and modern web technologies.</span>
           </p>
           <div className="flex items-center justify-center pt-2">
             <Link

@@ -149,11 +149,11 @@ export async function generateMetadata(): Promise<Metadata> {
       },
     },
     alternates: {
-      canonical: "/",
+      canonical: "",
       languages: {
-        en: "/",
-        "en-US": "/",
-        "x-default": "/",
+        en: "",
+        "en-US": "",
+        "x-default": "",
       },
     },
     openGraph: {

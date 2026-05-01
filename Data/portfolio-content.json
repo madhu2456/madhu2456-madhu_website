@@ -50,7 +50,7 @@
     "updatedAt": "2026-04-17T09:00:13.712Z"
   },
   "siteSettings": {
-    "siteTitle": "Madhu Dadi - Portfolio",
+    "siteTitle": "Madhu Dadi | Data Analyst & AI Consultant",
     "siteDescription": "AI consultant and ML engineer with 9+ years of experience delivering generative AI consulting, LLM applications, RAG systems, and full-stack product development.",
     "siteKeywords": [
       "Madhu Dadi",
@@ -516,7 +516,7 @@
       "slug": "udemy-enroller-fastapi",
       "tagline": "Udemy Enroller build on FastAPI",
       "category": "web-app",
-      "impactSummary": "Reduced manual effort by around 90% and enabled users to enroll in multiple courses within seconds. Improved efficiency, eliminated repetitive tasks, and ensured users never miss time-limited learning opportunities. Received 20000+ courses within 6 months for free and estimated cost savings of ₹10,00,000+",
+      "impactSummary": "Reduced manual effort by around 90% and enabled users to enroll in multiple courses within seconds. Improved efficiency, eliminated repetitive tasks, and ensured users never miss time-limited learning opportunities. Received 20000+ courses within 6 months for free and estimated cost savings of \u20b910,00,000+ The automated platform successfully eliminated 100% of manual enrollment effort for its users. By leveraging asynchronous queues, the system scales seamlessly to handle hundreds of concurrent coupon processing requests, ensuring users never miss a time-sensitive learning opportunity while strictly adhering to platform rate limits.",
       "liveUrl": "https://udemyenroller.madhudadi.in",
       "githubUrl": "https://github.com/madhu2456/udemy_enroller_fastapi",
       "featured": true,
@@ -542,8 +542,8 @@
           "name": "GitHub Actions"
         }
       ],
-      "problemStatement": "Finding free or discounted Udemy courses is a repetitive and time-sensitive process. Users have to manually browse multiple coupon sites, copy links, and enroll quickly before offers expire. This often leads to missed opportunities and inefficient use of time.",
-      "solutionApproach": "Developed a FastAPI-based automation system that scrapes coupon websites, extracts course links, and automatically enrolls users using session-based authentication. The system uses async processing to handle multiple enrollments efficiently with minimal manual input.",
+      "problemStatement": "Finding free or discounted Udemy courses is a repetitive and time-sensitive process. Users have to manually browse multiple coupon sites, copy links, and enroll quickly before offers expire. This often leads to missed opportunities and inefficient use of time. Previously, this process was completely manual, requiring users to constantly monitor for free course coupons and manually log in to claim them before they expired. This resulted in significant time wasted and many missed learning opportunities due to timezone differences and short coupon validity windows. The system needed a robust, high-availability architecture capable of handling asynchronous task queues and rate-limiting gracefully.",
+      "solutionApproach": "Developed a FastAPI-based automation system that scrapes coupon websites, extracts course links, and automatically enrolls users using session-based authentication. The system uses async processing to handle multiple enrollments efficiently with minimal manual input. I engineered a scalable backend service using FastAPI to manage the core API layer, integrated with Celery and Redis for asynchronous task processing. The system implements a robust scraping and validation pipeline that automatically authenticates, verifies coupon validity, and enrolls users without manual intervention. I also built a comprehensive logging and monitoring system to track success rates and handle CAPTCHAs or IP blocks.",
       "citations": [
         {
           "label": "Live demo",
