@@ -1,0 +1,110 @@
+{
+  "exportFormatVersion": 2,
+  "exportTime": "2026-05-01 18:00:00",
+  "containerVersion": {
+    "name": "Full Portfolio Tracking v3",
+    "description": "Complete tracking for Chat, Leads, Projects, and Social/External Links with Categorization",
+    "container": {
+      "publicId": "GTM-PBB2W9VG"
+    },
+    "tag": [
+      {
+        "accountId": "6346521942",
+        "containerId": "247567668",
+        "tagId": "101",
+        "name": "GA4 - External Links",
+        "type": "gaawe",
+        "parameter": [
+          { "type": "BOOLEAN", "key": "sendEcommerceData", "value": "false" },
+          {
+            "type": "LIST",
+            "key": "eventSettingsTable",
+            "list": [
+              {
+                "type": "MAP",
+                "map": [
+                  { "type": "TEMPLATE", "key": "parameter", "value": "link_name" },
+                  { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - link_label}}" }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  { "type": "TEMPLATE", "key": "parameter", "value": "url" },
+                  { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - link_url}}" }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  { "type": "TEMPLATE", "key": "parameter", "value": "link_category" },
+                  { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - link_category}}" }
+                ]
+              }
+            ]
+          },
+          { "type": "TEMPLATE", "key": "eventName", "value": "external_click" },
+          { "type": "TEMPLATE", "key": "measurementIdOverride", "value": "{{GA4 Measurement ID}}" }
+        ],
+        "firingTriggerId": ["101"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      }
+    ],
+    "trigger": [
+      {
+        "accountId": "6346521942",
+        "containerId": "247567668",
+        "triggerId": "101",
+        "name": "Event - External Click",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" },
+              { "type": "TEMPLATE", "key": "arg1", "value": "external_click" }
+            ]
+          }
+        ]
+      }
+    ],
+    "variable": [
+      {
+        "accountId": "6346521942",
+        "containerId": "247567668",
+        "variableId": "101",
+        "name": "DLV - link_label",
+        "type": "v",
+        "parameter": [
+          { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+          { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" },
+          { "type": "TEMPLATE", "key": "name", "value": "link_label" }
+        ]
+      },
+      {
+        "accountId": "6346521942",
+        "containerId": "247567668",
+        "variableId": "102",
+        "name": "DLV - link_url",
+        "type": "v",
+        "parameter": [
+          { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+          { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" },
+          { "type": "TEMPLATE", "key": "name", "value": "link_url" }
+        ]
+      },
+      {
+        "accountId": "6346521942",
+        "containerId": "247567668",
+        "variableId": "103",
+        "name": "DLV - link_category",
+        "type": "v",
+        "parameter": [
+          { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+          { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" },
+          { "type": "TEMPLATE", "key": "name", "value": "link_category" }
+        ]
+      }
+    ]
+  }
+}

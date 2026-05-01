@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import { TrackedLink } from "@/components/TrackedLink";
 import { getPortfolioData } from "@/lib/portfolio-data";
 
 const ObfuscatedEmail = dynamic(() =>
@@ -44,48 +45,52 @@ export async function HeroSection() {
               {profile.socialLinks && (
                 <div className="flex flex-wrap gap-3 @md/hero:gap-4 pt-4">
                   {profile.socialLinks.github && (
-                    <a
+                    <TrackedLink
                       href={profile.socialLinks.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      type="external"
+                      category="social"
+                      externalLabel="hero_github"
                       aria-label="View GitHub profile (opens in new tab)"
                       className="px-4 py-3 @md/hero:px-6 rounded-lg border hover:bg-accent transition-colors text-sm @md/hero:text-base min-h-[44px] flex items-center"
                     >
                       GitHub
-                    </a>
+                    </TrackedLink>
                   )}
                   {profile.socialLinks.linkedin && (
-                    <a
+                    <TrackedLink
                       href={profile.socialLinks.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      type="external"
+                      category="social"
+                      externalLabel="hero_linkedin"
                       aria-label="View LinkedIn profile (opens in new tab)"
                       className="px-4 py-3 @md/hero:px-6 rounded-lg border hover:bg-accent transition-colors text-sm @md/hero:text-base min-h-[44px] flex items-center"
                     >
                       LinkedIn
-                    </a>
+                    </TrackedLink>
                   )}
                   {profile.socialLinks.twitter && (
-                    <a
+                    <TrackedLink
                       href={profile.socialLinks.twitter}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      type="external"
+                      category="social"
+                      externalLabel="hero_twitter"
                       aria-label="View Twitter profile (opens in new tab)"
                       className="px-4 py-3 @md/hero:px-6 rounded-lg border hover:bg-accent transition-colors text-sm @md/hero:text-base min-h-[44px] flex items-center"
                     >
                       Twitter
-                    </a>
+                    </TrackedLink>
                   )}
                   {profile.socialLinks.website && (
-                    <a
+                    <TrackedLink
                       href={profile.socialLinks.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      type="external"
+                      category="social"
+                      externalLabel="hero_blog"
                       aria-label="Visit blog (opens in new tab)"
                       className="px-4 py-3 @md/hero:px-6 rounded-lg border hover:bg-accent transition-colors text-sm @md/hero:text-base min-h-[44px] flex items-center"
                     >
                       Blog
-                    </a>
+                    </TrackedLink>
                   )}
                 </div>
               )}

@@ -1,5 +1,6 @@
 import { IconAward, IconCalendar, IconExternalLink } from "@tabler/icons-react";
 import Image from "next/image";
+import { TrackedLink } from "@/components/TrackedLink";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { formatDate } from "@/lib/utils";
 
@@ -129,15 +130,15 @@ export async function EducationSection() {
 
                 {/* Website link */}
                 {edu.website && (
-                  <a
+                  <TrackedLink
                     href={edu.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    type="external"
+                    externalLabel={`edu_${edu.institution?.toLowerCase()}`}
                     className="inline-flex items-center gap-2 text-sm text-primary hover:underline font-medium group-hover:gap-3 transition-all"
                   >
                     Visit Website
                     <IconExternalLink className="w-4 h-4" />
-                  </a>
+                  </TrackedLink>
                 )}
               </div>
             </div>

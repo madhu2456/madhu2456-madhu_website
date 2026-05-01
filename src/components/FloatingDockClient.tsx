@@ -1,9 +1,9 @@
 "use client";
 
 import { IconMenu2, IconX } from "@tabler/icons-react";
-import Link from "next/link";
 import { useState } from "react";
 import { DynamicIcon } from "./DynamicIcon";
+import { TrackedLink } from "./TrackedLink";
 import { useSidebar } from "./ui/sidebar";
 
 interface NavItem {
@@ -269,6 +269,11 @@ function DockIcon({
   const wrapperClasses =
     "group relative flex items-center justify-center w-12 h-12 md:w-12 md:h-12";
 
+  const isSocial = (title?: string | null) => {
+    const t = title?.toLowerCase() || "";
+    return ["github", "linkedin", "twitter", "blog", "medium", "devto", "youtube"].some(s => t.includes(s));
+  };
+
   return item.onClick ? (
     <button
       type="button"
@@ -278,26 +283,16 @@ function DockIcon({
     >
       {content}
     </button>
-  ) : item.isExternal ? (
-    <a
-      href={item.href || "#"}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={`${item.title} (opens in new tab)`}
-      className={wrapperClasses}
-      onClick={onItemClick}
-    >
-      {content}
-    </a>
   ) : (
-    <Link
+    <TrackedLink
       href={item.href || "#"}
+      type="external"
+      category={isSocial(item.title) ? "social" : "link"}
+      externalLabel={`nav_${item.title?.toLowerCase()}`}
       aria-label={item.title}
       className={wrapperClasses}
-      scroll={true}
-      onClick={onItemClick}
     >
       {content}
-    </Link>
+    </TrackedLink>
   );
 }

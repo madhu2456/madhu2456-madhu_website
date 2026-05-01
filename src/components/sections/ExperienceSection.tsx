@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { TrackedLink } from "@/components/TrackedLink";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { formatDate } from "@/lib/utils";
 
@@ -49,9 +50,20 @@ export async function ExperienceSection() {
                       {exp.position}
                     </h3>
                     <div className="flex flex-wrap items-center gap-2 mt-1">
-                      <p className="text-base @md/card:text-lg text-primary font-medium truncate">
-                        {exp.company}
-                      </p>
+                      {exp.companyWebsite ? (
+                        <TrackedLink
+                          href={exp.companyWebsite}
+                          type="external"
+                          externalLabel={`company_${exp.company?.toLowerCase()}`}
+                          className="text-base @md/card:text-lg text-primary font-medium truncate hover:underline"
+                        >
+                          {exp.company}
+                        </TrackedLink>
+                      ) : (
+                        <p className="text-base @md/card:text-lg text-primary font-medium truncate">
+                          {exp.company}
+                        </p>
+                      )}
                       {exp.employmentType && (
                         <>
                           <span className="text-muted-foreground">•</span>

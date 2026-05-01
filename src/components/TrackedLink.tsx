@@ -12,6 +12,7 @@ interface TrackedLinkProps {
   type?: "case_study" | "live_demo" | "github" | "external";
   projectTitle?: string;
   externalLabel?: string;
+  category?: "social" | "link" | "other";
 }
 
 export function TrackedLink({
@@ -22,12 +23,13 @@ export function TrackedLink({
   type,
   projectTitle,
   externalLabel,
+  category,
 }: TrackedLinkProps) {
   const handleClick = () => {
     if (!type) return;
 
     if (type === "external") {
-      trackExternalClick(externalLabel || href, href);
+      trackExternalClick(externalLabel || href, href, category || "link");
     } else if (projectTitle) {
       const actionMap = {
         case_study: "view_case_study",
