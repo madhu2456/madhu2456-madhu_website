@@ -246,6 +246,7 @@ AI-powered chat assistant using Agentic RAG over local portfolio data.
 - **Portfolio search:** ${siteUrl}/search
 - **Blog RSS feed:** ${siteUrl}/blog/feed.xml
 - **XML sitemap:** ${siteUrl}/sitemap.xml
+- **Blog sitemap:** ${siteUrl}/blog/sitemap.xml
 
 ## Evidence & Sources
 

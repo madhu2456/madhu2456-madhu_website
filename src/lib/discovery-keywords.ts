@@ -38,6 +38,11 @@ const MODERN_AI_DISCOVERY_TERMS = [
   "llm application development",
   "rag system development",
   "ai product engineering",
+  "technical ai engineering blog",
+  "rag systems implementation guide",
+  "llm application development articles",
+  "agentic ai software architecture",
+  "Madhu Dadi blog",
 ];
 
 const normalizeWhitespace = (value: string) =>
