@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { getPortfolioData } from "@/lib/portfolio-data";
+import { formatDate } from "@/lib/utils";
 
 export async function ExperienceSection() {
   const { sortedExperiences } = await getPortfolioData();
@@ -7,13 +8,6 @@ export async function ExperienceSection() {
   if (sortedExperiences.length === 0) {
     return null;
   }
-
-  const formatDate = (date: string) => {
-    return new Date(date).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-    });
-  };
 
   return (
     <section id="experience" className="py-20 px-6">

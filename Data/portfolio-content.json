@@ -513,7 +513,8 @@
     },
     {
       "title": "Udemy Enroller using FastAPI",
-      "slug": "udemy-enroller-fastapi",      "tagline": "Udemy Enroller build on FastAPI",
+      "slug": "udemy-enroller-fastapi",
+      "tagline": "Udemy Enroller build on FastAPI",
       "category": "web-app",
       "impactSummary": "Reduced manual effort by around 90% and enabled users to enroll in multiple courses within seconds. Improved efficiency, eliminated repetitive tasks, and ensured users never miss time-limited learning opportunities. Received 20000+ courses within 6 months for free and estimated cost savings of ₹10,00,000+",
       "liveUrl": "https://udemyenroller.madhudadi.in",

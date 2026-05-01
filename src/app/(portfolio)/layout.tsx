@@ -239,8 +239,8 @@ export default async function RootLayout({
         <DeferredGTM gtmId="GTM-PBB2W9VG" />
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
+          enableSystem={false}
           disableTransitionOnChange
         >
           <SidebarProvider defaultOpen={false}>

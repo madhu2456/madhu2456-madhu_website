@@ -1,37 +1,14 @@
 import { NextResponse } from "next/server";
 import { revalidatePortfolioRoutes } from "@/lib/cms-revalidate";
+import { portfolioContentSchema } from "@/lib/cms-schema";
 import {
   getPortfolioContentPath,
-  type PortfolioContent,
   readPortfolioContent,
   savePortfolioContent,
 } from "@/lib/portfolio-data";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
-
-const isRecord = (value: unknown): value is Record<string, unknown> =>
-  typeof value === "object" && value !== null && !Array.isArray(value);
-
-const isPortfolioContentPayload = (
-  value: unknown,
-): value is PortfolioContent => {
-  if (!isRecord(value)) {
-    return false;
-  }
-
-  return (
-    isRecord(value.profile) &&
-    isRecord(value.siteSettings) &&
-    Array.isArray(value.navigationItems) &&
-    Array.isArray(value.skills) &&
-    Array.isArray(value.experiences) &&
-    Array.isArray(value.education) &&
-    Array.isArray(value.projects) &&
-    Array.isArray(value.services) &&
-    Array.isArray(value.certifications)
-  );
-};
 
 export async function GET() {
   const content = await readPortfolioContent();
@@ -52,22 +29,26 @@ export async function GET() {
 export async function PUT(request: Request) {
   const payload: unknown = await request.json();
 
-  if (!isRecord(payload) || !("content" in payload)) {
+  if (!payload || typeof payload !== "object" || !("content" in payload)) {
     return NextResponse.json(
       { error: "Request body must include a content object." },
       { status: 400 },
     );
   }
 
-  const nextContent = payload.content;
-  if (!isPortfolioContentPayload(nextContent)) {
+  const result = portfolioContentSchema.safeParse(payload.content);
+
+  if (!result.success) {
     return NextResponse.json(
-      { error: "Content payload does not match the expected portfolio shape." },
+      {
+        error: "Content payload does not match the expected portfolio shape.",
+        details: result.error.format(),
+      },
       { status: 400 },
     );
   }
 
-  const savedContent = await savePortfolioContent(nextContent);
+  const savedContent = await savePortfolioContent(result.data);
   revalidatePortfolioRoutes();
 
   return NextResponse.json(

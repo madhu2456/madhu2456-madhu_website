@@ -90,12 +90,17 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
     setShowScrollBtn(!near);
   };
 
-  const resizeTextarea = () => {
+  const resizeTextarea = useCallback(() => {
     const el = textareaRef.current;
     if (!el) return;
     el.style.height = "auto";
-    el.style.height = `${Math.min(el.scrollHeight, 160)}px`;
-  };
+    el.style.height = `${el.scrollHeight}px`;
+  }, []);
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: resizeTextarea must run whenever input changes to adjust height
+  useEffect(() => {
+    resizeTextarea();
+  }, [input, resizeTextarea]);
 
   const startTypewriter = useCallback(
     (fullText: string, msgId: string, suggestions: string[]) => {
@@ -308,7 +313,6 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
               value={input}
               onChange={(e) => {
                 setInput(e.target.value);
-                resizeTextarea();
               }}
               onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.shiftKey) {
