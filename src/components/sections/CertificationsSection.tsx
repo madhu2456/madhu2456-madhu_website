@@ -81,7 +81,8 @@ export async function CertificationsSection() {
                       {/* Date at Top */}
                       <div className="mb-4">
                         <p className="text-xs text-zinc-400">
-                          {cert.issueDate && formatDate(cert.issueDate, certDateFormat)}
+                          {cert.issueDate &&
+                            formatDate(cert.issueDate, certDateFormat)}
                         </p>
                       </div>
 

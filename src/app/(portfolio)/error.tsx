@@ -27,7 +27,10 @@ export default function PortfolioError({
           strokeLinecap="round"
           strokeLinejoin="round"
           className="text-red-500"
+          role="img"
+          aria-labelledby="error-icon-title"
         >
+          <title id="error-icon-title">Error Icon</title>
           <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
           <path d="M12 9v4" />
           <path d="M12 17h.01" />
@@ -39,6 +42,7 @@ export default function PortfolioError({
         usually due to missing or malformed data.
       </p>
       <button
+        type="button"
         onClick={() => reset()}
         className="px-6 py-2.5 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-all font-medium shadow-lg shadow-primary/20"
       >
