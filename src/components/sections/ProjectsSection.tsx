@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { TrackedLink } from "@/components/TrackedLink";
 import {
   normalizeImageSource,
   shouldUseUnoptimizedImage,
@@ -98,35 +98,37 @@ export async function ProjectsSection() {
                     {/* Actions */}
                     <div className="flex flex-col @xs/card:flex-row gap-2 @xs/card:gap-3 pt-2">
                       {project.slug && (
-                        <Link
+                        <TrackedLink
                           href={`/case-studies/${project.slug}`}
+                          type="case_study"
+                          projectTitle={project.title || project.slug}
                           aria-label={`Read case study for ${project.title || "project"}`}
                           className="flex-1 text-center px-3 py-2 @md/card:px-4 rounded-lg border hover:bg-accent transition-colors text-xs @md/card:text-sm"
                         >
                           Case Study
-                        </Link>
+                        </TrackedLink>
                       )}
                       {project.liveUrl && (
-                        <a
+                        <TrackedLink
                           href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                          type="live_demo"
+                          projectTitle={project.title || project.slug}
                           aria-label={`Live demo of ${project.title || "project"} (opens in new tab)`}
                           className="flex-1 text-center px-3 py-2 @md/card:px-4 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-xs @md/card:text-sm"
                         >
                           Live Demo
-                        </a>
+                        </TrackedLink>
                       )}
                       {project.githubUrl && (
-                        <a
+                        <TrackedLink
                           href={project.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                          type="github"
+                          projectTitle={project.title || project.slug}
                           aria-label={`GitHub repository for ${project.title || "project"} (opens in new tab)`}
                           className="px-3 py-2 @md/card:px-4 rounded-lg border hover:bg-accent transition-colors text-xs @md/card:text-sm text-center"
                         >
                           GitHub
-                        </a>
+                        </TrackedLink>
                       )}
                     </div>
                   </div>

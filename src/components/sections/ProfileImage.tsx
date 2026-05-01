@@ -2,6 +2,7 @@
 
 import { IconMessageCircle, IconX } from "@tabler/icons-react";
 import Image from "next/image";
+import { trackChatInteraction } from "@/lib/gtm";
 import { useSidebar } from "../ui/sidebar";
 
 interface ProfileImageProps {
@@ -22,7 +23,10 @@ export function ProfileImage({
   return (
     <button
       type="button"
-      onClick={toggleSidebar}
+      onClick={() => {
+        trackChatInteraction(open ? "close" : "open");
+        toggleSidebar();
+      }}
       className="relative rounded-xl overflow-hidden border-4 border-primary/20 block group cursor-pointer w-full h-full mx-auto"
       aria-label="Toggle AI Chat Sidebar"
     >

@@ -10,6 +10,7 @@ import {
 import { AnimatePresence, motion } from "motion/react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useSidebar } from "@/components/ui/sidebar";
+import { trackChatInteraction } from "@/lib/gtm";
 import { MessageBubble } from "./chat-message";
 import type { ChatProfile } from "./chat-profile";
 import type { ChatMessage } from "./chat-types";
@@ -141,6 +142,13 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
   const sendMessage = async (directMessage?: string) => {
     const text = (directMessage ?? input).trim();
     if (!text || sending) return;
+
+    // Track chat interaction
+    trackChatInteraction(directMessage ? "click_suggestion" : "send_message", {
+      message_length: text.length,
+      is_suggestion: !!directMessage,
+    });
+
     setInput("");
     if (textareaRef.current) textareaRef.current.style.height = "auto";
     setSending(true);
@@ -231,7 +239,10 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
             </div>
             <button
               type="button"
-              onClick={toggleSidebar}
+              onClick={() => {
+                trackChatInteraction("close");
+                toggleSidebar();
+              }}
               aria-label="Close chat"
               className="flex h-7 w-7 items-center justify-center rounded-full text-foreground/40 transition-all hover:bg-foreground/8 hover:text-foreground"
             >
