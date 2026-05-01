@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { submitContactForm } from "@/app/actions/submit-contact-form";
+import { trackContactForm } from "@/lib/gtm";
 
 export function ContactForm() {
   const [isPending, startTransition] = useTransition();
@@ -12,23 +13,30 @@ export function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
+    const target = e.target as HTMLFormElement;
+    const formData = new FormData(target);
+
+    trackContactForm("submit_attempt", {
+      subject: formData.get("subject"),
+    });
 
     startTransition(async () => {
       const result = await submitContactForm(formData);
 
       if (result.success) {
+        trackContactForm("success");
         setStatus({
           type: "success",
           message: "Thank you! Your message has been sent successfully.",
         });
         // Reset the form
-        (e.target as HTMLFormElement).reset();
+        target.reset();
         // Clear success message after 5 seconds
         setTimeout(() => {
           setStatus({ type: null, message: "" });
         }, 5000);
       } else {
+        trackContactForm("error", { error_message: result.error });
         setStatus({
           type: "error",
           message: result.error || "Something went wrong. Please try again.",
