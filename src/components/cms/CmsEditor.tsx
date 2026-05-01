@@ -1,6 +1,20 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  IconBriefcase,
+  IconCertificate,
+  IconCode,
+  IconCompass,
+  IconDeviceFloppy,
+  IconLayout2,
+  IconRefresh,
+  IconSchool,
+  IconSettings,
+  IconTools,
+  IconUser,
+  IconWorldWww,
+} from "@tabler/icons-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import {
@@ -30,16 +44,20 @@ type CmsApiResponse = {
   error?: string;
 };
 
-const sectionConfig: Array<{ key: SectionKey; label: string }> = [
-  { key: "profile", label: "Profile" },
-  { key: "siteSettings", label: "Site settings" },
-  { key: "navigationItems", label: "Navigation" },
-  { key: "skills", label: "Skills" },
-  { key: "experiences", label: "Experience" },
-  { key: "education", label: "Education" },
-  { key: "projects", label: "Projects" },
-  { key: "services", label: "Services" },
-  { key: "certifications", label: "Certifications" },
+const sectionConfig: Array<{
+  key: SectionKey;
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+}> = [
+  { key: "profile", label: "Profile", icon: IconUser },
+  { key: "siteSettings", label: "Site settings", icon: IconSettings },
+  { key: "navigationItems", label: "Navigation", icon: IconCompass },
+  { key: "skills", label: "Skills", icon: IconTools },
+  { key: "experiences", label: "Experience", icon: IconBriefcase },
+  { key: "education", label: "Education", icon: IconSchool },
+  { key: "projects", label: "Projects", icon: IconCode },
+  { key: "services", label: "Services", icon: IconLayout2 },
+  { key: "certifications", label: "Certifications", icon: IconCertificate },
 ];
 
 export function CmsEditor() {
@@ -227,11 +245,13 @@ export function CmsEditor() {
           ) : null}
         </div>
 
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[300px_minmax(0,1fr)]">
-          <aside className="space-y-2 rounded-xl border bg-card p-4 md:p-5 h-fit lg:sticky lg:top-4">
-            <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-              Sections
-            </h2>
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[280px_minmax(0,1fr)]">
+          <aside className="space-y-1 h-fit lg:sticky lg:top-4">
+            <div className="mb-4 px-3">
+              <h2 className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground/60">
+                Data Sections
+              </h2>
+            </div>
             {sectionConfig.map((section) => (
               <button
                 type="button"
@@ -241,65 +261,111 @@ export function CmsEditor() {
                   setErrorMessage("");
                   setStatusMessage("");
                 }}
-                className={`flex w-full items-center justify-between rounded-lg border px-3 py-2 text-left text-sm transition-colors ${
+                className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm transition-all duration-200 ${
                   selectedSection === section.key
-                    ? "border-primary bg-primary/10 text-primary"
-                    : "border-border hover:bg-accent"
+                    ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20"
+                    : "text-muted-foreground hover:bg-foreground/5 hover:text-foreground"
                 }`}
               >
-                <span className="font-medium">{section.label}</span>
-                <span className="text-xs text-muted-foreground">
-                  {sectionSummary[section.key]}
-                </span>
+                <section.icon className="w-4 h-4 shrink-0" />
+                <div className="flex-1 overflow-hidden">
+                  <p className="font-semibold truncate">{section.label}</p>
+                  {selectedSection !== section.key && (
+                    <p className="text-[10px] opacity-70 truncate">
+                      {sectionSummary[section.key]}
+                    </p>
+                  )}
+                </div>
               </button>
             ))}
           </aside>
 
-          <section className="space-y-4 rounded-xl border bg-card p-4 md:p-5">
-            <div className="flex flex-wrap items-center justify-between gap-2 border-b pb-4 mb-4">
-              <h2 className="text-base font-semibold">
-                {sectionConfig.find(
-                  (section) => section.key === selectedSection,
-                )?.label || "Section"}
-              </h2>
+          <section className="min-h-[600px] space-y-8 rounded-2xl border border-foreground/5 bg-card/50 p-6 md:p-8 backdrop-blur-sm">
+            <div className="flex flex-wrap items-center justify-between gap-4 border-b border-foreground/5 pb-6">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  {(() => {
+                    const Icon = sectionConfig.find(
+                      (s) => s.key === selectedSection,
+                    )?.icon;
+                    return Icon ? <Icon className="h-5 w-5" /> : null;
+                  })()}
+                </div>
+                <div>
+                  <h2 className="text-xl font-bold tracking-tight">
+                    {sectionConfig.find((s) => s.key === selectedSection)
+                      ?.label || "Section"}
+                  </h2>
+                  <p className="text-xs text-muted-foreground">
+                    Manage your {selectedSection} details
+                  </p>
+                </div>
+              </div>
+
               <div className="flex flex-wrap gap-2">
                 <button
                   type="button"
                   onClick={() => void loadContent()}
-                  className="rounded-md border px-3 py-2 text-sm hover:bg-accent"
+                  className="inline-flex items-center gap-2 rounded-lg border border-foreground/10 px-4 py-2 text-xs font-semibold transition-colors hover:bg-foreground/5"
                 >
+                  <IconRefresh className="h-3.5 w-3.5" />
                   Reload
                 </button>
                 <button
                   type="submit"
                   disabled={saving || syncing}
-                  className="rounded-md bg-primary px-3 py-2 text-sm text-primary-foreground hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2 text-xs font-bold text-primary-foreground shadow-lg shadow-primary/10 transition-all hover:bg-primary/90 hover:scale-[1.02] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 disabled:scale-100"
                 >
+                  <IconDeviceFloppy className="h-3.5 w-3.5" />
                   {saving ? "Saving..." : "Save Changes"}
                 </button>
                 <button
                   type="button"
                   onClick={() => void syncFromLiveSite()}
                   disabled={saving || syncing}
-                  className="rounded-md border px-3 py-2 text-sm hover:bg-accent disabled:cursor-not-allowed disabled:opacity-60"
+                  className="inline-flex items-center gap-2 rounded-lg border border-foreground/10 px-4 py-2 text-xs font-semibold transition-colors hover:bg-foreground/5 disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  {syncing ? "Syncing..." : "Sync from madhudadi.in"}
+                  <IconWorldWww className="h-3.5 w-3.5" />
+                  {syncing ? "Syncing..." : "Sync Live"}
                 </button>
               </div>
             </div>
 
-            {renderSectionEditor()}
+            <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
+              {renderSectionEditor()}
+            </div>
 
             {errorMessage ? (
-              <p className="rounded-md border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-500 animate-in fade-in duration-200">
-                {errorMessage}
-              </p>
+              <div className="flex items-center gap-3 rounded-xl border border-red-500/20 bg-red-500/5 p-4 text-sm text-red-500 animate-in fade-in zoom-in-95 duration-200">
+                <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-red-500/10">
+                  <span className="font-bold">!</span>
+                </div>
+                <p className="font-medium">{errorMessage}</p>
+              </div>
             ) : null}
 
             {!errorMessage && statusMessage ? (
-              <p className="rounded-md border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-sm text-emerald-600 dark:text-emerald-400 animate-in fade-in duration-200">
-                {statusMessage}
-              </p>
+              <div className="flex items-center gap-3 rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-4 text-sm text-emerald-600 dark:text-emerald-400 animate-in fade-in zoom-in-95 duration-200">
+                <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-500/10">
+                  <svg
+                    className="h-3.5 w-3.5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={3}
+                    role="img"
+                    aria-labelledby="success-icon-title"
+                  >
+                    <title id="success-icon-title">Success Icon</title>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </div>
+                <p className="font-medium">{statusMessage}</p>
+              </div>
             ) : null}
           </section>
         </div>

@@ -1,5 +1,6 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
+import { portfolioContentSchema } from "./cms-schema";
 
 export type SocialLinks = {
   github?: string;
@@ -674,25 +675,8 @@ export const defaultPortfolioContent: PortfolioContent = {
 const cloneDefaultContent = (): PortfolioContent =>
   JSON.parse(JSON.stringify(defaultPortfolioContent)) as PortfolioContent;
 
-const isRecord = (value: unknown): value is Record<string, unknown> =>
-  typeof value === "object" && value !== null && !Array.isArray(value);
-
 const isPortfolioContent = (value: unknown): value is PortfolioContent => {
-  if (!isRecord(value)) {
-    return false;
-  }
-
-  return (
-    isRecord(value.profile) &&
-    isRecord(value.siteSettings) &&
-    Array.isArray(value.navigationItems) &&
-    Array.isArray(value.skills) &&
-    Array.isArray(value.experiences) &&
-    Array.isArray(value.education) &&
-    Array.isArray(value.projects) &&
-    Array.isArray(value.services) &&
-    Array.isArray(value.certifications)
-  );
+  return portfolioContentSchema.safeParse(value).success;
 };
 
 const ensurePortfolioContentFile = async () => {

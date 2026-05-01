@@ -4,15 +4,12 @@ import { type ChangeEvent, type ReactNode, useState } from "react";
 import type { Citation, ImpactMetric, Technology } from "@/lib/cms-schema";
 
 export const inputClass =
-  "w-full rounded-md border bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-primary/40";
+  "w-full rounded-lg border border-foreground/10 bg-background px-4 py-2.5 text-sm transition-all focus:border-primary/50 focus:ring-4 focus:ring-primary/10 outline-none";
 export const textareaClass =
-  "min-h-[120px] w-full rounded-md border bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-primary/40";
+  "min-h-[140px] w-full rounded-lg border border-foreground/10 bg-background px-4 py-2.5 text-sm transition-all focus:border-primary/50 focus:ring-4 focus:ring-primary/10 outline-none resize-none";
 
 export const parseLines = (value: string) =>
-  value
-    .split("\n")
-    .map((item) => item.trim())
-    .filter(Boolean);
+  value.split("\n").map((item) => item.trim());
 
 export const toLineText = (items?: string[]) => (items ?? []).join("\n");
 
@@ -136,14 +133,23 @@ export function FormField({
   error?: string;
 }) {
   return (
-    <div className="space-y-1.5">
-      <p className="text-sm font-medium">{label}</p>
+    <div className="space-y-2">
+      <div className="flex items-center justify-between gap-2">
+        <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground/80">
+          {label}
+        </div>
+        {error && (
+          <span className="text-[10px] font-bold text-red-500 uppercase tracking-tight">
+            {error}
+          </span>
+        )}
+      </div>
       {children}
-      {error ? (
-        <p className="text-xs font-medium text-red-500">{error}</p>
-      ) : hint ? (
-        <p className="text-xs text-muted-foreground">{hint}</p>
-      ) : null}
+      {hint && !error && (
+        <p className="text-[11px] text-muted-foreground/60 leading-relaxed italic">
+          {hint}
+        </p>
+      )}
     </div>
   );
 }
@@ -196,38 +202,56 @@ export function ImageUploadField({
   };
 
   return (
-    <div className="space-y-2 rounded-md border p-3">
-      <div className="text-sm font-medium">{label}</div>
-      <input
-        type="text"
-        value={value ?? ""}
-        onChange={(event) => onChange(event.target.value)}
-        className={inputClass}
-        placeholder="/uploads/cms/your-image.png"
-      />
-      <div className="flex flex-wrap items-center gap-2">
-        <label className="inline-flex cursor-pointer items-center rounded-md border px-3 py-2 text-sm hover:bg-accent">
-          <span>{uploading ? "Uploading..." : "Upload image"}</span>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(event) => void onFileChange(event)}
-            className="hidden"
-            disabled={uploading}
-          />
-        </label>
-        {value ? (
+    <div className="space-y-4 rounded-xl border border-foreground/5 bg-foreground/[0.02] p-6 transition-all hover:border-foreground/10">
+      <div className="flex items-center justify-between">
+        <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground/80">
+          {label}
+        </div>
+        {value && (
           <button
             type="button"
             onClick={() => onChange("")}
-            className="rounded-md border px-3 py-2 text-sm hover:bg-accent"
+            className="text-[10px] font-bold uppercase tracking-tight text-red-500 hover:text-red-600"
           >
-            Clear
+            Remove Image
           </button>
-        ) : null}
+        )}
       </div>
+
+      <div className="flex flex-col gap-4 md:flex-row md:items-center">
+        <div className="flex-1">
+          <input
+            type="text"
+            value={value ?? ""}
+            onChange={(event) => onChange(event.target.value)}
+            className={inputClass}
+            placeholder="/uploads/cms/your-image.png"
+          />
+        </div>
+
+        <div className="flex shrink-0 items-center gap-2">
+          <label className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-foreground/10 bg-background px-4 py-2.5 text-xs font-bold transition-all hover:bg-foreground/5 hover:scale-[1.02] active:scale-[0.98]">
+            {uploading ? (
+              <span className="flex items-center gap-2">
+                <span className="h-3 w-3 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+                Processing...
+              </span>
+            ) : (
+              "Upload New"
+            )}
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(event) => void onFileChange(event)}
+              className="hidden"
+              disabled={uploading}
+            />
+          </label>
+        </div>
+      </div>
+
       {uploadError ? (
-        <p className="text-sm text-red-500">{uploadError}</p>
+        <p className="text-xs font-medium text-red-500">{uploadError}</p>
       ) : null}
     </div>
   );
