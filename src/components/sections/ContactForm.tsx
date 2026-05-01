@@ -126,7 +126,11 @@ export function ContactForm() {
             id="message"
             name="message"
             rows={5}
-            className="w-full px-3 py-1.5 @md/form:px-4 @md/form:py-2 rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-primary resize-none text-sm @md/form:text-base"
+            onChange={(e) => {
+              e.target.style.height = "auto";
+              e.target.style.height = `${e.target.scrollHeight}px`;
+            }}
+            className="w-full px-3 py-1.5 @md/form:px-4 @md/form:py-2 rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-primary resize-none text-sm @md/form:text-base overflow-hidden"
             placeholder="Tell me about your project..."
             required
             disabled={isPending}

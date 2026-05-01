@@ -1,6 +1,7 @@
 import { IconAward, IconCalendar, IconExternalLink } from "@tabler/icons-react";
 import Image from "next/image";
 import { getPortfolioData } from "@/lib/portfolio-data";
+import { formatDate } from "@/lib/utils";
 
 export async function EducationSection() {
   const { sortedEducation } = await getPortfolioData();
@@ -8,13 +9,6 @@ export async function EducationSection() {
   if (sortedEducation.length === 0) {
     return null;
   }
-
-  const formatDate = (date: string) => {
-    return new Date(date).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-    });
-  };
 
   return (
     <section

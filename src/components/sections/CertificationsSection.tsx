@@ -1,6 +1,7 @@
 import { IconExternalLink } from "@tabler/icons-react";
 import Image from "next/image";
 import { getPortfolioData } from "@/lib/portfolio-data";
+import { formatDate, isDateExpired } from "@/lib/utils";
 
 export async function CertificationsSection() {
   const { sortedCertifications } = await getPortfolioData();
@@ -9,17 +10,10 @@ export async function CertificationsSection() {
     return null;
   }
 
-  const formatDate = (date: string) => {
-    return new Date(date).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  };
-
-  const isExpired = (expiryDate: string | null | undefined) => {
-    if (!expiryDate) return false;
-    return new Date(expiryDate) < new Date();
+  const certDateFormat: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   };
 
   return (
@@ -87,7 +81,7 @@ export async function CertificationsSection() {
                       {/* Date at Top */}
                       <div className="mb-4">
                         <p className="text-xs text-zinc-400">
-                          {cert.issueDate && formatDate(cert.issueDate)}
+                          {cert.issueDate && formatDate(cert.issueDate, certDateFormat)}
                         </p>
                       </div>
 
@@ -170,13 +164,13 @@ export async function CertificationsSection() {
                               </span>
                               <span
                                 className={
-                                  isExpired(cert.expiryDate)
+                                  isDateExpired(cert.expiryDate)
                                     ? "text-red-400 font-semibold"
                                     : "text-zinc-300 font-semibold"
                                 }
                               >
-                                {formatDate(cert.expiryDate)}
-                                {isExpired(cert.expiryDate) && " (Expired)"}
+                                {formatDate(cert.expiryDate, certDateFormat)}
+                                {isDateExpired(cert.expiryDate) && " (Expired)"}
                               </span>
                             </div>
                           )}
