@@ -28,7 +28,7 @@ export async function SeoStructuredData() {
 
   const siteUrl = (
     process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in"
-  ).replace(/\/+$/, "");
+  ).replace(/\/+$/, "") + "/";
   const fullName =
     [profile.firstName, profile.lastName].filter(Boolean).join(" ") ||
     "Madhu Dadi";
@@ -43,7 +43,7 @@ export async function SeoStructuredData() {
     projects,
   });
   const profileImageUrl = profile.profileImage
-    ? `${siteUrl}${profile.profileImage}`
+    ? `${siteUrl}${profile.profileImage.replace(/^\/+/, "")}`
     : undefined;
   const updatedAtValues = [
     siteSettings.updatedAt,
