@@ -119,12 +119,12 @@ export async function generateMetadata({
     title,
     description,
     alternates: {
-      canonical: `/case-studies/${slug}`,
+      canonical: `/case-studies/${slug}/`,
     },
     openGraph: {
       title,
       description,
-      url: `/case-studies/${slug}`,
+      url: `/case-studies/${slug}/`,
       type: "article",
       images: [{ url: imageUrl, width: 1200, height: 630, alt: data.title }],
     },
@@ -153,7 +153,7 @@ export default async function CaseStudyPage({
   const siteUrl = getSiteUrl();
   const title = project.title.trim();
   const evidenceLinks = makeEvidenceLinks(project, siteUrl);
-  const caseStudyUrl = `${siteUrl}/case-studies/${slug}`;
+  const caseStudyUrl = `${siteUrl}case-studies/${slug}/`;
   const description = toDescription(project.impactSummary, project.tagline);
   const coverImageSource = normalizeImageSource(project.coverImage);
 
@@ -193,7 +193,7 @@ export default async function CaseStudyPage({
             "@type": "ListItem",
             position: 2,
             name: "Case studies",
-            item: `${siteUrl}/case-studies`,
+            item: `${siteUrl}case-studies/`,
           },
           {
             "@type": "ListItem",

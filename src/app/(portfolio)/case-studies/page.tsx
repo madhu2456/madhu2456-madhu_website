@@ -35,12 +35,12 @@ export const metadata: Metadata = {
   title: "In-Depth Analytics Case Studies",
   description: CASE_STUDIES_DESCRIPTION,
   alternates: {
-    canonical: "/case-studies",
+    canonical: "/case-studies/",
   },
   openGraph: {
     title: "Case Studies | Madhu Dadi",
     description: CASE_STUDIES_DESCRIPTION,
-    url: "/case-studies",
+    url: "/case-studies/",
     type: "website",
     images: [
       {
@@ -66,7 +66,7 @@ export default async function CaseStudiesPage() {
     coverImage: project.coverImage ? { asset: project.coverImage } : null,
   })) as CaseStudy[];
   const siteUrl = getSiteUrl();
-  const collectionUrl = `${siteUrl}case-studies`;
+  const collectionUrl = `${siteUrl}case-studies/`;
   const itemListElement = caseStudies
     .map((project, index) => {
       const slug = project.slug?.trim();
