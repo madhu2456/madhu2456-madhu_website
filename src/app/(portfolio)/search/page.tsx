@@ -115,7 +115,7 @@ export default async function SearchPage({
         project.impactSummary ||
         project.tagline ||
         "Project case study with architecture and delivery outcomes.",
-      href: project.slug ? `/case-studies/${project.slug}` : "/#projects",
+      href: project.slug ? `/case-studies/${project.slug}/` : "/#projects",
       label: "Project",
     }));
 

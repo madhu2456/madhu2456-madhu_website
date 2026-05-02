@@ -484,7 +484,7 @@ export const projects: ProjectItem[] = [
       { label: "Knowledge Coverage", value: "+3x" },
     ],
     citations: [
-      { label: "Case Studies", url: "https://madhudadi.in/case-studies" },
+      { label: "Case Studies", url: "https://madhudadi.in/case-studies/" },
     ],
     order: 2,
     updatedAt: "2026-04-10T12:00:00.000Z",

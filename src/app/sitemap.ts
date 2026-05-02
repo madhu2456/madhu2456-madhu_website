@@ -97,7 +97,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
       return [
         {
-          url: `${siteUrl}case-studies/${slug}`,
+          url: `${siteUrl}case-studies/${slug}/`,
           lastModified,
           changeFrequency: "monthly" as const,
           priority: 0.8,

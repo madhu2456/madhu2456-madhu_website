@@ -99,7 +99,7 @@ export async function ProjectsSection() {
                     <div className="flex flex-col @xs/card:flex-row gap-2 @xs/card:gap-3 pt-2">
                       {project.slug && (
                         <TrackedLink
-                          href={`/case-studies/${project.slug}`}
+                          href={`/case-studies/${project.slug}/`}
                           type="case_study"
                           projectTitle={project.title || project.slug}
                           aria-label={`Read case study for ${project.title || "project"}`}

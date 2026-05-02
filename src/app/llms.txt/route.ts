@@ -90,7 +90,7 @@ export async function GET() {
   const projectLines = sortedProjects
     .map((project) => {
       const links = [
-        `[case study](${siteUrl}case-studies/${project.slug})`,
+        `[case study](${siteUrl}case-studies/${project.slug}/)`,
         project.liveUrl ? `[live](${project.liveUrl})` : null,
         project.githubUrl ? `[code](${project.githubUrl})` : null,
         ...(project.citations ?? []).map((citation) =>
@@ -111,7 +111,7 @@ export async function GET() {
 
   const caseStudyLines = sortedProjects
     .map((project) => {
-      const url = `${siteUrl}case-studies/${project.slug}`;
+      const url = `${siteUrl}case-studies/${project.slug}/`;
       const summary = project.impactSummary || project.tagline;
       return `- **${project.title}** — [${url}](${url})${summary ? ` — ${summary}` : ""}`;
     })
@@ -144,17 +144,17 @@ export async function GET() {
     new Map(
       [
         { label: "Canonical website", url: siteUrl },
-        { label: "Technical blog", url: `${siteUrl}blog` },
-        { label: "Blog articles index", url: `${siteUrl}blog/posts` },
+        { label: "Technical blog", url: `${siteUrl}blog/` },
+        { label: "Blog articles index", url: `${siteUrl}blog/posts/` },
         { label: "Blog RSS feed", url: `${siteUrl}blog/feed.xml` },
-        { label: "Blog AI assistant", url: `${siteUrl}blog/ask` },
+        { label: "Blog AI assistant", url: `${siteUrl}blog/ask/` },
         ...socialProfiles.map((profileLink) => ({
           label: profileLink.label,
           url: profileLink.url,
         })),
         ...sortedProjects.map((project) => ({
           label: `${project.title} case study`,
-          url: `${siteUrl}case-studies/${project.slug}`,
+          url: `${siteUrl}case-studies/${project.slug}/`,
         })),
         ...sortedCertifications.flatMap((certification) => {
           if (!certification.credentialUrl) return [];
@@ -230,7 +230,7 @@ ${certLines ? `## Certifications\n\n${certLines}\n` : ""}## Portfolio Sections
 
 The technical blog is a core part of this knowledge graph, focusing on deep dives into modern engineering.
 
-- **URL:** ${siteUrl}blog
+- **URL:** ${siteUrl}blog/
 - **Primary Topics:** AI Engineering, LLM Application Development, RAG Systems, Agentic AI, Next.js, Python, FastAPI.
 - **Features:** Series-style articles, AI-powered Q&A (Ask), and technical code breakdowns.
 - **RSS Feed:** ${siteUrl}blog/feed.xml
@@ -244,8 +244,8 @@ AI-powered chat assistant using Agentic RAG over local portfolio data.
 
 - **AI profile JSON:** ${siteUrl}ai-profile.json
 - **LLMs profile feed:** ${siteUrl}llms.txt
-- **Case studies index:** ${siteUrl}case-studies
-- **Portfolio search:** ${siteUrl}search
+- **Case studies index:** ${siteUrl}case-studies/
+- **Portfolio search:** ${siteUrl}search/
 - **Blog RSS feed:** ${siteUrl}blog/feed.xml
 - **XML sitemap:** ${siteUrl}sitemap.xml
 - **Blog sitemap:** ${siteUrl}blog/sitemap.xml
@@ -264,7 +264,7 @@ ${evidenceLinks}
       Link:
         `<${siteUrl}ai-profile.json>; rel="alternate"; type="application/json", ` +
         `<${siteUrl}sitemap.xml>; rel="sitemap", ` +
-        `<${siteUrl}case-studies>; rel="collection", ` +
+        `<${siteUrl}case-studies/>; rel="collection", ` +
         `<${siteUrl}blog/feed.xml>; rel="alternate"; type="application/rss+xml"; title="${fullName} Blog"`,
       "X-Robots-Tag":
         "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
