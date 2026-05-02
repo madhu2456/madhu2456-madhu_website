@@ -18,8 +18,10 @@ const DEFAULT_SITE_URL = "https://madhudadi.in";
 const THEME_COLOR = "#7c3aed";
 const MAX_META_DESCRIPTION_LENGTH = 155;
 
-const resolveSiteUrl = (rawUrl?: string) =>
-  (rawUrl?.trim() || DEFAULT_SITE_URL).replace(/\/+$/, "");
+const resolveSiteUrl = (rawUrl?: string) => {
+  const url = (rawUrl?.trim() || DEFAULT_SITE_URL).replace(/\/+$/, "");
+  return `${url}/`;
+};
 const SITE_URL = resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL);
 
 const normalizeWhitespace = (value: string) =>
@@ -113,8 +115,8 @@ export async function generateMetadata(): Promise<Metadata> {
       : undefined;
 
   const ogImageUrl = profile.profileImage
-    ? `${siteUrl}${profile.profileImage}`
-    : `${siteUrl}/opengraph-image`;
+    ? `${siteUrl}${profile.profileImage.replace(/^\/+/, "")}`
+    : `${siteUrl}opengraph-image`;
 
   return {
     metadataBase: new URL(siteUrl),
@@ -215,13 +217,13 @@ export default async function RootLayout({
         <link
           rel="alternate"
           type="text/plain"
-          href={`${SITE_URL}/llms.txt`}
+          href={`${SITE_URL}llms.txt`}
           title="LLMs profile"
         />
         <link
           rel="alternate"
           type="application/json"
-          href={`${SITE_URL}/ai-profile.json`}
+          href={`${SITE_URL}ai-profile.json`}
           title="AI profile JSON"
         />
         {/* RSS autodiscovery for the blog — allows feed readers to find the feed
@@ -229,10 +231,11 @@ export default async function RootLayout({
         <link
           rel="alternate"
           type="application/rss+xml"
-          href={`${SITE_URL}/blog/feed.xml`}
+          href={`${SITE_URL}blog/feed.xml`}
           title="MadhuDadi Blog — RSS Feed"
         />
       </head>
+
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

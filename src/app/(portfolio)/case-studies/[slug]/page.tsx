@@ -15,8 +15,10 @@ type Citation = {
 
 const DEFAULT_SITE_URL = "https://madhudadi.in";
 
-const getSiteUrl = () =>
-  (process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE_URL).replace(/\/+$/, "");
+const getSiteUrl = () => {
+  const url = (process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE_URL).replace(/\/+$/, "");
+  return `${url}/`;
+};
 
 const toDescription = (...values: Array<string | null | undefined>) => {
   const merged = values
@@ -44,7 +46,7 @@ const toAbsoluteImageUrl = (siteUrl: string, value?: string | null) => {
   const source = normalizeImageSource(value);
   if (!source) return null;
   if (/^https?:\/\//i.test(source)) return source;
-  return `${siteUrl}${source}`;
+  return `${siteUrl}${source.replace(/^\/+/, "")}`;
 };
 
 const makeEvidenceLinks = (project: ProjectItem, siteUrl: string) => {
@@ -54,7 +56,7 @@ const makeEvidenceLinks = (project: ProjectItem, siteUrl: string) => {
   if (slug) {
     links.push({
       label: "Case study",
-      url: `${siteUrl}/case-studies/${slug}`,
+      url: `${siteUrl}case-studies/${slug}`,
     });
   }
 

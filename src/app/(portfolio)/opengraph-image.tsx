@@ -38,7 +38,7 @@ export default async function OGImage() {
   ).replace(/^https?:\/\//, "");
   const siteUrl = (
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://madhudadi.in"
-  ).replace(/\/+$/, "");
+  ).replace(/\/+$/, "") + "/";
 
   let profileImageUrl: string | null = null;
   if (profile.profileImage) {
@@ -48,7 +48,7 @@ export default async function OGImage() {
       try {
         profileImageUrl = await toDataUrlFromPublicAsset(profile.profileImage);
       } catch {
-        profileImageUrl = `${siteUrl}${profile.profileImage}`;
+        profileImageUrl = `${siteUrl}${profile.profileImage.replace(/^\/+/, "")}`;
       }
     }
   }

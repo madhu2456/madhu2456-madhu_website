@@ -9,10 +9,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const { portfolioLastUpdatedAt, sortedProjects } = await getPortfolioData();
   const siteUrl = (
     process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in"
-  ).replace(/\/$/, "");
+  ).replace(/\/+$/, "") + "/";
 
   const latestDate = new Date(portfolioLastUpdatedAt);
-  const blogUrl = `${siteUrl}/blog`;
+  const blogUrl = `${siteUrl}blog`;
 
   const baseEntries: MetadataRoute.Sitemap = [
     {
@@ -22,13 +22,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1,
     },
     {
-      url: `${siteUrl}/case-studies`,
+      url: `${siteUrl}case-studies`,
       lastModified: latestDate,
       changeFrequency: "weekly",
       priority: 0.85,
     },
     {
-      url: `${siteUrl}/search`,
+      url: `${siteUrl}search`,
       lastModified: latestDate,
       changeFrequency: "monthly",
       priority: 0.6,
@@ -66,19 +66,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     // Machine-readable endpoints — important for AI/LLM crawlers
     {
-      url: `${siteUrl}/llms.txt`,
+      url: `${siteUrl}llms.txt`,
       lastModified: latestDate,
       changeFrequency: "weekly",
       priority: 0.7,
     },
     {
-      url: `${siteUrl}/ai-profile.json`,
+      url: `${siteUrl}ai-profile.json`,
       lastModified: latestDate,
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
-      url: `${siteUrl}/humans.txt`,
+      url: `${siteUrl}humans.txt`,
       lastModified: latestDate,
       changeFrequency: "monthly",
       priority: 0.5,
@@ -97,7 +97,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
       return [
         {
-          url: `${siteUrl}/case-studies/${slug}`,
+          url: `${siteUrl}case-studies/${slug}`,
           lastModified,
           changeFrequency: "monthly" as const,
           priority: 0.8,

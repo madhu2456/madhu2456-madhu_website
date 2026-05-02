@@ -3,14 +3,17 @@ import type { MetadataRoute } from "next";
 export default function robots(): MetadataRoute.Robots {
   const siteUrl = (
     process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in"
-  ).replace(/\/+$/, "");
-  const siteHost = (() => {
+  ).replace(/\/+$/, "") + "/";
+
+  const getDomain = () => {
     try {
       return new URL(siteUrl).host;
     } catch {
-      return siteUrl.replace(/^https?:\/\//, "");
+      return siteUrl.replace(/^https?:\/\//, "").replace(/\/$/, "");
     }
-  })();
+  };
+
+  const siteHost = getDomain();
 
   return {
     rules: [
@@ -20,7 +23,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: [
           "/",
           "/blog",
-          "/blog/",
           "/case-studies",
           "/sitemap.xml",
           "/llms.txt",
@@ -70,7 +72,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: [
           "/",
           "/blog",
-          "/blog/",
           "/case-studies",
           "/llms.txt",
           "/ai-profile.json",
@@ -79,7 +80,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/studio/", "/api/"],
       },
     ],
-    sitemap: [`${siteUrl}/sitemap.xml`, `${siteUrl}/blog/sitemap.xml`],
+    sitemap: [`${siteUrl}sitemap.xml`, `${siteUrl}blog/sitemap.xml`],
     host: siteHost,
   };
 }

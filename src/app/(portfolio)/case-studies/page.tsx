@@ -26,8 +26,10 @@ const DEFAULT_SITE_URL = "https://madhudadi.in";
 const CASE_STUDIES_DESCRIPTION =
   "Detailed case studies of AI, analytics, and full-stack projects delivered by Madhu Dadi.";
 
-const getSiteUrl = () =>
-  (process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE_URL).replace(/\/+$/, "");
+const getSiteUrl = () => {
+  const url = (process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE_URL).replace(/\/+$/, "");
+  return `${url}/`;
+};
 
 export const metadata: Metadata = {
   title: "In-Depth Analytics Case Studies",
@@ -64,7 +66,7 @@ export default async function CaseStudiesPage() {
     coverImage: project.coverImage ? { asset: project.coverImage } : null,
   })) as CaseStudy[];
   const siteUrl = getSiteUrl();
-  const collectionUrl = `${siteUrl}/case-studies`;
+  const collectionUrl = `${siteUrl}case-studies`;
   const itemListElement = caseStudies
     .map((project, index) => {
       const slug = project.slug?.trim();
@@ -97,7 +99,7 @@ export default async function CaseStudiesPage() {
     name: "In-Depth Analytics Case Studies",
     description: CASE_STUDIES_DESCRIPTION,
     inLanguage: "en-US",
-    isPartOf: { "@id": `${siteUrl}/#website` },
+    isPartOf: { "@id": `${siteUrl}#website` },
     mainEntity: {
       "@type": "ItemList",
       "@id": `${collectionUrl}#items`,

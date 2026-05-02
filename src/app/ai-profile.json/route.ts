@@ -26,8 +26,10 @@ type NormalizedSkill = {
   yearsOfExperience: number | null;
 };
 
-const toSiteUrl = (value?: string) =>
-  (value?.trim() || DEFAULT_SITE_URL).replace(/\/+$/, "");
+const toSiteUrl = (value?: string) => {
+  const url = (value?.trim() || DEFAULT_SITE_URL).replace(/\/+$/, "");
+  return `${url}/`;
+};
 
 const normalizeSkillName = (name?: string | null) => {
   const normalized = name?.trim();
@@ -66,7 +68,7 @@ export async function GET() {
           (value): value is string =>
             typeof value === "string" && value.trim().length > 0,
         )
-        .filter((value) => value !== siteUrl),
+        .filter((value) => value !== siteUrl.replace(/\/$/, "")),
     ),
   );
 
@@ -167,7 +169,7 @@ export async function GET() {
   }));
 
   const projectEntries = sortedProjects.map((item) => {
-    const caseStudyUrl = `${siteUrl}/case-studies/${item.slug}`;
+    const caseStudyUrl = `${siteUrl}case-studies/${item.slug}`;
     const evidenceLinks = [
       ...(item.citations ?? [])
         .map((citation) => {
@@ -223,16 +225,16 @@ export async function GET() {
       generatedAt: new Date().toISOString(),
       dateModified: portfolioLastUpdatedAt,
       canonical: siteUrl,
-      profileEndpoint: `${siteUrl}/ai-profile.json`,
-      llmsEndpoint: `${siteUrl}/llms.txt`,
-      caseStudiesEndpoint: `${siteUrl}/case-studies`,
-      searchEndpoint: `${siteUrl}/search`,
+      profileEndpoint: `${siteUrl}ai-profile.json`,
+      llmsEndpoint: `${siteUrl}llms.txt`,
+      caseStudiesEndpoint: `${siteUrl}case-studies`,
+      searchEndpoint: `${siteUrl}search`,
       blog: {
-        url: `${siteUrl}/blog`,
-        posts: `${siteUrl}/blog/posts`,
-        rss: `${siteUrl}/blog/feed.xml`,
-        sitemap: `${siteUrl}/blog/sitemap.xml`,
-        aiChat: `${siteUrl}/blog/ask`,
+        url: `${siteUrl}blog`,
+        posts: `${siteUrl}blog/posts`,
+        rss: `${siteUrl}blog/feed.xml`,
+        sitemap: `${siteUrl}blog/sitemap.xml`,
+        aiChat: `${siteUrl}blog/ask`,
         description:
           "Technical blog covering AI engineering, full-stack development, RAG systems, and software architecture.",
       },
@@ -293,9 +295,9 @@ export async function GET() {
       canonical: siteUrl,
       profiles: sourceProfiles,
       blog: {
-        url: `${siteUrl}/blog`,
-        posts: `${siteUrl}/blog/posts`,
-        rss: `${siteUrl}/blog/feed.xml`,
+        url: `${siteUrl}blog`,
+        posts: `${siteUrl}blog/posts`,
+        rss: `${siteUrl}blog/feed.xml`,
       },
       caseStudies: caseStudies.slice(0, 12),
       certifications: sortedCertifications
@@ -308,7 +310,7 @@ export async function GET() {
     schema: {
       "@context": "https://schema.org",
       "@type": "Person",
-      "@id": `${siteUrl}/#person`,
+      "@id": `${siteUrl}#person`,
       name: fullName,
       url: siteUrl,
       ...(profile.headline && { jobTitle: profile.headline }),
@@ -324,7 +326,7 @@ export async function GET() {
       ...(normalizedKeywords.length > 0 && {
         keywords: normalizedKeywords.join(", "),
       }),
-      mainEntityOfPage: { "@id": `${siteUrl}/#profilepage` },
+      mainEntityOfPage: { "@id": `${siteUrl}#profilepage` },
     },
   };
 
@@ -334,9 +336,9 @@ export async function GET() {
       "Content-Language": "en-US",
       "Last-Modified": new Date(portfolioLastUpdatedAt).toUTCString(),
       Link:
-        `<${siteUrl}/llms.txt>; rel="alternate"; type="text/plain", ` +
-        `<${siteUrl}/case-studies>; rel="collection", ` +
-        `<${siteUrl}/blog/feed.xml>; rel="alternate"; type="application/rss+xml"; title="${fullName} Blog"`,
+        `<${siteUrl}llms.txt>; rel="alternate"; type="text/plain", ` +
+        `<${siteUrl}case-studies>; rel="collection", ` +
+        `<${siteUrl}blog/feed.xml>; rel="alternate"; type="application/rss+xml"; title="${fullName} Blog"`,
       "X-Robots-Tag":
         "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
       "Access-Control-Allow-Origin": "*",
