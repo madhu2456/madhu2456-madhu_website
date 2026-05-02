@@ -77,7 +77,7 @@ export default async function CaseStudiesPage() {
         "@type": "ListItem",
         position: index + 1,
         name: title,
-        url: `${collectionUrl}/${slug}`,
+        url: `${collectionUrl}${slug}/`,
       };
     })
     .filter(
@@ -214,7 +214,7 @@ export default async function CaseStudiesPage() {
                     <div className="pt-2 mt-auto flex flex-wrap gap-3">
                       {slug ? (
                         <Link
-                          href={`/case-studies/${slug}`}
+                          href={`/case-studies/${slug}/`}
                           className="px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-sm"
                         >
                           Read case study

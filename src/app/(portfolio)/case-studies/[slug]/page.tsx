@@ -56,7 +56,7 @@ const makeEvidenceLinks = (project: ProjectItem, siteUrl: string) => {
   if (slug) {
     links.push({
       label: "Case study",
-      url: `${siteUrl}case-studies/${slug}`,
+      url: `${siteUrl}case-studies/${slug}/`,
     });
   }
 
@@ -99,7 +99,7 @@ export async function generateMetadata({
     return {
       title: "Case Study Not Found",
       alternates: {
-        canonical: `/case-studies/${slug}`,
+        canonical: `/case-studies/${slug}/`,
       },
       robots: {
         index: false,
@@ -169,13 +169,13 @@ export default async function CaseStudyPage({
         url: caseStudyUrl,
         author: {
           "@type": "Person",
-          "@id": `${siteUrl}/#person`,
+          "@id": `${siteUrl}#person`,
           name: `${profile.firstName} ${profile.lastName}`,
           url: siteUrl,
         },
         isPartOf: {
           "@type": "CollectionPage",
-          "@id": `${siteUrl}/case-studies`,
+          "@id": `${siteUrl}case-studies/`,
         },
         citation: evidenceLinks.map((link) => link.url),
       },

@@ -169,7 +169,7 @@ export async function GET() {
   }));
 
   const projectEntries = sortedProjects.map((item) => {
-    const caseStudyUrl = `${siteUrl}case-studies/${item.slug}`;
+    const caseStudyUrl = `${siteUrl}case-studies/${item.slug}/`;
     const evidenceLinks = [
       ...(item.citations ?? [])
         .map((citation) => {
@@ -227,14 +227,14 @@ export async function GET() {
       canonical: siteUrl,
       profileEndpoint: `${siteUrl}ai-profile.json`,
       llmsEndpoint: `${siteUrl}llms.txt`,
-      caseStudiesEndpoint: `${siteUrl}case-studies`,
-      searchEndpoint: `${siteUrl}search`,
+      caseStudiesEndpoint: `${siteUrl}case-studies/`,
+      searchEndpoint: `${siteUrl}search/`,
       blog: {
-        url: `${siteUrl}blog`,
-        posts: `${siteUrl}blog/posts`,
+        url: `${siteUrl}blog/`,
+        posts: `${siteUrl}blog/posts/`,
         rss: `${siteUrl}blog/feed.xml`,
         sitemap: `${siteUrl}blog/sitemap.xml`,
-        aiChat: `${siteUrl}blog/ask`,
+        aiChat: `${siteUrl}blog/ask/`,
         description:
           "Technical blog covering AI engineering, full-stack development, RAG systems, and software architecture.",
       },
@@ -337,7 +337,7 @@ export async function GET() {
       "Last-Modified": new Date(portfolioLastUpdatedAt).toUTCString(),
       Link:
         `<${siteUrl}llms.txt>; rel="alternate"; type="text/plain", ` +
-        `<${siteUrl}case-studies>; rel="collection", ` +
+        `<${siteUrl}case-studies/>; rel="collection", ` +
         `<${siteUrl}blog/feed.xml>; rel="alternate"; type="application/rss+xml"; title="${fullName} Blog"`,
       "X-Robots-Tag":
         "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",

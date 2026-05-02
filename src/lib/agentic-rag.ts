@@ -303,7 +303,7 @@ export const buildKnowledgeChunks = (data: PortfolioData): KnowledgeChunk[] => {
         item.citations?.length
           ? `Citations: ${item.citations.map((citation) => citation.url).join(", ")}`
           : "",
-        `Case Study URL: https://madhudadi.in/case-studies/${item.slug}`,
+        `Case Study URL: https://madhudadi.in/case-studies/${item.slug}/`,
       ]
         .filter(Boolean)
         .join(" | "),
