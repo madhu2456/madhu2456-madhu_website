@@ -121,7 +121,7 @@ export function buildPersonSchema({
 
   return {
     "@type": "Person",
-    "@id": `${siteUrl}/#person`,
+    "@id": `${siteUrl}#person`,
     name: fullName,
     url: siteUrl,
     ...(description && { description }),
@@ -133,7 +133,7 @@ export function buildPersonSchema({
           "@type": "ContactPoint",
           contactType: "professional",
           email,
-          url: `${siteUrl}/#contact`,
+          url: `${siteUrl}#contact`,
           availableLanguage: ["English"],
         },
       ],
@@ -147,16 +147,16 @@ export function buildPersonSchema({
     ...(profileImageUrl && {
       image: {
         "@type": "ImageObject",
-        "@id": `${siteUrl}/#personImage`,
+        "@id": `${siteUrl}#personImage`,
         url: profileImageUrl,
         contentUrl: profileImageUrl,
       },
     }),
     ...(sameAs.length > 0 && { sameAs }),
-    publishingPrinciples: `${siteUrl}/blog`,
+    publishingPrinciples: `${siteUrl}blog/`,
     inLanguage: "en-US",
-    mainEntityOfPage: { "@id": `${siteUrl}/#profilepage` },
-    hasOccupation: { "@id": `${siteUrl}/#occupation` },
+    mainEntityOfPage: { "@id": `${siteUrl}#profilepage` },
+    hasOccupation: { "@id": `${siteUrl}#occupation` },
     ...(knowsAbout.length > 0 && { knowsAbout }),
     ...(nationality && {
       nationality: {
@@ -189,7 +189,7 @@ export function buildOccupationSchema({
 }) {
   return {
     "@type": "Occupation",
-    "@id": `${siteUrl}/#occupation`,
+    "@id": `${siteUrl}#occupation`,
     name: jobTitle || "AI Developer & ML Engineer",
     occupationLocation: {
       "@type": "AdministrativeArea",
@@ -212,22 +212,22 @@ export function buildWebSiteSchema({
   url: string;
   description?: string | null;
 }) {
-  const blogUrl = `${url}/blog`;
+  const blogUrl = `${url}blog/`;
   return {
     "@type": "WebSite",
-    "@id": `${url}/#website`,
+    "@id": `${url}#website`,
     name,
     url,
     ...(description && { description }),
     inLanguage: "en-US",
-    publisher: { "@id": `${url}/#person` },
+    publisher: { "@id": `${url}#person` },
     // SiteLinksSearchBox — enables rich search in Google SERPs
     potentialAction: [
       {
         "@type": "SearchAction",
         target: {
           "@type": "EntryPoint",
-          urlTemplate: `${url}/search?q={search_term_string}`,
+          urlTemplate: `${url}search/?q={search_term_string}`,
         },
         "query-input": "required name=search_term_string",
       },
@@ -236,15 +236,15 @@ export function buildWebSiteSchema({
     // and AI crawlers understand the relationship between portfolio and blog
     hasPart: {
       "@type": "Blog",
-      "@id": `${blogUrl}/#blog`,
+      "@id": `${blogUrl}#blog`,
       name: `${name} — Technical Blog`,
       url: blogUrl,
       description:
         "A learning-focused technical blog covering AI engineering, full-stack development, RAG systems, and analytics best practices.",
       inLanguage: "en-US",
-      author: { "@id": `${url}/#person` },
-      copyrightHolder: { "@id": `${url}/#person` },
-      publisher: { "@id": `${url}/#person` },
+      author: { "@id": `${url}#person` },
+      copyrightHolder: { "@id": `${url}#person` },
+      publisher: { "@id": `${url}#person` },
       about: [
         { "@type": "Thing", name: "Artificial Intelligence" },
         { "@type": "Thing", name: "Machine Learning" },
@@ -259,7 +259,7 @@ export function buildWebSiteSchema({
         "@type": "SearchAction",
         target: {
           "@type": "EntryPoint",
-          urlTemplate: `${blogUrl}/search?q={search_term_string}`,
+          urlTemplate: `${blogUrl}search/?q={search_term_string}`,
         },
         "query-input": "required name=search_term_string",
       },
@@ -285,15 +285,15 @@ export function buildProfilePageSchema({
 }) {
   return {
     "@type": "ProfilePage",
-    "@id": `${url}/#profilepage`,
+    "@id": `${url}#profilepage`,
     name: `${fullName} — Portfolio`,
     url,
     ...(description && { description }),
     inLanguage: "en-US",
-    isPartOf: { "@id": `${url}/#website` },
-    about: { "@id": `${url}/#person` },
-    mainEntity: { "@id": `${url}/#person` },
-    breadcrumb: { "@id": `${url}/#breadcrumb` },
+    isPartOf: { "@id": `${url}#website` },
+    about: { "@id": `${url}#person` },
+    mainEntity: { "@id": `${url}#person` },
+    breadcrumb: { "@id": `${url}#breadcrumb` },
     dateModified: dateModified ?? new Date().toISOString(),
     ...(profileImageUrl && {
       primaryImageOfPage: {
@@ -328,7 +328,7 @@ export function buildServicesListSchema({
 
   return {
     "@type": "ItemList",
-    "@id": `${siteUrl}/#services`,
+    "@id": `${siteUrl}#services`,
     name: "Professional Services",
     description: "Consulting and development services offered by Madhu Dadi",
     numberOfItems: services.length,
@@ -345,11 +345,11 @@ export function buildServicesListSchema({
         position: i + 1,
         item: {
           "@type": "Service",
-          "@id": `${siteUrl}/#service-${i + 1}`,
+          "@id": `${siteUrl}#service-${i + 1}`,
           name: service.title,
           serviceType: service.title,
-          url: `${siteUrl}/#services`,
-          provider: { "@id": `${siteUrl}/#person` },
+          url: `${siteUrl}#services`,
+          provider: { "@id": `${siteUrl}#person` },
           ...(service.shortDescription && {
             description: service.shortDescription,
           }),
@@ -359,7 +359,7 @@ export function buildServicesListSchema({
               price: startingPrice,
               priceCurrency: "USD",
               availability: "https://schema.org/InStock",
-              url: `${siteUrl}/#services`,
+              url: `${siteUrl}#services`,
               ...(priceType &&
                 unitTextByPriceType[priceType] && {
                   priceSpecification: {
@@ -391,7 +391,7 @@ export function buildCertificationsListSchema({
 
   return {
     "@type": "ItemList",
-    "@id": `${siteUrl}/#certifications`,
+    "@id": `${siteUrl}#certifications`,
     name: "Professional Certifications",
     numberOfItems: certifications.length,
     itemListElement: certifications.map((certification, i) => ({
@@ -399,7 +399,7 @@ export function buildCertificationsListSchema({
       position: i + 1,
       item: {
         "@type": "EducationalOccupationalCredential",
-        "@id": `${siteUrl}/#credential-${i + 1}`,
+        "@id": `${siteUrl}#credential-${i + 1}`,
         name: certification.name,
         credentialCategory: "Professional Certification",
         ...(certification.description && {
@@ -444,7 +444,7 @@ export function buildProjectsListSchema({
 
   return {
     "@type": "ItemList",
-    "@id": `${siteUrl}/#projects`,
+    "@id": `${siteUrl}#projects`,
     name: "Portfolio Projects",
     description: "Software projects built by Madhu Dadi",
     numberOfItems: projects.length,
@@ -455,11 +455,11 @@ export function buildProjectsListSchema({
         "@type": "SoftwareApplication",
         name: p.title,
         ...(p.tagline && { description: p.tagline }),
-        ...((p.slug && { url: `${siteUrl}/case-studies/${p.slug}` }) ||
+        ...((p.slug && { url: `${siteUrl}case-studies/${p.slug}/` }) ||
           (p.liveUrl && { url: p.liveUrl })),
         ...(p.githubUrl && { codeRepository: p.githubUrl }),
         ...(p.category && { applicationCategory: p.category }),
-        author: { "@id": `${siteUrl}/#person` },
+        author: { "@id": `${siteUrl}#person` },
       },
     })),
   };
@@ -479,7 +479,7 @@ export function buildWorkExperienceSchema({
 
   return {
     "@type": "ItemList",
-    "@id": `${siteUrl}/#workexperience`,
+    "@id": `${siteUrl}#workexperience`,
     name: "Work Experience",
     numberOfItems: experiences.length,
     description: "Professional roles and responsibilities held by Madhu Dadi",
@@ -518,7 +518,7 @@ export function buildBreadcrumbSchema(
 
   return {
     "@type": "BreadcrumbList",
-    "@id": `${url}/#breadcrumb`,
+    "@id": `${url}#breadcrumb`,
     itemListElement: allItems.map((item, i) => ({
       "@type": "ListItem",
       position: i + 1,
@@ -581,7 +581,7 @@ export function buildFaqSchema({
 
   return {
     "@type": "FAQPage",
-    "@id": `${siteUrl}/#faq`,
+    "@id": `${siteUrl}#faq`,
     mainEntity: [
       {
         "@type": "Question",
@@ -608,7 +608,7 @@ export function buildFaqSchema({
           "@type": "Answer",
           text:
             projectCount > 0
-              ? `${fullName}'s portfolio features ${projectCount} highlighted software projects across product and engineering domains. Detailed case studies are available at ${siteUrl}/case-studies.`
+              ? `${fullName}'s portfolio features ${projectCount} highlighted software projects across product and engineering domains. Detailed case studies are available at ${siteUrl}case-studies/`
               : `${fullName}'s portfolio includes practical software projects with implementation and outcomes.`,
         },
       },
@@ -617,7 +617,7 @@ export function buildFaqSchema({
         name: `Does ${fullName} have a technical blog?`,
         acceptedAnswer: {
           "@type": "Answer",
-          text: `Yes. ${fullName} maintains an authoritative technical blog at ${siteUrl}/blog, focusing on AI engineering, RAG systems, and LLM application development. The blog provides deep dives into agentic AI, software architecture, and modern web engineering, serving as a core evidence source for his technical expertise. It features an AI-powered Q&A assistant for rapid discovery and an RSS feed at ${siteUrl}/blog/feed.xml.`,
+          text: `Yes. ${fullName} maintains an authoritative technical blog at ${siteUrl}blog/, focusing on AI engineering, RAG systems, and LLM application development. The blog provides deep dives into agentic AI, software architecture, and modern web engineering, serving as a core evidence source for his technical expertise. It features an AI-powered Q&A assistant for rapid discovery and an RSS feed at ${siteUrl}blog/feed.xml.`,
         },
       },
       {

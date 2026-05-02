@@ -151,17 +151,17 @@ export async function generateMetadata(): Promise<Metadata> {
       },
     },
     alternates: {
-      canonical: "/",
+      canonical: siteUrl,
       languages: {
-        en: "/",
-        "en-US": "/",
-        "x-default": "/",
+        en: siteUrl,
+        "en-US": siteUrl,
+        "x-default": siteUrl,
       },
     },
     openGraph: {
       type: "profile",
       locale: "en_US",
-      url: "/",
+      url: siteUrl,
       siteName,
       title,
       description,

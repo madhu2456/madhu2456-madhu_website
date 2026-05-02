@@ -27,6 +27,9 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // Ensure all URLs have a trailing slash to avoid duplicate content SEO issues.
+  trailingSlash: true,
+
   experimental: {
     optimizePackageImports: ["@tabler/icons-react", "motion"],
     // Enable scroll restoration for better UX on navigation
