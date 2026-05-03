@@ -214,7 +214,32 @@ ${projectLines}
 
 ${caseStudyLines}
 
-${certLines ? `## Certifications\n\n${certLines}\n` : ""}## Portfolio Sections
+${certLines ? `## Certifications\n\n${certLines}\n` : ""}## Availability & Hiring
+
+${fullName} is **${availabilityLabel.toLowerCase()}**.
+
+- **Engagement types:** Freelance projects, consulting engagements, advisory roles, and full-time opportunities
+- **Work mode:** Remote-first, with availability for on-site collaboration in India (Hyderabad, Bangalore, Visakhapatnam)
+- **Typical response time:** Within 24 hours for initial inquiries
+- **Preferred contact:** Email or LinkedIn for professional enquiries
+- **Languages:** English (fluent)
+
+## Engagement Process
+
+1. **Review** — Explore services and case studies at ${siteUrl}
+2. **Brief** — Share your problem statement, timeline, and budget range
+3. **Discovery call** — 30-minute alignment call to discuss scope and approach
+4. **Proposal** — Detailed proposal with fixed pricing, milestones, and deliverables
+5. **Delivery** — Weekly updates, transparent communication, and outcome-focused execution
+
+## Pricing Indication
+
+- **AI & LLM projects:** Starting from $2,500 USD (project-based)
+- **Marketing analytics:** Starting from $2,000 USD (project-based)
+- **Full-stack development:** Starting from $3,000 USD (project-based)
+- Custom quotes available for retainer and advisory arrangements
+
+## Portfolio Sections
 
 - **Home** — Introduction, headline, availability status, social links
 - **About** — Full biography, statistics, and background

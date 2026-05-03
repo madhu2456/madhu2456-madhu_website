@@ -271,7 +271,15 @@ function DockIcon({
 
   const isSocial = (title?: string | null) => {
     const t = title?.toLowerCase() || "";
-    return ["github", "linkedin", "twitter", "blog", "medium", "devto", "youtube"].some(s => t.includes(s));
+    return [
+      "github",
+      "linkedin",
+      "twitter",
+      "blog",
+      "medium",
+      "devto",
+      "youtube",
+    ].some((s) => t.includes(s));
   };
 
   return item.onClick ? (

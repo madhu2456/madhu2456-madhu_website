@@ -23,28 +23,52 @@
               {
                 "type": "MAP",
                 "map": [
-                  { "type": "TEMPLATE", "key": "parameter", "value": "link_name" },
-                  { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - link_label}}" }
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameter",
+                    "value": "link_name"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameterValue",
+                    "value": "{{DLV - link_label}}"
+                  }
                 ]
               },
               {
                 "type": "MAP",
                 "map": [
                   { "type": "TEMPLATE", "key": "parameter", "value": "url" },
-                  { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - link_url}}" }
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameterValue",
+                    "value": "{{DLV - link_url}}"
+                  }
                 ]
               },
               {
                 "type": "MAP",
                 "map": [
-                  { "type": "TEMPLATE", "key": "parameter", "value": "link_category" },
-                  { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - link_category}}" }
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameter",
+                    "value": "link_category"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameterValue",
+                    "value": "{{DLV - link_category}}"
+                  }
                 ]
               }
             ]
           },
           { "type": "TEMPLATE", "key": "eventName", "value": "external_click" },
-          { "type": "TEMPLATE", "key": "measurementIdOverride", "value": "{{GA4 Measurement ID}}" }
+          {
+            "type": "TEMPLATE",
+            "key": "measurementIdOverride",
+            "value": "{{GA4 Measurement ID}}"
+          }
         ],
         "firingTriggerId": ["101"],
         "tagFiringOption": "ONCE_PER_EVENT"

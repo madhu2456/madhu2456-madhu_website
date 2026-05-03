@@ -16,7 +16,10 @@ type Citation = {
 const DEFAULT_SITE_URL = "https://madhudadi.in";
 
 const getSiteUrl = () => {
-  const url = (process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE_URL).replace(/\/+$/, "");
+  const url = (process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE_URL).replace(
+    /\/+$/,
+    "",
+  );
   return `${url}/`;
 };
 
@@ -409,6 +412,32 @@ export default async function CaseStudyPage({
                 </li>
               ))}
             </ul>
+          </section>
+
+          {/* Related Services CTA */}
+          <section className="rounded-2xl border bg-primary/5 p-6 md:p-8 space-y-4 shadow-sm">
+            <h2 className="text-xl md:text-2xl font-semibold">
+              Need help with a similar project?
+            </h2>
+            <p className="text-muted-foreground leading-relaxed">
+              I offer AI & LLM Development, Marketing Analytics, and Full-Stack
+              Product Development services. Let&apos;s discuss how I can help
+              you build something impactful.
+            </p>
+            <div className="flex flex-wrap gap-3 pt-2">
+              <Link
+                href="/#services"
+                className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-sm font-semibold"
+              >
+                View Services
+              </Link>
+              <Link
+                href="/#contact"
+                className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg border hover:bg-accent transition-colors text-sm font-semibold"
+              >
+                Discuss Your Project
+              </Link>
+            </div>
           </section>
         </article>
       </div>

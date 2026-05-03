@@ -1,5 +1,6 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
+import defaultContentJson from "../../Data/portfolio-content.json";
 import { portfolioContentSchema } from "./cms-schema";
 
 export type SocialLinks = {
@@ -166,469 +167,9 @@ export type NavigationItem = {
   order: number;
 };
 
-export const profile: Profile = {
-  firstName: "Madhu",
-  lastName: "Dadi",
-  headline: "Data, AI and Full-Stack Engineer",
-  headlineStaticText: "I build",
-  headlineAnimatedWords: [
-    "AI-powered products",
-    "analytics platforms",
-    "automation systems",
-    "full-stack web apps",
-  ],
-  headlineAnimationDuration: 3000,
-  shortBio:
-    "I design and ship AI, analytics, and full-stack solutions that turn messy business workflows into measurable outcomes.",
-  fullBioParagraphs: [
-    "I am a software and analytics engineer focused on practical impact. I enjoy taking ambiguous business problems, mapping them to reliable systems, and shipping solutions people can actually use.",
-    "My work spans data engineering, product analytics, and application development. I build with a bias toward maintainability, observability, and clear decision support.",
-    "I specialize in AI-enabled workflows, automation, and full-stack platforms. My approach is simple: understand the process deeply, keep architecture grounded, and optimize for long-term value.",
-  ],
-  email: "madhu.dadi@gmail.com",
-  phone: "+91-00000-00000",
-  location: "India (Remote)",
-  availability: "open",
-  socialLinks: {
-    github: "https://github.com/madhu2456",
-    linkedin: "https://www.linkedin.com/in/madhu-dadi",
-    website: "https://madhudadi.in/blog",
-  },
-  yearsOfExperience: 7,
-  stats: [
-    { label: "Projects Delivered", value: "40+" },
-    { label: "Years Experience", value: "7+" },
-    { label: "Domains Covered", value: "10+" },
-    { label: "Production Systems", value: "20+" },
-  ],
-  profileImage: "/icon-512.png",
-  updatedAt: "2026-04-10T12:00:00.000Z",
-};
-
-export const siteSettings: SiteSettings = {
-  siteTitle: "Madhu Dadi - Portfolio",
-  siteDescription:
-    "AI consultant and ML engineer delivering generative AI consulting, LLM applications, RAG systems, and full-stack product delivery.",
-  siteKeywords: [
-    "Madhu Dadi",
-    "AI consultant",
-    "AI consulting services",
-    "AI consulting company",
-    "AI consulting firms",
-    "top AI consulting firms",
-    "generative AI consulting",
-    "generative AI consulting services",
-    "AI strategy consulting",
-    "enterprise AI consulting",
-    "AI automation consulting",
-    "AI transformation consulting",
-    "AI integration services",
-    "LLM consulting",
-    "LLM development services",
-    "RAG development services",
-    "AI agent development services",
-    "AI chatbot development services",
-    "machine learning consulting services",
-    "OpenAI consulting",
-    "AI consulting company in India",
-  ],
-  twitterHandle: "madhudadi",
-  updatedAt: "2026-04-17T15:56:54.057Z",
-};
-
-export const navigationItems: NavigationItem[] = [
-  { title: "Home", href: "#home", icon: "IconHome", order: 1 },
-  { title: "About", href: "#about", icon: "IconUser", order: 2 },
-  { title: "Experience", href: "#experience", icon: "IconBriefcase", order: 3 },
-  { title: "Projects", href: "#projects", icon: "IconCode", order: 4 },
-  { title: "Services", href: "#services", icon: "IconTools", order: 5 },
-  { title: "Education", href: "#education", icon: "IconSchool", order: 6 },
-  {
-    title: "Certifications",
-    href: "#certifications",
-    icon: "IconCertificate",
-    order: 7,
-  },
-  { title: "Contact", href: "#contact", icon: "IconMail", order: 8 },
-  {
-    title: "Blog",
-    href: "https://madhudadi.in/blog",
-    icon: "IconNews",
-    isExternal: true,
-    order: 9,
-  },
-  {
-    title: "GitHub",
-    href: "https://github.com/madhu2456",
-    icon: "IconBrandGithub",
-    isExternal: true,
-    order: 10,
-  },
-];
-
-export const skills: SkillItem[] = [
-  {
-    name: "Python",
-    category: "Backend",
-    proficiency: "expert",
-    yearsOfExperience: 7,
-    updatedAt: "2026-04-10T12:00:00.000Z",
-  },
-  {
-    name: "TypeScript",
-    category: "Frontend",
-    proficiency: "advanced",
-    yearsOfExperience: 5,
-    updatedAt: "2026-04-10T12:00:00.000Z",
-  },
-  {
-    name: "Next.js",
-    category: "Frontend",
-    proficiency: "advanced",
-    yearsOfExperience: 4,
-    updatedAt: "2026-04-10T12:00:00.000Z",
-  },
-  {
-    name: "React",
-    category: "Frontend",
-    proficiency: "advanced",
-    yearsOfExperience: 5,
-    updatedAt: "2026-04-10T12:00:00.000Z",
-  },
-  {
-    name: "SQL",
-    category: "Data",
-    proficiency: "expert",
-    yearsOfExperience: 7,
-    updatedAt: "2026-04-10T12:00:00.000Z",
-  },
-  {
-    name: "AWS",
-    category: "Cloud",
-    proficiency: "advanced",
-    yearsOfExperience: 4,
-    updatedAt: "2026-04-10T12:00:00.000Z",
-  },
-  {
-    name: "LLM / RAG",
-    category: "AI",
-    proficiency: "advanced",
-    yearsOfExperience: 3,
-    updatedAt: "2026-04-10T12:00:00.000Z",
-  },
-  {
-    name: "Dataiku",
-    category: "Analytics",
-    proficiency: "advanced",
-    yearsOfExperience: 4,
-    updatedAt: "2026-04-10T12:00:00.000Z",
-  },
-];
-
-export const experiences: ExperienceItem[] = [
-  {
-    company: "Novartis",
-    position: "Data and AI Engineer",
-    employmentType: "Full-time",
-    location: "India",
-    startDate: "2022-04-01",
-    current: true,
-    description:
-      "Built analytics and AI workflows for enterprise decision support, process optimization, and campaign intelligence.",
-    responsibilities: [
-      "Designed production analytics pipelines and KPI frameworks.",
-      "Built AI-powered assistants and retrieval workflows for internal users.",
-      "Collaborated across product, analytics, and engineering teams.",
-    ],
-    achievements: [
-      "Improved turnaround time for reporting workflows.",
-      "Raised trust in decisioning with reproducible data products.",
-    ],
-    technologies: [
-      { name: "Python", category: "Backend" },
-      { name: "SQL", category: "Data" },
-      { name: "Dataiku", category: "Analytics" },
-      { name: "LLM / RAG", category: "AI" },
-    ],
-    companyLogo: "/icon-512.png",
-    order: 1,
-    updatedAt: "2026-04-10T12:00:00.000Z",
-  },
-  {
-    company: "redBus",
-    position: "Data Analyst Engineer",
-    employmentType: "Full-time",
-    location: "India",
-    startDate: "2020-01-01",
-    endDate: "2022-03-31",
-    description:
-      "Worked on growth analytics, experimentation, and customer lifecycle performance for a large travel-tech product.",
-    responsibilities: [
-      "Built reusable dashboards and metrics definitions.",
-      "Partnered with marketing and product for experimentation analysis.",
-      "Automated recurring reporting pipelines.",
-    ],
-    achievements: [
-      "Improved campaign attribution quality.",
-      "Reduced manual reporting effort for business teams.",
-    ],
-    technologies: [
-      { name: "SQL", category: "Data" },
-      { name: "Python", category: "Backend" },
-      { name: "Tableau", category: "Analytics" },
-    ],
-    companyLogo: "/icon-512.png",
-    order: 2,
-    updatedAt: "2026-04-10T12:00:00.000Z",
-  },
-  {
-    company: "GroupM",
-    position: "Marketing Analytics Specialist",
-    employmentType: "Full-time",
-    location: "India",
-    startDate: "2018-06-01",
-    endDate: "2019-12-31",
-    description:
-      "Delivered campaign analytics and optimization recommendations across multiple clients and digital channels.",
-    responsibilities: [
-      "Designed campaign measurement and performance models.",
-      "Built weekly and monthly executive performance views.",
-    ],
-    achievements: [
-      "Improved media performance visibility across teams.",
-      "Helped standardize analytics templates for repeatable execution.",
-    ],
-    technologies: [
-      { name: "SQL", category: "Data" },
-      { name: "Python", category: "Backend" },
-      { name: "Excel", category: "Analytics" },
-    ],
-    companyLogo: "/icon-512.png",
-    order: 3,
-    updatedAt: "2026-04-10T12:00:00.000Z",
-  },
-];
-
-export const education: EducationItem[] = [
-  {
-    institution: "Jawaharlal Nehru Technological University",
-    degree: "Bachelor of Technology",
-    fieldOfStudy: "Computer Science",
-    startDate: "2014-06-01",
-    endDate: "2018-05-31",
-    gpa: "8.2/10",
-    description:
-      "Foundation in analytics, data structures, and analytics.",
-    achievements: [
-      "Built multiple applied software projects.",
-      "Participated in technical workshops and hackathons.",
-    ],
-    logo: "/icon-512.png",
-    website: "https://www.jntuh.ac.in/",
-    order: 1,
-    updatedAt: "2026-04-10T12:00:00.000Z",
-  },
-];
-
-export const projects: ProjectItem[] = [
-  {
-    title: "Marketing Intelligence Platform",
-    slug: "marketing-intelligence-platform",
-    tagline: "Unified analytics and decision support for growth teams",
-    category: "analytics",
-    impactSummary:
-      "Reduced reporting overhead and accelerated decision cycles with automated intelligence workflows.",
-    liveUrl: "https://madhudadi.in",
-    featured: true,
-    coverImage: "/icon-512.png",
-    technologies: [
-      { name: "Python" },
-      { name: "SQL" },
-      { name: "Dataiku" },
-      { name: "Next.js" },
-    ],
-    problemStatement:
-      "Teams were spending significant time stitching fragmented campaign data before decisions could be made.",
-    solutionApproach:
-      "Built a unified data model, reusable analytics layer, and workflow automation for repeatable insights delivery.",
-    impactMetrics: [
-      { label: "Reporting Time", value: "-45%" },
-      { label: "Decision Latency", value: "-35%" },
-    ],
-    citations: [{ label: "Portfolio", url: "https://madhudadi.in" }],
-    order: 1,
-    updatedAt: "2026-04-10T12:00:00.000Z",
-  },
-  {
-    title: "AI Knowledge Assistant",
-    slug: "ai-knowledge-assistant",
-    tagline: "Context-aware assistant for internal knowledge retrieval",
-    category: "ai-ml",
-    impactSummary:
-      "Enabled faster access to internal knowledge using retrieval pipelines and grounded responses.",
-    liveUrl: "https://madhudadi.in",
-    featured: true,
-    coverImage: "/icon-512.png",
-    technologies: [
-      { name: "Python" },
-      { name: "LLM / RAG" },
-      { name: "Vector Search" },
-      { name: "Next.js" },
-    ],
-    problemStatement:
-      "Critical process and product knowledge was spread across disconnected systems, making answers slow and inconsistent.",
-    solutionApproach:
-      "Implemented document ingestion, chunking, retrieval, and response orchestration with verification-oriented prompts.",
-    impactMetrics: [
-      { label: "Response Time", value: "-60%" },
-      { label: "Knowledge Coverage", value: "+3x" },
-    ],
-    citations: [
-      { label: "Case Studies", url: "https://madhudadi.in/case-studies/" },
-    ],
-    order: 2,
-    updatedAt: "2026-04-10T12:00:00.000Z",
-  },
-  {
-    title: "Portfolio and Case Study Engine",
-    slug: "portfolio-case-study-engine",
-    tagline:
-      "SEO-oriented portfolio architecture with machine-readable endpoints",
-    category: "web-app",
-    liveUrl: "https://madhudadi.in",
-    githubUrl: "https://github.com/madhu2456/madhu2456-madhu_website",
-    featured: true,
-    coverImage: "/icon-512.png",
-    technologies: [
-      { name: "Next.js" },
-      { name: "TypeScript" },
-      { name: "Tailwind CSS" },
-    ],
-    problemStatement:
-      "Portfolio content needed stronger discoverability across search and AI systems.",
-    solutionApproach:
-      "Built structured metadata, schema graph, llms.txt, ai-profile.json, and case-study-first information architecture.",
-    impactMetrics: [
-      { label: "Structured Endpoints", value: "5+" },
-      { label: "SEO Surfaces", value: "Site-wide" },
-    ],
-    citations: [
-      {
-        label: "GitHub Repository",
-        url: "https://github.com/madhu2456/madhu2456-madhu_website",
-      },
-    ],
-    order: 3,
-    updatedAt: "2026-04-10T12:00:00.000Z",
-  },
-];
-
-export const services: ServiceItem[] = [
-  {
-    title: "AI and LLM Applications",
-    slug: "ai-llm-applications",
-    icon: "/icon-512.png",
-    shortDescription:
-      "Design and delivery of production-focused AI systems including RAG and workflow copilots.",
-    features: [
-      "Use-case framing and architecture design",
-      "RAG pipeline implementation",
-      "Evaluation and guardrails setup",
-    ],
-    technologies: [
-      { name: "Python" },
-      { name: "LLM / RAG" },
-      { name: "TypeScript" },
-    ],
-    pricing: {
-      startingPrice: 2500,
-      priceType: "project",
-      description: "Depends on complexity and scope",
-    },
-    timeline: "2-8 weeks",
-    featured: true,
-    order: 1,
-    updatedAt: "2026-04-10T12:00:00.000Z",
-  },
-  {
-    title: "Analytics and Decision Engineering",
-    slug: "analytics-decision-engineering",
-    icon: "/icon-512.png",
-    shortDescription:
-      "KPI architecture, measurement frameworks, experimentation analytics, and reporting automation.",
-    features: [
-      "Data model and metric standardization",
-      "Executive and operational dashboards",
-      "Automation of recurring reporting",
-    ],
-    technologies: [{ name: "SQL" }, { name: "Python" }, { name: "Dataiku" }],
-    pricing: {
-      startingPrice: 1800,
-      priceType: "project",
-      description: "Custom roadmap and phased delivery",
-    },
-    timeline: "2-6 weeks",
-    featured: true,
-    order: 2,
-    updatedAt: "2026-04-10T12:00:00.000Z",
-  },
-  {
-    title: "Full-Stack Product Development",
-    slug: "fullstack-product-development",
-    icon: "/icon-512.png",
-    shortDescription:
-      "Modern web products with scalable APIs, clean UI, and reliable deployment pipelines.",
-    features: [
-      "End-to-end application development",
-      "Performance and SEO optimization",
-      "Production deployment and monitoring",
-    ],
-    technologies: [
-      { name: "Next.js" },
-      { name: "TypeScript" },
-      { name: "AWS" },
-    ],
-    pricing: {
-      startingPrice: 3000,
-      priceType: "project",
-      description: "Based on milestones and product depth",
-    },
-    timeline: "4-12 weeks",
-    featured: false,
-    order: 3,
-    updatedAt: "2026-04-10T12:00:00.000Z",
-  },
-];
-
-export const certifications: CertificationItem[] = [
-  {
-    name: "AWS Certified Cloud Practitioner",
-    issuer: "Amazon Web Services",
-    issueDate: "2024-05-01",
-    expiryDate: "2027-05-01",
-    credentialId: "AWS-XXXX-XXXX",
-    credentialUrl: "https://www.credly.com/",
-    logo: "/icon-512.png",
-    description:
-      "Foundational certification covering AWS cloud services and architecture basics.",
-    skills: [{ name: "AWS" }, { name: "Cloud" }],
-    order: 1,
-    updatedAt: "2026-04-10T12:00:00.000Z",
-  },
-  {
-    name: "Dataiku Core Designer",
-    issuer: "Dataiku",
-    issueDate: "2023-09-01",
-    credentialId: "DIKU-XXXX-XXXX",
-    credentialUrl: "https://academy.dataiku.com/",
-    logo: "/icon-512.png",
-    description:
-      "Certification in end-to-end analytics workflow design and execution.",
-    skills: [{ name: "Dataiku" }, { name: "Analytics" }],
-    order: 2,
-    updatedAt: "2026-04-10T12:00:00.000Z",
-  },
-];
+// Default content is sourced from the canonical JSON file so it never drifts
+// from the committed / deployed data. If the JSON is missing at runtime,
+// ensurePortfolioContentFile will recreate it from this snapshot.
 
 export type PortfolioContent = {
   profile: Profile;
@@ -660,17 +201,8 @@ const PORTFOLIO_CONTENT_FILE_PATH = path.join(
   "portfolio-content.json",
 );
 
-export const defaultPortfolioContent: PortfolioContent = {
-  profile,
-  siteSettings,
-  navigationItems,
-  skills,
-  experiences,
-  education,
-  projects,
-  services,
-  certifications,
-};
+export const defaultPortfolioContent: PortfolioContent =
+  defaultContentJson as unknown as PortfolioContent;
 
 const cloneDefaultContent = (): PortfolioContent =>
   JSON.parse(JSON.stringify(defaultPortfolioContent)) as PortfolioContent;
@@ -686,11 +218,18 @@ const ensurePortfolioContentFile = async () => {
     await fs.mkdir(path.dirname(PORTFOLIO_CONTENT_FILE_PATH), {
       recursive: true,
     });
+    const tempPath = `${PORTFOLIO_CONTENT_FILE_PATH}.tmp`;
     await fs.writeFile(
-      PORTFOLIO_CONTENT_FILE_PATH,
+      tempPath,
       JSON.stringify(cloneDefaultContent(), null, 2),
       "utf8",
     );
+    try {
+      await fs.rename(tempPath, PORTFOLIO_CONTENT_FILE_PATH);
+    } catch {
+      await fs.unlink(tempPath).catch(() => undefined);
+      throw new Error("Failed to initialize portfolio content file.");
+    }
   }
 };
 
@@ -785,11 +324,31 @@ export const getPortfolioContentPath = () => PORTFOLIO_CONTENT_FILE_PATH;
 
 export async function readPortfolioContent(): Promise<PortfolioContent> {
   await ensurePortfolioContentFile();
-  const rawContent = await fs.readFile(PORTFOLIO_CONTENT_FILE_PATH, "utf8");
-  const parsedContent: unknown = JSON.parse(rawContent);
+  let rawContent: string;
+  try {
+    rawContent = await fs.readFile(PORTFOLIO_CONTENT_FILE_PATH, "utf8");
+  } catch {
+    // If read fails (permissions, corruption), recreate from defaults
+    const fallback = cloneDefaultContent();
+    await savePortfolioContent(fallback);
+    return fallback;
+  }
+
+  let parsedContent: unknown;
+  try {
+    parsedContent = JSON.parse(rawContent);
+  } catch {
+    // Invalid JSON — recreate from defaults
+    const fallback = cloneDefaultContent();
+    await savePortfolioContent(fallback);
+    return fallback;
+  }
 
   if (!isPortfolioContent(parsedContent)) {
-    throw new Error("Portfolio content file is invalid.");
+    // Schema mismatch — recreate from defaults
+    const fallback = cloneDefaultContent();
+    await savePortfolioContent(fallback);
+    return fallback;
   }
 
   return parsedContent;
@@ -807,11 +366,21 @@ export async function savePortfolioContent(
   await fs.mkdir(path.dirname(PORTFOLIO_CONTENT_FILE_PATH), {
     recursive: true,
   });
+
+  const tempPath = `${PORTFOLIO_CONTENT_FILE_PATH}.tmp`;
   await fs.writeFile(
-    PORTFOLIO_CONTENT_FILE_PATH,
+    tempPath,
     JSON.stringify(normalizedContent, null, 2),
     "utf8",
   );
+
+  try {
+    await fs.rename(tempPath, PORTFOLIO_CONTENT_FILE_PATH);
+  } catch {
+    // Clean up temp file if rename fails so it doesn't leak
+    await fs.unlink(tempPath).catch(() => undefined);
+    throw new Error("Failed to finalize portfolio content save.");
+  }
 
   return normalizedContent;
 }

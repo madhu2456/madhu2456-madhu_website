@@ -42,6 +42,30 @@ export async function HeroSection() {
                 {profile.shortBio}
               </p>
 
+              {/* CTA Buttons */}
+              <div className="flex flex-wrap gap-3 @md/hero:gap-4 pt-2">
+                <TrackedLink
+                  href="/#services"
+                  type="external"
+                  category="link"
+                  externalLabel="hero_view_services"
+                  aria-label="View services"
+                  className="px-5 py-3 @md/hero:px-7 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-sm @md:hero:text-base min-h-[44px] flex items-center font-semibold"
+                >
+                  View Services
+                </TrackedLink>
+                <TrackedLink
+                  href="/#contact"
+                  type="external"
+                  category="link"
+                  externalLabel="hero_get_in_touch"
+                  aria-label="Get in touch"
+                  className="px-5 py-3 @md/hero:px-7 rounded-lg border hover:bg-accent transition-colors text-sm @md:hero:text-base min-h-[44px] flex items-center font-semibold"
+                >
+                  Get in Touch
+                </TrackedLink>
+              </div>
+
               {profile.socialLinks && (
                 <div className="flex flex-wrap gap-3 @md/hero:gap-4 pt-4">
                   {profile.socialLinks.github && (
@@ -51,7 +75,7 @@ export async function HeroSection() {
                       category="social"
                       externalLabel="hero_github"
                       aria-label="View GitHub profile (opens in new tab)"
-                      className="px-4 py-3 @md/hero:px-6 rounded-lg border hover:bg-accent transition-colors text-sm @md/hero:text-base min-h-[44px] flex items-center"
+                      className="px-4 py-3 @md/hero:px-6 rounded-lg border hover:bg-accent transition-colors text-sm @md:hero:text-base min-h-[44px] flex items-center"
                     >
                       GitHub
                     </TrackedLink>
@@ -63,7 +87,7 @@ export async function HeroSection() {
                       category="social"
                       externalLabel="hero_linkedin"
                       aria-label="View LinkedIn profile (opens in new tab)"
-                      className="px-4 py-3 @md/hero:px-6 rounded-lg border hover:bg-accent transition-colors text-sm @md/hero:text-base min-h-[44px] flex items-center"
+                      className="px-4 py-3 @md/hero:px-6 rounded-lg border hover:bg-accent transition-colors text-sm @md:hero:text-base min-h-[44px] flex items-center"
                     >
                       LinkedIn
                     </TrackedLink>
@@ -75,7 +99,7 @@ export async function HeroSection() {
                       category="social"
                       externalLabel="hero_twitter"
                       aria-label="View Twitter profile (opens in new tab)"
-                      className="px-4 py-3 @md/hero:px-6 rounded-lg border hover:bg-accent transition-colors text-sm @md/hero:text-base min-h-[44px] flex items-center"
+                      className="px-4 py-3 @md/hero:px-6 rounded-lg border hover:bg-accent transition-colors text-sm @md:hero:text-base min-h-[44px] flex items-center"
                     >
                       Twitter
                     </TrackedLink>
@@ -87,7 +111,7 @@ export async function HeroSection() {
                       category="social"
                       externalLabel="hero_blog"
                       aria-label="Visit blog (opens in new tab)"
-                      className="px-4 py-3 @md/hero:px-6 rounded-lg border hover:bg-accent transition-colors text-sm @md/hero:text-base min-h-[44px] flex items-center"
+                      className="px-4 py-3 @md/hero:px-6 rounded-lg border hover:bg-accent transition-colors text-sm @md:hero:text-base min-h-[44px] flex items-center"
                     >
                       Blog
                     </TrackedLink>
@@ -114,7 +138,11 @@ export async function HeroSection() {
                 {profile.availability && (
                   <div className="flex items-center gap-2">
                     <span>✅</span>
-                    <span>{profile.availability}</span>
+                    <span>
+                      {profile.availability === "open"
+                        ? "Available for consulting & job opportunities"
+                        : profile.availability}
+                    </span>
                   </div>
                 )}
               </div>
