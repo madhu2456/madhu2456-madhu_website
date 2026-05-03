@@ -10,12 +10,12 @@
       "Full-stack Web Product Development"
     ],
     "headlineAnimationDuration": 3000,
-    "shortBio": "AI consultant and ML engineer with 9+ years of experience delivering generative AI consulting, LLM applications, and RAG systems that drive measurable business outcomes. I specialize in AI strategy consulting, AI automation, and full-stack product delivery using Python, FastAPI, Next.js, TypeScript, and cloud-native architecture.",
+    "shortBio": "AI consultant and ML engineer with 9+ years of experience delivering generative AI consulting, LLM applications, and RAG systems that drive measurable business outcomes. I specialize in AI strategy consulting, AI automation, marketing analytics, and full-stack product delivery using Python, FastAPI, Next.js, TypeScript, and cloud-native architecture. Open to freelance, consulting, and collaboration opportunities.",
     "fullBioParagraphs": [
-      "I am an AI consultant and ML engineer with 9+ years of hands-on experience designing and delivering production-grade AI systems for enterprises and growth-focused teams. My work spans AI consulting services, machine learning consulting services, and full-stack product engineering built for reliability, speed, and business impact.",
-      "I specialize in generative AI consulting services, LLM consulting, and RAG development services, helping teams turn complex ideas into practical products. This includes AI agent development services, AI chatbot development services, and AI integration services that improve decision-making, automate workflows, and reduce operational friction.",
+      "I am an AI consultant and ML engineer with 9+ years of hands-on experience designing and delivering production-grade AI systems for enterprises and growth-focused teams. My work spans AI consulting services, machine learning consulting services, marketing analytics, and full-stack product engineering built for reliability, speed, and business impact.",
+      "I specialize in generative AI consulting services, LLM consulting, and RAG development services, helping teams turn complex ideas into practical products. This includes AI agent development services, AI chatbot development services, marketing analytics consulting, and AI integration services that improve decision-making, automate workflows, and reduce operational friction.",
       "From an engineering perspective, I build end-to-end solutions across data pipelines, model orchestration, backend APIs, and modern web interfaces. My core stack includes Python, FastAPI, SQL, Next.js, React, and TypeScript, with a focus on observability, performance, security, and maintainable architecture.",
-      "I approach every engagement with an outcome-first mindset: understand the business context deeply, design the right system, and ship with clear metrics for success. If you are looking for an AI consultant in India for enterprise AI consulting, AI transformation consulting, or product-focused delivery, I bring strategy and execution together."
+      "I approach every engagement with an outcome-first mindset: understand the business context deeply, design the right system, and ship with clear metrics for success. If you are looking for an AI consultant in India for enterprise AI consulting, AI transformation consulting, marketing analytics, or product-focused delivery, I bring strategy and execution together. Available for freelance projects, consulting engagements, and full-time roles."
     ],
     "email": "madhu.kumar245@gmail.com",
     "phone": "+91 9985422444",
@@ -30,20 +30,20 @@
     "yearsOfExperience": 9,
     "stats": [
       {
-        "label": "Projects Completed",
-        "value": "50+"
+        "label": "New Customer Growth",
+        "value": "30%"
       },
       {
-        "label": "Client Satisfaction",
-        "value": "100%"
+        "label": "Churn Rate Reduction",
+        "value": "20%"
+      },
+      {
+        "label": "Brand Awareness Lift",
+        "value": "15%"
       },
       {
         "label": "Years Experience",
         "value": "9+"
-      },
-      {
-        "label": "Technologies Mastered",
-        "value": "20+"
       }
     ],
     "profileImage": "/uploads/imported/profile-image-a70423e9c352.jpg",
@@ -51,7 +51,7 @@
   },
   "siteSettings": {
     "siteTitle": "Madhu Dadi | Data Analyst & AI Consultant",
-    "siteDescription": "AI consultant and ML engineer with 9+ years of experience delivering generative AI consulting, LLM applications, RAG systems, and full-stack product development.",
+    "siteDescription": "AI consultant and ML engineer with 9+ years of experience delivering generative AI consulting, LLM applications, RAG systems, marketing analytics, and full-stack product development. Available for freelance and consulting engagements.",
     "siteKeywords": [
       "Madhu Dadi",
       "AI consultant",
@@ -73,7 +73,32 @@
       "AI chatbot development services",
       "machine learning consulting services",
       "OpenAI consulting",
-      "AI consulting company in India"
+      "AI consulting company in India",
+      "hire AI developer",
+      "hire AI consultant",
+      "hire ML engineer",
+      "hire data analyst",
+      "hire analytics consultant",
+      "freelance AI developer",
+      "freelance data analyst",
+      "freelance analytics consultant",
+      "AI freelancer India",
+      "data analyst for hire",
+      "analytics consultant for hire",
+      "marketing analytics consultant",
+      "marketing analytics services",
+      "campaign analytics expert",
+      "full-stack developer for hire",
+      "Python developer for hire",
+      "FastAPI developer",
+      "Next.js developer India",
+      "remote AI consultant",
+      "AI engineer remote",
+      "LLM freelancer",
+      "RAG consultant",
+      "AI product development",
+      "data pipeline consultant",
+      "business intelligence consultant"
     ],
     "twitterHandle": "madhu245",
     "updatedAt": "2026-04-17T15:56:54.057Z"
@@ -402,6 +427,90 @@
       "proficiency": "beginner",
       "yearsOfExperience": 1,
       "updatedAt": "2026-04-17T09:00:13.712Z"
+    },
+    {
+      "name": "Agentic AI",
+      "category": "ai-ml",
+      "proficiency": "advanced",
+      "yearsOfExperience": 2,
+      "updatedAt": "2026-05-03T20:00:00.000Z"
+    },
+    {
+      "name": "MLOps",
+      "category": "devops",
+      "proficiency": "advanced",
+      "yearsOfExperience": 2,
+      "updatedAt": "2026-05-03T20:00:00.000Z"
+    },
+    {
+      "name": "BigQuery",
+      "category": "database",
+      "proficiency": "advanced",
+      "yearsOfExperience": 4,
+      "updatedAt": "2026-05-03T20:00:00.000Z"
+    },
+    {
+      "name": "Power BI",
+      "category": "tools",
+      "proficiency": "expert",
+      "yearsOfExperience": 4,
+      "updatedAt": "2026-05-03T20:00:00.000Z"
+    },
+    {
+      "name": "Tableau",
+      "category": "tools",
+      "proficiency": "advanced",
+      "yearsOfExperience": 4,
+      "updatedAt": "2026-05-03T20:00:00.000Z"
+    },
+    {
+      "name": "Looker Studio",
+      "category": "tools",
+      "proficiency": "advanced",
+      "yearsOfExperience": 3,
+      "updatedAt": "2026-05-03T20:00:00.000Z"
+    },
+    {
+      "name": "BigData",
+      "category": "other",
+      "proficiency": "advanced",
+      "yearsOfExperience": 4,
+      "updatedAt": "2026-05-03T20:00:00.000Z"
+    },
+    {
+      "name": "NLP",
+      "category": "ai-ml",
+      "proficiency": "advanced",
+      "yearsOfExperience": 2,
+      "updatedAt": "2026-05-03T20:00:00.000Z"
+    },
+    {
+      "name": "DevOps",
+      "category": "devops",
+      "proficiency": "advanced",
+      "yearsOfExperience": 3,
+      "updatedAt": "2026-05-03T20:00:00.000Z"
+    },
+    {
+      "name": "Next.js",
+      "category": "frontend",
+      "proficiency": "expert",
+      "yearsOfExperience": 3,
+      "updatedAt": "2026-05-03T20:00:00.000Z"
+    },
+    {
+      "name": "Machine Learning",
+      "category": "ai-ml",
+      "proficiency": "expert",
+      "yearsOfExperience": 6,
+      "updatedAt": "2026-05-03T20:00:00.000Z"
+    },
+    {
+      "name": "Deep Learning",
+      "category": "ai-ml",
+      "proficiency": "advanced",
+      "yearsOfExperience": 2,
+      "updatedAt": "2026-05-03T20:00:00.000Z"
     }
   ],
   "experiences": [
@@ -413,7 +522,20 @@
       "startDate": "2023-03-20",
       "current": true,
       "order": 1,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "description": "Led the digital analytics strategy and analytics for Novartis Patient Support Services, ensuring data-driven decision-making across digital platforms to enhance patient engagement and support services.",
+      "responsibilities": [
+        "Led the digital analytics strategy and analytics for Novartis Patient Support Services, ensuring data-driven decision-making across digital platforms to enhance patient engagement and support services.",
+        "Developed and implemented key performance indicators (KPIs) and metrics to track the success and impact of digital initiatives, contributing to the optimization of patient support programs.",
+        "Collaborated with cross-functional teams (marketing, IT, patient support, and analytics) to drive the integration of digital analytics into business processes and achieve project goals.",
+        "Managed end-to-end digital analytics initiatives, from data collection and analysis to actionable insights and reporting, ensuring alignment with organizational objectives.",
+        "Trained and mentored team members in digital analytics best practices, fostering a data-centric culture within the Patient Support Services team.",
+        "Presented analytical findings and strategic recommendations to senior leadership, facilitating informed decision-making and business growth within the Patient Support Services division.",
+        "Utilized advanced analytics tools (e.g., Google Analytics, Power BI, Advanced Modelling, etc.) to measure and improve digital engagement, patient satisfaction, and operational efficiency."
+      ],
+      "achievements": [
+        "Received Best performer of the Quarter (Q1 2024) in Novartis."
+      ],
+      "updatedAt": "2026-05-03T20:00:00.000Z"
     },
     {
       "company": "RedBus (MMT Group)",
@@ -424,7 +546,18 @@
       "endDate": "2023-03-17",
       "current": false,
       "order": 2,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "description": "Led the Marketing Analytics team at redBus to provide measurement solutions for ATL, BTL and Digital Campaigns across India, Malaysia, Indonesia and Singapore.",
+      "responsibilities": [
+        "Handled the planning, execution and optimization of brand campaigns on Facebook, Programmatic and Google ads.",
+        "Performed impact analysis and reporting of the brand campaigns across all redBus markets (India, Malaysia, Indonesia and Singapore) and helped in increasing the Brand awareness by 15%.",
+        "Handled the Planning and Strategy for the CLM campaigns (Email, WhatsApp, SMS, PNs) and reducing the churn rate by 20%.",
+        "Led the Marketing Analytics team in redBus to provide measurement solutions for ATL, BTL and Digital Campaigns.",
+        "Created Brand Playbooks for Digital, Social and Owned media to effectively optimise the campaign budgets and increase the ROI of Brand initiatives."
+      ],
+      "achievements": [
+        "Received the Best performer of the Quarter (Q3 Trailblazer) award for creating the best campaign strategy, which resulted in 30% growth in new customers."
+      ],
+      "updatedAt": "2026-05-03T20:00:00.000Z"
     },
     {
       "company": "GroupM (WPP Media)",
@@ -435,7 +568,19 @@
       "endDate": "2022-05-13",
       "current": false,
       "order": 3,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "description": "Led Google Ads Data Hub projects across GroupM agencies for top 5% clients, performing frequency reach analysis, brand lift studies, and 1st party data solutions.",
+      "responsibilities": [
+        "Led the Google Ads Data Hub projects across GroupM agencies and worked for the top 5% of the clients of GroupM.",
+        "Performed frequency reach analysis to find the optimal number of exposures of ads in a cost-effective way.",
+        "Performed brand lift study, identified the most optimal consumer journey from first touch point to last touch point and measured the performance in terms of conversion lift.",
+        "Brought awareness of 1st party data solutions to increase the targeting by using cluster analysis, cost benefit analysis and pricing analytics to the clients."
+      ],
+      "achievements": [
+        "Received the best performer of the year 2020-2021 award in GroupM.",
+        "Selected for Prestigious WPP NextGen program in GroupM.",
+        "Increased the margins of the GroupM campaigns by 10-15%."
+      ],
+      "updatedAt": "2026-05-03T20:00:00.000Z"
     },
     {
       "company": "Absolinsoft",
@@ -446,7 +591,15 @@
       "endDate": "2018-07-13",
       "current": false,
       "order": 4,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "description": "Performed website analytics, SEO, SMM and SEM campaigns using descriptive and predictive modelling to improve traffic and engagement.",
+      "responsibilities": [
+        "Performed analysis on websites using Google Analytics to improve traffic and worked on SEO, SMM and SEM Campaigns using Descriptive and Predictive modellings and decreased the bounce rate by 25%.",
+        "Strategized, planned and executed social media campaigns across all platforms including Instagram and Facebook.",
+        "Implemented, Analyzed and Optimized organic and paid search engine marketing activities and increase the CTR by 20%.",
+        "Formulated and documented the project/product plan for web applications."
+      ],
+      "achievements": [],
+      "updatedAt": "2026-05-03T20:00:00.000Z"
     }
   ],
   "education": [
@@ -562,7 +715,116 @@
       "updatedAt": "2026-04-17T09:00:13.712Z"
     }
   ],
-  "services": [],
+  "services": [
+    {
+      "title": "AI & LLM Application Development",
+      "slug": "ai-llm-applications",
+      "icon": "/icon-512.png",
+      "shortDescription": "End-to-end generative AI consulting and LLM product development including RAG systems, AI agents, and chatbots that deliver measurable business outcomes.",
+      "fullDescription": "I design and build production-grade AI systems using Large Language Models, retrieval-augmented generation, and agentic workflows. From architecture design to deployment, I help teams implement AI solutions that automate processes, improve decision-making, and create new product capabilities. Every engagement includes evaluation frameworks, guardrails, and monitoring to ensure reliable performance in production.",
+      "features": [
+        "RAG pipeline architecture and implementation",
+        "LLM strategy and model selection",
+        "AI agent and workflow automation",
+        "Chatbot and conversational AI development",
+        "Production deployment and monitoring"
+      ],
+      "technologies": [
+        { "name": "Python" },
+        { "name": "OpenAI API" },
+        { "name": "LangChain" },
+        { "name": "FastAPI" },
+        { "name": "Next.js" }
+      ],
+      "deliverables": [
+        "AI system architecture document",
+        "Working prototype or MVP",
+        "Production deployment pipeline",
+        "Documentation and handover"
+      ],
+      "pricing": {
+        "startingPrice": 2500,
+        "priceType": "project",
+        "description": "Starting from $2,500 depending on scope and complexity"
+      },
+      "timeline": "3-8 weeks",
+      "featured": true,
+      "order": 1,
+      "updatedAt": "2026-05-03T20:00:00.000Z"
+    },
+    {
+      "title": "Marketing Analytics & Decision Intelligence",
+      "slug": "marketing-analytics-intelligence",
+      "icon": "/icon-512.png",
+      "shortDescription": "Campaign analytics, attribution modeling, marketing dashboards, and decision support systems that turn marketing data into competitive advantage.",
+      "fullDescription": "With deep experience across Novartis, redBus, and GroupM, I build analytics solutions that help marketing teams understand performance, optimize spend, and make faster decisions. Services include campaign measurement frameworks, automated reporting pipelines, attribution models, and executive dashboards tailored to your business context.",
+      "features": [
+        "Campaign performance analytics and reporting",
+        "Marketing attribution modeling",
+        "Executive and operational dashboards",
+        "Data pipeline automation",
+        "A/B testing and experimentation analysis"
+      ],
+      "technologies": [
+        { "name": "SQL" },
+        { "name": "Python" },
+        { "name": "Snowflake" },
+        { "name": "Google Analytics" },
+        { "name": "Dataiku" }
+      ],
+      "deliverables": [
+        "Analytics strategy and measurement plan",
+        "Automated reporting dashboards",
+        "Data pipeline and ETL workflows",
+        "Training and documentation"
+      ],
+      "pricing": {
+        "startingPrice": 2000,
+        "priceType": "project",
+        "description": "Starting from $2,000 depending on data sources and complexity"
+      },
+      "timeline": "2-6 weeks",
+      "featured": true,
+      "order": 2,
+      "updatedAt": "2026-05-03T20:00:00.000Z"
+    },
+    {
+      "title": "Full-Stack Web Product Development",
+      "slug": "fullstack-product-development",
+      "icon": "/icon-512.png",
+      "shortDescription": "Modern web applications from concept to deployment using React, Next.js, TypeScript, and cloud-native backends built for scale.",
+      "fullDescription": "I build complete web products with clean architecture, responsive design, and production-ready deployment. From internal tools to customer-facing platforms, I handle frontend, backend, API design, database modeling, and DevOps. Every project is built with SEO, performance, and maintainability in mind.",
+      "features": [
+        "Full-stack application development",
+        "REST and GraphQL API design",
+        "Database architecture and optimization",
+        "Performance and SEO optimization",
+        "Cloud deployment and CI/CD"
+      ],
+      "technologies": [
+        { "name": "Next.js" },
+        { "name": "TypeScript" },
+        { "name": "React" },
+        { "name": "FastAPI" },
+        { "name": "PostgreSQL" }
+      ],
+      "deliverables": [
+        "Production-ready web application",
+        "API documentation",
+        "Deployment and hosting setup",
+        "Source code and technical documentation"
+      ],
+      "pricing": {
+        "startingPrice": 3000,
+        "priceType": "project",
+        "description": "Starting from $3,000 depending on product scope"
+      },
+      "timeline": "4-12 weeks",
+      "featured": true,
+      "order": 3,
+      "updatedAt": "2026-05-03T20:00:00.000Z"
+    }
+  ],
   "certifications": [
     {
       "name": "Ultimate RAG Bootcamp Using Langchain, LangGraph & Langsmith",

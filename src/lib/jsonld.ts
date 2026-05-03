@@ -48,6 +48,28 @@ type Certification = {
   description?: string | null;
 };
 
+type RichService = {
+  title: string;
+  slug?: string | null;
+  shortDescription?: string | null;
+  fullDescription?: string | null;
+  features?: string[] | null;
+  technologies?: Array<{ name?: string | null }> | null;
+  pricing?: {
+    startingPrice?: number | null;
+    priceType?: string | null;
+    description?: string | null;
+  } | null;
+  timeline?: string | null;
+};
+
+type CurrentRole = {
+  company: string;
+  position: string;
+  startDate?: string | null;
+  location?: string | null;
+};
+
 // ---------------------------------------------------------------------------
 // Person
 // ---------------------------------------------------------------------------
@@ -64,6 +86,10 @@ export function buildPersonSchema({
   nationality,
   alumniOf,
   seoKeywords,
+  certifications,
+  services,
+  currentRole,
+  priceRange,
 }: {
   fullName: string;
   headline?: string | null;
@@ -77,6 +103,10 @@ export function buildPersonSchema({
   nationality?: string | null;
   alumniOf?: Array<{ name: string; url?: string }> | null;
   seoKeywords?: string[] | null;
+  certifications?: Certification[] | null;
+  services?: RichService[] | null;
+  currentRole?: CurrentRole | null;
+  priceRange?: string | null;
 }) {
   const sameAs = Object.values(socialLinks ?? {}).filter(
     (v): v is string => typeof v === "string" && v.length > 0,
@@ -119,6 +149,71 @@ export function buildPersonSchema({
   }
   const description = descriptionParts.join(" ") || undefined;
 
+  const credentialNodes =
+    certifications && certifications.length > 0
+      ? certifications
+          .filter((c) => c.credentialUrl || c.name)
+          .map((c, i) => ({
+            "@type": "EducationalOccupationalCredential",
+            "@id": `${siteUrl}#credential-${i + 1}`,
+            name: c.name,
+            ...(c.credentialUrl && { url: c.credentialUrl }),
+            ...(c.issuer && {
+              recognizedBy: {
+                "@type": "Organization",
+                name: c.issuer,
+              },
+            }),
+          }))
+      : [];
+
+  const offerNodes =
+    services && services.length > 0
+      ? services
+          .filter((s) => s.title)
+          .map((s, i) => {
+            const hasPrice =
+              typeof s.pricing?.startingPrice === "number" &&
+              s.pricing.startingPrice > 0;
+            return {
+              "@type": "Offer",
+              "@id": `${siteUrl}#offer-${i + 1}`,
+              name: s.title,
+              description: s.shortDescription ?? undefined,
+              url: `${siteUrl}#services`,
+              availability: "https://schema.org/InStock",
+              ...(hasPrice && {
+                price: s.pricing?.startingPrice,
+                priceCurrency: "USD",
+              }),
+              ...(s.timeline && {
+                deliveryLeadTime: {
+                  "@type": "QuantitativeValue",
+                  value: s.timeline,
+                },
+              }),
+            };
+          })
+      : [];
+
+  const worksForNode = currentRole
+    ? {
+        "@type": "OrganizationRole",
+        roleName: currentRole.position,
+        ...(currentRole.startDate && { startDate: currentRole.startDate }),
+        memberOf: {
+          "@type": "Organization",
+          name: currentRole.company,
+          ...(currentRole.location && {
+            location: {
+              "@type": "PostalAddress",
+              addressLocality: currentRole.location,
+            },
+          }),
+        },
+      }
+    : undefined;
+
   return {
     "@type": "Person",
     "@id": `${siteUrl}#person`,
@@ -135,6 +230,10 @@ export function buildPersonSchema({
           email,
           url: `${siteUrl}#contact`,
           availableLanguage: ["English"],
+          areaServed: {
+            "@type": "Country",
+            name: "India",
+          },
         },
       ],
     }),
@@ -172,6 +271,19 @@ export function buildPersonSchema({
           ...(edu.url && { url: edu.url }),
         })),
       }),
+    ...(worksForNode && { worksFor: worksForNode }),
+    ...(credentialNodes.length > 0 && { hasCredential: credentialNodes }),
+    ...(offerNodes.length > 0 && { makesOffer: offerNodes }),
+    ...(priceRange && { priceRange }),
+    areaServed: [
+      { "@type": "Country", name: "India" },
+      { "@type": "Place", name: "Global (Remote)" },
+    ],
+    availableLanguage: ["English"],
+    seeks: {
+      "@type": "Demand",
+      name: "Freelance, consulting, and full-time opportunities in AI, analytics, and full-stack engineering",
+    },
   };
 }
 
@@ -651,6 +763,100 @@ export function buildFaqSchema({
           "@type": "Answer",
           text: `${fullName} specializes in AI/ML engineering (LLMs, RAG systems, agentic pipelines), full-stack development with Next.js, React, TypeScript, Node.js, Python, FastAPI, and PostgreSQL, as well as cloud infrastructure and system design.`,
         },
+      },
+      {
+        "@type": "Question",
+        name: `What is the typical engagement process?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `The typical process starts with a brief review of your needs, followed by a discovery call, a detailed proposal with timeline and pricing, and then project kickoff with weekly updates. See the step-by-step guide at ${siteUrl}#howto-hire.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: `What industries has ${fullName} worked in?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `${fullName} has delivered projects across pharmaceuticals (Novartis), travel-tech (redBus), media and advertising (GroupM / WPP), and education technology. This cross-industry experience brings adaptable frameworks and proven playbooks to every engagement.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: `Does ${fullName} work remotely?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `Yes. ${fullName} is based in India and works with clients globally. Remote collaboration is supported through async communication, scheduled video calls, and shared project management tools.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: `What is the pricing model?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `${fullName} offers project-based pricing with clear milestones. Typical engagements start from $2,000 depending on scope. A detailed proposal with fixed pricing is provided after the discovery call.`,
+        },
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// HowTo — step-by-step guide for hiring / engaging
+// Helps AI search engines answer "how do I hire Madhu Dadi?"
+// ---------------------------------------------------------------------------
+export function buildHowToHireSchema({
+  siteUrl,
+  fullName,
+}: {
+  siteUrl: string;
+  fullName: string;
+}) {
+  return {
+    "@type": "HowTo",
+    "@id": `${siteUrl}#howto-hire`,
+    name: `How to Hire ${fullName}`,
+    description: `A simple guide to engaging ${fullName} for AI consulting, analytics, or full-stack development projects.`,
+    totalTime: "PT48H",
+    supply: [
+      { "@type": "HowToSupply", name: "Project brief or problem statement" },
+      { "@type": "HowToSupply", name: "Budget range and timeline" },
+    ],
+    tool: [
+      { "@type": "HowToTool", name: "Email or contact form" },
+      { "@type": "HowToTool", name: "LinkedIn" },
+    ],
+    step: [
+      {
+        "@type": "HowToStep",
+        position: 1,
+        name: "Review services and case studies",
+        text: `Explore the portfolio at ${siteUrl} to understand services, past projects, and case studies.`,
+        url: `${siteUrl}case-studies/`,
+      },
+      {
+        "@type": "HowToStep",
+        position: 2,
+        name: "Prepare your project brief",
+        text: "Outline your business problem, desired outcomes, timeline, and budget range.",
+      },
+      {
+        "@type": "HowToStep",
+        position: 3,
+        name: "Initiate contact",
+        text: `Use the contact form at ${siteUrl}#contact or reach out via LinkedIn to schedule an initial discussion.`,
+        url: `${siteUrl}#contact`,
+      },
+      {
+        "@type": "HowToStep",
+        position: 4,
+        name: "Discovery call and proposal",
+        text: "A 30-minute call to align on scope, followed by a detailed proposal with timeline and pricing.",
+      },
+      {
+        "@type": "HowToStep",
+        position: 5,
+        name: "Kickoff and delivery",
+        text: "Project kickoff with weekly updates, transparent communication, and delivery against agreed milestones.",
       },
     ],
   };

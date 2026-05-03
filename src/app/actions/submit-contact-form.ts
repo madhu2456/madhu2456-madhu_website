@@ -137,7 +137,7 @@ export async function submitContactForm(
   const subject = String(formData.get("subject") || "").trim();
   const message = String(formData.get("message") || "").trim();
 
-  if (!name || !email || !message) {
+  if (!name || !email || !subject || !message) {
     return { success: false, error: "Please fill in all required fields." };
   }
 
@@ -159,26 +159,32 @@ export async function submitContactForm(
   const fromEmail =
     process.env.CONTACT_FORM_FROM ?? "Portfolio <onboarding@resend.dev>";
 
-  if (process.env.RESEND_API_KEY && toEmail) {
-    try {
-      await sendViaResend({
-        from: fromEmail,
-        to: [toEmail],
-        reply_to: `${name} <${email}>`,
-        subject: subject
-          ? `[madhudadi.in] ${subject}`
-          : `[madhudadi.in] New message from ${name}`,
-        html: buildEmailHtml({ name, email, subject, message, submittedAt }),
-      });
-      console.info("[contact-form] email sent via Resend to", toEmail);
-    } catch (err) {
-      // Log but don't surface the error to the visitor — form still succeeds.
-      console.error("[contact-form] Resend delivery failed", err);
-    }
-  } else {
-    console.warn(
-      "[contact-form] RESEND_API_KEY or CONTACT_FORM_TO not set — email skipped",
-    );
+  if (!process.env.RESEND_API_KEY || !toEmail) {
+    return {
+      success: false,
+      error:
+        "Contact delivery is not configured on this environment. Please reach out directly via email or LinkedIn.",
+    };
+  }
+
+  try {
+    await sendViaResend({
+      from: fromEmail,
+      to: [toEmail],
+      reply_to: `${name} <${email}>`,
+      subject: subject
+        ? `[madhudadi.in] ${subject}`
+        : `[madhudadi.in] New message from ${name}`,
+      html: buildEmailHtml({ name, email, subject, message, submittedAt }),
+    });
+    console.info("[contact-form] email sent via Resend to", toEmail);
+  } catch (err) {
+    console.error("[contact-form] Resend delivery failed", err);
+    return {
+      success: false,
+      error:
+        "Message could not be sent right now. Please try again later or contact directly via email.",
+    };
   }
 
   return { success: true, data: { submittedAt } };

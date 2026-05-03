@@ -239,7 +239,9 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <DeferredGTM gtmId="GTM-PBB2W9VG" />
+        <DeferredGTM
+          gtmId={process.env.NEXT_PUBLIC_GTM_ID?.trim() || "GTM-PBB2W9VG"}
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

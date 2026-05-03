@@ -7,9 +7,11 @@ export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const { portfolioLastUpdatedAt, sortedProjects } = await getPortfolioData();
-  const siteUrl = (
-    process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in"
-  ).replace(/\/+$/, "") + "/";
+  const siteUrl =
+    (process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(
+      /\/+$/,
+      "",
+    ) + "/";
 
   const latestDate = new Date(portfolioLastUpdatedAt);
   const blogUrl = `${siteUrl}blog/`;

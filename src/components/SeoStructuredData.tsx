@@ -4,6 +4,7 @@ import {
   buildCertificationsListSchema,
   buildFaqSchema,
   buildFullGraph,
+  buildHowToHireSchema,
   buildOccupationSchema,
   buildPersonSchema,
   buildProfilePageSchema,
@@ -26,9 +27,11 @@ export async function SeoStructuredData() {
     sortedServices: services,
   } = await getPortfolioData();
 
-  const siteUrl = (
-    process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in"
-  ).replace(/\/+$/, "") + "/";
+  const siteUrl =
+    (process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(
+      /\/+$/,
+      "",
+    ) + "/";
   const fullName =
     [profile.firstName, profile.lastName].filter(Boolean).join(" ") ||
     "Madhu Dadi";
@@ -61,6 +64,8 @@ export async function SeoStructuredData() {
       ? new Date(Math.max(...updatedAtTimestamps)).toISOString()
       : undefined;
 
+  const currentRole = experience.find((e) => e.current);
+
   const graph = buildFullGraph([
     buildPersonSchema({
       fullName,
@@ -80,6 +85,17 @@ export async function SeoStructuredData() {
           url: edu.website ?? undefined,
         })),
       seoKeywords: discoveryKeywords,
+      certifications,
+      services,
+      currentRole: currentRole
+        ? {
+            company: currentRole.company,
+            position: currentRole.position,
+            startDate: currentRole.startDate,
+            location: currentRole.location,
+          }
+        : undefined,
+      priceRange: "$$",
     }),
     buildOccupationSchema({
       siteUrl,
@@ -113,6 +129,7 @@ export async function SeoStructuredData() {
       services,
       seoKeywords: discoveryKeywords,
     }),
+    buildHowToHireSchema({ siteUrl, fullName }),
   ]);
 
   return (

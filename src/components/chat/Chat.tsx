@@ -256,6 +256,10 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
           ref={viewportRef}
           onScroll={handleScroll}
           className="flex-1 overflow-y-auto px-3 py-5"
+          aria-live="polite"
+          aria-atomic="false"
+          role="log"
+          aria-label="Chat messages"
         >
           <div className="space-y-5">
             <AnimatePresence initial={false}>

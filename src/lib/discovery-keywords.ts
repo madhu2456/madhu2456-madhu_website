@@ -43,6 +43,20 @@ const MODERN_AI_DISCOVERY_TERMS = [
   "llm application development articles",
   "agentic ai software architecture",
   "Madhu Dadi blog",
+  "hire ai developer india",
+  "hire ml engineer india",
+  "freelance ai consultant",
+  "freelance data analyst india",
+  "remote ai engineer for hire",
+  "marketing analytics consultant india",
+  "campaign analytics expert",
+  "full stack developer for hire india",
+  "python developer remote",
+  "fastapi developer for hire",
+  "nextjs developer consultant",
+  "ai automation freelancer",
+  "data pipeline consultant",
+  "business intelligence consultant india",
 ];
 
 const normalizeWhitespace = (value: string) =>
@@ -120,12 +134,24 @@ const buildIntentKeywordVariants = (seed: string, location?: string | null) => {
     `${seed} consulting services`,
     `${seed} development services`,
     `hire ${seed} expert`,
+    `hire ${seed} developer`,
     `${seed} freelancer`,
+    `${seed} for hire`,
+    `${seed} contractor`,
+    `${seed} remote`,
+    `${seed} near me`,
   ];
 
   if (location) {
+    const cityOnly = location.replace(/,.*$/, "").trim();
     variants.push(`${seed} in ${location}`);
     variants.push(`${seed} services in ${location}`);
+    variants.push(`hire ${seed} in ${location}`);
+    variants.push(`${seed} freelancer ${location}`);
+    if (cityOnly && cityOnly !== location) {
+      variants.push(`${seed} in ${cityOnly}`);
+      variants.push(`hire ${seed} in ${cityOnly}`);
+    }
   }
 
   return variants;

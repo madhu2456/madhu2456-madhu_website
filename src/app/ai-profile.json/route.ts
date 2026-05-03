@@ -220,6 +220,39 @@ export async function GET() {
       null,
   };
 
+  const engagementMeta = {
+    availabilityStatus: profile.availability,
+    availabilityLabel: availability,
+    preferredEngagementTypes: [
+      "freelance projects",
+      "consulting engagements",
+      "advisory roles",
+      "full-time opportunities",
+    ],
+    workMode: "remote-first",
+    onsiteLocations: ["Hyderabad", "Bangalore", "Visakhapatnam", "India"],
+    languages: ["English"],
+    typicalResponseTime: "Within 24 hours",
+    preferredContactMethods: ["email", "LinkedIn", "contact form"],
+    areaServed: ["India", "Global (Remote)"],
+  };
+
+  const pricingIndication = sortedServices
+    .filter((s) => s.pricing && typeof s.pricing.startingPrice === "number")
+    .map((s) => ({
+      service: s.title,
+      startingPrice: s.pricing?.startingPrice,
+      priceCurrency: "USD",
+      priceType: s.pricing?.priceType ?? "project",
+      timeline: s.timeline ?? null,
+    }));
+
+  const hiringKeywords = normalizedKeywords.filter((k) =>
+    /\b(hire|freelance|contractor|remote|for hire|consultant|expert)\b/i.test(
+      k,
+    ),
+  );
+
   const body = {
     meta: {
       generatedAt: new Date().toISOString(),
@@ -255,6 +288,9 @@ export async function GET() {
       website: siteUrl,
       sameAs,
     },
+    engagement: engagementMeta,
+    pricingIndication,
+    hiringKeywords,
     expertise,
     keywords: normalizedKeywords,
     skills: normalizedSkills.map((skill) => ({
