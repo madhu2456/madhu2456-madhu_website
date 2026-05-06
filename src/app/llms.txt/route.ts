@@ -93,11 +93,6 @@ export async function GET() {
         `[case study](${siteUrl}case-studies/${project.slug}/)`,
         project.liveUrl ? `[live](${project.liveUrl})` : null,
         project.githubUrl ? `[code](${project.githubUrl})` : null,
-        ...(project.citations ?? []).map((citation) =>
-          citation.url
-            ? `[${citation.label || "evidence"}](${citation.url})`
-            : null,
-        ),
       ];
       const uniqueLinks = Array.from(new Set(links.filter(Boolean)));
       const parts = [`- **${project.title}**`];
@@ -105,9 +100,18 @@ export async function GET() {
       if (project.impactSummary) parts.push(` — ${project.impactSummary}`);
       if (uniqueLinks.length > 0) parts.push(` — ${uniqueLinks.join(", ")}`);
       if (project.featured) parts.push(" ⭐");
-      return parts.join("");
+      
+      const headerLine = parts.join("");
+      
+      // Generate Verified Evidence section
+      const citations = project.citations ?? [];
+      const evidenceLines = citations.length > 0
+        ? citations.map(c => `  - **${c.label || 'Evidence'}:** ${c.url}`).join('\n')
+        : "  - See case study for evidence links";
+      
+      return `${headerLine}\n  \n  ### Verified Evidence\n${evidenceLines}`;
     })
-    .join("\n");
+    .join("\n\n");
 
   const caseStudyLines = sortedProjects
     .map((project) => {
