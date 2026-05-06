@@ -274,6 +274,11 @@ export function buildPersonSchema({
         name: "Technical Articles Index",
         url: `${siteUrl}blog/posts/`,
       },
+      {
+        "@type": "CreativeWork",
+        name: "Technical Blog AI Assistant",
+        url: `${siteUrl}blog/ask/`,
+      },
     ],
     ...(knowsAbout.length > 0 && { knowsAbout }),
     ...(nationality && {
