@@ -1,5 +1,9 @@
 import { expect, test, describe } from "vitest";
-import { buildProjectsListSchema } from "../jsonld";
+import { 
+  buildProjectsListSchema, 
+  buildPersonSchema, 
+  buildWebSiteSchema 
+} from "../jsonld";
 
 describe("buildProjectsListSchema", () => {
   const siteUrl = "https://madhudadi.com/";
@@ -74,5 +78,43 @@ describe("buildProjectsListSchema", () => {
         },
       ],
     });
+  });
+});
+
+describe("buildPersonSchema", () => {
+  const siteUrl = "https://madhudadi.com/";
+  const fullName = "Madhu Dadi";
+
+  test("includes subjectOf property with blog links", () => {
+    const schema = buildPersonSchema({ fullName, siteUrl });
+
+    expect(schema.subjectOf).toEqual([
+      {
+        "@type": "CreativeWork",
+        name: "Madhu Dadi's Technical Blog RSS Feed",
+        url: "https://madhudadi.com/blog/feed.xml",
+        encodingFormat: "application/rss+xml",
+      },
+      {
+        "@type": "CreativeWork",
+        name: "Technical Articles Index",
+        url: "https://madhudadi.com/blog/posts/",
+      },
+    ]);
+  });
+});
+
+describe("buildWebSiteSchema", () => {
+  const url = "https://madhudadi.com/";
+  const name = "Madhu Dadi";
+
+  test("includes significantLink and relatedLink properties", () => {
+    const schema = buildWebSiteSchema({ name, url });
+
+    expect(schema.significantLink).toEqual([
+      "https://madhudadi.com/blog/ask/",
+      "https://madhudadi.com/blog/posts/",
+    ]);
+    expect(schema.relatedLink).toEqual(["https://madhudadi.com/blog/"]);
   });
 });

@@ -262,6 +262,19 @@ export function buildPersonSchema({
     inLanguage: "en-US",
     mainEntityOfPage: { "@id": `${siteUrl}#profilepage` },
     hasOccupation: { "@id": `${siteUrl}#occupation` },
+    subjectOf: [
+      {
+        "@type": "CreativeWork",
+        name: `${fullName}'s Technical Blog RSS Feed`,
+        url: `${siteUrl}blog/feed.xml`,
+        encodingFormat: "application/rss+xml",
+      },
+      {
+        "@type": "CreativeWork",
+        name: "Technical Articles Index",
+        url: `${siteUrl}blog/posts/`,
+      },
+    ],
     ...(knowsAbout.length > 0 && { knowsAbout }),
     ...(nationality && {
       nationality: {
@@ -339,6 +352,8 @@ export function buildWebSiteSchema({
     ...(description && { description }),
     inLanguage: "en-US",
     publisher: { "@id": `${url}#person` },
+    significantLink: [`${blogUrl}ask/`, `${blogUrl}posts/`],
+    relatedLink: [blogUrl],
     // SiteLinksSearchBox — enables rich search in Google SERPs
     potentialAction: [
       {
