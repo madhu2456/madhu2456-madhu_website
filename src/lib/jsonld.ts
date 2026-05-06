@@ -11,6 +11,11 @@ type SocialLinks = {
   stackoverflow?: string | null;
 };
 
+type Citation = {
+  label?: string | null;
+  url?: string | null;
+};
+
 type Project = {
   title: string;
   slug?: string | null;
@@ -18,6 +23,7 @@ type Project = {
   liveUrl?: string | null;
   githubUrl?: string | null;
   category?: string | null;
+  citations?: Citation[] | null;
 };
 
 type Experience = {
@@ -572,6 +578,14 @@ export function buildProjectsListSchema({
         ...(p.githubUrl && { codeRepository: p.githubUrl }),
         ...(p.category && { applicationCategory: p.category }),
         author: { "@id": `${siteUrl}#person` },
+        ...(p.citations &&
+          p.citations.length > 0 && {
+            citation: p.citations.map((c) => ({
+              "@type": "CreativeWork",
+              name: c.label || "Evidence",
+              url: c.url,
+            })),
+          }),
       },
     })),
   };
