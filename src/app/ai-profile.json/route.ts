@@ -331,9 +331,11 @@ export async function GET() {
       canonical: siteUrl,
       profiles: sourceProfiles,
       blog: {
-        url: `${siteUrl}blog`,
-        posts: `${siteUrl}blog/posts`,
+        url: `${siteUrl}blog/`,
+        posts: `${siteUrl}blog/posts/`,
         rss: `${siteUrl}blog/feed.xml`,
+        sitemap: `${siteUrl}blog/sitemap.xml`,
+        aiChat: `${siteUrl}blog/ask/`,
       },
       caseStudies: caseStudies.slice(0, 12),
       certifications: sortedCertifications

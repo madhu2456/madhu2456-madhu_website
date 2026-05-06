@@ -11,9 +11,14 @@ type ProjectTechLike = {
   name?: string | null;
 };
 
+type CitationLike = {
+  label?: string | null;
+};
+
 type ProjectLike = {
   category?: string | null;
   technologies?: Array<ProjectTechLike | null> | null;
+  citations?: Array<CitationLike | null> | null;
 };
 
 export type DiscoveryKeywordInput = {
@@ -122,6 +127,9 @@ const buildSeedTerms = ({
     appendUnique(terms, seen, project?.category);
     for (const technology of project?.technologies ?? []) {
       appendUnique(terms, seen, technology?.name);
+    }
+    for (const citation of project?.citations ?? []) {
+      appendUnique(terms, seen, citation?.label);
     }
   }
 

@@ -100,6 +100,11 @@ describe("buildPersonSchema", () => {
         name: "Technical Articles Index",
         url: "https://madhudadi.com/blog/posts/",
       },
+      {
+        "@type": "CreativeWork",
+        name: "Technical Blog AI Assistant",
+        url: "https://madhudadi.com/blog/ask/",
+      },
     ]);
   });
 });
