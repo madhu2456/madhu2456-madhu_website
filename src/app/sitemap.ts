@@ -12,7 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ).replace(/\/+$/, "")}/`;
 
   const latestDate = new Date(portfolioLastUpdatedAt);
-  const blogUrl = `${siteUrl}blog/`;
+  const blogUrl = `${siteUrl}blog`;
 
   const baseEntries: MetadataRoute.Sitemap = [
     {
@@ -40,26 +40,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     },
     {
-      url: `${blogUrl}series/`,
+      url: `${blogUrl}/series`,
       lastModified: latestDate,
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
-      url: `${blogUrl}tags/`,
+      url: `${blogUrl}/tags`,
       lastModified: latestDate,
       changeFrequency: "weekly",
       priority: 0.7,
     },
     // Blog sub-site pages (crawlers benefit from seeing these in the portfolio sitemap)
     {
-      url: `${blogUrl}posts/`,
+      url: `${blogUrl}/posts`,
       lastModified: latestDate,
       changeFrequency: "daily",
       priority: 0.85,
     },
     {
-      url: `${blogUrl}ask/`,
+      url: `${blogUrl}/ask`,
       lastModified: latestDate,
       changeFrequency: "monthly",
       priority: 0.7,
