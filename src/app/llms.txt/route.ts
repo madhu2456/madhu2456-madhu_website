@@ -100,15 +100,18 @@ export async function GET() {
       if (project.impactSummary) parts.push(` — ${project.impactSummary}`);
       if (uniqueLinks.length > 0) parts.push(` — ${uniqueLinks.join(", ")}`);
       if (project.featured) parts.push(" ⭐");
-      
+
       const headerLine = parts.join("");
-      
+
       // Generate Verified Evidence section
       const citations = project.citations ?? [];
-      const evidenceLines = citations.length > 0
-        ? citations.map(c => `  - **${c.label || 'Evidence'}:** ${c.url}`).join('\n')
-        : "  - See case study for evidence links";
-      
+      const evidenceLines =
+        citations.length > 0
+          ? citations
+              .map((c) => `  - **${c.label || "Evidence"}:** ${c.url}`)
+              .join("\n")
+          : "  - See case study for evidence links";
+
       return `${headerLine}\n  \n  ### Verified Evidence\n${evidenceLines}`;
     })
     .join("\n\n");
@@ -274,7 +277,7 @@ AI-powered chat assistant using Agentic RAG over local portfolio data.
 - **AI profile JSON:** ${siteUrl}ai-profile.json
 - **LLMs profile feed:** ${siteUrl}llms.txt
 - **Case studies index:** ${siteUrl}case-studies/
-- **Portfolio search:** ${siteUrl}search/
+- **Portfolio search:** ${siteUrl}search
 - **Blog RSS feed:** ${siteUrl}blog/feed.xml
 - **XML sitemap:** ${siteUrl}sitemap.xml
 - **Blog sitemap:** ${siteUrl}blog/sitemap.xml

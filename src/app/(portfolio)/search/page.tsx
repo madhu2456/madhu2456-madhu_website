@@ -53,7 +53,7 @@ export async function generateMetadata({
     title,
     description,
     alternates: {
-      canonical: "/search/",
+      canonical: "/search",
     },
     robots: {
       index: query.length === 0,

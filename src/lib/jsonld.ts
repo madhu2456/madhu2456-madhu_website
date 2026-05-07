@@ -365,7 +365,7 @@ export function buildWebSiteSchema({
         "@type": "SearchAction",
         target: {
           "@type": "EntryPoint",
-          urlTemplate: `${url}search/?q={search_term_string}`,
+          urlTemplate: `${url}search?q={search_term_string}`,
         },
         "query-input": "required name=search_term_string",
       },
@@ -397,7 +397,7 @@ export function buildWebSiteSchema({
         "@type": "SearchAction",
         target: {
           "@type": "EntryPoint",
-          urlTemplate: `${blogUrl}search/?q={search_term_string}`,
+          urlTemplate: `${blogUrl}search?q={search_term_string}`,
         },
         "query-input": "required name=search_term_string",
       },
