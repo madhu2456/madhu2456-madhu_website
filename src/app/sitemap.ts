@@ -12,7 +12,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ).replace(/\/+$/, "")}/`;
 
   const latestDate = new Date(portfolioLastUpdatedAt);
-  const blogUrl = `${siteUrl}blog`;
 
   const baseEntries: MetadataRoute.Sitemap = [
     {
@@ -32,56 +31,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: latestDate,
       changeFrequency: "monthly",
       priority: 0.6,
-    },
-    {
-      url: blogUrl,
-      lastModified: latestDate,
-      changeFrequency: "daily",
-      priority: 0.9,
-    },
-    {
-      url: `${blogUrl}/series`,
-      lastModified: latestDate,
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${blogUrl}/tags`,
-      lastModified: latestDate,
-      changeFrequency: "weekly",
-      priority: 0.7,
-    },
-    // Blog sub-site pages (crawlers benefit from seeing these in the portfolio sitemap)
-    {
-      url: `${blogUrl}/posts`,
-      lastModified: latestDate,
-      changeFrequency: "daily",
-      priority: 0.85,
-    },
-    {
-      url: `${blogUrl}/ask`,
-      lastModified: latestDate,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    // Machine-readable endpoints — important for AI/LLM crawlers
-    {
-      url: `${siteUrl}llms.txt`,
-      lastModified: latestDate,
-      changeFrequency: "weekly",
-      priority: 0.7,
-    },
-    {
-      url: `${siteUrl}ai-profile.json`,
-      lastModified: latestDate,
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${siteUrl}humans.txt`,
-      lastModified: latestDate,
-      changeFrequency: "monthly",
-      priority: 0.5,
     },
   ];
 
