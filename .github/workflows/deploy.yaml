@@ -76,7 +76,7 @@ jobs:
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: madhudadi.in
+          host: 134.209.154.101
           username: madhu
           key: ${{ secrets.SSH_KEY }}
           command_timeout: '20m'
