@@ -27,11 +27,9 @@ export async function SeoStructuredData() {
     sortedServices: services,
   } = await getPortfolioData();
 
-  const siteUrl =
-    (process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(
-      /\/+$/,
-      "",
-    ) + "/";
+  const siteUrl = `${(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in"
+  ).replace(/\/+$/, "")}/`;
   const fullName =
     [profile.firstName, profile.lastName].filter(Boolean).join(" ") ||
     "Madhu Dadi";

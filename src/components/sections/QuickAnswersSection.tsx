@@ -54,7 +54,9 @@ export async function QuickAnswersSection() {
     <section id="answers" className="py-20 px-6 bg-muted/20">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Quick Answers</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            Frequently Asked Questions (FAQ)
+          </h2>
           <p className="text-xl text-muted-foreground">
             Fast answers for hiring and collaboration decisions
           </p>

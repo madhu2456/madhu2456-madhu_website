@@ -1,8 +1,8 @@
-import { expect, test, describe } from "vitest";
-import { 
-  buildProjectsListSchema, 
-  buildPersonSchema, 
-  buildWebSiteSchema 
+import { describe, expect, test } from "vitest";
+import {
+  buildPersonSchema,
+  buildProjectsListSchema,
+  buildWebSiteSchema,
 } from "../jsonld";
 
 describe("buildProjectsListSchema", () => {
