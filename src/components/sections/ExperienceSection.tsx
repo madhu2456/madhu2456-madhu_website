@@ -15,7 +15,7 @@ export async function ExperienceSection() {
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Work Experience
+            Professional Experience in AI & Analytics
           </h2>
           <p className="text-xl text-muted-foreground">
             My professional journey

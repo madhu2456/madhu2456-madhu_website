@@ -18,7 +18,7 @@ export async function ProjectsSection() {
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Featured Projects
+            Featured AI & Web Projects
           </h2>
           <p className="text-xl text-muted-foreground">Some of my best work</p>
         </div>

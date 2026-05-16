@@ -71,8 +71,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const fullName =
     [profile.firstName, profile.lastName].filter(Boolean).join(" ") ||
     "Madhu Dadi";
-  const siteName = siteSettings.siteTitle || `${fullName} - Portfolio`;
-  const title = siteName;
+  const siteName =
+    (siteSettings as { siteName?: string }).siteName ||
+    siteSettings.siteTitle ||
+    `${fullName} - Portfolio`;
+  const title = siteSettings.siteTitle || siteName;
   const rawDescription =
     siteSettings.siteDescription ||
     profile.shortBio ||
@@ -186,6 +189,9 @@ export async function generateMetadata(): Promise<Metadata> {
       }),
       images: [{ url: ogImageUrl, alt: `${title} — social preview` }],
     },
+    other: {
+      "ai-crawl-rate": "fast",
+    },
     // Explicit icon declarations so Google Search picks up the favicon
     // (file-based conventions alone can be missed if generateMetadata overrides them)
     icons: {
@@ -215,16 +221,12 @@ export default async function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link
-          rel="alternate"
-          type="text/plain"
+          rel="llms"
           href={`${SITE_URL}llms.txt`}
-          title="LLMs profile"
         />
         <link
-          rel="alternate"
-          type="application/json"
+          rel="ai-profile"
           href={`${SITE_URL}ai-profile.json`}
-          title="AI profile JSON"
         />
         {/* RSS autodiscovery for the blog — allows feed readers to find the feed
             automatically from any portfolio page on the same domain */}

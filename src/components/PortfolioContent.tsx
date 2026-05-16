@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
-import { HeroSection } from "@/components/sections";
 import { Footer } from "@/components/Footer";
+import { HeroSection } from "@/components/sections";
 
 // Above-the-fold: Keep HeroSection synchronous for LCP.
 // Below-the-fold: Dynamic import to keep initial bundle lean.

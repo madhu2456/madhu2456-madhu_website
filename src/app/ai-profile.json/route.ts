@@ -364,6 +364,25 @@ export async function GET() {
       ...(normalizedKeywords.length > 0 && {
         keywords: normalizedKeywords.join(", "),
       }),
+      ...(sortedCertifications.length > 0 && {
+        hasCredential: sortedCertifications.map((cert, i) => ({
+          "@type": "EducationalOccupationalCredential",
+          "@id": `${siteUrl}#credential-${i + 1}`,
+          name: cert.name,
+          ...(cert.credentialUrl && { url: cert.credentialUrl }),
+          ...(cert.issuer && {
+            recognizedBy: {
+              "@type": "Organization",
+              name: cert.issuer,
+            },
+          }),
+        })),
+      }),
+      ...(sortedEducation.length > 0 && {
+        alumniOf: sortedEducation
+          .filter((edu) => edu.institution)
+          .map((edu) => edu.institution),
+      }),
       mainEntityOfPage: { "@id": `${siteUrl}#profilepage` },
     },
   };

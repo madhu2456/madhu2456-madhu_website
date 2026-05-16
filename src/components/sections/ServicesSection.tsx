@@ -52,7 +52,9 @@ export async function ServicesSection() {
     <section id="services" className="py-20 px-6">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Services</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            Generative AI & Engineering Services
+          </h2>
           <p className="text-xl text-muted-foreground">What I can do for you</p>
         </div>
 

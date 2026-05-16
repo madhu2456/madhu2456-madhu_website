@@ -36,11 +36,9 @@ export default async function OGImage() {
   const siteLabel = (
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://madhudadi.in"
   ).replace(/^https?:\/\//, "");
-  const siteUrl =
-    (process.env.NEXT_PUBLIC_SITE_URL ?? "https://madhudadi.in").replace(
-      /\/+$/,
-      "",
-    ) + "/";
+  const siteUrl = `${(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://madhudadi.in"
+  ).replace(/\/+$/, "")}/`;
 
   let profileImageUrl: string | null = null;
   if (profile.profileImage) {
