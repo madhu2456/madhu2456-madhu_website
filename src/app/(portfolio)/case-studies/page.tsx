@@ -34,6 +34,12 @@ const getSiteUrl = () => {
   return `${url}/`;
 };
 
+const ogSearchParams = new URLSearchParams();
+ogSearchParams.set("title", "AI, Python & Marketing Analytics Case Studies");
+ogSearchParams.set("subtitle", "Detailed deep-dives into Generative AI and Data Engineering.");
+ogSearchParams.set("type", "page");
+const ogImageUrl = `${getSiteUrl()}api/og?${ogSearchParams.toString()}`;
+
 export const metadata: Metadata = {
   title: "AI, Python & Marketing Analytics Case Studies",
   description: CASE_STUDIES_DESCRIPTION,
@@ -47,7 +53,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/opengraph-image",
+        url: ogImageUrl,
         width: 1200,
         height: 630,
         alt: "Madhu Dadi case studies",
@@ -58,7 +64,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "AI, Python & Marketing Analytics Case Studies | Madhu Dadi",
     description: CASE_STUDIES_DESCRIPTION,
-    images: [{ url: "/opengraph-image", alt: "Madhu Dadi case studies" }],
+    images: [{ url: ogImageUrl, alt: "Madhu Dadi case studies" }],
   },
 };
 

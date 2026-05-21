@@ -114,9 +114,16 @@ export async function generateMetadata({
   const siteUrl = getSiteUrl();
   const title = `${data.title} | Case Study`;
   const description = toDescription(data.impactSummary, data.tagline);
-  const imageUrl =
-    toAbsoluteImageUrl(siteUrl, data.coverImage) ??
-    `${siteUrl}/opengraph-image`;
+
+  // Dynamic OG image generation
+  const ogSearchParams = new URLSearchParams();
+  ogSearchParams.set("title", data.title);
+  ogSearchParams.set("subtitle", data.tagline || "Project Case Study");
+  ogSearchParams.set("type", "case-study");
+  for (const t of (data.technologies || []).slice(0, 5)) {
+    if (t?.name) ogSearchParams.append("tech", t.name);
+  }
+  const imageUrl = `${siteUrl}api/og?${ogSearchParams.toString()}`;
 
   return {
     title,
