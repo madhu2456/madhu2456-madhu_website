@@ -42,11 +42,11 @@ export async function generateMetadata({
   const query = toQuery((await searchParams).q);
   const encodedQuery = encodeURIComponent(query);
   const title = query
-    ? `Search "${query}" | Madhu Dadi`
-    : "Portfolio Search | Madhu Dadi";
+    ? `Search results for "${query}" | AI & Analytics Portfolio`
+    : "Search AI & Analytics Portfolio Projects | Madhu Dadi";
   const description = query
-    ? `Search results for "${query}" across projects, services, skills, and experience in Madhu Dadi's portfolio.`
-    : "Search Madhu Dadi's portfolio by project, service, skill, or experience.";
+    ? `View search results for "${query}" across projects, services, skills, and professional experience in Madhu Dadi's AI & Analytics Portfolio website.`
+    : "Search across Madhu Dadi's AI & Analytics Portfolio to discover detailed AI projects, marketing analytics case studies, technical skills, and experience.";
   const url = query ? `/search/?q=${encodedQuery}` : "/search/";
 
   return {

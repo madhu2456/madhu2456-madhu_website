@@ -33,12 +33,12 @@ const toDescription = (...values: Array<string | null | undefined>) => {
     return "Case study detailing implementation approach, stack, and measurable delivery outcomes.";
   }
 
-  if (merged.length <= 155) {
+  if (merged.length <= 160) {
     return merged;
   }
 
-  const boundary = merged.lastIndexOf(" ", 155);
-  const safeBoundary = boundary > 0 ? boundary : 155;
+  const boundary = merged.lastIndexOf(" ", 160);
+  const safeBoundary = boundary > 0 ? boundary : 160;
   return `${merged
     .slice(0, safeBoundary)
     .trim()

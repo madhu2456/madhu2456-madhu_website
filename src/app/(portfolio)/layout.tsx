@@ -16,7 +16,7 @@ const FloatingDock = dynamic(() =>
 
 const DEFAULT_SITE_URL = "https://madhudadi.in";
 const THEME_COLOR = "#7c3aed";
-const MAX_META_DESCRIPTION_LENGTH = 155;
+const MAX_META_DESCRIPTION_LENGTH = 160;
 
 const resolveSiteUrl = (rawUrl?: string) => {
   const url = (rawUrl?.trim() || DEFAULT_SITE_URL).replace(/\/+$/, "");

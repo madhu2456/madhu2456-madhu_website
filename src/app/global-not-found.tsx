@@ -15,8 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "404 - Page Not Found",
-  description: "The page you are looking for does not exist.",
+  title: "404 Page Not Found | AI & Analytics Portfolio",
+  description:
+    "The page you are looking for does not exist or has been moved. Return to Madhu Dadi's AI & Analytics portfolio to explore AI projects and analytics services.",
 };
 
 export default function GlobalNotFound() {

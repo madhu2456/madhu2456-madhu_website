@@ -24,7 +24,7 @@ type CaseStudy = {
 
 const DEFAULT_SITE_URL = "https://madhudadi.in";
 const CASE_STUDIES_DESCRIPTION =
-  "Detailed case studies of AI, analytics, and full-stack projects delivered by Madhu Dadi.";
+  "Explore detailed case studies covering generative AI, advanced marketing analytics, and full-stack engineering solutions driving tangible business outcomes.";
 
 const getSiteUrl = () => {
   const url = (process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE_URL).replace(
@@ -35,13 +35,13 @@ const getSiteUrl = () => {
 };
 
 export const metadata: Metadata = {
-  title: "In-Depth Analytics Case Studies",
+  title: "AI & Marketing Analytics Case Studies",
   description: CASE_STUDIES_DESCRIPTION,
   alternates: {
     canonical: "/case-studies/",
   },
   openGraph: {
-    title: "Case Studies | Madhu Dadi",
+    title: "AI & Marketing Analytics Case Studies | Madhu Dadi",
     description: CASE_STUDIES_DESCRIPTION,
     url: "/case-studies/",
     type: "website",
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Case Studies | Madhu Dadi",
+    title: "AI & Marketing Analytics Case Studies | Madhu Dadi",
     description: CASE_STUDIES_DESCRIPTION,
     images: [{ url: "/opengraph-image", alt: "Madhu Dadi case studies" }],
   },
