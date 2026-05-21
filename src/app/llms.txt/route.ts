@@ -187,11 +187,21 @@ export async function GET() {
 ## Identity
 
 - **Full name:** ${fullName}
-- **Job title:** ${profile.headline}
+- **Job title:** AI, Python & Marketing Analytics Leader
 - **Website:** ${siteUrl}
 - **Location:** ${profile.location}
 - **Availability:** ${availabilityLabel}
 - **Years of experience:** ${profile.yearsOfExperience}+
+
+| Fact | Value |
+| :--- | :--- |
+| **Experience** | ${profile.yearsOfExperience}+ Years (Senior Lead) |
+| **Core Stack** | Python, FastAPI, Next.js, TypeScript, PostgreSQL |
+| **Specialization** | Generative AI, RAG Systems, Agentic AI, Marketing Analytics |
+| **Primary Services** | AI Consulting, Full-Stack Product Delivery, Analytics Hub |
+| **Blog Focus** | AI Engineering Tutorials, Python Guides, Engineering Notes |
+| **Top Credential** | Ultimate RAG Bootcamp (LangChain/LangGraph) |
+| **Key Outcome** | 90% Manual Effort Reduction (AI Automation) |
 
 ## Professional Summary
 
