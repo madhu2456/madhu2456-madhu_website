@@ -3,8 +3,9 @@ import type { Metadata } from "next";
 import { CmsEditor } from "@/components/cms/CmsEditor";
 
 export const metadata: Metadata = {
-  title: "Local CMS | Portfolio Manager",
-  description: "Advanced content management for your professional portfolio.",
+  title: "Local CMS Manager | AI & Analytics Portfolio",
+  description:
+    "Advanced local content management system for Madhu Dadi's AI & Analytics Portfolio. Securely edit profiles, projects, skills, and professional site settings.",
   robots: {
     index: false,
     follow: false,
