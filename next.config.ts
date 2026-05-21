@@ -1,6 +1,22 @@
 import type { NextConfig } from "next";
 
+const cspHeader = `
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com;
+    style-src 'self' 'unsafe-inline';
+    img-src 'self' blob: data: https://images.unsplash.com https://www.googletagmanager.com https://www.google-analytics.com;
+    font-src 'self' data:;
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+    frame-ancestors 'none';
+    upgrade-insecure-requests;
+`
+  .replace(/\s{2,}/g, " ")
+  .trim();
+
 const securityHeaders = [
+  { key: "Content-Security-Policy", value: cspHeader },
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "X-Frame-Options", value: "DENY" },
   { key: "X-XSS-Protection", value: "1; mode=block" },
@@ -29,8 +45,7 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   // Ensure all URLs have a trailing slash to avoid duplicate content SEO issues.
   trailingSlash: true,
-  // Let the app control slash handling for select routes like /search.
-  skipTrailingSlashRedirect: true,
+  poweredByHeader: false,
 
   experimental: {
     optimizePackageImports: ["@tabler/icons-react", "motion"],

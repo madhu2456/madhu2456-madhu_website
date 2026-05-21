@@ -13,7 +13,6 @@ const ALLOWED_TYPES = new Set([
   "image/png",
   "image/webp",
   "image/gif",
-  "image/svg+xml",
 ]);
 
 const extensionByMime: Record<string, string> = {
@@ -22,7 +21,6 @@ const extensionByMime: Record<string, string> = {
   "image/png": ".png",
   "image/webp": ".webp",
   "image/gif": ".gif",
-  "image/svg+xml": ".svg",
 };
 
 const sanitizeBaseName = (value: string) =>
@@ -48,7 +46,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         error:
-          "Unsupported file type. Please upload a JPG, PNG, WEBP, AVIF, GIF, or SVG image.",
+          "Unsupported file type. Please upload a JPG, PNG, WEBP, AVIF, or GIF image.",
       },
       { status: 400 },
     );

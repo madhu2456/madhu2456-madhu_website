@@ -67,7 +67,7 @@ export async function QuickAnswersSection() {
             <h3 className="text-lg font-semibold">What can Madhu build?</h3>
             <p className="text-sm text-muted-foreground">{buildAnswer}</p>
             <Link
-              href="/case-studies"
+              href="/case-studies/"
               className="text-sm text-primary underline"
             >
               Browse case studies

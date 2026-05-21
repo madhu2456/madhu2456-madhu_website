@@ -47,13 +47,13 @@ export async function generateMetadata({
   const description = query
     ? `Search results for "${query}" across projects, services, skills, and experience in Madhu Dadi's portfolio.`
     : "Search Madhu Dadi's portfolio by project, service, skill, or experience.";
-  const url = query ? `/search?q=${encodedQuery}` : "/search";
+  const url = query ? `/search/?q=${encodedQuery}` : "/search/";
 
   return {
     title,
     description,
     alternates: {
-      canonical: "/search",
+      canonical: "/search/",
     },
     robots: {
       index: query.length === 0,
@@ -224,23 +224,23 @@ export default async function SearchPage({
           <section className="rounded-2xl border bg-background p-6 md:p-8 space-y-4 shadow-sm">
             <p className="text-muted-foreground">
               Example:{" "}
-              <code className="font-mono">/search?q=rag+consulting</code>
+              <code className="font-mono">/search/?q=rag+consulting</code>
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
-                href="/search?q=ai+consulting"
+                href="/search/?q=ai+consulting"
                 className="inline-flex items-center rounded-full border px-4 py-2 text-sm hover:bg-accent"
               >
                 AI consulting
               </Link>
               <Link
-                href="/search?q=rag"
+                href="/search/?q=rag"
                 className="inline-flex items-center rounded-full border px-4 py-2 text-sm hover:bg-accent"
               >
                 RAG
               </Link>
               <Link
-                href="/search?q=next.js"
+                href="/search/?q=next.js"
                 className="inline-flex items-center rounded-full border px-4 py-2 text-sm hover:bg-accent"
               >
                 Next.js
@@ -250,16 +250,19 @@ export default async function SearchPage({
         ) : allResults.length === 0 ? (
           <section className="rounded-2xl border bg-background p-6 md:p-8 text-muted-foreground shadow-sm">
             No matches found for "{query}". Try broader terms such as{" "}
-            <Link href="/search?q=ai" className="text-primary underline">
+            <Link href="/search/?q=ai" className="text-primary underline">
               AI
             </Link>
             ,{" "}
-            <Link href="/search?q=analytics" className="text-primary underline">
+            <Link
+              href="/search/?q=analytics"
+              className="text-primary underline"
+            >
               analytics
             </Link>
             , or{" "}
             <Link
-              href="/search?q=full-stack"
+              href="/search/?q=full-stack"
               className="text-primary underline"
             >
               full-stack

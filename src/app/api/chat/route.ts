@@ -35,7 +35,37 @@ const parseHistory = (value: unknown): ChatTurn[] => {
   return turns.slice(-12);
 };
 
+// Basic in-memory rate limiting for serverless-ish environments.
+// For production, use Upstash, Redis, or an edge-level WAF.
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
+const MAX_REQUESTS_PER_WINDOW = 10;
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const record = rateLimitMap.get(ip);
+
+  if (!record || now > record.resetAt) {
+    rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return false;
+  }
+
+  record.count += 1;
+  return record.count > MAX_REQUESTS_PER_WINDOW;
+}
+
 export async function POST(request: Request) {
+  const ip = request.headers.get("x-forwarded-for") || "anonymous";
+
+  if (isRateLimited(ip)) {
+    return NextResponse.json(
+      {
+        error: "Too many requests. Please wait a minute before trying again.",
+      },
+      { status: 429, headers: { "Cache-Control": "no-store" } },
+    );
+  }
+
   const body = (await request
     .json()
     .catch(() => null)) as ChatRequestBody | null;

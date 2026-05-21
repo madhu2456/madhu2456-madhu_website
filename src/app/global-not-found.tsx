@@ -51,7 +51,7 @@ export default function GlobalNotFound() {
                   Back to home
                 </a>
                 <a
-                  href="/case-studies"
+                  href="/case-studies/"
                   className="inline-flex items-center justify-center rounded-lg border px-5 py-3 text-sm font-medium transition-colors hover:bg-accent"
                 >
                   View case studies

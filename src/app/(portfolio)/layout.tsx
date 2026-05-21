@@ -220,14 +220,8 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link
-          rel="llms"
-          href={`${SITE_URL}llms.txt`}
-        />
-        <link
-          rel="ai-profile"
-          href={`${SITE_URL}ai-profile.json`}
-        />
+        <link rel="llms" href={`${SITE_URL}llms.txt`} />
+        <link rel="ai-profile" href={`${SITE_URL}ai-profile.json`} />
         {/* RSS autodiscovery for the blog — allows feed readers to find the feed
             automatically from any portfolio page on the same domain */}
         <link

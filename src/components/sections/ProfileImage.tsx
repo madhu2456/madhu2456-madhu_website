@@ -38,7 +38,7 @@ export function ProfileImage({
         decoding="sync"
         fetchPriority="high"
         sizes="(max-width: 768px) min(86vw, 300px), (max-width: 1280px) 340px, 380px"
-        className="object-cover object-[center_35%] transition-transform duration-300 group-hover:scale-105"
+        className="object-cover object-[center_35%] transition-transform duration-300 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
         quality={60}
         placeholder={lqip ? "blur" : "empty"}
         blurDataURL={lqip}
@@ -47,8 +47,8 @@ export function ProfileImage({
       {/* Online Badge */}
       <div className="absolute top-4 right-4 flex items-center gap-2 bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-full">
         <div className="relative">
-          <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse" />
-          <div className="absolute inset-0 w-2.5 h-2.5 bg-green-500 rounded-full animate-ping" />
+          <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse motion-reduce:animate-none" />
+          <div className="absolute inset-0 w-2.5 h-2.5 bg-green-500 rounded-full animate-ping motion-reduce:animate-none" />
         </div>
         <span className="text-xs font-medium text-white">Online</span>
       </div>

@@ -30,7 +30,7 @@ export default function NotFound() {
             </Button>
 
             <Button asChild variant="outline" size="lg">
-              <a href="/case-studies" aria-label="Go to case studies">
+              <a href="/case-studies/" aria-label="Go to case studies">
                 View case studies
               </a>
             </Button>

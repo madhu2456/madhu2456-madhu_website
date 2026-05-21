@@ -216,7 +216,7 @@ export default async function CaseStudyPage({
               url: project.liveUrl || caseStudyUrl,
               codeRepository: project.githubUrl,
               applicationCategory: project.category || "WebApplication",
-              author: { "@id": `${siteUrl}/#person` },
+              author: { "@id": `${siteUrl}#person` },
             },
           ]
         : []),
@@ -239,7 +239,7 @@ export default async function CaseStudyPage({
             </Link>
             <span>/</span>
             <Link
-              href="/case-studies"
+              href="/case-studies/"
               className="hover:text-foreground transition-colors"
             >
               Case studies
@@ -255,7 +255,7 @@ export default async function CaseStudyPage({
               Back to home
             </Link>
             <Link
-              href="/case-studies"
+              href="/case-studies/"
               className="inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
             >
               All case studies
