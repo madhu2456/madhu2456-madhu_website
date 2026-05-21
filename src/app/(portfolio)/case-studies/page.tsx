@@ -35,13 +35,13 @@ const getSiteUrl = () => {
 };
 
 export const metadata: Metadata = {
-  title: "AI & Marketing Analytics Case Studies",
+  title: "AI, Python & Marketing Analytics Case Studies",
   description: CASE_STUDIES_DESCRIPTION,
   alternates: {
     canonical: "/case-studies/",
   },
   openGraph: {
-    title: "AI & Marketing Analytics Case Studies | Madhu Dadi",
+    title: "AI, Python & Marketing Analytics Case Studies | Madhu Dadi",
     description: CASE_STUDIES_DESCRIPTION,
     url: "/case-studies/",
     type: "website",
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI & Marketing Analytics Case Studies | Madhu Dadi",
+    title: "AI, Python & Marketing Analytics Case Studies | Madhu Dadi",
     description: CASE_STUDIES_DESCRIPTION,
     images: [{ url: "/opengraph-image", alt: "Madhu Dadi case studies" }],
   },
