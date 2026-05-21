@@ -36,7 +36,10 @@ const getSiteUrl = () => {
 
 const ogSearchParams = new URLSearchParams();
 ogSearchParams.set("title", "AI, Python & Marketing Analytics Case Studies");
-ogSearchParams.set("subtitle", "Detailed deep-dives into Generative AI and Data Engineering.");
+ogSearchParams.set(
+  "subtitle",
+  "Detailed deep-dives into Generative AI and Data Engineering.",
+);
 ogSearchParams.set("type", "page");
 const ogImageUrl = `${getSiteUrl()}api/og?${ogSearchParams.toString()}`;
 
