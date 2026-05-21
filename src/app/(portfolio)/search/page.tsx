@@ -42,8 +42,8 @@ export async function generateMetadata({
   const query = toQuery((await searchParams).q);
   const encodedQuery = encodeURIComponent(query);
   const title = query
-    ? `Search results for "${query}" | AI & Analytics Portfolio`
-    : "Search AI & Analytics Portfolio Projects | Madhu Dadi";
+    ? `Search results for "${query}"`
+    : "Search AI & Analytics Portfolio Projects";
   const description = query
     ? `View search results for "${query}" across projects, services, skills, and professional experience in Madhu Dadi's AI & Analytics Portfolio website.`
     : "Search across Madhu Dadi's AI & Analytics Portfolio to discover detailed AI projects, marketing analytics case studies, technical skills, and experience.";
