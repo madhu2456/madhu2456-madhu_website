@@ -45,7 +45,7 @@ const toDescription = (...values: Array<string | null | undefined>) => {
     .replace(/[,\s;:!?-]+$/, "")}.`;
 };
 
-const toAbsoluteImageUrl = (siteUrl: string, value?: string | null) => {
+const _toAbsoluteImageUrl = (siteUrl: string, value?: string | null) => {
   const source = normalizeImageSource(value);
   if (!source) return null;
   if (/^https?:\/\//i.test(source)) return source;
