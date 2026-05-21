@@ -23,9 +23,10 @@ export default function robots(): MetadataRoute.Robots {
         allow: [
           "/",
           "/blog",
-          "/case-studies",
+          "/case-studies/",
           "/sitemap.xml",
           "/llms.txt",
+          "/llms-full.txt",
           "/ai-profile.json",
           "/humans.txt",
         ],
@@ -72,8 +73,9 @@ export default function robots(): MetadataRoute.Robots {
         allow: [
           "/",
           "/blog",
-          "/case-studies",
+          "/case-studies/",
           "/llms.txt",
+          "/llms-full.txt",
           "/ai-profile.json",
           "/humans.txt",
         ],

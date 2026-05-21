@@ -216,8 +216,8 @@ function DockIcon({
 }) {
   const baseIconClasses =
     "relative flex items-center justify-center w-full h-full rounded-full backdrop-blur-md transition-all";
-  const verticalIconClasses = `${baseIconClasses} bg-white/40 dark:bg-white/20 border border-white/50 dark:border-white/30 duration-300 hover:scale-110 hover:bg-white/50 dark:hover:bg-white/30 hover:border-white/70 dark:hover:border-white/40`;
-  const horizontalIconClasses = `${baseIconClasses} bg-white/10 dark:bg-white/5 group-hover/dock:bg-white/40 dark:group-hover/dock:bg-white/20 border border-white/20 dark:border-white/10 group-hover/dock:border-white/50 dark:group-hover/dock:border-white/30 duration-500 ease-out hover:scale-125 hover:-translate-y-2 md:hover:-translate-y-3 hover:!bg-white/50 dark:hover:!bg-white/30 hover:!border-white/70 dark:hover:!border-white/40 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)]`;
+  const verticalIconClasses = `${baseIconClasses} bg-white/40 dark:bg-white/20 border border-white/50 dark:border-white/30 duration-300 hover:scale-110 hover:bg-white/50 dark:hover:bg-white/30 hover:border-white/70 dark:hover:border-white/40 motion-reduce:transition-none motion-reduce:hover:scale-100`;
+  const horizontalIconClasses = `${baseIconClasses} bg-white/10 dark:bg-white/5 group-hover/dock:bg-white/40 dark:group-hover/dock:bg-white/20 border border-white/20 dark:border-white/10 group-hover/dock:border-white/50 dark:group-hover/dock:border-white/30 duration-500 ease-out hover:scale-125 hover:-translate-y-2 md:hover:-translate-y-3 hover:!bg-white/50 dark:hover:!bg-white/30 hover:!border-white/70 dark:hover:!border-white/40 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] motion-reduce:transition-none motion-reduce:hover:scale-100 motion-reduce:hover:translate-y-0`;
 
   const Tooltip = ({ direction }: { direction: "vertical" | "horizontal" }) => {
     const isHorizontal = direction === "horizontal";
@@ -227,7 +227,7 @@ function DockIcon({
           isHorizontal
             ? "-top-9 md:-top-12 left-1/2 -translate-x-1/2 group-hover:-translate-y-2"
             : "right-14 top-1/2 -translate-y-1/2 group-hover:-translate-x-1"
-        }`}
+        } motion-reduce:transition-none motion-reduce:group-hover:translate-y-0 motion-reduce:group-hover:translate-x-0 motion-reduce:group-hover:scale-100`}
       >
         {item.title}
         <div

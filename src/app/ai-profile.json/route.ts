@@ -270,6 +270,20 @@ export async function GET() {
         aiChat: `${siteUrl}blog/ask/`,
         description:
           "Technical blog covering AI engineering, full-stack development, RAG systems, and software architecture.",
+        // Entity facts synced from blog as of 2026-05-19 audit
+        latestUpdate: "2026-05-19T00:00:00Z",
+        postCount: 42,
+        seriesCount: 5,
+        tagCount: 28,
+        topics: [
+          "AI Engineering",
+          "LLM Application Development",
+          "RAG Systems",
+          "Agentic AI",
+          "Next.js",
+          "Python",
+          "FastAPI",
+        ],
       },
       keywords: normalizedKeywords,
       source: "local-data-nextjs",
@@ -336,6 +350,15 @@ export async function GET() {
         rss: `${siteUrl}blog/feed.xml`,
         sitemap: `${siteUrl}blog/sitemap.xml`,
         aiChat: `${siteUrl}blog/ask/`,
+        topics: [
+          "AI Engineering",
+          "LLM Application Development",
+          "RAG Systems",
+          "Agentic AI",
+          "Next.js",
+          "Python",
+          "FastAPI",
+        ],
       },
       caseStudies: caseStudies.slice(0, 12),
       certifications: sortedCertifications

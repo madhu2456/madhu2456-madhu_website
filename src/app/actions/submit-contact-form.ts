@@ -1,5 +1,7 @@
 "use server";
 
+import { headers } from "next/headers";
+
 // Email delivery via Resend (HTTPS API — not SMTP, so DigitalOcean port blocks don't apply).
 // Setup: pnpm add resend
 // Env vars needed in .env.local / production:
@@ -10,6 +12,24 @@
 type SubmitResult =
   | { success: true; data?: { submittedAt: string } }
   | { success: false; error: string };
+
+// Basic in-memory rate limiting for contact form
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000; // 10 minutes
+const MAX_REQUESTS_PER_WINDOW = 3;
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const record = rateLimitMap.get(ip);
+
+  if (!record || now > record.resetAt) {
+    rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return false;
+  }
+
+  record.count += 1;
+  return record.count > MAX_REQUESTS_PER_WINDOW;
+}
 
 type ResendPayload = {
   from: string;
@@ -40,6 +60,15 @@ async function sendViaResend(payload: ResendPayload): Promise<void> {
   }
 }
 
+function escapeHtml(str: string) {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 function buildEmailHtml(opts: {
   name: string;
   email: string;
@@ -47,12 +76,11 @@ function buildEmailHtml(opts: {
   message: string;
   submittedAt: string;
 }) {
-  const { name, email, subject, message, submittedAt } = opts;
-  const escapedMessage = message
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/\n/g, "<br>");
+  const name = escapeHtml(opts.name);
+  const email = escapeHtml(opts.email);
+  const subject = escapeHtml(opts.subject);
+  const submittedAt = opts.submittedAt;
+  const escapedMessage = escapeHtml(opts.message).replace(/\n/g, "<br>");
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -127,6 +155,15 @@ function buildEmailHtml(opts: {
 export async function submitContactForm(
   formData: FormData,
 ): Promise<SubmitResult> {
+  const ip = (await headers()).get("x-forwarded-for") || "anonymous";
+
+  if (isRateLimited(ip)) {
+    return {
+      success: false,
+      error: "Too many submissions. Please try again in 10 minutes.",
+    };
+  }
+
   // Honeypot — bots fill hidden fields
   if (formData.get("hp_field")) {
     return { success: true };
