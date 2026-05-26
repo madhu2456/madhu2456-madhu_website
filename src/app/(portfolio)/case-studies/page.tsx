@@ -178,7 +178,7 @@ export default async function CaseStudiesPage() {
           </section>
         ) : (
           <section className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {caseStudies.map((project) => {
+            {caseStudies.map((project, index) => {
               const slug = project.slug?.trim();
               const title = project.title?.trim() || "Untitled Project";
               const coverImageSource = normalizeImageSource(
@@ -202,6 +202,7 @@ export default async function CaseStudiesPage() {
                         fill
                         className="object-cover"
                         sizes="(max-width: 1024px) 100vw, 50vw"
+                        priority={index < 2}
                         unoptimized={shouldUseUnoptimizedImage(
                           coverImageSource,
                         )}

@@ -298,6 +298,7 @@ export default async function CaseStudyPage({
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 1024px"
+              priority
               unoptimized={shouldUseUnoptimizedImage(coverImageSource)}
             />
           </div>
