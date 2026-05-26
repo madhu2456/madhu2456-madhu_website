@@ -337,6 +337,39 @@ export function buildOccupationSchema({
 }
 
 // ---------------------------------------------------------------------------
+// Organization
+// ---------------------------------------------------------------------------
+export function buildOrganizationSchema({
+  siteUrl,
+  name,
+  logoUrl,
+  description,
+  socialLinks,
+}: {
+  siteUrl: string;
+  name: string;
+  logoUrl?: string;
+  description?: string;
+  socialLinks?: SocialLinks;
+}) {
+  const sameAs = socialLinks
+    ? Object.values(socialLinks).filter(
+        (v): v is string => typeof v === "string" && v.length > 0,
+      )
+    : [];
+  return {
+    "@type": "Organization",
+    "@id": `${siteUrl}#organization`,
+    name,
+    url: siteUrl,
+    logo: logoUrl ? { "@type": "ImageObject", url: logoUrl } : undefined,
+    founder: { "@id": `${siteUrl}#person` },
+    ...(description && { description }),
+    ...(sameAs.length > 0 && { sameAs }),
+  };
+}
+
+// ---------------------------------------------------------------------------
 // WebSite
 // ---------------------------------------------------------------------------
 export function buildWebSiteSchema({
@@ -356,7 +389,7 @@ export function buildWebSiteSchema({
     url,
     ...(description && { description }),
     inLanguage: "en-US",
-    publisher: { "@id": `${url}#person` },
+    publisher: { "@id": `${url}#organization` },
     significantLink: [`${blogUrl}ask/`, `${blogUrl}posts/`],
     relatedLink: [blogUrl],
     // SiteLinksSearchBox — enables rich search in Google SERPs
