@@ -6,6 +6,7 @@ import {
   buildFullGraph,
   buildHowToHireSchema,
   buildOccupationSchema,
+  buildOrganizationSchema,
   buildPersonSchema,
   buildProfilePageSchema,
   buildProjectsListSchema,
@@ -99,6 +100,13 @@ export async function SeoStructuredData() {
       siteUrl,
       jobTitle: profile?.headline,
       location: profile?.location,
+    }),
+    buildOrganizationSchema({
+      siteUrl,
+      name: siteSettings.siteTitle || fullName,
+      logoUrl: `${siteUrl}icon-512.png`,
+      description,
+      socialLinks: profile?.socialLinks ?? undefined,
     }),
     buildWebSiteSchema({
       name: siteSettings.siteTitle || fullName,
