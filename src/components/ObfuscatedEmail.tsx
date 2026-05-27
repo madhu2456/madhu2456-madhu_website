@@ -17,8 +17,10 @@ export function ObfuscatedEmail({
 
   return (
     <span className={className}>
+      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: static Cloudflare email protection wrapper */}
       <span dangerouslySetInnerHTML={{ __html: "<!--email_off-->" }} />
       <span className="sr-only">{email}</span>
+      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: static Cloudflare email protection wrapper */}
       <span dangerouslySetInnerHTML={{ __html: "<!--/email_off-->" }} />
       <span
         style={{ unicodeBidi: "bidi-override", direction: "rtl" }}

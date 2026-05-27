@@ -46,7 +46,10 @@ export async function generateMetadata({
     : "Search AI, Python & Analytics Projects | Madhu Dadi";
   if (title.length > 65) {
     const maxQueryLen = 65 - 'Search results for "" | Madhu Dadi'.length - 3;
-    const truncatedQuery = query.slice(0, maxQueryLen).trim().replace(/[\s,;:!?-]+$/, "");
+    const truncatedQuery = query
+      .slice(0, maxQueryLen)
+      .trim()
+      .replace(/[\s,;:!?-]+$/, "");
     title = `Search results for "${truncatedQuery}..." | Madhu Dadi`;
   }
   const description = query

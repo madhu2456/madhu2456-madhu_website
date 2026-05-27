@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
@@ -28,6 +26,7 @@ export function Footer() {
           >
             Terms of Service
           </a>
+          {/* biome-ignore lint/security/noDangerouslySetInnerHtml: static Cloudflare email protection wrapper */}
           <span dangerouslySetInnerHTML={{ __html: "<!--email_off-->" }} />
           <a
             href="mailto:hello@madhudadi.in"
@@ -35,6 +34,7 @@ export function Footer() {
           >
             Contact
           </a>
+          {/* biome-ignore lint/security/noDangerouslySetInnerHtml: static Cloudflare email protection wrapper */}
           <span dangerouslySetInnerHTML={{ __html: "<!--/email_off-->" }} />
         </nav>
       </div>

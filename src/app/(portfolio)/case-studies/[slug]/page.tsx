@@ -115,7 +115,10 @@ export async function generateMetadata({
   let title = `${data.title} | Case Study | Madhu Dadi`;
   if (title.length > 65) {
     const maxTitleLen = 65 - " | Case Study | Madhu Dadi".length;
-    const truncated = data.title.slice(0, maxTitleLen).trim().replace(/[\s,;:!?-]+$/, "");
+    const truncated = data.title
+      .slice(0, maxTitleLen)
+      .trim()
+      .replace(/[\s,;:!?-]+$/, "");
     title = `${truncated} | Case Study | Madhu Dadi`;
   }
   const description = toDescription(data.impactSummary, data.tagline);
