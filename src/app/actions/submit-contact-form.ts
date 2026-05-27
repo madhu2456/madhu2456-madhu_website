@@ -142,7 +142,7 @@ function buildEmailHtml(opts: {
         <!-- Footer -->
         <tr>
           <td style="padding:16px 32px;background:#f9f9f9;border-top:1px solid #f0f0f0;">
-            <p style="margin:0;font-size:12px;color:#aaa;">Sent via the contact form on <a href="https://madhudadi.in" style="color:#6366f1;text-decoration:none;">madhudadi.in</a></p>
+            <p style="margin:0;font-size:12px;color:#aaa;">Sent via the contact form on <a href="https://madhudadi.in/" style="color:#6366f1;text-decoration:none;">madhudadi.in</a></p>
           </td>
         </tr>
       </table>

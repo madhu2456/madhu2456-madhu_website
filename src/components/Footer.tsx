@@ -10,30 +10,32 @@ export function Footer() {
           &copy; {currentYear} Madhu Dadi. All rights reserved.
         </p>
         <nav className="flex items-center gap-6">
-          <Link
-            href="/blog"
+          <a
+            href="https://madhudadi.in/blog"
             className="text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             Blog
-          </Link>
-          <Link
-            href="/blog/privacy-policy"
+          </a>
+          <a
+            href="https://madhudadi.in/blog/privacy-policy"
             className="text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             Privacy Policy
-          </Link>
-          <Link
-            href="/blog/terms"
+          </a>
+          <a
+            href="https://madhudadi.in/blog/terms"
             className="text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             Terms of Service
-          </Link>
+          </a>
+          <span dangerouslySetInnerHTML={{ __html: "<!--email_off-->" }} />
           <a
             href="mailto:hello@madhudadi.in"
             className="text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             Contact
           </a>
+          <span dangerouslySetInnerHTML={{ __html: "<!--/email_off-->" }} />
         </nav>
       </div>
     </footer>

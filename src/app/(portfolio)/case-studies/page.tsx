@@ -44,7 +44,7 @@ ogSearchParams.set("type", "page");
 const ogImageUrl = `${getSiteUrl()}api/og?${ogSearchParams.toString()}`;
 
 export const metadata: Metadata = {
-  title: "AI, Python & Marketing Analytics Case Studies",
+  title: "AI, Python & Marketing Analytics Case Studies | Madhu Dadi",
   description: CASE_STUDIES_DESCRIPTION,
   alternates: {
     canonical: "/case-studies/",
@@ -67,7 +67,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "AI, Python & Marketing Analytics Case Studies | Madhu Dadi",
     description: CASE_STUDIES_DESCRIPTION,
-    images: [{ url: ogImageUrl, alt: "Madhu Dadi case studies" }],
+    images: [ogImageUrl],
+    creator: "@madhu245",
+    site: "@madhu245",
   },
 };
 
@@ -195,13 +197,13 @@ export default async function CaseStudiesPage() {
                   className="rounded-xl border bg-card overflow-hidden flex flex-col"
                 >
                   {coverImageSource ? (
-                    <div className="relative aspect-video bg-muted">
+                    <div className="relative aspect-video bg-muted overflow-hidden">
                       <Image
                         src={coverImageSource}
                         alt={`${title} preview`}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        width={600}
+                        height={338}
+                        className="object-cover w-full h-full"
                         priority={index < 2}
                         unoptimized={shouldUseUnoptimizedImage(
                           coverImageSource,

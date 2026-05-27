@@ -123,10 +123,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     metadataBase: new URL(siteUrl),
-    title: {
-      default: title,
-      template: `%s | ${fullName}`,
-    },
+    title: title,
     description,
     applicationName: siteName,
     referrer: "strict-origin-when-cross-origin",
@@ -159,6 +156,14 @@ export async function generateMetadata(): Promise<Metadata> {
         en: siteUrl,
         "en-US": siteUrl,
         "x-default": siteUrl,
+      },
+      types: {
+        "application/rss+xml": [
+          {
+            url: `${siteUrl}blog/feed.xml`,
+            title: "MadhuDadi Blog — RSS Feed",
+          },
+        ],
       },
     },
     openGraph: {
@@ -219,22 +224,11 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="llms" href={`${SITE_URL}llms.txt`} />
-        <link rel="ai-profile" href={`${SITE_URL}ai-profile.json`} />
-        {/* RSS autodiscovery for the blog — allows feed readers to find the feed
-            automatically from any portfolio page on the same domain */}
-        <link
-          rel="alternate"
-          type="application/rss+xml"
-          href={`${SITE_URL}blog/feed.xml`}
-          title="MadhuDadi Blog — RSS Feed"
-        />
-      </head>
-
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <link rel="llms" href={`${SITE_URL}llms.txt`} />
+        <link rel="ai-profile" href={`${SITE_URL}ai-profile.json`} />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-background focus:text-foreground"
