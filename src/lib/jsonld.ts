@@ -945,7 +945,9 @@ export function buildSoftwareApplicationSchema({
     "@type": "SoftwareApplication",
     "@id": `${siteUrl}#software`,
     name: `${name} AI & Analytics Solutions`,
-    description: description || "Enterprise-grade generative AI engineering, RAG architectures, and custom analytics solutions.",
+    description:
+      description ||
+      "Enterprise-grade generative AI engineering, RAG architectures, and custom analytics solutions.",
     applicationCategory: "BusinessApplication",
     operatingSystem: "All",
     browserRequirements: "Requires HTML5 compatible browser",
@@ -953,8 +955,8 @@ export function buildSoftwareApplicationSchema({
     publisher: { "@id": `${siteUrl}#organization` },
     offers: {
       "@type": "Offer",
-      "price": "0.00",
-      "priceCurrency": "USD",
+      price: "0.00",
+      priceCurrency: "USD",
     },
   };
 }
