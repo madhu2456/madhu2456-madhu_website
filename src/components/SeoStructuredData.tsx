@@ -11,6 +11,7 @@ import {
   buildProfilePageSchema,
   buildProjectsListSchema,
   buildServicesListSchema,
+  buildSoftwareApplicationSchema,
   buildWebSiteSchema,
   buildWorkExperienceSchema,
 } from "@/lib/jsonld";
@@ -103,14 +104,19 @@ export async function SeoStructuredData() {
     }),
     buildOrganizationSchema({
       siteUrl,
-      name: siteSettings.siteTitle || fullName,
+      name: (siteSettings as { siteName?: string }).siteName || fullName,
       logoUrl: `${siteUrl}icon-512.png`,
       description,
       socialLinks: profile?.socialLinks ?? undefined,
     }),
     buildWebSiteSchema({
-      name: siteSettings.siteTitle || fullName,
+      name: (siteSettings as { siteName?: string }).siteName || fullName,
       url: siteUrl,
+      description,
+    }),
+    buildSoftwareApplicationSchema({
+      siteUrl,
+      name: (siteSettings as { siteName?: string }).siteName || fullName,
       description,
     }),
     buildProfilePageSchema({

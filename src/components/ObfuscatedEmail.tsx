@@ -17,7 +17,9 @@ export function ObfuscatedEmail({
 
   return (
     <span className={className}>
+      <span dangerouslySetInnerHTML={{ __html: "<!--email_off-->" }} />
       <span className="sr-only">{email}</span>
+      <span dangerouslySetInnerHTML={{ __html: "<!--/email_off-->" }} />
       <span
         style={{ unicodeBidi: "bidi-override", direction: "rtl" }}
         aria-hidden

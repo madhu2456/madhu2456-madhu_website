@@ -41,9 +41,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const query = toQuery((await searchParams).q);
   const encodedQuery = encodeURIComponent(query);
-  const title = query
-    ? `Search results for "${query}"`
-    : "Search AI, Python & Analytics Projects";
+  let title = query
+    ? `Search results for "${query}" | Madhu Dadi`
+    : "Search AI, Python & Analytics Projects | Madhu Dadi";
+  if (title.length > 65) {
+    const maxQueryLen = 65 - 'Search results for "" | Madhu Dadi'.length - 3;
+    const truncatedQuery = query.slice(0, maxQueryLen).trim().replace(/[\s,;:!?-]+$/, "");
+    title = `Search results for "${truncatedQuery}..." | Madhu Dadi`;
+  }
   const description = query
     ? `View search results for "${query}" across projects, services, skills, and professional experience in Madhu Dadi's AI & Analytics Portfolio website.`
     : "Search across Madhu Dadi's AI & Analytics Portfolio to discover detailed AI projects, marketing analytics case studies, technical skills, and experience.";
@@ -77,7 +82,9 @@ export async function generateMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: [{ url: "/opengraph-image", alt: "Madhu Dadi portfolio search" }],
+      images: ["https://madhudadi.in/opengraph-image"],
+      creator: "@madhu245",
+      site: "@madhu245",
     },
   };
 }

@@ -112,7 +112,12 @@ export async function generateMetadata({
   }
 
   const siteUrl = getSiteUrl();
-  const title = `${data.title} | Case Study`;
+  let title = `${data.title} | Case Study | Madhu Dadi`;
+  if (title.length > 65) {
+    const maxTitleLen = 65 - " | Case Study | Madhu Dadi".length;
+    const truncated = data.title.slice(0, maxTitleLen).trim().replace(/[\s,;:!?-]+$/, "");
+    title = `${truncated} | Case Study | Madhu Dadi`;
+  }
   const description = toDescription(data.impactSummary, data.tagline);
 
   // Dynamic OG image generation
@@ -142,7 +147,9 @@ export async function generateMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: [{ url: imageUrl, alt: data.title }],
+      images: [imageUrl],
+      creator: "@madhu245",
+      site: "@madhu245",
     },
   };
 }
@@ -295,9 +302,9 @@ export default async function CaseStudyPage({
             <Image
               src={coverImageSource}
               alt={project.coverImageAlt?.trim() || `${title} preview`}
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 1024px"
+              width={1024}
+              height={576}
+              className="object-cover w-full h-full"
               priority
               unoptimized={shouldUseUnoptimizedImage(coverImageSource)}
             />

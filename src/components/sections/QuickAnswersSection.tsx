@@ -62,56 +62,63 @@ export async function QuickAnswersSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <article className="rounded-xl border bg-card p-6 space-y-3">
-            <h3 className="text-lg font-semibold">What can Madhu build?</h3>
-            <p className="text-sm text-muted-foreground">{buildAnswer}</p>
-            <Link
-              href="/case-studies/"
-              className="text-sm text-primary underline"
-            >
-              Browse case studies
-            </Link>
-          </article>
+        <dl className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="rounded-xl border bg-card p-6 space-y-3">
+            <dt className="text-lg font-semibold">What can Madhu build?</dt>
+            <dd className="text-sm text-muted-foreground">{buildAnswer}</dd>
+            <dd>
+              <Link
+                href="/case-studies/"
+                className="text-sm text-primary underline"
+              >
+                Browse case studies
+              </Link>
+            </dd>
+          </div>
 
-          <article className="rounded-xl border bg-card p-6 space-y-3">
-            <h3 className="text-lg font-semibold">
+          <div className="rounded-xl border bg-card p-6 space-y-3">
+            <dt className="text-lg font-semibold">
               Which industries has he worked in?
-            </h3>
-            <p className="text-sm text-muted-foreground">{industryAnswer}</p>
-            <p className="text-xs text-muted-foreground">
+            </dt>
+            <dd className="text-sm text-muted-foreground">{industryAnswer}</dd>
+            <dd className="text-xs text-muted-foreground">
               Highlighted projects: {projectCount}
-            </p>
-          </article>
+            </dd>
+          </div>
 
-          <article className="rounded-xl border bg-card p-6 space-y-3">
-            <h3 className="text-lg font-semibold">Does he have a blog?</h3>
-            <p className="text-sm text-muted-foreground">
+          <div className="rounded-xl border bg-card p-6 space-y-3">
+            <dt className="text-lg font-semibold">Does he have a blog?</dt>
+            <dd className="text-sm text-muted-foreground">
               Yes, Madhu writes a technical blog on AI engineering, RAG systems,
               and full-stack product delivery at madhudadi.in/blog.
-            </p>
-            <Link
-              href="/blog"
-              className="text-sm text-primary underline"
-              target="_blank"
-            >
-              Read articles
-            </Link>
-          </article>
+            </dd>
+            <dd>
+              <a
+                href="https://madhudadi.in/blog"
+                className="text-sm text-primary underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Read articles
+              </a>
+            </dd>
+          </div>
 
-          <article className="rounded-xl border bg-card p-6 space-y-3">
-            <h3 className="text-lg font-semibold">
+          <div className="rounded-xl border bg-card p-6 space-y-3">
+            <dt className="text-lg font-semibold">
               How can I hire or collaborate?
-            </h3>
-            <p className="text-sm text-muted-foreground">
+            </dt>
+            <dd className="text-sm text-muted-foreground">
               Use the contact section for direct outreach, or connect on
               LinkedIn for project discussions and consulting.
-            </p>
-            <Link href="#contact" className="text-sm text-primary underline">
-              Contact now
-            </Link>
-          </article>
-        </div>
+            </dd>
+            <dd>
+              <Link href="#contact" className="text-sm text-primary underline">
+                Contact now
+              </Link>
+            </dd>
+          </div>
+        </dl>
       </div>
     </section>
   );
