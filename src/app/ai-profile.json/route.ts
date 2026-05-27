@@ -263,11 +263,11 @@ export async function GET() {
       caseStudiesEndpoint: `${siteUrl}case-studies/`,
       searchEndpoint: `${siteUrl}search/`,
       blog: {
-        url: `${siteUrl}blog/`,
-        posts: `${siteUrl}blog/posts/`,
+        url: `${siteUrl}blog`,
+        posts: `${siteUrl}blog/posts`,
         rss: `${siteUrl}blog/feed.xml`,
         sitemap: `${siteUrl}blog/sitemap.xml`,
-        aiChat: `${siteUrl}blog/ask/`,
+        aiChat: `${siteUrl}blog/ask`,
         description:
           "Technical blog covering AI engineering, full-stack development, RAG systems, and software architecture.",
         // Entity facts synced from blog as of 2026-05-19 audit
@@ -345,11 +345,11 @@ export async function GET() {
       canonical: siteUrl,
       profiles: sourceProfiles,
       blog: {
-        url: `${siteUrl}blog/`,
-        posts: `${siteUrl}blog/posts/`,
+        url: `${siteUrl}blog`,
+        posts: `${siteUrl}blog/posts`,
         rss: `${siteUrl}blog/feed.xml`,
         sitemap: `${siteUrl}blog/sitemap.xml`,
-        aiChat: `${siteUrl}blog/ask/`,
+        aiChat: `${siteUrl}blog/ask`,
         topics: [
           "AI Engineering",
           "LLM Application Development",
