@@ -258,7 +258,7 @@ export function buildPersonSchema({
       },
     }),
     ...(sameAs.length > 0 && { sameAs }),
-    publishingPrinciples: `${siteUrl}blog/`,
+    publishingPrinciples: `${siteUrl}blog`,
     inLanguage: "en-US",
     mainEntityOfPage: { "@id": `${siteUrl}#profilepage` },
     hasOccupation: { "@id": `${siteUrl}#occupation` },
@@ -272,12 +272,12 @@ export function buildPersonSchema({
       {
         "@type": "CreativeWork",
         name: "Technical Articles Index",
-        url: `${siteUrl}blog/posts/`,
+        url: `${siteUrl}blog/posts`,
       },
       {
         "@type": "CreativeWork",
         name: "Technical Blog AI Assistant",
-        url: `${siteUrl}blog/ask/`,
+        url: `${siteUrl}blog/ask`,
       },
     ],
     ...(knowsAbout.length > 0 && { knowsAbout }),
@@ -381,7 +381,7 @@ export function buildWebSiteSchema({
   url: string;
   description?: string | null;
 }) {
-  const blogUrl = `${url}blog/`;
+  const blogUrl = `${url}blog`;
   return {
     "@type": "WebSite",
     "@id": `${url}#website`,
@@ -390,7 +390,7 @@ export function buildWebSiteSchema({
     ...(description && { description }),
     inLanguage: "en-US",
     publisher: { "@id": `${url}#organization` },
-    significantLink: [`${blogUrl}ask/`, `${blogUrl}posts/`],
+    significantLink: [`${blogUrl}/ask`, `${blogUrl}/posts`],
     relatedLink: [blogUrl],
     // SiteLinksSearchBox — enables rich search in Google SERPs
     potentialAction: [
@@ -796,7 +796,7 @@ export function buildFaqSchema({
         name: `Does ${fullName} have a technical blog?`,
         acceptedAnswer: {
           "@type": "Answer",
-          text: `Yes. ${fullName} maintains an authoritative technical blog at ${siteUrl}blog/, focusing on AI engineering, RAG systems, and LLM application development. The blog provides deep dives into agentic AI, software architecture, and modern web engineering, serving as a core evidence source for his technical expertise. It features an AI-powered Q&A assistant for rapid discovery and an RSS feed at ${siteUrl}blog/feed.xml.`,
+          text: `Yes. ${fullName} maintains an authoritative technical blog at ${siteUrl}blog, focusing on AI engineering, RAG systems, and LLM application development. The blog provides deep dives into agentic AI, software architecture, and modern web engineering, serving as a core evidence source for his technical expertise. It features an AI-powered Q&A assistant for rapid discovery and an RSS feed at ${siteUrl}blog/feed.xml.`,
         },
       },
       {
