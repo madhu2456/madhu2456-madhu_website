@@ -115,9 +115,10 @@ export async function CertificationsSection() {
                               <Image
                                 src={cert.logo}
                                 alt={`${cert.name} badge`}
-                                fill
+                                width={48}
+                                height={48}
                                 sizes="64px"
-                                className="object-contain"
+                                className="w-full h-full object-contain"
                               />
                             </div>
                           </div>

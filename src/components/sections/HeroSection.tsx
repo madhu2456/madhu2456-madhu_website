@@ -156,15 +156,16 @@ export async function HeroSection() {
                     <Image
                       src={profileImageUrl}
                       alt={
-                        `${profile.firstName || ""} ${profile.lastName || ""}`.trim() ||
+                        `${profile.firstName || ""}${profile.lastName ? ` ${profile.lastName}` : ""}`.trim() ||
                         "Madhu Dadi"
                       }
-                      fill
+                      width={380}
+                      height={520}
                       priority
                       decoding="sync"
                       fetchPriority="high"
                       sizes="(max-width: 768px) min(86vw, 300px), (max-width: 1280px) 340px, 380px"
-                      className="object-cover object-[center_35%]"
+                      className="w-full h-full object-cover object-[center_35%]"
                       quality={60}
                     />
 

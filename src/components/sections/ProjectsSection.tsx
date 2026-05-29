@@ -39,9 +39,10 @@ export async function ProjectsSection() {
                       <Image
                         src={coverImageSource}
                         alt={project.title || "Project image"}
-                        fill
+                        width={640}
+                        height={360}
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         unoptimized={shouldUseUnoptimizedImage(
                           coverImageSource,
                         )}

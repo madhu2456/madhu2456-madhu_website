@@ -57,9 +57,10 @@ export async function EducationSection() {
                       <Image
                         src={edu.logo}
                         alt={`${edu.institution} logo`}
-                        fill
+                        width={64}
+                        height={64}
                         sizes="64px"
-                        className="object-cover"
+                        className="w-full h-full object-cover"
                       />
                     </div>
                   )}
