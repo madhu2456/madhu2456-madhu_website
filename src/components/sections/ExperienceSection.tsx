@@ -38,9 +38,10 @@ export async function ExperienceSection() {
                       <Image
                         src={exp.companyLogo}
                         alt={`${exp.company} company logo`}
-                        fill
+                        width={64}
+                        height={64}
                         sizes="64px"
-                        className="object-cover"
+                        className="w-full h-full object-cover"
                       />
                     </div>
                   )}

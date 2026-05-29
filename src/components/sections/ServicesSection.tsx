@@ -77,9 +77,10 @@ export async function ServicesSection() {
                         <Image
                           src={service.icon}
                           alt={service.title || "Service"}
-                          fill
+                          width={64}
+                          height={64}
                           sizes="64px"
-                          className="object-contain"
+                          className="w-full h-full object-contain"
                         />
                       </div>
                     )}
@@ -186,9 +187,10 @@ export async function ServicesSection() {
                         <Image
                           src={service.icon}
                           alt={service.title || "Service"}
-                          fill
+                          width={48}
+                          height={48}
                           sizes="48px"
-                          className="object-contain"
+                          className="w-full h-full object-contain"
                         />
                       </div>
                     )}
