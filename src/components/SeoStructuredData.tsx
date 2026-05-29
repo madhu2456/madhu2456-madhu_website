@@ -144,11 +144,40 @@ export async function SeoStructuredData() {
     buildHowToHireSchema({ siteUrl, fullName }),
   ]);
 
+  const orgSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${siteUrl}#organization`,
+    name: (siteSettings as { siteName?: string }).siteName || fullName,
+    url: siteUrl,
+    logo: {
+      "@type": "ImageObject",
+      url: `${siteUrl}icon-512.png`,
+    },
+    founder: {
+      "@type": "Person",
+      "@id": `${siteUrl}#person`,
+      name: fullName,
+    },
+    description,
+    ...(profile.socialLinks && {
+      sameAs: Object.values(profile.socialLinks).filter(
+        (v): v is string => typeof v === "string" && v.length > 0,
+      ),
+    }),
+  };
+
   return (
-    <script
-      type="application/ld+json"
-      // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
+      />
+    </>
   );
 }

@@ -151,12 +151,6 @@ export async function generateMetadata(): Promise<Metadata> {
       },
     },
     alternates: {
-      canonical: siteUrl,
-      languages: {
-        en: siteUrl,
-        "en-US": siteUrl,
-        "x-default": siteUrl,
-      },
       types: {
         "application/rss+xml": [
           {
