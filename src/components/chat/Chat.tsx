@@ -43,7 +43,7 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
     [profile],
   );
 
-  const { toggleSidebar } = useSidebar();
+  const { setOpen, setOpenMobile } = useSidebar();
 
   const [booting, setBooting] = useState(true);
   const [sending, setSending] = useState(false);
@@ -162,15 +162,34 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
       .map((m) => ({ role: m.role, content: m.text }));
 
     try {
-      const res = await fetch("/api/chat", {
+      const res = await fetch("/api/chat/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         cache: "no-store",
         body: JSON.stringify({ message: text, history }),
       });
-      const payload = (await res.json()) as ChatApiResponse;
-      if (!res.ok)
-        throw new Error(payload.error || "Failed to get a response.");
+
+      let payload: ChatApiResponse = {};
+      const contentType = res.headers.get("content-type");
+      if (contentType?.includes("application/json")) {
+        try {
+          payload = await res.json();
+        } catch {
+          throw new Error(
+            "Sorry, I encountered a formatting error. Please try again.",
+          );
+        }
+      } else {
+        throw new Error(
+          "Sorry, the chat service is currently unavailable. Please try again later.",
+        );
+      }
+
+      if (!res.ok) {
+        throw new Error(
+          payload.error || "Failed to get a response from the AI assistant.",
+        );
+      }
 
       const reply =
         typeof payload.reply === "string" && payload.reply.trim()
@@ -189,10 +208,18 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
       ]);
       startTypewriter(reply, newId, suggestions);
     } catch (err) {
-      const msg =
-        err instanceof Error
-          ? err.message
-          : "I couldn\u2019t answer right now. Please try again.";
+      let msg = "I couldn\u2019t answer right now. Please try again.";
+      if (err instanceof Error) {
+        if (
+          err.message.includes("Failed to fetch") ||
+          err.message.includes("fetch")
+        ) {
+          msg =
+            "Network connection lost. Please check your internet connection and try again.";
+        } else {
+          msg = err.message;
+        }
+      }
       setMessages((p) => [
         ...p,
         { id: createId(), role: "assistant", text: msg },
@@ -241,7 +268,8 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
               type="button"
               onClick={() => {
                 trackChatInteraction("close");
-                toggleSidebar();
+                setOpen(false);
+                setOpenMobile(false);
               }}
               aria-label="Close chat"
               className="flex h-7 w-7 items-center justify-center rounded-full text-foreground/40 transition-all hover:bg-foreground/8 hover:text-foreground"

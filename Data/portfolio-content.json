@@ -10,12 +10,12 @@
       "Full-stack Web Product Development"
     ],
     "headlineAnimationDuration": 3000,
-    "shortBio": "AI consultant and ML engineer with 9+ years of experience delivering generative AI consulting, LLM applications, and RAG systems that drive measurable business outcomes. I specialize in AI strategy consulting, AI automation, marketing analytics, and full-stack product delivery using Python, FastAPI, Next.js, TypeScript, and cloud-native architecture. Open to freelance, consulting, and collaboration opportunities.",
+    "shortBio": "I'm Madhu, an AI and analytics engineer with nine years of experience building LLM applications, RAG pipelines, AI agents, and the marketing analytics that prove they drive real outcomes. I work across Python, FastAPI, Next.js, Postgres, vector databases, and GA4. I'm looking for a full-time role on a serious team where I can own AI and analytics end-to-end.",
     "fullBioParagraphs": [
-      "I am an AI consultant and ML engineer with 9+ years of hands-on experience designing and delivering production-grade AI systems for enterprises and growth-focused teams. My work spans AI consulting services, machine learning consulting services, marketing analytics, and full-stack product engineering built for reliability, speed, and business impact.",
-      "I specialize in generative AI consulting services, LLM consulting, and RAG development services, helping teams turn complex ideas into practical products. This includes AI agent development services, AI chatbot development services, marketing analytics consulting, and AI integration services that improve decision-making, automate workflows, and reduce operational friction.",
-      "From an engineering perspective, I build end-to-end solutions across data pipelines, model orchestration, backend APIs, and modern web interfaces. My core stack includes Python, FastAPI, SQL, Next.js, React, and TypeScript, with a focus on observability, performance, security, and maintainable architecture.",
-      "I approach every engagement with an outcome-first mindset: understand the business context deeply, design the right system, and ship with clear metrics for success. If you are looking for an AI consultant in India for enterprise AI consulting, AI transformation consulting, marketing analytics, or product-focused delivery, I bring strategy and execution together. Available for freelance projects, consulting engagements, and full-time roles."
+      "I build AI. I don't just talk about it. My work splits in two. I help teams put LLMs, RAG, and AI agents into real products without the demo-to-prod cliff. And I clean up the marketing data that's meant to tell them whether any of it actually works.",
+      "I write Python and TypeScript every day. I live in FastAPI, Next.js, and SQL. I care about the boring things that keep AI shipping: evals, guardrails, logs, p95s, and who gets paged at 2am. If a project doesn't have a number attached to it, I'll ask for one before we start.",
+      "My work has crossed healthcare, travel, media, SaaS, and education. I like systems that are useful after the demo, understandable after handoff, and measurable after launch.",
+      "I'm open to a full-time role where I can own AI and analytics end-to-end on a serious product team. Remote is ideal, relocation is possible for the right team, and practical impact matters more than buzzwords."
     ],
     "email": "madhu.kumar245@gmail.com",
     "phone": "+91 9985422444",
@@ -30,29 +30,29 @@
     "yearsOfExperience": 9,
     "stats": [
       {
-        "label": "New Customer Growth",
-        "value": "30%"
+        "value": "9+",
+        "label": "Years experience"
       },
       {
-        "label": "Churn Rate Reduction",
-        "value": "20%"
+        "value": "30%",
+        "label": "New-customer growth"
       },
       {
-        "label": "Brand Awareness Lift",
-        "value": "15%"
+        "value": "20%",
+        "label": "Churn reduction"
       },
       {
-        "label": "Years Experience",
-        "value": "9+"
+        "value": "15%",
+        "label": "Brand-awareness lift"
       }
     ],
-    "profileImage": "/uploads/imported/profile-image-a70423e9c352.jpg",
-    "updatedAt": "2026-04-17T09:00:13.712Z"
+    "profileImage": "/new-ui/hero-portrait.jpg",
+    "updatedAt": "2026-05-31T00:00:00.000Z"
   },
   "siteSettings": {
     "siteName": "Madhu Dadi — Portfolio",
-    "siteTitle": "Madhu Dadi | AI, Python & Marketing Analytics Leader",
-    "siteDescription": "Madhu Dadi is an AI consultant specializing in generative AI, Python engineering, and marketing analytics to deliver high-impact AI & analytics solutions.",
+    "siteTitle": "Madhu Dadi | AI & Analytics Engineer · LLM, RAG, GA4",
+    "siteDescription": "Madhu Dadi is an AI and analytics engineer with 9+ years building LLM applications, RAG pipelines, AI agents, and marketing analytics that move the numbers.",
     "siteKeywords": [
       "Madhu Dadi",
       "AI consultant",
@@ -102,43 +102,43 @@
       "business intelligence consultant"
     ],
     "twitterHandle": "madhu245",
-    "updatedAt": "2026-04-17T15:56:54.057Z"
+    "updatedAt": "2026-05-31T00:00:00.000Z"
   },
   "navigationItems": [
-    {
-      "title": "Home",
-      "href": "#home",
-      "icon": "IconHome",
-      "order": 1
-    },
     {
       "title": "About",
       "href": "#about",
       "icon": "IconUser",
+      "order": 1
+    },
+    {
+      "title": "Work",
+      "href": "#projects",
+      "icon": "IconCode",
       "order": 2
     },
     {
-      "title": "Experience",
-      "href": "#experience",
+      "title": "Services",
+      "href": "#services",
       "icon": "IconBriefcase",
       "order": 3
     },
     {
-      "title": "Projects",
-      "href": "#projects",
-      "icon": "IconCode",
+      "title": "Skills",
+      "href": "#skills",
+      "icon": "IconSparkles",
       "order": 4
     },
     {
-      "title": "Education",
-      "href": "#education",
-      "icon": "IconSchool",
+      "title": "Experience",
+      "href": "#experience",
+      "icon": "IconTimeline",
       "order": 5
     },
     {
-      "title": "Certifications",
-      "href": "#certifications",
-      "icon": "IconCertificate",
+      "title": "FAQ",
+      "href": "#faq",
+      "icon": "IconQuestionMark",
       "order": 6
     },
     {
@@ -152,14 +152,14 @@
       "href": "https://madhudadi.in/blog",
       "icon": "IconNews",
       "isExternal": true,
-      "order": 9
+      "order": 8
     },
     {
       "title": "GitHub",
       "href": "https://github.com/madhu2456",
       "icon": "IconBrandGithub",
       "isExternal": true,
-      "order": 10
+      "order": 9
     }
   ],
   "skills": [
@@ -523,7 +523,7 @@
       "startDate": "2023-03-20",
       "current": true,
       "order": 1,
-      "description": "Led the digital analytics strategy and analytics for Novartis Patient Support Services, ensuring data-driven decision-making across digital platforms to enhance patient engagement and support services.",
+      "description": "Lead digital analytics strategy for Novartis Patient Support Services, driving data-informed decisions across patient-engagement platforms.",
       "responsibilities": [
         "Led the digital analytics strategy and analytics for Novartis Patient Support Services, ensuring data-driven decision-making across digital platforms to enhance patient engagement and support services.",
         "Developed and implemented key performance indicators (KPIs) and metrics to track the success and impact of digital initiatives, contributing to the optimization of patient support programs.",
@@ -533,13 +533,11 @@
         "Presented analytical findings and strategic recommendations to senior leadership, facilitating informed decision-making and business growth within the Patient Support Services division.",
         "Utilized advanced analytics tools (e.g., Google Analytics, Power BI, Advanced Modelling, etc.) to measure and improve digital engagement, patient satisfaction, and operational efficiency."
       ],
-      "achievements": [
-        "Received Best performer of the Quarter (Q1 2024) in Novartis."
-      ],
-      "updatedAt": "2026-05-03T20:00:00.000Z"
+      "achievements": ["Best Performer of the Quarter, Q1 2024"],
+      "updatedAt": "2026-05-31T00:00:00.000Z"
     },
     {
-      "company": "RedBus (MMT Group)",
+      "company": "redBus (MakeMyTrip Group)",
       "position": "Marketing Analytics Manager",
       "employmentType": "Full-time",
       "location": "Bangalore, India",
@@ -547,7 +545,7 @@
       "endDate": "2023-03-17",
       "current": false,
       "order": 2,
-      "description": "Led the Marketing Analytics team at redBus to provide measurement solutions for ATL, BTL and Digital Campaigns across India, Malaysia, Indonesia and Singapore.",
+      "description": "Led measurement for ATL, BTL, and digital campaigns across India, Malaysia, Indonesia, and Singapore. Built brand playbooks and CLM strategy.",
       "responsibilities": [
         "Handled the planning, execution and optimization of brand campaigns on Facebook, Programmatic and Google ads.",
         "Performed impact analysis and reporting of the brand campaigns across all redBus markets (India, Malaysia, Indonesia and Singapore) and helped in increasing the Brand awareness by 15%.",
@@ -555,13 +553,11 @@
         "Led the Marketing Analytics team in redBus to provide measurement solutions for ATL, BTL and Digital Campaigns.",
         "Created Brand Playbooks for Digital, Social and Owned media to effectively optimise the campaign budgets and increase the ROI of Brand initiatives."
       ],
-      "achievements": [
-        "Received the Best performer of the Quarter (Q3 Trailblazer) award for creating the best campaign strategy, which resulted in 30% growth in new customers."
-      ],
-      "updatedAt": "2026-05-03T20:00:00.000Z"
+      "achievements": ["Q3 Trailblazer, 30% new-customer growth"],
+      "updatedAt": "2026-05-31T00:00:00.000Z"
     },
     {
-      "company": "GroupM (WPP Media)",
+      "company": "GroupM (WPP)",
       "position": "Analytics Manager",
       "employmentType": "Full-time",
       "location": "Gurgaon, India",
@@ -569,19 +565,15 @@
       "endDate": "2022-05-13",
       "current": false,
       "order": 3,
-      "description": "Led Google Ads Data Hub projects across GroupM agencies for top 5% clients, performing frequency reach analysis, brand lift studies, and 1st party data solutions.",
+      "description": "Led Google Ads Data Hub projects for top-5% GroupM clients: frequency reach, brand lift studies, and first-party data activation.",
       "responsibilities": [
         "Led the Google Ads Data Hub projects across GroupM agencies and worked for the top 5% of the clients of GroupM.",
         "Performed frequency reach analysis to find the optimal number of exposures of ads in a cost-effective way.",
         "Performed brand lift study, identified the most optimal consumer journey from first touch point to last touch point and measured the performance in terms of conversion lift.",
         "Brought awareness of 1st party data solutions to increase the targeting by using cluster analysis, cost benefit analysis and pricing analytics to the clients."
       ],
-      "achievements": [
-        "Received the best performer of the year 2020-2021 award in GroupM.",
-        "Selected for Prestigious WPP NextGen program in GroupM.",
-        "Increased the margins of the GroupM campaigns by 10-15%."
-      ],
-      "updatedAt": "2026-05-03T20:00:00.000Z"
+      "achievements": ["Performer of the Year 2020-21 - WPP NextGen"],
+      "updatedAt": "2026-05-31T00:00:00.000Z"
     },
     {
       "company": "Absolinsoft",
@@ -592,15 +584,15 @@
       "endDate": "2018-07-13",
       "current": false,
       "order": 4,
-      "description": "Performed website analytics, SEO, SMM and SEM campaigns using descriptive and predictive modelling to improve traffic and engagement.",
+      "description": "Web analytics, SEO, SMM, and SEM with descriptive and predictive modelling. Reduced bounce 25%, lifted CTR 20%.",
       "responsibilities": [
         "Performed analysis on websites using Google Analytics to improve traffic and worked on SEO, SMM and SEM Campaigns using Descriptive and Predictive modellings and decreased the bounce rate by 25%.",
         "Strategized, planned and executed social media campaigns across all platforms including Instagram and Facebook.",
         "Implemented, Analyzed and Optimized organic and paid search engine marketing activities and increase the CTR by 20%.",
         "Formulated and documented the project/product plan for web applications."
       ],
-      "achievements": [],
-      "updatedAt": "2026-05-03T20:00:00.000Z"
+      "achievements": ["Foundations in analytics + engineering"],
+      "updatedAt": "2026-05-31T00:00:00.000Z"
     }
   ],
   "education": [
@@ -629,9 +621,9 @@
     {
       "title": "Adticks",
       "slug": "adticks",
-      "tagline": "SaaS Platform for Technical SEO, AEO, and Generative Engine Optimization (GEO)",
-      "category": "SaaS / Web App",
-      "impactSummary": "Engineered from scratch by Madhu Dadi, Adticks operates as a comprehensive search intelligence and AI visibility auditing platform. The crawler scales to run parallel headless rendering over 10,000 pages, mapping indexability, robot policies, and content schemas. Adticks detects JavaScript render-parity bottlenecks where core text, pricing, and schema.org markup are hidden from bots, resulting in significant indexing and AI Overview citation lift. The platform's automated diagnostics reduce technical audit cycle times by 85% and deliver prioritized action queues for modern search platforms.",
+      "tagline": "AI Visibility & SEO Auditing Platform",
+      "category": "SaaS - SEO / AEO / GEO",
+      "impactSummary": "Crawls 10,000+ pages in parallel with Playwright. Compares server HTML to the rendered DOM. Returns a ranked fix list for SEO, AEO, and GEO. Audits that took a week now take an afternoon.",
       "liveUrl": "https://adticks.com",
       "featured": true,
       "coverImage": "/uploads/cms/adticks-cover.png",
@@ -662,8 +654,8 @@
           "name": "Playwright"
         }
       ],
-      "problemStatement": "As search behavior shifts from traditional ten blue links to AI Overviews and conversational answer engines (ChatGPT, Claude, Gemini, Perplexity), brands struggle to measure and maintain their visibility across LLM systems. Standard web crawlers fail to diagnose accessibility issues specific to generative crawlers (e.g., GPTBot, ClaudeBot, PerplexityBot). Furthermore, client-side JavaScript rendering issues often hide critical semantic content, entity relationships, and schema.org templates from LLM crawlers, leading to omission from AI citations.",
-      "solutionApproach": "To solve this, Madhu Dadi designed and built Adticks as a unified inside-out site auditing engine. The core system runs parallel headless crawls using Playwright to identify render parity gaps between raw server HTML and fully client-rendered DOM. It audits robots.txt directives, sitemaps, structured data schemas, and llms.txt configurations. The backend, built with FastAPI and Celery workers, schedules deep site crawls, parses code with selectolax, runs 18 parallel audit analyzers, and outputs actionable, severity-prioritized fix queues tailored for SEO, AEO, and GEO optimization.",
+      "problemStatement": "As search shifts from ten blue links to AI Overviews and answer engines (ChatGPT, Claude, Gemini, Perplexity), brands struggle to measure and maintain visibility across LLM systems. Standard crawlers don't diagnose accessibility issues specific to generative crawlers (GPTBot, ClaudeBot, PerplexityBot), and client-side JS rendering hides critical semantic content, entity relationships, and schema.org markup from LLM crawlers, leading to omission from AI citations.",
+      "solutionApproach": "Designed Adticks as a unified inside-out site auditing engine.\nRuns parallel headless crawls with Playwright to identify render-parity gaps between raw server HTML and fully client-rendered DOM.\nAudits robots.txt, sitemaps, structured data schemas, and llms.txt configurations.\nFastAPI + Celery backend schedules deep crawls, parses with selectolax, and runs 18 parallel audit analyzers.\nOutputs severity-prioritized fix queues tailored for SEO, AEO, and GEO.",
       "citations": [
         {
           "label": "Visit Adticks",
@@ -675,14 +667,28 @@
         }
       ],
       "order": 1,
-      "updatedAt": "2026-05-28T18:00:00.000Z"
+      "updatedAt": "2026-05-31T00:00:00.000Z",
+      "impactMetrics": [
+        {
+          "value": "10,000+",
+          "label": "pages per audit with parallel headless rendering"
+        },
+        {
+          "value": "85%",
+          "label": "reduction in technical audit cycle time"
+        },
+        {
+          "value": "Higher",
+          "label": "indexing and AI Overview citation readiness through render-parity diagnostics"
+        }
+      ]
     },
     {
       "title": "Technical Blog",
       "slug": "technical-blog",
-      "tagline": "In-depth articles on AI, RAG, and Modern Web Engineering",
-      "category": "Education",
-      "impactSummary": "The implementation of the technical blog has significantly elevated learning efficacy and traffic engagement. By focusing on high-intent AI and engineering topics, the platform achieves organic search rankings and attracts developers seeking advanced technical solutions. The RAG AI Assistant successfully processes user queries in real-time, providing immediate contextual answers with direct citations, reducing user search latencies by an estimated 80%. Automated continuous integration and post-deployment cache warming have stabilized page traversal speeds (low TTFB), ensuring a high-quality experience for both search bots and human learners.",
+      "tagline": "RAG-Powered Learning Platform with AI Assistant",
+      "category": "Education - RAG / AI assistant",
+      "impactSummary": "A series-based tech blog with an assistant that has actually read the blog. Vector-grounded answers with citations. Instant in-page search. Ranks for humans and LLMs alike.",
       "liveUrl": "https://madhudadi.in/blog",
       "featured": true,
       "coverImage": "/uploads/cms/technical-blog-cover.png",
@@ -698,11 +704,17 @@
           "name": "Tailwind CSS"
         },
         {
-          "name": "AI Assistant"
+          "name": "FastAPI"
+        },
+        {
+          "name": "RAG"
+        },
+        {
+          "name": "Vector DB"
         }
       ],
-      "problemStatement": "Modern software developers, AI engineers, and data analysts struggle with highly fragmented, surface-level technical learning resources. Many online guides explain the basic hello-world concepts of Large Language Models (LLMs) and systems engineering, but fail to address the critical edge cases, structural design decisions, and real-world deployment challenges of complex pipelines like Retrieval-Augmented Generation (RAG). Furthermore, static documentation lacks interactive elements and immediate searchability, forcing engineers to manually browse through endless forum posts and code repositories to find verified, idiomatic implementation patterns.",
-      "solutionApproach": "To solve this problem, I built and engineered a learning-focused technical blog platform designed specifically around in-depth technical deep dives and interactive education. The core application structure features series-based learning paths where technical concepts are taught progressively. I integrated a custom, production-grade AI Assistant powered by a localized Retrieval-Augmented Generation (RAG) pipeline, allowing visitors to get immediate, technically accurate, grounded answers directly from the blog's localized vector database. The architecture was engineered with Next.js for server-rendered page speeds, Tailwind CSS for modern aesthetics, and a secure FastAPI backend supporting custom execution runtime test runners.",
+      "problemStatement": "Software developers, AI engineers, and data analysts face fragmented, surface-level learning resources. Most guides cover hello-world LLM concepts but skip the edge cases, structural design decisions, and real-world deployment challenges of pipelines like RAG. Static docs lack interactive search, forcing engineers to dig through forums and repos for verified patterns.",
+      "solutionApproach": "Built series-based learning paths that teach technical concepts progressively.\nIntegrated a custom production-grade AI Assistant powered by a localized RAG pipeline.\nUsed Next.js for server-rendered page speed and Tailwind CSS for the visual system.\nConnected a secure FastAPI backend with custom execution runtime test runners.",
       "citations": [
         {
           "label": "Visit Blog",
@@ -714,14 +726,28 @@
         }
       ],
       "order": 2,
-      "updatedAt": "2026-04-25T17:30:00.000Z"
+      "updatedAt": "2026-05-31T00:00:00.000Z",
+      "impactMetrics": [
+        {
+          "value": "Organic",
+          "label": "ranking on high-intent AI and engineering topics"
+        },
+        {
+          "value": "80%",
+          "label": "lower user search latency through grounded RAG answers"
+        },
+        {
+          "value": "Low",
+          "label": "TTFB for bots and humans through CI and cache warming"
+        }
+      ]
     },
     {
       "title": "Udemy Enroller using FastAPI",
       "slug": "udemy-enroller-fastapi",
-      "tagline": "Udemy Enroller build on FastAPI",
-      "category": "web-app",
-      "impactSummary": "Reduced manual effort by around 90% and enabled users to enroll in multiple courses within seconds. Improved efficiency, eliminated repetitive tasks, and ensured users never miss time-limited learning opportunities. Received 20000+ courses within 6 months for free and estimated cost savings of \u20b910,00,000+ The automated platform successfully eliminated 100% of manual enrollment effort for its users. By leveraging asynchronous queues, the system scales seamlessly to handle hundreds of concurrent coupon processing requests, ensuring users never miss a time-sensitive learning opportunity while strictly adhering to platform rate limits.",
+      "tagline": "Async FastAPI Course Enrollment Automation",
+      "category": "Web app - Automation",
+      "impactSummary": "Scrapes Udemy coupon sources, validates each link, and enrolls users automatically through an async FastAPI and Celery queue. Has delivered 20,000+ free courses in six months. Roughly Rs 10L in saved tuition.",
       "liveUrl": "https://udemyenroller.madhudadi.in",
       "githubUrl": "https://github.com/madhu2456/udemy_enroller_fastapi",
       "featured": true,
@@ -729,26 +755,26 @@
       "coverImageAlt": "Udemy Enroller using FastAPI preview",
       "technologies": [
         {
-          "name": "Google Analytics"
-        },
-        {
           "name": "Python"
-        },
-        {
-          "name": "GitHub"
-        },
-        {
-          "name": "REST API Design"
         },
         {
           "name": "FastAPI"
         },
         {
+          "name": "Celery"
+        },
+        {
+          "name": "Redis"
+        },
+        {
           "name": "GitHub Actions"
+        },
+        {
+          "name": "Google Analytics"
         }
       ],
-      "problemStatement": "Finding free or discounted Udemy courses is a repetitive and time-sensitive process. Users have to manually browse multiple coupon sites, copy links, and enroll quickly before offers expire. This often leads to missed opportunities and inefficient use of time. Previously, this process was completely manual, requiring users to constantly monitor for free course coupons and manually log in to claim them before they expired. This resulted in significant time wasted and many missed learning opportunities due to timezone differences and short coupon validity windows. The system needed a robust, high-availability architecture capable of handling asynchronous task queues and rate-limiting gracefully.",
-      "solutionApproach": "Developed a FastAPI-based automation system that scrapes coupon websites, extracts course links, and automatically enrolls users using session-based authentication. The system uses async processing to handle multiple enrollments efficiently with minimal manual input. I engineered a scalable backend service using FastAPI to manage the core API layer, integrated with Celery and Redis for asynchronous task processing. The system implements a robust scraping and validation pipeline that automatically authenticates, verifies coupon validity, and enrolls users without manual intervention. I also built a comprehensive logging and monitoring system to track success rates and handle CAPTCHAs or IP blocks.",
+      "problemStatement": "Finding free or discounted Udemy courses is repetitive and time-sensitive. Users had to monitor multiple coupon sites, copy links, and enroll before short validity windows expired, losing opportunities to timezone gaps and manual toil. The system needed a robust, high-availability architecture to handle async queues and rate-limiting gracefully.",
+      "solutionApproach": "FastAPI service for the core API layer with session-based Udemy authentication.\nCelery + Redis for async task processing and concurrent enrollments.\nScraping and validation pipeline that authenticates, verifies coupons, and enrolls users without manual input.\nComprehensive logging and monitoring to track success rates and handle CAPTCHAs or IP blocks.",
       "citations": [
         {
           "label": "Live demo",
@@ -764,7 +790,21 @@
         }
       ],
       "order": 3,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T00:00:00.000Z",
+      "impactMetrics": [
+        {
+          "value": "90%",
+          "label": "reduction in manual enrollment effort"
+        },
+        {
+          "value": "20,000+",
+          "label": "free courses delivered in six months"
+        },
+        {
+          "value": "Rs 10,00,000+",
+          "label": "estimated savings"
+        }
+      ]
     }
   ],
   "services": [
@@ -772,21 +812,30 @@
       "title": "AI & LLM Application Development",
       "slug": "ai-llm-applications",
       "icon": "/icon-512.png",
-      "shortDescription": "End-to-end generative AI consulting and LLM product development including RAG systems, AI agents, and chatbots that deliver measurable business outcomes.",
-      "fullDescription": "I design and build production-grade AI systems using Large Language Models, retrieval-augmented generation, and agentic workflows. From architecture design to deployment, I help teams implement AI solutions that automate processes, improve decision-making, and create new product capabilities. Every engagement includes evaluation frameworks, guardrails, and monitoring to ensure reliable performance in production.",
+      "shortDescription": "RAG, agents, and chatbots built for real users. Not just a happy-path demo.",
+      "fullDescription": "Production AI systems using LLMs, retrieval, and agentic workflows with practical evals, guardrails, observability, and deployment paths.",
       "features": [
-        "RAG pipeline architecture and implementation",
-        "LLM strategy and model selection",
-        "AI agent and workflow automation",
-        "Chatbot and conversational AI development",
-        "Production deployment and monitoring"
+        "RAG pipelines that cite their sources",
+        "Model choices that fit your budget",
+        "Agents that don't loop forever",
+        "Evals, guardrails, and quiet observability"
       ],
       "technologies": [
-        { "name": "Python" },
-        { "name": "OpenAI API" },
-        { "name": "LangChain" },
-        { "name": "FastAPI" },
-        { "name": "Next.js" }
+        {
+          "name": "Python"
+        },
+        {
+          "name": "OpenAI"
+        },
+        {
+          "name": "LangChain"
+        },
+        {
+          "name": "FastAPI"
+        },
+        {
+          "name": "Next.js"
+        }
       ],
       "deliverables": [
         "AI system architecture document",
@@ -797,32 +846,41 @@
       "pricing": {
         "startingPrice": 2500,
         "priceType": "project",
-        "description": "Starting from $2,500 depending on scope and complexity"
+        "description": "From $2,500"
       },
       "timeline": "3-8 weeks",
       "featured": true,
       "order": 1,
-      "updatedAt": "2026-05-03T20:00:00.000Z"
+      "updatedAt": "2026-05-31T00:00:00.000Z"
     },
     {
       "title": "Marketing Analytics & Decision Intelligence",
       "slug": "marketing-analytics-intelligence",
       "icon": "/icon-512.png",
-      "shortDescription": "Campaign analytics, attribution modeling, marketing dashboards, and decision support systems that turn marketing data into competitive advantage.",
-      "fullDescription": "With deep experience across Novartis, redBus, and GroupM, I build analytics solutions that help marketing teams understand performance, optimize spend, and make faster decisions. Services include campaign measurement frameworks, automated reporting pipelines, attribution models, and executive dashboards tailored to your business context.",
+      "shortDescription": "Attribution and dashboards your team will open on Monday. And trust by Friday.",
+      "fullDescription": "Measurement systems for campaign performance, attribution, testing, and executive decision support, built around the questions teams actually ask.",
       "features": [
-        "Campaign performance analytics and reporting",
-        "Marketing attribution modeling",
-        "Executive and operational dashboards",
-        "Data pipeline automation",
-        "A/B testing and experimentation analysis"
+        "Measurement that holds up in a CMO Q&A",
+        "Attribution without hand-waving",
+        "Dashboards for execs and operators",
+        "A/B tests read honestly, not optimistically"
       ],
       "technologies": [
-        { "name": "SQL" },
-        { "name": "Python" },
-        { "name": "Snowflake" },
-        { "name": "Google Analytics" },
-        { "name": "Dataiku" }
+        {
+          "name": "SQL"
+        },
+        {
+          "name": "Python"
+        },
+        {
+          "name": "Snowflake"
+        },
+        {
+          "name": "GA4"
+        },
+        {
+          "name": "Dataiku"
+        }
       ],
       "deliverables": [
         "Analytics strategy and measurement plan",
@@ -833,32 +891,41 @@
       "pricing": {
         "startingPrice": 2000,
         "priceType": "project",
-        "description": "Starting from $2,000 depending on data sources and complexity"
+        "description": "From $2,000"
       },
       "timeline": "2-6 weeks",
       "featured": true,
       "order": 2,
-      "updatedAt": "2026-05-03T20:00:00.000Z"
+      "updatedAt": "2026-05-31T00:00:00.000Z"
     },
     {
       "title": "Full-Stack Web Product Development",
       "slug": "fullstack-product-development",
       "icon": "/icon-512.png",
-      "shortDescription": "Modern web applications from concept to deployment using React, Next.js, TypeScript, and cloud-native backends built for scale.",
-      "fullDescription": "I build complete web products with clean architecture, responsive design, and production-ready deployment. From internal tools to customer-facing platforms, I handle frontend, backend, API design, database modeling, and DevOps. Every project is built with SEO, performance, and maintainability in mind.",
+      "shortDescription": "Web products that load fast, rank well, and don't break the day after launch.",
+      "fullDescription": "Full-stack product builds across UI, APIs, databases, deployment, performance, SEO, and handoff documentation.",
       "features": [
-        "Full-stack application development",
-        "REST and GraphQL API design",
-        "Database architecture and optimization",
-        "Performance and SEO optimization",
-        "Cloud deployment and CI/CD"
+        "Full-stack builds, front to back",
+        "REST and GraphQL APIs",
+        "Postgres schemas you can live with",
+        "Performance, SEO, and a CI you trust"
       ],
       "technologies": [
-        { "name": "Next.js" },
-        { "name": "TypeScript" },
-        { "name": "React" },
-        { "name": "FastAPI" },
-        { "name": "PostgreSQL" }
+        {
+          "name": "Next.js"
+        },
+        {
+          "name": "TypeScript"
+        },
+        {
+          "name": "React"
+        },
+        {
+          "name": "FastAPI"
+        },
+        {
+          "name": "Postgres"
+        }
       ],
       "deliverables": [
         "Production-ready web application",
@@ -869,64 +936,64 @@
       "pricing": {
         "startingPrice": 3000,
         "priceType": "project",
-        "description": "Starting from $3,000 depending on product scope"
+        "description": "From $3,000"
       },
       "timeline": "4-12 weeks",
       "featured": true,
       "order": 3,
-      "updatedAt": "2026-05-03T20:00:00.000Z"
+      "updatedAt": "2026-05-31T00:00:00.000Z"
     }
   ],
   "certifications": [
     {
-      "name": "Ultimate RAG Bootcamp Using Langchain, LangGraph & Langsmith",
+      "name": "Ultimate RAG Bootcamp, LangChain, LangGraph, LangSmith",
       "issuer": "Udemy",
       "issueDate": "2026-04-07",
       "credentialId": "UC-108879e5-e8bb-49fd-bf5a-3b04299802e9",
       "credentialUrl": "https://www.udemy.com/certificate/UC-108879e5-e8bb-49fd-bf5a-3b04299802e9/",
       "order": 1,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T00:00:00.000Z"
     },
     {
-      "name": "Complete Data Science, Machine Learning, DL, NLP Bootcamp",
+      "name": "Complete Data Science, ML, DL, NLP Bootcamp",
       "issuer": "Udemy",
       "issueDate": "2026-02-01",
       "credentialId": "UC-2c133425-fc3d-4d86-89e5-6499c0e3669f",
       "credentialUrl": "https://udemy-certificate.s3.amazonaws.com/image/UC-2c133425-fc3d-4d86-89e5-6499c0e3669f.jpg",
       "order": 2,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T00:00:00.000Z"
     },
     {
-      "name": "Microsoft Certified: Azure AI Fundamentals",
+      "name": "Azure AI Fundamentals",
       "issuer": "Microsoft",
       "issueDate": "2025-06-07",
       "credentialId": "838CB018ADDA8DC8",
       "credentialUrl": "https://learn.microsoft.com/en-us/users/madhudadi-6748/credentials/838cb018adda8dc8",
       "order": 3,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T00:00:00.000Z"
     },
     {
       "name": "MongoDB Python Developer Path",
-      "issuer": "MongoDB Inc.",
+      "issuer": "MongoDB",
       "issueDate": "2025-05-12",
       "credentialId": "MDBdjgyu6syfv",
       "credentialUrl": "https://learn.mongodb.com/c/ysblCQ5bShSRgrmsyQy5PQ",
       "order": 4,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T00:00:00.000Z"
     },
     {
-      "name": "GitHub Actions Professional Certificate",
+      "name": "GitHub Actions Professional",
       "issuer": "GitHub",
       "issueDate": "2025-05-09",
       "expiryDate": "2028-05-09",
       "credentialId": "b94f1c7e-6a06-4cd8-ad3b-2ec9012d27e3",
       "credentialUrl": "https://www.credly.com/badges/b94f1c7e-6a06-4cd8-ad3b-2ec9012d27e3/",
       "order": 5,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T00:00:00.000Z"
     },
     {
-      "name": "DataIku Core Designer",
-      "issuer": "DataIku",
+      "name": "Dataiku Core Designer",
+      "issuer": "Dataiku",
       "issueDate": "2025-05-06",
       "credentialId": "bm4dvx7mymim",
       "credentialUrl": "https://verify.skilljar.com/c/bm4dvx7mymim",
@@ -941,7 +1008,7 @@
         }
       ],
       "order": 6,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T00:00:00.000Z"
     }
   ]
 }

@@ -1,0 +1,37 @@
+# Madhu Dadi
+
+> AI consultant and ML engineer with 9+ years of experience building generative AI, LLM applications, RAG systems, and marketing analytics for global teams. Available for freelance, consulting, and full-time roles. Based in Visakhapatnam, India; works worldwide.
+
+## Identity
+
+- Name: Madhu Dadi
+- Role: AI Consultant & ML Engineer
+- Location: Visakhapatnam, Andhra Pradesh, India
+- Email: madhu.kumar245@gmail.com
+- Phone: +91 99854 22444
+- Website: https://madhudadi.in
+- GitHub: https://github.com/madhu2456
+- LinkedIn: https://www.linkedin.com/in/madhu-dadi-54684531
+- X / Twitter: https://x.com/madhu245
+
+## Services
+
+- AI & LLM Application Development — RAG pipelines, agents, chatbots, evaluation, guardrails, observability. From $2,500. 3–8 weeks.
+- Marketing Analytics & Decision Intelligence — attribution, dashboards, experiment analysis. From $2,000. 2–6 weeks.
+- Full-Stack Web Product Development — Next.js, React, TypeScript, FastAPI, Postgres. From $3,000. 4–12 weeks.
+
+## Experience
+
+- Senior Analytics Manager, Novartis (Mar 2023 – Present)
+- Marketing Analytics Manager, redBus / MakeMyTrip Group (Jun 2022 – Mar 2023)
+- Analytics Manager, GroupM (WPP) (Sep 2020 – May 2022)
+- Web Developer & Penetration Tester, Absolinsoft (May 2016 – Jul 2018)
+
+## Stack
+
+Python, FastAPI, OpenAI, LangChain, LangGraph, Next.js, React, TypeScript, SQL, Snowflake, Postgres, GA4, Dataiku, Azure AI, MongoDB, GitHub Actions.
+
+## Pages
+
+- [Home](https://madhudadi.in/): Overview, services, experience, projects, FAQ, contact.
+- [Sitemap](https://madhudadi.in/sitemap.xml)
