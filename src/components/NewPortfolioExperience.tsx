@@ -2,6 +2,9 @@
 
 import {
   IconAward,
+  IconBrandGithub,
+  IconBrandLinkedin,
+  IconBrandX,
   IconChartBar,
   IconSparkles,
   IconTrendingUp,
@@ -925,19 +928,42 @@ function Contact({ profile }: { profile: Profile }) {
           </ul>
           <div className="flex flex-wrap gap-3 pt-2">
             {profile.socialLinks.github ? (
-              <SocialLink href={profile.socialLinks.github} label="GitHub" />
+              <SocialLink
+                href={profile.socialLinks.github}
+                label="GitHub"
+                icon={<IconBrandGithub className="h-4 w-4" />}
+              />
             ) : null}
             {profile.socialLinks.linkedin ? (
               <SocialLink
                 href={profile.socialLinks.linkedin}
                 label="LinkedIn"
+                icon={<IconBrandLinkedin className="h-4 w-4" />}
               />
             ) : null}
             {profile.socialLinks.twitter ? (
-              <SocialLink href={profile.socialLinks.twitter} label="Twitter" />
+              <SocialLink
+                href={profile.socialLinks.twitter}
+                label="Twitter"
+                icon={<IconBrandX className="h-4 w-4" />}
+              />
             ) : null}
             {profile.socialLinks.website ? (
-              <SocialLink href={profile.socialLinks.website} label="Blog" />
+              <SocialLink
+                href={profile.socialLinks.website}
+                label="Blog"
+                icon={
+                  <div className="flex h-4 w-4 items-center justify-center overflow-hidden rounded-full border border-border/50 bg-surface shadow-inner">
+                    <Image
+                      src="/new-ui/logo.png"
+                      alt=""
+                      width={16}
+                      height={16}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                }
+              />
             ) : null}
           </div>
         </div>
@@ -1034,10 +1060,12 @@ function SocialLink({
   href,
   label,
   children,
+  icon,
 }: {
   href: string;
   label: string;
   children?: ReactNode;
+  icon?: ReactNode;
 }) {
   return (
     <a
@@ -1046,6 +1074,7 @@ function SocialLink({
       rel="noreferrer"
       className="inline-flex items-center gap-2 rounded-full border border-border bg-white/5 px-4 py-2 text-sm hover:bg-surface-elevated hover:border-primary/30 transition-all duration-300"
     >
+      {icon}
       {children}
       {label}
       <ExternalLink className="h-3.5 w-3.5" aria-hidden />
