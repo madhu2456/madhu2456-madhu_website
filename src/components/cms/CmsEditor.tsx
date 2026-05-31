@@ -122,7 +122,7 @@ export function CmsEditor() {
     setStatusMessage("");
 
     try {
-      const response = await fetch("/api/cms/content", { cache: "no-store" });
+      const response = await fetch("/api/cms/content/", { cache: "no-store" });
       const payload = (await response.json()) as CmsApiResponse;
 
       if (!response.ok) {
@@ -151,7 +151,7 @@ export function CmsEditor() {
     setStatusMessage("");
 
     try {
-      const response = await fetch("/api/cms/content", {
+      const response = await fetch("/api/cms/content/", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ content: data }),

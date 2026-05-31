@@ -1,7 +1,13 @@
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Header } from "@/components/NewPortfolioExperience";
+import {
+  normalizeImageSource,
+  shouldUseUnoptimizedImage,
+} from "@/lib/image-source";
 import { getPortfolioData, type ProjectItem } from "@/lib/portfolio-data";
 
 const DEFAULT_SITE_URL = "https://madhudadi.in";
@@ -52,44 +58,27 @@ const splitIntoList = (value?: string) => {
 };
 
 const getProjectMeta = (project: ProjectItem) => {
-  if (project.slug === "adticks") {
-    return {
-      client: "Adticks",
-      role: "Founder & Full-stack / AI Engineer",
-      period: "2024 to Present",
-    };
-  }
-
-  if (project.slug === "technical-blog") {
-    return {
-      client: "madhudadi.in/blog",
-      role: "Designer & Engineer",
-      period: "2024 to Present",
-    };
-  }
-
-  if (project.slug === "udemy-enroller-fastapi") {
-    return {
-      client: "Open source / community",
-      role: "Designer & Engineer",
-      period: "2023 to Present",
-    };
-  }
-
   return {
-    client: project.title,
-    role: "Designer & Engineer",
-    period: "Recent project",
+    client:
+      project.client ||
+      (project.slug === "adticks"
+        ? "Adticks"
+        : project.slug === "technical-blog"
+          ? "madhudadi.in/blog"
+          : project.slug === "udemy-enroller-fastapi"
+            ? "Open source / community"
+            : project.title),
+    role:
+      project.role ||
+      (project.slug === "adticks"
+        ? "Founder & Full-stack / AI Engineer"
+        : "Designer & Engineer"),
+    period: project.period || "2026 to Present",
   };
 };
 
-const makeEvidenceLinks = (project: ProjectItem, siteUrl: string) => {
-  const links: Array<{ label: string; url: string }> = [
-    {
-      label: "Case study",
-      url: `${siteUrl}case-studies/${project.slug}/`,
-    },
-  ];
+const makeEvidenceLinks = (project: ProjectItem, _siteUrl: string) => {
+  const links: Array<{ label: string; url: string }> = [];
 
   if (project.liveUrl) links.push({ label: "Live demo", url: project.liveUrl });
   if (project.githubUrl)
@@ -227,130 +216,147 @@ export default async function CaseStudyPage({
   };
 
   return (
-    <main className="mx-auto w-[min(1100px,92%)] pt-32 pb-24">
-      <script
-        type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: server-side JSON-LD
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
-      />
+    <>
+      <Header profile={profile} />
+      <main className="mx-auto w-[min(1100px,92%)] pt-32 pb-24">
+        <script
+          type="application/ld+json"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: server-side JSON-LD
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
+        />
 
-      <Link
-        href="/case-studies/"
-        className="inline-flex items-center gap-2 text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-      >
-        <ArrowLeft className="h-4 w-4" aria-hidden />
-        All case studies
-      </Link>
+        <Link
+          href="/case-studies/"
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+        >
+          <ArrowLeft className="h-4 w-4" aria-hidden />
+          All case studies
+        </Link>
 
-      {project.category ? (
-        <p className="mt-8 text-xs tracking-[0.25em] text-primary uppercase">
-          {project.category}
+        {project.category ? (
+          <p className="mt-8 text-xs tracking-[0.25em] text-primary uppercase">
+            {project.category}
+          </p>
+        ) : null}
+        <h1 className="mt-3 font-display text-4xl font-bold text-gradient md:text-6xl">
+          {project.title}
+        </h1>
+        <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+          {project.tagline || description}
         </p>
-      ) : null}
-      <h1 className="mt-3 font-display text-4xl font-bold text-gradient md:text-6xl">
-        {project.title}
-      </h1>
-      <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-        {project.tagline || description}
-      </p>
 
-      <dl className="mt-8 grid grid-cols-2 gap-4 rounded-2xl border border-border bg-surface/40 p-6 text-sm md:grid-cols-3">
-        <div>
-          <dt className="text-xs tracking-widest text-muted-foreground uppercase">
-            Client
-          </dt>
-          <dd className="mt-1">{meta.client}</dd>
-        </div>
-        <div>
-          <dt className="text-xs tracking-widest text-muted-foreground uppercase">
-            Role
-          </dt>
-          <dd className="mt-1">{meta.role}</dd>
-        </div>
-        <div>
-          <dt className="text-xs tracking-widest text-muted-foreground uppercase">
-            Period
-          </dt>
-          <dd className="mt-1">{meta.period}</dd>
-        </div>
-      </dl>
+        {project.coverImage ? (
+          <div className="relative mt-8 aspect-video w-full overflow-hidden rounded-2xl border border-border/80 bg-surface shadow-glow">
+            <Image
+              src={normalizeImageSource(project.coverImage) || ""}
+              alt={project.coverImageAlt || project.title}
+              fill
+              sizes="(max-width: 1200px) 100vw, 1100px"
+              className="object-cover"
+              priority
+              unoptimized={shouldUseUnoptimizedImage(project.coverImage)}
+            />
+          </div>
+        ) : null}
 
-      <section className="mt-12">
-        <h2 className="font-display text-2xl font-bold">Problem</h2>
-        <p className="mt-3 leading-relaxed text-muted-foreground">
-          {project.problemStatement ||
-            "The project addressed a real-world workflow bottleneck and focused on improving decision speed, reliability, and usability."}
-        </p>
-      </section>
+        <dl className="mt-8 grid grid-cols-2 gap-4 rounded-2xl border border-border bg-surface/40 p-6 text-sm md:grid-cols-3">
+          <div>
+            <dt className="text-xs tracking-widest text-muted-foreground uppercase">
+              Client
+            </dt>
+            <dd className="mt-1">{meta.client}</dd>
+          </div>
+          <div>
+            <dt className="text-xs tracking-widest text-muted-foreground uppercase">
+              Role
+            </dt>
+            <dd className="mt-1">{meta.role}</dd>
+          </div>
+          <div>
+            <dt className="text-xs tracking-widest text-muted-foreground uppercase">
+              Period
+            </dt>
+            <dd className="mt-1">{meta.period}</dd>
+          </div>
+        </dl>
 
-      {approach.length > 0 ? (
-        <section className="mt-10">
-          <h2 className="font-display text-2xl font-bold">Approach</h2>
-          <ul className="mt-3 space-y-2">
-            {approach.map((item) => (
-              <li
-                key={item}
-                className="flex gap-3 rounded-xl border border-border bg-surface/40 px-4 py-3 text-sm"
-              >
-                <span className="text-primary">◆</span>
-                <span>{item}</span>
+        <section className="mt-12">
+          <h2 className="font-display text-2xl font-bold">Problem</h2>
+          <p className="mt-3 leading-relaxed text-muted-foreground">
+            {project.problemStatement ||
+              "The project addressed a real-world workflow bottleneck and focused on improving decision speed, reliability, and usability."}
+          </p>
+        </section>
+
+        {approach.length > 0 ? (
+          <section className="mt-10">
+            <h2 className="font-display text-2xl font-bold">Approach</h2>
+            <ul className="mt-3 space-y-2">
+              {approach.map((item) => (
+                <li
+                  key={item}
+                  className="flex gap-3 rounded-xl border border-border bg-surface/40 px-4 py-3 text-sm"
+                >
+                  <span className="text-primary">◆</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
+
+        {outcomes.length > 0 ? (
+          <section className="mt-10">
+            <h2 className="font-display text-2xl font-bold">Outcomes</h2>
+            <ul className="mt-3 space-y-2">
+              {outcomes.map((item) => (
+                <li
+                  key={item}
+                  className="flex gap-3 rounded-xl border border-border bg-surface/40 px-4 py-3 text-sm"
+                >
+                  <span className="text-primary">✓</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
+
+        {stack.length > 0 ? (
+          <section className="mt-10">
+            <h2 className="font-display text-2xl font-bold">Stack</h2>
+            <ul className="mt-3 flex flex-wrap gap-2">
+              {stack.map((tech) => (
+                <li
+                  key={tech}
+                  className="rounded-full border border-border bg-surface/60 px-3 py-1 text-xs"
+                >
+                  {tech}
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
+
+        <section id="evidence" className="mt-10">
+          <h2 className="font-display text-2xl font-bold">Links</h2>
+          <ul className="mt-3 flex flex-wrap gap-3">
+            {evidenceLinks.map((link) => (
+              <li key={link.url}>
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-border bg-white/5 px-4 py-2 text-sm hover:bg-surface-elevated hover:border-primary/30 transition-all duration-300"
+                >
+                  {link.label}
+                  <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+                </a>
               </li>
             ))}
           </ul>
         </section>
-      ) : null}
-
-      {outcomes.length > 0 ? (
-        <section className="mt-10">
-          <h2 className="font-display text-2xl font-bold">Outcomes</h2>
-          <ul className="mt-3 space-y-2">
-            {outcomes.map((item) => (
-              <li
-                key={item}
-                className="flex gap-3 rounded-xl border border-border bg-surface/40 px-4 py-3 text-sm"
-              >
-                <span className="text-primary">✓</span>
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-      ) : null}
-
-      {stack.length > 0 ? (
-        <section className="mt-10">
-          <h2 className="font-display text-2xl font-bold">Stack</h2>
-          <ul className="mt-3 flex flex-wrap gap-2">
-            {stack.map((tech) => (
-              <li
-                key={tech}
-                className="rounded-full border border-border bg-surface/60 px-3 py-1 text-xs"
-              >
-                {tech}
-              </li>
-            ))}
-          </ul>
-        </section>
-      ) : null}
-
-      <section id="evidence" className="mt-10">
-        <h2 className="font-display text-2xl font-bold">Links</h2>
-        <ul className="mt-3 flex flex-wrap gap-3">
-          {evidenceLinks.map((link) => (
-            <li key={link.url}>
-              <a
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-4 py-2 text-sm hover:bg-surface-elevated"
-              >
-                {link.label}
-                <ExternalLink className="h-3.5 w-3.5" aria-hidden />
-              </a>
-            </li>
-          ))}
-        </ul>
-      </section>
-    </main>
+      </main>
+    </>
   );
 }

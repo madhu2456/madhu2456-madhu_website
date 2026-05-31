@@ -1,5 +1,11 @@
 "use client";
 
+import {
+  IconAward,
+  IconChartBar,
+  IconSparkles,
+  IconTrendingUp,
+} from "@tabler/icons-react";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,6 +19,10 @@ import {
   useTransition,
 } from "react";
 import { submitContactForm } from "@/app/actions/submit-contact-form";
+import {
+  normalizeImageSource,
+  shouldUseUnoptimizedImage,
+} from "@/lib/image-source";
 import type {
   CertificationItem,
   ExperienceItem,
@@ -84,31 +94,67 @@ export function NewPortfolioExperience({
   );
 }
 
-function Header({ profile }: { profile: Profile }) {
-  const active = useActiveSection(navLinks.map((link) => link.href.slice(1)));
+export function Header({ profile }: { profile: Profile }) {
+  const [isClient, setIsClient] = useState(false);
+  const [isCaseStudy, setIsCaseStudy] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+    if (typeof window !== "undefined") {
+      setIsCaseStudy(window.location.pathname.includes("/case-studies"));
+    }
+  }, []);
+
+  const scrollActive = useActiveSection(
+    navLinks.map((link) => link.href.slice(1)),
+  );
+  const [active, setActive] = useState("");
+
+  useEffect(() => {
+    if (isCaseStudy) {
+      setActive("projects");
+    } else {
+      setActive(scrollActive || "about");
+    }
+  }, [scrollActive, isCaseStudy]);
+
+  const getHref = (href: string) => {
+    if (!isClient) return href;
+    return isCaseStudy ? `/${href}` : href;
+  };
+
+  const getLogoHref = () => {
+    if (!isClient) return "#main";
+    return isCaseStudy ? "/" : "#main";
+  };
 
   return (
     <header className="fixed top-0 right-0 left-0 z-50">
-      <div className="glass mx-auto mt-3 flex w-[min(1400px,94%)] items-center justify-between rounded-full px-3 py-2 sm:mt-4 sm:px-5 sm:py-3">
+      <div className="mx-auto mt-3 flex w-[min(1400px,94%)] items-center justify-between rounded-full border border-border/90 bg-surface-elevated/85 px-3 py-2 sm:mt-4 sm:px-5 sm:py-3 shadow-lg shadow-black/20 backdrop-blur-md">
         <a
-          href="#main"
-          className="flex items-center gap-2 font-display text-base sm:text-lg"
+          href={getLogoHref()}
+          className="group flex items-center gap-2.5 font-display text-base font-semibold tracking-tight transition-colors hover:text-primary sm:text-lg"
           aria-label="Madhu Dadi home"
         >
-          <Image
-            src="/new-ui/logo.png"
-            alt=""
-            aria-hidden
-            width={28}
-            height={28}
-            className="h-7 w-7 rounded-md object-cover"
-          />
-          <span>
+          <div className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full border border-border/80 bg-surface shadow-inner transition-all duration-300 group-hover:scale-105 group-hover:border-primary/30">
+            <Image
+              src="/new-ui/logo.png"
+              alt=""
+              aria-hidden
+              width={32}
+              height={32}
+              className="h-full w-full object-cover"
+            />
+          </div>
+          <span className="text-foreground/90 transition-colors group-hover:text-foreground">
             {profile.firstName}&nbsp;{profile.lastName}
           </span>
         </a>
 
-        <nav aria-label="Primary" className="hidden items-center gap-7 md:flex">
+        <nav
+          aria-label="Primary"
+          className="hidden items-center gap-1 rounded-full border border-border/30 bg-black/30 p-1 md:flex"
+        >
           {navLinks.map((link) => {
             const id = link.href.slice(1);
             const isActive = active === id;
@@ -116,19 +162,15 @@ function Header({ profile }: { profile: Profile }) {
             return (
               <a
                 key={link.href}
-                href={link.href}
+                href={getHref(link.href)}
                 aria-current={isActive ? "location" : undefined}
-                className={`relative text-sm transition-colors hover:text-foreground ${
-                  isActive ? "text-foreground" : "text-muted-foreground"
+                className={`rounded-full px-3.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-300 ${
+                  isActive
+                    ? "bg-primary/15 text-primary border border-primary/20 shadow-sm"
+                    : "text-muted-foreground border border-transparent hover:bg-white/5 hover:text-foreground"
                 }`}
               >
                 {link.label}
-                <span
-                  aria-hidden
-                  className={`pointer-events-none absolute -bottom-1 left-0 h-px w-full origin-left bg-primary transition-transform duration-300 ${
-                    isActive ? "scale-x-100" : "scale-x-0"
-                  }`}
-                />
               </a>
             );
           })}
@@ -143,7 +185,7 @@ function Header({ profile }: { profile: Profile }) {
                 "Hi Madhu,\n\nWe'd like to talk about a full-time role.\n\nCompany:\nRole / team:\nLocation (remote, hybrid, onsite):\nTech stack:\nIdeal start date:\n\nLooking forward to connecting.",
             })
           }
-          className="rounded-full bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-transform hover:scale-[1.03] sm:px-4 sm:py-2 sm:text-sm"
+          className="rounded-full bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground shadow-sm shadow-primary/25 transition-all duration-300 hover:scale-[1.04] hover:shadow-glow sm:px-5 sm:text-sm"
         >
           Hire me
         </button>
@@ -184,8 +226,15 @@ function Hero({
           </p>
           <h1 className="font-display text-[clamp(2rem,8vw,4.75rem)] leading-[1.15] font-bold tracking-tight sm:leading-[1.1]">
             I build{" "}
-            <span className="text-gradient-amber italic">
-              AI that actually ships
+            <span className="text-gradient-amber italic inline-block">AI</span>{" "}
+            <span className="text-gradient-amber italic inline-block">
+              that
+            </span>{" "}
+            <span className="text-gradient-amber italic inline-block">
+              actually
+            </span>{" "}
+            <span className="text-gradient-amber italic inline-block">
+              ships
             </span>
             <br className="hidden sm:block" />
             <span className="sm:hidden"> </span>
@@ -215,7 +264,7 @@ function Hero({
             </button>
             <a
               href="#projects"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-surface/60 px-5 py-3 text-sm font-medium hover:bg-surface-elevated sm:px-6"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-white/5 px-5 py-3 text-sm font-medium hover:bg-surface-elevated hover:border-primary/30 sm:px-6 transition-all duration-300"
             >
               See case studies
             </a>
@@ -268,18 +317,15 @@ function Hero({
 }
 
 function Stats({ stats }: { stats: Profile["stats"] }) {
-  const { ref, inView } = useInView<HTMLDListElement>();
+  const { ref, inView } = useInView<HTMLDivElement>();
 
   if (stats.length === 0) return null;
 
   return (
-    <section
-      aria-label="Key results"
-      className="border-y border-border bg-surface/40"
-    >
-      <dl
+    <section aria-label="Key results" className="py-12 sm:py-16">
+      <div
         ref={ref}
-        className="mx-auto grid w-[min(1400px,92%)] grid-cols-2 gap-px md:grid-cols-4"
+        className="mx-auto grid w-[min(1400px,92%)] grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
       >
         {stats.map((stat, index) => (
           <StatItem
@@ -290,7 +336,7 @@ function Stats({ stats }: { stats: Profile["stats"] }) {
             delay={index * 80}
           />
         ))}
-      </dl>
+      </div>
     </section>
   );
 }
@@ -308,19 +354,57 @@ function StatItem({
 }) {
   const display = useCountUp(value, start);
 
+  const getIcon = (label: string) => {
+    const l = label.toLowerCase();
+    if (l.includes("experience") || l.includes("year")) {
+      return (
+        <IconAward className="h-6 w-6 text-primary transition-transform duration-300 group-hover:scale-115 group-hover:rotate-6" />
+      );
+    }
+    if (l.includes("customer") || l.includes("growth") || l.includes("user")) {
+      return (
+        <IconTrendingUp className="h-6 w-6 text-primary transition-transform duration-300 group-hover:scale-115 group-hover:translate-y-[-2px]" />
+      );
+    }
+    if (
+      l.includes("churn") ||
+      l.includes("reduction") ||
+      l.includes("retention")
+    ) {
+      return (
+        <IconChartBar className="h-6 w-6 text-primary transition-transform duration-300 group-hover:scale-115 group-hover:translate-x-[2px]" />
+      );
+    }
+    return (
+      <IconSparkles className="h-6 w-6 text-primary transition-transform duration-300 group-hover:scale-115 group-hover:rotate-12" />
+    );
+  };
+
   return (
     <div
-      className="py-10 text-center transition-all duration-700"
+      className="group relative flex flex-col items-center justify-center overflow-hidden rounded-2xl border border-border/60 bg-surface/30 px-6 py-8 text-center shadow-sm backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:border-primary/25 hover:shadow-glow"
       style={{
         opacity: start ? 1 : 0,
-        transform: start ? "translateY(0)" : "translateY(12px)",
+        transform: start ? "translateY(0)" : "translateY(20px)",
         transitionDelay: `${delay}ms`,
+        transitionProperty: "opacity, transform, border-color, box-shadow",
       }}
     >
-      <dd className="text-gradient-amber font-display text-4xl md:text-5xl">
+      {/* Dynamic ambient radial backdrop glow */}
+      <div className="absolute inset-0 -z-10 bg-radial from-primary/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+      {/* Floating Icon Wrapper */}
+      <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-border/80 bg-surface/50 shadow-inner group-hover:border-primary/20">
+        {getIcon(label)}
+      </div>
+
+      <dd className="text-gradient-amber font-display text-4xl font-extrabold tracking-tight sm:text-5xl">
         {display}
       </dd>
-      <dt className="mt-2 text-sm text-muted-foreground">{label}</dt>
+
+      <dt className="mt-3 text-xs font-semibold text-foreground/90 tracking-wider uppercase sm:text-sm">
+        {label}
+      </dt>
     </div>
   );
 }
@@ -417,61 +501,75 @@ function Projects({ projects }: { projects: ProjectItem[] }) {
           return (
             <article
               key={project.slug}
-              className="group flex flex-col rounded-2xl border border-border bg-surface/60 p-5 transition-all hover:-translate-y-1 hover:border-primary/40 sm:p-6"
+              className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface/60 transition-all hover:-translate-y-1 hover:border-primary/40 shadow-card"
             >
-              {project.category ? (
-                <p className="text-[11px] tracking-widest text-primary uppercase sm:text-xs">
-                  {project.category}
-                </p>
+              {project.coverImage ? (
+                <div className="relative aspect-video w-full overflow-hidden border-b border-border/80 bg-surface">
+                  <Image
+                    src={normalizeImageSource(project.coverImage) || ""}
+                    alt={project.coverImageAlt || project.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    unoptimized={shouldUseUnoptimizedImage(project.coverImage)}
+                  />
+                </div>
               ) : null}
-              <h3 className="mt-2 min-h-[3.75rem] font-display text-xl font-semibold leading-tight sm:text-2xl">
-                {project.tagline || project.title}
-              </h3>
-              <p className="mt-1 text-sm font-medium text-foreground/80">
-                {project.title}
-              </p>
-              {project.impactSummary ? (
-                <p className="mt-3 min-h-[9rem] text-sm leading-relaxed text-muted-foreground">
-                  {project.impactSummary}
+              <div className="flex flex-1 flex-col p-5 sm:p-6">
+                {project.category ? (
+                  <p className="text-[11px] tracking-widest text-primary uppercase sm:text-xs">
+                    {project.category}
+                  </p>
+                ) : null}
+                <h3 className="mt-2 min-h-[3.75rem] font-display text-xl font-semibold leading-tight sm:text-2xl">
+                  {project.tagline || project.title}
+                </h3>
+                <p className="mt-1 text-sm font-medium text-foreground/80">
+                  {project.title}
                 </p>
-              ) : null}
-              <div className="mt-4 flex min-h-[3.5rem] flex-wrap content-start gap-1.5">
-                {stack.slice(0, 8).map((tech) => (
-                  <span
-                    key={`${project.slug}-${tech}`}
-                    className="rounded-full border border-border px-2 py-0.5 text-[11px] text-muted-foreground"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-              <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
-                <Link
-                  href={`/case-studies/${project.slug}/`}
-                  className="inline-flex items-center gap-1 font-medium text-primary underline-offset-4 transition-colors hover:underline"
-                >
-                  Read case study <ArrowRight className="h-3.5 w-3.5" />
-                </Link>
-                {project.liveUrl ? (
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-                  >
-                    Live <ExternalLink className="h-3.5 w-3.5" />
-                  </a>
+                {project.impactSummary ? (
+                  <p className="mt-3 min-h-[9rem] text-sm leading-relaxed text-muted-foreground">
+                    {project.impactSummary}
+                  </p>
                 ) : null}
-                {project.githubUrl ? (
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+                <div className="mt-4 flex min-h-[3.5rem] flex-wrap content-start gap-1.5">
+                  {stack.slice(0, 8).map((tech) => (
+                    <span
+                      key={`${project.slug}-${tech}`}
+                      className="rounded-full border border-border px-2 py-0.5 text-[11px] text-muted-foreground"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+                  <Link
+                    href={`/case-studies/${project.slug}/`}
+                    className="inline-flex items-center gap-1 font-medium text-primary underline-offset-4 transition-colors hover:underline"
                   >
-                    GitHub <ExternalLink className="h-3.5 w-3.5" />
-                  </a>
-                ) : null}
+                    Read case study <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                  {project.liveUrl ? (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+                    >
+                      Live <ExternalLink className="h-3.5 w-3.5" />
+                    </a>
+                  ) : null}
+                  {project.githubUrl ? (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+                    >
+                      GitHub <ExternalLink className="h-3.5 w-3.5" />
+                    </a>
+                  ) : null}
+                </div>
               </div>
             </article>
           );
@@ -939,7 +1037,7 @@ function SocialLink({
       href={href}
       target="_blank"
       rel="noreferrer"
-      className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-4 py-2 text-sm hover:bg-surface-elevated"
+      className="inline-flex items-center gap-2 rounded-full border border-border bg-white/5 px-4 py-2 text-sm hover:bg-surface-elevated hover:border-primary/30 transition-all duration-300"
     >
       {children}
       {label}
@@ -1128,11 +1226,11 @@ function Section({
       }}
     >
       <div className="mx-auto w-[min(1400px,92%)]">
-        <header className="mb-8 max-w-3xl">
+        <header className="mb-8 max-w-none">
           <p className="mb-3 text-xs tracking-[0.25em] text-primary uppercase">
             {eyebrow}
           </p>
-          <h2 className="font-display text-4xl font-bold leading-tight md:text-6xl">
+          <h2 className="font-display text-3xl font-bold leading-tight sm:text-4xl lg:text-[clamp(2.25rem,2.8vw,3.25rem)]">
             <span className="text-gradient">{title}</span>
           </h2>
         </header>
@@ -1206,6 +1304,7 @@ function useCountUp(target: string, start: boolean, duration = 1400) {
 
 function useActiveSection(ids: string[]) {
   const [active, setActive] = useState(ids[0] ?? "");
+  const intersectionStates = useRef<Record<string, boolean>>({});
 
   useEffect(() => {
     if (typeof IntersectionObserver === "undefined") return;
@@ -1217,14 +1316,40 @@ function useActiveSection(ids: string[]) {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        if (visible[0]) {
-          setActive(visible[0].target.id);
+        // 1. Record the intersection state of changed elements
+        for (const entry of entries) {
+          intersectionStates.current[entry.target.id] = entry.isIntersecting;
+        }
+
+        // 2. Gather all currently intersecting section IDs
+        const intersectingIds = Object.keys(intersectionStates.current).filter(
+          (id) => intersectionStates.current[id],
+        );
+
+        if (intersectingIds.length === 0) return;
+
+        // 3. Find which intersecting section is closest to the viewing window's top-margin (navbar focus area ~120px)
+        let bestId = active;
+        let minDistance = Number.MAX_VALUE;
+
+        for (const id of intersectingIds) {
+          const el = document.getElementById(id);
+          if (!el) continue;
+          const rect = el.getBoundingClientRect();
+          const distance = Math.abs(rect.top - 120);
+
+          if (distance < minDistance) {
+            minDistance = distance;
+            bestId = id;
+          }
+        }
+
+        if (bestId && bestId !== active) {
+          setActive(bestId);
         }
       },
-      { rootMargin: "-40% 0px -50% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] },
+      // rootMargin: starts below navbar (~100px) down to 80% screen height to cover fluid scrolling
+      { rootMargin: "-100px 0px -20% 0px", threshold: 0 },
     );
 
     for (const element of elements) {
@@ -1232,7 +1357,7 @@ function useActiveSection(ids: string[]) {
     }
 
     return () => observer.disconnect();
-  }, [ids]);
+  }, [ids, active]);
 
   return active;
 }

@@ -115,6 +115,33 @@ export function ProjectsEditor() {
                 {...register(`projects.${index}.coverImageAlt`)}
               />
             </FormField>
+            <FormField
+              label="Client"
+              error={errors.projects?.[index]?.client?.message}
+            >
+              <input
+                className={inputClass}
+                {...register(`projects.${index}.client`)}
+              />
+            </FormField>
+            <FormField
+              label="Role"
+              error={errors.projects?.[index]?.role?.message}
+            >
+              <input
+                className={inputClass}
+                {...register(`projects.${index}.role`)}
+              />
+            </FormField>
+            <FormField
+              label="Period"
+              error={errors.projects?.[index]?.period?.message}
+            >
+              <input
+                className={inputClass}
+                {...register(`projects.${index}.period`)}
+              />
+            </FormField>
           </div>
 
           <label className="inline-flex items-center gap-2 text-sm">
