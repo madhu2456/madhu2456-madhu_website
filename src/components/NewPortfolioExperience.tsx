@@ -89,7 +89,7 @@ function Header({ profile }: { profile: Profile }) {
 
   return (
     <header className="fixed top-0 right-0 left-0 z-50">
-      <div className="glass mx-auto mt-3 flex w-[min(1200px,94%)] items-center justify-between rounded-full px-3 py-2 sm:mt-4 sm:px-5 sm:py-3">
+      <div className="glass mx-auto mt-3 flex w-[min(1400px,94%)] items-center justify-between rounded-full px-3 py-2 sm:mt-4 sm:px-5 sm:py-3">
         <a
           href="#main"
           className="flex items-center gap-2 font-display text-base sm:text-lg"
@@ -173,7 +173,7 @@ function Hero({
       className="relative isolate bg-hero-glow pt-24 pb-16 sm:pt-32 sm:pb-20 lg:min-h-[100svh]"
     >
       <div className="grain absolute inset-0 -z-10" aria-hidden />
-      <div className="mx-auto grid w-[min(1200px,92%)] gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-14">
+      <div className="mx-auto grid w-[min(1400px,92%)] gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-14">
         <div className="animate-fade-up">
           <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-[11px] text-emerald-300 sm:mb-5 sm:text-xs">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
@@ -279,7 +279,7 @@ function Stats({ stats }: { stats: Profile["stats"] }) {
     >
       <dl
         ref={ref}
-        className="mx-auto grid w-[min(1200px,92%)] grid-cols-2 gap-px md:grid-cols-4"
+        className="mx-auto grid w-[min(1400px,92%)] grid-cols-2 gap-px md:grid-cols-4"
       >
         {stats.map((stat, index) => (
           <StatItem
@@ -326,6 +326,48 @@ function StatItem({
 }
 
 function About({ profile }: { profile: Profile }) {
+  const formatBioText = (text: string) => {
+    const highlights = [
+      "build AI",
+      "LLMs, RAG, and AI agents",
+      "marketing data",
+    ];
+    let result: (string | ReactNode)[] = [text];
+
+    for (const phrase of highlights) {
+      const nextResult: (string | ReactNode)[] = [];
+      for (const part of result) {
+        if (typeof part !== "string") {
+          nextResult.push(part);
+          continue;
+        }
+
+        const index = part.indexOf(phrase);
+        if (index === -1) {
+          nextResult.push(part);
+          continue;
+        }
+
+        const before = part.slice(0, index);
+        const after = part.slice(index + phrase.length);
+
+        if (before) nextResult.push(before);
+        nextResult.push(
+          <strong
+            key={`${phrase}-${index}`}
+            className="font-semibold text-foreground"
+          >
+            {phrase}
+          </strong>,
+        );
+        if (after) nextResult.push(after);
+      }
+      result = nextResult;
+    }
+
+    return result;
+  };
+
   return (
     <Section
       id="about"
@@ -335,7 +377,7 @@ function About({ profile }: { profile: Profile }) {
       <div className="grid gap-10 lg:grid-cols-3">
         <div className="space-y-4 text-lg leading-relaxed text-muted-foreground lg:col-span-2">
           {profile.fullBioParagraphs.slice(0, 2).map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
+            <p key={paragraph}>{formatBioText(paragraph)}</p>
           ))}
         </div>
         <ul className="space-y-3 text-sm">
@@ -999,7 +1041,7 @@ function Footer({
 
   return (
     <footer className="border-t border-border bg-surface/30 py-12">
-      <div className="mx-auto w-[min(1200px,92%)]">
+      <div className="mx-auto w-[min(1400px,92%)]">
         <nav
           aria-label="Footer"
           className="grid gap-8 sm:grid-cols-2 md:grid-cols-3"
@@ -1079,7 +1121,7 @@ function Section({
         transform: inView ? "translateY(0)" : "translateY(20px)",
       }}
     >
-      <div className="mx-auto w-[min(1200px,92%)]">
+      <div className="mx-auto w-[min(1400px,92%)]">
         <header className="mb-8 max-w-3xl">
           <p className="mb-3 text-xs tracking-[0.25em] text-primary uppercase">
             {eyebrow}
