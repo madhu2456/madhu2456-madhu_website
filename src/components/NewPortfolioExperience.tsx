@@ -162,11 +162,14 @@ export function Header({ profile }: { profile: Profile }) {
           {navLinks.map((link) => {
             const id = link.href.slice(1);
             const isActive = active === id;
+            const isExternal = !link.href.startsWith("#");
 
             return (
               <a
                 key={link.href}
                 href={getHref(link.href)}
+                target={isExternal ? "_blank" : undefined}
+                rel={isExternal ? "noreferrer" : undefined}
                 aria-current={isActive ? "location" : undefined}
                 className={`rounded-full px-3.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-300 ${
                   isActive
