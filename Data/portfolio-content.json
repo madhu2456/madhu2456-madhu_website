@@ -627,6 +627,57 @@
   ],
   "projects": [
     {
+      "title": "Adticks",
+      "slug": "adticks",
+      "tagline": "SaaS Platform for Technical SEO, AEO, and Generative Engine Optimization (GEO)",
+      "category": "SaaS / Web App",
+      "impactSummary": "Engineered from scratch by Madhu Dadi, Adticks operates as a comprehensive search intelligence and AI visibility auditing platform. The crawler scales to run parallel headless rendering over 10,000 pages, mapping indexability, robot policies, and content schemas. Adticks detects JavaScript render-parity bottlenecks where core text, pricing, and schema.org markup are hidden from bots, resulting in significant indexing and AI Overview citation lift. The platform's automated diagnostics reduce technical audit cycle times by 85% and deliver prioritized action queues for modern search platforms.",
+      "liveUrl": "https://adticks.com",
+      "featured": true,
+      "coverImage": "/uploads/cms/adticks-cover.png",
+      "coverImageAlt": "Adticks search and AI visibility measurement platform, designed and built by Madhu Dadi.",
+      "technologies": [
+        {
+          "name": "Next.js"
+        },
+        {
+          "name": "React"
+        },
+        {
+          "name": "Tailwind CSS"
+        },
+        {
+          "name": "FastAPI"
+        },
+        {
+          "name": "PostgreSQL"
+        },
+        {
+          "name": "Redis"
+        },
+        {
+          "name": "Celery"
+        },
+        {
+          "name": "Playwright"
+        }
+      ],
+      "problemStatement": "As search behavior shifts from traditional ten blue links to AI Overviews and conversational answer engines (ChatGPT, Claude, Gemini, Perplexity), brands struggle to measure and maintain their visibility across LLM systems. Standard web crawlers fail to diagnose accessibility issues specific to generative crawlers (e.g., GPTBot, ClaudeBot, PerplexityBot). Furthermore, client-side JavaScript rendering issues often hide critical semantic content, entity relationships, and schema.org templates from LLM crawlers, leading to omission from AI citations.",
+      "solutionApproach": "To solve this, Madhu Dadi designed and built Adticks as a unified inside-out site auditing engine. The core system runs parallel headless crawls using Playwright to identify render parity gaps between raw server HTML and fully client-rendered DOM. It audits robots.txt directives, sitemaps, structured data schemas, and llms.txt configurations. The backend, built with FastAPI and Celery workers, schedules deep site crawls, parses code with selectolax, runs 18 parallel audit analyzers, and outputs actionable, severity-prioritized fix queues tailored for SEO, AEO, and GEO optimization.",
+      "citations": [
+        {
+          "label": "Visit Adticks",
+          "url": "https://adticks.com"
+        },
+        {
+          "label": "Audit App",
+          "url": "https://app.adticks.com"
+        }
+      ],
+      "order": 1,
+      "updatedAt": "2026-05-28T18:00:00.000Z"
+    },
+    {
       "title": "Technical Blog",
       "slug": "technical-blog",
       "tagline": "In-depth articles on AI, RAG, and Modern Web Engineering",
@@ -634,7 +685,7 @@
       "impactSummary": "The implementation of the technical blog has significantly elevated learning efficacy and traffic engagement. By focusing on high-intent AI and engineering topics, the platform achieves organic search rankings and attracts developers seeking advanced technical solutions. The RAG AI Assistant successfully processes user queries in real-time, providing immediate contextual answers with direct citations, reducing user search latencies by an estimated 80%. Automated continuous integration and post-deployment cache warming have stabilized page traversal speeds (low TTFB), ensuring a high-quality experience for both search bots and human learners.",
       "liveUrl": "https://madhudadi.in/blog",
       "featured": true,
-      "coverImage": "/icon-512.png",
+      "coverImage": "/uploads/cms/technical-blog-cover.png",
       "coverImageAlt": "Technical Blog preview",
       "technologies": [
         {
@@ -662,7 +713,7 @@
           "url": "https://madhudadi.in/blog/ask"
         }
       ],
-      "order": 1,
+      "order": 2,
       "updatedAt": "2026-04-25T17:30:00.000Z"
     },
     {
@@ -674,7 +725,7 @@
       "liveUrl": "https://udemyenroller.madhudadi.in",
       "githubUrl": "https://github.com/madhu2456/udemy_enroller_fastapi",
       "featured": true,
-      "coverImage": "/uploads/imported/udemy-enroller-fastapi-cover-587e017b6cf1.png",
+      "coverImage": "/uploads/cms/udemy-enroller-cover.png",
       "coverImageAlt": "Udemy Enroller using FastAPI preview",
       "technologies": [
         {
@@ -712,7 +763,7 @@
           "url": "https://madhudadi.in/case-studies/udemy-enroller-fastapi/"
         }
       ],
-      "order": 1,
+      "order": 3,
       "updatedAt": "2026-04-17T09:00:13.712Z"
     }
   ],
