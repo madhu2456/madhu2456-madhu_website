@@ -247,7 +247,7 @@ export default async function CaseStudyPage({
           {project.category}
         </p>
       ) : null}
-      <h1 className="mt-3 font-display text-4xl text-gradient md:text-6xl">
+      <h1 className="mt-3 font-display text-4xl font-bold text-gradient md:text-6xl">
         {project.title}
       </h1>
       <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
@@ -276,7 +276,7 @@ export default async function CaseStudyPage({
       </dl>
 
       <section className="mt-12">
-        <h2 className="font-display text-2xl">Problem</h2>
+        <h2 className="font-display text-2xl font-bold">Problem</h2>
         <p className="mt-3 leading-relaxed text-muted-foreground">
           {project.problemStatement ||
             "The project addressed a real-world workflow bottleneck and focused on improving decision speed, reliability, and usability."}
@@ -285,7 +285,7 @@ export default async function CaseStudyPage({
 
       {approach.length > 0 ? (
         <section className="mt-10">
-          <h2 className="font-display text-2xl">Approach</h2>
+          <h2 className="font-display text-2xl font-bold">Approach</h2>
           <ul className="mt-3 space-y-2">
             {approach.map((item) => (
               <li
@@ -302,7 +302,7 @@ export default async function CaseStudyPage({
 
       {outcomes.length > 0 ? (
         <section className="mt-10">
-          <h2 className="font-display text-2xl">Outcomes</h2>
+          <h2 className="font-display text-2xl font-bold">Outcomes</h2>
           <ul className="mt-3 space-y-2">
             {outcomes.map((item) => (
               <li
@@ -319,7 +319,7 @@ export default async function CaseStudyPage({
 
       {stack.length > 0 ? (
         <section className="mt-10">
-          <h2 className="font-display text-2xl">Stack</h2>
+          <h2 className="font-display text-2xl font-bold">Stack</h2>
           <ul className="mt-3 flex flex-wrap gap-2">
             {stack.map((tech) => (
               <li
@@ -334,7 +334,7 @@ export default async function CaseStudyPage({
       ) : null}
 
       <section id="evidence" className="mt-10">
-        <h2 className="font-display text-2xl">Links</h2>
+        <h2 className="font-display text-2xl font-bold">Links</h2>
         <ul className="mt-3 flex flex-wrap gap-3">
           {evidenceLinks.map((link) => (
             <li key={link.url}>
