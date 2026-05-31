@@ -253,6 +253,60 @@ export async function GET() {
     ),
   );
 
+  // Synchronize blog metadata dynamically at build/request time to prevent entity drift (GEO-001)
+  let blogStats = {
+    latestUpdate: "2026-05-19T00:00:00Z",
+    postCount: 42,
+    seriesCount: 5,
+    tagCount: 28,
+  };
+
+  try {
+    const blogRes = await fetch("https://madhudadi.in/blog/ai-profile.json", {
+      next: { revalidate: 3600 },
+      signal: AbortSignal.timeout(3000), // Timeout after 3 seconds
+    });
+    if (blogRes.ok) {
+      const blogData = (await blogRes.json()) as {
+        meta?: {
+          blog?: {
+            latestUpdate?: string;
+            latestUpdateDate?: string;
+            postCount?: number;
+            seriesCount?: number;
+            tagCount?: number;
+          };
+        };
+      };
+      if (blogData?.meta?.blog) {
+        const remoteBlog = blogData.meta.blog;
+        blogStats = {
+          latestUpdate:
+            remoteBlog.latestUpdate ||
+            remoteBlog.latestUpdateDate ||
+            blogStats.latestUpdate,
+          postCount:
+            typeof remoteBlog.postCount === "number"
+              ? remoteBlog.postCount
+              : blogStats.postCount,
+          seriesCount:
+            typeof remoteBlog.seriesCount === "number"
+              ? remoteBlog.seriesCount
+              : blogStats.seriesCount,
+          tagCount:
+            typeof remoteBlog.tagCount === "number"
+              ? remoteBlog.tagCount
+              : blogStats.tagCount,
+        };
+      }
+    }
+  } catch (err) {
+    console.warn(
+      "Failed to fetch fresh blog stats, using local fallbacks:",
+      err,
+    );
+  }
+
   const body = {
     meta: {
       generatedAt: new Date().toISOString(),
@@ -270,11 +324,11 @@ export async function GET() {
         aiChat: `${siteUrl}blog/ask`,
         description:
           "Technical blog covering AI engineering, full-stack development, RAG systems, and software architecture.",
-        // Entity facts synced from blog as of 2026-05-19 audit
-        latestUpdate: "2026-05-19T00:00:00Z",
-        postCount: 42,
-        seriesCount: 5,
-        tagCount: 28,
+        // Entity facts dynamically synced from blog (or fallback to pre-compiled values)
+        latestUpdate: blogStats.latestUpdate,
+        postCount: blogStats.postCount,
+        seriesCount: blogStats.seriesCount,
+        tagCount: blogStats.tagCount,
         topics: [
           "AI Engineering",
           "LLM Application Development",
