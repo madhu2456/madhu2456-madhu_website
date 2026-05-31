@@ -98,12 +98,12 @@ describe("buildPersonSchema", () => {
       {
         "@type": "CreativeWork",
         name: "Technical Articles Index",
-        url: "https://madhudadi.com/blog/posts/",
+        url: "https://madhudadi.com/blog/posts",
       },
       {
         "@type": "CreativeWork",
         name: "Technical Blog AI Assistant",
-        url: "https://madhudadi.com/blog/ask/",
+        url: "https://madhudadi.com/blog/ask",
       },
     ]);
   });
@@ -117,9 +117,9 @@ describe("buildWebSiteSchema", () => {
     const schema = buildWebSiteSchema({ name, url });
 
     expect(schema.significantLink).toEqual([
-      "https://madhudadi.com/blog/ask/",
-      "https://madhudadi.com/blog/posts/",
+      "https://madhudadi.com/blog/ask",
+      "https://madhudadi.com/blog/posts",
     ]);
-    expect(schema.relatedLink).toEqual(["https://madhudadi.com/blog/"]);
+    expect(schema.relatedLink).toEqual(["https://madhudadi.com/blog"]);
   });
 });
