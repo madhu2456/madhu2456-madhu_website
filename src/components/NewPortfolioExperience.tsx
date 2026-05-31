@@ -182,7 +182,7 @@ function Hero({
           <p className="mb-3 font-display text-[11px] tracking-[0.18em] text-muted-foreground uppercase sm:text-sm sm:tracking-[0.2em]">
             {profile.firstName} {profile.lastName}, {profile.headline}
           </p>
-          <h1 className="font-display text-[clamp(2rem,8vw,4.75rem)] leading-[1.05] font-bold tracking-tight sm:leading-[1.02]">
+          <h1 className="font-display text-[clamp(2rem,8vw,4.75rem)] leading-[1.15] font-bold tracking-tight sm:leading-[1.1]">
             I build{" "}
             <span className="text-gradient-amber italic">
               AI that actually ships
