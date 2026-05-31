@@ -24,33 +24,36 @@
     "socialLinks": {
       "github": "https://github.com/madhu2456",
       "linkedin": "https://www.linkedin.com/in/madhu-dadi-54684531",
+      "twitter": "https://x.com/madhu245",
       "website": "https://madhudadi.in/blog",
-      "twitter": "https://x.com/madhu245"
+      "medium": "",
+      "devto": "",
+      "youtube": "",
+      "stackoverflow": ""
     },
     "yearsOfExperience": 9,
     "stats": [
       {
-        "value": "9+",
-        "label": "Years experience"
+        "label": "Years experience",
+        "value": "9+"
       },
       {
-        "value": "30%",
-        "label": "New-customer growth"
+        "label": "New-customer growth",
+        "value": "30%"
       },
       {
-        "value": "20%",
-        "label": "Churn reduction"
+        "label": "Churn reduction",
+        "value": "20%"
       },
       {
-        "value": "15%",
-        "label": "Brand-awareness lift"
+        "label": "Brand-awareness lift",
+        "value": "15%"
       }
     ],
     "profileImage": "/new-ui/hero-portrait.jpg",
-    "updatedAt": "2026-05-31T00:00:00.000Z"
+    "updatedAt": "2026-05-31T14:09:41.323Z"
   },
   "siteSettings": {
-    "siteName": "Madhu Dadi — Portfolio",
     "siteTitle": "Madhu Dadi | AI & Analytics Engineer · LLM, RAG, GA4",
     "siteDescription": "Madhu Dadi is an AI and analytics engineer with 9+ years building LLM applications, RAG pipelines, AI agents, and marketing analytics that move the numbers.",
     "siteKeywords": [
@@ -102,49 +105,56 @@
       "business intelligence consultant"
     ],
     "twitterHandle": "madhu245",
-    "updatedAt": "2026-05-31T00:00:00.000Z"
+    "updatedAt": "2026-05-31T14:09:41.323Z"
   },
   "navigationItems": [
     {
       "title": "About",
       "href": "#about",
       "icon": "IconUser",
+      "isExternal": false,
       "order": 1
     },
     {
       "title": "Work",
       "href": "#projects",
       "icon": "IconCode",
+      "isExternal": false,
       "order": 2
     },
     {
       "title": "Services",
       "href": "#services",
       "icon": "IconBriefcase",
+      "isExternal": false,
       "order": 3
     },
     {
       "title": "Skills",
       "href": "#skills",
       "icon": "IconSparkles",
+      "isExternal": false,
       "order": 4
     },
     {
       "title": "Experience",
       "href": "#experience",
       "icon": "IconTimeline",
+      "isExternal": false,
       "order": 5
     },
     {
       "title": "FAQ",
       "href": "#faq",
       "icon": "IconQuestionMark",
+      "isExternal": false,
       "order": 6
     },
     {
       "title": "Contact",
       "href": "#contact",
       "icon": "IconMail",
+      "isExternal": false,
       "order": 7
     },
     {
@@ -168,350 +178,350 @@
       "category": "backend",
       "proficiency": "expert",
       "yearsOfExperience": 9,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "SQL",
       "category": "backend",
       "proficiency": "expert",
       "yearsOfExperience": 9,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Campaign Analytics",
       "category": "other",
       "proficiency": "expert",
       "yearsOfExperience": 8,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Communication",
       "category": "soft-skills",
       "proficiency": "expert",
       "yearsOfExperience": 8,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Git",
       "category": "tools",
       "proficiency": "expert",
       "yearsOfExperience": 8,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "GitHub",
       "category": "devops",
       "proficiency": "advanced",
       "yearsOfExperience": 8,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Problem Solving",
       "category": "soft-skills",
       "proficiency": "expert",
       "yearsOfExperience": 8,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Agile/Scrum",
       "category": "soft-skills",
       "proficiency": "expert",
       "yearsOfExperience": 7,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "REST API Design",
       "category": "backend",
       "proficiency": "expert",
       "yearsOfExperience": 7,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Advanced Models",
       "category": "ai-ml",
       "proficiency": "expert",
       "yearsOfExperience": 6,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "FastAPI",
       "category": "backend",
       "proficiency": "expert",
       "yearsOfExperience": 6,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Responsive Design",
       "category": "design",
       "proficiency": "expert",
       "yearsOfExperience": 6,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Django",
       "category": "backend",
       "proficiency": "advanced",
       "yearsOfExperience": 5,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Technical Leadership",
       "category": "soft-skills",
       "proficiency": "advanced",
       "yearsOfExperience": 5,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Google Analytics",
       "category": "tools",
       "proficiency": "expert",
       "yearsOfExperience": 4,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Jenkins",
       "category": "devops",
       "proficiency": "advanced",
       "yearsOfExperience": 4,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Snowflake",
       "category": "database",
       "proficiency": "advanced",
       "yearsOfExperience": 4,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Web Accessibility",
       "category": "frontend",
       "proficiency": "advanced",
       "yearsOfExperience": 4,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Dataiku",
       "category": "tools",
       "proficiency": "advanced",
       "yearsOfExperience": 3,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Figma",
       "category": "design",
       "proficiency": "intermediate",
       "yearsOfExperience": 3,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Firebase",
       "category": "cloud",
       "proficiency": "advanced",
       "yearsOfExperience": 3,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "GCP",
       "category": "cloud",
       "proficiency": "advanced",
       "yearsOfExperience": 3,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "GraphQL",
       "category": "backend",
       "proficiency": "advanced",
       "yearsOfExperience": 3,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "JavaScript",
       "category": "frontend",
       "proficiency": "expert",
       "yearsOfExperience": 3,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "React Native",
       "category": "mobile",
       "proficiency": "advanced",
       "yearsOfExperience": 3,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Vercel",
       "category": "cloud",
       "proficiency": "expert",
       "yearsOfExperience": 3,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "WebSockets",
       "category": "backend",
       "proficiency": "advanced",
       "yearsOfExperience": 3,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "AWS",
       "category": "cloud",
       "proficiency": "beginner",
       "yearsOfExperience": 2,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Elasticsearch",
       "category": "database",
       "proficiency": "intermediate",
       "yearsOfExperience": 2,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Google Cloud Platform",
       "category": "cloud",
       "proficiency": "intermediate",
       "yearsOfExperience": 2,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Kubernetes",
       "category": "devops",
       "proficiency": "intermediate",
       "yearsOfExperience": 2,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "LangChain",
       "category": "ai-ml",
       "proficiency": "advanced",
       "yearsOfExperience": 2,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "LangSmith",
       "category": "ai-ml",
       "proficiency": "advanced",
       "yearsOfExperience": 2,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "MongoDB",
       "category": "database",
       "proficiency": "intermediate",
       "yearsOfExperience": 2,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "OpenAI API",
       "category": "ai-ml",
       "proficiency": "expert",
       "yearsOfExperience": 2,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "RAG",
       "category": "ai-ml",
       "proficiency": "advanced",
       "yearsOfExperience": 2,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Terraform",
       "category": "devops",
       "proficiency": "intermediate",
       "yearsOfExperience": 2,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Azure",
       "category": "cloud",
       "proficiency": "beginner",
       "yearsOfExperience": 1,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Agentic AI",
       "category": "ai-ml",
       "proficiency": "advanced",
       "yearsOfExperience": 2,
-      "updatedAt": "2026-05-03T20:00:00.000Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "MLOps",
       "category": "devops",
       "proficiency": "advanced",
       "yearsOfExperience": 2,
-      "updatedAt": "2026-05-03T20:00:00.000Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "BigQuery",
       "category": "database",
       "proficiency": "advanced",
       "yearsOfExperience": 4,
-      "updatedAt": "2026-05-03T20:00:00.000Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Power BI",
       "category": "tools",
       "proficiency": "expert",
       "yearsOfExperience": 4,
-      "updatedAt": "2026-05-03T20:00:00.000Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Tableau",
       "category": "tools",
       "proficiency": "advanced",
       "yearsOfExperience": 4,
-      "updatedAt": "2026-05-03T20:00:00.000Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Looker Studio",
       "category": "tools",
       "proficiency": "advanced",
       "yearsOfExperience": 3,
-      "updatedAt": "2026-05-03T20:00:00.000Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "BigData",
       "category": "other",
       "proficiency": "advanced",
       "yearsOfExperience": 4,
-      "updatedAt": "2026-05-03T20:00:00.000Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "NLP",
       "category": "ai-ml",
       "proficiency": "advanced",
       "yearsOfExperience": 2,
-      "updatedAt": "2026-05-03T20:00:00.000Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "DevOps",
       "category": "devops",
       "proficiency": "advanced",
       "yearsOfExperience": 3,
-      "updatedAt": "2026-05-03T20:00:00.000Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Next.js",
       "category": "frontend",
       "proficiency": "expert",
       "yearsOfExperience": 3,
-      "updatedAt": "2026-05-03T20:00:00.000Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Machine Learning",
       "category": "ai-ml",
       "proficiency": "expert",
       "yearsOfExperience": 6,
-      "updatedAt": "2026-05-03T20:00:00.000Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Deep Learning",
       "category": "ai-ml",
       "proficiency": "advanced",
       "yearsOfExperience": 2,
-      "updatedAt": "2026-05-03T20:00:00.000Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     }
   ],
   "experiences": [
@@ -522,7 +532,6 @@
       "location": "Hyderabad, India",
       "startDate": "2023-03-20",
       "current": true,
-      "order": 1,
       "description": "Lead digital analytics strategy for Novartis Patient Support Services, driving data-informed decisions across patient-engagement platforms.",
       "responsibilities": [
         "Led the digital analytics strategy and analytics for Novartis Patient Support Services, ensuring data-driven decision-making across digital platforms to enhance patient engagement and support services.",
@@ -534,7 +543,8 @@
         "Utilized advanced analytics tools (e.g., Google Analytics, Power BI, Advanced Modelling, etc.) to measure and improve digital engagement, patient satisfaction, and operational efficiency."
       ],
       "achievements": ["Best Performer of the Quarter, Q1 2024"],
-      "updatedAt": "2026-05-31T00:00:00.000Z"
+      "order": 1,
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "company": "redBus (MakeMyTrip Group)",
@@ -544,7 +554,6 @@
       "startDate": "2022-06-13",
       "endDate": "2023-03-17",
       "current": false,
-      "order": 2,
       "description": "Led measurement for ATL, BTL, and digital campaigns across India, Malaysia, Indonesia, and Singapore. Built brand playbooks and CLM strategy.",
       "responsibilities": [
         "Handled the planning, execution and optimization of brand campaigns on Facebook, Programmatic and Google ads.",
@@ -554,7 +563,8 @@
         "Created Brand Playbooks for Digital, Social and Owned media to effectively optimise the campaign budgets and increase the ROI of Brand initiatives."
       ],
       "achievements": ["Q3 Trailblazer, 30% new-customer growth"],
-      "updatedAt": "2026-05-31T00:00:00.000Z"
+      "order": 2,
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "company": "GroupM (WPP)",
@@ -564,7 +574,6 @@
       "startDate": "2020-09-14",
       "endDate": "2022-05-13",
       "current": false,
-      "order": 3,
       "description": "Led Google Ads Data Hub projects for top-5% GroupM clients: frequency reach, brand lift studies, and first-party data activation.",
       "responsibilities": [
         "Led the Google Ads Data Hub projects across GroupM agencies and worked for the top 5% of the clients of GroupM.",
@@ -573,7 +582,8 @@
         "Brought awareness of 1st party data solutions to increase the targeting by using cluster analysis, cost benefit analysis and pricing analytics to the clients."
       ],
       "achievements": ["Performer of the Year 2020-21 - WPP NextGen"],
-      "updatedAt": "2026-05-31T00:00:00.000Z"
+      "order": 3,
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "company": "Absolinsoft",
@@ -583,7 +593,6 @@
       "startDate": "2016-05-02",
       "endDate": "2018-07-13",
       "current": false,
-      "order": 4,
       "description": "Web analytics, SEO, SMM, and SEM with descriptive and predictive modelling. Reduced bounce 25%, lifted CTR 20%.",
       "responsibilities": [
         "Performed analysis on websites using Google Analytics to improve traffic and worked on SEO, SMM and SEM Campaigns using Descriptive and Predictive modellings and decreased the bounce rate by 25%.",
@@ -592,7 +601,8 @@
         "Formulated and documented the project/product plan for web applications."
       ],
       "achievements": ["Foundations in analytics + engineering"],
-      "updatedAt": "2026-05-31T00:00:00.000Z"
+      "order": 4,
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     }
   ],
   "education": [
@@ -603,8 +613,10 @@
       "startDate": "2018-07-23",
       "endDate": "2020-02-28",
       "current": false,
+      "gpa": "",
+      "website": "",
       "order": 1,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "institution": "MVGR College of Engineering",
@@ -613,8 +625,10 @@
       "startDate": "2012-05-21",
       "endDate": "2016-05-31",
       "current": false,
+      "gpa": "",
+      "website": "",
       "order": 2,
-      "updatedAt": "2026-04-17T09:00:13.712Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     }
   ],
   "projects": [
@@ -625,9 +639,13 @@
       "category": "SaaS - SEO / AEO / GEO",
       "impactSummary": "Crawls 10,000+ pages in parallel with Playwright. Compares server HTML to the rendered DOM. Returns a ranked fix list for SEO, AEO, and GEO. Audits that took a week now take an afternoon.",
       "liveUrl": "https://adticks.com",
+      "githubUrl": "",
       "featured": true,
       "coverImage": "/uploads/cms/adticks-cover.png",
       "coverImageAlt": "Adticks search and AI visibility measurement platform, designed and built by Madhu Dadi.",
+      "client": "Adticks",
+      "role": "Founder & Full-stack / AI Engineer",
+      "period": "2026 to Present",
       "technologies": [
         {
           "name": "Next.js"
@@ -656,6 +674,20 @@
       ],
       "problemStatement": "As search shifts from ten blue links to AI Overviews and answer engines (ChatGPT, Claude, Gemini, Perplexity), brands struggle to measure and maintain visibility across LLM systems. Standard crawlers don't diagnose accessibility issues specific to generative crawlers (GPTBot, ClaudeBot, PerplexityBot), and client-side JS rendering hides critical semantic content, entity relationships, and schema.org markup from LLM crawlers, leading to omission from AI citations.",
       "solutionApproach": "Designed Adticks as a unified inside-out site auditing engine.\nRuns parallel headless crawls with Playwright to identify render-parity gaps between raw server HTML and fully client-rendered DOM.\nAudits robots.txt, sitemaps, structured data schemas, and llms.txt configurations.\nFastAPI + Celery backend schedules deep crawls, parses with selectolax, and runs 18 parallel audit analyzers.\nOutputs severity-prioritized fix queues tailored for SEO, AEO, and GEO.",
+      "impactMetrics": [
+        {
+          "label": "pages per audit with parallel headless rendering",
+          "value": "10,000+"
+        },
+        {
+          "label": "reduction in technical audit cycle time",
+          "value": "85%"
+        },
+        {
+          "label": "indexing and AI Overview citation readiness through render-parity diagnostics",
+          "value": "Higher"
+        }
+      ],
       "citations": [
         {
           "label": "Visit Adticks",
@@ -667,21 +699,7 @@
         }
       ],
       "order": 1,
-      "updatedAt": "2026-05-31T00:00:00.000Z",
-      "impactMetrics": [
-        {
-          "value": "10,000+",
-          "label": "pages per audit with parallel headless rendering"
-        },
-        {
-          "value": "85%",
-          "label": "reduction in technical audit cycle time"
-        },
-        {
-          "value": "Higher",
-          "label": "indexing and AI Overview citation readiness through render-parity diagnostics"
-        }
-      ]
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "title": "Technical Blog",
@@ -690,9 +708,13 @@
       "category": "Education - RAG / AI assistant",
       "impactSummary": "A series-based tech blog with an assistant that has actually read the blog. Vector-grounded answers with citations. Instant in-page search. Ranks for humans and LLMs alike.",
       "liveUrl": "https://madhudadi.in/blog",
+      "githubUrl": "",
       "featured": true,
       "coverImage": "/uploads/cms/technical-blog-cover.png",
       "coverImageAlt": "Technical Blog preview",
+      "client": "madhudadi.in/blog",
+      "role": "Designer & Engineer",
+      "period": "2026 to Present",
       "technologies": [
         {
           "name": "Next.js"
@@ -715,6 +737,20 @@
       ],
       "problemStatement": "Software developers, AI engineers, and data analysts face fragmented, surface-level learning resources. Most guides cover hello-world LLM concepts but skip the edge cases, structural design decisions, and real-world deployment challenges of pipelines like RAG. Static docs lack interactive search, forcing engineers to dig through forums and repos for verified patterns.",
       "solutionApproach": "Built series-based learning paths that teach technical concepts progressively.\nIntegrated a custom production-grade AI Assistant powered by a localized RAG pipeline.\nUsed Next.js for server-rendered page speed and Tailwind CSS for the visual system.\nConnected a secure FastAPI backend with custom execution runtime test runners.",
+      "impactMetrics": [
+        {
+          "label": "ranking on high-intent AI and engineering topics",
+          "value": "Organic"
+        },
+        {
+          "label": "lower user search latency through grounded RAG answers",
+          "value": "80%"
+        },
+        {
+          "label": "TTFB for bots and humans through CI and cache warming",
+          "value": "Low"
+        }
+      ],
       "citations": [
         {
           "label": "Visit Blog",
@@ -726,21 +762,7 @@
         }
       ],
       "order": 2,
-      "updatedAt": "2026-05-31T00:00:00.000Z",
-      "impactMetrics": [
-        {
-          "value": "Organic",
-          "label": "ranking on high-intent AI and engineering topics"
-        },
-        {
-          "value": "80%",
-          "label": "lower user search latency through grounded RAG answers"
-        },
-        {
-          "value": "Low",
-          "label": "TTFB for bots and humans through CI and cache warming"
-        }
-      ]
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "title": "Udemy Enroller using FastAPI",
@@ -753,6 +775,9 @@
       "featured": true,
       "coverImage": "/uploads/cms/udemy-enroller-cover.png",
       "coverImageAlt": "Udemy Enroller using FastAPI preview",
+      "client": "Open source / community",
+      "role": "Designer & Engineer",
+      "period": "2026 to Present",
       "technologies": [
         {
           "name": "Python"
@@ -775,6 +800,20 @@
       ],
       "problemStatement": "Finding free or discounted Udemy courses is repetitive and time-sensitive. Users had to monitor multiple coupon sites, copy links, and enroll before short validity windows expired, losing opportunities to timezone gaps and manual toil. The system needed a robust, high-availability architecture to handle async queues and rate-limiting gracefully.",
       "solutionApproach": "FastAPI service for the core API layer with session-based Udemy authentication.\nCelery + Redis for async task processing and concurrent enrollments.\nScraping and validation pipeline that authenticates, verifies coupons, and enrolls users without manual input.\nComprehensive logging and monitoring to track success rates and handle CAPTCHAs or IP blocks.",
+      "impactMetrics": [
+        {
+          "label": "reduction in manual enrollment effort",
+          "value": "90%"
+        },
+        {
+          "label": "free courses delivered in six months",
+          "value": "20,000+"
+        },
+        {
+          "label": "estimated savings",
+          "value": "Rs 10,00,000+"
+        }
+      ],
       "citations": [
         {
           "label": "Live demo",
@@ -790,21 +829,7 @@
         }
       ],
       "order": 3,
-      "updatedAt": "2026-05-31T00:00:00.000Z",
-      "impactMetrics": [
-        {
-          "value": "90%",
-          "label": "reduction in manual enrollment effort"
-        },
-        {
-          "value": "20,000+",
-          "label": "free courses delivered in six months"
-        },
-        {
-          "value": "Rs 10,00,000+",
-          "label": "estimated savings"
-        }
-      ]
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     }
   ],
   "services": [
@@ -851,7 +876,7 @@
       "timeline": "3-8 weeks",
       "featured": true,
       "order": 1,
-      "updatedAt": "2026-05-31T00:00:00.000Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "title": "Marketing Analytics & Decision Intelligence",
@@ -896,7 +921,7 @@
       "timeline": "2-6 weeks",
       "featured": true,
       "order": 2,
-      "updatedAt": "2026-05-31T00:00:00.000Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "title": "Full-Stack Web Product Development",
@@ -941,7 +966,7 @@
       "timeline": "4-12 weeks",
       "featured": true,
       "order": 3,
-      "updatedAt": "2026-05-31T00:00:00.000Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     }
   ],
   "certifications": [
@@ -952,7 +977,7 @@
       "credentialId": "UC-108879e5-e8bb-49fd-bf5a-3b04299802e9",
       "credentialUrl": "https://www.udemy.com/certificate/UC-108879e5-e8bb-49fd-bf5a-3b04299802e9/",
       "order": 1,
-      "updatedAt": "2026-05-31T00:00:00.000Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Complete Data Science, ML, DL, NLP Bootcamp",
@@ -961,7 +986,7 @@
       "credentialId": "UC-2c133425-fc3d-4d86-89e5-6499c0e3669f",
       "credentialUrl": "https://udemy-certificate.s3.amazonaws.com/image/UC-2c133425-fc3d-4d86-89e5-6499c0e3669f.jpg",
       "order": 2,
-      "updatedAt": "2026-05-31T00:00:00.000Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Azure AI Fundamentals",
@@ -970,7 +995,7 @@
       "credentialId": "838CB018ADDA8DC8",
       "credentialUrl": "https://learn.microsoft.com/en-us/users/madhudadi-6748/credentials/838cb018adda8dc8",
       "order": 3,
-      "updatedAt": "2026-05-31T00:00:00.000Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "MongoDB Python Developer Path",
@@ -979,7 +1004,7 @@
       "credentialId": "MDBdjgyu6syfv",
       "credentialUrl": "https://learn.mongodb.com/c/ysblCQ5bShSRgrmsyQy5PQ",
       "order": 4,
-      "updatedAt": "2026-05-31T00:00:00.000Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "GitHub Actions Professional",
@@ -989,7 +1014,7 @@
       "credentialId": "b94f1c7e-6a06-4cd8-ad3b-2ec9012d27e3",
       "credentialUrl": "https://www.credly.com/badges/b94f1c7e-6a06-4cd8-ad3b-2ec9012d27e3/",
       "order": 5,
-      "updatedAt": "2026-05-31T00:00:00.000Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
       "name": "Dataiku Core Designer",
@@ -1008,7 +1033,7 @@
         }
       ],
       "order": 6,
-      "updatedAt": "2026-05-31T00:00:00.000Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z"
     }
   ]
 }

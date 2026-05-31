@@ -108,6 +108,9 @@ export type ProjectItem = {
   featured?: boolean;
   coverImage?: string;
   coverImageAlt?: string;
+  client?: string;
+  role?: string;
+  period?: string;
   technologies?: Technology[];
   problemStatement?: string;
   solutionApproach?: string;
