@@ -227,7 +227,7 @@ export default async function CaseStudyPage({
   };
 
   return (
-    <main className="mx-auto w-[min(900px,92%)] pt-32 pb-24">
+    <main className="mx-auto w-[min(1100px,92%)] pt-32 pb-24">
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: server-side JSON-LD
