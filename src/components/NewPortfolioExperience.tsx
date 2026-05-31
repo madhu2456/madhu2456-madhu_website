@@ -56,6 +56,7 @@ const navLinks = [
   { href: "#experience", label: "Experience" },
   { href: "#faq", label: "FAQ" },
   { href: "#contact", label: "Contact" },
+  { href: "https://madhudadi.in/blog", label: "Blog" },
 ];
 
 const LINKEDIN_CERTS_URL =
@@ -106,7 +107,9 @@ export function Header({ profile }: { profile: Profile }) {
   }, []);
 
   const scrollActive = useActiveSection(
-    navLinks.map((link) => link.href.slice(1)),
+    navLinks
+      .filter((link) => link.href.startsWith("#"))
+      .map((link) => link.href.slice(1)),
   );
   const [active, setActive] = useState("");
 
@@ -119,6 +122,7 @@ export function Header({ profile }: { profile: Profile }) {
   }, [scrollActive, isCaseStudy]);
 
   const getHref = (href: string) => {
+    if (!href.startsWith("#")) return href;
     if (!isClient) return href;
     return isCaseStudy ? `/${href}` : href;
   };
