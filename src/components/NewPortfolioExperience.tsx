@@ -182,7 +182,7 @@ function Hero({
           <p className="mb-3 font-display text-[11px] tracking-[0.18em] text-muted-foreground uppercase sm:text-sm sm:tracking-[0.2em]">
             {profile.firstName} {profile.lastName}, {profile.headline}
           </p>
-          <h1 className="font-display text-[clamp(2rem,8vw,4.75rem)] leading-[1.05] font-medium tracking-tight sm:leading-[1.02]">
+          <h1 className="font-display text-[clamp(2rem,8vw,4.75rem)] leading-[1.05] font-bold tracking-tight sm:leading-[1.02]">
             I build{" "}
             <span className="text-gradient-amber italic">
               AI that actually ships
@@ -424,7 +424,7 @@ function Projects({ projects }: { projects: ProjectItem[] }) {
                   {project.category}
                 </p>
               ) : null}
-              <h3 className="mt-2 min-h-[3.75rem] font-display text-xl leading-tight sm:text-2xl">
+              <h3 className="mt-2 min-h-[3.75rem] font-display text-xl font-semibold leading-tight sm:text-2xl">
                 {project.tagline || project.title}
               </h3>
               <p className="mt-1 text-sm font-medium text-foreground/80">
@@ -502,7 +502,9 @@ function Services({ services }: { services: ServiceItem[] }) {
               <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/15 text-primary">
                 ◇
               </div>
-              <h3 className="font-display text-2xl">{service.title}</h3>
+              <h3 className="font-display text-2xl font-semibold">
+                {service.title}
+              </h3>
               {service.shortDescription ? (
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                   {service.shortDescription}
@@ -571,7 +573,9 @@ function Skills({ skills }: { skills: SkillItem[] }) {
             key={group.title}
             className="rounded-2xl border border-border bg-surface/60 p-6 shadow-card transition-all hover:-translate-y-1 hover:border-primary/40"
           >
-            <h3 className="font-display text-xl">{group.title}</h3>
+            <h3 className="font-display text-xl font-semibold">
+              {group.title}
+            </h3>
             <ul className="mt-4 flex flex-wrap gap-2">
               {group.items.map((skill) => (
                 <li
@@ -609,7 +613,7 @@ function Experience({ experiences }: { experiences: ExperienceItem[] }) {
               aria-hidden
             />
             <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <h3 className="font-display text-2xl">
+              <h3 className="font-display text-2xl font-semibold">
                 {experience.position}{" "}
                 <span className="text-muted-foreground">
                   · {normalizeCompanyName(experience.company)}
@@ -710,7 +714,9 @@ function Faq({ items }: { items: Array<{ q: string; a: string }> }) {
                   aria-expanded={isOpen}
                   aria-controls={panelId}
                 >
-                  <span className="font-display text-lg">{item.q}</span>
+                  <span className="font-display text-lg font-semibold">
+                    {item.q}
+                  </span>
                   <span
                     aria-hidden
                     className={`text-primary transition-transform ${
@@ -1126,7 +1132,7 @@ function Section({
           <p className="mb-3 text-xs tracking-[0.25em] text-primary uppercase">
             {eyebrow}
           </p>
-          <h2 className="font-display text-4xl leading-tight md:text-6xl">
+          <h2 className="font-display text-4xl font-bold leading-tight md:text-6xl">
             <span className="text-gradient">{title}</span>
           </h2>
         </header>

@@ -91,7 +91,7 @@ export default async function CaseStudiesPage() {
         <p className="text-xs tracking-[0.25em] text-primary uppercase">
           Selected work
         </p>
-        <h1 className="mt-3 font-display text-5xl text-gradient md:text-7xl">
+        <h1 className="mt-3 font-display text-5xl font-bold text-gradient md:text-7xl">
           Selected work.
         </h1>
         <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
@@ -115,7 +115,7 @@ export default async function CaseStudiesPage() {
                   {project.category}
                 </p>
               ) : null}
-              <h2 className="mt-3 font-display text-2xl leading-tight">
+              <h2 className="mt-3 font-display text-2xl font-semibold leading-tight">
                 {project.title}
               </h2>
               {project.tagline ? (
