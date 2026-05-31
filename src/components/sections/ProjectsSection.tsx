@@ -47,8 +47,6 @@ export async function ProjectsSection() {
                           coverImageSource,
                         )}
                       />
-                      {/* Glass overlay that fades on hover */}
-                      <div className="absolute inset-0 bg-background/40 backdrop-blur-[2px] group-hover:opacity-0 transition-opacity duration-300" />
                     </div>
                   )}
 
