@@ -13,6 +13,8 @@
       "!.next",
       "!dist",
       "!build",
+      "!Madhu Dadi New UI",
+      "!Madhu Dadi Boost",
       "!chromewebdata_*.report.html"
     ]
   },

@@ -1,30 +1,11 @@
+import { ArrowRight, ExternalLink } from "lucide-react";
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
-import {
-  normalizeImageSource,
-  shouldUseUnoptimizedImage,
-} from "@/lib/image-source";
 import { getPortfolioData } from "@/lib/portfolio-data";
-
-type CaseStudy = {
-  title?: string | null;
-  slug?: string | null;
-  tagline?: string | null;
-  category?: string | null;
-  impactSummary?: string | null;
-  liveUrl?: string | null;
-  githubUrl?: string | null;
-  featured?: boolean | null;
-  coverImage?: {
-    asset?: string | null;
-  } | null;
-  technologies?: Array<{ name?: string | null } | null> | null;
-};
 
 const DEFAULT_SITE_URL = "https://madhudadi.in";
 const CASE_STUDIES_DESCRIPTION =
-  "Explore detailed case studies covering generative AI, advanced marketing analytics, and full-stack engineering solutions driving tangible business outcomes.";
+  "Selected case studies by Madhu Dadi across AI visibility, RAG-powered learning, automation, marketing analytics, and full-stack engineering.";
 
 const getSiteUrl = () => {
   const url = (process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE_URL).replace(
@@ -34,29 +15,20 @@ const getSiteUrl = () => {
   return `${url}/`;
 };
 
-const ogSearchParams = new URLSearchParams();
-ogSearchParams.set("title", "AI, Python & Marketing Analytics Case Studies");
-ogSearchParams.set(
-  "subtitle",
-  "Detailed deep-dives into Generative AI and Data Engineering.",
-);
-ogSearchParams.set("type", "page");
-const ogImageUrl = `${getSiteUrl()}api/og?${ogSearchParams.toString()}`;
-
 export const metadata: Metadata = {
-  title: "AI, Python & Marketing Analytics Case Studies | Madhu Dadi",
+  title: "Case Studies | Madhu Dadi",
   description: CASE_STUDIES_DESCRIPTION,
   alternates: {
     canonical: "/case-studies/",
   },
   openGraph: {
-    title: "AI, Python & Marketing Analytics Case Studies | Madhu Dadi",
+    title: "Case Studies | Madhu Dadi",
     description: CASE_STUDIES_DESCRIPTION,
     url: "/case-studies/",
     type: "website",
     images: [
       {
-        url: ogImageUrl,
+        url: `${getSiteUrl()}opengraph-image`,
         width: 1200,
         height: 630,
         alt: "Madhu Dadi case studies",
@@ -65,9 +37,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI, Python & Marketing Analytics Case Studies | Madhu Dadi",
+    title: "Case Studies | Madhu Dadi",
     description: CASE_STUDIES_DESCRIPTION,
-    images: [ogImageUrl],
+    images: [`${getSiteUrl()}opengraph-image`],
     creator: "@madhu245",
     site: "@madhu245",
   },
@@ -75,42 +47,21 @@ export const metadata: Metadata = {
 
 export default async function CaseStudiesPage() {
   const { sortedProjects } = await getPortfolioData();
-  const caseStudies = sortedProjects.map((project) => ({
-    ...project,
-    coverImage: project.coverImage ? { asset: project.coverImage } : null,
-  })) as CaseStudy[];
   const siteUrl = getSiteUrl();
   const collectionUrl = `${siteUrl}case-studies/`;
-  const itemListElement = caseStudies
-    .map((project, index) => {
-      const slug = project.slug?.trim();
-      const title = project.title?.trim();
-      if (!slug || !title) return null;
-
-      return {
-        "@type": "ListItem",
-        position: index + 1,
-        name: title,
-        url: `${collectionUrl}${slug}/`,
-      };
-    })
-    .filter(
-      (
-        item,
-      ): item is {
-        "@type": "ListItem";
-        position: number;
-        name: string;
-        url: string;
-      } => Boolean(item),
-    );
+  const itemListElement = sortedProjects.map((project, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: project.title,
+    url: `${collectionUrl}${project.slug}/`,
+  }));
 
   const collectionSchema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "@id": `${collectionUrl}#collection`,
     url: collectionUrl,
-    name: "In-Depth Analytics Case Studies",
+    name: "Case studies by Madhu Dadi",
     description: CASE_STUDIES_DESCRIPTION,
     inLanguage: "en-US",
     isPartOf: { "@id": `${siteUrl}#website` },
@@ -123,167 +74,92 @@ export default async function CaseStudiesPage() {
   };
 
   return (
-    <main className="min-h-screen py-20 px-6 bg-muted/10">
+    <main className="mx-auto w-[min(1200px,92%)] pt-32 pb-24">
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: server-side JSON-LD
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
       />
-      <div className="container mx-auto max-w-6xl space-y-12">
-        <header className="text-center space-y-4">
-          <nav className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-            <Link href="/" className="hover:text-foreground transition-colors">
-              Home
-            </Link>
-            <span>/</span>
-            <span className="text-foreground">Case studies</span>
-          </nav>
-          <h1 className="text-4xl md:text-5xl font-bold">
-            In-Depth Analytics Case Studies
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-4xl mx-auto space-y-4">
-            <span>
-              Welcome to the portfolio case studies section. Here you will find
-              detailed breakdowns of comprehensive analytics, AI, and full-stack
-              projects I have successfully delivered from concept to production.
-              Each case study provides an in-depth look into the initial problem
-              statement, the architectural and technology decisions made to
-              address those bottlenecks, and the measurable business impact
-              achieved through these solutions.
-            </span>
-            <br />
-            <br />
-            <span>
-              By exploring these technical deep dives, you can gain a clearer
-              understanding of my pragmatic approach to engineering—focusing on
-              robust backend architectures, scalable data processing pipelines,
-              and intuitive user interfaces. From developing automated
-              intelligent workflows with generative AI to constructing
-              end-to-end data analytics platforms, these projects highlight a
-              commitment to solving complex, real-world challenges through
-              systematic problem-solving and modern web technologies.
-            </span>
-          </p>
-          <div className="flex items-center justify-center pt-2">
-            <Link
-              href="/"
-              className="inline-flex items-center justify-center rounded-full border border-border/70 bg-background px-5 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+      <Link
+        href="/"
+        className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+      >
+        Home
+      </Link>
+
+      <header className="mt-8 max-w-3xl">
+        <p className="text-xs tracking-[0.25em] text-primary uppercase">
+          Selected work
+        </p>
+        <h1 className="mt-3 font-display text-5xl text-gradient md:text-7xl">
+          Selected work.
+        </h1>
+        <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
+          Case studies across AI visibility, RAG learning systems, async
+          automation, and the full-stack engineering that keeps them useful
+          after launch.
+        </p>
+      </header>
+
+      <section className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {sortedProjects.map((project) => {
+          const stack = project.technologies?.map((tech) => tech.name) ?? [];
+
+          return (
+            <article
+              key={project.slug}
+              className="group flex flex-col rounded-2xl border border-border bg-surface/60 p-6 transition-all hover:-translate-y-1 hover:border-primary/40"
             >
-              Back to home
-            </Link>
-          </div>
-        </header>
-
-        {caseStudies.length === 0 ? (
-          <section className="rounded-xl border bg-card p-8 text-center text-muted-foreground">
-            Case studies will appear here after projects are published.
-          </section>
-        ) : (
-          <section className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {caseStudies.map((project, index) => {
-              const slug = project.slug?.trim();
-              const title = project.title?.trim() || "Untitled Project";
-              const coverImageSource = normalizeImageSource(
-                project.coverImage?.asset,
-              );
-              const summary =
-                project.impactSummary?.trim() ||
-                project.tagline?.trim() ||
-                "Problem-to-impact walkthrough, architecture notes, and delivery evidence.";
-
-              return (
-                <article
-                  key={slug || title}
-                  className="rounded-xl border bg-card overflow-hidden flex flex-col"
+              {project.category ? (
+                <p className="text-xs tracking-widest text-primary uppercase">
+                  {project.category}
+                </p>
+              ) : null}
+              <h2 className="mt-3 font-display text-2xl leading-tight">
+                {project.title}
+              </h2>
+              {project.tagline ? (
+                <p className="mt-2 text-sm font-medium text-foreground/80">
+                  {project.tagline}
+                </p>
+              ) : null}
+              {project.impactSummary ? (
+                <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
+                  {project.impactSummary}
+                </p>
+              ) : null}
+              <div className="mt-5 flex flex-wrap gap-1.5">
+                {stack.slice(0, 6).map((tech) => (
+                  <span
+                    key={`${project.slug}-${tech}`}
+                    className="rounded-full border border-border px-2 py-0.5 text-[11px] text-muted-foreground"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+              <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+                <Link
+                  href={`/case-studies/${project.slug}/`}
+                  className="inline-flex items-center gap-1 font-medium text-primary underline-offset-4 hover:underline"
                 >
-                  {coverImageSource ? (
-                    <div className="relative aspect-video bg-muted overflow-hidden">
-                      <Image
-                        src={coverImageSource}
-                        alt={`${title} preview`}
-                        width={600}
-                        height={338}
-                        className="object-cover w-full h-full"
-                        priority={index < 2}
-                        unoptimized={shouldUseUnoptimizedImage(
-                          coverImageSource,
-                        )}
-                      />
-                    </div>
-                  ) : null}
-
-                  <div className="p-6 space-y-4 flex-1 flex flex-col">
-                    <div className="space-y-2">
-                      <div className="flex flex-wrap gap-2">
-                        {project.featured ? (
-                          <span className="px-2 py-1 text-xs rounded-full bg-primary/15 text-primary">
-                            Featured
-                          </span>
-                        ) : null}
-                        {project.category ? (
-                          <span className="px-2 py-1 text-xs rounded-full bg-muted text-muted-foreground">
-                            {project.category}
-                          </span>
-                        ) : null}
-                      </div>
-                      <h2 className="text-2xl font-semibold">{title}</h2>
-                      <p className="text-sm text-muted-foreground">{summary}</p>
-                    </div>
-
-                    {project.technologies && project.technologies.length > 0 ? (
-                      <div className="flex flex-wrap gap-2">
-                        {project.technologies
-                          .map((tech) => tech?.name?.trim())
-                          .filter((tech): tech is string => Boolean(tech))
-                          .slice(0, 6)
-                          .map((tech) => (
-                            <span
-                              key={`${title}-${tech}`}
-                              className="px-2 py-1 text-xs rounded-md bg-primary/10 text-primary"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                      </div>
-                    ) : null}
-
-                    <div className="pt-2 mt-auto flex flex-wrap gap-3">
-                      {slug ? (
-                        <Link
-                          href={`/case-studies/${slug}/`}
-                          className="px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-sm"
-                        >
-                          Read case study
-                        </Link>
-                      ) : null}
-                      {project.liveUrl ? (
-                        <a
-                          href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-4 py-2 rounded-lg border hover:bg-accent transition-colors text-sm"
-                        >
-                          Live demo
-                        </a>
-                      ) : null}
-                      {project.githubUrl ? (
-                        <a
-                          href={project.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-4 py-2 rounded-lg border hover:bg-accent transition-colors text-sm"
-                        >
-                          Source code
-                        </a>
-                      ) : null}
-                    </div>
-                  </div>
-                </article>
-              );
-            })}
-          </section>
-        )}
-      </div>
+                  Read case study <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+                {project.liveUrl ? (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+                  >
+                    Live <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
+                ) : null}
+              </div>
+            </article>
+          );
+        })}
+      </section>
     </main>
   );
 }

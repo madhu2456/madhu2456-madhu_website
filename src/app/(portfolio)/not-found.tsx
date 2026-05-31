@@ -1,40 +1,32 @@
-import { IconHome } from "@tabler/icons-react";
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen relative overflow-hidden bg-background px-6 py-20">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(124,58,237,0.12),transparent_45%)]" />
+    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-4">
+      <div className="grain absolute inset-0" aria-hidden />
+      <div className="bg-hero-glow absolute inset-0" aria-hidden />
 
-      <div className="relative container mx-auto max-w-3xl">
-        <div className="rounded-2xl border bg-card/95 backdrop-blur p-8 md:p-12 text-center shadow-sm space-y-8">
-          <div className="space-y-3">
-            <p className="text-sm uppercase tracking-[0.2em] text-primary">
-              404
-            </p>
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-              Page not found
-            </h1>
-            <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto">
-              The page you are looking for does not exist or may have been
-              moved.
-            </p>
-          </div>
-
-          <div className="flex flex-col sm:flex-row justify-center gap-3">
-            <Button asChild size="lg">
-              <a href="/" aria-label="Go back to homepage">
-                <IconHome className="size-4" />
-                Back to home
-              </a>
-            </Button>
-
-            <Button asChild variant="outline" size="lg">
-              <a href="/case-studies/" aria-label="Go to case studies">
-                View case studies
-              </a>
-            </Button>
-          </div>
+      <div className="relative max-w-md text-center">
+        <p className="text-xs tracking-[0.25em] text-primary uppercase">404</p>
+        <h1 className="mt-4 font-display text-6xl text-gradient md:text-7xl">
+          Page not found
+        </h1>
+        <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+          The page you&apos;re looking for doesn&apos;t exist or has been moved.
+        </p>
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <Link
+            href="/"
+            className="rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-transform hover:scale-[1.03]"
+          >
+            Go home
+          </Link>
+          <Link
+            href="/case-studies/"
+            className="rounded-full border border-border bg-surface/60 px-5 py-3 text-sm font-medium hover:bg-surface-elevated"
+          >
+            View case studies
+          </Link>
         </div>
       </div>
     </main>

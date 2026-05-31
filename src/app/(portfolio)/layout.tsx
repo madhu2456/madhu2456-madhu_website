@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import dynamic from "next/dynamic";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono, Instrument_Serif, Inter } from "next/font/google";
 import { AppSidebar } from "@/components/app-sidebar";
 import { ClientChrome } from "@/components/ClientChrome";
 import { DeferredGTM } from "@/components/DeferredGTM";
@@ -10,12 +9,8 @@ import { buildDiscoveryKeywords } from "@/lib/discovery-keywords";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import "../globals.css";
 
-const FloatingDock = dynamic(() =>
-  import("@/components/FloatingDock").then((m) => m.FloatingDock),
-);
-
 const DEFAULT_SITE_URL = "https://madhudadi.in";
-const THEME_COLOR = "#7c3aed";
+const THEME_COLOR = "#1a1410";
 const MAX_META_DESCRIPTION_LENGTH = 160;
 
 const resolveSiteUrl = (rawUrl?: string) => {
@@ -48,9 +43,16 @@ const toMetaDescription = (text: string, maxLength: number) => {
   return clipped.endsWith(".") ? clipped : `${clipped}.`;
 };
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  subsets: ["latin"],
+  weight: "400",
   display: "swap",
 });
 
@@ -219,7 +221,7 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} ${instrumentSerif.variable} ${geistMono.variable} antialiased`}
       >
         <link rel="llms" href={`${SITE_URL}llms.txt`} />
         <link rel="ai-profile" href={`${SITE_URL}ai-profile.json`} />
@@ -239,11 +241,10 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <SidebarProvider defaultOpen={false}>
-            <SidebarInset className="">{children}</SidebarInset>
+            <SidebarInset>{children}</SidebarInset>
 
             <AppSidebar side="right" />
 
-            <FloatingDock />
             <ClientChrome />
           </SidebarProvider>
         </ThemeProvider>

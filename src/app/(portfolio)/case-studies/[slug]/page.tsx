@@ -1,17 +1,8 @@
+import { ArrowLeft, ExternalLink } from "lucide-react";
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  normalizeImageSource,
-  shouldUseUnoptimizedImage,
-} from "@/lib/image-source";
 import { getPortfolioData, type ProjectItem } from "@/lib/portfolio-data";
-
-type Citation = {
-  label?: string | null;
-  url?: string | null;
-};
 
 const DEFAULT_SITE_URL = "https://madhudadi.in";
 
@@ -33,9 +24,7 @@ const toDescription = (...values: Array<string | null | undefined>) => {
     return "Case study detailing implementation approach, stack, and measurable delivery outcomes.";
   }
 
-  if (merged.length <= 160) {
-    return merged;
-  }
+  if (merged.length <= 160) return merged;
 
   const boundary = merged.lastIndexOf(" ", 160);
   const safeBoundary = boundary > 0 ? boundary : 160;
@@ -45,37 +34,71 @@ const toDescription = (...values: Array<string | null | undefined>) => {
     .replace(/[,\s;:!?-]+$/, "")}.`;
 };
 
-const _toAbsoluteImageUrl = (siteUrl: string, value?: string | null) => {
-  const source = normalizeImageSource(value);
-  if (!source) return null;
-  if (/^https?:\/\//i.test(source)) return source;
-  return `${siteUrl}${source.replace(/^\/+/, "")}`;
+const splitIntoList = (value?: string) => {
+  if (!value) return [];
+
+  const newlineItems = value
+    .split(/\n+/)
+    .map((item) => item.replace(/^[-*]\s*/, "").trim())
+    .filter(Boolean);
+
+  if (newlineItems.length > 1) return newlineItems;
+
+  return value
+    .split(/(?<=[.!?])\s+/)
+    .map((item) => item.trim())
+    .filter(Boolean)
+    .slice(0, 5);
+};
+
+const getProjectMeta = (project: ProjectItem) => {
+  if (project.slug === "adticks") {
+    return {
+      client: "Adticks",
+      role: "Founder & Full-stack / AI Engineer",
+      period: "2024 to Present",
+    };
+  }
+
+  if (project.slug === "technical-blog") {
+    return {
+      client: "madhudadi.in/blog",
+      role: "Designer & Engineer",
+      period: "2024 to Present",
+    };
+  }
+
+  if (project.slug === "udemy-enroller-fastapi") {
+    return {
+      client: "Open source / community",
+      role: "Designer & Engineer",
+      period: "2023 to Present",
+    };
+  }
+
+  return {
+    client: project.title,
+    role: "Designer & Engineer",
+    period: "Recent project",
+  };
 };
 
 const makeEvidenceLinks = (project: ProjectItem, siteUrl: string) => {
-  const slug = project.slug?.trim();
-  const links: Array<{ label: string; url: string }> = [];
-
-  if (slug) {
-    links.push({
+  const links: Array<{ label: string; url: string }> = [
+    {
       label: "Case study",
-      url: `${siteUrl}case-studies/${slug}/`,
-    });
-  }
+      url: `${siteUrl}case-studies/${project.slug}/`,
+    },
+  ];
 
-  if (project.liveUrl) {
-    links.push({ label: "Live demo", url: project.liveUrl });
-  }
-  if (project.githubUrl) {
+  if (project.liveUrl) links.push({ label: "Live demo", url: project.liveUrl });
+  if (project.githubUrl)
     links.push({ label: "Source code", url: project.githubUrl });
-  }
 
-  for (const citation of (project.citations ?? []) as Citation[]) {
-    if (!citation?.url) continue;
-    links.push({
-      label: citation.label?.trim() || "Evidence",
-      url: citation.url,
-    });
+  for (const citation of project.citations ?? []) {
+    if (citation.url) {
+      links.push({ label: citation.label || "Evidence", url: citation.url });
+    }
   }
 
   return Array.from(new Map(links.map((link) => [link.url, link])).values());
@@ -83,10 +106,7 @@ const makeEvidenceLinks = (project: ProjectItem, siteUrl: string) => {
 
 export async function generateStaticParams() {
   const { sortedProjects } = await getPortfolioData();
-  return sortedProjects
-    .map((item) => item.slug?.trim())
-    .filter((value): value is string => Boolean(value))
-    .map((slug) => ({ slug }));
+  return sortedProjects.map((project) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata({
@@ -96,61 +116,44 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const { sortedProjects } = await getPortfolioData();
-  const data = sortedProjects.find((item) => item.slug === slug);
+  const project = sortedProjects.find((item) => item.slug === slug);
 
-  if (!data?.title) {
+  if (!project) {
     return {
       title: "Case Study Not Found",
-      alternates: {
-        canonical: `/case-studies/${slug}/`,
-      },
-      robots: {
-        index: false,
-        follow: true,
-      },
+      alternates: { canonical: `/case-studies/${slug}/` },
+      robots: { index: false, follow: true },
     };
   }
 
   const siteUrl = getSiteUrl();
-  let title = `${data.title} | Case Study | Madhu Dadi`;
-  if (title.length > 65) {
-    const maxTitleLen = 65 - " | Case Study | Madhu Dadi".length;
-    const truncated = data.title
-      .slice(0, maxTitleLen)
-      .trim()
-      .replace(/[\s,;:!?-]+$/, "");
-    title = `${truncated} | Case Study | Madhu Dadi`;
-  }
-  const description = toDescription(data.impactSummary, data.tagline);
-
-  // Dynamic OG image generation
-  const ogSearchParams = new URLSearchParams();
-  ogSearchParams.set("title", data.title);
-  ogSearchParams.set("subtitle", data.tagline || "Project Case Study");
-  ogSearchParams.set("type", "case-study");
-  for (const t of (data.technologies || []).slice(0, 5)) {
-    if (t?.name) ogSearchParams.append("tech", t.name);
-  }
-  const imageUrl = `${siteUrl}api/og?${ogSearchParams.toString()}`;
+  const title = `${project.title} Case Study | ${project.category || "Work"} · Madhu Dadi`;
+  const description = toDescription(project.impactSummary, project.tagline);
+  const url = `/case-studies/${slug}/`;
 
   return {
     title,
     description,
-    alternates: {
-      canonical: `/case-studies/${slug}/`,
-    },
+    alternates: { canonical: url },
     openGraph: {
       title,
       description,
-      url: `/case-studies/${slug}/`,
+      url,
       type: "article",
-      images: [{ url: imageUrl, width: 1200, height: 630, alt: data.title }],
+      images: [
+        {
+          url: `${siteUrl}opengraph-image`,
+          width: 1200,
+          height: 630,
+          alt: `${project.title} case study by Madhu Dadi`,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [imageUrl],
+      images: [`${siteUrl}opengraph-image`],
       creator: "@madhu245",
       site: "@madhu245",
     },
@@ -166,16 +169,18 @@ export default async function CaseStudyPage({
   const { profile, sortedProjects } = await getPortfolioData();
   const project = sortedProjects.find((item) => item.slug === slug);
 
-  if (!project?.title) {
-    notFound();
-  }
+  if (!project) notFound();
 
   const siteUrl = getSiteUrl();
-  const title = project.title.trim();
-  const evidenceLinks = makeEvidenceLinks(project, siteUrl);
   const caseStudyUrl = `${siteUrl}case-studies/${slug}/`;
   const description = toDescription(project.impactSummary, project.tagline);
-  const coverImageSource = normalizeImageSource(project.coverImage);
+  const evidenceLinks = makeEvidenceLinks(project, siteUrl);
+  const meta = getProjectMeta(project);
+  const approach = splitIntoList(project.solutionApproach);
+  const outcomes =
+    project.impactMetrics?.map((metric) => `${metric.value} ${metric.label}`) ??
+    splitIntoList(project.impactSummary);
+  const stack = project.technologies?.map((tech) => tech.name) ?? [];
 
   const graph = {
     "@context": "https://schema.org",
@@ -183,7 +188,7 @@ export default async function CaseStudyPage({
       {
         "@type": "Article",
         "@id": `${caseStudyUrl}#case-study`,
-        headline: title,
+        headline: project.title,
         description,
         dateModified: project.updatedAt ?? new Date().toISOString(),
         url: caseStudyUrl,
@@ -203,12 +208,7 @@ export default async function CaseStudyPage({
         "@type": "BreadcrumbList",
         "@id": `${caseStudyUrl}#breadcrumb`,
         itemListElement: [
-          {
-            "@type": "ListItem",
-            position: 1,
-            name: "Home",
-            item: siteUrl,
-          },
+          { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
           {
             "@type": "ListItem",
             position: 2,
@@ -218,247 +218,139 @@ export default async function CaseStudyPage({
           {
             "@type": "ListItem",
             position: 3,
-            name: title,
+            name: project.title,
             item: caseStudyUrl,
           },
         ],
       },
-      ...(project.githubUrl
-        ? [
-            {
-              "@type": ["SoftwareApplication", "SoftwareSourceCode"],
-              "@id": `${caseStudyUrl}#software`,
-              name: title,
-              description,
-              url: project.liveUrl || caseStudyUrl,
-              codeRepository: project.githubUrl,
-              applicationCategory: project.category || "WebApplication",
-              author: { "@id": `${siteUrl}#person` },
-            },
-          ]
-        : []),
     ],
   };
 
   return (
-    <main className="min-h-screen py-16 px-6 bg-muted/10">
+    <main className="mx-auto w-[min(900px,92%)] pt-32 pb-24">
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: server-side JSON-LD
         dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
       />
 
-      <div className="container mx-auto max-w-4xl space-y-8 md:space-y-10">
-        <header className="rounded-2xl border bg-background p-6 md:p-8 space-y-6 shadow-sm">
-          <nav className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-            <Link href="/" className="hover:text-foreground transition-colors">
-              Home
-            </Link>
-            <span>/</span>
-            <Link
-              href="/case-studies/"
-              className="hover:text-foreground transition-colors"
-            >
-              Case studies
-            </Link>
-            <span>/</span>
-            <span className="text-foreground">{title}</span>
-          </nav>
-          <div className="flex flex-wrap items-center gap-3">
-            <Link
-              href="/"
-              className="inline-flex items-center justify-center rounded-full border border-border/70 bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-            >
-              Back to home
-            </Link>
-            <Link
-              href="/case-studies/"
-              className="inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-            >
-              All case studies
-            </Link>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {project.featured ? (
-              <span className="px-2 py-1 text-xs rounded-full bg-primary/15 text-primary">
-                Featured
-              </span>
-            ) : null}
-            {project.category ? (
-              <span className="px-2 py-1 text-xs rounded-full bg-muted text-muted-foreground">
-                {project.category}
-              </span>
-            ) : null}
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-            {title}
-          </h1>
-          {project.tagline ? (
-            <p className="text-lg text-muted-foreground max-w-3xl">
-              {project.tagline}
-            </p>
-          ) : null}
-        </header>
+      <Link
+        href="/case-studies/"
+        className="inline-flex items-center gap-2 text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+      >
+        <ArrowLeft className="h-4 w-4" aria-hidden />
+        All case studies
+      </Link>
 
-        {coverImageSource ? (
-          <div className="relative aspect-video rounded-xl overflow-hidden border bg-muted">
-            <Image
-              src={coverImageSource}
-              alt={project.coverImageAlt?.trim() || `${title} preview`}
-              width={1024}
-              height={576}
-              className="object-cover w-full h-full"
-              priority
-              unoptimized={shouldUseUnoptimizedImage(coverImageSource)}
-            />
-          </div>
-        ) : null}
+      {project.category ? (
+        <p className="mt-8 text-xs tracking-[0.25em] text-primary uppercase">
+          {project.category}
+        </p>
+      ) : null}
+      <h1 className="mt-3 font-display text-4xl text-gradient md:text-6xl">
+        {project.title}
+      </h1>
+      <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+        {project.tagline || description}
+      </p>
 
-        <section className="rounded-2xl border bg-background p-4 shadow-sm">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-            {project.liveUrl ? (
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-xl bg-primary px-4 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+      <dl className="mt-8 grid grid-cols-2 gap-4 rounded-2xl border border-border bg-surface/40 p-6 text-sm md:grid-cols-3">
+        <div>
+          <dt className="text-xs tracking-widest text-muted-foreground uppercase">
+            Client
+          </dt>
+          <dd className="mt-1">{meta.client}</dd>
+        </div>
+        <div>
+          <dt className="text-xs tracking-widest text-muted-foreground uppercase">
+            Role
+          </dt>
+          <dd className="mt-1">{meta.role}</dd>
+        </div>
+        <div>
+          <dt className="text-xs tracking-widest text-muted-foreground uppercase">
+            Period
+          </dt>
+          <dd className="mt-1">{meta.period}</dd>
+        </div>
+      </dl>
+
+      <section className="mt-12">
+        <h2 className="font-display text-2xl">Problem</h2>
+        <p className="mt-3 leading-relaxed text-muted-foreground">
+          {project.problemStatement ||
+            "The project addressed a real-world workflow bottleneck and focused on improving decision speed, reliability, and usability."}
+        </p>
+      </section>
+
+      {approach.length > 0 ? (
+        <section className="mt-10">
+          <h2 className="font-display text-2xl">Approach</h2>
+          <ul className="mt-3 space-y-2">
+            {approach.map((item) => (
+              <li
+                key={item}
+                className="flex gap-3 rounded-xl border border-border bg-surface/40 px-4 py-3 text-sm"
               >
-                Live demo
-              </a>
-            ) : null}
-            {project.githubUrl ? (
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-xl border px-4 py-3 text-sm font-medium transition-colors hover:bg-accent"
-              >
-                Source code
-              </a>
-            ) : null}
-            <Link
-              href="#evidence"
-              className="inline-flex items-center justify-center rounded-xl border px-4 py-3 text-sm font-medium transition-colors hover:bg-accent"
-            >
-              Evidence links
-            </Link>
-          </div>
+                <span className="text-primary">◆</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
         </section>
+      ) : null}
 
-        <article className="space-y-6">
-          <section className="rounded-2xl border bg-background p-6 md:p-7 space-y-3 shadow-sm">
-            <h2 className="text-2xl font-semibold">Problem</h2>
-            <p className="text-muted-foreground leading-relaxed">
-              {project.problemStatement?.trim() ||
-                "The project addressed a real-world workflow bottleneck and focused on improving decision speed, reliability, and usability."}
-            </p>
-          </section>
-
-          <section className="rounded-2xl border bg-background p-6 md:p-7 space-y-3 shadow-sm">
-            <h2 className="text-2xl font-semibold">Solution</h2>
-            <p className="text-muted-foreground leading-relaxed">
-              {project.solutionApproach?.trim() ||
-                "The solution combined scalable API design, automation-first workflows, and production-oriented frontend delivery to reduce manual effort and improve outcomes."}
-            </p>
-          </section>
-
-          <section className="rounded-2xl border bg-background p-6 md:p-7 space-y-3 shadow-sm">
-            <h2 className="text-2xl font-semibold">Impact</h2>
-            <p className="text-muted-foreground leading-relaxed">
-              {project.impactSummary?.trim() ||
-                "The implementation improved operational efficiency and made decision support more repeatable through measurable, maintainable workflows."}
-            </p>
-
-            {project.impactMetrics && project.impactMetrics.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                {project.impactMetrics.map((metric) => {
-                  const label = metric?.label?.trim();
-                  const value = metric?.value?.trim();
-                  if (!label || !value) return null;
-
-                  return (
-                    <div
-                      key={`${label}-${value}`}
-                      className="rounded-lg border bg-card p-4"
-                    >
-                      <p className="text-xs uppercase tracking-wide text-muted-foreground">
-                        {label}
-                      </p>
-                      <p className="text-2xl font-semibold mt-1">{value}</p>
-                    </div>
-                  );
-                })}
-              </div>
-            ) : null}
-          </section>
-
-          {project.technologies && project.technologies.length > 0 ? (
-            <section className="rounded-2xl border bg-background p-6 md:p-7 space-y-3 shadow-sm">
-              <h2 className="text-2xl font-semibold">Technology stack</h2>
-              <div className="flex flex-wrap gap-2">
-                {project.technologies
-                  .map((tech) => tech?.name?.trim())
-                  .filter((tech): tech is string => Boolean(tech))
-                  .map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-              </div>
-            </section>
-          ) : null}
-
-          <section
-            id="evidence"
-            className="rounded-2xl border bg-background p-6 md:p-7 space-y-3 shadow-sm"
-          >
-            <h2 className="text-2xl font-semibold">Evidence and citations</h2>
-            <ul className="space-y-2">
-              {evidenceLinks.map((link) => (
-                <li key={link.url}>
-                  <a
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary underline underline-offset-4 break-all"
-                  >
-                    {link.label}: {link.url}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          {/* Related Services CTA */}
-          <section className="rounded-2xl border bg-primary/5 p-6 md:p-8 space-y-4 shadow-sm">
-            <h2 className="text-xl md:text-2xl font-semibold">
-              Need help with a similar project?
-            </h2>
-            <p className="text-muted-foreground leading-relaxed">
-              I offer AI & LLM Development, Marketing Analytics, and Full-Stack
-              Product Development services. Let&apos;s discuss how I can help
-              you build something impactful.
-            </p>
-            <div className="flex flex-wrap gap-3 pt-2">
-              <Link
-                href="/#services"
-                className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-sm font-semibold"
+      {outcomes.length > 0 ? (
+        <section className="mt-10">
+          <h2 className="font-display text-2xl">Outcomes</h2>
+          <ul className="mt-3 space-y-2">
+            {outcomes.map((item) => (
+              <li
+                key={item}
+                className="flex gap-3 rounded-xl border border-border bg-surface/40 px-4 py-3 text-sm"
               >
-                View Services
-              </Link>
-              <Link
-                href="/#contact"
-                className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg border hover:bg-accent transition-colors text-sm font-semibold"
+                <span className="text-primary">✓</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      {stack.length > 0 ? (
+        <section className="mt-10">
+          <h2 className="font-display text-2xl">Stack</h2>
+          <ul className="mt-3 flex flex-wrap gap-2">
+            {stack.map((tech) => (
+              <li
+                key={tech}
+                className="rounded-full border border-border bg-surface/60 px-3 py-1 text-xs"
               >
-                Discuss Your Project
-              </Link>
-            </div>
-          </section>
-        </article>
-      </div>
+                {tech}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      <section id="evidence" className="mt-10">
+        <h2 className="font-display text-2xl">Links</h2>
+        <ul className="mt-3 flex flex-wrap gap-3">
+          {evidenceLinks.map((link) => (
+            <li key={link.url}>
+              <a
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-4 py-2 text-sm hover:bg-surface-elevated"
+              >
+                {link.label}
+                <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
     </main>
   );
 }
