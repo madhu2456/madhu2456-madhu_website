@@ -17,72 +17,86 @@ export default function robots(): MetadataRoute.Robots {
 
   return {
     rules: [
-      // Standard crawlers — full access except admin/API paths
+      // Standard crawlers — consolidate blog and portfolio crawl controls
       {
         userAgent: "*",
-        allow: [
-          "/",
-          "/blog",
-          "/case-studies/",
-          "/sitemap.xml",
-          "/llms.txt",
-          "/llms-full.txt",
-          "/ai-profile.json",
-          "/humans.txt",
+        allow: "/",
+        disallow: [
+          "/studio/",
+          "/api/",
+          "/blog/admin/",
+          "/blog/api/v1/admin/",
+          "/blog/api/v1/auth/",
+          "/blog/api/v1/payments/",
+          "/blog/login",
+          "/blog/register",
+          "/blog/profile/",
+          "/blog/bookmarks",
+          "/blog/auth",
+          "/cdn-cgi/",
         ],
-        disallow: ["/studio/", "/api/"],
       },
-      // AI search engines — explicitly welcomed for GEO
+      // Bing / Yahoo minimal crawl delay to protect server performance
+      {
+        userAgent: ["bingbot", "adidxbot", "slurp"],
+        crawlDelay: 1,
+      },
+      // AI search engines — explicitly welcomed for GEO indexing with safe boundaries
       {
         userAgent: [
-          // OpenAI
           "GPTBot",
           "ChatGPT-User",
           "OAI-SearchBot",
-          // Anthropic
           "anthropic-ai",
           "ClaudeBot",
           "Claude-Web",
-          // Perplexity
           "PerplexityBot",
-          // Google AI
           "Google-Extended",
           "Googlebot-Extended",
-          // Apple
           "Applebot",
           "Applebot-Extended",
-          // Meta / Facebook
           "Meta-ExternalAgent",
           "Meta-ExternalFetcher",
           "facebookexternalhit",
-          // Amazon
-          "Amazonbot",
-          // Common Crawl (used by many AI training pipelines)
-          "CCBot",
-          // ByteDance / TikTok
-          "Bytespider",
-          // Cohere
           "cohere-ai",
-          // Diffbot (knowledge graph / AI)
           "Diffbot",
-          // You.com AI search
           "YouBot",
-          // Brave Search
           "BraveBot",
         ],
         allow: [
-          "/",
+          "/blog/api/og",
           "/blog",
-          "/case-studies/",
+          "/blog/posts",
+          "/blog/series",
+          "/blog/tags",
+          "/blog/ask",
+          "/blog/llms.txt",
+          "/blog/llms-full.txt",
+          "/blog/ai-profile.json",
           "/llms.txt",
           "/llms-full.txt",
-          "/ai-profile.json",
-          "/humans.txt",
         ],
-        disallow: ["/studio/", "/api/"],
+        disallow: [
+          "/blog/admin",
+          "/blog/profile",
+          "/blog/bookmarks",
+          "/blog/auth",
+          "/blog/login",
+          "/blog/register",
+          "/blog/api/v1/auth",
+          "/blog/api/v1/admin",
+          "/blog/api/v1/payments",
+          "/studio/",
+          "/api/",
+          "/cdn-cgi/",
+        ],
       },
     ],
-    sitemap: [`${siteUrl}sitemap.xml`, `${siteUrl}blog/sitemap.xml`],
+    sitemap: [
+      `${siteUrl}sitemap.xml`,
+      `${siteUrl}blog/sitemap.xml`,
+      `${siteUrl}blog/api/v1/sitemap-index.xml`,
+    ],
     host: siteHost,
   };
 }

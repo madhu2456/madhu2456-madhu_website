@@ -26,12 +26,6 @@ export async function GET() {
       changeFrequency: "weekly",
       priority: 0.85,
     },
-    {
-      url: `${siteUrl}search/`,
-      lastModified: latestDate.toISOString(),
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
   ];
 
   const caseStudyEntries = sortedProjects.flatMap((project) => {

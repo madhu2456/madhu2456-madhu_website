@@ -7,7 +7,7 @@
 - Metadata model: root portfolio metadata in `src/app/(portfolio)/layout.tsx`; search and case study metadata in route-level pages.
 - Structured data model: home graph from `src/components/SeoStructuredData.tsx` and `src/lib/jsonld.ts`; case study schema is route-local.
 - Crawl model in source: `src/app/sitemap.ts` and `src/app/robots.ts`.
-- Crawl model in live runtime: consolidated root `robots.txt` and root sitemap index, plus live `sitemap-portfolio.xml` child sitemap.
+- Crawl model in live runtime: consolidated root `robots.txt` and root sitemap output.
 - Rendering model observed: prerendered portfolio pages with `x-nextjs-prerender: 1`, `x-nextjs-cache: HIT` on sampled portfolio pages.
 - CMS protection: `src/proxy.ts` protects `/cms/:path*` and `/api/cms/:path*`.
 
@@ -16,9 +16,8 @@
 The live root sitemap is not the direct output shape of `src/app/sitemap.ts`.
 
 - Source `src/app/sitemap.ts` returns a `MetadataRoute.Sitemap` URL set with `/`, `/case-studies/`, `/search`, and project case studies.
-- Live `https://madhudadi.in/sitemap.xml` returns a sitemap index pointing to `https://madhudadi.in/sitemap-portfolio.xml` and `https://madhudadi.in/blog/sitemap.xml`.
-- Live `https://madhudadi.in/sitemap-portfolio.xml` returns the portfolio URL set matching the source entries.
-- Source route for `/sitemap-portfolio.xml` was not found in the repository.
+- Live `https://madhudadi.in/sitemap.xml` should be the canonical portfolio sitemap entry point for this repository.
+- Blog sitemap composition should be handled by `robots.txt` or a source-controlled sitemap-index route, not by a separate portfolio child sitemap.
 
 This may be intentional deployment composition, but it is not reproducible from the current source alone.
 
@@ -57,8 +56,7 @@ Severity: Medium
 Evidence:
 
 - Source `src/app/sitemap.ts:8` exports a URL-set metadata route.
-- Runtime `https://madhudadi.in/sitemap.xml` returns a sitemap index with `sitemap-portfolio.xml` and `blog/sitemap.xml`.
-- Source route/file for `sitemap-portfolio.xml` was not found by `rg --files`.
+- Runtime `https://madhudadi.in/sitemap.xml` should be reproducible from source and should not depend on an undocumented portfolio child sitemap.
 
 Impact: deployment parity and crawler control can regress if this repository is deployed without the external sitemap/robots composition.
 
@@ -90,4 +88,3 @@ Evidence:
 - Runtime `https://madhudadi.in/blog/llms-full.txt` returns 200.
 
 Impact: AI crawler discovery gets a broken root-level hint, while the blog-level full LLM file exists.
-

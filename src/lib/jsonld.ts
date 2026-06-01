@@ -757,6 +757,19 @@ export function buildFaqSchema({
   const profileSummary = [headline, experienceSummary, location]
     .filter(Boolean)
     .join(" · ");
+  const startingPrices = services
+    .map((service) => service.pricing?.startingPrice)
+    .filter((price): price is number => typeof price === "number" && price > 0);
+  const lowestStartingPrice =
+    startingPrices.length > 0 ? Math.min(...startingPrices) : null;
+  const formattedLowestPrice =
+    lowestStartingPrice === null
+      ? null
+      : new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+          maximumFractionDigits: 0,
+        }).format(lowestStartingPrice);
 
   return {
     "@type": "FAQPage",
@@ -860,7 +873,9 @@ export function buildFaqSchema({
         name: `What is the pricing model?`,
         acceptedAnswer: {
           "@type": "Answer",
-          text: `${fullName} offers project-based pricing with clear milestones. Typical engagements start from $2,000 depending on scope. A detailed proposal with fixed pricing is provided after the discovery call.`,
+          text: formattedLowestPrice
+            ? `${fullName} offers project-based pricing with clear milestones. Current listed services start from ${formattedLowestPrice}, depending on scope. A detailed proposal with fixed pricing is provided after the discovery call.`
+            : `${fullName} offers project-based pricing with clear milestones. Pricing depends on scope, timeline, and delivery requirements, with a detailed proposal provided after the discovery call.`,
         },
       },
     ],
