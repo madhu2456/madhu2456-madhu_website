@@ -17,7 +17,7 @@ No live 5xx, deindexing directive, hard 404 in sitemap, or CMS exposure was conf
 
 | ID | Severity | Confidence | Category | Affected URLs | Primary Evidence | Owner |
 |---|---|---|---|---|---|---|
-| `OPS-001` | Medium | Verified | Deployment parity | `/robots.txt`, `/sitemap.xml`, `/sitemap-portfolio.xml` | Live sitemap index not reproducible from `src/app/sitemap.ts` | DevOps/Next.js |
+| `OPS-001` | Medium | Verified | Deployment parity | `/robots.txt`, `/sitemap.xml` | Live sitemap output not reproducible from source | DevOps/Next.js |
 | `CRAWL-001` | Medium | Verified | Crawl/canonical | `/case-studies`, `/case-studies/*`, `/search` | Slash and non-slash variants return 200; mixed source links | Next.js/SEO |
 | `SCHEMA-001` | Medium | Verified | Structured data | `/case-studies/udemy-enroller-fastapi/` | Runtime JSON-LD has `https://madhudadi.in//#person`; source line 219 | Next.js/SEO |
 | `GEO-001` | Medium | Verified | GEO/content | `/ai-profile.json`, `/llms.txt`, `/blog/ai-profile.json` | Portfolio updated 2026-05-03, blog updated 2026-05-19 | SEO/GEO |
@@ -70,7 +70,7 @@ graph TD
 - Repair package manager/dependency install.
 - Re-run lint, tests, build.
 - Decide whether root sitemap/robots composition belongs in this repo or deployment config.
-- Add source-controlled route or config for `sitemap-portfolio.xml` if it remains live.
+- Keep portfolio discovery consolidated under `/sitemap.xml`; remove any deployment/runtime references to legacy child sitemaps.
 - Normalize internal links to canonical URLs.
 - Add redirects for noncanonical trailing-slash variants or remove `skipTrailingSlashRedirect`.
 - Fix case-study JSON-LD author ID.
@@ -255,4 +255,3 @@ Priority 3:
 - Harden SVG uploads.
 - Add accessibility live regions and reduced-motion safeguards.
 - Run lab and field performance validation.
-

@@ -147,6 +147,57 @@ export async function GET() {
     })
     .join("\n");
 
+  const skillNameSet = new Set(skills.map((skill) => skill.name.toLowerCase()));
+  const preferredCoreStack = [
+    "Python",
+    "FastAPI",
+    "Next.js",
+    "TypeScript",
+    "PostgreSQL",
+  ];
+  const coreStack =
+    preferredCoreStack
+      .filter((skill) => skillNameSet.has(skill.toLowerCase()))
+      .join(", ") ||
+    skills
+      .map((skill) => skill.name)
+      .filter(Boolean)
+      .slice(0, 5)
+      .join(", ");
+  const primaryServices =
+    sortedServices
+      .map((service) => service.title)
+      .filter(Boolean)
+      .slice(0, 3)
+      .join(", ") || "See services section";
+  const topCredential =
+    sortedCertifications[0]?.name || "See certifications section";
+  const highlightedMetric = sortedProjects
+    .flatMap((project) => project.impactMetrics ?? [])
+    .find((metric) => /%|\+/.test(metric.value));
+  const keyOutcome = highlightedMetric
+    ? `${highlightedMetric.value} ${highlightedMetric.label}`
+    : "See case studies for measured outcomes";
+  const currencyFormatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  });
+  const pricingLines = sortedServices
+    .filter(
+      (service) =>
+        typeof service.pricing?.startingPrice === "number" &&
+        service.pricing.startingPrice > 0,
+    )
+    .map((service) => {
+      const price = currencyFormatter.format(
+        service.pricing?.startingPrice ?? 0,
+      );
+      const priceType = service.pricing?.priceType || "project";
+      return `- **${service.title}:** Starting from ${price} USD (${priceType}-based)`;
+    })
+    .join("\n");
+
   const evidenceLinks = Array.from(
     new Map(
       [
@@ -187,7 +238,7 @@ export async function GET() {
 ## Identity
 
 - **Full name:** ${fullName}
-- **Job title:** AI, Python & Marketing Analytics Leader
+- **Job title:** ${profile.headline}
 - **Website:** ${siteUrl}
 - **Location:** ${profile.location}
 - **Availability:** ${availabilityLabel}
@@ -196,12 +247,12 @@ export async function GET() {
 | Fact | Value |
 | :--- | :--- |
 | **Experience** | ${profile.yearsOfExperience}+ Years (Senior Lead) |
-| **Core Stack** | Python, FastAPI, Next.js, TypeScript, PostgreSQL |
+| **Core Stack** | ${coreStack} |
 | **Specialization** | Generative AI, RAG Systems, Agentic AI, Marketing Analytics |
-| **Primary Services** | AI Consulting, Full-Stack Product Delivery, Analytics Hub |
+| **Primary Services** | ${primaryServices} |
 | **Blog Focus** | AI Engineering Tutorials, Python Guides, Engineering Notes |
-| **Top Credential** | Ultimate RAG Bootcamp (LangChain/LangGraph) |
-| **Key Outcome** | 90% Manual Effort Reduction (AI Automation) |
+| **Top Credential** | ${topCredential} |
+| **Key Outcome** | ${keyOutcome} |
 
 ## Professional Summary
 
@@ -251,9 +302,7 @@ ${fullName} is **${availabilityLabel.toLowerCase()}**.
 
 ## Pricing Indication
 
-- **AI & LLM projects:** Starting from $2,500 USD (project-based)
-- **Marketing analytics:** Starting from $2,000 USD (project-based)
-- **Full-stack development:** Starting from $3,000 USD (project-based)
+${pricingLines || "- Pricing is scoped per engagement after discovery."}
 - Custom quotes available for retainer and advisory arrangements
 
 ## Portfolio Sections

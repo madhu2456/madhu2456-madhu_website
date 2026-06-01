@@ -64,7 +64,7 @@ export async function generateMetadata({
       canonical: "/search/",
     },
     robots: {
-      index: query.length === 0,
+      index: false,
       follow: true,
     },
     openGraph: {

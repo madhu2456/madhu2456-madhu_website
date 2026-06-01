@@ -24,7 +24,9 @@ const toDescription = (...values: Array<string | null | undefined>) => {
   const merged = values
     .map((value) => value?.trim())
     .filter((value): value is string => Boolean(value))
-    .join(" ");
+    .join(" — ")
+    .replace(/\s+/g, " ")
+    .trim();
 
   if (!merged) {
     return "Case study detailing implementation approach, stack, and measurable delivery outcomes.";
@@ -32,12 +34,17 @@ const toDescription = (...values: Array<string | null | undefined>) => {
 
   if (merged.length <= 160) return merged;
 
-  const boundary = merged.lastIndexOf(" ", 160);
-  const safeBoundary = boundary > 0 ? boundary : 160;
+  const sentenceBoundary = merged.lastIndexOf(".", 160);
+  if (sentenceBoundary >= 80) {
+    return merged.slice(0, sentenceBoundary + 1).trim();
+  }
+
+  const boundary = merged.lastIndexOf(" ", 157);
+  const safeBoundary = boundary > 0 ? boundary : 157;
   return `${merged
     .slice(0, safeBoundary)
     .trim()
-    .replace(/[,\s;:!?-]+$/, "")}.`;
+    .replace(/[,\s;:!?-]+$/, "")}...`;
 };
 
 const splitIntoList = (value?: string) => {
@@ -117,7 +124,7 @@ export async function generateMetadata({
 
   const siteUrl = getSiteUrl();
   const title = `${project.title} Case Study | ${project.category || "Work"} · Madhu Dadi`;
-  const description = toDescription(project.impactSummary, project.tagline);
+  const description = toDescription(project.tagline, project.impactSummary);
   const url = `/case-studies/${slug}/`;
 
   return {
@@ -162,7 +169,7 @@ export default async function CaseStudyPage({
 
   const siteUrl = getSiteUrl();
   const caseStudyUrl = `${siteUrl}case-studies/${slug}/`;
-  const description = toDescription(project.impactSummary, project.tagline);
+  const description = toDescription(project.tagline, project.impactSummary);
   const evidenceLinks = makeEvidenceLinks(project, siteUrl);
   const meta = getProjectMeta(project);
   const approach = splitIntoList(project.solutionApproach);

@@ -102,7 +102,6 @@ Primary source files:
 | `https://madhudadi.in/search?q=rag` | 200 | `noindex, follow`, canonical `/search/` |
 | `https://madhudadi.in/robots.txt` | 200 | Live consolidated blog + portfolio file |
 | `https://madhudadi.in/sitemap.xml` | 200 | Live sitemap index |
-| `https://madhudadi.in/sitemap-portfolio.xml` | 200 | Live portfolio child sitemap |
 | `https://madhudadi.in/llms.txt` | 200 | Portfolio LLM feed |
 | `https://madhudadi.in/llms-full.txt` | 404 | Allowed in live robots, missing at root |
 | `https://madhudadi.in/ai-profile.json` | 200 | Portfolio AI profile |
@@ -124,4 +123,3 @@ Primary source files:
 - Local build, lint, and test validation were blocked by missing package-manager/toolchain dependencies.
 - Security dependency audit was not run because package manager execution is unavailable in this environment.
 - Any Core Web Vitals verdict requires CrUX, RUM, or Search Console validation.
-
