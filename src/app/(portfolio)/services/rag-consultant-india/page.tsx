@@ -162,8 +162,83 @@ export default async function RagConsultantIndiaPage() {
     },
   ];
 
+  const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${siteUrl}services/rag-consultant-india/#service`,
+    name: "RAG System Development & Consulting",
+    serviceType: "RAG system consulting and development",
+    description:
+      "Retrieval-augmented generation systems and source-cited AI assistants featuring hybrid search, rerankers, evals, and observability.",
+    provider: {
+      "@id": `${siteUrl}#person`,
+    },
+    areaServed: ["India", "Worldwide", "Remote"],
+    url: `${siteUrl}services/rag-consultant-india/`,
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "RAG engineering services",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          name: "Vector database integration",
+          description:
+            "Integration of pgvector, Pinecone, or Qdrant for semantic query matching.",
+        },
+        {
+          "@type": "Offer",
+          name: "Document ingestion pipelines",
+          description:
+            "Chunking, metadata enrichment, and vector embedding pipelines.",
+        },
+        {
+          "@type": "Offer",
+          name: "Source attribution & citation UI",
+          description:
+            "Observability and user interfaces showing precise source document citations.",
+        },
+      ],
+    },
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Services",
+        item: `${siteUrl}services/`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "RAG Consultant in India",
+        item: `${siteUrl}services/rag-consultant-india/`,
+      },
+    ],
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
+      <script
+        type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <Header profile={profile} />
 
       <main id="main-content" className="flex-1 px-6 py-28 bg-background/50">

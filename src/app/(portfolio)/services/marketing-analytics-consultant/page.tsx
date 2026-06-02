@@ -149,8 +149,83 @@ export default async function MarketingAnalyticsConsultantPage() {
     },
   ];
 
+  const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${siteUrl}services/marketing-analytics-consultant/#service`,
+    name: "Marketing Analytics & Decision Support",
+    serviceType: "Marketing analytics and decision support",
+    description:
+      "Marketing analytics, GA4, BigQuery reporting, campaign analytics, attribution, dashboards, and decision workflows connected to outcomes.",
+    provider: {
+      "@id": `${siteUrl}#person`,
+    },
+    areaServed: ["India", "Worldwide", "Remote"],
+    url: `${siteUrl}services/marketing-analytics-consultant/`,
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Marketing Analytics services",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          name: "GA4 tracking audits & tagging",
+          description:
+            "Auditing and tag manager setup for conversion mapping and user journeys.",
+        },
+        {
+          "@type": "Offer",
+          name: "BigQuery data modeling",
+          description:
+            "Data warehousing and custom transformation modeling for marketing metrics.",
+        },
+        {
+          "@type": "Offer",
+          name: "Attribution framework mapping",
+          description:
+            "Custom attribution frameworks bypassing standard platform defaults.",
+        },
+      ],
+    },
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Services",
+        item: `${siteUrl}services/`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "Marketing Analytics Consultant",
+        item: `${siteUrl}services/marketing-analytics-consultant/`,
+      },
+    ],
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
+      <script
+        type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <Header profile={profile} />
 
       <main id="main-content" className="flex-1 px-6 py-28 bg-background/50">

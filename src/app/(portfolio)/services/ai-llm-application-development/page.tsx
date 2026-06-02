@@ -160,8 +160,83 @@ export default async function AiLlmApplicationDevelopmentPage() {
     },
   ];
 
+  const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${siteUrl}services/ai-llm-application-development/#service`,
+    name: "AI & LLM Application Development",
+    serviceType: "AI and LLM application development",
+    description:
+      "Production LLM applications, RAG systems, AI agents, FastAPI backends, Next.js interfaces, evals, guardrails, and analytics instrumentation.",
+    provider: {
+      "@id": `${siteUrl}#person`,
+    },
+    areaServed: ["India", "Worldwide", "Remote"],
+    url: `${siteUrl}services/ai-llm-application-development/`,
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "AI engineering services",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          name: "RAG system development",
+          description:
+            "Source-cited retrieval-augmented generation systems for product, support, content, and internal knowledge use cases.",
+        },
+        {
+          "@type": "Offer",
+          name: "AI agent development",
+          description:
+            "Tool-using AI agents with guardrails, logs, evals, and workflow integration.",
+        },
+        {
+          "@type": "Offer",
+          name: "FastAPI AI backend development",
+          description:
+            "Production Python/FastAPI backends for AI applications.",
+        },
+      ],
+    },
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Services",
+        item: `${siteUrl}services/`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "AI & LLM Application Development",
+        item: `${siteUrl}services/ai-llm-application-development/`,
+      },
+    ],
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
+      <script
+        type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <Header profile={profile} />
 
       <main id="main-content" className="flex-1 px-6 py-28 bg-background/50">
