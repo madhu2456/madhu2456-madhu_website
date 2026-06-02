@@ -202,6 +202,10 @@ export async function GET() {
     new Map(
       [
         { label: "Canonical website", url: siteUrl },
+        { label: "Profile Page", url: `${siteUrl}profile/` },
+        { label: "Services Hub", url: `${siteUrl}services/` },
+        { label: "Credentials Portal", url: `${siteUrl}credentials/` },
+        { label: "Contact Form Page", url: `${siteUrl}contact/` },
         { label: "Technical blog", url: `${siteUrl}blog` },
         { label: "Blog articles index", url: `${siteUrl}blog/posts` },
         { label: "Blog RSS feed", url: `${siteUrl}blog/feed.xml` },
@@ -213,6 +217,10 @@ export async function GET() {
         ...sortedProjects.map((project) => ({
           label: `${project.title} case study`,
           url: `${siteUrl}case-studies/${project.slug}/`,
+        })),
+        ...sortedServices.map((service) => ({
+          label: `${service.title} Service Details`,
+          url: `${siteUrl}services/${service.slug}/`,
         })),
         ...sortedCertifications.flatMap((certification) => {
           if (!certification.credentialUrl) return [];

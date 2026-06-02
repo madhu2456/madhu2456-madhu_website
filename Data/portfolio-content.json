@@ -837,32 +837,22 @@
   "services": [
     {
       "title": "AI & LLM Application Development",
-      "slug": "ai-llm-applications",
+      "slug": "ai-llm-application-development",
       "icon": "/icon-512.png",
-      "shortDescription": "RAG, agents, and chatbots built for real users. Not just a happy-path demo.",
-      "fullDescription": "Production AI systems using LLMs, retrieval, and agentic workflows with practical evals, guardrails, observability, and deployment paths.",
+      "shortDescription": "RAG systems, chatbots, and generative features built for production users. Not just happy-path demos.",
+      "fullDescription": "Production AI systems using LLMs, semantic retrieval, and generative workflows with practical evals, guardrails, and secure deployment paths.",
       "features": [
         "RAG pipelines that cite their sources",
         "Model choices that fit your budget",
-        "Agents that don't loop forever",
-        "Evals, guardrails, and quiet observability"
+        "Observation and guardrail pipelines",
+        "Evaluation frameworks before shipping"
       ],
       "technologies": [
-        {
-          "name": "Python"
-        },
-        {
-          "name": "OpenAI"
-        },
-        {
-          "name": "LangChain"
-        },
-        {
-          "name": "FastAPI"
-        },
-        {
-          "name": "Next.js"
-        }
+        { "name": "Python" },
+        { "name": "OpenAI" },
+        { "name": "LangChain" },
+        { "name": "FastAPI" },
+        { "name": "Next.js" }
       ],
       "deliverables": [
         "AI system architecture document",
@@ -881,93 +871,142 @@
       "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
-      "title": "Marketing Analytics & Decision Intelligence",
-      "slug": "marketing-analytics-intelligence",
+      "title": "RAG Consultant India",
+      "slug": "rag-consultant-india",
       "icon": "/icon-512.png",
-      "shortDescription": "Attribution and dashboards your team will open on Monday. And trust by Friday.",
-      "fullDescription": "Measurement systems for campaign performance, attribution, testing, and executive decision support, built around the questions teams actually ask.",
+      "shortDescription": "Enterprise semantic search, document ingestion, vector retrieval, and advanced hybrid search tuning.",
+      "fullDescription": "High-precision Retrieval-Augmented Generation engineering, tuning vector search models, designing hybrid dense/sparse retrieval, chunking policies, and metadata filtering.",
       "features": [
-        "Measurement that holds up in a CMO Q&A",
-        "Attribution without hand-waving",
-        "Dashboards for execs and operators",
-        "A/B tests read honestly, not optimistically"
+        "Hybrid search tuning & reranking",
+        "Document chunking & pipeline design",
+        "Vector store optimizations",
+        "Factuality validation and evaluation"
       ],
       "technologies": [
-        {
-          "name": "SQL"
-        },
-        {
-          "name": "Python"
-        },
-        {
-          "name": "Snowflake"
-        },
-        {
-          "name": "GA4"
-        },
-        {
-          "name": "Dataiku"
-        }
+        { "name": "Pinecone" },
+        { "name": "Qdrant" },
+        { "name": "Postgres (pgvector)" },
+        { "name": "Python" },
+        { "name": "LlamaIndex" }
       ],
       "deliverables": [
-        "Analytics strategy and measurement plan",
-        "Automated reporting dashboards",
-        "Data pipeline and ETL workflows",
-        "Training and documentation"
-      ],
-      "pricing": {
-        "startingPrice": 2000,
-        "priceType": "project",
-        "description": "From $2,000"
-      },
-      "timeline": "2-6 weeks",
-      "featured": true,
-      "order": 2,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "title": "Full-Stack Web Product Development",
-      "slug": "fullstack-product-development",
-      "icon": "/icon-512.png",
-      "shortDescription": "Web products that load fast, rank well, and don't break the day after launch.",
-      "fullDescription": "Full-stack product builds across UI, APIs, databases, deployment, performance, SEO, and handoff documentation.",
-      "features": [
-        "Full-stack builds, front to back",
-        "REST and GraphQL APIs",
-        "Postgres schemas you can live with",
-        "Performance, SEO, and a CI you trust"
-      ],
-      "technologies": [
-        {
-          "name": "Next.js"
-        },
-        {
-          "name": "TypeScript"
-        },
-        {
-          "name": "React"
-        },
-        {
-          "name": "FastAPI"
-        },
-        {
-          "name": "Postgres"
-        }
-      ],
-      "deliverables": [
-        "Production-ready web application",
-        "API documentation",
-        "Deployment and hosting setup",
-        "Source code and technical documentation"
+        "Hybrid retrieval system architecture",
+        "Chunking & embedding ETL pipeline",
+        "Vector search engine configuration",
+        "Factuality evaluation reports"
       ],
       "pricing": {
         "startingPrice": 3000,
         "priceType": "project",
         "description": "From $3,000"
       },
+      "timeline": "4-10 weeks",
+      "featured": true,
+      "order": 2,
+      "updatedAt": "2026-05-31T14:09:41.323Z"
+    },
+    {
+      "title": "AI Agent Development",
+      "slug": "ai-agent-development",
+      "icon": "/icon-512.png",
+      "shortDescription": "Agentic workflows, task planners, tool calling, and structured output systems that execute autonomous tasks.",
+      "fullDescription": "Multi-agent orchestration systems, task decomposition planners, state machines, autonomous tool-calling pipelines, and recursive task validation.",
+      "features": [
+        "Task planners and planners evals",
+        "Tool execution and sandboxing",
+        "LangGraph / State-machine control",
+        "Structured output and JSON parsing guardrails"
+      ],
+      "technologies": [
+        { "name": "LangGraph" },
+        { "name": "Python" },
+        { "name": "OpenAI Function Calling" },
+        { "name": "CrewAI" }
+      ],
+      "deliverables": [
+        "Agent orchestration architecture",
+        "Function calling & tool integration",
+        "Guardrail & state control pipeline",
+        "Traceability & monitoring logs"
+      ],
+      "pricing": {
+        "startingPrice": 4000,
+        "priceType": "project",
+        "description": "From $4,000"
+      },
       "timeline": "4-12 weeks",
       "featured": true,
       "order": 3,
+      "updatedAt": "2026-05-31T14:09:41.323Z"
+    },
+    {
+      "title": "Marketing Analytics Consultant",
+      "slug": "marketing-analytics-consultant",
+      "icon": "/icon-512.png",
+      "shortDescription": "GA4, BigQuery, Attribution, dashboards, and custom marketing pipelines that align stats to revenue.",
+      "fullDescription": "Measurement strategies, campaign performance dashboards, client journeys, server-side tracking, multi-touch attribution, and A/B testing analytics that leaders trust.",
+      "features": [
+        "Server-side Google Tag Manager",
+        "BigQuery marketing data warehouse",
+        "GA4 custom schemas and metrics",
+        "Multi-touch attribution models"
+      ],
+      "technologies": [
+        { "name": "GA4" },
+        { "name": "BigQuery" },
+        { "name": "SQL" },
+        { "name": "Python" },
+        { "name": "Dataiku" }
+      ],
+      "deliverables": [
+        "Analytics strategy and measurement plan",
+        "Automated BI reporting dashboard",
+        "Server-side tracking configuration",
+        "Data pipeline ETL workflows"
+      ],
+      "pricing": {
+        "startingPrice": 2000,
+        "priceType": "project",
+        "description": "From $2,000"
+      },
+      "timeline": "3-6 weeks",
+      "featured": true,
+      "order": 4,
+      "updatedAt": "2026-05-31T14:09:41.323Z"
+    },
+    {
+      "title": "Full-Stack AI Product Development",
+      "slug": "full-stack-ai-product-development",
+      "icon": "/icon-512.png",
+      "shortDescription": "Complete web applications combining Next.js frontends, FastAPI backends, Postgres schemas, and AI.",
+      "fullDescription": "End-to-end full-stack systems built for performance, security, and SEO, featuring Next.js React UI, FastAPI endpoints, and production Postgres schemas.",
+      "features": [
+        "Fast Next.js UI/UX",
+        "FastAPI secure backends",
+        "Robust Postgres schemas",
+        "Optimized SEO and deployment CI/CD"
+      ],
+      "technologies": [
+        { "name": "Next.js" },
+        { "name": "FastAPI" },
+        { "name": "TypeScript" },
+        { "name": "Postgres" },
+        { "name": "Tailwind CSS" }
+      ],
+      "deliverables": [
+        "Production-ready web application",
+        "Secure API documentation",
+        "Deployment & server setup",
+        "Source code and technical documentation"
+      ],
+      "pricing": {
+        "startingPrice": 5000,
+        "priceType": "project",
+        "description": "From $5,000"
+      },
+      "timeline": "4-12 weeks",
+      "featured": true,
+      "order": 5,
       "updatedAt": "2026-05-31T14:09:41.323Z"
     }
   ],

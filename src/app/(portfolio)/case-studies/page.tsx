@@ -2,7 +2,7 @@ import { ArrowRight, ExternalLink } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Header } from "@/components/NewPortfolioExperience";
+import { Header } from "@/components/Header";
 import {
   normalizeImageSource,
   shouldUseUnoptimizedImage,
