@@ -327,20 +327,48 @@ function Hero({
 }
 
 function Stats({ stats }: { stats: Profile["stats"] }) {
+  const { ref, inView } = useInView<HTMLDivElement>();
+
   if (stats.length === 0) return null;
 
   return (
     <section aria-label="Key results" className="py-12 sm:py-16">
-      <div className="mx-auto grid w-[min(1400px,92%)] grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
-        {stats.map((stat) => (
-          <StatItem key={stat.label} value={stat.value} label={stat.label} />
+      <div
+        ref={ref}
+        className="mx-auto grid w-[min(1400px,92%)] grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
+      >
+        {stats.map((stat, index) => (
+          <StatItem
+            key={stat.label}
+            value={stat.value}
+            label={stat.label}
+            start={inView}
+            delay={index * 80}
+          />
         ))}
       </div>
     </section>
   );
 }
 
-function StatItem({ value, label }: { value: string; label: string }) {
+function StatItem({
+  value,
+  label,
+  start,
+  delay,
+}: {
+  value: string;
+  label: string;
+  start: boolean;
+  delay: number;
+}) {
+  const display = useHydratedCountUp(value, start);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const getIcon = (label: string) => {
     const l = label.toLowerCase();
     if (
@@ -365,7 +393,8 @@ function StatItem({ value, label }: { value: string; label: string }) {
       l.includes("reduction") ||
       l.includes("retention") ||
       l.includes("page") ||
-      l.includes("audit")
+      l.includes("audit") ||
+      l.includes("domain")
     ) {
       return (
         <IconChartBar className="h-6 w-6 text-primary transition-transform duration-300 group-hover:scale-115 group-hover:translate-x-[2px]" />
@@ -378,8 +407,11 @@ function StatItem({ value, label }: { value: string; label: string }) {
 
   return (
     <div
-      className="group relative flex flex-col items-center justify-center overflow-hidden rounded-2xl border border-border/60 bg-surface/30 px-6 py-8 text-center shadow-sm backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:border-primary/25 hover:shadow-glow opacity-100 translate-y-0"
+      className="group relative flex flex-col items-center justify-center overflow-hidden rounded-2xl border border-border/60 bg-surface/30 px-6 py-8 text-center shadow-sm backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:border-primary/25 hover:shadow-glow"
       style={{
+        opacity: !isMounted || start ? 1 : 0,
+        transform: !isMounted || start ? "translateY(0)" : "translateY(20px)",
+        transitionDelay: `${delay}ms`,
         transitionProperty: "opacity, transform, border-color, box-shadow",
       }}
     >
@@ -391,8 +423,12 @@ function StatItem({ value, label }: { value: string; label: string }) {
         {getIcon(label)}
       </div>
 
-      <dd className="text-gradient-amber font-display text-4xl font-extrabold tracking-tight sm:text-5xl">
-        {value}
+      <dd
+        className="text-gradient-amber font-display text-4xl font-extrabold tracking-tight sm:text-5xl"
+        data-count-to={value}
+        suppressHydrationWarning
+      >
+        {display}
       </dd>
 
       <dt className="mt-3 text-xs font-semibold text-foreground/90 tracking-wider uppercase sm:text-sm">
@@ -1289,6 +1325,50 @@ function useInView<T extends HTMLElement>(options?: IntersectionObserverInit) {
   }, [inView, options]);
 
   return { ref, inView };
+}
+
+function useHydratedCountUp(target: string, start: boolean, duration = 1400) {
+  const match = target.match(/^([^\d]*)(\d+(?:\.\d+)?)(.*)$/);
+  const prefix = match?.[1] ?? "";
+  const end = match ? Number.parseFloat(match[2].replace(/,/g, "")) : 0;
+  const suffix = match?.[3] ?? "";
+  const hasNumber = Boolean(match);
+
+  const [isMounted, setIsMounted] = useState(false);
+  const [value, setValue] = useState(end);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!start || !hasNumber || !isMounted) return;
+
+    let raf = 0;
+    const startTime = performance.now();
+    setValue(0);
+
+    const tick = (now: number) => {
+      const progress = Math.min(1, (now - startTime) / duration);
+      const eased = 1 - (1 - progress) ** 3;
+      setValue(end * eased);
+      if (progress < 1) {
+        raf = requestAnimationFrame(tick);
+      }
+    };
+
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [start, end, duration, hasNumber, isMounted]);
+
+  if (!hasNumber) return target;
+  if (!isMounted) return target;
+
+  const formattedValue = Number.isInteger(end)
+    ? Math.round(value).toLocaleString("en-US")
+    : value.toFixed(1);
+
+  return `${prefix}${formattedValue}${suffix}`;
 }
 
 function useActiveSection(ids: string[]) {
