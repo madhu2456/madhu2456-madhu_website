@@ -398,6 +398,93 @@ export default async function MarketingAnalyticsConsultantPage() {
             </div>
           </section>
 
+          {/* Featured Analytics Project Proof */}
+          <section className="space-y-8">
+            <div className="text-center space-y-2 max-w-xl mx-auto">
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tight">
+                Featured Case Studies & Software Proof
+              </h2>
+              <p className="text-sm text-muted-foreground">
+                Explore real, verified case studies where I designed and shipped
+                advanced indexing, validation, and search platforms.
+              </p>
+            </div>
+
+            <div className="grid gap-8 md:grid-cols-3">
+              {/* Adticks */}
+              <article className="group rounded-2xl border border-border bg-surface/20 p-6 space-y-4 hover:-translate-y-1 transition-all duration-300">
+                <span className="text-[10px] font-mono tracking-widest text-primary uppercase block">
+                  AI Marketing Audit Platform
+                </span>
+                <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
+                  Adticks
+                </h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Engineered custom parallel indexing models and multi-stage NLP
+                  analysis layers capable of running automated SEO/AEO/GEO
+                  diagnostic audits across 10,000+ pages simultaneously.
+                </p>
+                <div className="pt-2">
+                  <Link
+                    href="/case-studies/adticks/"
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:text-primary-hover group/link transition-colors"
+                  >
+                    View Adticks study
+                    <IconChevronRight className="h-3.5 w-3.5 transition-transform group-hover/link:translate-x-0.5" />
+                  </Link>
+                </div>
+              </article>
+
+              {/* Technical Blog */}
+              <article className="group rounded-2xl border border-border bg-surface/20 p-6 space-y-4 hover:-translate-y-1 transition-all duration-300">
+                <span className="text-[10px] font-mono tracking-widest text-primary uppercase block">
+                  Retrieval-Augmented Generation
+                </span>
+                <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
+                  Technical Blog RAG Assistant
+                </h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Designed a precise, high-accuracy Q&A search system backed by
+                  vector search pipelines, custom semantic chunking schemas, and
+                  multi-stage prompt validation rigs.
+                </p>
+                <div className="pt-2">
+                  <Link
+                    href="/case-studies/technical-blog/"
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:text-primary-hover group/link transition-colors"
+                  >
+                    View RAG study
+                    <IconChevronRight className="h-3.5 w-3.5 transition-transform group-hover/link:translate-x-0.5" />
+                  </Link>
+                </div>
+              </article>
+
+              {/* Udemy Enroller */}
+              <article className="group rounded-2xl border border-border bg-surface/20 p-6 space-y-4 hover:-translate-y-1 transition-all duration-300">
+                <span className="text-[10px] font-mono tracking-widest text-primary uppercase block">
+                  FastAPI Automation Workflow
+                </span>
+                <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
+                  Udemy Enroller
+                </h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Built a high-throughput, async automated course-enrollment
+                  scheduling pipeline using Python, FastAPI, and Postgres,
+                  serving over 20,000 automated enrollments cleanly.
+                </p>
+                <div className="pt-2">
+                  <Link
+                    href="/case-studies/udemy-enroller-fastapi/"
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:text-primary-hover group/link transition-colors"
+                  >
+                    View automation study
+                    <IconChevronRight className="h-3.5 w-3.5 transition-transform group-hover/link:translate-x-0.5" />
+                  </Link>
+                </div>
+              </article>
+            </div>
+          </section>
+
           {/* Bespoke Accordion FAQs */}
           <section className="space-y-8 max-w-3xl mx-auto">
             <div className="text-center space-y-2">
@@ -459,7 +546,7 @@ export default async function MarketingAnalyticsConsultantPage() {
                 transactions and business outcomes. Schedule a technical audit
                 or dashboard planning discovery session.
               </p>
-              <div className="pt-4">
+              <div className="pt-4 flex flex-col items-center gap-4">
                 <Link
                   href={contactUrl}
                   className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all"
@@ -467,6 +554,23 @@ export default async function MarketingAnalyticsConsultantPage() {
                   Book a technical discovery call
                   <IconArrowRight className="h-4.5 w-4.5" />
                 </Link>
+                <div className="flex flex-wrap items-center justify-center gap-3 text-xs text-muted-foreground mt-2">
+                  <Link
+                    href="/profile/"
+                    className="hover:text-primary transition-colors"
+                  >
+                    About Madhu Dadi (Profile)
+                  </Link>
+                  <span className="text-muted-foreground/30 select-none">
+                    |
+                  </span>
+                  <Link
+                    href="/credentials/"
+                    className="hover:text-primary transition-colors"
+                  >
+                    Verified Credentials & Proof
+                  </Link>
+                </div>
               </div>
             </div>
           </section>

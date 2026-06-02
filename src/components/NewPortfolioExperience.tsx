@@ -149,29 +149,22 @@ function Hero({
             </p>
           </div>
           <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center">
-            <button
-              type="button"
-              onClick={() =>
-                prefillContact({
-                  subject: "Intro call, AI consulting",
-                  message:
-                    "Hi Madhu,\n\nI'd like to book a 20-minute intro call to discuss:\n\nWhat I'm trying to build:\nTimeline:\nBudget range:\n\nThanks!",
-                })
-              }
+            <Link
+              href="/contact/"
               className="group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-transform hover:scale-[1.03] sm:px-6"
             >
-              Book a 20-min intro call
+              Hire me
               <ArrowRight
                 className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
                 aria-hidden
               />
-            </button>
-            <a
-              href="#projects"
+            </Link>
+            <Link
+              href="/case-studies/"
               className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-white/5 px-5 py-3 text-sm font-medium hover:bg-surface-elevated hover:border-primary/30 sm:px-6 transition-all duration-300"
             >
               See case studies
-            </a>
+            </Link>
           </div>
           {workedAt.length > 0 ? (
             <div className="mt-8 sm:mt-10">
@@ -227,7 +220,7 @@ function DirectAnswer() {
       eyebrow="Direct Answer"
       title="Who is Madhu Dadi?"
     >
-      <div className="relative rounded-3xl border border-border/80 bg-surface/35 p-8 md:p-10 backdrop-blur-md overflow-hidden">
+      <div className="relative rounded-3xl border border-border/80 bg-surface/35 p-8 md:p-10 backdrop-blur-md overflow-hidden flex flex-col justify-between min-h-[220px]">
         <div className="absolute top-0 right-0 h-40 w-40 bg-primary/5 rounded-full blur-3xl -z-10" />
         <p className="text-lg md:text-xl font-medium text-foreground/95 leading-relaxed max-w-3xl">
           Madhu Dadi is an AI and marketing analytics engineer based in
@@ -235,6 +228,25 @@ function DirectAnswer() {
           agents, FastAPI/Next.js products, and analytics systems. He has 9+
           years of experience across Novartis, redBus, GroupM, and Absolinsoft.
         </p>
+        <div className="mt-6 flex flex-wrap gap-4 border-t border-border/30 pt-6">
+          <Link
+            href="/profile/"
+            className="group inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-primary-hover transition-colors"
+          >
+            Full profile
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          </Link>
+          <span className="text-muted-foreground/30 select-none" aria-hidden>
+            |
+          </span>
+          <Link
+            href="/credentials/"
+            className="group inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-primary-hover transition-colors"
+          >
+            Credentials
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          </Link>
+        </div>
       </div>
     </Section>
   );
@@ -1098,20 +1110,6 @@ function useHydratedCountUp(target: string, start: boolean, duration = 1400) {
     : value.toFixed(1);
 
   return `${prefix}${formattedValue}${suffix}`;
-}
-
-function setContactPrefill(prefill: Prefill) {
-  try {
-    sessionStorage.setItem("contact-prefill", JSON.stringify(prefill));
-    window.dispatchEvent(new Event("contact-prefill"));
-  } catch {
-    // Contact prefill is progressive enhancement.
-  }
-}
-
-function prefillContact(prefill: Prefill) {
-  setContactPrefill(prefill);
-  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
 }
 
 function buildSkillGroups(skills: SkillItem[]) {

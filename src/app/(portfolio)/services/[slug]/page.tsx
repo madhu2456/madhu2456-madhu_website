@@ -334,7 +334,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 goals. I respond with a structured initial proposal within 24
                 hours.
               </p>
-              <div className="pt-4">
+              <div className="pt-4 flex flex-col items-center gap-4">
                 <Link
                   href={prefillContactUrl}
                   className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 hover:scale-[1.02] hover:shadow-glow transition-all"
@@ -342,6 +342,23 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                   Book {service.title.split(" ")[0]} project consultation
                   <IconArrowRight className="h-4 w-4" />
                 </Link>
+                <div className="flex flex-wrap items-center justify-center gap-3 text-xs text-muted-foreground mt-2">
+                  <Link
+                    href="/profile/"
+                    className="hover:text-primary transition-colors"
+                  >
+                    About Madhu Dadi (Profile)
+                  </Link>
+                  <span className="text-muted-foreground/30 select-none">
+                    |
+                  </span>
+                  <Link
+                    href="/credentials/"
+                    className="hover:text-primary transition-colors"
+                  >
+                    Verified Credentials & Proof
+                  </Link>
+                </div>
               </div>
             </div>
           </section>
