@@ -30,7 +30,10 @@ export function ChatSidebarSection({
 
   if (!hasOpened) {
     return (
-      <div className="flex h-full w-full items-center justify-center px-6 text-center text-sm text-foreground/60">
+      <div
+        aria-hidden="true"
+        className="flex h-full w-full items-center justify-center px-6 text-center text-sm text-foreground/60 select-none"
+      >
         Open chat to load AI assistant
       </div>
     );

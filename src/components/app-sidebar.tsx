@@ -6,7 +6,10 @@ import type { ChatProfile } from "./chat/chat-profile";
 
 function SidebarSkeleton() {
   return (
-    <div className="flex flex-col h-full w-full overflow-hidden">
+    <div
+      className="flex flex-col h-full w-full overflow-hidden"
+      aria-hidden="true"
+    >
       <div className="flex items-center gap-3 px-4 py-3 border-b border-foreground/10">
         <div className="w-7 h-7 rounded-full bg-foreground/15 animate-pulse" />
         <div className="h-3.5 w-28 rounded-full bg-foreground/15 animate-pulse" />
