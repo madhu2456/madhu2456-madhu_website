@@ -367,19 +367,56 @@ if (fs.existsSync(robotsPath)) {
 const sitemapPath = path.join(BUILD_DIR, "sitemap.xml.body");
 if (fs.existsSync(sitemapPath)) {
   const sitemapText = fs.readFileSync(sitemapPath, "utf8");
-  console.log("✅ sitemap.xml file exists");
+  console.log("✅ sitemap.xml index file exists");
+
+  // Parse all <loc> nodes in the sitemap index
+  const locs = extractAll(sitemapText, /<loc>([^<]+)<\/loc>/gi).map(
+    (m) => m[1],
+  );
+  console.log(`  ✅ Found ${locs.length} URLs in sitemap index`);
+
+  // Assert exactly 2 index URLs
+  check(
+    "Sitemap Index lists exactly 2 sitemaps",
+    locs.length === 2,
+    `Sitemap Index has ${locs.length} entries (expected exactly 2).`,
+  );
+
+  check(
+    "Sitemap Index references sitemap-portfolio.xml",
+    locs.includes("https://madhudadi.in/sitemap-portfolio.xml"),
+    "Sitemap Index missing https://madhudadi.in/sitemap-portfolio.xml",
+  );
+
+  check(
+    "Sitemap Index references blog sitemap",
+    locs.includes("https://madhudadi.in/blog/sitemap.xml"),
+    "Sitemap Index missing https://madhudadi.in/blog/sitemap.xml",
+  );
+} else {
+  check(
+    "sitemap.xml exists",
+    false,
+    "sitemap.xml.body is missing from build output directory",
+  );
+}
+
+const sitemapPortfolioPath = path.join(BUILD_DIR, "sitemap-portfolio.xml.body");
+if (fs.existsSync(sitemapPortfolioPath)) {
+  const sitemapText = fs.readFileSync(sitemapPortfolioPath, "utf8");
+  console.log("✅ sitemap-portfolio.xml file exists");
 
   // Parse all <loc> nodes in the sitemap
   const locs = extractAll(sitemapText, /<loc>([^<]+)<\/loc>/gi).map(
     (m) => m[1],
   );
-  console.log(`  ✅ Found ${locs.length} URLs in sitemap`);
+  console.log(`  ✅ Found ${locs.length} URLs in sitemap-portfolio`);
 
   // Assert exactly 16 URLs
   check(
-    "Sitemap lists exactly 16 URLs",
+    "Sitemap-portfolio lists exactly 16 URLs",
     locs.length === 16,
-    `Sitemap has ${locs.length} entries (expected exactly 16).`,
+    `Sitemap-portfolio has ${locs.length} entries (expected exactly 16).`,
   );
 
   // Verify all URLs are secure, canonical, and have trailing slashes
@@ -401,9 +438,9 @@ if (fs.existsSync(sitemapPath)) {
   }
 } else {
   check(
-    "sitemap.xml exists",
+    "sitemap-portfolio.xml exists",
     false,
-    "sitemap.xml.body is missing from build output directory",
+    "sitemap-portfolio.xml.body is missing from build output directory",
   );
 }
 
