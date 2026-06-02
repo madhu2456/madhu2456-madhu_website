@@ -22,6 +22,8 @@ import {
   useTransition,
 } from "react";
 import { submitContactForm } from "@/app/actions/submit-contact-form";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
 import {
   normalizeImageSource,
   shouldUseUnoptimizedImage,
@@ -51,7 +53,7 @@ type Prefill = {
   message?: string;
 };
 
-const navLinks = [
+const _navLinks = [
   { href: "#about", label: "About" },
   { href: "#projects", label: "Work" },
   { href: "#services", label: "Services" },
@@ -98,111 +100,7 @@ export function NewPortfolioExperience({
   );
 }
 
-export function Header({ profile }: { profile: Profile }) {
-  const [isClient, setIsClient] = useState(false);
-  const [isCaseStudy, setIsCaseStudy] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-    if (typeof window !== "undefined") {
-      setIsCaseStudy(window.location.pathname.includes("/case-studies"));
-    }
-  }, []);
-
-  const scrollActive = useActiveSection(
-    navLinks
-      .filter((link) => link.href.startsWith("#"))
-      .map((link) => link.href.slice(1)),
-  );
-  const [active, setActive] = useState("");
-
-  useEffect(() => {
-    if (isCaseStudy) {
-      setActive("projects");
-    } else {
-      setActive(scrollActive || "about");
-    }
-  }, [scrollActive, isCaseStudy]);
-
-  const getHref = (href: string) => {
-    if (!href.startsWith("#")) return href;
-    if (!isClient) return href;
-    return isCaseStudy ? `/${href}` : href;
-  };
-
-  const getLogoHref = () => {
-    if (!isClient) return "#main";
-    return isCaseStudy ? "/" : "#main";
-  };
-
-  return (
-    <header className="fixed top-0 right-0 left-0 z-50">
-      <div className="mx-auto mt-3 flex w-[min(1400px,94%)] items-center justify-between rounded-full border border-border/90 bg-surface-elevated/85 px-3 py-2 sm:mt-4 sm:px-5 sm:py-3 shadow-lg shadow-black/20 backdrop-blur-md">
-        <a
-          href={getLogoHref()}
-          className="group flex items-center gap-2.5 font-display text-base font-semibold tracking-tight transition-colors hover:text-primary sm:text-lg"
-          aria-label="Madhu Dadi home"
-        >
-          <div className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full border border-border/80 bg-surface shadow-inner transition-all duration-300 group-hover:scale-105 group-hover:border-primary/30">
-            <Image
-              src="/new-ui/logo.png"
-              alt=""
-              aria-hidden
-              width={32}
-              height={32}
-              className="h-full w-full object-cover"
-            />
-          </div>
-          <span className="text-foreground/90 transition-colors group-hover:text-foreground">
-            {profile.firstName}&nbsp;{profile.lastName}
-          </span>
-        </a>
-
-        <nav
-          aria-label="Primary"
-          className="hidden items-center gap-1 rounded-full border border-border/30 bg-black/30 p-1 md:flex"
-        >
-          {navLinks.map((link) => {
-            const id = link.href.slice(1);
-            const isActive = active === id;
-            const isExternal = !link.href.startsWith("#");
-
-            return (
-              <a
-                key={link.href}
-                href={getHref(link.href)}
-                target={isExternal ? "_blank" : undefined}
-                rel={isExternal ? "noreferrer" : undefined}
-                aria-current={isActive ? "location" : undefined}
-                className={`rounded-full px-3.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-300 ${
-                  isActive
-                    ? "bg-primary/15 text-primary border border-primary/20 shadow-sm"
-                    : "text-muted-foreground border border-transparent hover:bg-white/5 hover:text-foreground"
-                }`}
-              >
-                {link.label}
-              </a>
-            );
-          })}
-        </nav>
-
-        <button
-          type="button"
-          onClick={() =>
-            prefillContact({
-              subject: "Hiring inquiry, full-time AI & Analytics Engineer",
-              message:
-                "Hi Madhu,\n\nWe'd like to talk about a full-time role.\n\nCompany:\nRole / team:\nLocation (remote, hybrid, onsite):\nTech stack:\nIdeal start date:\n\nLooking forward to connecting.",
-            })
-          }
-          className="rounded-full bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground shadow-sm shadow-primary/25 transition-all duration-300 hover:scale-[1.04] hover:shadow-glow sm:px-5 sm:text-sm"
-        >
-          Hire me
-        </button>
-      </div>
-    </header>
-  );
-}
+// Shared Header is imported from @/components/Header
 
 function Hero({
   profile,
@@ -659,22 +557,16 @@ function Services({ services }: { services: ServiceItem[] }) {
                   </span>
                 ))}
               </div>
-              <button
-                type="button"
-                onClick={() =>
-                  prefillContact({
-                    subject: `${service.title}, project inquiry`,
-                    message: `Hi Madhu,\n\nI'm interested in your ${service.title} work.\n\nWhat I'm trying to build:\nTimeline:\nCurrent stack / context:\n\nThanks!`,
-                  })
-                }
+              <Link
+                href={`/services/${service.slug}/`}
                 className="group mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-transform hover:scale-[1.02]"
               >
-                Start a {service.title.split(" ")[0]} project
+                Explore {service.title.split(" ")[0]}
                 <ArrowRight
                   className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
                   aria-hidden
                 />
-              </button>
+              </Link>
             </article>
           );
         })}
@@ -1152,110 +1044,7 @@ function Field({
   );
 }
 
-function Footer({
-  profile,
-  projects,
-}: {
-  profile: Profile;
-  projects: ProjectItem[];
-}) {
-  const sitemap = [
-    {
-      heading: "Explore",
-      links: [
-        { label: "About", href: "#about" },
-        { label: "Work", href: "#projects" },
-        { label: "Services", href: "#services" },
-        { label: "Experience", href: "#experience" },
-        { label: "FAQ", href: "#faq" },
-        { label: "Contact", href: "#contact" },
-      ],
-    },
-    {
-      heading: "Case studies",
-      links: [
-        ...projects.slice(0, 3).map((project) => ({
-          label: project.title,
-          href: `/case-studies/${project.slug}/`,
-        })),
-        { label: "All case studies", href: "/case-studies/" },
-      ],
-    },
-    {
-      heading: "Connect",
-      links: [
-        { label: "Email", href: `mailto:${profile.email}` },
-        ...(profile.socialLinks.linkedin
-          ? [{ label: "LinkedIn", href: profile.socialLinks.linkedin }]
-          : []),
-        ...(profile.socialLinks.github
-          ? [{ label: "GitHub", href: profile.socialLinks.github }]
-          : []),
-        ...(profile.socialLinks.website
-          ? [{ label: "Blog", href: profile.socialLinks.website }]
-          : []),
-      ],
-    },
-  ];
-
-  return (
-    <footer className="border-t border-border bg-surface/30 py-12">
-      <div className="mx-auto w-[min(1400px,92%)]">
-        <nav
-          aria-label="Footer"
-          className="grid gap-8 sm:grid-cols-2 md:grid-cols-3"
-        >
-          {sitemap.map((column) => (
-            <div key={column.heading}>
-              <h2 className="mb-3 text-xs tracking-widest text-muted-foreground uppercase">
-                {column.heading}
-              </h2>
-              <ul className="space-y-2 text-sm">
-                {column.links.map((link) => (
-                  <li key={`${column.heading}-${link.href}`}>
-                    <FooterLink href={link.href}>{link.label}</FooterLink>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </nav>
-        <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-border/60 pt-6 text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} Madhu Dadi. Built with intention.</p>
-          <p>{profile.location} · Available worldwide</p>
-        </div>
-      </div>
-    </footer>
-  );
-}
-
-function FooterLink({ href, children }: { href: string; children: ReactNode }) {
-  const isInternal = href.startsWith("/");
-  const isHash = href.startsWith("#");
-
-  if (isInternal) {
-    return (
-      <Link
-        href={href}
-        className="text-foreground/80 underline-offset-4 hover:text-foreground hover:underline"
-      >
-        {children}
-      </Link>
-    );
-  }
-
-  return (
-    <a
-      href={href}
-      {...(!isHash && !href.startsWith("mailto:")
-        ? { target: "_blank", rel: "noreferrer" }
-        : {})}
-      className="text-foreground/80 underline-offset-4 hover:text-foreground hover:underline"
-    >
-      {children}
-    </a>
-  );
-}
+// Shared Footer is imported from @/components/Footer
 
 function Section({
   id,
@@ -1369,66 +1158,6 @@ function useHydratedCountUp(target: string, start: boolean, duration = 1400) {
     : value.toFixed(1);
 
   return `${prefix}${formattedValue}${suffix}`;
-}
-
-function useActiveSection(ids: string[]) {
-  const [active, setActive] = useState(ids[0] ?? "");
-  const intersectionStates = useRef<Record<string, boolean>>({});
-
-  useEffect(() => {
-    if (typeof IntersectionObserver === "undefined") return;
-    const elements = ids
-      .map((id) => document.getElementById(id))
-      .filter((element): element is HTMLElement => Boolean(element));
-
-    if (elements.length === 0) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // 1. Record the intersection state of changed elements
-        for (const entry of entries) {
-          intersectionStates.current[entry.target.id] = entry.isIntersecting;
-        }
-
-        // 2. Gather all currently intersecting section IDs
-        const intersectingIds = Object.keys(intersectionStates.current).filter(
-          (id) => intersectionStates.current[id],
-        );
-
-        if (intersectingIds.length === 0) return;
-
-        // 3. Find which intersecting section is closest to the viewing window's top-margin (navbar focus area ~120px)
-        let bestId = active;
-        let minDistance = Number.MAX_VALUE;
-
-        for (const id of intersectingIds) {
-          const el = document.getElementById(id);
-          if (!el) continue;
-          const rect = el.getBoundingClientRect();
-          const distance = Math.abs(rect.top - 120);
-
-          if (distance < minDistance) {
-            minDistance = distance;
-            bestId = id;
-          }
-        }
-
-        if (bestId && bestId !== active) {
-          setActive(bestId);
-        }
-      },
-      // rootMargin: starts below navbar (~100px) down to 80% screen height to cover fluid scrolling
-      { rootMargin: "-100px 0px -20% 0px", threshold: 0 },
-    );
-
-    for (const element of elements) {
-      observer.observe(element);
-    }
-
-    return () => observer.disconnect();
-  }, [ids, active]);
-
-  return active;
 }
 
 function setContactPrefill(prefill: Prefill) {

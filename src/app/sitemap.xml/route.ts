@@ -6,7 +6,8 @@ export const revalidate = 3600;
 const DEFAULT_SITE_URL = "https://madhudadi.in";
 
 export async function GET() {
-  const { portfolioLastUpdatedAt, sortedProjects } = await getPortfolioData();
+  const { portfolioLastUpdatedAt, sortedProjects, sortedServices } =
+    await getPortfolioData();
   const siteUrl = `${(
     process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE_URL
   ).replace(/\/+$/, "")}/`;
@@ -21,10 +22,34 @@ export async function GET() {
       priority: 1,
     },
     {
+      url: `${siteUrl}profile/`,
+      lastModified: latestDate.toISOString(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${siteUrl}services/`,
+      lastModified: latestDate.toISOString(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
       url: `${siteUrl}case-studies/`,
       lastModified: latestDate.toISOString(),
       changeFrequency: "weekly",
       priority: 0.85,
+    },
+    {
+      url: `${siteUrl}credentials/`,
+      lastModified: latestDate.toISOString(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${siteUrl}contact/`,
+      lastModified: latestDate.toISOString(),
+      changeFrequency: "monthly",
+      priority: 0.7,
     },
   ];
 
@@ -47,7 +72,26 @@ export async function GET() {
     ];
   });
 
-  const entries = [...baseEntries, ...caseStudyEntries];
+  const serviceEntries = sortedServices.flatMap((service) => {
+    const slug = service.slug?.trim();
+    if (!slug) return [];
+
+    const updatedAt = new Date(service.updatedAt);
+    const lastModified = !Number.isNaN(updatedAt.getTime())
+      ? updatedAt.toISOString()
+      : latestDate.toISOString();
+
+    return [
+      {
+        url: `${siteUrl}services/${slug}/`,
+        lastModified,
+        changeFrequency: "monthly",
+        priority: 0.85,
+      },
+    ];
+  });
+
+  const entries = [...baseEntries, ...caseStudyEntries, ...serviceEntries];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
