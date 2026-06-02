@@ -75,10 +75,7 @@ export function NewPortfolioExperience({
   services,
   certifications,
 }: NewPortfolioExperienceProps) {
-  const faqItems = useMemo(
-    () => buildFaqItems(profile, skills, experiences),
-    [profile, skills, experiences],
-  );
+  const faqItems = useMemo(() => buildFaqItems(), []);
 
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
@@ -234,11 +231,9 @@ function DirectAnswer() {
         <div className="absolute top-0 right-0 h-40 w-40 bg-primary/5 rounded-full blur-3xl -z-10" />
         <p className="text-lg md:text-xl font-medium text-foreground/95 leading-relaxed max-w-3xl">
           Madhu Dadi is an AI and marketing analytics engineer based in
-          Visakhapatnam, India. He has 9+ years of experience across Novartis,
-          redBus, GroupM, and Absolinsoft. He builds production LLM/RAG
-          applications, AI agents, FastAPI/Next.js products, and analytics
-          systems for teams that need practical AI delivery tied to measurable
-          business outcomes.
+          Visakhapatnam, India. He builds production LLM/RAG applications, AI
+          agents, FastAPI/Next.js products, and analytics systems. He has 9+
+          years of experience across Novartis, redBus, GroupM, and Absolinsoft.
         </p>
       </div>
     </Section>
@@ -1187,51 +1182,27 @@ function buildSkillGroups(skills: SkillItem[]) {
   ].filter((group) => group.items.length > 0);
 }
 
-function buildFaqItems(
-  profile: Profile,
-  skills: SkillItem[],
-  experiences: ExperienceItem[],
-) {
-  const skillNames = skills
-    .map((skill) => skill.name)
-    .filter(Boolean)
-    .slice(0, 8)
-    .join(", ");
-  const companies = experiences
-    .map((experience) => normalizeCompanyName(experience.company))
-    .filter(Boolean)
-    .slice(0, 4)
-    .join(", ");
-
+function buildFaqItems() {
   return [
     {
-      q: `What does ${profile.firstName} build?`,
-      a: "LLM and RAG features inside real products, marketing analytics that teams use to make decisions, and the full-stack code that holds both together.",
+      q: "Who is Madhu Dadi?",
+      a: "Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India, with 9+ years of experience across Novartis, redBus, GroupM, and Absolinsoft.",
     },
     {
-      q: "Where has he worked?",
-      a: companies
-        ? `${companies}. ${profile.yearsOfExperience}+ years in total.`
-        : `${profile.yearsOfExperience}+ years across AI, analytics, and product engineering.`,
+      q: "What is Madhu Dadi best known for?",
+      a: "He is best known for building production LLM/RAG applications, AI agents, AI visibility auditing systems, FastAPI/Next.js products, and analytics systems.",
     },
     {
-      q: "Is he open to full-time roles?",
-      a:
-        profile.availability === "unavailable"
-          ? "He is not actively available right now, but the best way to confirm is to reach out directly."
-          : "Yes. He is open to a full-time position where he can own AI and analytics end-to-end on a serious product team.",
+      q: "When should someone hire Madhu Dadi?",
+      a: "Hire Madhu when you need a hands-on engineer who can build AI products and connect them to measurable analytics outcomes.",
     },
     {
-      q: "What's his core stack?",
-      a:
-        skillNames ||
-        "Python, TypeScript, FastAPI, Next.js, SQL, and modern AI engineering tools.",
+      q: "Is Madhu Dadi available for consulting?",
+      a: "Madhu is open to full-time roles, consulting, freelance projects, and advisory work depending on scope and fit.",
     },
     {
-      q: "What's the fastest way to reach him?",
-      a: `Email ${profile.email}${
-        profile.phone ? ` or call ${profile.phone}` : ""
-      }. He replies within a day.`,
+      q: "What stack does Madhu Dadi use?",
+      a: "Python, FastAPI, Next.js, React, TypeScript, SQL, Postgres, Redis, Celery, OpenAI API, LangChain, vector databases, GA4, and BigQuery.",
     },
   ];
 }

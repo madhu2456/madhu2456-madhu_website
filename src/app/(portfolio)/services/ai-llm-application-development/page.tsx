@@ -135,20 +135,20 @@ export default async function AiLlmApplicationDevelopmentPage() {
 
   const faqs = [
     {
-      q: "How long does an AI app take?",
-      a: "A typical production-ready minimum viable product (MVP) takes between 4 to 8 weeks depending on the complexity of your custom tools, document schemas, and evaluation protocols.",
+      q: "Can Madhu Dadi build a RAG system with citations?",
+      a: "Yes. Madhu builds RAG systems that retrieve source content, generate grounded answers, display citations, and include evals, logging, and analytics.",
     },
     {
-      q: "Can you improve an existing AI app?",
-      a: "Yes. I routinely audit existing LLM prototypes to resolve critical performance bottlenecks: fixing silent agent failures, reducing hallucination in RAG pipelines, decreasing API latency, and optimizing token costs.",
+      q: "Can Madhu Dadi improve an existing AI chatbot?",
+      a: "Yes. He can audit retrieval quality, prompts, latency, hallucination behavior, observability, and analytics before rebuilding.",
+    },
+    {
+      q: "How long does a production-ready AI application take to build?",
+      a: "A typical production-ready minimum viable product (MVP) takes between 4 to 8 weeks depending on the complexity of your custom tools, document schemas, and evaluation protocols.",
     },
     {
       q: "Do you work with OpenAI only?",
       a: "No. While OpenAI is a standard foundation, I construct model-agnostic orchestration patterns leveraging Anthropic Claude, Google Gemini, and open-source models like Llama 3 depending on your budget and accuracy requirements.",
-    },
-    {
-      q: "Can you build RAG with citations?",
-      a: "Absolutely. I build source-grounded RAG retrieval pipelines that enforce hard metadata-filtering policies and citation extraction, ensuring every sentence in a response points directly to a verifiable chunk ID and source document.",
     },
     {
       q: "Do you include evals and guardrails?",
@@ -197,9 +197,7 @@ export default async function AiLlmApplicationDevelopmentPage() {
                   Madhu Dadi builds production LLM applications, RAG systems, AI
                   agents, and AI-powered product features using Python, FastAPI,
                   Next.js, Postgres, vector databases, and analytics
-                  instrumentation. He focuses on systems that cite sources,
-                  handle edge cases, include evals and observability, and
-                  connect AI usage to measurable business outcomes.
+                  instrumentation.
                 </p>
               </div>
 

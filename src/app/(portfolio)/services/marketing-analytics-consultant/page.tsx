@@ -132,24 +132,20 @@ export default async function MarketingAnalyticsConsultantPage() {
 
   const faqs = [
     {
-      q: "Can you audit an existing GA4 setup?",
-      a: "Yes. I run diagnostic analytics audits to resolve typical tracking flaws: duplicate transactions, unlinked cross-domain properties, incorrect referral exclusions, missing custom definitions, and misconfigured conversion events.",
+      q: "Can Madhu Dadi audit our GA4 and BigQuery setup?",
+      a: "Yes. I run diagnostic analytics audits to resolve typical tracking flaws: duplicate transactions, unlinked cross-domain properties, incorrect referral exclusions, missing custom definitions, and misconfigured conversion events. I also build clean SQL pipelines inside BigQuery.",
     },
     {
-      q: "Can you build dashboards?",
+      q: "Can Madhu Dadi build custom attribution models?",
+      a: "Yes. I design custom attribution models (First-touch, Last-touch, Position-based, or Data-driven W-shaped setups) in SQL and Python to bypass standard self-attributing network biases and connect spend to business results.",
+    },
+    {
+      q: "Can Madhu Dadi build analytics dashboards?",
       a: "Yes. I construct beautiful, high-performance dashboards using Looker Studio or Power BI. I focus on clean information hierarchy so growth teams can extract actionable decisions inside 5 seconds.",
     },
     {
-      q: "Can you work with BigQuery?",
-      a: "Absolutely. BigQuery is where modern analytics thrives. I write clean SQL extraction pipelines, schedule transformation queries, and build cost-optimized schemas to store your raw marketing telemetry safely.",
-    },
-    {
-      q: "Can you help with attribution?",
-      a: "Yes. I design custom attribution models (First-touch, Last-touch, Position-based, or Data-driven W-shaped setups) in SQL/Python to bypass standard self-attributing network biases.",
-    },
-    {
-      q: "Can you connect marketing analytics to AI products?",
-      a: "Yes. This is my core differentiator. I bridge the gap by instrumenting tracking plans that feed real user feedback (like thumbs up/down, prompt success metrics, and RAG latencies) back into server-side GA4 events, training your models with actual usage metrics.",
+      q: "Can Madhu Dadi connect product analytics to AI features?",
+      a: "Yes. This is my core differentiator. I bridge the gap by instrumenting tracking plans that feed real user feedback (like thumbs up/down, prompt success metrics, and RAG latencies) back into server-side GA4 events and BigQuery.",
     },
   ];
 
@@ -188,11 +184,10 @@ export default async function MarketingAnalyticsConsultantPage() {
               {/* Above-the-fold direct answer */}
               <div className="border-l-4 border-primary pl-5 py-2">
                 <p className="text-base md:text-lg text-foreground/90 font-medium leading-relaxed">
-                  Madhu Dadi helps marketing, product, and growth teams build
-                  analytics systems they can trust: GA4 implementations,
-                  BigQuery models, campaign measurement, dashboards, attribution
-                  analysis, A/B test reads, and decision workflows that connect
-                  marketing activity to business outcomes.
+                  Madhu Dadi helps teams build marketing analytics systems they
+                  can trust, including GA4, BigQuery reporting, campaign
+                  analytics, attribution analysis, dashboards, experimentation
+                  reads, and decision-intelligence workflows.
                 </p>
               </div>
 
