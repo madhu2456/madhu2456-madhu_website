@@ -11,11 +11,6 @@ import {
 } from "@tabler/icons-react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  buildFullGraph,
-  buildPersonSchema,
-  buildProfilePageSchema,
-} from "@/lib/jsonld";
 import { getPortfolioData } from "@/lib/portfolio-data";
 
 export const revalidate = 3600;
@@ -39,26 +34,88 @@ export default async function ProfilePage() {
     await getPortfolioData();
   const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
 
-  const graph = buildFullGraph([
-    buildPersonSchema({
-      fullName: `${profile.firstName} ${profile.lastName}`,
-      headline: profile.headline,
-      bio: profile.shortBio,
-      email: profile.email,
-      location: profile.location,
-      profileImageUrl: `${siteUrl}new-ui/hero-portrait.jpg`,
-      siteUrl,
-      socialLinks: profile.socialLinks,
-      yearsOfExperience: profile.yearsOfExperience,
-      nationality: "India",
-    }),
-    buildProfilePageSchema({
-      fullName: `${profile.firstName} ${profile.lastName}`,
-      url: `${siteUrl}profile/`,
-      description: profile.shortBio,
-      profileImageUrl: `${siteUrl}new-ui/hero-portrait.jpg`,
-    }),
-  ]);
+  const coreEntityGraph = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": `${siteUrl}#person`,
+        name: "Madhu Dadi",
+        givenName: "Madhu",
+        familyName: "Dadi",
+        alternateName: ["madhu2456"],
+        url: siteUrl,
+        image: `${siteUrl}new-ui/hero-portrait.jpg`,
+        jobTitle: "AI & Marketing Analytics Engineer",
+        description:
+          "Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India. He has 9+ years of experience across Novartis, redBus, GroupM, and Absolinsoft, and builds production LLM/RAG applications, AI agents, FastAPI/Next.js products, and analytics systems.",
+        disambiguatingDescription:
+          "AI and marketing analytics engineer based in Visakhapatnam, India; specializes in LLM/RAG applications, AI agents, FastAPI/Next.js products, and marketing analytics.",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Visakhapatnam",
+          addressCountry: "IN",
+        },
+        email: "mailto:madhu.kumar245@gmail.com",
+        sameAs: [
+          "https://github.com/madhu2456",
+          "https://www.linkedin.com/in/madhu-dadi-54684531",
+          "https://dev.to/madhudadi",
+          "https://peerlist.io/madhudadi",
+          "https://x.com/madhu245",
+        ],
+        knowsAbout: [
+          "LLM application development",
+          "Retrieval-Augmented Generation",
+          "AI agents",
+          "FastAPI",
+          "Next.js",
+          "Python",
+          "SQL",
+          "PostgreSQL",
+          "Marketing analytics",
+          "GA4",
+          "BigQuery",
+          "Campaign measurement",
+          "Data pipelines",
+          "Full-stack AI product development",
+        ],
+        worksFor: {
+          "@type": "Organization",
+          name: "Novartis",
+        },
+        alumniOf: [
+          {
+            "@type": "CollegeOrUniversity",
+            name: "Indian Institute of Management Amritsar",
+          },
+          {
+            "@type": "CollegeOrUniversity",
+            name: "MVGR College of Engineering",
+          },
+        ],
+        mainEntityOfPage: `${siteUrl}profile/`,
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${siteUrl}#website`,
+        name: "Madhu Dadi",
+        url: siteUrl,
+        publisher: {
+          "@id": `${siteUrl}#person`,
+        },
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": `${siteUrl}profile/#webpage`,
+        url: `${siteUrl}profile/`,
+        name: "Madhu Dadi — AI & Marketing Analytics Engineer",
+        mainEntity: {
+          "@id": `${siteUrl}#person`,
+        },
+      },
+    ],
+  };
 
   // Group skills into core categories as requested
   const coreStack = {
@@ -89,7 +146,7 @@ export default async function ProfilePage() {
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(coreEntityGraph) }}
       />
 
       <div className="container mx-auto max-w-4xl space-y-12">

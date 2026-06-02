@@ -121,8 +121,83 @@ export default async function AiAgentDevelopmentPage() {
     },
   ];
 
+  const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${siteUrl}services/ai-agent-development/#service`,
+    name: "AI Agent Development",
+    serviceType: "AI agent development",
+    description:
+      "Autonomous AI agents using tools, following workflow graph rules, integrating observability, loop control, and human approval loops.",
+    provider: {
+      "@id": `${siteUrl}#person`,
+    },
+    areaServed: ["India", "Worldwide", "Remote"],
+    url: `${siteUrl}services/ai-agent-development/`,
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "AI Agent engineering services",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          name: "Tool-use frameworks",
+          description:
+            "Custom function calling integrations utilizing LangGraph and state machines.",
+        },
+        {
+          "@type": "Offer",
+          name: "Human-in-the-loop gates",
+          description:
+            "Deterministic pause-and-resume workflows for human approval on high-impact tasks.",
+        },
+        {
+          "@type": "Offer",
+          name: "Error correction & loop guards",
+          description:
+            "Infinite loop detection and runtime fallback protections.",
+        },
+      ],
+    },
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Services",
+        item: `${siteUrl}services/`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "AI Agent Development",
+        item: `${siteUrl}services/ai-agent-development/`,
+      },
+    ],
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
+      <script
+        type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <Header profile={profile} />
 
       <main id="main-content" className="flex-1 px-6 py-28 bg-background/50">

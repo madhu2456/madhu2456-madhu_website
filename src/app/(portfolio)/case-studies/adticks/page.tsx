@@ -110,8 +110,68 @@ export default async function AdticksCaseStudyPage() {
     },
   ];
 
+  const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
+  const softwareSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": `${siteUrl}case-studies/adticks/#software`,
+    name: "Adticks",
+    applicationCategory: "SEO and AI visibility audit platform",
+    operatingSystem: "Web",
+    description:
+      "Adticks is an AI visibility and SEO/AEO/GEO auditing platform built by Madhu Dadi. It crawls large websites, compares server HTML with rendered DOM output, and returns prioritized fixes for search and AI crawler visibility.",
+    creator: {
+      "@id": `${siteUrl}#person`,
+    },
+    url: "https://adticks.com",
+    sameAs: [`${siteUrl}case-studies/adticks/`],
+    keywords: [
+      "SEO audit",
+      "AEO audit",
+      "GEO audit",
+      "AI visibility",
+      "Playwright crawler",
+      "render parity",
+    ],
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Case Studies",
+        item: `${siteUrl}case-studies/`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "Adticks",
+        item: `${siteUrl}case-studies/adticks/`,
+      },
+    ],
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
+      <script
+        type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <Header profile={profile} />
 
       <main id="main-content" className="flex-1 px-6 py-28 bg-background/50">

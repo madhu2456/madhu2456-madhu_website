@@ -116,8 +116,68 @@ export default async function UdemyEnrollerCaseStudyPage() {
     },
   ];
 
+  const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
+  const softwareSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": `${siteUrl}case-studies/udemy-enroller-fastapi/#software`,
+    name: "Udemy Course Enroller",
+    applicationCategory: "Headless Browser Automation Framework",
+    operatingSystem: "Web / Headless",
+    description:
+      "Udemy Course Enroller is an automated headless browser task scheduling framework built in Python and FastAPI. It runs background tasks via Celery and Redis to automatically check out free promotional course coupons, validating and enrolling accounts with 90% reduced human effort.",
+    creator: {
+      "@id": `${siteUrl}#person`,
+    },
+    url: "https://github.com/madhu2456/udemy-enroller-fastapi",
+    sameAs: [`${siteUrl}case-studies/udemy-enroller-fastapi/`],
+    keywords: [
+      "FastAPI automation",
+      "Playwright headless browser",
+      "Celery task scheduling",
+      "Redis broker queue",
+      "session encryption at rest",
+      "automated coupon validation",
+    ],
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Case Studies",
+        item: `${siteUrl}case-studies/`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "Udemy Enroller",
+        item: `${siteUrl}case-studies/udemy-enroller-fastapi/`,
+      },
+    ],
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
+      <script
+        type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <Header profile={profile} />
 
       <main id="main-content" className="flex-1 px-6 py-28 bg-background/50">

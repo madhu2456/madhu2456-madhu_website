@@ -79,6 +79,25 @@ export default async function CaseStudiesPage() {
     },
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Case Studies",
+        item: collectionUrl,
+      },
+    ],
+  };
+
   return (
     <>
       <Header profile={profile} />
@@ -87,6 +106,11 @@ export default async function CaseStudiesPage() {
           type="application/ld+json"
           // biome-ignore lint/security/noDangerouslySetInnerHtml: server-side JSON-LD
           dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: server-side JSON-LD
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
         />
         <Link
           href="/"

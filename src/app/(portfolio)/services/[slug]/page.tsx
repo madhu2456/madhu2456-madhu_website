@@ -107,8 +107,58 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
   const encodedMessage = encodeURIComponent(prefillMessage);
   const prefillContactUrl = `/contact/?subject=${encodedSubject}&message=${encodedMessage}`;
 
+  const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${siteUrl}services/${slug}/#service`,
+    name: service.title,
+    serviceType: service.title,
+    description: service.shortDescription || service.fullDescription || "",
+    provider: {
+      "@id": `${siteUrl}#person`,
+    },
+    areaServed: ["India", "Worldwide", "Remote"],
+    url: `${siteUrl}services/${slug}/`,
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Services",
+        item: `${siteUrl}services/`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: service.title,
+        item: `${siteUrl}services/${slug}/`,
+      },
+    ],
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
+      <script
+        type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <Header profile={profile} />
 
       <main id="main-content" className="flex-1 px-6 py-28 bg-background/50">

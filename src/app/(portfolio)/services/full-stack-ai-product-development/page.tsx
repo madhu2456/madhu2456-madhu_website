@@ -179,8 +179,83 @@ export default async function FullStackAIProductPage() {
     },
   ];
 
+  const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${siteUrl}services/full-stack-ai-product-development/#service`,
+    name: "Full-Stack AI Product Development",
+    serviceType: "Full-stack AI product development",
+    description:
+      "Madhu Dadi builds full-stack AI products with FastAPI, Next.js, TypeScript, Postgres, Redis, Celery, analytics, SEO, performance, and production deployment practices.",
+    provider: {
+      "@id": `${siteUrl}#person`,
+    },
+    areaServed: ["India", "Worldwide", "Remote"],
+    url: `${siteUrl}services/full-stack-ai-product-development/`,
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Full-Stack AI Product Development services",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          name: "SaaS MVP engineering",
+          description:
+            "Full-stack software products with auth, payments, database schemas, and admin panels.",
+        },
+        {
+          "@type": "Offer",
+          name: "Database & task queue architectures",
+          description:
+            "SQLAlchemy models, Alembic migrations, Celery worker nodes, and Redis message brokers.",
+        },
+        {
+          "@type": "Offer",
+          name: "Analytics and SEO instrumentation",
+          description:
+            "Schema markup, server-rendered layouts, crawlable structures, and GA4 telemetry.",
+        },
+      ],
+    },
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Services",
+        item: `${siteUrl}services/`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "Full-Stack AI Product Development",
+        item: `${siteUrl}services/full-stack-ai-product-development/`,
+      },
+    ],
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
+      <script
+        type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <Header profile={profile} />
 
       <main id="main-content" className="flex-1 px-6 py-28 bg-background/50">
