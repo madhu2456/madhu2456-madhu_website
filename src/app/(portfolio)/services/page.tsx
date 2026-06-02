@@ -39,7 +39,7 @@ export default async function ServicesHubPage() {
     switch (slug) {
       case "ai-llm-application-development":
         return <IconBrain className="h-6 w-6 text-primary" />;
-      case "rag-system-development":
+      case "rag-consultant-india":
         return <IconDatabase className="h-6 w-6 text-primary" />;
       case "ai-agent-development":
         return <IconCpu className="h-6 w-6 text-primary" />;
