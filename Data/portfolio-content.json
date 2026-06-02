@@ -34,24 +34,20 @@
     "yearsOfExperience": 9,
     "stats": [
       {
-        "label": "Years experience",
+        "label": "AI, analytics, and product engineering experience",
         "value": "9+"
       },
       {
-        "label": "New-customer growth",
-        "value": "30%"
+        "label": "Parallel SEO/AEO/GEO audit capability built for Adticks",
+        "value": "10,000+"
       },
       {
-        "label": "Churn reduction",
-        "value": "20%"
+        "label": "Automated course enrollments delivered by Udemy Enroller",
+        "value": "20,000+"
       },
       {
-        "label": "Brand-awareness lift",
-        "value": "15%"
-      },
-      {
-        "label": "learning value unlocked",
-        "value": "₹10L+"
+        "label": "Healthcare, travel-tech, media, and SaaS/product engineering",
+        "value": "4 domains"
       }
     ],
     "profileImage": "/new-ui/hero-portrait.jpg",
