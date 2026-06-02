@@ -1,5 +1,12 @@
 # Madhu Dadi Portfolio (`madhudadi.in`)
 
+* **Built by**: Madhu Dadi
+* **Canonical profile**: https://madhudadi.in/profile/
+* **Case study**: https://madhudadi.in/
+* **Service relevance**: Full-Stack AI Product Development & Next.js Frontend
+
+---
+
 Production portfolio built with Next.js 16, React 19, TypeScript, and Tailwind CSS v4, focused on:
 
 - High-quality portfolio UX and case studies
