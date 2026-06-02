@@ -102,7 +102,14 @@ const makeEvidenceLinks = (project: ProjectItem, _siteUrl: string) => {
 
 export async function generateStaticParams() {
   const { sortedProjects } = await getPortfolioData();
-  return sortedProjects.map((project) => ({ slug: project.slug }));
+  return sortedProjects
+    .filter(
+      (project) =>
+        project.slug !== "adticks" &&
+        project.slug !== "technical-blog" &&
+        project.slug !== "udemy-enroller-fastapi",
+    )
+    .map((project) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata({
