@@ -24,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title:
       "Technical Blog Case Study — Next.js Server-Side RAG & SEO/AEO System | Madhu Dadi",
     description:
-      "Explore Madhu Dadi's technical blog RAG platform featuring server-side React 19 rendering, pgvector semantic search caching, and LLM source-cited citation flows.",
+      "Explore Madhu Dadi's Next.js RAG blog platform with React 19 server rendering, pgvector semantic search, and source-cited LLM answer streaming.",
     alternates: {
       canonical: "https://madhudadi.in/case-studies/technical-blog/",
     },

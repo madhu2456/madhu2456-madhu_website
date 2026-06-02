@@ -26,7 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "AI Agent Development — Workflows, Tools, Guardrails | Madhu Dadi",
     description:
-      "Build AI agents that use tools, follow workflows, avoid infinite loops, log actions, include guardrails, and integrate with FastAPI, Next.js, databases, and analytics systems.",
+      "Hire Madhu Dadi to build production AI agents with tool integrations, workflow controls, loop prevention, FastAPI backends, and Next.js interfaces.",
     alternates: {
       canonical: canonicalUrl,
     },

@@ -22,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "Madhu Dadi — AI & Marketing Analytics Engineer Profile",
     description:
-      "Profile of Madhu Dadi, an AI and marketing analytics engineer based in Visakhapatnam, India. 9+ years across Novartis, redBus, GroupM, and Absolinsoft, specializing in LLM/RAG apps, AI agents, FastAPI, Next.js, GA4, and analytics systems.",
+      "Profile of Madhu Dadi, AI & marketing analytics engineer. 9+ years exp across Novartis, redBus, and GroupM. Expert in LLM/RAG, FastAPI, Next.js, and GA4.",
     alternates: {
       canonical: canonicalUrl,
     },
