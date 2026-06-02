@@ -146,7 +146,8 @@ function Sidebar({
   variant?: "sidebar" | "floating" | "inset";
   collapsible?: "offcanvas" | "icon" | "none";
 }) {
-  const { isMobile, state, openMobile, setOpenMobile } = useSidebar();
+  const { isMobile, state, openMobile, setOpenMobile, open } = useSidebar();
+  const isOpen = isMobile ? openMobile : open;
 
   if (collapsible === "none") {
     return (
@@ -196,6 +197,8 @@ function Sidebar({
       data-variant={variant}
       data-side={side}
       data-slot="sidebar"
+      aria-hidden={!isOpen}
+      inert={!isOpen}
     >
       <div
         data-slot="sidebar-gap"
