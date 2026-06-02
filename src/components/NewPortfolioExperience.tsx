@@ -85,10 +85,10 @@ export function NewPortfolioExperience({
       <Header profile={profile} />
       <main id="main">
         <Hero profile={profile} experiences={experiences} />
-        <Stats stats={profile.stats} />
-        <About profile={profile} />
-        <Projects projects={projects} />
+        <DirectAnswer />
         <Services services={services} />
+        <Projects projects={projects} />
+        <Stats stats={profile.stats} />
         <Skills skills={skills} />
         <Experience experiences={experiences} />
         <Certifications certifications={certifications} />
@@ -129,29 +129,28 @@ function Hero({
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
             Available now · Replies within 24 hours
           </p>
-          <p className="mb-3 font-display text-[11px] tracking-[0.18em] text-muted-foreground uppercase sm:text-sm sm:tracking-[0.2em]">
-            {profile.firstName} {profile.lastName}, {profile.headline}
+          <p className="mb-3 font-display text-[11px] tracking-[0.18em] text-primary uppercase sm:text-sm sm:tracking-[0.2em] font-semibold">
+            I build AI that actually ships and moves numbers you care about.
           </p>
-          <h1 className="font-display text-[clamp(2rem,8vw,4.75rem)] leading-[1.15] font-bold tracking-tight sm:leading-[1.1]">
-            I build{" "}
-            <span className="text-gradient-amber italic inline-block">AI</span>{" "}
-            <span className="text-gradient-amber italic inline-block">
-              that
-            </span>{" "}
-            <span className="text-gradient-amber italic inline-block">
-              actually
-            </span>{" "}
-            <span className="text-gradient-amber italic inline-block">
-              ships
+          <h1 className="font-display text-[clamp(2rem,6vw,4rem)] leading-[1.15] font-bold tracking-tight sm:leading-[1.1]">
+            Madhu Dadi —{" "}
+            <span className="text-gradient">
+              AI & Marketing Analytics Engineer
             </span>
-            <br className="hidden sm:block" />
-            <span className="sm:hidden"> </span>
-            and moves{" "}
-            <span className="text-gradient">numbers you care about.</span>
           </h1>
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:mt-6 sm:text-lg">
-            {profile.shortBio}
-          </p>
+          <div className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:mt-6 sm:text-lg space-y-4">
+            <p>
+              I build production LLM/RAG applications, AI agents,
+              FastAPI/Next.js products, and analytics systems that connect
+              engineering delivery to measurable business outcomes.
+            </p>
+            <p>
+              I have 9+ years of experience across Novartis, redBus, GroupM, and
+              Absolinsoft, working at the intersection of AI engineering,
+              marketing analytics, full-stack product development, and decision
+              intelligence.
+            </p>
+          </div>
           <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center">
             <button
               type="button"
@@ -221,6 +220,28 @@ function Hero({
         </div>
       </div>
     </section>
+  );
+}
+
+function DirectAnswer() {
+  return (
+    <Section
+      id="direct-answer"
+      eyebrow="Direct Answer"
+      title="Who is Madhu Dadi?"
+    >
+      <div className="relative rounded-3xl border border-border/80 bg-surface/35 p-8 md:p-10 backdrop-blur-md overflow-hidden">
+        <div className="absolute top-0 right-0 h-40 w-40 bg-primary/5 rounded-full blur-3xl -z-10" />
+        <p className="text-lg md:text-xl font-medium text-foreground/95 leading-relaxed max-w-3xl">
+          Madhu Dadi is an AI and marketing analytics engineer based in
+          Visakhapatnam, India. He has 9+ years of experience across Novartis,
+          redBus, GroupM, and Absolinsoft. He builds production LLM/RAG
+          applications, AI agents, FastAPI/Next.js products, and analytics
+          systems for teams that need practical AI delivery tied to measurable
+          business outcomes.
+        </p>
+      </div>
+    </Section>
   );
 }
 
@@ -333,82 +354,6 @@ function StatItem({
         {label}
       </dt>
     </div>
-  );
-}
-
-function About({ profile }: { profile: Profile }) {
-  const formatBioText = (text: string) => {
-    const highlights = [
-      "build AI",
-      "LLMs, RAG, and AI agents",
-      "marketing data",
-    ];
-    let result: (string | ReactNode)[] = [text];
-
-    for (const phrase of highlights) {
-      const nextResult: (string | ReactNode)[] = [];
-      for (const part of result) {
-        if (typeof part !== "string") {
-          nextResult.push(part);
-          continue;
-        }
-
-        const index = part.indexOf(phrase);
-        if (index === -1) {
-          nextResult.push(part);
-          continue;
-        }
-
-        const before = part.slice(0, index);
-        const after = part.slice(index + phrase.length);
-
-        if (before) nextResult.push(before);
-        nextResult.push(
-          <strong
-            key={`${phrase}-${index}`}
-            className="font-semibold text-foreground"
-          >
-            {phrase}
-          </strong>,
-        );
-        if (after) nextResult.push(after);
-      }
-      result = nextResult;
-    }
-
-    return result;
-  };
-
-  return (
-    <Section
-      id="about"
-      eyebrow="About"
-      title="Strategy and execution, together."
-    >
-      <div className="grid gap-10 lg:grid-cols-3">
-        <div className="space-y-4 text-lg leading-relaxed text-muted-foreground lg:col-span-2">
-          {profile.fullBioParagraphs.slice(0, 2).map((paragraph) => (
-            <p key={paragraph}>{formatBioText(paragraph)}</p>
-          ))}
-        </div>
-        <ul className="space-y-3 text-sm">
-          {[
-            "Small, senior team. Usually just me.",
-            "Evals and monitoring ship with the launch.",
-            "You keep the code, the docs, and the keys.",
-            "Shipped in healthcare, travel, media, and SaaS.",
-          ].map((item) => (
-            <li
-              key={item}
-              className="flex gap-3 rounded-xl border border-border bg-surface/50 px-4 py-3"
-            >
-              <span className="text-primary">◆</span>
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </Section>
   );
 }
 
