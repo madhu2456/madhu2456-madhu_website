@@ -941,7 +941,7 @@
     },
     {
       "title": "Marketing Analytics & Decision Intelligence",
-      "slug": "marketing-analytics-decision-intelligence",
+      "slug": "marketing-analytics-consultant",
       "icon": "/icon-512.png",
       "shortDescription": "Custom marketing pipelines, attribution modeling, customer lifetime value prediction, and decision-support systems that connect engineering to revenue.",
       "fullDescription": "Advanced marketing data science and decision intelligence systems. Build reliable multi-touch attribution models, customer journey mapping, customer lifetime value (CLV) predictive engines, and data pipeline frameworks that translate complex telemetry into clear marketing investment decisions.",

@@ -43,7 +43,7 @@ export default async function ServicesHubPage() {
         return <IconDatabase className="h-6 w-6 text-primary" />;
       case "ai-agent-development":
         return <IconCpu className="h-6 w-6 text-primary" />;
-      case "marketing-analytics-decision-intelligence":
+      case "marketing-analytics-consultant":
         return <IconChartBar className="h-6 w-6 text-primary" />;
       case "ga4-bigquery-campaign-analytics":
         return <IconSettings className="h-6 w-6 text-primary" />;

@@ -36,7 +36,8 @@ export async function generateStaticParams() {
       (service) =>
         service.slug !== "ai-llm-application-development" &&
         service.slug !== "rag-consultant-india" &&
-        service.slug !== "ai-agent-development",
+        service.slug !== "ai-agent-development" &&
+        service.slug !== "marketing-analytics-consultant",
     )
     .map((service) => ({
       slug: service.slug,
@@ -84,7 +85,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         return <IconDatabase className="h-8 w-8 text-primary" />;
       case "ai-agent-development":
         return <IconCpu className="h-8 w-8 text-primary" />;
-      case "marketing-analytics-decision-intelligence":
+      case "marketing-analytics-consultant":
         return <IconChartBar className="h-8 w-8 text-primary" />;
       case "ga4-bigquery-campaign-analytics":
         return <IconSettings className="h-8 w-8 text-primary" />;
