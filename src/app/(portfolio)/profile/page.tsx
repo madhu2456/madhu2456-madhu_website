@@ -207,15 +207,52 @@ export default async function ProfilePage() {
           </p>
         </section>
 
-        {/* Current Focus */}
+        {/* Current Focus & Services */}
         <section className="space-y-4">
           <h2 className="text-2xl font-bold tracking-tight border-b border-border/80 pb-2">
-            Current Focus
+            Current Focus & Services
           </h2>
           <p className="text-base text-muted-foreground leading-relaxed">
-            Production LLM/RAG applications, AI agents, analytics systems, and
-            full-stack AI products.
+            I actively consult and build systems in these key areas:
           </p>
+          <div className="grid gap-3 sm:grid-cols-2 pt-2">
+            <Link
+              href="/services/ai-llm-application-development/"
+              className="group p-4 rounded-xl border border-border bg-surface/20 hover:border-primary/30 hover:bg-surface-elevated/10 transition-all flex items-center justify-between"
+            >
+              <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
+                AI & LLM Application Development
+              </span>
+              <IconExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+            </Link>
+            <Link
+              href="/services/rag-consultant-india/"
+              className="group p-4 rounded-xl border border-border bg-surface/20 hover:border-primary/30 hover:bg-surface-elevated/10 transition-all flex items-center justify-between"
+            >
+              <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
+                RAG Consulting & Development
+              </span>
+              <IconExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+            </Link>
+            <Link
+              href="/services/ai-agent-development/"
+              className="group p-4 rounded-xl border border-border bg-surface/20 hover:border-primary/30 hover:bg-surface-elevated/10 transition-all flex items-center justify-between"
+            >
+              <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
+                AI Agent Development & Workflows
+              </span>
+              <IconExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+            </Link>
+            <Link
+              href="/services/marketing-analytics-consultant/"
+              className="group p-4 rounded-xl border border-border bg-surface/20 hover:border-primary/30 hover:bg-surface-elevated/10 transition-all flex items-center justify-between"
+            >
+              <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
+                Marketing Analytics & GA4/BigQuery
+              </span>
+              <IconExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+            </Link>
+          </div>
         </section>
 
         {/* Best Known For */}

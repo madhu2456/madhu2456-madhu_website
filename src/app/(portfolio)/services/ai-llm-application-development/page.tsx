@@ -640,7 +640,7 @@ export default async function AiLlmApplicationDevelopmentPage() {
                 agents, or high-performance FastAPI backends, I deliver
                 production systems backed by evaluations and tracking.
               </p>
-              <div className="pt-4">
+              <div className="pt-4 flex flex-col items-center gap-4">
                 <Link
                   href={contactUrl}
                   className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all"
@@ -648,6 +648,23 @@ export default async function AiLlmApplicationDevelopmentPage() {
                   Book a 20-minute intro call
                   <IconArrowRight className="h-4.5 w-4.5" />
                 </Link>
+                <div className="flex flex-wrap items-center justify-center gap-3 text-xs text-muted-foreground mt-2">
+                  <Link
+                    href="/profile/"
+                    className="hover:text-primary transition-colors"
+                  >
+                    About Madhu Dadi (Profile)
+                  </Link>
+                  <span className="text-muted-foreground/30 select-none">
+                    |
+                  </span>
+                  <Link
+                    href="/credentials/"
+                    className="hover:text-primary transition-colors"
+                  >
+                    Verified Credentials & Proof
+                  </Link>
+                </div>
               </div>
             </div>
           </section>
