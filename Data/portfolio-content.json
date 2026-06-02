@@ -839,26 +839,26 @@
       "title": "AI & LLM Application Development",
       "slug": "ai-llm-application-development",
       "icon": "/icon-512.png",
-      "shortDescription": "RAG systems, chatbots, and generative features built for production users. Not just happy-path demos.",
-      "fullDescription": "Production AI systems using LLMs, semantic retrieval, and generative workflows with practical evals, guardrails, and secure deployment paths.",
+      "shortDescription": "Production-grade generative AI applications, bespoke custom chat interfaces, and LLM integrations built for reliability. Not just happy-path demos.",
+      "fullDescription": "High-performance generative AI systems utilizing modern LLMs (GPT-4o, Claude 3.5 Sonnet, Llama 3), structured outputs (Pydantic), robust prompt engineering pipelines, runtime evaluation frameworks, and guardrails to prevent hallucination and data leakage.",
       "features": [
-        "RAG pipelines that cite their sources",
-        "Model choices that fit your budget",
-        "Observation and guardrail pipelines",
-        "Evaluation frameworks before shipping"
+        "Bespoke LLM application orchestration",
+        "Structured output pipelines (Pydantic, JSON Schema)",
+        "Prompt engineering & versioned prompt management",
+        "Hallucination guardrails & security checks"
       ],
       "technologies": [
         { "name": "Python" },
         { "name": "OpenAI" },
+        { "name": "Anthropic" },
         { "name": "LangChain" },
-        { "name": "FastAPI" },
-        { "name": "Next.js" }
+        { "name": "FastAPI" }
       ],
       "deliverables": [
-        "AI system architecture document",
-        "Working prototype or MVP",
-        "Production deployment pipeline",
-        "Documentation and handover"
+        "Production-ready LLM service module",
+        "Automated prompt evaluation suite",
+        "LLM execution logging and tracing dashboard",
+        "Detailed API contract & deployment guide"
       ],
       "pricing": {
         "startingPrice": 2500,
@@ -868,19 +868,19 @@
       "timeline": "3-8 weeks",
       "featured": true,
       "order": 1,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
+      "updatedAt": "2026-06-02T12:55:10.000Z"
     },
     {
-      "title": "RAG Consultant India",
-      "slug": "rag-consultant-india",
+      "title": "RAG System Development",
+      "slug": "rag-system-development",
       "icon": "/icon-512.png",
-      "shortDescription": "Enterprise semantic search, document ingestion, vector retrieval, and advanced hybrid search tuning.",
-      "fullDescription": "High-precision Retrieval-Augmented Generation engineering, tuning vector search models, designing hybrid dense/sparse retrieval, chunking policies, and metadata filtering.",
+      "shortDescription": "High-precision Retrieval-Augmented Generation engineering, enterprise semantic search, vector storage, and advanced hybrid search tuning.",
+      "fullDescription": "Bespoke enterprise Retrieval-Augmented Generation (RAG) pipelines designed for complex document ingestion, semantic chunking, dense/sparse hybrid search, cross-encoder reranking, and citation verification to eliminate hallucination.",
       "features": [
-        "Hybrid search tuning & reranking",
-        "Document chunking & pipeline design",
-        "Vector store optimizations",
-        "Factuality validation and evaluation"
+        "Hybrid search tuning & cross-encoder reranking",
+        "Context-aware chunking & extraction ETL pipelines",
+        "Vector database optimization and scaling",
+        "Citation verification & factuality audit protocols"
       ],
       "technologies": [
         { "name": "Pinecone" },
@@ -890,10 +890,10 @@
         { "name": "LlamaIndex" }
       ],
       "deliverables": [
-        "Hybrid retrieval system architecture",
-        "Chunking & embedding ETL pipeline",
-        "Vector search engine configuration",
-        "Factuality evaluation reports"
+        "Hybrid retrieval & ingestion pipeline code",
+        "Optimized vector database configuration",
+        "Factuality and citation evaluation report",
+        "API integration endpoints and documentation"
       ],
       "pricing": {
         "startingPrice": 3000,
@@ -903,19 +903,19 @@
       "timeline": "4-10 weeks",
       "featured": true,
       "order": 2,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
+      "updatedAt": "2026-06-02T12:55:10.000Z"
     },
     {
       "title": "AI Agent Development",
       "slug": "ai-agent-development",
       "icon": "/icon-512.png",
-      "shortDescription": "Agentic workflows, task planners, tool calling, and structured output systems that execute autonomous tasks.",
-      "fullDescription": "Multi-agent orchestration systems, task decomposition planners, state machines, autonomous tool-calling pipelines, and recursive task validation.",
+      "shortDescription": "Agentic workflows, task planners, tool calling, and autonomous multi-agent systems designed to execute complex business tasks.",
+      "fullDescription": "Multi-agent orchestration systems using state machines (LangGraph) for deterministic control. Designed with task decomposition planners, sandboxed tool-calling pipelines, self-correction loops, and recursive task validation.",
       "features": [
-        "Task planners and planners evals",
-        "Tool execution and sandboxing",
-        "LangGraph / State-machine control",
-        "Structured output and JSON parsing guardrails"
+        "LangGraph state-machine orchestrations",
+        "Autonomous tool calling & sandbox environments",
+        "Task planning, decomposition & self-correction",
+        "Agentic evaluation frameworks (Evals)"
       ],
       "technologies": [
         { "name": "LangGraph" },
@@ -924,10 +924,10 @@
         { "name": "CrewAI" }
       ],
       "deliverables": [
-        "Agent orchestration architecture",
-        "Function calling & tool integration",
-        "Guardrail & state control pipeline",
-        "Traceability & monitoring logs"
+        "Multi-agent state-machine system codebase",
+        "Secure tool execution sandbox API",
+        "Traceability, observability & logging integration",
+        "Comprehensive agent evaluation reports"
       ],
       "pricing": {
         "startingPrice": 4000,
@@ -937,32 +937,67 @@
       "timeline": "4-12 weeks",
       "featured": true,
       "order": 3,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
+      "updatedAt": "2026-06-02T12:55:10.000Z"
     },
     {
-      "title": "Marketing Analytics Consultant",
-      "slug": "marketing-analytics-consultant",
+      "title": "Marketing Analytics & Decision Intelligence",
+      "slug": "marketing-analytics-decision-intelligence",
       "icon": "/icon-512.png",
-      "shortDescription": "GA4, BigQuery, Attribution, dashboards, and custom marketing pipelines that align stats to revenue.",
-      "fullDescription": "Measurement strategies, campaign performance dashboards, client journeys, server-side tracking, multi-touch attribution, and A/B testing analytics that leaders trust.",
+      "shortDescription": "Custom marketing pipelines, attribution modeling, customer lifetime value prediction, and decision-support systems that connect engineering to revenue.",
+      "fullDescription": "Advanced marketing data science and decision intelligence systems. Build reliable multi-touch attribution models, customer journey mapping, customer lifetime value (CLV) predictive engines, and data pipeline frameworks that translate complex telemetry into clear marketing investment decisions.",
       "features": [
-        "Server-side Google Tag Manager",
-        "BigQuery marketing data warehouse",
-        "GA4 custom schemas and metrics",
-        "Multi-touch attribution models"
+        "Multi-touch attribution models (MTA)",
+        "Customer lifetime value (CLV) predictive modeling",
+        "Marketing mix modeling (MMM) integration",
+        "Automated cohort and funnel analysis"
+      ],
+      "technologies": [
+        { "name": "SQL" },
+        { "name": "Python" },
+        { "name": "BigQuery" },
+        { "name": "dbt" },
+        { "name": "Pandas" }
+      ],
+      "deliverables": [
+        "Attribution & predictive modeling pipeline code",
+        "Automated marketing data warehouse (BigQuery)",
+        "CLV & cohort analytics reporting dashboards",
+        "Measurement strategy & decision framework documents"
+      ],
+      "pricing": {
+        "startingPrice": 3000,
+        "priceType": "project",
+        "description": "From $3,000"
+      },
+      "timeline": "4-8 weeks",
+      "featured": true,
+      "order": 4,
+      "updatedAt": "2026-06-02T12:55:10.000Z"
+    },
+    {
+      "title": "GA4 / BigQuery / Campaign Analytics",
+      "slug": "ga4-bigquery-campaign-analytics",
+      "icon": "/icon-512.png",
+      "shortDescription": "End-to-end server-side tracking, GA4 custom schemas, Google Cloud BigQuery warehouses, and campaign measurement workflows that leaders trust.",
+      "fullDescription": "Robust enterprise-grade digital measurement setups. Includes server-side Google Tag Manager (sGTM) deployment, custom GA4 schema design, automated BigQuery data warehouse pipelines, cross-device attribution, and reliable, high-performance web dashboards.",
+      "features": [
+        "Server-side Google Tag Manager (sGTM) setup",
+        "Custom GA4 telemetry schemas & event structures",
+        "Google Cloud BigQuery warehouse integrations",
+        "Automated campaign performance dashboards"
       ],
       "technologies": [
         { "name": "GA4" },
         { "name": "BigQuery" },
         { "name": "SQL" },
         { "name": "Python" },
-        { "name": "Dataiku" }
+        { "name": "Google Tag Manager" }
       ],
       "deliverables": [
-        "Analytics strategy and measurement plan",
-        "Automated BI reporting dashboard",
-        "Server-side tracking configuration",
-        "Data pipeline ETL workflows"
+        "Server-side tracking & sGTM container files",
+        "Documented GA4 custom event & schema registry",
+        "BigQuery SQL extraction & transformation scripts",
+        "Polished campaign performance BI dashboards"
       ],
       "pricing": {
         "startingPrice": 2000,
@@ -971,20 +1006,20 @@
       },
       "timeline": "3-6 weeks",
       "featured": true,
-      "order": 4,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
+      "order": 5,
+      "updatedAt": "2026-06-02T12:55:10.000Z"
     },
     {
       "title": "Full-Stack AI Product Development",
       "slug": "full-stack-ai-product-development",
       "icon": "/icon-512.png",
-      "shortDescription": "Complete web applications combining Next.js frontends, FastAPI backends, Postgres schemas, and AI.",
-      "fullDescription": "End-to-end full-stack systems built for performance, security, and SEO, featuring Next.js React UI, FastAPI endpoints, and production Postgres schemas.",
+      "shortDescription": "Complete web applications combining Next.js frontends, FastAPI backends, secure Postgres schemas, and production AI integrations.",
+      "fullDescription": "End-to-end production web applications designed for visual excellence, performance, security, and search engine optimization. Combining ultra-fast Next.js React user interfaces, robust FastAPI backend microservices, secure and optimized Postgres schemas, and reliable AI integration layers.",
       "features": [
-        "Fast Next.js UI/UX",
-        "FastAPI secure backends",
-        "Robust Postgres schemas",
-        "Optimized SEO and deployment CI/CD"
+        "Fast, high-fidelity Next.js UI/UX with modern animations",
+        "High-performance FastAPI backends with Pydantic schemas",
+        "Robust relational database design & migrations in Postgres",
+        "Production-grade CI/CD and secure containerized deployment"
       ],
       "technologies": [
         { "name": "Next.js" },
@@ -994,10 +1029,10 @@
         { "name": "Tailwind CSS" }
       ],
       "deliverables": [
-        "Production-ready web application",
-        "Secure API documentation",
-        "Deployment & server setup",
-        "Source code and technical documentation"
+        "Complete production-ready web application codebase",
+        "Fully documented REST API endpoints (OpenAPI)",
+        "Postgres schema definition and database migration scripts",
+        "Containerized deployment configs (Docker / CI-CD)"
       ],
       "pricing": {
         "startingPrice": 5000,
@@ -1006,8 +1041,8 @@
       },
       "timeline": "4-12 weeks",
       "featured": true,
-      "order": 5,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
+      "order": 6,
+      "updatedAt": "2026-06-02T12:55:10.000Z"
     }
   ],
   "certifications": [

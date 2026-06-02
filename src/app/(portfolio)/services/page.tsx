@@ -6,6 +6,7 @@ import {
   IconCode,
   IconCpu,
   IconDatabase,
+  IconSettings,
   IconSparkles,
 } from "@tabler/icons-react";
 import type { Metadata } from "next";
@@ -21,9 +22,9 @@ export async function generateMetadata(): Promise<Metadata> {
   const canonicalUrl = `${siteUrl}services/`;
 
   return {
-    title: "AI & Analytics Engineering Services | Madhu Dadi",
+    title: "AI, RAG, Analytics & Full-Stack Engineering Services — Madhu Dadi",
     description:
-      "Production-grade generative AI application development, enterprise RAG consulting, multi-agent orchestration, full-stack product engineering, and advanced marketing analytics.",
+      "Hire Madhu Dadi for AI/LLM application development, RAG systems, AI agents, marketing analytics, GA4/BigQuery dashboards, and FastAPI/Next.js full-stack AI product development.",
     alternates: {
       canonical: canonicalUrl,
     },
@@ -38,12 +39,14 @@ export default async function ServicesHubPage() {
     switch (slug) {
       case "ai-llm-application-development":
         return <IconBrain className="h-6 w-6 text-primary" />;
-      case "rag-consultant-india":
+      case "rag-system-development":
         return <IconDatabase className="h-6 w-6 text-primary" />;
       case "ai-agent-development":
         return <IconCpu className="h-6 w-6 text-primary" />;
-      case "marketing-analytics-consultant":
+      case "marketing-analytics-decision-intelligence":
         return <IconChartBar className="h-6 w-6 text-primary" />;
+      case "ga4-bigquery-campaign-analytics":
+        return <IconSettings className="h-6 w-6 text-primary" />;
       case "full-stack-ai-product-development":
         return <IconCode className="h-6 w-6 text-primary" />;
       default:
@@ -63,12 +66,15 @@ export default async function ServicesHubPage() {
               <IconSparkles className="h-3.5 w-3.5" /> High-Outcome Engineering
               Delivery
             </span>
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-              AI & Analytics <span className="text-gradient">Services</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+              AI, RAG, Analytics &{" "}
+              <span className="text-gradient">Full-Stack</span> Engineering
+              Services
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-              Production-grade systems designed to connect advanced engineering
-              capabilities with defensible, measurable business outcomes.
+              I help teams build production AI and analytics systems: LLM/RAG
+              applications, AI agents, FastAPI/Next.js products, GA4/BigQuery
+              analytics, dashboards, and campaign measurement workflows.
             </p>
           </section>
 
