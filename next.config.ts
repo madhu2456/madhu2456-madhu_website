@@ -140,6 +140,17 @@ const nextConfig: NextConfig = {
         source: "/robots.txt",
         headers: [{ key: "Cache-Control", value: "public, max-age=86400" }],
       },
+      // IndexNow verification key
+      {
+        source: "/4987000e306144ec8609ede9a23f9b4b.txt",
+        headers: [
+          { key: "Content-Type", value: "text/plain; charset=utf-8" },
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
     ];
   },
 };
