@@ -37,7 +37,8 @@ export async function generateStaticParams() {
         service.slug !== "ai-llm-application-development" &&
         service.slug !== "rag-consultant-india" &&
         service.slug !== "ai-agent-development" &&
-        service.slug !== "marketing-analytics-consultant",
+        service.slug !== "marketing-analytics-consultant" &&
+        service.slug !== "full-stack-ai-product-development",
     )
     .map((service) => ({
       slug: service.slug,
