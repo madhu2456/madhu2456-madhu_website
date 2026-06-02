@@ -26,7 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "RAG Consultant in India — Source-Cited AI Assistants | Madhu Dadi",
     description:
-      "Madhu Dadi builds RAG systems and source-cited AI assistants using FastAPI, Next.js, vector databases, evals, logs, and analytics instrumentation for production teams.",
+      "Production RAG systems and source-cited AI assistants by Madhu Dadi. Built with FastAPI, Next.js, vector databases, evaluation logs, and telemetry.",
     alternates: {
       canonical: canonicalUrl,
     },

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title:
     "Madhu Dadi — AI & Marketing Analytics Engineer | LLM, RAG, FastAPI, GA4",
   description:
-    "Madhu Dadi is an AI and marketing analytics engineer with 9+ years of experience across Novartis, redBus, GroupM, and Absolinsoft. He builds production LLM/RAG apps, AI agents, FastAPI/Next.js products, and analytics systems.",
+    "AI and marketing analytics engineer. 9+ years exp (Novartis, redBus, GroupM). I build production LLM/RAG apps, AI agents, FastAPI, Next.js, and analytics.",
   alternates: {
     canonical: siteUrl,
     languages: {

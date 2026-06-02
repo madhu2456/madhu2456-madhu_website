@@ -24,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title:
       "Udemy Enroller Case Study — Headless Browser Task Automation & Telemetry | Madhu Dadi",
     description:
-      "Explore Madhu Dadi's Udemy Course Enroller automation framework built in Python/FastAPI, utilizing headless browser tab pools, Celery dispatches, and session cache storage.",
+      "Explore Madhu Dadi's Udemy Course Enroller task automation engine built in Python/FastAPI with headless browser tab pools and Celery job queuing.",
     alternates: {
       canonical: "https://madhudadi.in/case-studies/udemy-enroller-fastapi/",
     },

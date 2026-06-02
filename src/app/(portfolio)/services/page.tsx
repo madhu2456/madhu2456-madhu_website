@@ -24,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "AI, RAG, Analytics & Full-Stack Engineering Services — Madhu Dadi",
     description:
-      "Hire Madhu Dadi for AI/LLM application development, RAG systems, AI agents, marketing analytics, GA4/BigQuery dashboards, and FastAPI/Next.js full-stack AI product development.",
+      "Hire Madhu Dadi for production AI/LLM development, RAG systems, AI agents, marketing analytics, GA4/BigQuery pipelines, and full-stack FastAPI/Next.js apps.",
     alternates: {
       canonical: canonicalUrl,
     },

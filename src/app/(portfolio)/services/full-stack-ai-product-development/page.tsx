@@ -28,7 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title:
       "Full-Stack AI Product Development — FastAPI, Next.js, Postgres | Madhu Dadi",
     description:
-      "Madhu Dadi builds full-stack AI products with FastAPI, Next.js, TypeScript, Postgres, Redis, Celery, analytics, SEO, performance, and production deployment practices.",
+      "Full-stack AI product development by Madhu Dadi. I build FastAPI backends, Next.js interfaces, Postgres schemas, Celery tasks, and analytics instrumentation.",
     alternates: {
       canonical: canonicalUrl,
     },

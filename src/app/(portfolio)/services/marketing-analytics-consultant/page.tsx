@@ -24,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title:
       "Marketing Analytics Consultant — GA4, BigQuery, Campaign Analytics | Madhu Dadi",
     description:
-      "Hire Madhu Dadi for marketing analytics, GA4, BigQuery, campaign measurement, attribution, dashboards, experimentation analysis, and decision intelligence workflows.",
+      "Hire Madhu Dadi for marketing analytics, GA4 setups, BigQuery dashboards, campaign attribution, A/B test analysis, and decision intelligence workflows.",
     alternates: {
       canonical: canonicalUrl,
     },

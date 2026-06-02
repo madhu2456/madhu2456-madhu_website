@@ -61,7 +61,7 @@ export async function generateMetadata({
 
   return {
     title: `${service.title} | Services | Madhu Dadi`,
-    description: service.fullDescription || service.shortDescription,
+    description: service.shortDescription || service.fullDescription,
     alternates: {
       canonical: canonicalUrl,
     },

@@ -25,7 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title:
       "AI & LLM Application Development — RAG, Agents, FastAPI, Next.js | Madhu Dadi",
     description:
-      "Hire Madhu Dadi to build production LLM applications, RAG systems, AI agents, chatbots, FastAPI backends, Next.js interfaces, evals, guardrails, and analytics instrumentation.",
+      "Build production LLM applications, source-cited RAG systems, autonomous AI agents, FastAPI backends, Next.js UIs, and evaluation pipelines with Madhu Dadi.",
     alternates: {
       canonical: canonicalUrl,
     },
