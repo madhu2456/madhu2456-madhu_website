@@ -132,7 +132,7 @@ function Hero({
           <h1 className="font-display text-[clamp(2rem,6vw,4rem)] leading-[1.15] font-bold tracking-tight sm:leading-[1.1]">
             Madhu Dadi —{" "}
             <span className="text-gradient">
-              AI & Marketing Analytics Engineer
+              Generative AI Engineer & Marketing Analytics Leader
             </span>
           </h1>
           <div className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:mt-6 sm:text-lg space-y-4">
@@ -771,8 +771,10 @@ function Contact({ profile }: { profile: Profile }) {
       <div className="grid gap-10 lg:grid-cols-2">
         <div className="space-y-6">
           <p className="text-lg leading-relaxed text-muted-foreground">
-            Wherever you are in the world, drop a note about your problem and
-            I&apos;ll respond within 24 hours with whether and how I can help.
+            Have an AI, RAG, analytics, or full-stack product problem? Send me
+            the problem statement, current stack, timeline, and desired business
+            outcome. I will reply within 24 hours with whether I can help and
+            what the best next step should be.
           </p>
           <ul className="space-y-3 text-sm">
             <ContactRow

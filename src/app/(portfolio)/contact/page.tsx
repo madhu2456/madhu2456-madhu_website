@@ -24,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const canonicalUrl = `${siteUrl}contact/`;
 
   return {
-    title: "Contact Madhu Dadi — AI & Marketing Analytics Engineer",
+    title: "Contact Madhu Dadi — Generative AI & Marketing Analytics Engineer",
     description:
       "Work with Madhu Dadi on production AI, RAG, AI agents, marketing analytics, or full-stack AI product development. Response time is usually within 24 hours.",
     alternates: {
@@ -99,7 +99,10 @@ export default async function ContactPage() {
                   Collaboration
                 </span>
                 <h1 className="text-3xl md:text-5xl font-bold tracking-tight">
-                  Contact Madhu Dadi
+                  Contact Madhu Dadi —{" "}
+                  <span className="text-gradient">
+                    Generative AI & Marketing Analytics Engineer
+                  </span>
                 </h1>
                 <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
                   Work with me on production AI, RAG, AI agents, marketing

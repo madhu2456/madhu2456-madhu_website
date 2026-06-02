@@ -24,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const canonicalUrl = `${siteUrl}services/rag-consultant-india/`;
 
   return {
-    title: "RAG Consultant in India — Source-Cited AI Assistants | Madhu Dadi",
+    title: "RAG Engineer & Consultant in India — Source-Cited AI Assistants",
     description:
       "Production RAG systems and source-cited AI assistants by Madhu Dadi. Built with FastAPI, Next.js, vector databases, evaluation logs, and telemetry.",
     alternates: {
@@ -264,7 +264,10 @@ export default async function RagConsultantIndiaPage() {
               </span>
 
               <h1 className="text-3xl md:text-5xl font-bold tracking-tight leading-tight">
-                RAG Consultant <span className="text-gradient">in India</span>
+                RAG Engineer & Consultant{" "}
+                <span className="text-gradient">
+                  in India for Source-Cited AI Assistants
+                </span>
               </h1>
 
               {/* Above-the-fold opening copy */}

@@ -24,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const canonicalUrl = `${siteUrl}services/ai-agent-development/`;
 
   return {
-    title: "AI Agent Development — Workflows, Tools, Guardrails | Madhu Dadi",
+    title: "AI Agent Engineer for Tool-Using LLM Workflows | Madhu Dadi",
     description:
       "Hire Madhu Dadi to build production AI agents with tool integrations, workflow controls, loop prevention, FastAPI backends, and Next.js interfaces.",
     alternates: {
@@ -223,7 +223,8 @@ export default async function AiAgentDevelopmentPage() {
               </span>
 
               <h1 className="text-3xl md:text-5xl font-bold tracking-tight leading-tight">
-                AI Agent <span className="text-gradient">Development</span>
+                AI Agent Engineer for{" "}
+                <span className="text-gradient">Tool-Using LLM Workflows</span>
               </h1>
 
               {/* Above-the-fold opening copy */}

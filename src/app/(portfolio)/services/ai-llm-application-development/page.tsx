@@ -22,8 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const canonicalUrl = `${siteUrl}services/ai-llm-application-development/`;
 
   return {
-    title:
-      "AI & LLM Application Development — RAG, Agents, FastAPI, Next.js | Madhu Dadi",
+    title: "Generative AI Engineer for LLM Apps, RAG & AI Agents | Madhu Dadi",
     description:
       "Build production LLM applications, source-cited RAG systems, autonomous AI agents, FastAPI backends, Next.js UIs, and evaluation pipelines with Madhu Dadi.",
     alternates: {
@@ -262,17 +261,22 @@ export default async function AiLlmApplicationDevelopmentPage() {
               </span>
 
               <h1 className="text-3xl md:text-5xl font-bold tracking-tight leading-tight">
-                AI & LLM{" "}
-                <span className="text-gradient">Application Development</span>
+                Generative AI Engineer for{" "}
+                <span className="text-gradient">LLM Apps, RAG & AI Agents</span>
               </h1>
 
               {/* Above-the-fold direct answer */}
-              <div className="border-l-4 border-primary pl-5 py-2">
+              <div className="border-l-4 border-primary pl-5 py-2 space-y-4">
                 <p className="text-base md:text-lg text-foreground/90 font-medium leading-relaxed">
-                  Madhu Dadi builds production LLM applications, RAG systems, AI
-                  agents, and AI-powered product features using Python, FastAPI,
-                  Next.js, Postgres, vector databases, and analytics
-                  instrumentation.
+                  Madhu Dadi is a generative AI engineer specializing in custom
+                  LLM applications, retrieval-augmented generation (RAG) vector
+                  pipelines, and autonomous agent workflows.
+                </p>
+                <p className="text-base md:text-lg text-foreground/90 font-medium leading-relaxed">
+                  He designs production AI systems using Python, FastAPI,
+                  Next.js, and Postgres, backing every deployment with custom
+                  evaluations, security guardrails, and server-side user
+                  analytics instrumentation.
                 </p>
               </div>
 

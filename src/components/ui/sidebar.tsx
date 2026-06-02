@@ -203,8 +203,8 @@ function Sidebar({
       <div
         data-slot="sidebar-gap"
         className={cn(
-          "relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear",
-          "group-data-[collapsible=offcanvas]:w-0",
+          "relative bg-transparent transition-[width] duration-200 ease-linear",
+          isOpen ? "w-(--sidebar-width)" : "w-0",
           "group-data-[side=right]:rotate-180",
           variant === "floating" || variant === "inset"
             ? "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4)))]"
@@ -216,8 +216,12 @@ function Sidebar({
         className={cn(
           "fixed inset-y-0 z-30 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear md:flex",
           side === "left"
-            ? "left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]"
-            : "right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]",
+            ? isOpen
+              ? "left-0"
+              : "left-[-25rem]"
+            : isOpen
+              ? "right-0"
+              : "right-[-25rem]",
           variant === "floating" || variant === "inset"
             ? "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)]"
             : "group-data-[collapsible=icon]:w-(--sidebar-width-icon) group-data-[side=left]:border-r group-data-[side=right]:border-l",
@@ -262,10 +266,27 @@ function SidebarRail({ className, ...props }: React.ComponentProps<"button">) {
   );
 }
 
-function SidebarInset({ className, ...props }: React.ComponentProps<"main">) {
+function SidebarInset({
+  className,
+  onClick,
+  ...props
+}: React.ComponentProps<"main">) {
+  const { setOpen, setOpenMobile, open, openMobile, isMobile } = useSidebar();
+  const isOpen = isMobile ? openMobile : open;
+
+  const handleInsetClick = (e: React.MouseEvent<HTMLElement>) => {
+    if (isOpen) {
+      setOpen(false);
+      setOpenMobile(false);
+    }
+    onClick?.(e);
+  };
+
   return (
+    // biome-ignore lint/a11y/useKeyWithClickEvents: Inset container click closes sidebar, not a focused keyboard interactive element
     <main
       data-slot="sidebar-inset"
+      onClick={handleInsetClick}
       className={cn(
         "bg-background relative flex w-full flex-1 flex-col",
         "md:peer-data-[variant=inset]:m-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow-sm md:peer-data-[variant=inset]:peer-data-[state=collapsed]:ml-2",

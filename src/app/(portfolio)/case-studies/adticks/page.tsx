@@ -21,8 +21,7 @@ export const revalidate = 3600;
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title:
-      "Adticks Case Study — AI Visibility & SEO/AEO/GEO Auditing SaaS | Madhu Dadi",
+    title: "Adticks Case Study — SEO, AEO & GEO Audit Platform by Madhu Dadi",
     description:
       "Explore Adticks, a high-scale SEO/AEO/GEO audit platform crawling 10,000+ pages using FastAPI, Next.js, Playwright, Redis, and Celery worker diagnostic queues.",
     alternates: {
@@ -198,7 +197,7 @@ export default async function AdticksCaseStudyPage() {
               <h1 className="text-3xl md:text-5xl font-bold tracking-tight leading-tight">
                 Adticks —{" "}
                 <span className="text-gradient">
-                  AI Visibility & SEO/AEO/GEO SaaS
+                  SEO, AEO & GEO Audit Platform Case Study
                 </span>
               </h1>
 
