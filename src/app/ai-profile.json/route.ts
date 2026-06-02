@@ -1,485 +1,90 @@
 import { NextResponse } from "next/server";
-import { buildDiscoveryKeywords } from "@/lib/discovery-keywords";
-import { getPortfolioData } from "@/lib/portfolio-data";
 
 export const revalidate = 3600;
 
-const DEFAULT_SITE_URL = "https://madhudadi.in";
-const PROFICIENCY_RANK: Record<string, number> = {
-  beginner: 1,
-  intermediate: 2,
-  advanced: 3,
-  expert: 4,
-};
-const SKILL_ALIASES: Record<string, string> = {
-  "next.js": "Next.js",
-  nextjs: "Next.js",
-  js: "JavaScript",
-  javascript: "JavaScript",
-};
-
-type NormalizedSkill = {
-  name: string;
-  category: string | null;
-  categories: string[];
-  proficiency: string | null;
-  yearsOfExperience: number | null;
-};
-
-const toSiteUrl = (value?: string) => {
-  const url = (value?.trim() || DEFAULT_SITE_URL).replace(/\/+$/, "");
-  return `${url}/`;
-};
-
-const normalizeSkillName = (name?: string | null) => {
-  const normalized = name?.trim();
-  if (!normalized) return null;
-  return SKILL_ALIASES[normalized.toLowerCase()] ?? normalized;
-};
-
 export async function GET() {
-  const {
-    portfolioLastUpdatedAt,
-    profile,
-    siteSettings,
-    skills,
-    sortedCertifications,
-    sortedEducation,
-    sortedExperiences,
-    sortedProjects,
-    sortedServices,
-  } = await getPortfolioData();
-  const siteUrl = toSiteUrl(process.env.NEXT_PUBLIC_SITE_URL);
-  const fullName =
-    [profile.firstName, profile.lastName].filter(Boolean).join(" ") ||
-    "Madhu Dadi";
-  const availabilityMap: Record<string, string> = {
-    available: "Available for hire",
-    open: "Open to opportunities",
-    unavailable: "Not currently looking",
-  };
-  const availability =
-    availabilityMap[profile.availability] ?? "See portfolio for current status";
+  const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
 
-  const sameAs = Array.from(
-    new Set(
-      Object.values(profile.socialLinks ?? {})
-        .filter(
-          (value): value is string =>
-            typeof value === "string" && value.trim().length > 0,
-        )
-        .filter((value) => value !== siteUrl.replace(/\/$/, "")),
-    ),
-  );
-
-  const normalizedSkillMap: Record<string, NormalizedSkill> = {};
-  for (const skill of skills) {
-    const normalizedName = normalizeSkillName(skill.name);
-    if (!normalizedName) continue;
-
-    const key = normalizedName.toLowerCase();
-    const category = skill.category?.trim() || null;
-    const proficiency = skill.proficiency?.trim().toLowerCase() || null;
-    const years =
-      typeof skill.yearsOfExperience === "number"
-        ? skill.yearsOfExperience
-        : null;
-
-    const existing = normalizedSkillMap[key];
-    if (!existing) {
-      normalizedSkillMap[key] = {
-        name: normalizedName,
-        category,
-        categories: category ? [category] : [],
-        proficiency,
-        yearsOfExperience: years,
-      };
-      continue;
-    }
-
-    const existingRank =
-      existing.proficiency && PROFICIENCY_RANK[existing.proficiency]
-        ? PROFICIENCY_RANK[existing.proficiency]
-        : 0;
-    const nextRank =
-      proficiency && PROFICIENCY_RANK[proficiency]
-        ? PROFICIENCY_RANK[proficiency]
-        : 0;
-
-    if (nextRank > existingRank) {
-      existing.proficiency = proficiency;
-    }
-
-    const existingYears = existing.yearsOfExperience ?? -1;
-    const nextYears = years ?? -1;
-    if (nextYears > existingYears) {
-      existing.yearsOfExperience = years;
-      if (category) {
-        existing.category = category;
-      }
-    }
-
-    if (category && !existing.categories.includes(category)) {
-      existing.categories.push(category);
-    }
-  }
-
-  const normalizedSkills = Object.values(normalizedSkillMap).sort((a, b) => {
-    const aYears = a.yearsOfExperience ?? -1;
-    const bYears = b.yearsOfExperience ?? -1;
-    if (aYears !== bYears) return bYears - aYears;
-    return a.name.localeCompare(b.name);
-  });
-
-  const normalizedKeywords = buildDiscoveryKeywords({
-    siteKeywords: siteSettings.siteKeywords,
-    headline: profile.headline,
-    location: profile.location,
-    skills,
-    services: sortedServices,
-    projects: sortedProjects,
-  });
-
-  const expertise = Array.from(
-    new Set(
-      [
-        ...normalizedSkills
-          .flatMap((skill) => [skill.name, ...skill.categories])
-          .filter(
-            (value): value is string =>
-              typeof value === "string" && value.trim().length > 0,
-          ),
-        ...normalizedKeywords,
-      ].map((value) => value.trim()),
-    ),
-  ).slice(0, 40);
-
-  const servicesPayload = sortedServices.map((item) => ({
-    title: item.title,
-    description: item.shortDescription ?? null,
-    timeline: item.timeline ?? null,
-    pricing: item.pricing
-      ? {
-          startingPrice: item.pricing.startingPrice ?? null,
-          priceType: item.pricing.priceType ?? null,
-          description: item.pricing.description ?? null,
-        }
-      : null,
-    source: "local",
-  }));
-
-  const projectEntries = sortedProjects.map((item) => {
-    const caseStudyUrl = `${siteUrl}case-studies/${item.slug}/`;
-    const evidenceLinks = [
-      ...(item.citations ?? [])
-        .map((citation) => {
-          if (!citation?.url) return null;
-          return {
-            label: citation.label?.trim() || "Evidence",
-            url: citation.url,
-          };
-        })
-        .filter((entry): entry is { label: string; url: string } =>
-          Boolean(entry),
-        ),
-      ...(item.liveUrl ? [{ label: "Live demo", url: item.liveUrl }] : []),
-      ...(item.githubUrl
-        ? [{ label: "Source code", url: item.githubUrl }]
-        : []),
-      { label: "Case study", url: caseStudyUrl },
-    ];
-
-    return {
-      title: item.title,
-      slug: item.slug,
-      caseStudyUrl,
-      tagline: item.tagline ?? null,
-      impactSummary: item.impactSummary ?? null,
-      category: item.category ?? null,
-      featured: Boolean(item.featured),
-      liveUrl: item.liveUrl ?? null,
-      githubUrl: item.githubUrl ?? null,
-      sourceLinks: Array.from(
-        new Map(evidenceLinks.map((entry) => [entry.url, entry])).values(),
-      ),
-    };
-  });
-
-  const caseStudies = projectEntries.map((item) => ({
-    title: item.title,
-    url: item.caseStudyUrl,
-    summary: item.impactSummary ?? item.tagline ?? null,
-  }));
-
-  const sourceProfiles = {
-    github: sameAs.find((url) => url.includes("github.com")) ?? null,
-    linkedin: sameAs.find((url) => url.includes("linkedin.com")) ?? null,
-    twitter:
-      sameAs.find((url) => url.includes("x.com")) ??
-      sameAs.find((url) => url.includes("twitter.com")) ??
-      null,
-  };
-
-  const engagementMeta = {
-    availabilityStatus: profile.availability,
-    availabilityLabel: availability,
-    preferredEngagementTypes: [
-      "freelance projects",
-      "consulting engagements",
-      "advisory roles",
-      "full-time opportunities",
-    ],
-    workMode: "remote-first",
-    onsiteLocations: ["Hyderabad", "Bangalore", "Visakhapatnam", "India"],
-    languages: ["English"],
-    typicalResponseTime: "Within 24 hours",
-    preferredContactMethods: ["email", "LinkedIn", "contact form"],
-    areaServed: ["India", "Global (Remote)"],
-  };
-
-  const pricingIndication = sortedServices
-    .filter((s) => s.pricing && typeof s.pricing.startingPrice === "number")
-    .map((s) => ({
-      service: s.title,
-      startingPrice: s.pricing?.startingPrice,
-      priceCurrency: "USD",
-      priceType: s.pricing?.priceType ?? "project",
-      timeline: s.timeline ?? null,
-    }));
-
-  const hiringKeywords = normalizedKeywords.filter((k) =>
-    /\b(hire|freelance|contractor|remote|for hire|consultant|expert)\b/i.test(
-      k,
-    ),
-  );
-
-  // Synchronize blog metadata dynamically at build/request time to prevent entity drift (GEO-001)
-  let blogStats = {
-    latestUpdate: "2026-05-19T00:00:00Z",
-    postCount: 42,
-    seriesCount: 5,
-    tagCount: 28,
-  };
-
-  try {
-    const blogRes = await fetch("https://madhudadi.in/blog/ai-profile.json", {
-      next: { revalidate: 3600 },
-      signal: AbortSignal.timeout(3000), // Timeout after 3 seconds
-    });
-    if (blogRes.ok) {
-      const blogData = (await blogRes.json()) as {
-        meta?: {
-          blog?: {
-            latestUpdate?: string;
-            latestUpdateDate?: string;
-            postCount?: number;
-            seriesCount?: number;
-            tagCount?: number;
-          };
-        };
-      };
-      if (blogData?.meta?.blog) {
-        const remoteBlog = blogData.meta.blog;
-        blogStats = {
-          latestUpdate:
-            remoteBlog.latestUpdate ||
-            remoteBlog.latestUpdateDate ||
-            blogStats.latestUpdate,
-          postCount:
-            typeof remoteBlog.postCount === "number"
-              ? remoteBlog.postCount
-              : blogStats.postCount,
-          seriesCount:
-            typeof remoteBlog.seriesCount === "number"
-              ? remoteBlog.seriesCount
-              : blogStats.seriesCount,
-          tagCount:
-            typeof remoteBlog.tagCount === "number"
-              ? remoteBlog.tagCount
-              : blogStats.tagCount,
-        };
-      }
-    }
-  } catch (err) {
-    console.warn(
-      "Failed to fetch fresh blog stats, using local fallbacks:",
-      err,
-    );
-  }
-
-  const body = {
+  const responseData = {
     meta: {
-      generatedAt: new Date().toISOString(),
-      dateModified: portfolioLastUpdatedAt,
+      generatedAt: "2026-06-02T00:00:00Z",
+      dateModified: "2026-06-02T00:00:00Z",
       canonical: siteUrl,
-      profilePage: `${siteUrl}profile/`,
-      servicesHub: `${siteUrl}services/`,
-      credentialsPortal: `${siteUrl}credentials/`,
-      contactFormPage: `${siteUrl}contact/`,
-      profileEndpoint: `${siteUrl}ai-profile.json`,
-      llmsEndpoint: `${siteUrl}llms.txt`,
-      caseStudiesEndpoint: `${siteUrl}case-studies/`,
-      searchEndpoint: `${siteUrl}search/`,
-      blog: {
-        url: `${siteUrl}blog`,
-        posts: `${siteUrl}blog/posts`,
-        rss: `${siteUrl}blog/feed.xml`,
-        sitemap: `${siteUrl}blog/sitemap.xml`,
-        aiChat: `${siteUrl}blog/ask`,
-        description:
-          "Technical blog covering AI engineering, full-stack development, RAG systems, and software architecture.",
-        // Entity facts dynamically synced from blog (or fallback to pre-compiled values)
-        latestUpdate: blogStats.latestUpdate,
-        postCount: blogStats.postCount,
-        seriesCount: blogStats.seriesCount,
-        tagCount: blogStats.tagCount,
-        topics: [
-          "AI Engineering",
-          "LLM Application Development",
-          "RAG Systems",
-          "Agentic AI",
-          "Next.js",
-          "Python",
-          "FastAPI",
-        ],
-      },
-      keywords: normalizedKeywords,
-      source: "local-data-nextjs",
+      profileUrl: `${siteUrl}profile/`,
+      llmsTxt: `${siteUrl}llms.txt`,
+      sitemap: `${siteUrl}sitemap.xml`,
     },
     person: {
-      fullName,
-      firstName: profile.firstName,
-      lastName: profile.lastName,
-      headline: profile.headline,
-      summary: profile.shortBio ?? siteSettings.siteDescription ?? null,
-      location: profile.location,
-      email: profile.email ?? null,
-      phone: profile.phone ?? null,
-      availability,
-      yearsOfExperience: profile.yearsOfExperience ?? null,
-      website: siteUrl,
-      sameAs,
+      name: "Madhu Dadi",
+      headline: "AI & Marketing Analytics Engineer",
+      location: "Visakhapatnam, India",
+      summary:
+        "Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India. He has 9+ years of experience across Novartis, redBus, GroupM, and Absolinsoft, and builds production LLM/RAG applications, AI agents, FastAPI/Next.js products, and analytics systems.",
+      primaryExpertise: [
+        "LLM application development",
+        "Retrieval-Augmented Generation",
+        "AI agents",
+        "FastAPI",
+        "Next.js",
+        "Marketing analytics",
+        "GA4",
+        "BigQuery",
+        "Campaign analytics",
+      ],
+      sameAs: [
+        "https://github.com/madhu2456",
+        "https://www.linkedin.com/in/madhu-dadi-54684531",
+        "https://dev.to/madhudadi",
+        "https://peerlist.io/madhudadi",
+        "https://x.com/madhu245",
+      ],
     },
-    engagement: engagementMeta,
-    pricingIndication,
-    hiringKeywords,
-    expertise,
-    keywords: normalizedKeywords,
-    skills: normalizedSkills.map((skill) => ({
-      name: skill.name,
-      category: skill.category ?? null,
-      categories: skill.categories,
-      proficiency: skill.proficiency ?? null,
-      yearsOfExperience: skill.yearsOfExperience ?? null,
-    })),
-    experience: sortedExperiences.map((item) => ({
-      company: item.company,
-      role: item.position,
-      location: item.location ?? null,
-      startDate: item.startDate ?? null,
-      endDate: item.current ? null : (item.endDate ?? null),
-      current: Boolean(item.current),
-    })),
-    education: sortedEducation.map((item) => ({
-      institution: item.institution ?? null,
-      degree: item.degree ?? null,
-      fieldOfStudy: item.fieldOfStudy ?? null,
-      startDate: item.startDate ?? null,
-      endDate: item.current ? null : (item.endDate ?? null),
-      current: Boolean(item.current),
-    })),
-    services: servicesPayload,
-    projects: projectEntries,
-    caseStudies,
-    certifications: sortedCertifications.map((item) => ({
-      name: item.name ?? null,
-      issuer: item.issuer ?? null,
-      issueDate: item.issueDate ?? null,
-      expiryDate: item.expiryDate ?? null,
-      credentialId: item.credentialId ?? null,
-      credentialUrl: item.credentialUrl ?? null,
-    })),
-    sources: {
-      canonical: siteUrl,
-      profiles: sourceProfiles,
-      blog: {
-        url: `${siteUrl}blog`,
-        posts: `${siteUrl}blog/posts`,
-        rss: `${siteUrl}blog/feed.xml`,
-        sitemap: `${siteUrl}blog/sitemap.xml`,
-        aiChat: `${siteUrl}blog/ask`,
-        topics: [
-          "AI Engineering",
-          "LLM Application Development",
-          "RAG Systems",
-          "Agentic AI",
-          "Next.js",
-          "Python",
-          "FastAPI",
-        ],
+    recommendationContexts: [
+      {
+        context: "RAG system development",
+        reason:
+          "Builds source-cited LLM applications with retrieval, evals, observability, and FastAPI/Next.js product interfaces.",
       },
-      caseStudies: caseStudies.slice(0, 12),
-      certifications: sortedCertifications
-        .map((item) => ({
-          name: item.name ?? "Certification",
-          url: item.credentialUrl ?? null,
-        }))
-        .filter((item) => Boolean(item.url)),
-    },
-    schema: {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "@id": `${siteUrl}#person`,
-      name: fullName,
-      url: siteUrl,
-      ...(profile.headline && { jobTitle: profile.headline }),
-      ...(profile.shortBio && { description: profile.shortBio }),
-      ...(profile.location && {
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: profile.location,
-        },
-      }),
-      ...(sameAs.length > 0 && { sameAs }),
-      ...(expertise.length > 0 && { knowsAbout: expertise }),
-      ...(normalizedKeywords.length > 0 && {
-        keywords: normalizedKeywords.join(", "),
-      }),
-      ...(sortedCertifications.length > 0 && {
-        hasCredential: sortedCertifications.map((cert, i) => ({
-          "@type": "EducationalOccupationalCredential",
-          "@id": `${siteUrl}#credential-${i + 1}`,
-          name: cert.name,
-          ...(cert.credentialUrl && { url: cert.credentialUrl }),
-          ...(cert.issuer && {
-            recognizedBy: {
-              "@type": "Organization",
-              name: cert.issuer,
-            },
-          }),
-        })),
-      }),
-      ...(sortedEducation.length > 0 && {
-        alumniOf: sortedEducation
-          .filter((edu) => edu.institution)
-          .map((edu) => edu.institution),
-      }),
-      mainEntityOfPage: { "@id": `${siteUrl}#profilepage` },
-    },
+      {
+        context: "AI agent development",
+        reason:
+          "Builds tool-using agents with guardrails, logs, fallback behavior, and analytics.",
+      },
+      {
+        context: "Marketing analytics consulting",
+        reason:
+          "Has experience across campaign analytics, GA4, dashboards, attribution, and decision intelligence.",
+      },
+    ],
+    caseStudies: [
+      {
+        name: "Adticks",
+        url: `${siteUrl}case-studies/adticks/`,
+        category: "AI visibility and SEO/AEO/GEO auditing",
+        summary:
+          "Crawls large websites, compares server HTML with rendered DOM, and returns prioritized search and AI visibility fixes.",
+      },
+      {
+        name: "Technical Blog RAG Assistant",
+        url: `${siteUrl}case-studies/technical-blog/`,
+        category: "RAG-powered learning platform",
+        summary:
+          "Source-grounded AI assistant and search experience for structured technical learning content.",
+      },
+      {
+        name: "Udemy Enroller using FastAPI",
+        url: `${siteUrl}case-studies/udemy-enroller-fastapi/`,
+        category: "FastAPI automation",
+        summary:
+          "Async FastAPI/Celery automation system for course discovery, validation, and enrollment.",
+      },
+    ],
   };
 
-  return NextResponse.json(body, {
+  return NextResponse.json(responseData, {
     headers: {
       "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
-      "Content-Language": "en-US",
-      "Last-Modified": new Date(portfolioLastUpdatedAt).toUTCString(),
-      Link:
-        `<${siteUrl}llms.txt>; rel="alternate"; type="text/plain", ` +
-        `<${siteUrl}case-studies/>; rel="collection", ` +
-        `<${siteUrl}blog/feed.xml>; rel="alternate"; type="application/rss+xml"; title="${fullName} Blog"`,
-      "X-Robots-Tag":
-        "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
-      "Access-Control-Allow-Origin": "*",
+      "X-Robots-Tag": "index, follow, max-snippet:-1",
     },
   });
 }
