@@ -327,46 +327,30 @@ function Hero({
 }
 
 function Stats({ stats }: { stats: Profile["stats"] }) {
-  const { ref, inView } = useInView<HTMLDivElement>();
-
   if (stats.length === 0) return null;
 
   return (
     <section aria-label="Key results" className="py-12 sm:py-16">
-      <div
-        ref={ref}
-        className="mx-auto grid w-[min(1400px,92%)] grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
-      >
-        {stats.map((stat, index) => (
-          <StatItem
-            key={stat.label}
-            value={stat.value}
-            label={stat.label}
-            start={inView}
-            delay={index * 80}
-          />
+      <div className="mx-auto grid w-[min(1400px,92%)] grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
+        {stats.map((stat) => (
+          <StatItem key={stat.label} value={stat.value} label={stat.label} />
         ))}
       </div>
     </section>
   );
 }
 
-function StatItem({
-  value,
-  label,
-  start,
-  delay,
-}: {
-  value: string;
-  label: string;
-  start: boolean;
-  delay: number;
-}) {
-  const display = useCountUp(value, start);
-
+function StatItem({ value, label }: { value: string; label: string }) {
   const getIcon = (label: string) => {
     const l = label.toLowerCase();
-    if (l.includes("experience") || l.includes("year")) {
+    if (
+      l.includes("experience") ||
+      l.includes("year") ||
+      l.includes("enrollment") ||
+      l.includes("udemy") ||
+      l.includes("learning") ||
+      l.includes("value")
+    ) {
       return (
         <IconAward className="h-6 w-6 text-primary transition-transform duration-300 group-hover:scale-115 group-hover:rotate-6" />
       );
@@ -379,7 +363,9 @@ function StatItem({
     if (
       l.includes("churn") ||
       l.includes("reduction") ||
-      l.includes("retention")
+      l.includes("retention") ||
+      l.includes("page") ||
+      l.includes("audit")
     ) {
       return (
         <IconChartBar className="h-6 w-6 text-primary transition-transform duration-300 group-hover:scale-115 group-hover:translate-x-[2px]" />
@@ -392,11 +378,8 @@ function StatItem({
 
   return (
     <div
-      className="group relative flex flex-col items-center justify-center overflow-hidden rounded-2xl border border-border/60 bg-surface/30 px-6 py-8 text-center shadow-sm backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:border-primary/25 hover:shadow-glow"
+      className="group relative flex flex-col items-center justify-center overflow-hidden rounded-2xl border border-border/60 bg-surface/30 px-6 py-8 text-center shadow-sm backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:border-primary/25 hover:shadow-glow opacity-100 translate-y-0"
       style={{
-        opacity: start ? 1 : 0,
-        transform: start ? "translateY(0)" : "translateY(20px)",
-        transitionDelay: `${delay}ms`,
         transitionProperty: "opacity, transform, border-color, box-shadow",
       }}
     >
@@ -409,7 +392,7 @@ function StatItem({
       </div>
 
       <dd className="text-gradient-amber font-display text-4xl font-extrabold tracking-tight sm:text-5xl">
-        {display}
+        {value}
       </dd>
 
       <dt className="mt-3 text-xs font-semibold text-foreground/90 tracking-wider uppercase sm:text-sm">
@@ -1306,36 +1289,6 @@ function useInView<T extends HTMLElement>(options?: IntersectionObserverInit) {
   }, [inView, options]);
 
   return { ref, inView };
-}
-
-function useCountUp(target: string, start: boolean, duration = 1400) {
-  const match = target.match(/^([^\d]*)(\d+(?:\.\d+)?)(.*)$/);
-  const prefix = match?.[1] ?? "";
-  const end = match ? Number.parseFloat(match[2]) : 0;
-  const suffix = match?.[3] ?? "";
-  const hasNumber = Boolean(match);
-  const [value, setValue] = useState(hasNumber ? 0 : end);
-
-  useEffect(() => {
-    if (!start || !hasNumber) return;
-
-    let raf = 0;
-    const startTime = performance.now();
-    const tick = (now: number) => {
-      const progress = Math.min(1, (now - startTime) / duration);
-      const eased = 1 - (1 - progress) ** 3;
-      setValue(end * eased);
-      if (progress < 1) {
-        raf = requestAnimationFrame(tick);
-      }
-    };
-
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [start, end, duration, hasNumber]);
-
-  if (!hasNumber) return target;
-  return `${prefix}${Number.isInteger(end) ? Math.round(value) : value.toFixed(1)}${suffix}`;
 }
 
 function useActiveSection(ids: string[]) {

@@ -34,20 +34,24 @@
     "yearsOfExperience": 9,
     "stats": [
       {
-        "label": "Years experience",
+        "label": "years analytics and AI experience",
         "value": "9+"
       },
       {
-        "label": "New-customer growth",
+        "label": "new-customer growth at redBus",
         "value": "30%"
       },
       {
-        "label": "Churn reduction",
-        "value": "20%"
+        "label": "enrollments for Udemy Enroller",
+        "value": "20,000+"
       },
       {
-        "label": "Brand-awareness lift",
-        "value": "15%"
+        "label": "pages audited for Adticks",
+        "value": "10,000+"
+      },
+      {
+        "label": "learning value unlocked",
+        "value": "₹10L+"
       }
     ],
     "profileImage": "/new-ui/hero-portrait.jpg",
