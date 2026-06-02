@@ -1,15 +1,15 @@
 import {
-  IconBrandGithub,
   IconBrandLinkedin,
-  IconBrandX,
+  IconCalendar,
   IconChevronLeft,
+  IconCircleCheck,
+  IconClock,
+  IconGlobe,
   IconMail,
   IconMapPin,
-  IconPhone,
   IconSparkles,
 } from "@tabler/icons-react";
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 import { ContactForm } from "@/components/ContactForm";
@@ -24,9 +24,9 @@ export async function generateMetadata(): Promise<Metadata> {
   const canonicalUrl = `${siteUrl}contact/`;
 
   return {
-    title: "Contact & Collaboration | Madhu Dadi",
+    title: "Contact Madhu Dadi — AI & Marketing Analytics Engineer",
     description:
-      "Get in touch with Madhu Dadi for generative AI development, RAG systems, and advanced marketing analytics consulting. Available worldwide.",
+      "Work with Madhu Dadi on production AI, RAG, AI agents, marketing analytics, or full-stack AI product development. Response time is usually within 24 hours.",
     alternates: {
       canonical: canonicalUrl,
     },
@@ -56,6 +56,18 @@ export default async function ContactPage() {
     ],
   };
 
+  const bestFitAreas = [
+    "LLM/RAG applications",
+    "AI agents and workflow automation",
+    "FastAPI/Next.js product builds",
+    "GA4, BigQuery, campaign analytics, dashboards",
+    "AI visibility and SEO/AEO/GEO systems",
+  ];
+
+  const linkedinUrl =
+    profile.socialLinks.linkedin ||
+    "https://www.linkedin.com/in/madhu-dadi-54684531";
+
   return (
     <div className="flex flex-col min-h-screen">
       <script
@@ -77,156 +89,164 @@ export default async function ContactPage() {
             </Link>
           </div>
 
-          {/* Intro Section */}
-          <section className="space-y-4 max-w-2xl">
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
-              <IconSparkles className="h-3.5 w-3.5" /> Collaboration & Hiring
-            </span>
-            <h1 className="text-3xl md:text-5xl font-bold tracking-tight">
-              Let&apos;s build{" "}
-              <span className="text-gradient">something great</span>
-            </h1>
-            <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-              Wherever you are in the world, drop a note about your technical
-              challenge, hiring timeline, or project inquiry. I respond within
-              24 hours.
-            </p>
-          </section>
-
-          {/* Form and Contact Detail Split */}
-          <div className="grid gap-10 lg:grid-cols-2 pt-4">
-            {/* Info and Socials */}
+          <div className="grid gap-10 lg:grid-cols-2">
+            {/* Left Column: Context, Best Fit, and Direct Details */}
             <div className="space-y-8">
-              <div className="space-y-6">
-                <h2 className="text-xl font-bold tracking-tight border-b border-border/80 pb-2">
-                  Direct Contact Info
+              {/* Intro Section */}
+              <section className="space-y-4">
+                <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
+                  <IconSparkles className="h-3.5 w-3.5 animate-pulse" />{" "}
+                  Collaboration
+                </span>
+                <h1 className="text-3xl md:text-5xl font-bold tracking-tight">
+                  Contact Madhu Dadi
+                </h1>
+                <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+                  Work with me on production AI, RAG, AI agents, marketing
+                  analytics, or full-stack AI product development.
+                </p>
+              </section>
+
+              {/* Best Fit Focus Areas */}
+              <section className="space-y-4">
+                <h2 className="text-lg font-bold tracking-tight border-b border-border/80 pb-2">
+                  Best fit projects:
                 </h2>
-                <ul className="space-y-4 text-sm">
-                  <li className="flex items-center gap-3 p-4 rounded-xl border border-border/60 bg-surface/20 hover:border-primary/10 transition-colors">
+                <ul className="space-y-3">
+                  {bestFitAreas.map((area) => (
+                    <li key={area} className="flex gap-2.5 items-start">
+                      <IconCircleCheck className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                      <span className="text-sm text-foreground/90">{area}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+
+              {/* Engagement Status & Details */}
+              <section className="space-y-4">
+                <h2 className="text-lg font-bold tracking-tight border-b border-border/80 pb-2">
+                  Availability & Engagement
+                </h2>
+                <div className="grid gap-4 sm:grid-cols-2 text-xs">
+                  <div className="p-4 rounded-xl border border-border/50 bg-surface/10 space-y-1">
+                    <span className="text-muted-foreground block font-medium">
+                      Availability
+                    </span>
+                    <span className="font-semibold text-foreground flex items-center gap-1">
+                      <IconGlobe className="h-4 w-4 text-primary" />{" "}
+                      Remote-first, available worldwide
+                    </span>
+                  </div>
+                  <div className="p-4 rounded-xl border border-border/50 bg-surface/10 space-y-1">
+                    <span className="text-muted-foreground block font-medium">
+                      Response Time
+                    </span>
+                    <span className="font-semibold text-foreground flex items-center gap-1">
+                      <IconClock className="h-4 w-4 text-primary" /> I usually
+                      reply within 24 hours
+                    </span>
+                  </div>
+                </div>
+              </section>
+
+              {/* Direct Info */}
+              <section className="space-y-4">
+                <h2 className="text-sm font-semibold tracking-widest text-muted-foreground uppercase">
+                  Direct Contact & Portals
+                </h2>
+                <ul className="space-y-3.5 text-sm">
+                  <li className="flex items-center gap-3 p-4 rounded-xl border border-border/60 bg-surface/20">
                     <div className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-primary/15 text-primary border border-primary/10 shrink-0">
                       <IconMail className="h-4.5 w-4.5" />
                     </div>
                     <div>
-                      <span className="text-xs text-muted-foreground block">
-                        Email
+                      <span className="text-[10px] text-muted-foreground block uppercase font-mono">
+                        Email Address
                       </span>
                       <a
                         href={`mailto:${profile.email}`}
-                        className="font-medium text-foreground hover:text-primary transition-colors"
+                        className="font-semibold text-foreground hover:text-primary transition-colors"
                       >
                         {profile.email}
                       </a>
                     </div>
                   </li>
-
-                  {profile.phone && (
-                    <li className="flex items-center gap-3 p-4 rounded-xl border border-border/60 bg-surface/20 hover:border-primary/10 transition-colors">
-                      <div className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-primary/15 text-primary border border-primary/10 shrink-0">
-                        <IconPhone className="h-4.5 w-4.5" />
-                      </div>
-                      <div>
-                        <span className="text-xs text-muted-foreground block">
-                          Phone
-                        </span>
-                        <a
-                          href={`tel:${profile.phone.replace(/[^\d+]/g, "")}`}
-                          className="font-medium text-foreground hover:text-primary transition-colors"
-                        >
-                          {profile.phone}
-                        </a>
-                      </div>
-                    </li>
-                  )}
-
-                  <li className="flex items-center gap-3 p-4 rounded-xl border border-border/60 bg-surface/20 hover:border-primary/10 transition-colors">
+                  <li className="flex items-center gap-3 p-4 rounded-xl border border-border/60 bg-surface/20">
+                    <div className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-primary/15 text-primary border border-primary/10 shrink-0">
+                      <IconBrandLinkedin className="h-4.5 w-4.5" />
+                    </div>
+                    <div>
+                      <span className="text-[10px] text-muted-foreground block uppercase font-mono">
+                        LinkedIn Profile
+                      </span>
+                      <a
+                        href={linkedinUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-semibold text-foreground hover:text-primary transition-colors"
+                      >
+                        linkedin.com/in/madhu-dadi
+                      </a>
+                    </div>
+                  </li>
+                  <li className="flex items-center gap-3 p-4 rounded-xl border border-border/60 bg-surface/20">
+                    <div className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-primary/15 text-primary border border-primary/10 shrink-0">
+                      <IconCalendar className="h-4.5 w-4.5" />
+                    </div>
+                    <div>
+                      <span className="text-[10px] text-muted-foreground block uppercase font-mono">
+                        Booking / Scheduling
+                      </span>
+                      <a
+                        href={`mailto:${profile.email}?subject=Booking%20Inquiry`}
+                        className="font-semibold text-primary hover:underline transition-all"
+                      >
+                        Request scheduling link
+                      </a>
+                    </div>
+                  </li>
+                  <li className="flex items-center gap-3 p-4 rounded-xl border border-border/60 bg-surface/20">
                     <div className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-primary/15 text-primary border border-primary/10 shrink-0">
                       <IconMapPin className="h-4.5 w-4.5" />
                     </div>
                     <div>
-                      <span className="text-xs text-muted-foreground block">
+                      <span className="text-[10px] text-muted-foreground block uppercase font-mono">
                         Location
                       </span>
-                      <span className="font-medium text-foreground">
+                      <span className="font-semibold text-foreground">
                         {profile.location}
                       </span>
                     </div>
                   </li>
                 </ul>
-              </div>
-
-              {/* Social Channels */}
-              <div className="space-y-4">
-                <h2 className="text-sm font-semibold tracking-widest text-muted-foreground uppercase">
-                  Social Channels
-                </h2>
-                <div className="flex flex-wrap gap-3">
-                  {profile.socialLinks.github && (
-                    <a
-                      href={profile.socialLinks.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-muted-foreground hover:text-foreground border border-border bg-surface/30 rounded-xl hover:border-primary/20 transition-all"
-                    >
-                      <IconBrandGithub className="h-4.5 w-4.5" /> GitHub
-                    </a>
-                  )}
-                  {profile.socialLinks.linkedin && (
-                    <a
-                      href={profile.socialLinks.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-muted-foreground hover:text-foreground border border-border bg-surface/30 rounded-xl hover:border-primary/20 transition-all"
-                    >
-                      <IconBrandLinkedin className="h-4.5 w-4.5" /> LinkedIn
-                    </a>
-                  )}
-                  {profile.socialLinks.twitter && (
-                    <a
-                      href={profile.socialLinks.twitter}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-muted-foreground hover:text-foreground border border-border bg-surface/30 rounded-xl hover:border-primary/20 transition-all"
-                    >
-                      <IconBrandX className="h-4.5 w-4.5" /> Twitter
-                    </a>
-                  )}
-                  {profile.socialLinks.website && (
-                    <a
-                      href={profile.socialLinks.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-muted-foreground hover:text-foreground border border-border bg-surface/30 rounded-xl hover:border-primary/20 transition-all"
-                    >
-                      <div className="flex h-4.5 w-4.5 items-center justify-center overflow-hidden rounded-full border border-border/50 bg-surface shadow-inner shrink-0">
-                        <Image
-                          src="/new-ui/logo.png"
-                          alt=""
-                          width={18}
-                          height={18}
-                          className="h-full w-full object-cover"
-                        />
-                      </div>
-                      Blog
-                    </a>
-                  )}
-                </div>
-              </div>
+              </section>
             </div>
 
-            {/* Interactive Form Component */}
-            <div className="space-y-4">
-              <Suspense
-                fallback={
-                  <div className="flex flex-col items-center justify-center h-80 rounded-2xl border border-border bg-surface/30 p-6 space-y-4 animate-pulse">
-                    <div className="h-8 w-8 rounded-full border-4 border-t-primary border-r-transparent border-b-transparent border-l-transparent animate-spin" />
-                    <p className="text-sm text-muted-foreground">
-                      Preparing contact form...
-                    </p>
-                  </div>
-                }
-              >
-                <ContactForm />
-              </Suspense>
+            {/* Right Column: Contact Form Component */}
+            <div className="space-y-4 lg:pt-14">
+              <div className="rounded-2xl border border-border bg-surface/10 p-6 md:p-8 space-y-6 backdrop-blur-sm">
+                <div className="space-y-2">
+                  <h2 className="text-xl font-bold tracking-tight">
+                    Send a Message
+                  </h2>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    Submit your requirements below to instantly start our review
+                    pipeline.
+                  </p>
+                </div>
+                <Suspense
+                  fallback={
+                    <div className="flex flex-col items-center justify-center h-80 rounded-xl border border-border bg-surface/30 p-6 space-y-4 animate-pulse">
+                      <div className="h-8 w-8 rounded-full border-4 border-t-primary border-r-transparent border-b-transparent border-l-transparent animate-spin" />
+                      <p className="text-sm text-muted-foreground">
+                        Preparing contact form...
+                      </p>
+                    </div>
+                  }
+                >
+                  <ContactForm />
+                </Suspense>
+              </div>
             </div>
           </div>
         </div>
