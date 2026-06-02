@@ -10,6 +10,7 @@ import {
   IconCoin,
   IconCpu,
   IconDatabase,
+  IconSettings,
   IconSparkles,
 } from "@tabler/icons-react";
 import type { Metadata } from "next";
@@ -27,7 +28,7 @@ interface ServicePageProps {
   }>;
 }
 
-// Generate static routes for the 5 services
+// Generate static routes for the 6 services
 export async function generateStaticParams() {
   const { sortedServices } = await getPortfolioData();
   return sortedServices.map((service) => ({
@@ -72,12 +73,14 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
     switch (slug) {
       case "ai-llm-application-development":
         return <IconBrain className="h-8 w-8 text-primary" />;
-      case "rag-consultant-india":
+      case "rag-system-development":
         return <IconDatabase className="h-8 w-8 text-primary" />;
       case "ai-agent-development":
         return <IconCpu className="h-8 w-8 text-primary" />;
-      case "marketing-analytics-consultant":
+      case "marketing-analytics-decision-intelligence":
         return <IconChartBar className="h-8 w-8 text-primary" />;
+      case "ga4-bigquery-campaign-analytics":
+        return <IconSettings className="h-8 w-8 text-primary" />;
       case "full-stack-ai-product-development":
         return <IconCode className="h-8 w-8 text-primary" />;
       default:
