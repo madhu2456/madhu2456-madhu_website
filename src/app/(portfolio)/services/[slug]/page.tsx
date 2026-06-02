@@ -28,12 +28,14 @@ interface ServicePageProps {
   }>;
 }
 
-// Generate static routes for the 6 services
+// Generate static routes for the dynamic services (excluding the bespoke AI & LLM page)
 export async function generateStaticParams() {
   const { sortedServices } = await getPortfolioData();
-  return sortedServices.map((service) => ({
-    slug: service.slug,
-  }));
+  return sortedServices
+    .filter((service) => service.slug !== "ai-llm-application-development")
+    .map((service) => ({
+      slug: service.slug,
+    }));
 }
 
 export async function generateMetadata({
