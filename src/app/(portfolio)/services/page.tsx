@@ -22,7 +22,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const canonicalUrl = `${siteUrl}services/`;
 
   return {
-    title: "AI, RAG, Analytics & Full-Stack Engineering Services — Madhu Dadi",
+    title:
+      "Generative AI, RAG, AI Agents & Marketing Analytics Services — Madhu Dadi",
     description:
       "Hire Madhu Dadi for production AI/LLM development, RAG systems, AI agents, marketing analytics, GA4/BigQuery pipelines, and full-stack FastAPI/Next.js apps.",
     alternates: {
@@ -92,8 +93,8 @@ export default async function ServicesHubPage() {
               Delivery
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-              AI, RAG, Analytics &{" "}
-              <span className="text-gradient">Full-Stack</span> Engineering
+              Generative AI, RAG, AI Agents &{" "}
+              <span className="text-gradient">Marketing Analytics</span>{" "}
               Services
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">

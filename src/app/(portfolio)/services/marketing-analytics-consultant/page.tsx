@@ -21,8 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const canonicalUrl = `${siteUrl}services/marketing-analytics-consultant/`;
 
   return {
-    title:
-      "Marketing Analytics Consultant — GA4, BigQuery, Campaign Analytics | Madhu Dadi",
+    title: "Marketing Analytics Manager & GA4 BigQuery Consultant | Madhu Dadi",
     description:
       "Hire Madhu Dadi for marketing analytics, GA4 setups, BigQuery dashboards, campaign attribution, A/B test analysis, and decision intelligence workflows.",
     alternates: {
@@ -252,17 +251,24 @@ export default async function MarketingAnalyticsConsultantPage() {
               </span>
 
               <h1 className="text-3xl md:text-5xl font-bold tracking-tight leading-tight">
-                Marketing Analytics{" "}
-                <span className="text-gradient">Consultant</span>
+                Marketing Analytics Manager &{" "}
+                <span className="text-gradient">GA4 BigQuery Consultant</span>
               </h1>
 
               {/* Above-the-fold direct answer */}
-              <div className="border-l-4 border-primary pl-5 py-2">
+              <div className="border-l-4 border-primary pl-5 py-2 space-y-4">
                 <p className="text-base md:text-lg text-foreground/90 font-medium leading-relaxed">
                   Madhu Dadi helps teams build marketing analytics systems they
-                  can trust, including GA4, BigQuery reporting, campaign
-                  analytics, attribution analysis, dashboards, experimentation
-                  reads, and decision-intelligence workflows.
+                  can trust. He designs and implements custom tracking plans,
+                  Google Analytics 4 (GA4) setups, server-side Google Tag
+                  Manager (sGTM) containers, and Google Ads Ads Data Hub (ADH)
+                  environments.
+                </p>
+                <p className="text-base md:text-lg text-foreground/90 font-medium leading-relaxed">
+                  He models and joins advertising spends to downstream sales
+                  databases inside Google BigQuery and designs intuitive BI
+                  dashboards (Looker Studio, Power BI) to track customer
+                  acquisition cost (CAC) and customer lifetime value (LTV).
                 </p>
               </div>
 

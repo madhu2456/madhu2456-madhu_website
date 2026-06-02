@@ -22,7 +22,7 @@ export const revalidate = 3600;
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title:
-      "Udemy Enroller Case Study — Headless Browser Task Automation & Telemetry | Madhu Dadi",
+      "Udemy Enroller FastAPI Case Study — Automation System by Madhu Dadi",
     description:
       "Explore Madhu Dadi's Udemy Course Enroller task automation engine built in Python/FastAPI with headless browser tab pools and Celery job queuing.",
     alternates: {
@@ -202,9 +202,9 @@ export default async function UdemyEnrollerCaseStudyPage() {
               </span>
 
               <h1 className="text-3xl md:text-5xl font-bold tracking-tight leading-tight">
-                Udemy Enroller —{" "}
+                Udemy Enroller FastAPI —{" "}
                 <span className="text-gradient">
-                  Task Automation & Headless Telemetry
+                  Async Automation Case Study
                 </span>
               </h1>
 

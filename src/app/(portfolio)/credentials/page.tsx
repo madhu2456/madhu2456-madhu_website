@@ -25,7 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const canonicalUrl = `${siteUrl}credentials/`;
 
   return {
-    title: "Credentials, Certifications & Proof — Madhu Dadi",
+    title: "Madhu Dadi Credentials — AI, RAG, GA4 & Analytics Certifications",
     description:
       "Verified credentials, certifications, awards, work history, and public proof for Madhu Dadi, AI and marketing analytics engineer.",
     alternates: {
@@ -190,8 +190,10 @@ export default async function CredentialsPage() {
               Authentication
             </span>
             <h1 className="text-3xl md:text-5xl font-bold tracking-tight">
-              Credentials, Certifications &{" "}
-              <span className="text-gradient">Proof</span>
+              Madhu Dadi Credentials —{" "}
+              <span className="text-gradient">
+                AI, RAG, GA4 & Analytics Certifications
+              </span>
             </h1>
             <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Factual, verifiable proof of professional competencies, academic

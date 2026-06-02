@@ -22,13 +22,15 @@ const getSiteUrl = () => {
 };
 
 export const metadata: Metadata = {
-  title: "Case Studies | Madhu Dadi",
+  title:
+    "Generative AI, RAG, FastAPI & Marketing Analytics Case Studies — Madhu Dadi",
   description: CASE_STUDIES_DESCRIPTION,
   alternates: {
     canonical: "/case-studies/",
   },
   openGraph: {
-    title: "Case Studies | Madhu Dadi",
+    title:
+      "Generative AI, RAG, FastAPI & Marketing Analytics Case Studies — Madhu Dadi",
     description: CASE_STUDIES_DESCRIPTION,
     url: "/case-studies/",
     type: "website",
@@ -43,7 +45,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Case Studies | Madhu Dadi",
+    title:
+      "Generative AI, RAG, FastAPI & Marketing Analytics Case Studies — Madhu Dadi",
     description: CASE_STUDIES_DESCRIPTION,
     images: [`${getSiteUrl()}opengraph-image`],
     creator: "@madhu245",
@@ -123,8 +126,8 @@ export default async function CaseStudiesPage() {
           <p className="text-xs tracking-[0.25em] text-primary uppercase">
             Selected work
           </p>
-          <h1 className="mt-3 font-display text-5xl font-bold text-gradient md:text-7xl">
-            Selected work.
+          <h1 className="mt-3 font-display text-5xl font-bold text-gradient md:text-6xl">
+            Generative AI, RAG, FastAPI & Marketing Analytics Case Studies
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
             Case studies across AI visibility, RAG learning systems, async

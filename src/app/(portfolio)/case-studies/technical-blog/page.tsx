@@ -21,8 +21,7 @@ export const revalidate = 3600;
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title:
-      "Technical Blog Case Study — Next.js Server-Side RAG & SEO/AEO System | Madhu Dadi",
+    title: "RAG Technical Blog Case Study — Source-Cited AI Learning Platform",
     description:
       "Explore Madhu Dadi's Next.js RAG blog platform with React 19 server rendering, pgvector semantic search, and source-cited LLM answer streaming.",
     alternates: {
@@ -199,9 +198,9 @@ export default async function TechnicalBlogCaseStudyPage() {
               </span>
 
               <h1 className="text-3xl md:text-5xl font-bold tracking-tight leading-tight">
-                Technical Blog —{" "}
+                RAG Technical Blog —{" "}
                 <span className="text-gradient">
-                  Server-Side RAG & SEO/AEO Portal
+                  Source-Cited AI Learning Platform Case Study
                 </span>
               </h1>
 

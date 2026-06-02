@@ -25,8 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const canonicalUrl = `${siteUrl}services/full-stack-ai-product-development/`;
 
   return {
-    title:
-      "Full-Stack AI Product Development — FastAPI, Next.js, Postgres | Madhu Dadi",
+    title: "Full Stack AI Engineer for FastAPI, Next.js & GenAI Products",
     description:
       "Full-stack AI product development by Madhu Dadi. I build FastAPI backends, Next.js interfaces, Postgres schemas, Celery tasks, and analytics instrumentation.",
     alternates: {
@@ -281,8 +280,10 @@ export default async function FullStackAIProductPage() {
               </span>
 
               <h1 className="text-3xl md:text-5xl font-bold tracking-tight leading-tight">
-                Full-Stack AI{" "}
-                <span className="text-gradient">Product Development</span>
+                Full Stack AI Engineer for{" "}
+                <span className="text-gradient">
+                  FastAPI, Next.js & GenAI Products
+                </span>
               </h1>
 
               {/* Above-the-fold answer */}
