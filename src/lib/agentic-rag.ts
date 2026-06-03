@@ -122,7 +122,7 @@ const SECTION_SUGGESTIONS: Record<ChatSection | "blog", string[]> = {
   service: [
     "Would you like service-wise timelines and deliverables?",
     "Want details on which service fits your use case?",
-    "Would you like pricing-related details where available?",
+    "Would you like to review the step-by-step engagement process?",
   ],
   skills: [
     "Would you like my skills grouped by category?",

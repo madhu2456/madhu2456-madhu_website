@@ -860,11 +860,6 @@
         "LLM execution logging and tracing dashboard",
         "Detailed API contract & deployment guide"
       ],
-      "pricing": {
-        "startingPrice": 2500,
-        "priceType": "project",
-        "description": "From $2,500"
-      },
       "timeline": "3-8 weeks",
       "featured": true,
       "order": 1,
@@ -895,11 +890,6 @@
         "Factuality and citation evaluation report",
         "API integration endpoints and documentation"
       ],
-      "pricing": {
-        "startingPrice": 3000,
-        "priceType": "project",
-        "description": "From $3,000"
-      },
       "timeline": "4-10 weeks",
       "featured": true,
       "order": 2,
@@ -929,11 +919,6 @@
         "Traceability, observability & logging integration",
         "Comprehensive agent evaluation reports"
       ],
-      "pricing": {
-        "startingPrice": 4000,
-        "priceType": "project",
-        "description": "From $4,000"
-      },
       "timeline": "4-12 weeks",
       "featured": true,
       "order": 3,
@@ -964,11 +949,6 @@
         "CLV & cohort analytics reporting dashboards",
         "Measurement strategy & decision framework documents"
       ],
-      "pricing": {
-        "startingPrice": 3000,
-        "priceType": "project",
-        "description": "From $3,000"
-      },
       "timeline": "4-8 weeks",
       "featured": true,
       "order": 4,
@@ -999,11 +979,6 @@
         "BigQuery SQL extraction & transformation scripts",
         "Polished campaign performance BI dashboards"
       ],
-      "pricing": {
-        "startingPrice": 2000,
-        "priceType": "project",
-        "description": "From $2,000"
-      },
       "timeline": "3-6 weeks",
       "featured": true,
       "order": 5,
@@ -1034,11 +1009,6 @@
         "Postgres schema definition and database migration scripts",
         "Containerized deployment configs (Docker / CI-CD)"
       ],
-      "pricing": {
-        "startingPrice": 5000,
-        "priceType": "project",
-        "description": "From $5,000"
-      },
       "timeline": "4-12 weeks",
       "featured": true,
       "order": 6,
