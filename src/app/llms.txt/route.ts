@@ -1,5 +1,3 @@
-import { NextResponse } from "next/server";
-
 export const revalidate = 3600;
 
 export async function GET() {
@@ -102,7 +100,7 @@ GitHub: https://github.com/madhu2456/udemy_enroller_fastapi
 - Sitemap: ${siteUrl}sitemap.xml
 `;
 
-  return new NextResponse(body, {
+  return new Response(body, {
     headers: {
       "Content-Type": "text/plain; charset=utf-8",
       "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
