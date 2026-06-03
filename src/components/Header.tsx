@@ -98,12 +98,22 @@ export function Header({ profile }: HeaderProps) {
           })}
         </nav>
 
-        <Link
-          href="/contact/?subject=Hiring inquiry, full-time AI & Analytics Engineer&message=Hi Madhu,%0A%0AWe'd like to talk about a full-time role.%0A%0ACompany:%0ARole / team:%0ALocation (remote, hybrid, onsite):%0ATech stack:%0AIdeal start date:%0A%0ALooking forward to connecting."
-          className="rounded-full bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground shadow-sm shadow-primary/25 transition-all duration-300 hover:scale-[1.04] hover:shadow-glow sm:px-5 sm:text-sm"
-        >
-          Hire me
-        </Link>
+        <div className="flex items-center gap-2">
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-full border border-border/80 bg-surface/50 px-4 py-2 text-xs font-semibold text-foreground shadow-sm transition-all duration-300 hover:scale-[1.04] hover:bg-surface-elevated hover:border-primary/30 sm:px-5 sm:text-sm"
+          >
+            Resume
+          </a>
+          <Link
+            href="/contact/?subject=Hiring inquiry, full-time AI & Analytics Engineer&message=Hi Madhu,%0A%0AWe'd like to talk about a full-time role.%0A%0ACompany:%0ARole / team:%0ALocation (remote, hybrid, onsite):%0ATech stack:%0AIdeal start date:%0A%0ALooking forward to connecting."
+            className="rounded-full bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground shadow-sm shadow-primary/25 transition-all duration-300 hover:scale-[1.04] hover:shadow-glow sm:px-5 sm:text-sm"
+          >
+            Hire me
+          </Link>
+        </div>
       </div>
     </header>
   );
