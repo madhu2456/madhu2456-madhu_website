@@ -85,9 +85,9 @@ Live: https://adticks.com
 RAG-powered learning platform with source-grounded AI assistant.
 Case study: https://madhudadi.in/case-studies/technical-blog/
 
-### Udemy Enroller using FastAPI
+### Browser Task Automation System
 
-Async FastAPI and Celery automation project.
+Async FastAPI and Celery browser-workflow automation project.
 Case study: https://madhudadi.in/case-studies/udemy-enroller-fastapi/
 GitHub: https://github.com/madhu2456/udemy_enroller_fastapi
 
