@@ -145,8 +145,8 @@ export default async function RagConsultantIndiaPage() {
 
   const faqs = [
     {
-      q: "How do you guarantee that a RAG assistant will not hallucinate?",
-      a: "No LLM is 100% immune, but we minimize hallucination to near-zero by: (1) enforcing strict prompt boundaries that forbid answering without context, (2) using citation parser schemas, and (3) adding evaluation guardrails.",
+      q: "How do you reduce hallucination risk in a RAG assistant?",
+      a: "No LLM is 100% immune, but we achieve a reduced hallucination risk through retrieval boundaries and evals by: (1) enforcing strict prompt boundaries that forbid answering without context, (2) using citation parser schemas, and (3) adding evaluation guardrails.",
     },
     {
       q: "Can you implement RAG on private local data?",

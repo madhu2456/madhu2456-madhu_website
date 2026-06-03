@@ -63,7 +63,7 @@ export default async function TechnicalBlogCaseStudyPage() {
   const technicalDecisions = [
     {
       title: "React 19 Server Components",
-      desc: "Leveraged Next.js React 19 server components (SSR/SSG) to achieve optimal performance, enabling near-instant page load times (low TTFB) and flawless search crawler readability.",
+      desc: "Leveraged Next.js React 19 server components (SSR/SSG) to achieve optimal performance, enabling near-instant page load times (low TTFB) and strong search crawler readability.",
     },
     {
       title: "Local pgvector Embeddings Index",
@@ -75,7 +75,7 @@ export default async function TechnicalBlogCaseStudyPage() {
     },
     {
       title: "Strict Temperature Controls",
-      desc: "Configured LLM prompt pipelines with a low temperature (0.1) and absolute context-bounding system instructions to restrict responses strictly to verified local blog text and completely eliminate AI hallucinations.",
+      desc: "Configured LLM prompt pipelines with a low temperature (0.1) and absolute context-bounding system instructions to restrict responses strictly to verified local blog text and reduce AI hallucination risk.",
     },
   ];
 
@@ -91,9 +91,9 @@ export default async function TechnicalBlogCaseStudyPage() {
       desc: "Verified through automated regression tests querying complex concepts and measuring citation mapping accuracy against the database.",
     },
     {
-      metric: "100% crawl indexability",
+      metric: "Full coverage",
       label: "Search & AI Indexing Rate",
-      desc: "Confirmed by auditing robots.txt and sitemap canonical parameters, ensuring instant search crawls with zero duplicate slashes.",
+      desc: "Verified as full sitemap and canonical coverage in the tested environment, ensuring search crawls with zero duplicate slashes.",
     },
   ];
 
@@ -299,11 +299,11 @@ export default async function TechnicalBlogCaseStudyPage() {
                   High Factual Veracity:
                 </strong>{" "}
                 The localized chatbot must reject irrelevant or non-portfolio
-                technical prompts, eliminating the risk of LLM hallucinations.
+                technical prompts, reducing the risk of LLM hallucinations.
               </li>
               <li>
                 <strong className="text-foreground">
-                  Perfect Canonical Crawling:
+                  Consistent Canonical Crawling:
                 </strong>{" "}
                 All dynamic sitemap files, trailing-slashes, and schema
                 attributes must align cleanly to avoid index duplication
