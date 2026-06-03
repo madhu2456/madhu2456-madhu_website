@@ -801,7 +801,7 @@
         }
       ],
       "problemStatement": "Finding free or discounted Udemy courses is repetitive and time-sensitive. Users had to monitor multiple coupon sites, copy links, and enroll before short validity windows expired, losing opportunities to timezone gaps and manual toil. The system needed a robust, high-availability architecture to handle async queues and rate-limiting gracefully.",
-      "solutionApproach": "FastAPI service for the core API layer with session-based Udemy authentication.\nCelery + Redis for async task processing and concurrent enrollments.\nScraping and validation pipeline that authenticates, verifies coupons, and enrolls users without manual input.\nComprehensive logging and monitoring to track success rates and handle CAPTCHAs or IP blocks.",
+      "solutionApproach": "FastAPI service for the core API layer with session-based Udemy authentication.\nCelery + Redis for async task processing and concurrent enrollments.\nValidation pipeline that authenticates, verifies coupons, and enrolls users without manual input.\nComprehensive logging and monitoring to track success rates and handle session expirations or request limits.",
       "impactMetrics": [
         {
           "label": "reduction in manual enrollment effort",

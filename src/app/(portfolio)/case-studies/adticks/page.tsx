@@ -100,8 +100,8 @@ export default async function AdticksCaseStudyPage() {
       a: "It inspects HTTP headers, redirects, robots.txt crawl rules specifically matching AI agent tokens (e.g. GPTBot, Google-Extended, OAI-SearchBot), semantic heading tree depths, sitemap indexing schemas, and counts hidden raw-HTML rendering discrepancies.",
     },
     {
-      q: "Can it bypass basic Cloudflare scraping blocks?",
-      a: "The Playwright driver uses stealth parameter bypasses, custom user agents, and structured rate-limiting request bounds to simulate legitimate user behaviors during audits.",
+      q: "How does the crawler handle potential request blocks?",
+      a: "The crawler uses respectful rate limits, clear timeout boundaries, standard browser-rendering diagnostics, and compliance-aware request controls.",
     },
     {
       q: "How long does a 10,000-page crawl audit take?",
@@ -306,7 +306,7 @@ export default async function AdticksCaseStudyPage() {
                 </strong>{" "}
                 Scanning e-commerce directories of 10,000+ pages requires robust
                 error handling, concurrency bounds, and session recovery
-                checkpoints to bypass server timeouts.
+                checkpoints to mitigate server timeouts.
               </li>
             </ul>
           </section>
@@ -573,8 +573,7 @@ export default async function AdticksCaseStudyPage() {
                 Asked Questions
               </h2>
               <p className="text-xs text-muted-foreground">
-                Audits, Cloudflare scraping bypasses, execution times, and
-                render checks.
+                Audits, request controls, execution times, and render checks.
               </p>
             </div>
 
