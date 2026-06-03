@@ -147,7 +147,7 @@ export default async function Ga4BigQueryCampaignAnalyticsPage() {
           "@type": "Offer",
           name: "Server-side GTM setup & Conversions API",
           description:
-            "Deploying sGTM containers, routing conversion signals to custom domains to bypass client-side blockers.",
+            "Deploying sGTM containers, routing consented first-party measurement streams through controlled server endpoints to improve data quality and privacy controls.",
         },
         {
           "@type": "Offer",

@@ -129,7 +129,7 @@ export default async function AiAgentDevelopmentPage() {
     name: "AI Agent Development",
     serviceType: "AI agent development",
     description:
-      "Autonomous AI agents using tools, following workflow graph rules, integrating observability, loop control, and human approval loops.",
+      "AI agents executing structured workflows using tools, following workflow graph rules, integrating observability, loop control, and human approval loops.",
     provider: {
       "@id": `${siteUrl}#person`,
     },
