@@ -127,9 +127,9 @@ export default async function FullStackAIProductPage() {
       tech: ["FastAPI", "Next.js", "Celery", "Redis", "Postgres"],
     },
     {
-      title: "Udemy Course Automation",
+      title: "Browser Workflow Automation",
       url: "/case-studies/udemy-enroller-fastapi/",
-      desc: "Designed a headless automation framework built in Python/FastAPI. The application schedules automatic course checkouts, handles session tokens, runs background jobs, and logs telemetry events.",
+      desc: "Designed a private FastAPI and Playwright workflow-orchestration system with bounded worker concurrency, secure session-state handling, background queues, and telemetry logging.",
       tech: ["FastAPI", "Python", "Docker", "Background Tasks"],
     },
     {
