@@ -68,7 +68,7 @@ export default async function AiAgentDevelopmentPage() {
       id: "comparison",
       title: "2. Chatbot vs. Autonomous Agent",
       icon: <IconCpu className="h-5 w-5 text-primary" />,
-      desc: "Chatbots excel at answering questions from static knowledge bases. Agents, however, actively execute workflows. They read emails, query corporate SQL databases, compute metrics, call third-party APIs, write files, and handle asynchronous tasks over long durations, acting as autonomous team members.",
+      desc: "Chatbots excel at answering questions from static knowledge bases. Agents, however, actively execute workflows. They read emails, query corporate SQL databases, compute metrics, call third-party APIs, write files, and handle asynchronous tasks over long durations, acting as workflow executors with human approval gates.",
     },
     {
       id: "tooluse",
