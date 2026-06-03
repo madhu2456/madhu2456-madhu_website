@@ -7,7 +7,6 @@ import {
   IconCircleCheck,
   IconClock,
   IconCode,
-  IconCoin,
   IconCpu,
   IconDatabase,
   IconSettings,
@@ -267,22 +266,8 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                   Engagement
                 </h3>
 
-                {service.pricing && (
-                  <div className="space-y-1">
-                    <span className="text-xs text-muted-foreground flex items-center gap-1">
-                      <IconCoin className="h-4 w-4" /> Pricing Model
-                    </span>
-                    <p className="text-2xl font-bold text-foreground">
-                      {service.pricing.description}
-                    </p>
-                    <span className="text-xs text-muted-foreground block">
-                      Based on scope and deliverables type.
-                    </span>
-                  </div>
-                )}
-
                 {service.timeline && (
-                  <div className="space-y-1 pt-4 border-t border-border/60">
+                  <div className="space-y-1">
                     <span className="text-xs text-muted-foreground flex items-center gap-1">
                       <IconClock className="h-4 w-4" /> Est. Engagement Time
                     </span>

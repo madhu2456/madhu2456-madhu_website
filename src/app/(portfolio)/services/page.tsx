@@ -172,21 +172,7 @@ export default async function ServicesHubPage() {
                     </div>
 
                     {/* Links */}
-                    <div className="flex items-center justify-between gap-4">
-                      {service.pricing && (
-                        <div className="text-xs">
-                          <span className="text-muted-foreground block">
-                            Starting from{" "}
-                          </span>
-                          <span className="font-semibold text-foreground">
-                            {service.pricing.description?.replace(
-                              /^From\s+/,
-                              "",
-                            )}
-                          </span>
-                        </div>
-                      )}
-
+                    <div className="flex items-center justify-end gap-4">
                       <Link
                         href={`/services/${service.slug}/`}
                         className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary-hover group/link transition-colors"
