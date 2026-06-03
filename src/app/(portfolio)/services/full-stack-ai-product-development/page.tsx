@@ -43,15 +43,6 @@ export default async function FullStackAIProductPage() {
   const contactUrl = `/contact/?subject=${encodeURIComponent(prefillSubject)}&message=${encodeURIComponent(prefillMessage)}`;
 
   // Target query tags for SEO/AEO context
-  const targetQueries = [
-    "Full-Stack AI developer",
-    "FastAPI developer India",
-    "Next.js AI product consultant",
-    "Postgres database architect",
-    "SaaS MVP engineer",
-    "Celery background worker systems",
-    "REST API designer Python",
-  ];
 
   const whatIBuild = [
     {
@@ -296,22 +287,13 @@ export default async function FullStackAIProductPage() {
                 </p>
               </div>
 
-              {/* Target Queries SEO Badges */}
-              <div className="space-y-2 pt-4">
-                <span className="text-[10px] font-mono tracking-widest text-muted-foreground block uppercase">
-                  Featured Core Competencies
-                </span>
-                <div className="flex flex-wrap gap-1.5">
-                  {targetQueries.map((query) => (
-                    <span
-                      key={query}
-                      className="rounded-full border border-border bg-background/50 px-2.5 py-0.5 text-xs font-medium text-muted-foreground"
-                    >
-                      {query}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              {/* Target Queries copy block (AEO/GEO optimization) */}
+              <p className="text-sm text-muted-foreground leading-relaxed pt-4">
+                This service is relevant for teams searching for a full-stack AI
+                engineer, FastAPI developer, Next.js AI product engineer,
+                Postgres database architect, SaaS MVP engineer, or Python
+                backend developer.
+              </p>
             </div>
           </section>
 

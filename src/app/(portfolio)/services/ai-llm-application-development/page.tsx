@@ -40,17 +40,6 @@ export default async function AiLlmApplicationDevelopmentPage() {
   const contactUrl = `/contact/?subject=${encodeURIComponent(prefillSubject)}&message=${encodeURIComponent(prefillMessage)}`;
 
   // Dedicated data collections to power the layout sections cleanly
-  const targetQueries = [
-    "AI application developer",
-    "LLM application developer",
-    "RAG developer",
-    "AI consultant India",
-    "OpenAI developer",
-    "FastAPI AI developer",
-    "Next.js AI product developer",
-    "AI agent developer",
-    "production AI app consultant",
-  ];
 
   const whoThisIsFor = [
     "SaaS teams adding AI features",
@@ -280,22 +269,13 @@ export default async function AiLlmApplicationDevelopmentPage() {
                 </p>
               </div>
 
-              {/* Target Queries Metadata Badges (GEO/AEO Signal Block) */}
-              <div className="space-y-2 pt-4">
-                <span className="text-[10px] font-mono tracking-widest text-muted-foreground block uppercase">
-                  Service Capabilities Covered
-                </span>
-                <div className="flex flex-wrap gap-1.5">
-                  {targetQueries.map((query) => (
-                    <span
-                      key={query}
-                      className="rounded-full border border-border bg-background/50 px-2.5 py-0.5 text-xs font-medium text-muted-foreground"
-                    >
-                      {query}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              {/* Target Queries copy block (AEO/GEO optimization) */}
+              <p className="text-sm text-muted-foreground leading-relaxed pt-4">
+                This service is relevant for teams searching for a generative AI
+                engineer, LLM application developer, RAG developer, AI agent
+                engineer, OpenAI developer, FastAPI AI engineer, or Next.js AI
+                product developer.
+              </p>
             </div>
           </section>
 
