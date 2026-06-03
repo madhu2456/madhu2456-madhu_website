@@ -111,7 +111,7 @@ export default async function MarketingAnalyticsConsultantPage() {
     {
       company: "Novartis",
       role: "Patient-Support Analytics",
-      desc: "Engineered scalable data warehouse reporting structures and interactive support-program dashboards. Normalization of patient telemetry schemas enabled healthcare program managers to track support-workflow efficiency and patient retention trends with absolute data trust.",
+      desc: "Engineered scalable data warehouse reporting structures and interactive support-program dashboards. Normalization of patient telemetry schemas enabled healthcare program managers to track support-workflow efficiency and patient retention trends with high-confidence data quality.",
     },
     {
       company: "Absolinsoft",
@@ -327,7 +327,7 @@ export default async function MarketingAnalyticsConsultantPage() {
               </h2>
               <p className="text-sm text-muted-foreground">
                 Bespoke dashboards, tracking plans, and warehouse data
-                structures to establish complete data trust.
+                structures to establish high-confidence data quality.
               </p>
             </div>
 

@@ -149,7 +149,7 @@ export default async function FullStackAIProductPage() {
   const faqs = [
     {
       q: "Do you design the product layout and interfaces?",
-      a: "Yes. I construct visually stunning, highly interactive web interfaces using Tailwind CSS and motion animations. I focus on curated harmonious color palettes, modern typography, sleek dark modes, and fully responsive layouts that function on all desktop and mobile devices.",
+      a: "Yes. I construct clear, responsive, production-ready, highly interactive web interfaces using Tailwind CSS and motion animations. I focus on curated harmonious color palettes, modern typography, sleek dark modes, and fully responsive layouts that function on all desktop and mobile devices.",
     },
     {
       q: "Can you integrate with existing databases?",

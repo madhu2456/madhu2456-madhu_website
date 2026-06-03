@@ -267,7 +267,7 @@ export default async function AdticksCaseStudyPage() {
               3. The Problem
             </h2>
             <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-              The search landscape is undergoing a massive shift from simple
+              The search landscape is undergoing a major shift from simple
               keyword indexing to generative AI interfaces (ChatGPT Search,
               Gemini, Perplexity) that process web content differently. Standard
               SEO tools entirely miss dynamic JavaScript render anomalies,
@@ -353,7 +353,7 @@ export default async function AdticksCaseStudyPage() {
                   SaaS Audit Dashboard
                 </h4>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  A gorgeous, glassmorphic UI outlining prioritized fixes, AI
+                  A polished dashboard UI outlining prioritized fixes, AI
                   crawler rules verification, and dynamic SEO health grades.
                 </p>
               </div>
