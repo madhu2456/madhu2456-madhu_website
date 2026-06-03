@@ -1,5 +1,3 @@
-import { NextResponse } from "next/server";
-
 export const revalidate = 3600;
 
 export async function GET() {
@@ -81,8 +79,9 @@ export async function GET() {
     ],
   };
 
-  return NextResponse.json(responseData, {
+  return new Response(JSON.stringify(responseData, null, 2), {
     headers: {
+      "Content-Type": "application/json",
       "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
       "X-Robots-Tag": "index, follow, max-snippet:-1",
     },
