@@ -59,7 +59,7 @@ export default async function FullStackAIProductPage() {
     },
     {
       title: "Internal Productivity Tools",
-      desc: "Automated business scripts and management tools executing scraping pipelines, browser bots, and bulk uploads safely.",
+      desc: "Internal workflow tools for approved data operations, browser-based QA, structured imports, admin automation, and operational reporting.",
     },
     {
       title: "API-First Services",
