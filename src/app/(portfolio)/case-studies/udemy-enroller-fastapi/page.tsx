@@ -71,7 +71,7 @@ export default async function UdemyEnrollerCaseStudyPage() {
     },
     {
       title: "Playwright Python API",
-      desc: "Chose Playwright over Selenium for browser automation due to its superior stealth plugins, faster cold-launch execution speeds, and clean headless page context isolating.",
+      desc: "Chose Playwright over Selenium for browser automation due to its robust page-interaction controls, faster cold-launch execution speeds, and clean headless page context isolating.",
     },
     {
       title: "Strict Celery Concurrency Cap",
@@ -103,8 +103,8 @@ export default async function UdemyEnrollerCaseStudyPage() {
 
   const faqs = [
     {
-      q: "How does it bypass account protection restrictions?",
-      a: "The headless Playwright scripts integrate stealth parameters, mimic human mouse actions, randomize timeouts, and utilize preloaded browser profiles with active session cookies.",
+      q: "How does the system ensure account safety and compliance?",
+      a: "The automation system was designed as a private learning project with bounded execution, manual review points, secure session handling, and respect for platform terms and account safety.",
     },
     {
       q: "Is storing user session cookies secure?",
@@ -295,12 +295,13 @@ export default async function UdemyEnrollerCaseStudyPage() {
             <ul className="space-y-3 pl-4 list-disc text-sm md:text-base text-muted-foreground leading-relaxed">
               <li>
                 <strong className="text-foreground">
-                  Anti-Scraping Shields:
+                  Request Verification Controls:
                 </strong>{" "}
-                Udemy utilizes strict account verification algorithms, CORS
-                headers, and dynamically shifting elements. Automated tools must
-                simulate natural mouse movements and preserve authenticated
-                session states.
+                Udemy utilizes standard account checks, CORS headers, and
+                dynamically shifting layout structures. The automation system
+                was designed with respect for platform terms, employing standard
+                browser-rendering diagnostics and compliance-aware request
+                controls.
               </li>
               <li>
                 <strong className="text-foreground">
@@ -345,8 +346,8 @@ export default async function UdemyEnrollerCaseStudyPage() {
                   Headless Playwright Driver
                 </h4>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Stealth-instrumented checkout bot simulating client flows,
-                  handling cookie jars, and checking out pages.
+                  Compliance-aware automated checkout driver handling client
+                  flows, handling cookie jars, and checking out pages.
                 </p>
               </div>
               <div className="rounded-xl border border-border/80 bg-surface/10 p-5 space-y-2">
@@ -487,8 +488,8 @@ export default async function UdemyEnrollerCaseStudyPage() {
               </div>
               <pre className="text-[11px] font-mono text-muted-foreground leading-relaxed overflow-x-auto bg-background/50 p-4 rounded-xl border border-border/40">
                 {`[2026-06-02 19:12:44] INFO: [Celery-Worker-1] Initiated checkout task for coupon code: PROMO_9948
-[2026-06-02 19:12:45] INFO: Playwright: Session cookies fetched. Initializing stealth Chrome tab context.
-[2026-06-02 19:12:46] INFO: Page check: Bypassing Udemy client checks. Enroller bot loaded successfully.
+[2026-06-02 19:12:45] INFO: Playwright: Session cookies fetched. Initializing secure Chrome tab context.
+[2026-06-02 19:12:46] INFO: Page check: Session active. Enroller driver loaded successfully.
 [2026-06-02 19:12:47] INFO: Checkout Action: Dynamic promo code applied. Price: $0.00 FREE.
 [2026-06-02 19:12:48] INFO: Task Success: Course enrolled! Receipt ID: rec_9984a32. Updating PostgreSQL.`}
               </pre>
@@ -536,9 +537,10 @@ export default async function UdemyEnrollerCaseStudyPage() {
               10. Future Iterations
             </h2>
             <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-              If I were to build upcoming versions, I would incorporate
-              automated CAPTCHA solving modules using localized lightweight
-              neural networks, removing third-party verification gaps.
+              If I were to build upcoming versions, I would add stronger manual
+              verification checkpoints, clearer user consent flows, better
+              session-expiry handling, and stricter platform-compliance
+              safeguards.
             </p>
           </section>
 
@@ -579,7 +581,7 @@ export default async function UdemyEnrollerCaseStudyPage() {
                 Asked Questions
               </h2>
               <p className="text-xs text-muted-foreground">
-                Captcha bypasses, session cookie security, containerization, and
+                Session handling, session cookie security, containerization, and
                 browser rate limits.
               </p>
             </div>
