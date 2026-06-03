@@ -59,7 +59,7 @@ export default async function Ga4BigQueryCampaignAnalyticsPage() {
   const whatIBuild = [
     {
       title: "Server-Side GTM Setup (sGTM)",
-      desc: "Implement server-side containers on Google Cloud Platform or Stape, routing consented first-party measurement streams through controlled server endpoints to improve data quality, privacy controls, and measurement resilience.",
+      desc: "Implement server-side containers on Google Cloud Platform, routing consented first-party measurement streams through controlled server endpoints to improve data quality, privacy controls, and measurement resilience.",
     },
     {
       title: "GA4 Schema Calibration",
