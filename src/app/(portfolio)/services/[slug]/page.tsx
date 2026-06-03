@@ -15,7 +15,7 @@ import {
 } from "@tabler/icons-react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { getPortfolioData } from "@/lib/portfolio-data";
@@ -38,7 +38,8 @@ export async function generateStaticParams() {
         service.slug !== "rag-consultant-india" &&
         service.slug !== "ai-agent-development" &&
         service.slug !== "marketing-analytics-consultant" &&
-        service.slug !== "full-stack-ai-product-development",
+        service.slug !== "full-stack-ai-product-development" &&
+        service.slug !== "ga4-bigquery-campaign-analytics",
     )
     .map((service) => ({
       slug: service.slug,
@@ -70,6 +71,11 @@ export async function generateMetadata({
 
 export default async function ServiceDetailPage({ params }: ServicePageProps) {
   const { slug } = await params;
+
+  if (slug === "ga4-bigquery-campaign-analytics") {
+    redirect("/services/marketing-analytics-consultant/");
+  }
+
   const { profile, sortedServices, sortedProjects } = await getPortfolioData();
   const service = sortedServices.find((s) => s.slug === slug);
 

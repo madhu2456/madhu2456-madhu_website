@@ -246,7 +246,8 @@ export default async function AiLlmApplicationDevelopmentPage() {
 
             <div className="space-y-6">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
-                <IconBrain className="h-4 w-4" /> Premier Service Offer
+                <IconBrain className="h-4 w-4" /> Generative AI Engineering
+                Service
               </span>
 
               <h1 className="text-3xl md:text-5xl font-bold tracking-tight leading-tight">

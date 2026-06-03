@@ -123,7 +123,10 @@ export default async function ServicesHubPage() {
                       <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/15 text-primary border border-primary/10 shadow-inner group-hover:scale-105 transition-transform duration-300">
                         {Icon}
                       </div>
-                      <span className="text-xs font-mono text-muted-foreground bg-surface-elevated px-2.5 py-1 rounded-full border border-border/50">
+                      <span
+                        aria-hidden="true"
+                        className="text-xs font-mono text-muted-foreground bg-surface-elevated px-2.5 py-1 rounded-full border border-border/50"
+                      >
                         0{index + 1}
                       </span>
                     </div>
@@ -173,10 +176,13 @@ export default async function ServicesHubPage() {
                       {service.pricing && (
                         <div className="text-xs">
                           <span className="text-muted-foreground block">
-                            Starting at
+                            Starting from
                           </span>
                           <span className="font-semibold text-foreground">
-                            {service.pricing.description}
+                            {service.pricing.description?.replace(
+                              /^From\s+/,
+                              "",
+                            )}
                           </span>
                         </div>
                       )}

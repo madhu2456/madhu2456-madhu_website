@@ -771,7 +771,7 @@
       "slug": "udemy-enroller-fastapi",
       "tagline": "Async FastAPI Course Enrollment Automation",
       "category": "Web app - Automation",
-      "impactSummary": "Scrapes Udemy coupon sources, validates each link, and enrolls users automatically through an async FastAPI and Celery queue. Has delivered 20,000+ free courses in six months. Roughly Rs 10L in saved tuition.",
+      "impactSummary": "A private FastAPI automation project that explored async task queues, browser workflow orchestration, session handling, telemetry logging, and background processing using Celery, Redis, PostgreSQL, and Playwright.",
       "liveUrl": "https://udemyenroller.madhudadi.in",
       "githubUrl": "https://github.com/madhu2456/udemy_enroller_fastapi",
       "featured": true,

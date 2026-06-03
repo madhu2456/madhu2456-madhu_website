@@ -146,7 +146,7 @@ export default async function RagConsultantIndiaPage() {
   const faqs = [
     {
       q: "How do you reduce hallucination risk in a RAG assistant?",
-      a: "No LLM is 100% immune, but we achieve a reduced hallucination risk through retrieval boundaries and evals by: (1) enforcing strict prompt boundaries that forbid answering without context, (2) using citation parser schemas, and (3) adding evaluation guardrails.",
+      a: "No LLM is 100% immune, but I achieve a reduced hallucination risk through retrieval boundaries and evals by: (1) enforcing strict prompt boundaries that forbid answering without context, (2) using citation parser schemas, and (3) adding evaluation guardrails.",
     },
     {
       q: "Can you implement RAG on private local data?",
@@ -158,7 +158,7 @@ export default async function RagConsultantIndiaPage() {
     },
     {
       q: "How do you trace costs and latencies?",
-      a: "We integrate downstream observability layers (such as LangSmith or custom logging) to trace exact prompt/completion tokens, model latencies, and routing flows, giving you full visibility into run costs.",
+      a: "I integrate downstream observability layers (such as LangSmith or custom logging) to trace exact prompt/completion tokens, model latencies, and routing flows, giving you full visibility into run costs.",
     },
   ];
 
@@ -409,7 +409,7 @@ export default async function RagConsultantIndiaPage() {
                 Evaluation & Hallucination
               </h2>
               <p className="text-xs text-muted-foreground leading-relaxed">
-                We establish strict test suites using frameworks like RAGAS to
+                I establish strict test suites using frameworks like RAGAS to
                 score faithfulness, answer relevance, and context recall,
                 checking prompts against versioned retrieval indexes before
                 shipping.
@@ -423,7 +423,7 @@ export default async function RagConsultantIndiaPage() {
                 Citation & Source Display
               </h2>
               <p className="text-xs text-muted-foreground leading-relaxed">
-                Citations are designed at the ingestion level. We inject chunk
+                Citations are designed at the ingestion level. I inject chunk
                 metadata filters that return precise page numbers, section
                 headers, and click-through link tags in streaming markdown
                 formats.

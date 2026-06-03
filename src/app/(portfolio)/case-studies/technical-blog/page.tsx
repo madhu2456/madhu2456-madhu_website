@@ -75,7 +75,7 @@ export default async function TechnicalBlogCaseStudyPage() {
     },
     {
       title: "Strict Temperature Controls",
-      desc: "Configured LLM prompt pipelines with a low temperature (0.1) and absolute context-bounding system instructions to restrict responses strictly to verified local blog text and reduce AI hallucination risk.",
+      desc: "Configured LLM prompt pipelines with a low temperature (0.1) and absolute context-bounding system instructions to restrict responses strictly to verified local blog text and reduce hallucination risk by restricting answers to retrieved local context.",
     },
   ];
 
@@ -91,9 +91,9 @@ export default async function TechnicalBlogCaseStudyPage() {
       desc: "Verified through automated regression tests querying complex concepts and measuring citation mapping accuracy against the database.",
     },
     {
-      metric: "Full coverage",
+      metric: "Clean crawlability",
       label: "Search & AI Indexing Rate",
-      desc: "Verified as full sitemap and canonical coverage in the tested environment, ensuring search crawls with zero duplicate slashes.",
+      desc: "Verified as clean crawlability across tested sitemap and canonical URLs, ensuring search crawls with zero duplicate slashes.",
     },
   ];
 
