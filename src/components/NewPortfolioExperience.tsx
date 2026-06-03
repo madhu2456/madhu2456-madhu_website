@@ -836,6 +836,7 @@ function Contact({ profile }: { profile: Profile }) {
                     <Image
                       src="/new-ui/logo.png"
                       alt=""
+                      aria-hidden="true"
                       width={16}
                       height={16}
                       className="h-full w-full object-cover"
