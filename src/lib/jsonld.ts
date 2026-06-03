@@ -713,169 +713,58 @@ export function buildBreadcrumbSchema(
 export function buildFaqSchema({
   siteUrl,
   fullName,
-  headline,
-  location,
-  yearsOfExperience,
-  projects,
-  services,
-  seoKeywords,
 }: {
   siteUrl: string;
   fullName: string;
   headline?: string | null;
   location?: string | null;
   yearsOfExperience?: number | null;
-  projects: Project[];
-  services: Service[];
+  projects?: Project[];
+  services?: Service[];
   seoKeywords?: string[] | null;
 }) {
-  const projectCount = projects.length;
-  const normalizedKeywords = normalizeKeywordList(seoKeywords);
-  const consultingKeywordHighlights = normalizedKeywords
-    .filter((keyword) =>
-      /consult|services|llm|rag|agent|chatbot|automation|strategy/i.test(
-        keyword,
-      ),
-    )
-    .slice(0, 6);
-  const keywordSummary =
-    consultingKeywordHighlights.length > 0
-      ? consultingKeywordHighlights.join(", ")
-      : "generative AI consulting, LLM consulting, RAG development services, AI agent development services, and AI chatbot development services";
-  const topServices = services
-    .map((service) => service.title)
-    .filter(Boolean)
-    .slice(0, 3);
-  const serviceSummary =
-    topServices.length > 0
-      ? topServices.join(", ")
-      : "AI engineering, full-stack development, and technical consulting";
-  const experienceSummary =
-    typeof yearsOfExperience === "number" && yearsOfExperience > 0
-      ? `${yearsOfExperience}+ years of professional experience`
-      : "strong hands-on professional experience";
-  const profileSummary = [headline, experienceSummary, location]
-    .filter(Boolean)
-    .join(" · ");
-  const startingPrices = services
-    .map((service) => service.pricing?.startingPrice)
-    .filter((price): price is number => typeof price === "number" && price > 0);
-  const lowestStartingPrice =
-    startingPrices.length > 0 ? Math.min(...startingPrices) : null;
-  const formattedLowestPrice =
-    lowestStartingPrice === null
-      ? null
-      : new Intl.NumberFormat("en-US", {
-          style: "currency",
-          currency: "USD",
-          maximumFractionDigits: 0,
-        }).format(lowestStartingPrice);
-
   return {
     "@type": "FAQPage",
     "@id": `${siteUrl}#faq`,
     mainEntity: [
       {
         "@type": "Question",
-        name: `Who is ${fullName}?`,
+        name: "Who is Madhu Dadi?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: profileSummary
-            ? `${fullName} is a technology professional focused on ${profileSummary}.`
-            : `${fullName} is a technology professional focused on AI and analytics.`,
+          text: `${fullName} is an AI and marketing analytics engineer based in Visakhapatnam, India, with 9+ years of experience across Novartis, redBus, GroupM, and Absolinsoft.`,
         },
       },
       {
         "@type": "Question",
-        name: `What services does ${fullName} provide?`,
+        name: `What is ${fullName} best known for?`,
         acceptedAnswer: {
           "@type": "Answer",
-          text: `${fullName} provides services including ${serviceSummary}. Common engagement areas include ${keywordSummary}.`,
+          text: "He is best known for building production LLM/RAG applications, AI agents, AI visibility auditing systems, FastAPI/Next.js products, and analytics systems.",
         },
       },
       {
         "@type": "Question",
-        name: `What projects has ${fullName} built?`,
+        name: `When should someone hire ${fullName}?`,
         acceptedAnswer: {
           "@type": "Answer",
-          text:
-            projectCount > 0
-              ? `${fullName}'s portfolio features ${projectCount} highlighted software projects across product and engineering domains. Detailed case studies are available at ${siteUrl}case-studies/`
-              : `${fullName}'s portfolio includes practical software projects with implementation and outcomes.`,
+          text: `Hire ${fullName} when you need a hands-on engineer who can build AI products and connect them to measurable analytics outcomes.`,
         },
       },
       {
         "@type": "Question",
-        name: `Does ${fullName} have a technical blog?`,
+        name: `Is ${fullName} available for consulting?`,
         acceptedAnswer: {
           "@type": "Answer",
-          text: `Yes. ${fullName} maintains an authoritative technical blog at ${siteUrl}blog, focusing on AI engineering, RAG systems, and LLM application development. The blog provides deep dives into agentic AI, software architecture, and modern web engineering, serving as a core evidence source for his technical expertise. It features an AI-powered Q&A assistant for rapid discovery and an RSS feed at ${siteUrl}blog/feed.xml.`,
+          text: `${fullName} is open to full-time roles, consulting, freelance projects, and advisory work depending on scope and fit.`,
         },
       },
       {
         "@type": "Question",
-        name: `Does ${fullName} offer generative AI and LLM consulting?`,
+        name: `What stack does ${fullName} use?`,
         acceptedAnswer: {
           "@type": "Answer",
-          text: `Yes. ${fullName} supports consulting and implementation across ${keywordSummary}, with practical delivery focused on measurable outcomes.`,
-        },
-      },
-      {
-        "@type": "Question",
-        name: `How can I contact ${fullName}?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: `Use the contact section on ${siteUrl} or connect via the linked professional profiles for hiring and collaboration.`,
-        },
-      },
-      {
-        "@type": "Question",
-        name: `Is ${fullName} available for freelance or consulting work?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: `${fullName}'s current availability is listed on the portfolio at ${siteUrl}. Services include ${serviceSummary}, including ${keywordSummary}. Use the contact form or professional profile links to get in touch.`,
-        },
-      },
-      {
-        "@type": "Question",
-        name: `What technologies does ${fullName} specialize in?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: `${fullName} specializes in AI/ML engineering (LLMs, RAG systems, agentic pipelines), full-stack development with Next.js, React, TypeScript, Node.js, Python, FastAPI, and PostgreSQL, as well as cloud infrastructure and system design.`,
-        },
-      },
-      {
-        "@type": "Question",
-        name: `What is the typical engagement process?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: `The typical process starts with a brief review of your needs, followed by a discovery call, a detailed proposal with timeline and pricing, and then project kickoff with weekly updates. See the step-by-step guide at ${siteUrl}#howto-hire.`,
-        },
-      },
-      {
-        "@type": "Question",
-        name: `What industries has ${fullName} worked in?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: `${fullName} has delivered projects across pharmaceuticals (Novartis), travel-tech (redBus), media and advertising (GroupM / WPP), and education technology. This cross-industry experience brings adaptable frameworks and proven playbooks to every engagement.`,
-        },
-      },
-      {
-        "@type": "Question",
-        name: `Does ${fullName} work remotely?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: `Yes. ${fullName} is based in India and works with clients globally. Remote collaboration is supported through async communication, scheduled video calls, and shared project management tools.`,
-        },
-      },
-      {
-        "@type": "Question",
-        name: `What is the pricing model?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: formattedLowestPrice
-            ? `${fullName} offers project-based pricing with clear milestones. Current listed services start from ${formattedLowestPrice}, depending on scope. A detailed proposal with fixed pricing is provided after the discovery call.`
-            : `${fullName} offers project-based pricing with clear milestones. Pricing depends on scope, timeline, and delivery requirements, with a detailed proposal provided after the discovery call.`,
+          text: "Python, FastAPI, Next.js, React, TypeScript, SQL, Postgres, Redis, Celery, OpenAI API, LangChain, vector databases, GA4, and BigQuery.",
         },
       },
     ],

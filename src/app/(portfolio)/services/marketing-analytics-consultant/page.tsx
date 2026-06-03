@@ -173,7 +173,7 @@ export default async function MarketingAnalyticsConsultantPage() {
           "@type": "Offer",
           name: "Attribution framework mapping",
           description:
-            "Custom attribution frameworks bypassing standard platform defaults.",
+            "Custom attribution frameworks correcting for self-attributing network bias.",
         },
       ],
     },
