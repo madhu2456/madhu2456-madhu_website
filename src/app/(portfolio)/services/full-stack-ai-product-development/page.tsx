@@ -38,9 +38,7 @@ export default async function FullStackAIProductPage() {
   const { profile, sortedProjects } = await getPortfolioData();
 
   // Prefilled contact URL configuration
-  const prefillSubject = "Full-Stack AI Product Inquiry";
-  const prefillMessage = `Hi Madhu,\n\nI read your Full-Stack AI Product Development page and would love to discuss an end-to-end product engineering project.\n\nProject Scope / Vision:\n- Primary Product Idea:\n- Core Tech Stack Requirements (FastAPI, Next.js, etc.):\n- Expected Integrations (LLMs, Databases):\n- Target Launch Timeline:\n\nLet's connect!`;
-  const contactUrl = `/contact/?subject=${encodeURIComponent(prefillSubject)}&message=${encodeURIComponent(prefillMessage)}`;
+  const contactUrl = "/contact/#intent=full-stack-ai";
 
   // Target query tags for SEO/AEO context
 

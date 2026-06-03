@@ -37,9 +37,7 @@ export default async function AiAgentDevelopmentPage() {
   const { profile, sortedProjects } = await getPortfolioData();
 
   // Prefilled contact URL configuration
-  const prefillSubject = "AI Agent Development Inquiry";
-  const prefillMessage = `Hi Madhu,\n\nI read your AI Agent Development service page and would love to schedule a discovery call.\n\nProject Scope:\n- Intended Agent Tasks:\n- Required Tools/APIs:\n- Estimated Run Scopes:\n\nLooking forward to speaking with you!`;
-  const contactUrl = `/contact/?subject=${encodeURIComponent(prefillSubject)}&message=${encodeURIComponent(prefillMessage)}`;
+  const contactUrl = "/contact/#intent=ai-agent";
 
   // Agent capabilities checklist
   const agentCapabilities = [

@@ -17,18 +17,50 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { getPortfolioData } from "@/lib/portfolio-data";
 
-export const revalidate = 3600;
+const CONTACT_CANONICAL = "https://madhudadi.in/contact/";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
-  const canonicalUrl = `${siteUrl}contact/`;
+type SearchParams = Promise<Record<string, string | string[] | undefined>>;
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: SearchParams;
+}): Promise<Metadata> {
+  const params = await searchParams;
+
+  const hasSearchParams = Object.keys(params ?? {}).length > 0;
 
   return {
     title: "Contact Madhu Dadi — Generative AI & Marketing Analytics Engineer",
     description:
       "Work with Madhu Dadi on production AI, RAG, AI agents, marketing analytics, or full-stack AI product development. Response time is usually within 24 hours.",
     alternates: {
-      canonical: canonicalUrl,
+      canonical: CONTACT_CANONICAL,
+    },
+    robots: hasSearchParams
+      ? {
+          index: false,
+          follow: true,
+          googleBot: {
+            index: false,
+            follow: true,
+          },
+        }
+      : {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+          },
+        },
+    openGraph: {
+      title:
+        "Contact Madhu Dadi — Generative AI & Marketing Analytics Engineer",
+      description:
+        "Work with Madhu Dadi on production AI, RAG, AI agents, marketing analytics, or full-stack AI product development. Response time is usually within 24 hours.",
+      url: CONTACT_CANONICAL,
+      type: "website",
     },
   };
 }

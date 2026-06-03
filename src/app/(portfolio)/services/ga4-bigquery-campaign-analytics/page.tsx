@@ -34,9 +34,7 @@ export default async function Ga4BigQueryCampaignAnalyticsPage() {
   const { profile, sortedProjects } = await getPortfolioData();
 
   // Prefilled contact URL configuration
-  const prefillSubject = "GA4 & BigQuery Campaign Analytics Inquiry";
-  const prefillMessage = `Hi Madhu,\n\nI read your GA4 & BigQuery Campaign Analytics page and would love to discuss a custom measurement or dashboard project.\n\nProject Scope:\n- Primary Tracking Needs (GA4, sGTM, etc.):\n- Current Data Warehouse / Analytics Stack:\n- Key Campaign Outcomes to Track:\n\nLet's connect!`;
-  const contactUrl = `/contact/?subject=${encodeURIComponent(prefillSubject)}&message=${encodeURIComponent(prefillMessage)}`;
+  const contactUrl = "/contact/#intent=ga4-bigquery";
 
   const whoThisIsFor = [
     "Marketing teams looking for a single source of truth for media spend and conversions",

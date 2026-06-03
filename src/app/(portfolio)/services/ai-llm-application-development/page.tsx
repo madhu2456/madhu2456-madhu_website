@@ -35,9 +35,7 @@ export default async function AiLlmApplicationDevelopmentPage() {
   const { profile, sortedProjects } = await getPortfolioData();
 
   // Prefilled URL configuration for direct, high-intent prefilled contact inquiries
-  const prefillSubject = "AI & LLM Application Development Inquiry";
-  const prefillMessage = `Hi Madhu,\n\nI read your AI & LLM Application Development service page and would love to schedule a technical discovery call.\n\nAbout our project:\n- Goals/Features:\n- Preferred Tech Stack:\n- Desired Timeline:\n- Budget Guideline:\n\nLet's connect!`;
-  const contactUrl = `/contact/?subject=${encodeURIComponent(prefillSubject)}&message=${encodeURIComponent(prefillMessage)}`;
+  const contactUrl = "/contact/#intent=ai-llm";
 
   // Dedicated data collections to power the layout sections cleanly
 

@@ -101,12 +101,17 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
   const Icon = getServiceIcon(service.slug);
   const stack = service.technologies?.map((t) => t.name) ?? [];
 
-  // Build high-intent prefill subject and message
-  const prefillSubject = `${service.title} project inquiry`;
-  const prefillMessage = `Hi Madhu,\n\nI'm interested in your ${service.title} service.\n\nContext / Problem statement:\nWhat we want to build:\nTarget Timeline:\nEstimated budget range:\n\nLooking forward to speaking with you!`;
-  const encodedSubject = encodeURIComponent(prefillSubject);
-  const encodedMessage = encodeURIComponent(prefillMessage);
-  const prefillContactUrl = `/contact/?subject=${encodedSubject}&message=${encodedMessage}`;
+  // Map service slug to contact intent hash
+  const SERVICE_INTENT_BY_SLUG: Record<string, string> = {
+    "ai-llm-application-development": "ai-llm",
+    "rag-consultant-india": "rag",
+    "ai-agent-development": "ai-agent",
+    "marketing-analytics-consultant": "marketing-analytics",
+    "ga4-bigquery-campaign-analytics": "ga4-bigquery",
+    "full-stack-ai-product-development": "full-stack-ai",
+  };
+  const intent = SERVICE_INTENT_BY_SLUG[service.slug];
+  const prefillContactUrl = intent ? `/contact/#intent=${intent}` : "/contact/";
 
   const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
   const serviceSchema = {
