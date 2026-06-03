@@ -14,8 +14,13 @@ export function ChatSidebarSection({
 }: {
   profile: ChatProfile | null;
 }) {
+  const [mounted, setMounted] = useState(false);
   const sidebarContext = useContext(SidebarContext);
   const [hasOpened, setHasOpened] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const open = sidebarContext?.open ?? false;
   const openMobile = sidebarContext?.openMobile ?? false;
@@ -28,15 +33,10 @@ export function ChatSidebarSection({
     }
   }, [isOpen, hasOpened]);
 
-  if (!hasOpened) {
-    return (
-      <div
-        aria-hidden="true"
-        className="flex h-full w-full items-center justify-center px-6 text-center text-sm text-foreground/60 select-none"
-      >
-        Open chat to load AI assistant
-      </div>
-    );
+  // Render absolutely nothing on the server or when the sidebar has not been opened yet.
+  // This completely eliminates any early placeholder text from the DOM, optimizing indexing priority for primary content.
+  if (!mounted || !hasOpened) {
+    return null;
   }
 
   return <ChatWrapper profile={profile} />;
