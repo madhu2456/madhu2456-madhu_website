@@ -708,7 +708,7 @@
       "slug": "technical-blog",
       "tagline": "RAG-Powered Learning Platform with AI Assistant",
       "category": "Education - RAG / AI assistant",
-      "impactSummary": "A series-based tech blog with an assistant that has actually read the blog. Vector-grounded answers with citations. Instant in-page search. Ranks for humans and LLMs alike.",
+      "impactSummary": "A series-based tech blog with an assistant that has actually read the blog. Vector-grounded answers with citations. Instant in-page search. Designed for both human readers and AI-assisted retrieval.",
       "liveUrl": "https://madhudadi.in/blog",
       "githubUrl": "",
       "featured": true,
