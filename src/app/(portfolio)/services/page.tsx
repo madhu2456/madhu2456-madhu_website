@@ -149,7 +149,12 @@ export default async function ServicesHubPage() {
                             key={feature}
                             className="flex items-start gap-2 text-foreground/80"
                           >
-                            <span className="text-primary mt-0.5">›</span>
+                            <span
+                              className="text-primary mt-0.5"
+                              aria-hidden="true"
+                            >
+                              ›
+                            </span>
                             <span>{feature}</span>
                           </li>
                         ))}

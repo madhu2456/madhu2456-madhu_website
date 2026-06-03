@@ -484,7 +484,10 @@ function Services({ services }: { services: ServiceItem[] }) {
               key={service.slug}
               className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-surface/60 p-6 shadow-card transition-all hover:-translate-y-1 hover:border-primary/40"
             >
-              <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/15 text-primary">
+              <div
+                className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/15 text-primary"
+                aria-hidden="true"
+              >
                 ◇
               </div>
               <h3 className="font-display text-2xl font-semibold">
@@ -500,7 +503,9 @@ function Services({ services }: { services: ServiceItem[] }) {
                 <ul className="mt-5 space-y-2 text-sm">
                   {service.features.map((feature) => (
                     <li key={feature} className="flex gap-2">
-                      <span className="text-primary">›</span>
+                      <span className="text-primary" aria-hidden="true">
+                        ›
+                      </span>
                       <span>{feature}</span>
                     </li>
                   ))}

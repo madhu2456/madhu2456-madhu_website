@@ -311,7 +311,10 @@ export default async function AiLlmApplicationDevelopmentPage() {
               <ul className="space-y-4">
                 {problemsSolved.map((item) => (
                   <li key={item} className="flex items-start gap-3">
-                    <span className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-destructive/10 text-destructive mt-0.5">
+                    <span
+                      className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-destructive/10 text-destructive mt-0.5"
+                      aria-hidden="true"
+                    >
                       <span className="text-[10px] font-bold">!</span>
                     </span>
                     <span className="text-sm md:text-base text-muted-foreground">
