@@ -127,7 +127,7 @@ export default async function ServicesHubPage() {
                         aria-hidden="true"
                         className="text-xs font-mono text-muted-foreground bg-surface-elevated px-2.5 py-1 rounded-full border border-border/50"
                       >
-                        0{index + 1}
+                        {`0${index + 1}`}
                       </span>
                     </div>
 
@@ -166,7 +166,7 @@ export default async function ServicesHubPage() {
                           key={`${service.slug}-${tech}`}
                           className="rounded-full border border-border bg-background/40 px-2 py-0.5 text-[10px] font-mono text-muted-foreground"
                         >
-                          {tech}
+                          {tech}{" "}
                         </span>
                       ))}
                     </div>
@@ -176,7 +176,7 @@ export default async function ServicesHubPage() {
                       {service.pricing && (
                         <div className="text-xs">
                           <span className="text-muted-foreground block">
-                            Starting from
+                            Starting from{" "}
                           </span>
                           <span className="font-semibold text-foreground">
                             {service.pricing.description?.replace(

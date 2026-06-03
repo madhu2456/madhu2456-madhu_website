@@ -370,7 +370,7 @@ export default async function AiLlmApplicationDevelopmentPage() {
                         key={tech}
                         className="rounded-lg border border-border bg-background/50 px-2 py-1 text-xs font-medium text-foreground"
                       >
-                        {tech}
+                        {tech}{" "}
                       </span>
                     ))}
                   </div>
