@@ -24,9 +24,9 @@ type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 export async function generateMetadata({
   searchParams,
 }: {
-  searchParams: SearchParams;
+  searchParams?: SearchParams;
 }): Promise<Metadata> {
-  const params = await searchParams;
+  const params = searchParams ? await searchParams : {};
 
   const hasSearchParams = Object.keys(params ?? {}).length > 0;
 

@@ -37,9 +37,10 @@ const matchesQuery = (queryTokens: string[], values: Array<string | null>) => {
 export async function generateMetadata({
   searchParams,
 }: {
-  searchParams: SearchParams;
+  searchParams?: SearchParams;
 }): Promise<Metadata> {
-  const query = toQuery((await searchParams).q);
+  const resolvedParams = searchParams ? await searchParams : {};
+  const query = toQuery(resolvedParams.q);
   const encodedQuery = encodeURIComponent(query);
   let title = query
     ? `Search results for "${query}" | Madhu Dadi`
@@ -95,9 +96,10 @@ export async function generateMetadata({
 export default async function SearchPage({
   searchParams,
 }: {
-  searchParams: SearchParams;
+  searchParams?: SearchParams;
 }) {
-  const query = toQuery((await searchParams).q);
+  const resolvedParams = searchParams ? await searchParams : {};
+  const query = toQuery(resolvedParams.q);
   const queryTokens = queryToTokens(query);
   const {
     sortedCertifications,
