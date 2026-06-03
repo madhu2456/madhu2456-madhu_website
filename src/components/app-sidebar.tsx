@@ -17,7 +17,7 @@ function SidebarSkeleton() {
       <div className="flex-1 flex flex-col items-center justify-center px-6 gap-3">
         <div className="h-4 w-3/4 rounded-full bg-foreground/15 animate-pulse" />
         <div className="h-4 w-1/2 rounded-full bg-foreground/15 animate-pulse" />
-        <p className="text-xs text-foreground/40 mt-2">Loading…</p>
+        <div className="h-4 w-4 rounded-full border-2 border-primary/20 border-t-primary animate-spin mt-2" />
       </div>
       <div className="flex flex-col gap-2 px-4 pb-2">
         {[80, 65, 72, 60].map((w) => (
