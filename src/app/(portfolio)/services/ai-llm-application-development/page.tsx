@@ -476,12 +476,13 @@ export default async function AiLlmApplicationDevelopmentPage() {
                   FastAPI Automation Workflow
                 </span>
                 <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
-                  Udemy Enroller
+                  Browser Task Automation System
                 </h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Built a high-throughput, async automated course-enrollment
-                  scheduling pipeline using Python, FastAPI, and Postgres,
-                  serving over 20,000 automated enrollments cleanly.
+                  Built a private FastAPI automation project exploring async
+                  task queues, Playwright workflow orchestration, bounded worker
+                  concurrency, secure session-state handling, and telemetry
+                  logging.
                 </p>
                 <div className="pt-2">
                   <Link
@@ -600,7 +601,7 @@ export default async function AiLlmApplicationDevelopmentPage() {
                   </span>
                   <span className="text-foreground font-semibold">
                     Adticks (SEO audits), Technical Blog (RAG search assistant),
-                    Udemy Enroller (FastAPI automation)
+                    Browser Task Automation System (FastAPI automation)
                   </span>
                 </div>
                 <div>

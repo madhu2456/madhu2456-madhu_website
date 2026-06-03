@@ -477,10 +477,10 @@ export default async function TechnicalBlogCaseStudyPage() {
                 </span>
               </div>
               <pre className="text-[11px] font-mono text-muted-foreground leading-relaxed overflow-x-auto bg-background/50 p-4 rounded-xl border border-border/40">
-                {`[2026-06-02 19:12:31] INFO: Received prompt: "How did you scale Udemy Enroller Celery workers?"
+                {`[2026-06-02 19:12:31] INFO: Received prompt: "How did you scale Browser Task Automation System Celery workers?"
 [2026-06-02 19:12:31] INFO: Embeddings: Generated query vector in 18ms.
 [2026-06-02 19:12:31] INFO: pgvector Query: Executing cosine-similarity search.
-[2026-06-02 19:12:31] INFO: Match: Found chunk in "udemy-enroller-case.md" (Score: 0.892)
+[2026-06-02 19:12:31] INFO: Match: Found chunk in "browser-task-automation-case.md" (Score: 0.892)
 [2026-06-02 19:12:32] INFO: OpenAI SSE: Streaming structured markdown tokens to user UI.`}
               </pre>
             </div>
