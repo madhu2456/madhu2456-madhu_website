@@ -9,7 +9,7 @@ import {
   IconSparkles,
   IconTrendingUp,
 } from "@tabler/icons-react";
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowRight, ChevronRight, ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -488,7 +488,7 @@ function Services({ services }: { services: ServiceItem[] }) {
                 className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/15 text-primary"
                 aria-hidden="true"
               >
-                ◇
+                <IconSparkles className="h-5 w-5 text-primary" />
               </div>
               <h3 className="font-display text-2xl font-semibold">
                 {service.title}
@@ -503,9 +503,10 @@ function Services({ services }: { services: ServiceItem[] }) {
                 <ul className="mt-5 space-y-2 text-sm">
                   {service.features.map((feature) => (
                     <li key={feature} className="flex gap-2">
-                      <span className="text-primary" aria-hidden="true">
-                        ›
-                      </span>
+                      <ChevronRight
+                        className="h-4 w-4 text-primary shrink-0 mt-0.5"
+                        aria-hidden="true"
+                      />
                       <span>{feature}</span>
                     </li>
                   ))}
