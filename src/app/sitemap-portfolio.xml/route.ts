@@ -53,6 +53,12 @@ export async function GET() {
       priority: "0.85",
     },
     {
+      url: `${siteUrl}services/ga4-bigquery-campaign-analytics/`,
+      lastModified: "2026-06-02",
+      changeFrequency: "monthly",
+      priority: "0.85",
+    },
+    {
       url: `${siteUrl}services/full-stack-ai-product-development/`,
       lastModified: "2026-06-02",
       changeFrequency: "monthly",
