@@ -39,15 +39,6 @@ export default async function MarketingAnalyticsConsultantPage() {
   const contactUrl = `/contact/?subject=${encodeURIComponent(prefillSubject)}&message=${encodeURIComponent(prefillMessage)}`;
 
   // Target query tag collection
-  const targetQueries = [
-    "marketing analytics consultant",
-    "GA4 consultant India",
-    "campaign analytics consultant",
-    "attribution consultant",
-    "BigQuery analytics consultant",
-    "decision intelligence consultant",
-    "marketing dashboard consultant",
-  ];
 
   const whoThisIsFor = [
     "Marketing teams mapping complex customer journeys",
@@ -272,22 +263,13 @@ export default async function MarketingAnalyticsConsultantPage() {
                 </p>
               </div>
 
-              {/* Target Queries SEO tags */}
-              <div className="space-y-2 pt-4">
-                <span className="text-[10px] font-mono tracking-widest text-muted-foreground block uppercase">
-                  Service Capabilities Covered
-                </span>
-                <div className="flex flex-wrap gap-1.5">
-                  {targetQueries.map((query) => (
-                    <span
-                      key={query}
-                      className="rounded-full border border-border bg-background/50 px-2.5 py-0.5 text-xs font-medium text-muted-foreground"
-                    >
-                      {query}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              {/* Target Queries copy block (AEO/GEO optimization) */}
+              <p className="text-sm text-muted-foreground leading-relaxed pt-4">
+                This service is relevant for teams searching for a marketing
+                analytics consultant, GA4 consultant, BigQuery analytics
+                consultant, campaign analytics lead, attribution specialist, or
+                decision-intelligence partner.
+              </p>
             </div>
           </section>
 
