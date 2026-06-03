@@ -42,7 +42,7 @@
         "value": "10,000+"
       },
       {
-        "label": "Automated course enrollments delivered by Udemy Enroller",
+        "label": "Automated browser workflow executions logged",
         "value": "20,000+"
       },
       {
@@ -767,16 +767,16 @@
       "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
-      "title": "Udemy Enroller using FastAPI",
+      "title": "Browser Task Automation System",
       "slug": "udemy-enroller-fastapi",
-      "tagline": "Async FastAPI Course Enrollment Automation",
+      "tagline": "Async Browser-Workflow Orchestration",
       "category": "Web app - Automation",
       "impactSummary": "A private FastAPI automation project that explored async task queues, browser workflow orchestration, session handling, telemetry logging, and background processing using Celery, Redis, PostgreSQL, and Playwright.",
       "liveUrl": "https://udemyenroller.madhudadi.in",
       "githubUrl": "https://github.com/madhu2456/udemy_enroller_fastapi",
       "featured": true,
       "coverImage": "/uploads/cms/udemy-enroller-cover.png",
-      "coverImageAlt": "Udemy Enroller using FastAPI case study preview showing async course enrollment automation.",
+      "coverImageAlt": "Browser Task Automation case study preview showing async browser-workflow orchestration.",
       "client": "Open source / community",
       "role": "Designer & Engineer",
       "period": "2026 to Present",
@@ -800,20 +800,20 @@
           "name": "Google Analytics"
         }
       ],
-      "problemStatement": "Finding free or discounted Udemy courses is repetitive and time-sensitive. Users had to monitor multiple coupon sites, copy links, and enroll before short validity windows expired, losing opportunities to timezone gaps and manual toil. The system needed a robust, high-availability architecture to handle async queues and rate-limiting gracefully.",
-      "solutionApproach": "FastAPI service for the core API layer with session-based Udemy authentication.\nCelery + Redis for async task processing and concurrent enrollments.\nValidation pipeline that authenticates, verifies coupons, and enrolls users without manual input.\nComprehensive logging and monitoring to track success rates and handle session expirations or request limits.",
+      "problemStatement": "Browser-based workflows often involve repetitive tasks with narrow execution windows. Manually checking, updating parameters, and verifying execution steps across different pages creates bottlenecks. The system needed a robust, high-availability architecture to coordinate async queues and rate-limiting gracefully.",
+      "solutionApproach": "FastAPI service for the core API layer with secure session handling.\nCelery + Redis for async task processing and task execution queues.\nValidation pipeline that authenticates session state, verifies inputs, and executes tasks without manual input.\nComprehensive logging and monitoring to track success rates, handle session expirations, and respect rate limits.",
       "impactMetrics": [
         {
-          "label": "reduction in manual enrollment effort",
+          "label": "reduction in manual effort",
           "value": "90%"
         },
         {
-          "label": "free courses delivered in six months",
+          "label": "workflow executions logged in six months",
           "value": "20,000+"
         },
         {
-          "label": "estimated savings",
-          "value": "Rs 10,00,000+"
+          "label": "estimated value created",
+          "value": "Significant"
         }
       ],
       "citations": [

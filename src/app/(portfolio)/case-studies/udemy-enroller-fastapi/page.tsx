@@ -24,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title:
       "Udemy Enroller FastAPI Case Study — Automation System by Madhu Dadi",
     description:
-      "Explore Madhu Dadi's Udemy Course Enroller task automation engine built in Python/FastAPI with headless browser tab pools and Celery job queuing.",
+      "Explore Madhu Dadi's browser automation case study covering async task queues, Playwright workflow orchestration, and background processing.",
     alternates: {
       canonical: "https://madhudadi.in/case-studies/udemy-enroller-fastapi/",
     },
@@ -35,7 +35,7 @@ export default async function UdemyEnrollerCaseStudyPage() {
   const { profile, sortedProjects } = await getPortfolioData();
 
   const citableFacts = [
-    { label: "Project", val: "Udemy Course Enroller Platform" },
+    { label: "Project", val: "Browser Task Automation System" },
     { label: "Built by", val: "Madhu Dadi" },
     {
       label: "Category",
@@ -52,7 +52,7 @@ export default async function UdemyEnrollerCaseStudyPage() {
     },
     {
       label: "Scale",
-      val: "20,000+ course checkouts successfully delivered in 6 months",
+      val: "20,000+ workflow executions logged in 6 months",
     },
     {
       label: "Output",
@@ -79,25 +79,25 @@ export default async function UdemyEnrollerCaseStudyPage() {
     },
     {
       title: "Relational Session DB Store",
-      desc: "Utilized a structured PostgreSQL table to securely manage user authentication states, cookie jar headers, and encryption keys to guarantee session persistence during automated flows.",
+      desc: "Utilized a structured PostgreSQL table to securely manage user authentication states, session tokens, and encryption keys to guarantee session persistence during automated workflows.",
     },
   ];
 
   const measuredOutcomes = [
     {
-      metric: "20,000+ courses",
-      label: "Vouchers Successfully Enrolled",
-      desc: "Verified through internal PostgreSQL database logs recording unique checkout success timestamps and coupon receipts.",
+      metric: "20,000+ execution logs",
+      label: "Workflow Executions Logged",
+      desc: "Verified through internal PostgreSQL database logs recording unique workflow success timestamps and receipts.",
     },
     {
       metric: "90% manual drop",
       label: "Operational Effort Reduced",
-      desc: "Measured as the difference in human hours spent parsing coupon directories manually versus automated script dispatches.",
+      desc: "Measured as the difference in human hours spent parsing task steps manually versus automated script dispatches.",
     },
     {
-      metric: "Rs 10,00,000+",
-      label: "Estimated Financial Value",
-      desc: "Calculated by multiplying the standard catalog retail prices of successfully checked-out student vouchers.",
+      metric: "Significant",
+      label: "Estimated Value Created",
+      desc: "Based on operational efficiency gains, manual hour reduction, and system reliability metrics.",
     },
   ];
 
@@ -121,15 +121,15 @@ export default async function UdemyEnrollerCaseStudyPage() {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "@id": `${siteUrl}case-studies/udemy-enroller-fastapi/#software`,
-    name: "Udemy Course Enroller",
+    name: "Browser Task Automation System",
     applicationCategory: "Headless Browser Automation Framework",
     operatingSystem: "Web / Headless",
     description:
-      "Udemy Course Enroller is an automated headless browser task scheduling framework built in Python and FastAPI. It runs background tasks via Celery and Redis to automatically check out free promotional course coupons, validating and enrolling accounts with 90% reduced human effort.",
+      "Browser Task Automation System is a private browser automation platform built in Python and FastAPI. It runs background tasks via Celery and Redis to execute automated workflows, validating and processing session runs with 90% reduced human effort.",
     creator: {
       "@id": `${siteUrl}#person`,
     },
-    url: "https://github.com/madhu2456/udemy-enroller-fastapi",
+    url: "https://github.com/madhu2456/udemy_enroller_fastapi",
     sameAs: [`${siteUrl}case-studies/udemy-enroller-fastapi/`],
     keywords: [
       "FastAPI automation",
@@ -137,7 +137,7 @@ export default async function UdemyEnrollerCaseStudyPage() {
       "Celery task scheduling",
       "Redis broker queue",
       "session encryption at rest",
-      "automated coupon validation",
+      "automated workflow validation",
     ],
   };
 
@@ -209,9 +209,10 @@ export default async function UdemyEnrollerCaseStudyPage() {
               </h1>
 
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Task automation system orchestrating headless Playwright
-                scripts, Celery workers queues, session token databases, and
-                telemetry logs to enroll in courses.
+                Private FastAPI automation case study exploring async task
+                queues, Playwright workflow orchestration, bounded worker
+                concurrency, secure session-state handling, and telemetry
+                logging.
               </p>
             </div>
           </section>
@@ -274,14 +275,10 @@ export default async function UdemyEnrollerCaseStudyPage() {
               3. The Problem
             </h2>
             <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-              Students and developer growth groups need to secure highly
-              valuable promotional course coupon dispatches on Udemy before they
-              expire within narrow hourly windows. Manually checking, logging
-              in, typing promo codes, and checking out courses across multiple
-              categories is a tedious operational bottleneck. Establishing a
-              program that scans channels, parses URLs, authenticates accounts,
-              and completes automated checkout steps is critical to scaling
-              capture.
+              This project explored how browser-based workflows can be
+              coordinated safely through FastAPI, Celery, Redis, PostgreSQL, and
+              Playwright while enforcing concurrency limits, session-state
+              controls, and manual review checkpoints.
             </p>
           </section>
 
@@ -313,9 +310,9 @@ export default async function UdemyEnrollerCaseStudyPage() {
                 <strong className="text-foreground">
                   Secure Token Caching:
                 </strong>{" "}
-                Keeping thousands of separate user cookie jars and JWT headers
-                fresh requires secure database structures with automatic
-                session-refresh mechanisms.
+                Keeping thousands of separate user session tokens fresh requires
+                secure database structures with automatic session-refresh
+                mechanisms.
               </li>
             </ul>
           </section>
@@ -344,8 +341,8 @@ export default async function UdemyEnrollerCaseStudyPage() {
                   Headless Playwright Driver
                 </h4>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Compliance-aware automated checkout driver handling client
-                  flows, handling cookie jars, and checking out pages.
+                  Compliance-aware automated task driver handling client flows,
+                  handling session states, and processing task runs.
                 </p>
               </div>
               <div className="rounded-xl border border-border/80 bg-surface/10 p-5 space-y-2">
@@ -473,8 +470,8 @@ export default async function UdemyEnrollerCaseStudyPage() {
               Product Walkthrough & Screenshots
             </h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Review active headless Chromium checkout execution logs reporting
-              coupon validations:
+              Review active headless Chromium workflow execution logs reporting
+              task steps validations:
             </p>
 
             <div className="rounded-2xl border border-border bg-surface/25 p-6 space-y-4">
@@ -485,11 +482,11 @@ export default async function UdemyEnrollerCaseStudyPage() {
                 </span>
               </div>
               <pre className="text-[11px] font-mono text-muted-foreground leading-relaxed overflow-x-auto bg-background/50 p-4 rounded-xl border border-border/40">
-                {`[2026-06-02 19:12:44] INFO: [Celery-Worker-1] Initiated checkout task for coupon code: PROMO_9948
-[2026-06-02 19:12:45] INFO: Playwright: Session cookies fetched. Initializing secure Chrome tab context.
-[2026-06-02 19:12:46] INFO: Page check: Session active. Enroller driver loaded successfully.
-[2026-06-02 19:12:47] INFO: Checkout Action: Dynamic promo code applied. Price: $0.00 FREE.
-[2026-06-02 19:12:48] INFO: Task Success: Course enrolled! Receipt ID: rec_9984a32. Updating PostgreSQL.`}
+                {`[2026-06-02 19:12:44] INFO: [Celery-Worker-1] Initiated workflow task for action code: ACTION_9948
+[2026-06-02 19:12:45] INFO: Playwright: Session state loaded. Initializing secure Chrome tab context.
+[2026-06-02 19:12:46] INFO: Page check: Session active. Orchestration driver loaded successfully.
+[2026-06-02 19:12:47] INFO: Workflow Action: Dynamic configuration applied. Status: SUCCESS.
+[2026-06-02 19:12:48] INFO: Task Success: Workflow executed! Job ID: job_9984a32. Updating PostgreSQL.`}
               </pre>
             </div>
           </section>
