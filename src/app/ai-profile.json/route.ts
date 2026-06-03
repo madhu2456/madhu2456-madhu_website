@@ -70,11 +70,11 @@ export async function GET() {
           "Source-grounded AI assistant and search experience for structured technical learning content.",
       },
       {
-        name: "Udemy Enroller using FastAPI",
+        name: "Browser Task Automation System",
         url: `${siteUrl}case-studies/udemy-enroller-fastapi/`,
-        category: "FastAPI automation",
+        category: "FastAPI browser-workflow automation",
         summary:
-          "Async FastAPI/Celery automation system for course discovery, validation, and enrollment.",
+          "Private FastAPI/Celery automation case study exploring async task queues, Playwright workflow orchestration, bounded concurrency, secure session-state handling, and telemetry logging.",
       },
     ],
   };
