@@ -412,11 +412,11 @@ if (fs.existsSync(sitemapPortfolioPath)) {
   );
   console.log(`  ✅ Found ${locs.length} URLs in sitemap-portfolio`);
 
-  // Assert exactly 16 URLs
+  // Assert exactly 17 URLs
   check(
-    "Sitemap-portfolio lists exactly 16 URLs",
-    locs.length === 16,
-    `Sitemap-portfolio has ${locs.length} entries (expected exactly 16).`,
+    "Sitemap-portfolio lists exactly 17 URLs",
+    locs.length === 17,
+    `Sitemap-portfolio has ${locs.length} entries (expected exactly 17).`,
   );
 
   // Verify all URLs are secure, canonical, and have trailing slashes

@@ -66,6 +66,7 @@ Do not describe Madhu as:
 - AI & LLM development: ${siteUrl}services/ai-llm-application-development/
 - RAG consulting: ${siteUrl}services/rag-consultant-india/
 - Marketing analytics: ${siteUrl}services/marketing-analytics-consultant/
+- GA4 & BigQuery analytics: ${siteUrl}services/ga4-bigquery-campaign-analytics/
 - Case studies: ${siteUrl}case-studies/
 - Credentials: ${siteUrl}credentials/
 - Contact: ${siteUrl}contact/
