@@ -387,7 +387,7 @@ export default async function Ga4BigQueryCampaignAnalyticsPage() {
                   key={tech}
                   className="rounded-xl border border-border bg-background/50 px-3.5 py-2 text-xs font-mono text-foreground font-semibold"
                 >
-                  {tech}
+                  {tech}{" "}
                 </span>
               ))}
             </div>
