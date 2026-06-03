@@ -34,9 +34,7 @@ export default async function MarketingAnalyticsConsultantPage() {
   const { profile, sortedProjects } = await getPortfolioData();
 
   // Prefilled contact URL configuration
-  const prefillSubject = "Marketing Analytics Inquiry";
-  const prefillMessage = `Hi Madhu,\n\nI read your Marketing Analytics Consultant page and would love to discuss a custom measurement or dashboard project.\n\nProject Scope:\n- Primary Telemetry Needs (GA4, sGTM, etc.):\n- Current Data Stack (BigQuery, SQL, etc.):\n- Key Business Outcomes to Track:\n\nLet's connect!`;
-  const contactUrl = `/contact/?subject=${encodeURIComponent(prefillSubject)}&message=${encodeURIComponent(prefillMessage)}`;
+  const contactUrl = "/contact/#intent=marketing-analytics";
 
   // Target query tag collection
 

@@ -37,9 +37,7 @@ export default async function RagConsultantIndiaPage() {
   const { profile, sortedProjects } = await getPortfolioData();
 
   // Prefilled contact URL configuration
-  const prefillSubject = "RAG Consulting Inquiry";
-  const prefillMessage = `Hi Madhu,\n\nI read your RAG Consultant page and would love to discuss a custom RAG/semantic search implementation.\n\nProject Scope:\n- Types of Documents:\n- Volume of Data:\n- Expected Target Latency:\n\nLet's connect!`;
-  const contactUrl = `/contact/?subject=${encodeURIComponent(prefillSubject)}&message=${encodeURIComponent(prefillMessage)}`;
+  const contactUrl = "/contact/#intent=rag";
 
   // RAG Checklist Items (16 Items requested in the checklist specification)
   const ragChecklist = [

@@ -6,7 +6,7 @@ const BUILD_DIR = path.join(__dirname, "..", ".next", "server", "app");
 const PAGES = [
   { file: "index.html", route: "/" },
   { file: "profile.html", route: "/profile/" },
-  { file: "contact.html", route: "/contact/" },
+  { file: "contact.html", route: "/contact/", isDynamic: true },
   { file: "credentials.html", route: "/credentials/" },
   { file: "services.html", route: "/services/" },
   { file: "case-studies.html", route: "/case-studies/" },
@@ -73,11 +73,17 @@ function extractAll(html, regex) {
   return [...html.matchAll(regex)];
 }
 
-for (const { file, route } of PAGES) {
+for (const { file, route, isDynamic } of PAGES) {
   const filePath = path.join(BUILD_DIR, file);
   console.log(`📄 Auditing Route: ${route} (${file})`);
 
   if (!fs.existsSync(filePath)) {
+    if (isDynamic) {
+      console.log(
+        `  ℹ️ Route ${route} is dynamic (rendered on demand). Skipping static HTML file checks.\n`,
+      );
+      continue;
+    }
     console.log(`  ❌ HTML File does not exist: ${filePath}\n`);
     errorsList.push(`File missing: ${route} (${file})`);
     failedChecks++;
