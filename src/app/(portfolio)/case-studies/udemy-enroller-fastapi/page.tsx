@@ -48,7 +48,7 @@ export default async function UdemyEnrollerCaseStudyPage() {
     },
     {
       label: "Core capability",
-      val: "Distributed asynchronous headless chrome tasks and token pool management",
+      val: "Distributed asynchronous headless chrome tasks and secure session-state management",
     },
     {
       label: "Scale",
@@ -67,7 +67,7 @@ export default async function UdemyEnrollerCaseStudyPage() {
   const technicalDecisions = [
     {
       title: "FastAPI Lightweight Dispatch",
-      desc: "Selected FastAPI to expose ultra-low-overhead job trigger endpoints. Under heavy incoming coupon link spikes, the gateway instantly dispatches tasks without thread-blocking.",
+      desc: "Selected FastAPI to expose ultra-low-overhead job trigger endpoints. Under heavy incoming promotional link spikes, the gateway instantly dispatches tasks without thread-blocking.",
     },
     {
       title: "Playwright Python API",
@@ -79,7 +79,7 @@ export default async function UdemyEnrollerCaseStudyPage() {
     },
     {
       title: "Relational Session DB Store",
-      desc: "Utilized a structured PostgreSQL table to securely manage user authentication states, session tokens, and encryption keys to guarantee session persistence during automated workflows.",
+      desc: "Utilized a structured PostgreSQL table to securely manage user-authorized session states, encryption keys, and session parameters to guarantee session persistence during automated workflows.",
     },
   ];
 
@@ -107,8 +107,8 @@ export default async function UdemyEnrollerCaseStudyPage() {
       a: "The system was designed with bounded execution, secure session storage, manual review points, and strict failure handling. Future versions should prioritize user consent, platform-compliance checks, and safer workflow approvals.",
     },
     {
-      q: "Is storing user session cookies secure?",
-      a: "Yes. All cookies and JWT headers are securely written to relational Postgres tables. Fields are encrypted at rest with Fernet/AES algorithms, avoiding leakage.",
+      q: "Is storing user-authorized session states secure?",
+      a: "Yes. All user-authorized session artifacts are securely written to relational Postgres tables. Fields are encrypted at rest with Fernet/AES algorithms, avoiding leakage.",
     },
     {
       q: "Can this automation pipeline be deployed in a Docker container?",
@@ -308,11 +308,11 @@ export default async function UdemyEnrollerCaseStudyPage() {
               </li>
               <li>
                 <strong className="text-foreground">
-                  Secure Token Caching:
+                  Secure Session-State Store:
                 </strong>{" "}
-                Keeping thousands of separate user session tokens fresh requires
-                secure database structures with automatic session-refresh
-                mechanisms.
+                Keeping thousands of separate user-authorized session states
+                fresh requires secure database structures with automatic
+                session-refresh mechanisms.
               </li>
             </ul>
           </section>
@@ -332,8 +332,8 @@ export default async function UdemyEnrollerCaseStudyPage() {
                   Promotional Coupon Parser
                 </h4>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Python-based monitoring script extracting Udemy promotional
-                  coupon codes from active sitemaps and channels.
+                  Python-based monitoring script extracting promotional workflow
+                  metadata from active sitemaps and channels.
                 </p>
               </div>
               <div className="rounded-xl border border-border/80 bg-surface/10 p-5 space-y-2">
@@ -373,7 +373,8 @@ export default async function UdemyEnrollerCaseStudyPage() {
               Architecture Blueprint
             </h2>
             <p className="text-xs md:text-sm text-muted-foreground">
-              Task dispatch and dynamic session token persistence flow.
+              Task dispatch and dynamic user-authorized session state
+              persistence flow.
             </p>
 
             <div className="rounded-2xl border border-border bg-surface/20 p-6 md:p-8 backdrop-blur-sm overflow-x-auto text-center flex flex-col items-center justify-center gap-4">
@@ -385,7 +386,7 @@ export default async function UdemyEnrollerCaseStudyPage() {
                   </span>
                   <h4 className="font-bold text-xs mt-1">Promo Parser</h4>
                   <p className="text-[9px] text-muted-foreground">
-                    URL Coupon Extract
+                    URL Promo Extract
                   </p>
                 </div>
                 <IconChevronRight className="h-5 w-5 text-primary/40" />
@@ -433,7 +434,7 @@ export default async function UdemyEnrollerCaseStudyPage() {
                   </span>
                   <h4 className="font-bold text-xs mt-1">PostgreSQL DB</h4>
                   <p className="text-[9px] text-muted-foreground">
-                    Secure Token Cache
+                    Secure Session-State Store
                   </p>
                 </div>
               </div>
