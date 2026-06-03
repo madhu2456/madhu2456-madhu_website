@@ -487,12 +487,10 @@ export default async function FullStackAIProductPage() {
                 </h3>
               </div>
               <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
-                I instrument search-optimized frameworks directly from the first
-                commit. Using strict SEO title tags, unique meta descriptions,
-                sitemaps, semantic HTML hierarchies, schema.org JSON-LD scripts,
-                and server-side GA4 events, I optimize your application for
-                search engine visibility and improve crawlability and
-                answer-engine readiness (AEO/GEO).
+                I build applications with clean metadata, semantic HTML,
+                sitemaps, schema.org JSON-LD, crawlable links, and server-side
+                analytics so they are easier for search engines and answer
+                engines to understand, index, and cite.
               </p>
             </div>
 

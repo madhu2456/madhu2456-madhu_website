@@ -186,8 +186,8 @@ export default async function CredentialsPage() {
           <section className="relative rounded-3xl border border-border bg-surface/30 p-8 md:p-12 shadow-card backdrop-blur-md overflow-hidden text-center space-y-4">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 h-40 w-40 bg-primary/5 rounded-full blur-3xl -z-10" />
             <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
-              <IconShieldCheck className="h-3.5 w-3.5" /> Direct Entity
-              Authentication
+              <IconShieldCheck className="h-3.5 w-3.5" /> Verified Credentials &
+              Professional Proof
             </span>
             <h1 className="text-3xl md:text-5xl font-bold tracking-tight">
               Madhu Dadi Credentials —{" "}
@@ -627,7 +627,7 @@ export default async function CredentialsPage() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-40 w-40 bg-primary/5 rounded-full blur-[60px] -z-10" />
             <div className="max-w-2xl mx-auto space-y-4">
               <h2 className="text-xl md:text-2xl font-bold tracking-tight">
-                Authentic Verification Guarantee
+                Verification Notes
               </h2>
               <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
                 Verification Notes: All credentials, IDs, and certificates

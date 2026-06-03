@@ -86,7 +86,7 @@ export default async function AiAgentDevelopmentPage() {
       id: "audit",
       title: "5. Logging & Audit Trails",
       icon: <IconTerminal className="h-5 w-5 text-primary" />,
-      desc: "Production agents require complete traceability. Every task decomposition, prompt version, tool input/output, and LLM raw response is logged. This enables you to inspect the exact 'thought process' of the agent, trace execution timelines, and audit run history on admin dashboards.",
+      desc: "Production agents require complete traceability. Every task decomposition, prompt version, tool input/output, and LLM raw response is logged. This enables you to inspect the exact execution trace, prompt versions, tool calls, inputs, outputs, and decision path of the agent, trace execution timelines, and audit run history on admin dashboards.",
     },
     {
       id: "hitl",

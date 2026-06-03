@@ -167,7 +167,7 @@ export default async function ProfilePage() {
             <div className="flex flex-col md:flex-row gap-8 items-start md:items-center justify-between">
               <div className="space-y-4 min-w-0 flex-1">
                 <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
-                  Canonical Identity & Profile
+                  Verified AI & Marketing Analytics Profile
                 </span>
                 <h1 className="text-3xl md:text-5xl font-bold tracking-tight">
                   Madhu Dadi —{" "}

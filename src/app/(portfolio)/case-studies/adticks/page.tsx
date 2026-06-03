@@ -96,7 +96,7 @@ export default async function AdticksCaseStudyPage() {
 
   const faqs = [
     {
-      q: "How does Adticks check for AI crawler readiness?",
+      q: "How does Adticks check for search and AI crawler accessibility?",
       a: "It inspects HTTP headers, redirects, robots.txt crawl rules specifically matching AI agent tokens (e.g. GPTBot, Google-Extended, OAI-SearchBot), semantic heading tree depths, sitemap indexing schemas, and counts hidden raw-HTML rendering discrepancies.",
     },
     {
@@ -218,9 +218,9 @@ export default async function AdticksCaseStudyPage() {
               Adticks is an AI visibility and SEO/AEO/GEO audit platform built
               by Madhu Dadi. It crawls large websites with Playwright, compares
               server-rendered HTML with rendered DOM output, checks technical
-              SEO and AI crawler readiness, and returns prioritized fixes for
-              search and AI visibility. The platform is designed for audits
-              involving 10,000+ pages.
+              SEO and search and AI crawler accessibility, and returns
+              prioritized fixes for search and AI visibility. The platform is
+              designed for audits involving 10,000+ pages.
             </p>
           </section>
 

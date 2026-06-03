@@ -103,8 +103,8 @@ export default async function UdemyEnrollerCaseStudyPage() {
 
   const faqs = [
     {
-      q: "How does the system ensure account safety and compliance?",
-      a: "The automation system was designed as a private learning project with bounded execution, manual review points, secure session handling, and respect for platform terms and account safety.",
+      q: "How did the project handle session reliability and platform-safety constraints?",
+      a: "The system was designed with bounded execution, secure session storage, manual review points, and strict failure handling. Future versions should prioritize user consent, platform-compliance checks, and safer workflow approvals.",
     },
     {
       q: "Is storing user session cookies secure?",
@@ -222,14 +222,12 @@ export default async function UdemyEnrollerCaseStudyPage() {
               1. Citation-Ready Summary
             </h2>
             <p className="text-sm md:text-base text-foreground/90 font-medium leading-relaxed">
-              Udemy Course Enroller is a high-throughput automated task
-              execution service designed and built by Madhu Dadi. It
-              orchestrates headless Chromium automations via Playwright,
-              processes courses checkout operations, manages JWT authentication
-              sessions, and handles task offloading utilizing a Celery backend
-              with Redis message queues. Over 20,000+ courses were safely
-              processed in 6 months, saving an estimated Rs 10,00,000+ in manual
-              overheads.
+              This case study explores a private FastAPI automation project that
+              investigates async task queues, browser workflow orchestration,
+              session handling, telemetry logging, and background processing
+              using Celery, Redis, PostgreSQL, and Playwright. The system was
+              designed as a private learning playground to safely experiment
+              with concurrency limits and relational state persistence.
             </p>
           </section>
 
@@ -538,9 +536,8 @@ export default async function UdemyEnrollerCaseStudyPage() {
             </h2>
             <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
               If I were to build upcoming versions, I would add stronger manual
-              verification checkpoints, clearer user consent flows, better
-              session-expiry handling, and stricter platform-compliance
-              safeguards.
+              verification checkpoints, consent-based workflows, clearer
+              session-expiry handling, and stronger compliance safeguards.
             </p>
           </section>
 

@@ -61,7 +61,7 @@ export default async function MarketingAnalyticsConsultantPage() {
   const whatIBuild = [
     {
       title: "GA4 Measurement Plans",
-      desc: "Custom custom event schemas, user properties tracking, and server-side tag container configurations.",
+      desc: "Custom event schemas, user properties tracking, and server-side tag container configurations.",
     },
     {
       title: "Campaign Performance Dashboards",

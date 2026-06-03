@@ -239,10 +239,17 @@ export default async function ContactPage() {
                 </div>
                 <Suspense
                   fallback={
-                    <div className="flex flex-col items-center justify-center h-80 rounded-xl border border-border bg-surface/30 p-6 space-y-4 animate-pulse">
+                    <div className="flex flex-col items-center justify-center h-80 rounded-xl border border-border bg-surface/30 p-6 text-center space-y-4 animate-pulse">
                       <div className="h-8 w-8 rounded-full border-4 border-t-primary border-r-transparent border-b-transparent border-l-transparent animate-spin" />
-                      <p className="text-sm text-muted-foreground">
-                        Preparing contact form...
+                      <p className="text-sm text-muted-foreground max-w-xs leading-relaxed">
+                        Contact form loading. You can also email me directly at{" "}
+                        <a
+                          href={`mailto:${profile.email}`}
+                          className="text-primary hover:underline transition-colors font-medium break-all"
+                        >
+                          {profile.email}
+                        </a>
+                        .
                       </p>
                     </div>
                   }

@@ -130,9 +130,10 @@ export default async function CaseStudiesPage() {
             Generative AI, RAG, FastAPI & Marketing Analytics Case Studies
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
-            Case studies across AI visibility, RAG learning systems, async
-            automation, and the full-stack engineering that keeps them useful
-            after launch.
+            These case studies show Madhu Dadi’s work across generative AI, RAG,
+            SEO/AEO/GEO auditing, FastAPI automation, and marketing analytics
+            systems. Each project includes architecture, implementation details,
+            measurable outcomes, and citable proof.
           </p>
         </header>
 
