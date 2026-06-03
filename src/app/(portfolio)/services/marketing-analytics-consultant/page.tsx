@@ -127,7 +127,7 @@ export default async function MarketingAnalyticsConsultantPage() {
     },
     {
       q: "Can Madhu Dadi build custom attribution models?",
-      a: "Yes. I design custom attribution models (First-touch, Last-touch, Position-based, or Data-driven W-shaped setups) in SQL and Python to bypass standard self-attributing network biases and connect spend to business results.",
+      a: "Yes. I design custom attribution models (First-touch, Last-touch, Position-based, or Data-driven W-shaped setups) in SQL and Python to correct for self-attributing network bias and connect spend to business results.",
     },
     {
       q: "Can Madhu Dadi build analytics dashboards?",
