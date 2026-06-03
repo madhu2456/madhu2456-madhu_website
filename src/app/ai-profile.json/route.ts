@@ -79,9 +79,8 @@ export async function GET() {
     ],
   };
 
-  return new Response(JSON.stringify(responseData, null, 2), {
+  return Response.json(responseData, {
     headers: {
-      "Content-Type": "application/json",
       "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
       "X-Robots-Tag": "index, follow, max-snippet:-1",
     },
