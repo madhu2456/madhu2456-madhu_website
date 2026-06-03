@@ -88,9 +88,9 @@ export default async function AdticksCaseStudyPage() {
       desc: "Measured as the median processing time per page before and after introducing concurrent browser pooling and tab reuse protocols.",
     },
     {
-      metric: "100% anomaly check",
+      metric: "Full dynamic parity test coverage",
       label: "Dynamic Parity Detection",
-      desc: "Confirmed via automated integration checks containing dynamic JS components hidden in the raw server HTML but present in Playwright DOM.",
+      desc: "Confirmed via automated integration checks containing dynamic JS components hidden in raw server HTML but present in Playwright DOM.",
     },
   ];
 
