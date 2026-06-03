@@ -490,9 +490,9 @@ export default async function FullStackAIProductPage() {
                 I instrument search-optimized frameworks directly from the first
                 commit. Using strict SEO title tags, unique meta descriptions,
                 sitemaps, semantic HTML hierarchies, schema.org JSON-LD scripts,
-                and server-side GA4 events, I ensure your application ranks
-                highly on Google and answers perfectly in AI search and answer
-                engine outputs (AEO/GEO).
+                and server-side GA4 events, I optimize your application for
+                search engine visibility and improve crawlability and
+                answer-engine readiness (AEO/GEO).
               </p>
             </div>
 
