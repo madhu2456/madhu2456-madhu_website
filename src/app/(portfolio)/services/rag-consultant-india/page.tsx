@@ -507,10 +507,10 @@ export default async function RagConsultantIndiaPage() {
               {/* Udemy Enroller */}
               <article className="group rounded-2xl border border-border bg-surface/20 p-6 space-y-4 hover:-translate-y-1 transition-all duration-300">
                 <span className="text-[10px] font-mono tracking-widest text-primary uppercase block">
-                  FastAPI Automation Workflow
+                  FastAPI browser-workflow automation case study
                 </span>
                 <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
-                  Browser Task Automation System
+                  Udemy Enroller
                 </h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   Built a private FastAPI automation project exploring async

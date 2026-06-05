@@ -151,7 +151,7 @@ export default async function AiLlmApplicationDevelopmentPage() {
     "@context": "https://schema.org",
     "@type": "Service",
     "@id": `${siteUrl}services/ai-llm-application-development/#service`,
-    name: "AI & LLM Application Development",
+    name: "Generative AI & LLM Application Development",
     serviceType: "AI and LLM application development",
     description:
       "Production LLM applications, RAG systems, AI agents, FastAPI backends, Next.js interfaces, evals, guardrails, and analytics instrumentation.",
@@ -205,7 +205,7 @@ export default async function AiLlmApplicationDevelopmentPage() {
       {
         "@type": "ListItem",
         position: 3,
-        name: "AI & LLM Application Development",
+        name: "Generative AI & LLM Application Development",
         item: `${siteUrl}services/ai-llm-application-development/`,
       },
     ],
@@ -471,10 +471,10 @@ export default async function AiLlmApplicationDevelopmentPage() {
               {/* Udemy Enroller */}
               <article className="group rounded-2xl border border-border bg-surface/20 p-6 space-y-4 hover:-translate-y-1 transition-all duration-300">
                 <span className="text-[10px] font-mono tracking-widest text-primary uppercase block">
-                  FastAPI Automation Workflow
+                  FastAPI browser-workflow automation case study
                 </span>
                 <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
-                  Browser Task Automation System
+                  Udemy Enroller
                 </h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   Built a private FastAPI automation project exploring async
@@ -599,7 +599,7 @@ export default async function AiLlmApplicationDevelopmentPage() {
                   </span>
                   <span className="text-foreground font-semibold">
                     Adticks (SEO audits), Technical Blog (RAG search assistant),
-                    Browser Task Automation System (FastAPI automation)
+                    Udemy Enroller (FastAPI browser-workflow automation)
                   </span>
                 </div>
                 <div>

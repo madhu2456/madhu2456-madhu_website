@@ -35,11 +35,11 @@ export default async function UdemyEnrollerCaseStudyPage() {
   const { profile, sortedProjects } = await getPortfolioData();
 
   const citableFacts = [
-    { label: "Project", val: "Browser Task Automation System" },
+    { label: "Project", val: "Udemy Enroller" },
     { label: "Built by", val: "Madhu Dadi" },
     {
       label: "Category",
-      val: "Task Automation, Headless Browser Scripting, Telemetry Logs",
+      val: "FastAPI browser-workflow automation",
     },
     { label: "Role", val: "Designer and engineer" },
     {
@@ -48,7 +48,7 @@ export default async function UdemyEnrollerCaseStudyPage() {
     },
     {
       label: "Core capability",
-      val: "Distributed asynchronous headless chrome tasks and secure session-state management",
+      val: "Distributed asynchronous workflow orchestration and secure session-state handling",
     },
     {
       label: "Scale",
@@ -56,11 +56,11 @@ export default async function UdemyEnrollerCaseStudyPage() {
     },
     {
       label: "Output",
-      val: "Automated cron scheduling, telemetry status alerts, and session database records",
+      val: "Scheduled workflow runs, telemetry logs, status alerts, and relational task records",
     },
     {
       label: "Evidence",
-      val: "Case study, live GitHub repository, code walkthrough, empirical savings",
+      val: "Case study, GitHub repository, code walkthrough, performance methodology",
     },
   ];
 
@@ -107,8 +107,8 @@ export default async function UdemyEnrollerCaseStudyPage() {
       a: "The system was designed with bounded execution, secure session storage, manual review points, and strict failure handling. Future versions should prioritize user consent, platform-compliance checks, and safer workflow approvals.",
     },
     {
-      q: "Is storing user-authorized session states secure?",
-      a: "Yes. All user-authorized session artifacts are securely written to relational Postgres tables. Fields are encrypted at rest with Fernet/AES algorithms, avoiding leakage.",
+      q: "How does the system handle user-authorized session state?",
+      a: "The system stores user-authorized session artifacts in encrypted relational tables with strict access controls. Future versions should favor short-lived tokens, explicit consent checkpoints, and manual review flows for sensitive actions.",
     },
     {
       q: "Can this automation pipeline be deployed in a Docker container?",
@@ -121,11 +121,11 @@ export default async function UdemyEnrollerCaseStudyPage() {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "@id": `${siteUrl}case-studies/udemy-enroller-fastapi/#software`,
-    name: "Browser Task Automation System",
+    name: "Udemy Enroller",
     applicationCategory: "Headless Browser Automation Framework",
     operatingSystem: "Web / Headless",
     description:
-      "Browser Task Automation System is a private browser automation platform built in Python and FastAPI. It runs background tasks via Celery and Redis to execute automated workflows, validating and processing session runs with 90% reduced human effort.",
+      "Udemy Enroller is a private browser automation platform built in Python and FastAPI. It runs background tasks via Celery and Redis to execute automated workflows, validating and processing session runs with 90% reduced human effort.",
     creator: {
       "@id": `${siteUrl}#person`,
     },
@@ -209,10 +209,7 @@ export default async function UdemyEnrollerCaseStudyPage() {
               </h1>
 
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Private FastAPI automation case study exploring async task
-                queues, Playwright workflow orchestration, bounded worker
-                concurrency, secure session-state handling, and telemetry
-                logging.
+                A private FastAPI automation case study exploring async task queues, Playwright workflow orchestration, bounded concurrency, secure session-state handling, telemetry logging, and background processing.
               </p>
             </div>
           </section>
@@ -329,11 +326,11 @@ export default async function UdemyEnrollerCaseStudyPage() {
             <div className="grid gap-6 sm:grid-cols-2">
               <div className="rounded-xl border border-border/80 bg-surface/10 p-5 space-y-2">
                 <h4 className="font-bold text-sm text-foreground">
-                  Promotional Coupon Parser
+                  Workflow Metadata Parser
                 </h4>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Python-based monitoring script extracting promotional workflow
-                  metadata from active sitemaps and channels.
+                  Python-based monitoring script that parsed structured workflow metadata
+                  and queued eligible tasks for review and execution.
                 </p>
               </div>
               <div className="rounded-xl border border-border/80 bg-surface/10 p-5 space-y-2">
@@ -549,7 +546,7 @@ export default async function UdemyEnrollerCaseStudyPage() {
                 href="/services/ai-llm-application-development/"
                 className="inline-flex items-center gap-1 text-xs font-semibold text-primary border border-primary/20 bg-primary/5 px-3.5 py-1.5 rounded-full hover:bg-primary/10 transition-colors"
               >
-                AI & LLM Application Development{" "}
+                Generative AI & LLM Application Development{" "}
                 <IconChevronRight className="h-3 w-3" />
               </Link>
               <Link

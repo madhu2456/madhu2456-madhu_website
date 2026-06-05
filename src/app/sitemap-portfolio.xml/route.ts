@@ -112,6 +112,12 @@ export async function GET() {
       changeFrequency: "monthly",
       priority: "0.5",
     },
+    {
+      url: `${siteUrl}resume.pdf`,
+      lastModified: "2026-06-02",
+      changeFrequency: "monthly",
+      priority: "0.5",
+    },
   ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
