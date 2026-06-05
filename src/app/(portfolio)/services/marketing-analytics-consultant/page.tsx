@@ -50,7 +50,7 @@ export default async function MarketingAnalyticsConsultantPage() {
   const problemsSolved = [
     "GA4 data is unreliable or missing critical event logs",
     "Campaign reports do not match actual business bottom lines",
-    "Analytics dashboards are designed poorly and ignored",
+    "Analytics dashboards are hard to interpret and underused",
     "Multi-touch attribution is unclear and overrepresented",
     "A/B experiments are read optimistically without statistical rigor",
     "Stakeholders and executives do not trust telemetry numbers",
@@ -129,7 +129,7 @@ export default async function MarketingAnalyticsConsultantPage() {
     },
     {
       q: "Can Madhu Dadi build analytics dashboards?",
-      a: "Yes. I construct beautiful, high-performance dashboards using Looker Studio or Power BI. I focus on clean information hierarchy so growth teams can extract actionable decisions inside 5 seconds.",
+      a: "Yes. I construct clear, high-performance dashboards using Looker Studio or Power BI. I focus on clean information hierarchy so growth teams can extract actionable decisions inside 5 seconds.",
     },
     {
       q: "Can Madhu Dadi connect product analytics to AI features?",
@@ -451,10 +451,10 @@ export default async function MarketingAnalyticsConsultantPage() {
               {/* Udemy Enroller */}
               <article className="group rounded-2xl border border-border bg-surface/20 p-6 space-y-4 hover:-translate-y-1 transition-all duration-300">
                 <span className="text-[10px] font-mono tracking-widest text-primary uppercase block">
-                  FastAPI Automation Workflow
+                  FastAPI browser-workflow automation case study
                 </span>
                 <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
-                  Browser Task Automation System
+                  Udemy Enroller
                 </h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   Built a private FastAPI automation project exploring async

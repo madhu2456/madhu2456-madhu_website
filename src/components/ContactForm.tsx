@@ -11,10 +11,10 @@ type ContactIntent = {
 
 const CONTACT_INTENTS: Record<string, ContactIntent> = {
   "ai-llm": {
-    subject: "AI & LLM Application Development Inquiry",
+    subject: "Generative AI & LLM Application Development Inquiry",
     message: `Hi Madhu,
 
-I read your AI & LLM Application Development service page and would love to schedule a technical discovery call.
+I read your Generative AI & LLM Application Development service page and would love to schedule a technical discovery call.
 
 About our project:
 - Goals / Features:

@@ -630,11 +630,7 @@ export default async function CredentialsPage() {
                 Verification Notes
               </h2>
               <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
-                Verification Notes: All credentials, IDs, and certificates
-                displayed on this portal are authentic and mapped directly to
-                active platform registration catalogs. They represent genuine
-                professional engineering competencies and undergo immediate
-                validation upon catalog query checks.
+                Credential IDs and verification links are mapped to their issuing platforms where available. This page is maintained as a source of truth for Madhu Dadi’s professional certifications, awards, work history, and public project proof.
               </p>
             </div>
           </section>

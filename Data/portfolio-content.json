@@ -767,16 +767,16 @@
       "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
-      "title": "Browser Task Automation System",
+      "title": "Udemy Enroller",
       "slug": "udemy-enroller-fastapi",
-      "tagline": "Async Browser-Workflow Orchestration",
-      "category": "Web app - Automation",
-      "impactSummary": "A private FastAPI automation project that explored async task queues, browser workflow orchestration, session handling, telemetry logging, and background processing using Celery, Redis, PostgreSQL, and Playwright.",
+      "tagline": "FastAPI Browser-Workflow Automation",
+      "category": "FastAPI Browser-Workflow Automation",
+      "impactSummary": "A private FastAPI automation case study exploring async task queues, Playwright workflow orchestration, bounded concurrency, secure session-state handling, telemetry logging, and background processing.",
       "liveUrl": "https://udemyenroller.madhudadi.in",
       "githubUrl": "https://github.com/madhu2456/udemy_enroller_fastapi",
       "featured": true,
       "coverImage": "/uploads/cms/udemy-enroller-cover.png",
-      "coverImageAlt": "Browser Task Automation case study preview showing async browser-workflow orchestration.",
+      "coverImageAlt": "Udemy Enroller case study preview showing async browser-workflow orchestration.",
       "client": "Open source / community",
       "role": "Designer & Engineer",
       "period": "2026 to Present",
@@ -836,7 +836,7 @@
   ],
   "services": [
     {
-      "title": "AI & LLM Application Development",
+      "title": "Generative AI & LLM Application Development",
       "slug": "ai-llm-application-development",
       "icon": "/icon-512.png",
       "shortDescription": "Production-grade generative AI applications, bespoke custom chat interfaces, and LLM integrations built for reliability. Not just happy-path demos.",
@@ -899,7 +899,7 @@
       "title": "AI Agent Development",
       "slug": "ai-agent-development",
       "icon": "/icon-512.png",
-      "shortDescription": "Agentic workflows, task planners, tool calling, and autonomous multi-agent systems designed to execute complex business tasks.",
+      "shortDescription": "Agentic workflows, task planners, tool calling, and multi-agent systems with guardrails, logs, and human approval gates for complex business tasks.",
       "fullDescription": "Multi-agent orchestration systems using state machines (LangGraph) for deterministic control. Designed with task decomposition planners, sandboxed tool-calling pipelines, self-correction loops, and recursive task validation.",
       "features": [
         "LangGraph state-machine orchestrations",

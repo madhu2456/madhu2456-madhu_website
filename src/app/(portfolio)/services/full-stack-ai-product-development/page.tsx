@@ -125,7 +125,8 @@ export default async function FullStackAIProductPage() {
       tech: ["FastAPI", "Next.js", "Celery", "Redis", "Postgres"],
     },
     {
-      title: "Browser Workflow Automation",
+      title: "Udemy Enroller",
+      descriptor: "FastAPI Browser-Workflow Automation",
       url: "/case-studies/udemy-enroller-fastapi/",
       desc: "Designed a private FastAPI and Playwright workflow-orchestration system with bounded worker concurrency, secure session-state handling, background queues, and telemetry logging.",
       tech: ["FastAPI", "Python", "Docker", "Background Tasks"],
@@ -539,9 +540,16 @@ export default async function FullStackAIProductPage() {
                       <div className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-primary/10 text-primary">
                         <IconAward className="h-4.5 w-4.5" />
                       </div>
-                      <h3 className="font-bold text-base text-foreground">
-                        {study.title}
-                      </h3>
+                      <div className="flex flex-col">
+                        {study.descriptor && (
+                          <span className="text-[10px] font-mono tracking-widest text-primary uppercase block mb-1">
+                            {study.descriptor}
+                          </span>
+                        )}
+                        <h3 className="font-bold text-base text-foreground">
+                          {study.title}
+                        </h3>
+                      </div>
                     </div>
                     <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
                       {study.desc}

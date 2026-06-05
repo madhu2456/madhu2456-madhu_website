@@ -48,7 +48,7 @@ export default async function Ga4BigQueryCampaignAnalyticsPage() {
   const problemsSolved = [
     "Mismatched and bloated ad platform reporting numbers",
     "Missing checkout funnel events and incorrect revenue values in GA4",
-    "Broken tracking due to client-side ad blockers",
+    "Incomplete measurement caused by browser privacy controls, consent constraints, and client-side blocking",
     "Slow and inefficient BI dashboards reading from raw unoptimized tables",
     "Lack of user lifecycle tracking across domain transitions",
     "Broken lead forms or conversion signals that fail silently without alerting",

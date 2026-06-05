@@ -273,7 +273,7 @@ export default async function AdticksCaseStudyPage() {
               SEO tools entirely miss dynamic JavaScript render anomalies,
               client-side shifts, layout inconsistencies, and indexing
               directives that block AI crawlers. Without high-fidelity
-              Playwright instrumentation, growth teams have zero diagnostic
+              Playwright instrumentation, growth teams often lack reliable diagnostic
               visibility into whether their pages are readable by search agents.
             </p>
           </section>
@@ -416,7 +416,7 @@ export default async function AdticksCaseStudyPage() {
                   </span>
                   <h4 className="font-bold text-xs mt-1">Celery Pool</h4>
                   <p className="text-[9px] text-muted-foreground">
-                    Playwright scrapers
+                    Playwright render workers
                   </p>
                 </div>
                 <IconChevronRight className="h-5 w-5 text-primary/40" />
@@ -545,7 +545,7 @@ export default async function AdticksCaseStudyPage() {
                 href="/services/ai-llm-application-development/"
                 className="inline-flex items-center gap-1 text-xs font-semibold text-primary border border-primary/20 bg-primary/5 px-3.5 py-1.5 rounded-full hover:bg-primary/10 transition-colors"
               >
-                AI & LLM Application Development{" "}
+                Generative AI & LLM Application Development{" "}
                 <IconChevronRight className="h-3 w-3" />
               </Link>
               <Link

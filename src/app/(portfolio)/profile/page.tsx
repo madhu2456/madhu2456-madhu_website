@@ -227,7 +227,7 @@ export default async function ProfilePage() {
                 className="group p-4 rounded-xl border border-border bg-surface/20 hover:border-primary/30 hover:bg-surface-elevated/10 transition-all flex items-center justify-between"
               >
                 <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
-                  AI & LLM Application Development
+                  Generative AI & LLM Application Development
                 </span>
                 <IconExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
               </Link>

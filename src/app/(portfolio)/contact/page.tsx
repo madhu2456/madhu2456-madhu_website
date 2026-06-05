@@ -224,22 +224,7 @@ export default async function ContactPage() {
                       </a>
                     </div>
                   </li>
-                  <li className="flex items-center gap-3 p-4 rounded-xl border border-border/60 bg-surface/20">
-                    <div className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-primary/15 text-primary border border-primary/10 shrink-0">
-                      <IconCalendar className="h-4.5 w-4.5" />
-                    </div>
-                    <div>
-                      <span className="text-[10px] text-muted-foreground block uppercase font-mono">
-                        Booking / Scheduling
-                      </span>
-                      <a
-                        href={`mailto:${profile.email}?subject=Booking%20Inquiry`}
-                        className="font-semibold text-primary hover:underline transition-all"
-                      >
-                        Request scheduling link
-                      </a>
-                    </div>
-                  </li>
+
                   <li className="flex items-center gap-3 p-4 rounded-xl border border-border/60 bg-surface/20">
                     <div className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-primary/15 text-primary border border-primary/10 shrink-0">
                       <IconMapPin className="h-4.5 w-4.5" />

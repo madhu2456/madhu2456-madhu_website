@@ -76,6 +76,18 @@ const nextConfig: NextConfig = {
         destination: "https://madhudadi.in/:path*",
         permanent: true,
       },
+      {
+        source: "/contact",
+        has: [{ type: "query", key: "subject" }],
+        destination: "/contact/?",
+        permanent: true,
+      },
+      {
+        source: "/contact",
+        has: [{ type: "query", key: "message" }],
+        destination: "/contact/?",
+        permanent: true,
+      },
     ];
   },
 
