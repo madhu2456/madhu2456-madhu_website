@@ -903,7 +903,7 @@
       "fullDescription": "Multi-agent orchestration systems using state machines (LangGraph) for deterministic control. Designed with task decomposition planners, sandboxed tool-calling pipelines, self-correction loops, and recursive task validation.",
       "features": [
         "LangGraph state-machine orchestrations",
-        "Autonomous tool calling & sandbox environments",
+        "Tool calling with sandboxed execution and approval controls",
         "Task planning, decomposition & self-correction",
         "Agentic evaluation frameworks (Evals)"
       ],
