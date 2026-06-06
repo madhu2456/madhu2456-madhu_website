@@ -308,8 +308,8 @@ export default async function UdemyEnrollerCaseStudyPage() {
                   Secure Session-State Store:
                 </strong>{" "}
                 Keeping thousands of separate user-authorized session states
-                fresh requires secure database structures with automatic
-                session-refresh mechanisms.
+                fresh requires secure database structures with session-expiry
+                handling mechanisms.
               </li>
             </ul>
           </section>
@@ -338,8 +338,8 @@ export default async function UdemyEnrollerCaseStudyPage() {
                   Headless Playwright Driver
                 </h4>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Compliance-aware automated task driver handling client flows,
-                  handling session states, and processing task runs.
+                  Compliance-aware workflow driver handling browser-rendered flows,
+                  session-state boundaries, and controlled task runs.
                 </p>
               </div>
               <div className="rounded-xl border border-border/80 bg-surface/10 p-5 space-y-2">
