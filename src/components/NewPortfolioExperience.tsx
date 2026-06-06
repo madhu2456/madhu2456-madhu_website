@@ -231,7 +231,7 @@ function Hero({
 function DirectAnswer({ pageContent }: { pageContent: PageContent }) {
   return (
     <Section
-      id="direct-answer"
+      id="about"
       eyebrow="Direct Answer"
       title={pageContent.home.directAnswer?.title || "Who is Madhu Dadi?"}
     >

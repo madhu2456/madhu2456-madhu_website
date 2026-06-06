@@ -17,6 +17,12 @@ export function Header({ profile, navigationItems }: HeaderProps) {
     // If the link is external, return as is
     if (href.startsWith("http")) return href;
 
+    // Handle hash links (anchor links)
+    if (href.startsWith("#")) {
+      // If we are not on the homepage, prefix with / so it navigates back home first
+      return pathname === "/" ? href : `/${href}`;
+    }
+
     // Ensure all internal routes have trailing slash
     if (href === "/") return "/";
     return href.endsWith("/") ? href : `${href}/`;
