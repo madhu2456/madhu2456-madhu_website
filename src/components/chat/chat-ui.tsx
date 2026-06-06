@@ -151,9 +151,7 @@ export function CopyButton({ text }: { text: string }) {
 
 export function ChatInitSkeleton({ profile }: { profile: ChatProfile | null }) {
   const facts = useMemo(() => buildProfileFacts(profile), [profile]);
-  const [factIndex, setFactIndex] = useState(() =>
-    Math.floor(Math.random() * facts.length),
-  );
+  const [factIndex, setFactIndex] = useState(0);
   const [cycleKey, setCycleKey] = useState(0);
 
   useEffect(() => {
