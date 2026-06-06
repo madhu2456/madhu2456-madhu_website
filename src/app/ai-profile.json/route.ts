@@ -1,10 +1,14 @@
+import { getPortfolioData } from "@/lib/portfolio-data";
+
 export const revalidate = 3600;
 
 export async function GET() {
+  const { sortedCertifications } = await getPortfolioData();
+
   return Response.json({
     meta: {
-      generatedAt: "2026-06-02T00:00:00Z",
-      dateModified: "2026-06-02T00:00:00Z",
+      generatedAt: "2026-06-06T00:00:00Z",
+      dateModified: "2026-06-06T00:00:00Z",
       canonical: "https://madhudadi.in/",
       profileUrl: "https://madhudadi.in/profile/",
       llmsTxt: "https://madhudadi.in/llms.txt",
@@ -25,31 +29,41 @@ export async function GET() {
         "Marketing analytics",
         "GA4",
         "BigQuery",
-        "Campaign analytics"
-      ]
+        "Campaign analytics",
+        "LLM security",
+        "AI security",
+      ],
     },
+    certifications: sortedCertifications.map((certification) => ({
+      name: certification.name,
+      issuer: certification.issuer,
+      issueDate: certification.issueDate,
+      credentialId: certification.credentialId,
+      credentialUrl: certification.credentialUrl,
+      description: certification.description,
+    })),
     caseStudies: [
       {
         name: "Adticks",
         url: "https://madhudadi.in/case-studies/adticks/",
         category: "AI visibility and SEO/AEO/GEO auditing",
         summary:
-          "Crawls large websites, compares server HTML with rendered DOM, and returns prioritized search and AI visibility fixes."
+          "Crawls large websites, compares server HTML with rendered DOM, and returns prioritized search and AI visibility fixes.",
       },
       {
         name: "Technical Blog RAG Assistant",
         url: "https://madhudadi.in/case-studies/technical-blog/",
         category: "RAG-powered learning platform",
         summary:
-          "Source-grounded AI assistant and search experience for structured technical learning content."
+          "Source-grounded AI assistant and search experience for structured technical learning content.",
       },
       {
         name: "Udemy Enroller",
         url: "https://madhudadi.in/case-studies/udemy-enroller-fastapi/",
         category: "Production FastAPI Automation Platform",
         summary:
-          "Udemy Enroller is a live production FastAPI and Playwright automation platform that orchestrates asynchronous workflow runs, bounded worker concurrency, secure session-state handling, telemetry logging, and background processing with Celery, Redis, PostgreSQL, and Docker."
-      }
-    ]
+          "Udemy Enroller is a live production FastAPI and Playwright automation platform that orchestrates asynchronous workflow runs, bounded worker concurrency, secure session-state handling, telemetry logging, and background processing with Celery, Redis, PostgreSQL, and Docker.",
+      },
+    ],
   });
 }

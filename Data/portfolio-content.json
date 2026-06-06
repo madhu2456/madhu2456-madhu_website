@@ -1017,12 +1017,36 @@
   ],
   "certifications": [
     {
+      "name": "Certified LLM Security Professional (CLLMSP)",
+      "issuer": "Red Team Leaders",
+      "issueDate": "2026-06-06",
+      "credentialId": "18f1aed947dcd334",
+      "credentialUrl": "https://courses.redteamleaders.com/exam-completion/18f1aed947dcd334",
+      "description": "Credential focused on securing LLM systems, RAG pipelines, AI agents, prompt injection risks, tool use, monitoring, and defense-in-depth controls.",
+      "skills": [
+        {
+          "name": "LLM Security"
+        },
+        {
+          "name": "RAG Security"
+        },
+        {
+          "name": "AI Red Teaming"
+        },
+        {
+          "name": "Application Security"
+        }
+      ],
+      "order": 1,
+      "updatedAt": "2026-06-06T00:00:00.000Z"
+    },
+    {
       "name": "Ultimate RAG Bootcamp, LangChain, LangGraph, LangSmith",
       "issuer": "Udemy",
       "issueDate": "2026-04-07",
       "credentialId": "UC-108879e5-e8bb-49fd-bf5a-3b04299802e9",
       "credentialUrl": "https://www.udemy.com/certificate/UC-108879e5-e8bb-49fd-bf5a-3b04299802e9/",
-      "order": 1,
+      "order": 2,
       "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
@@ -1031,7 +1055,7 @@
       "issueDate": "2026-02-01",
       "credentialId": "UC-2c133425-fc3d-4d86-89e5-6499c0e3669f",
       "credentialUrl": "https://udemy-certificate.s3.amazonaws.com/image/UC-2c133425-fc3d-4d86-89e5-6499c0e3669f.jpg",
-      "order": 2,
+      "order": 3,
       "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
@@ -1040,7 +1064,7 @@
       "issueDate": "2025-06-07",
       "credentialId": "838CB018ADDA8DC8",
       "credentialUrl": "https://learn.microsoft.com/en-us/users/madhudadi-6748/credentials/838cb018adda8dc8",
-      "order": 3,
+      "order": 4,
       "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
@@ -1049,7 +1073,7 @@
       "issueDate": "2025-05-12",
       "credentialId": "MDBdjgyu6syfv",
       "credentialUrl": "https://learn.mongodb.com/c/ysblCQ5bShSRgrmsyQy5PQ",
-      "order": 4,
+      "order": 5,
       "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
@@ -1059,7 +1083,7 @@
       "expiryDate": "2028-05-09",
       "credentialId": "b94f1c7e-6a06-4cd8-ad3b-2ec9012d27e3",
       "credentialUrl": "https://www.credly.com/badges/b94f1c7e-6a06-4cd8-ad3b-2ec9012d27e3/",
-      "order": 5,
+      "order": 6,
       "updatedAt": "2026-05-31T14:09:41.323Z"
     },
     {
@@ -1078,7 +1102,7 @@
           "name": "Analytics"
         }
       ],
-      "order": 6,
+      "order": 7,
       "updatedAt": "2026-05-31T14:09:41.323Z"
     }
   ]
