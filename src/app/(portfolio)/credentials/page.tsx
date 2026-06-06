@@ -438,12 +438,12 @@ export default async function CredentialsPage() {
                 {sortedExperiences.map((exp) => (
                   <div key={exp.company} className="relative space-y-2">
                     {/* Circle bullet */}
-                    <span
+                    <div
                       aria-hidden="true"
-                      className="absolute -left-9.5 top-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-background border border-primary text-primary text-xs"
+                      className="absolute -left-9.5 top-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-background border border-primary"
                     >
-                      •
-                    </span>
+                      <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                    </div>
 
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                       <div>
