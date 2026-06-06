@@ -215,7 +215,7 @@ export default async function CaseStudyPage({
           {
             "@type": "ListItem",
             position: 2,
-            name: "Case studies",
+            name: "Case Studies",
             item: `${siteUrl}case-studies/`,
           },
           {
