@@ -115,7 +115,7 @@ export default async function Ga4BigQueryCampaignAnalyticsPage() {
     },
     {
       q: "Do you configure Conversion APIs for Meta, Google, and TikTok?",
-      a: "Yes. I set up server-side conversion signals (such as Meta Conversions API and Google Enhanced Conversions) via sGTM. I map user identifiers (hashed email, phone) to maximize match rates, leading to more accurate attribution and lower cost-per-acquisition (CPA).",
+      a: "Yes. I set up server-side conversion signals (such as Meta Conversions API and Google Enhanced Conversions) via sGTM. I map user identifiers (hashed email, phone) to maximize match rates, leading to more accurate attribution and lower cost-per-acquisition (CPA). All user identifiers should be handled only with appropriate consent, hashing, data minimization, and platform-policy compliance.",
     },
     {
       q: "Can you help optimize our Google Cloud BigQuery query costs?",
