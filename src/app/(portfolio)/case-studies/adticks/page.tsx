@@ -344,7 +344,7 @@ export default async function AdticksCaseStudyPage() {
                   Asynchronous Worker Pipeline
                 </h4>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Redis-backed Celery worker threads running background scraping
+                  Redis-backed Celery worker threads running background crawl and render-check
                   schedules completely isolated from the web gateway.
                 </p>
               </div>
