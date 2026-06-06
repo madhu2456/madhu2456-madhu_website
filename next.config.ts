@@ -55,7 +55,7 @@ const nextConfig: NextConfig = {
     // Enable scroll restoration for better UX on navigation
     scrollRestoration: true,
     // Inline CSS for first-load paint to reduce render-blocking stylesheet requests.
-    inlineCss: true,
+    inlineCss: false,
     // Ensure unmatched routes use a single global 404 with multiple root layouts.
     globalNotFound: true,
   },
