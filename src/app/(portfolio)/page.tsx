@@ -37,6 +37,13 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Madhu Dadi — AI & Marketing Analytics Engineer",
+    description:
+      "Production LLM/RAG apps, AI agents, FastAPI/Next.js products, and marketing analytics systems.",
+    images: [`${siteUrl}og/home.png`],
+  },
 };
 
 export default async function Home() {
