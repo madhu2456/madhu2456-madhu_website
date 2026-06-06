@@ -124,7 +124,7 @@ export async function generateMetadata({
   }
 
   const siteUrl = getSiteUrl();
-  const title = `${project.title} Case Study | ${project.category || "Work"} · Madhu Dadi`;
+  const title = `${project.title} Case Study | Madhu Dadi`;
   const description = toDescription(project.tagline, project.impactSummary);
   const url = `/case-studies/${slug}/`;
 
