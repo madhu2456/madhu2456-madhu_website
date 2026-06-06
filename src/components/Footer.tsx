@@ -70,9 +70,21 @@ export function Footer({ profile, projects, navigationItems }: FooterProps) {
             </div>
           ))}
         </nav>
-        <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-border/60 pt-6 text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} Madhu Dadi. Built with intention.</p>
-          <p>{profile.location} · Available worldwide</p>
+        <div className="mt-12 flex flex-col md:flex-row justify-between gap-8 border-t border-border/60 pt-8 text-sm text-muted-foreground">
+          <address className="not-italic leading-relaxed">
+            <strong className="font-semibold text-foreground">Madhu Dadi</strong><br />
+            Visakhapatnam, Andhra Pradesh<br />
+            India<br />
+            {profile.phone && (
+              <a href={`tel:${profile.phone.replace(/\s+/g, '')}`} className="hover:text-foreground transition-colors">
+                {profile.phone}
+              </a>
+            )}
+          </address>
+          <div className="flex flex-col gap-2 md:text-right">
+            <p>© {new Date().getFullYear()} Madhu Dadi. Built with intention.</p>
+            <p>Available worldwide</p>
+          </div>
         </div>
       </div>
     </footer>

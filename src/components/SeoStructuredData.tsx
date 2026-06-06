@@ -8,6 +8,7 @@ import {
   buildOccupationSchema,
   buildOrganizationSchema,
   buildPersonSchema,
+  buildProfessionalServiceSchema,
   buildProfilePageSchema,
   buildProjectsListSchema,
   buildServicesListSchema,
@@ -95,6 +96,16 @@ export async function SeoStructuredData() {
             location: currentRole.location,
           }
         : undefined,
+      priceRange: "$$",
+    }),
+    buildProfessionalServiceSchema({
+      siteUrl,
+      name: siteSettings.siteTitle || fullName,
+      description: description || "AI & Marketing Analytics Consulting",
+      image: `${siteUrl}og/home.png`,
+      telephone: profile?.phone,
+      email: profile?.email,
+      addressLocality: profile?.location,
       priceRange: "$$",
     }),
     buildOccupationSchema({
