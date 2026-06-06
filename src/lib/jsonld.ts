@@ -616,6 +616,7 @@ export function buildProjectsListSchema({
         ...((p.slug && { url: `${siteUrl}case-studies/${p.slug}/` }) ||
           (p.liveUrl && { url: p.liveUrl })),
         ...(p.category && { applicationCategory: p.category }),
+        operatingSystem: "All",
         author: { "@id": `${siteUrl}#person` },
         ...(p.citations &&
           p.citations.length > 0 && {
