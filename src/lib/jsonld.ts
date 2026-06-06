@@ -396,7 +396,7 @@ export function buildWebSiteSchema({
     hasPart: {
       "@type": "Blog",
       "@id": `${blogUrl}#blog`,
-      name: `${name} — Technical Blog`,
+      name: `${name} - Technical Blog`,
       url: blogUrl,
       description:
         "A learning-focused technical blog covering AI engineering, full-stack development, RAG systems, and analytics best practices.",
@@ -445,7 +445,7 @@ export function buildProfilePageSchema({
   return {
     "@type": "ProfilePage",
     "@id": `${url}#profilepage`,
-    name: `${fullName} — Portfolio`,
+    name: `${fullName} - Portfolio`,
     url,
     ...(description && { description }),
     inLanguage: "en-US",

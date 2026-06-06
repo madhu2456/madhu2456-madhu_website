@@ -490,7 +490,7 @@ const formatFallbackChunk = (chunk: KnowledgeChunk) => {
       const links = [caseStudyUrl, liveUrl, githubUrl]
         .filter(Boolean)
         .join(" | ");
-      return `${chunk.title}${tagline ? ` — ${tagline}` : ""}${impact ? ` — ${impact}` : ""}${links ? ` (${links})` : ""}.`;
+      return `${chunk.title}${tagline ? ` - ${tagline}` : ""}${impact ? ` - ${impact}` : ""}${links ? ` (${links})` : ""}.`;
     }
     case "skills": {
       const skill =
@@ -502,7 +502,7 @@ const formatFallbackChunk = (chunk: KnowledgeChunk) => {
     case "service": {
       const summary = fields.get("summary") || fields.get("description");
       const timeline = fields.get("timeline");
-      return `${chunk.title}${summary ? ` — ${summary}` : ""}${timeline ? ` (timeline: ${timeline})` : ""}.`;
+      return `${chunk.title}${summary ? ` - ${summary}` : ""}${timeline ? ` (timeline: ${timeline})` : ""}.`;
     }
     case "education": {
       const institution = fields.get("institution");
@@ -514,7 +514,7 @@ const formatFallbackChunk = (chunk: KnowledgeChunk) => {
       const issuer = fields.get("issuer");
       const issueDate = fields.get("issue date");
       const credentialUrl = fields.get("credential url");
-      return `${chunk.title}${issuer ? ` — ${issuer}` : ""}${issueDate ? ` (issued ${issueDate})` : ""}${credentialUrl ? ` (${credentialUrl})` : ""}.`;
+      return `${chunk.title}${issuer ? ` - ${issuer}` : ""}${issueDate ? ` (issued ${issueDate})` : ""}${credentialUrl ? ` (${credentialUrl})` : ""}.`;
     }
     case "contact": {
       const email = fields.get("email");

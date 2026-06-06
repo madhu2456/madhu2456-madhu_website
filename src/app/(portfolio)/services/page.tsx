@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title:
-      "Generative AI, RAG, AI Agents & Marketing Analytics Services — Madhu Dadi",
+      "Generative AI, RAG, AI Agents & Marketing Analytics Services - Madhu Dadi",
     description:
       "Hire Madhu Dadi for production AI/LLM development, RAG systems, AI agents, marketing analytics, GA4/BigQuery pipelines, and full-stack FastAPI/Next.js apps.",
     alternates: {

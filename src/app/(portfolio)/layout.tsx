@@ -90,7 +90,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const rawDescription =
     siteSettings.siteDescription ||
     profile.shortBio ||
-    `Portfolio of ${fullName} — developer, builder, and problem solver.`;
+    `Portfolio of ${fullName} - developer, builder, and problem solver.`;
   const description = toMetaDescription(
     rawDescription,
     MAX_META_DESCRIPTION_LENGTH,
@@ -157,7 +157,7 @@ export async function generateMetadata(): Promise<Metadata> {
         "application/rss+xml": [
           {
             url: `${siteUrl}blog/feed.xml`,
-            title: "MadhuDadi Blog — RSS Feed",
+            title: "MadhuDadi Blog - RSS Feed",
           },
         ],
       },
@@ -174,7 +174,7 @@ export async function generateMetadata(): Promise<Metadata> {
           url: ogImageUrl,
           width: 1200,
           height: 630,
-          alt: `${title} — Open Graph preview`,
+          alt: `${title} - Open Graph preview`,
         },
       ],
       ...(profile.firstName && { firstName: profile.firstName }),
@@ -188,7 +188,7 @@ export async function generateMetadata(): Promise<Metadata> {
         creator: `@${twitterHandle}`,
         site: `@${twitterHandle}`,
       }),
-      images: [{ url: ogImageUrl, alt: `${title} — social preview` }],
+      images: [{ url: ogImageUrl, alt: `${title} - social preview` }],
     },
     other: {
       "ai-crawl-rate": "fast",

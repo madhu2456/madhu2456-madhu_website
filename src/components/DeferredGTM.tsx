@@ -4,7 +4,7 @@
  * Defers Google Tag Manager until the first real user interaction
  * (mousemove, scroll, touchstart, or keydown).
  *
- * No timer fallback — bots and PageSpeed auditors that never interact
+ * No timer fallback - bots and PageSpeed auditors that never interact
  * will never load GTM, which keeps it out of the critical path entirely.
  * Real visitors trigger it within milliseconds of the first scroll or
  * mouse move, so no analytics data is lost in practice.

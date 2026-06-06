@@ -147,7 +147,7 @@ function Hero({
             {pageContent.home.eyebrow}
           </p>
           <h1 className="font-display text-[clamp(2rem,6vw,4rem)] leading-[1.15] font-bold tracking-tight sm:leading-[1.1]">
-            {profile.firstName} {profile.lastName} —{" "}
+            {profile.firstName} {profile.lastName} -{" "}
             <span className="text-gradient">{pageContent.home.heroTitle}</span>
           </h1>
           <div className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:mt-6 sm:text-lg space-y-4">

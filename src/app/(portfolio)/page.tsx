@@ -10,14 +10,14 @@ const resolveSiteUrl = (rawUrl?: string) => {
 const siteUrl = resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL);
 
 export const metadata: Metadata = {
-  title: "Madhu Dadi — Generative AI Engineer | RAG, AI Agents, FastAPI, GA4",
+  title: "Madhu Dadi - Generative AI Engineer | RAG, AI Agents, FastAPI, GA4",
   description:
     "AI and marketing analytics engineer. 9+ years exp (Novartis, redBus, GroupM). I build production LLM/RAG apps, AI agents, FastAPI, Next.js, and analytics.",
   alternates: {
     canonical: siteUrl,
   },
   openGraph: {
-    title: "Madhu Dadi — AI & Marketing Analytics Engineer",
+    title: "Madhu Dadi - AI & Marketing Analytics Engineer",
     description:
       "Production LLM/RAG apps, AI agents, FastAPI/Next.js products, and marketing analytics systems.",
     url: siteUrl,
@@ -28,13 +28,13 @@ export const metadata: Metadata = {
         url: `${siteUrl}og/home.png`,
         width: 1200,
         height: 630,
-        alt: "Madhu Dadi — AI & Marketing Analytics Engineer",
+        alt: "Madhu Dadi - AI & Marketing Analytics Engineer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Madhu Dadi — AI & Marketing Analytics Engineer",
+    title: "Madhu Dadi - AI & Marketing Analytics Engineer",
     description:
       "Production LLM/RAG apps, AI agents, FastAPI/Next.js products, and marketing analytics systems.",
     images: [`${siteUrl}og/home.png`],

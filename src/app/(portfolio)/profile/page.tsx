@@ -25,7 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title:
       pageContent.profile.seo?.title ||
-      "Madhu Dadi — Generative AI, RAG & Marketing Analytics Engineer",
+      "Madhu Dadi - Generative AI, RAG & Marketing Analytics Engineer",
     description:
       pageContent.profile.seo?.description ||
       "Profile of Madhu Dadi, AI & marketing analytics engineer. 9+ years exp across Novartis, redBus, and GroupM.",
@@ -35,7 +35,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title:
         pageContent.profile.seo?.title ||
-        "Madhu Dadi — Generative AI, RAG & Marketing Analytics Engineer",
+        "Madhu Dadi - Generative AI, RAG & Marketing Analytics Engineer",
       description:
         pageContent.profile.seo?.description ||
         "Profile of Madhu Dadi, AI & marketing analytics engineer. 9+ years exp across Novartis, redBus, and GroupM.",
@@ -135,7 +135,7 @@ export default async function ProfilePage() {
         "@type": "ProfilePage",
         "@id": `${siteUrl}profile/#webpage`,
         url: `${siteUrl}profile/`,
-        name: "Madhu Dadi — AI & Marketing Analytics Engineer",
+        name: "Madhu Dadi - AI & Marketing Analytics Engineer",
         mainEntity: {
           "@id": `${siteUrl}#person`,
         },
@@ -175,7 +175,7 @@ export default async function ProfilePage() {
                     "Verified AI & Marketing Analytics Profile"}
                 </span>
                 <h1 className="text-3xl md:text-5xl font-bold tracking-tight">
-                  {pageContent.profile.heroTitle || "Madhu Dadi"} —{" "}
+                  {pageContent.profile.heroTitle || "Madhu Dadi"} -{" "}
                   <span className="text-gradient">
                     {pageContent.profile.heroSubtitle ||
                       "Generative AI, RAG & Marketing Analytics Engineer"}

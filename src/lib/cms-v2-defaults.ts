@@ -4,7 +4,7 @@ export const buildV2PageContentDefaults = (): PageContentSchema => {
   return {
     home: {
       seo: {
-        title: "Madhu Dadi — Generative AI, RAG & Marketing Analytics Engineer",
+        title: "Madhu Dadi - Generative AI, RAG & Marketing Analytics Engineer",
         description:
           "Profile of Madhu Dadi, AI & marketing analytics engineer. 9+ years exp across Novartis, redBus, and GroupM. Expert in LLM/RAG, FastAPI, Next.js, and GA4.",
       },
@@ -43,7 +43,7 @@ export const buildV2PageContentDefaults = (): PageContentSchema => {
     },
     profile: {
       seo: {
-        title: "Madhu Dadi — Generative AI, RAG & Marketing Analytics Engineer",
+        title: "Madhu Dadi - Generative AI, RAG & Marketing Analytics Engineer",
         description:
           "Profile of Madhu Dadi, AI & marketing analytics engineer. 9+ years exp across Novartis, redBus, and GroupM. Expert in LLM/RAG, FastAPI, Next.js, and GA4.",
         canonicalPath: "/profile/",
@@ -83,7 +83,7 @@ export const buildV2PageContentDefaults = (): PageContentSchema => {
     },
     servicesIndex: {
       seo: {
-        title: "Services — AI, RAG & Full-Stack Development | Madhu Dadi",
+        title: "Services - AI, RAG & Full-Stack Development | Madhu Dadi",
         description:
           "Professional services across AI agent development, RAG systems, marketing analytics, and full-stack product development by Madhu Dadi.",
         canonicalPath: "/services/",
