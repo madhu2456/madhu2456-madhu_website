@@ -26,47 +26,46 @@ export async function generateMetadata({
 }: {
   searchParams?: SearchParams;
 }): Promise<Metadata> {
+  const { pageContent } = await getPortfolioData();
   const params = searchParams ? await searchParams : {};
-
   const hasSearchParams = Object.keys(params ?? {}).length > 0;
 
+  const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
+  const canonicalPath = pageContent.contact.seo?.canonicalPath || "/contact/";
+  const canonicalUrl = `${siteUrl}${canonicalPath.replace(/^\//, "")}`;
+
+  const title =
+    pageContent.contact.seo?.title ||
+    "Contact Madhu Dadi — Generative AI & Marketing Analytics Engineer";
+  const description =
+    pageContent.contact.seo?.description ||
+    "Work with Madhu Dadi on production AI, RAG, AI agents, marketing analytics, or full-stack AI product development. Response time is usually within 24 hours.";
+
   return {
-    title: "Contact Madhu Dadi — Generative AI & Marketing Analytics Engineer",
-    description:
-      "Work with Madhu Dadi on production AI, RAG, AI agents, marketing analytics, or full-stack AI product development. Response time is usually within 24 hours.",
+    title,
+    description,
     alternates: {
-      canonical: CONTACT_CANONICAL,
+      canonical: canonicalUrl,
     },
     robots: hasSearchParams
       ? {
           index: false,
           follow: true,
-          googleBot: {
-            index: false,
-            follow: true,
-          },
+          googleBot: { index: false, follow: true },
         }
-      : {
-          index: true,
-          follow: true,
-          googleBot: {
-            index: true,
-            follow: true,
-          },
-        },
+      : { index: true, follow: true, googleBot: { index: true, follow: true } },
     openGraph: {
-      title:
-        "Contact Madhu Dadi — Generative AI & Marketing Analytics Engineer",
-      description:
-        "Work with Madhu Dadi on production AI, RAG, AI agents, marketing analytics, or full-stack AI product development. Response time is usually within 24 hours.",
-      url: CONTACT_CANONICAL,
+      title,
+      description,
+      url: canonicalUrl,
       type: "website",
     },
   };
 }
 
 export default async function ContactPage() {
-  const { profile, sortedProjects } = await getPortfolioData();
+  const { profile, sortedProjects, sortedNavigationItems, pageContent } =
+    await getPortfolioData();
 
   const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
   const breadcrumbSchema = {
@@ -88,7 +87,7 @@ export default async function ContactPage() {
     ],
   };
 
-  const bestFitAreas = [
+  const bestFitAreas = pageContent.contact.bestFitAreas || [
     "LLM/RAG applications",
     "AI agents and workflow automation",
     "FastAPI/Next.js product builds",
@@ -107,7 +106,7 @@ export default async function ContactPage() {
         // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <Header profile={profile} />
+      <Header profile={profile} navigationItems={sortedNavigationItems} />
 
       <main id="main-content" className="flex-1 px-6 py-28 bg-background/50">
         <div className="container mx-auto max-w-4xl space-y-12">
@@ -128,17 +127,14 @@ export default async function ContactPage() {
               <section className="space-y-4">
                 <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
                   <IconSparkles className="h-3.5 w-3.5 animate-pulse" />{" "}
-                  Collaboration
+                  {pageContent.contact.eyebrow || "Collaboration"}
                 </span>
                 <h1 className="text-3xl md:text-5xl font-bold tracking-tight">
-                  Contact Madhu Dadi —{" "}
-                  <span className="text-gradient">
-                    Generative AI & Marketing Analytics Engineer
-                  </span>
+                  {pageContent.contact.heroTitle || "Contact Me"}
                 </h1>
                 <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-                  Work with me on production AI, RAG, AI agents, marketing
-                  analytics, or full-stack AI product development.
+                  {pageContent.contact.heroSubtitle ||
+                    "Work with me on production AI, RAG, AI agents, marketing analytics, or full-stack AI product development."}
                 </p>
               </section>
 
@@ -177,8 +173,9 @@ export default async function ContactPage() {
                       Response Time
                     </span>
                     <span className="font-semibold text-foreground flex items-center gap-1">
-                      <IconClock className="h-4 w-4 text-primary" /> I usually
-                      reply within 24 hours
+                      <IconClock className="h-4 w-4 text-primary" />{" "}
+                      {pageContent.contact.responseTimeText ||
+                        "I usually reply within 24 hours"}
                     </span>
                   </div>
                 </div>
@@ -279,7 +276,7 @@ export default async function ContactPage() {
         </div>
       </main>
 
-      <Footer profile={profile} projects={sortedProjects} />
+      <Footer profile={profile} navigationItems={sortedNavigationItems} projects={sortedProjects} />
     </div>
   );
 }

@@ -200,7 +200,7 @@ export function ServicesEditor() {
                   type="number"
                   className={inputClass}
                   {...register(`services.${index}.pricing.startingPrice`, {
-                    valueAsNumber: true,
+                    setValueAs: (v) => (v === "" ? undefined : Number(v)),
                   })}
                 />
               </FormField>
@@ -230,6 +230,141 @@ export function ServicesEditor() {
               </FormField>
             </div>
           </div>
+
+          <details className="rounded-md border p-3 group">
+            <summary className="font-medium cursor-pointer list-none flex items-center justify-between">
+              <span>Advanced (SEO & V2 Content)</span>
+              <span className="group-open:rotate-180 transition-transform text-muted-foreground">
+                ▼
+              </span>
+            </summary>
+            <div className="mt-4 space-y-4 border-t pt-4">
+              <div className="grid gap-3 md:grid-cols-2">
+                <FormField
+                  label="SEO Title"
+                  error={errors.services?.[index]?.seoTitle?.message}
+                >
+                  <input
+                    className={inputClass}
+                    {...register(`services.${index}.seoTitle`)}
+                  />
+                </FormField>
+                <FormField
+                  label="SEO Description"
+                  error={errors.services?.[index]?.seoDescription?.message}
+                >
+                  <input
+                    className={inputClass}
+                    {...register(`services.${index}.seoDescription`)}
+                  />
+                </FormField>
+                <FormField
+                  label="Hero Title"
+                  error={errors.services?.[index]?.heroTitle?.message}
+                >
+                  <input
+                    className={inputClass}
+                    {...register(`services.${index}.heroTitle`)}
+                  />
+                </FormField>
+                <FormField
+                  label="Hero Eyebrow"
+                  error={errors.services?.[index]?.heroEyebrow?.message}
+                >
+                  <input
+                    className={inputClass}
+                    {...register(`services.${index}.heroEyebrow`)}
+                  />
+                </FormField>
+                <FormField
+                  label="Contact Intent"
+                  error={errors.services?.[index]?.contactIntent?.message}
+                >
+                  <input
+                    className={inputClass}
+                    {...register(`services.${index}.contactIntent`)}
+                  />
+                </FormField>
+              </div>
+
+              <FormField label="Direct Answer Paragraphs">
+                <Controller
+                  control={control}
+                  name={`services.${index}.directAnswerParagraphs`}
+                  render={({ field }) => (
+                    <AutoResizeTextarea
+                      className={textareaClass}
+                      value={toLineText(field.value)}
+                      onChange={(val) => field.onChange(parseLines(val))}
+                    />
+                  )}
+                />
+              </FormField>
+
+              <FormField label="Audience">
+                <Controller
+                  control={control}
+                  name={`services.${index}.audience`}
+                  render={({ field }) => (
+                    <AutoResizeTextarea
+                      className={textareaClass}
+                      value={toLineText(field.value)}
+                      onChange={(val) => field.onChange(parseLines(val))}
+                    />
+                  )}
+                />
+              </FormField>
+
+              <FormField label="Problems Solved">
+                <Controller
+                  control={control}
+                  name={`services.${index}.problemsSolved`}
+                  render={({ field }) => (
+                    <AutoResizeTextarea
+                      className={textareaClass}
+                      value={toLineText(field.value)}
+                      onChange={(val) => field.onChange(parseLines(val))}
+                    />
+                  )}
+                />
+              </FormField>
+
+              <FormField label="Target Queries">
+                <Controller
+                  control={control}
+                  name={`services.${index}.targetQueries`}
+                  render={({ field }) => (
+                    <AutoResizeTextarea
+                      className={textareaClass}
+                      value={toLineText(field.value)}
+                      onChange={(val) => field.onChange(parseLines(val))}
+                    />
+                  )}
+                />
+              </FormField>
+
+              <FormField label="Proof Project Slugs (One per line)">
+                <Controller
+                  control={control}
+                  name={`services.${index}.proofProjectSlugs`}
+                  render={({ field }) => (
+                    <AutoResizeTextarea
+                      className={textareaClass}
+                      value={toLineText(field.value)}
+                      onChange={(val) => field.onChange(parseLines(val))}
+                    />
+                  )}
+                />
+              </FormField>
+
+              <div className="text-xs text-muted-foreground bg-muted p-2 rounded">
+                Note: Arrays of objects like capabilityCards, techStackGroups,
+                faqs, offerCatalog currently require JSON editing or custom form
+                arrays. To keep it simple, they are preserved but editing is
+                restricted to top-level arrays here.
+              </div>
+            </div>
+          </details>
 
           <button
             type="button"

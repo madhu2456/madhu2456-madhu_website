@@ -3,22 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { Profile } from "@/lib/portfolio-data";
+import type { NavigationItem, Profile } from "@/lib/portfolio-data";
 
 type HeaderProps = {
   profile: Profile;
+  navigationItems: NavigationItem[];
 };
 
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/profile/", label: "About" },
-  { href: "/services/", label: "Services" },
-  { href: "/credentials/", label: "Credentials" },
-  { href: "/contact/", label: "Contact" },
-  { href: "https://madhudadi.in/blog", label: "Blog" },
-];
-
-export function Header({ profile }: HeaderProps) {
+export function Header({ profile, navigationItems }: HeaderProps) {
   const pathname = usePathname();
 
   const getHref = (href: string) => {
@@ -74,9 +66,9 @@ export function Header({ profile }: HeaderProps) {
           aria-label="Primary"
           className="hidden items-center gap-1 rounded-full border border-border/30 bg-black/30 p-1 md:flex"
         >
-          {navLinks.map((link) => {
+          {navigationItems.map((link) => {
             const isActive = isLinkActive(link.href);
-            const isExternal = link.href.startsWith("http");
+            const isExternal = link.isExternal || link.href.startsWith("http");
 
             return (
               <Link
@@ -91,7 +83,7 @@ export function Header({ profile }: HeaderProps) {
                     : "text-muted-foreground border border-transparent hover:bg-white/5 hover:text-foreground"
                 }`}
               >
-                {link.label}
+                {link.title}
               </Link>
             );
           })}

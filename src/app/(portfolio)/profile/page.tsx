@@ -17,13 +17,18 @@ import { getPortfolioData } from "@/lib/portfolio-data";
 export const revalidate = 3600;
 
 export async function generateMetadata(): Promise<Metadata> {
+  const { pageContent } = await getPortfolioData();
   const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
-  const canonicalUrl = `${siteUrl}profile/`;
+  const canonicalPath = pageContent.profile.seo?.canonicalPath || "/profile/";
+  const canonicalUrl = `${siteUrl}${canonicalPath.replace(/^\//, "")}`;
 
   return {
-    title: "Madhu Dadi — Generative AI, RAG & Marketing Analytics Engineer",
+    title:
+      pageContent.profile.seo?.title ||
+      "Madhu Dadi — Generative AI, RAG & Marketing Analytics Engineer",
     description:
-      "Profile of Madhu Dadi, AI & marketing analytics engineer. 9+ years exp across Novartis, redBus, and GroupM. Expert in LLM/RAG, FastAPI, Next.js, and GA4.",
+      pageContent.profile.seo?.description ||
+      "Profile of Madhu Dadi, AI & marketing analytics engineer. 9+ years exp across Novartis, redBus, and GroupM.",
     alternates: {
       canonical: canonicalUrl,
     },
@@ -31,8 +36,14 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ProfilePage() {
-  const { profile, sortedExperiences, sortedEducation, sortedProjects } =
-    await getPortfolioData();
+  const {
+    profile,
+    sortedExperiences,
+    sortedEducation,
+    sortedProjects,
+    sortedNavigationItems,
+    pageContent,
+  } = await getPortfolioData();
   const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
 
   const coreEntityGraph = {
@@ -118,27 +129,6 @@ export default async function ProfilePage() {
     ],
   };
 
-  // Group skills into core categories as requested
-  const coreStack = {
-    ai: [
-      "OpenAI API",
-      "RAG",
-      "LangChain",
-      "LangSmith",
-      "AI Agents",
-      "Model Evals",
-    ],
-    backend: ["Python", "FastAPI", "SQL", "Postgres", "Redis", "Celery"],
-    frontend: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-    analytics: [
-      "GA4",
-      "BigQuery",
-      "Campaign Analytics",
-      "BI Dashboards",
-      "Attribution",
-    ],
-  };
-
   return (
     <div className="flex flex-col min-h-screen">
       <script
@@ -146,7 +136,7 @@ export default async function ProfilePage() {
         // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
         dangerouslySetInnerHTML={{ __html: JSON.stringify(coreEntityGraph) }}
       />
-      <Header profile={profile} />
+      <Header profile={profile} navigationItems={sortedNavigationItems} />
 
       <main id="main-content" className="flex-1 px-6 py-20 bg-background/50">
         <div className="container mx-auto max-w-4xl space-y-12">
@@ -167,12 +157,14 @@ export default async function ProfilePage() {
             <div className="flex flex-col md:flex-row gap-8 items-start md:items-center justify-between">
               <div className="space-y-4 min-w-0 flex-1">
                 <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
-                  Verified AI & Marketing Analytics Profile
+                  {pageContent.profile.eyebrow ||
+                    "Verified AI & Marketing Analytics Profile"}
                 </span>
                 <h1 className="text-3xl md:text-5xl font-bold tracking-tight">
-                  Madhu Dadi —{" "}
+                  {pageContent.profile.heroTitle || "Madhu Dadi"} —{" "}
                   <span className="text-gradient">
-                    Generative AI, RAG & Marketing Analytics Engineer
+                    {pageContent.profile.heroSubtitle ||
+                      "Generative AI, RAG & Marketing Analytics Engineer"}
                   </span>
                 </h1>
                 <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground">
@@ -195,24 +187,19 @@ export default async function ProfilePage() {
           {/* Short Answer / Biography */}
           <section className="space-y-4">
             <h2 className="text-2xl font-bold tracking-tight border-b border-border/80 pb-2">
-              Who is Madhu Dadi?
+              {pageContent.home.directAnswer?.title || "Who is Madhu Dadi?"}
             </h2>
             <div className="text-lg text-foreground/80 leading-relaxed bg-surface-elevated/20 border border-border/40 p-6 rounded-2xl space-y-4">
-              <p>
-                Madhu Dadi is an AI and marketing analytics engineer based in
-                Visakhapatnam, India. He has 9+ years of experience across
-                Novartis, redBus, GroupM, and Absolinsoft, and builds production
-                LLM/RAG applications, AI agents, FastAPI/Next.js products, and
-                analytics systems.
-              </p>
-              <p>
-                His work is especially relevant for teams that need practical AI
-                systems with retrieval, citations, evals, guardrails,
-                observability, and analytics measurement.
-              </p>
+              {pageContent.home.directAnswer?.paragraphs?.map((para, i) => (
+                <p key={i}>{para}</p>
+              )) || (
+                <p>
+                  Madhu Dadi is an AI and marketing analytics engineer based in
+                  Visakhapatnam, India.
+                </p>
+              )}
             </div>
           </section>
-
           {/* Current Focus & Services */}
           <section className="space-y-4">
             <h2 className="text-2xl font-bold tracking-tight border-b border-border/80 pb-2">
@@ -290,70 +277,26 @@ export default async function ProfilePage() {
               Core Tech Stack
             </h2>
             <div className="grid gap-6 sm:grid-cols-2">
-              {/* AI */}
-              <div className="p-5 border border-border bg-surface/10 rounded-xl space-y-3">
-                <h3 className="text-sm font-semibold tracking-widest text-muted-foreground uppercase">
-                  AI & LLM engineering
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {coreStack.ai.map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-xl border border-border bg-background/50 px-2.5 py-1 text-xs font-mono text-foreground"
-                    >
-                      {t}
-                    </span>
-                  ))}
+              {pageContent.profile.coreStackGroups?.map((group, index) => (
+                <div
+                  key={index}
+                  className="p-5 border border-border bg-surface/10 rounded-xl space-y-3"
+                >
+                  <h3 className="text-sm font-semibold tracking-widest text-muted-foreground uppercase">
+                    {group.title}
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {group.items.map((t) => (
+                      <span
+                        key={t}
+                        className="rounded-xl border border-border bg-background/50 px-2.5 py-1 text-xs font-mono text-foreground"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              {/* Backend */}
-              <div className="p-5 border border-border bg-surface/10 rounded-xl space-y-3">
-                <h3 className="text-sm font-semibold tracking-widest text-muted-foreground uppercase">
-                  Backend & Database
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {coreStack.backend.map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-xl border border-border bg-background/50 px-2.5 py-1 text-xs font-mono text-foreground"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              {/* Frontend */}
-              <div className="p-5 border border-border bg-surface/10 rounded-xl space-y-3">
-                <h3 className="text-sm font-semibold tracking-widest text-muted-foreground uppercase">
-                  Frontend & UI
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {coreStack.frontend.map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-xl border border-border bg-background/50 px-2.5 py-1 text-xs font-mono text-foreground"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              {/* Analytics */}
-              <div className="p-5 border border-border bg-surface/10 rounded-xl space-y-3">
-                <h3 className="text-sm font-semibold tracking-widest text-muted-foreground uppercase">
-                  Analytics & attribution
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {coreStack.analytics.map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-xl border border-border bg-background/50 px-2.5 py-1 text-xs font-mono text-foreground"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              ))}
             </div>
           </section>
 
@@ -534,15 +477,11 @@ export default async function ProfilePage() {
               <IconCircleX className="h-5 w-5 text-destructive" /> Not a Fit For
             </h2>
             <ul className="grid gap-2 text-xs text-muted-foreground sm:grid-cols-2 list-disc list-inside">
-              <li>
-                Generic content writing / blogging without code delivery
-              </li>
+              <li>Generic content writing / blogging without code delivery</li>
               <li>
                 No-code-only chatbot demonstrations or toy implementations
               </li>
-              <li>
-                Projects without defined or measurable success metrics
-              </li>
+              <li>Projects without defined or measurable success metrics</li>
               <li>
                 Unclear web scraping or automation projects that violate
                 platform terms of service

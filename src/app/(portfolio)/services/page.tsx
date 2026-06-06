@@ -33,7 +33,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ServicesHubPage() {
-  const { profile, sortedServices, sortedProjects } = await getPortfolioData();
+  const { profile, sortedServices, sortedProjects, sortedNavigationItems } = await getPortfolioData();
 
   // Helper to map slugs to premium icons
   const getServiceIcon = (slug: string) => {
@@ -82,7 +82,7 @@ export default async function ServicesHubPage() {
         // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <Header profile={profile} />
+      <Header profile={profile} navigationItems={sortedNavigationItems} />
 
       <main id="main-content" className="flex-1 px-6 py-28 bg-background/50">
         <div className="container mx-auto max-w-6xl space-y-16">
@@ -217,7 +217,7 @@ export default async function ServicesHubPage() {
         </div>
       </main>
 
-      <Footer profile={profile} projects={sortedProjects} />
+      <Footer profile={profile} navigationItems={sortedNavigationItems} projects={sortedProjects} />
     </div>
   );
 }

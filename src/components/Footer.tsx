@@ -1,23 +1,25 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import type { Profile, ProjectItem } from "@/lib/portfolio-data";
+import type {
+  NavigationItem,
+  Profile,
+  ProjectItem,
+} from "@/lib/portfolio-data";
 
 type FooterProps = {
   profile: Profile;
   projects: ProjectItem[];
+  navigationItems: NavigationItem[];
 };
 
-export function Footer({ profile, projects }: FooterProps) {
+export function Footer({ profile, projects, navigationItems }: FooterProps) {
   const sitemap = [
     {
       heading: "Explore",
-      links: [
-        { label: "Home", href: "/" },
-        { label: "About", href: "/profile/" },
-        { label: "Services", href: "/services/" },
-        { label: "Credentials", href: "/credentials/" },
-        { label: "Contact", href: "/contact/" },
-      ],
+      links: navigationItems.map((item) => ({
+        label: item.title,
+        href: item.href,
+      })),
     },
     {
       heading: "Case studies",

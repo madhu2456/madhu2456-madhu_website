@@ -8,7 +8,11 @@ export const inputClass =
 export const textareaClass =
   "min-h-[140px] w-full rounded-lg border border-foreground/10 bg-background px-4 py-2.5 text-sm transition-all focus:border-primary/50 focus:ring-4 focus:ring-primary/10 outline-none resize-none";
 
-export const parseLines = (value: string) => value.split("\n");
+export const parseLines = (value: string) =>
+  value
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
 
 export const toLineText = (items?: string[]) => (items ?? []).join("\n");
 
@@ -53,7 +57,7 @@ export function AutoResizeTextarea({
 export const parseTechnologies = (value: string): Technology[] =>
   parseLines(value)
     .map((line) => {
-      const parts = line.split("|");
+      const parts = line.split("|").map((p) => p.trim());
       const name = parts[0];
       const category = parts[1];
       const color = parts[2];
@@ -82,7 +86,7 @@ export const toTechnologyLines = (items?: Technology[]) =>
 export const parseImpactMetrics = (value: string): ImpactMetric[] =>
   parseLines(value)
     .map((line) => {
-      const [label, metricValue] = line.split("|");
+      const [label, metricValue] = line.split("|").map((p) => p.trim());
       if (!label || !metricValue) {
         return null;
       }
@@ -97,7 +101,7 @@ export const toImpactMetricLines = (items?: ImpactMetric[]) =>
 export const parseCitations = (value: string): Citation[] =>
   parseLines(value)
     .map((line) => {
-      const [label, url] = line.split("|");
+      const [label, url] = line.split("|").map((p) => p.trim());
       if (!label || !url) {
         return null;
       }
