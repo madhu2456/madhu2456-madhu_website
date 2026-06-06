@@ -66,7 +66,7 @@ export default async function CaseStudiesPage() {
   }));
 
   const collectionSchema = {
-    "@context": "https://schema.org",
+
     "@type": "CollectionPage",
     "@id": `${collectionUrl}#collection`,
     url: collectionUrl,
@@ -83,7 +83,7 @@ export default async function CaseStudiesPage() {
   };
 
   const breadcrumbSchema = {
-    "@context": "https://schema.org",
+
     "@type": "BreadcrumbList",
     itemListElement: [
       {
@@ -108,12 +108,12 @@ export default async function CaseStudiesPage() {
         <script
           type="application/ld+json"
           // biome-ignore lint/security/noDangerouslySetInnerHtml: server-side JSON-LD
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          // biome-ignore lint/security/noDangerouslySetInnerHtml: server-side JSON-LD
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [collectionSchema, breadcrumbSchema],
+            }),
+          }}
         />
         <Link
           href="/"
