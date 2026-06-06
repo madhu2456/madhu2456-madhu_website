@@ -126,9 +126,7 @@ export async function generateMetadata(): Promise<Metadata> {
         }
       : undefined;
 
-  const ogImageUrl = profile.profileImage
-    ? `${siteUrl}${profile.profileImage.replace(/^\/+/, "")}`
-    : `${siteUrl}opengraph-image`;
+  const ogImageUrl = `${siteUrl}opengraph-image`;
 
   return {
     metadataBase: new URL(siteUrl),
