@@ -9,6 +9,7 @@ export const socialLinksSchema = z.object({
   devto: z.string().url().optional().or(z.literal("")),
   youtube: z.string().url().optional().or(z.literal("")),
   stackoverflow: z.string().url().optional().or(z.literal("")),
+  wikidata: z.string().url().optional().or(z.literal("")),
 });
 
 export const profileStatSchema = z.object({

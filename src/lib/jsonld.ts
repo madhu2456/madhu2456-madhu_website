@@ -9,6 +9,7 @@ type SocialLinks = {
   devto?: string | null;
   youtube?: string | null;
   stackoverflow?: string | null;
+  wikidata?: string | null;
 };
 
 type Citation = {
@@ -867,7 +868,11 @@ export function buildProfessionalServiceSchema({
   email?: string | null;
   addressLocality?: string | null;
   priceRange?: string | null;
+  socialLinks?: SocialLinks;
 }) {
+  const sameAs = Object.values(socialLinks ?? {}).filter(
+    (v): v is string => typeof v === "string" && v.length > 0,
+  );
   return {
     "@type": "ProfessionalService",
     "@id": `${siteUrl}#localbusiness`,
@@ -875,6 +880,7 @@ export function buildProfessionalServiceSchema({
     description,
     url: siteUrl,
     image,
+    ...(sameAs.length > 0 && { sameAs }),
     ...(telephone && { telephone }),
     ...(email && { email }),
     ...(addressLocality && {
