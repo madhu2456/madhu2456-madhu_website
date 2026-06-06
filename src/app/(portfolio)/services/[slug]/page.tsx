@@ -116,7 +116,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
   const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
   const serviceSchema = {
 
-    "@type": "Service",
+    "@type": ["Service", "Product"],
     "@id": `${siteUrl}services/${slug}/#service`,
     name: service.title,
     serviceType: service.title,
@@ -124,8 +124,20 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
     provider: {
       "@id": `${siteUrl}#person`,
     },
+    brand: {
+      "@type": "Brand",
+      name: profile.firstName + " " + profile.lastName,
+    },
     areaServed: ["India", "Worldwide", "Remote"],
     url: `${siteUrl}services/${slug}/`,
+    offers: {
+      "@type": "Offer",
+      url: `${siteUrl}contact/`,
+      availability: "https://schema.org/InStock",
+      price: "0",
+      priceCurrency: "USD",
+      description: "Contact for custom pricing",
+    },
   };
 
   const breadcrumbSchema = {
