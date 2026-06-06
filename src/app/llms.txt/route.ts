@@ -47,6 +47,23 @@ Case study: https://madhudadi.in/case-studies/technical-blog/
 Udemy Enroller is a live production FastAPI and Playwright automation platform that orchestrates asynchronous workflow runs, bounded worker concurrency, secure session-state handling, telemetry logging, and background processing with Celery, Redis, PostgreSQL, and Docker.
 Project URL: https://madhudadi.in/case-studies/udemy-enroller-fastapi/
 
+## Frequently asked questions
+
+- **Who is Madhu Dadi?**
+  Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India, with 9+ years of experience across Novartis, redBus, GroupM, and Absolinsoft.
+
+- **What is Madhu Dadi best known for?**
+  He is best known for building production LLM/RAG applications, AI agents, AI visibility auditing systems, FastAPI/Next.js products, and analytics systems.
+
+- **When should someone hire Madhu Dadi?**
+  Hire Madhu when you need a hands-on engineer who can build AI products and connect them to measurable analytics outcomes.
+
+- **Is Madhu Dadi available for consulting?**
+  Madhu is open to full-time roles, consulting, freelance projects, and advisory work depending on scope and fit.
+
+- **What stack does Madhu Dadi use?**
+  Python, FastAPI, Next.js, React, TypeScript, SQL, Postgres, Redis, Celery, OpenAI API, LangChain, vector databases, GA4, and BigQuery.
+
 ## Certifications
 ${certificationLines}
 `;
