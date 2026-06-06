@@ -862,7 +862,7 @@ function Contact({ profile }: { profile: Profile }) {
                   <div className="flex h-4 w-4 items-center justify-center overflow-hidden rounded-full border border-border/50 bg-surface shadow-inner">
                     <Image
                       src="/new-ui/logo.png"
-                      alt=""
+                      alt="Blog icon"
                       aria-hidden="true"
                       width={16}
                       height={16}
