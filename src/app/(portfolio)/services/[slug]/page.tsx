@@ -60,7 +60,7 @@ export async function generateMetadata({
   const canonicalUrl = `${siteUrl}services/${slug}/`;
 
   return {
-    title: `${service.title} | Services | Madhu Dadi`,
+    title: service.seoTitle || (service.title.length > 45 ? service.title : `${service.title} | Madhu Dadi`),
     description: service.shortDescription || service.fullDescription,
     alternates: {
       canonical: canonicalUrl,

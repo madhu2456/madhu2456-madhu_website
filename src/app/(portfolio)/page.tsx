@@ -10,7 +10,7 @@ const resolveSiteUrl = (rawUrl?: string) => {
 const siteUrl = resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL);
 
 export const metadata: Metadata = {
-  title: "Madhu Dadi - Generative AI Engineer | RAG, AI Agents, FastAPI, GA4",
+  title: "Madhu Dadi - AI & Marketing Analytics Engineer",
   description:
     "AI and marketing analytics engineer. 9+ years exp (Novartis, redBus, GroupM). I build production LLM/RAG apps, AI agents, FastAPI, Next.js, and analytics.",
   alternates: {
