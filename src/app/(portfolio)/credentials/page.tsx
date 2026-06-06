@@ -47,6 +47,13 @@ export default async function CredentialsPage() {
   const proofTable = [
     {
       type: "Credential",
+      proof: "Certified LLM Security Professional (CLLMSP)",
+      linkText: "Red Team Leaders Credential",
+      linkUrl:
+        "https://courses.redteamleaders.com/exam-completion/18f1aed947dcd334",
+    },
+    {
+      type: "Credential",
       proof: "Ultimate RAG Bootcamp",
       linkText: "Udemy Credential",
       linkUrl:
