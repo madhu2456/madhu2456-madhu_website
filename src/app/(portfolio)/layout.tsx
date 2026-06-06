@@ -5,7 +5,7 @@ import { ClientChrome } from "@/components/ClientChrome";
 import { DeferredGTM } from "@/components/DeferredGTM";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { buildDiscoveryKeywords } from "@/lib/discovery-keywords";
+
 import { getPortfolioData } from "@/lib/portfolio-data";
 import "../globals.css";
 
@@ -94,14 +94,7 @@ export async function generateMetadata(): Promise<Metadata> {
     MAX_META_DESCRIPTION_LENGTH,
   );
 
-  const keywords = buildDiscoveryKeywords({
-    siteKeywords: siteSettings.siteKeywords,
-    headline: profile.headline,
-    location: profile.location,
-    skills,
-    services: sortedServices,
-    projects: sortedProjects,
-  });
+
   const twitterHandle = siteSettings.twitterHandle?.replace(/^@/, "");
   const googleSiteVerification =
     process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ||
@@ -141,7 +134,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     category: "technology",
     manifest: "/manifest.webmanifest",
-    ...(keywords.length > 0 && { keywords }),
+
     authors: [{ name: fullName, url: siteUrl }],
     creator: fullName,
     publisher: fullName,
