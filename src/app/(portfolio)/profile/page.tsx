@@ -535,25 +535,25 @@ export default async function ProfilePage() {
             </h2>
             <ul className="grid gap-2 text-xs text-muted-foreground sm:grid-cols-2">
               <li className="flex gap-2">
-                <span className="text-destructive font-bold">•</span>
+                <span className="text-destructive font-bold">-</span>{" "}
                 <span>
                   Generic content writing / blogging without code delivery
                 </span>
               </li>
               <li className="flex gap-2">
-                <span className="text-destructive font-bold">•</span>
+                <span className="text-destructive font-bold">-</span>{" "}
                 <span>
                   No-code-only chatbot demonstrations or toy implementations
                 </span>
               </li>
               <li className="flex gap-2">
-                <span className="text-destructive font-bold">•</span>
+                <span className="text-destructive font-bold">-</span>{" "}
                 <span>
-                  Projects without any defined or measurable success metrics
+                  Projects without defined or measurable success metrics
                 </span>
               </li>
               <li className="flex gap-2">
-                <span className="text-destructive font-bold">•</span>
+                <span className="text-destructive font-bold">-</span>{" "}
                 <span>
                   Unclear web scraping or automation projects that violate
                   platform terms of service
