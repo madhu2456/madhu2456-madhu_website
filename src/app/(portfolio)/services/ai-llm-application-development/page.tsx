@@ -67,7 +67,7 @@ export default async function AiLlmApplicationDevelopmentPage() {
     },
     {
       title: "AI Agents with Tools",
-      desc: "Autonomous workflows featuring sandboxed execution, self-correction, and state management.",
+      desc: "Controlled workflows featuring sandboxed execution, validation, fallback behavior, and state management.",
     },
     {
       title: "Prompt & Eval Pipelines",
