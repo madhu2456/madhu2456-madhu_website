@@ -527,11 +527,9 @@ export default async function AdticksCaseStudyPage() {
               10. Future Iterations
             </h2>
             <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-              If I were to build next-generation layers, I would integrate
-              automated LLM agent patches. By linking proposed dynamic render
-              anomalies straight to codegen utilities, the SaaS dashboard could
-              supply direct code diff fixes (e.g. Next.js server component
-              conversion scripts) for engineers to apply with one click.
+              For future iterations, I would explore AI-assisted remediation
+              suggestions that map detected render anomalies to
+              developer-readable code-change recommendations.
             </p>
           </section>
 
