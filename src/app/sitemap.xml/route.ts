@@ -9,21 +9,97 @@ export async function GET() {
   const siteUrl = `${(
     process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE_URL
   ).replace(/\/+$/, "")}/`;
+  
+  const { sortedServices, sortedProjects } = await getPortfolioData();
 
-  const { portfolioLastUpdatedAt } = await getPortfolioData();
-  const formattedDate = new Date(portfolioLastUpdatedAt).toISOString().split("T")[0];
+  const entries = [
+    {
+      url: siteUrl,
+      lastModified: "2026-06-02",
+      changeFrequency: "weekly",
+      priority: "1.0",
+    },
+    {
+      url: `${siteUrl}profile/`,
+      lastModified: "2026-06-02",
+      changeFrequency: "monthly",
+      priority: "0.9",
+    },
+    {
+      url: `${siteUrl}services/`,
+      lastModified: "2026-06-02",
+      changeFrequency: "monthly",
+      priority: "0.9",
+    },
+    {
+      url: `${siteUrl}case-studies/`,
+      lastModified: "2026-06-02",
+      changeFrequency: "monthly",
+      priority: "0.85",
+    },
+    {
+      url: `${siteUrl}credentials/`,
+      lastModified: "2026-06-02",
+      changeFrequency: "monthly",
+      priority: "0.7",
+    },
+    {
+      url: `${siteUrl}contact/`,
+      lastModified: "2026-06-02",
+      changeFrequency: "monthly",
+      priority: "0.7",
+    },
+    {
+      url: `${siteUrl}search/`,
+      lastModified: "2026-06-02",
+      changeFrequency: "monthly",
+      priority: "0.6",
+    },
+    {
+      url: `${siteUrl}llms.txt`,
+      lastModified: "2026-06-02",
+      changeFrequency: "monthly",
+      priority: "0.5",
+    },
+    {
+      url: `${siteUrl}ai-profile.json`,
+      lastModified: "2026-06-02",
+      changeFrequency: "monthly",
+      priority: "0.5",
+    },
+    {
+      url: `${siteUrl}resume.pdf`,
+      lastModified: "2026-06-02",
+      changeFrequency: "monthly",
+      priority: "0.5",
+    },
+    ...sortedServices.map(service => ({
+      url: `${siteUrl}services/${service.slug}/`,
+      lastModified: service.updatedAt ? new Date(service.updatedAt).toISOString().split('T')[0] : "2026-06-02",
+      changeFrequency: "monthly",
+      priority: "0.85",
+    })),
+    ...sortedProjects.map(project => ({
+      url: `${siteUrl}case-studies/${project.slug}/`,
+      lastModified: project.updatedAt ? new Date(project.updatedAt).toISOString().split('T')[0] : "2026-06-02",
+      changeFrequency: "monthly",
+      priority: "0.8",
+    })),
+  ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <sitemap>
-    <loc>${siteUrl}portfolio-sitemap.xml</loc>
-    <lastmod>${formattedDate}</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>${siteUrl}blog/sitemap.xml</loc>
-    <lastmod>2026-06-02</lastmod>
-  </sitemap>
-</sitemapindex>`;
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${entries
+  .map(
+    (entry) => `  <url>
+    <loc>${entry.url}</loc>
+    <lastmod>${entry.lastModified}</lastmod>
+    <changefreq>${entry.changeFrequency}</changefreq>
+    <priority>${entry.priority}</priority>
+  </url>`,
+  )
+  .join("\n")}
+</urlset>`;
 
   return new NextResponse(xml, {
     headers: {
