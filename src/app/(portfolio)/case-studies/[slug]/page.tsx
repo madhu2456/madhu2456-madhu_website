@@ -265,9 +265,10 @@ export default async function CaseStudyPage({
             <Image
               src={normalizeImageSource(project.coverImage) || ""}
               alt={project.coverImageAlt || project.title}
-              fill
+              width={1280}
+              height={720}
               sizes="(max-width: 1200px) 100vw, 1100px"
-              className="object-cover"
+              className="object-cover w-full h-full"
               priority
               unoptimized={shouldUseUnoptimizedImage(project.coverImage)}
             />
