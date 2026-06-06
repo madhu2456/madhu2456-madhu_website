@@ -184,6 +184,24 @@ export default async function ContactPage() {
                 </ul>
               </section>
 
+              {/* Consulting Process */}
+              <section className="space-y-4">
+                <h2 className="text-lg font-bold tracking-tight border-b border-border/80 pb-2">
+                  My Consulting Process
+                </h2>
+                <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
+                  <p>
+                    Every engagement starts with a comprehensive discovery phase. I prioritize understanding your underlying business objectives, technical constraints, and data architecture before proposing any solutions. This ensures that the AI products and marketing pipelines we build together are perfectly aligned with your strategic goals and deliver measurable ROI from day one.
+                  </p>
+                  <p>
+                    Whether you need a robust Retrieval-Augmented Generation (RAG) system, custom AI agents, or high-performance FastAPI backends, I follow a transparent, milestone-driven approach. You will have full visibility into the development lifecycle, from initial architectural design and rapid prototyping to production deployment, performance tuning, and ongoing maintenance.
+                  </p>
+                  <p>
+                    For marketing and analytics clients, my focus is on creating single-source-of-truth measurement systems using Google Analytics 4 (GA4) and Google BigQuery. I specialize in resolving data fragmentation, building reliable server-side tracking pipelines, and designing actionable dashboards that empower your marketing teams to make confident, data-driven decisions at scale.
+                  </p>
+                </div>
+              </section>
+
               {/* Common Questions / Engagement Status */}
               <section className="space-y-4">
                 <h2 className="text-lg font-bold tracking-tight border-b border-border/80 pb-2">
