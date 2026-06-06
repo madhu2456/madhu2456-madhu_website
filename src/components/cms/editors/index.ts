@@ -4,6 +4,7 @@ export * from "./ExperiencesEditor";
 export * from "./NavigationEditor";
 export * from "./ProfileEditor";
 export * from "./ProjectsEditor";
+export * from "./PageContentEditor";
 export * from "./ServicesEditor";
 export * from "./SiteSettingsEditor";
 export * from "./SkillsEditor";

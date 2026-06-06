@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { getPortfolioData } from "@/lib/portfolio-data";
 
 export const revalidate = 3600;
 
@@ -9,11 +10,14 @@ export async function GET() {
     process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE_URL
   ).replace(/\/+$/, "")}/`;
 
+  const { portfolioLastUpdatedAt } = await getPortfolioData();
+  const formattedDate = new Date(portfolioLastUpdatedAt).toISOString().split("T")[0];
+
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap>
     <loc>${siteUrl}sitemap-portfolio.xml</loc>
-    <lastmod>2026-06-02</lastmod>
+    <lastmod>${formattedDate}</lastmod>
   </sitemap>
   <sitemap>
     <loc>${siteUrl}blog/sitemap.xml</loc>

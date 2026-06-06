@@ -9,10 +9,14 @@ async function PortfolioContent() {
     sortedProjects,
     sortedServices,
     sortedCertifications,
+    sortedNavigationItems,
+    pageContent,
   } = await getPortfolioData();
 
   return (
     <NewPortfolioExperience
+      pageContent={pageContent}
+      navigationItems={sortedNavigationItems}
       profile={profile}
       skills={skills}
       experiences={sortedExperiences}

@@ -72,7 +72,7 @@ export function SkillsEditor() {
               type="number"
               className={inputClass}
               {...register(`skills.${index}.yearsOfExperience`, {
-                valueAsNumber: true,
+                setValueAs: (v) => (v === "" ? undefined : Number(v)),
               })}
             />
           </FormField>

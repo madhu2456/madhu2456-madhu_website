@@ -68,8 +68,14 @@ export const viewport: Viewport = {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { profile, siteSettings, skills, sortedProjects, sortedServices } =
-    await getPortfolioData();
+  const {
+    profile,
+    siteSettings,
+    skills,
+    sortedProjects,
+    sortedServices,
+    sortedNavigationItems,
+  } = await getPortfolioData();
   const siteUrl = resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL);
   const fullName =
     [profile.firstName, profile.lastName].filter(Boolean).join(" ") ||

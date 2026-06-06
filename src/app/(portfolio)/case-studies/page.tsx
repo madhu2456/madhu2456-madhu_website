@@ -55,7 +55,7 @@ export const metadata: Metadata = {
 };
 
 export default async function CaseStudiesPage() {
-  const { profile, sortedProjects } = await getPortfolioData();
+  const { profile, sortedProjects, sortedNavigationItems } = await getPortfolioData();
   const siteUrl = getSiteUrl();
   const collectionUrl = `${siteUrl}case-studies/`;
   const itemListElement = sortedProjects.map((project, index) => ({
@@ -103,7 +103,7 @@ export default async function CaseStudiesPage() {
 
   return (
     <>
-      <Header profile={profile} />
+      <Header profile={profile} navigationItems={sortedNavigationItems} />
       <main className="mx-auto w-[min(1400px,92%)] pt-32 pb-24">
         <script
           type="application/ld+json"

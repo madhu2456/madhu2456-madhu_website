@@ -169,7 +169,7 @@ export default async function CaseStudyPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const { profile, sortedProjects } = await getPortfolioData();
+  const { profile, sortedProjects, sortedNavigationItems } = await getPortfolioData();
   const project = sortedProjects.find((item) => item.slug === slug);
 
   if (!project) notFound();
@@ -231,7 +231,7 @@ export default async function CaseStudyPage({
 
   return (
     <>
-      <Header profile={profile} />
+      <Header profile={profile} navigationItems={sortedNavigationItems} />
       <main className="mx-auto w-[min(1100px,92%)] pt-32 pb-24">
         <script
           type="application/ld+json"

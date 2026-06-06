@@ -7,6 +7,7 @@ import {
   IconCode,
   IconCompass,
   IconDeviceFloppy,
+  IconFileText,
   IconLayout2,
   IconRefresh,
   IconSchool,
@@ -26,6 +27,7 @@ import {
   EducationEditor,
   ExperiencesEditor,
   NavigationEditor,
+  PageContentEditor,
   ProfileEditor,
   ProjectsEditor,
   ServicesEditor,
@@ -49,6 +51,7 @@ const sectionConfig: Array<{
   label: string;
   icon: React.ComponentType<{ className?: string }>;
 }> = [
+  { key: "pageContent", label: "Page Content", icon: IconFileText },
   { key: "profile", label: "Profile", icon: IconUser },
   { key: "siteSettings", label: "Site settings", icon: IconSettings },
   { key: "navigationItems", label: "Navigation", icon: IconCompass },
@@ -80,6 +83,7 @@ export function CmsEditor() {
     "profile.firstName",
     "profile.lastName",
     "siteSettings.siteTitle",
+    "pageContent",
     "navigationItems",
     "skills",
     "experiences",
@@ -94,6 +98,7 @@ export function CmsEditor() {
       firstName,
       lastName,
       siteTitle,
+      pageContent,
       navigationItems,
       skills,
       experiences,
@@ -106,6 +111,7 @@ export function CmsEditor() {
     return {
       profile: `${firstName || ""} ${lastName || ""}`.trim() || "Profile",
       siteSettings: siteTitle || "Site settings",
+      pageContent: "SEO and static content",
       navigationItems: `${navigationItems?.length || 0} items`,
       skills: `${skills?.length || 0} items`,
       experiences: `${experiences?.length || 0} items`,
@@ -113,6 +119,7 @@ export function CmsEditor() {
       projects: `${projects?.length || 0} items`,
       services: `${services?.length || 0} items`,
       certifications: `${certifications?.length || 0} items`,
+      contentVersion: "v2",
     };
   }, [summaryData]);
 
@@ -223,6 +230,8 @@ export function CmsEditor() {
 
   const renderSectionEditor = () => {
     switch (selectedSection) {
+      case "pageContent":
+        return <PageContentEditor />;
       case "profile":
         return <ProfileEditor />;
       case "siteSettings":

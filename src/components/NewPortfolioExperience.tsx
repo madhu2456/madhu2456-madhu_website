@@ -35,9 +35,13 @@ import type {
   ProjectItem,
   ServiceItem,
   SkillItem,
+  PageContent,
 } from "@/lib/portfolio-data";
 
+import type { NavigationItem } from "@/lib/portfolio-data";
 type NewPortfolioExperienceProps = {
+  navigationItems: NavigationItem[];
+  pageContent: PageContent;
   profile: Profile;
   skills: SkillItem[];
   experiences: ExperienceItem[];
@@ -69,20 +73,26 @@ const LINKEDIN_CERTS_URL =
 
 export function NewPortfolioExperience({
   profile,
+  navigationItems,
   skills,
   experiences,
   projects,
   services,
   certifications,
+  pageContent,
 }: NewPortfolioExperienceProps) {
   const faqItems = useMemo(() => buildFaqItems(), []);
 
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
-      <Header profile={profile} />
+      <Header profile={profile} navigationItems={navigationItems} />
       <main id="main">
-        <Hero profile={profile} experiences={experiences} />
-        <DirectAnswer />
+        <Hero
+          profile={profile}
+          experiences={experiences}
+          pageContent={pageContent}
+        />
+        <DirectAnswer pageContent={pageContent} />
         <Services services={services} />
         <Projects projects={projects} />
         <Stats stats={profile.stats} />
@@ -92,7 +102,11 @@ export function NewPortfolioExperience({
         <Faq items={faqItems} />
         <Contact profile={profile} />
       </main>
-      <Footer profile={profile} projects={projects} />
+      <Footer
+        navigationItems={navigationItems}
+        profile={profile}
+        projects={projects}
+      />
     </div>
   );
 }
@@ -102,9 +116,11 @@ export function NewPortfolioExperience({
 function Hero({
   profile,
   experiences,
+  pageContent,
 }: {
   profile: Profile;
   experiences: ExperienceItem[];
+  pageContent: PageContent;
 }) {
   const workedAt = Array.from(
     new Set(
@@ -124,29 +140,20 @@ function Hero({
         <div className="animate-fade-up">
           <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-[11px] text-emerald-300 sm:mb-5 sm:text-xs">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
-            Available now · Replies within 24 hours
+            {pageContent.home.heroAvailabilityText ||
+              "Available for new projects"}
           </p>
           <p className="mb-3 font-display text-[11px] tracking-[0.18em] text-primary uppercase sm:text-sm sm:tracking-[0.2em] font-semibold">
-            I build AI that actually ships and moves numbers you care about.
+            {pageContent.home.eyebrow}
           </p>
           <h1 className="font-display text-[clamp(2rem,6vw,4rem)] leading-[1.15] font-bold tracking-tight sm:leading-[1.1]">
-            Madhu Dadi —{" "}
-            <span className="text-gradient">
-              Generative AI Engineer & Marketing Analytics Leader
-            </span>
+            {profile.firstName} {profile.lastName} —{" "}
+            <span className="text-gradient">{pageContent.home.heroTitle}</span>
           </h1>
           <div className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:mt-6 sm:text-lg space-y-4">
-            <p>
-              I build production LLM/RAG applications, AI agents,
-              FastAPI/Next.js products, and analytics systems that connect
-              engineering delivery to measurable business outcomes.
-            </p>
-            <p>
-              I have 9+ years of experience across Novartis, redBus, GroupM, and
-              Absolinsoft, working at the intersection of AI engineering,
-              marketing analytics, full-stack product development, and decision
-              intelligence.
-            </p>
+            {(pageContent.home.introParagraphs || []).map((para, i) => (
+              <p key={i}>{para}</p>
+            ))}
           </div>
           <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center">
             <Link
@@ -177,7 +184,7 @@ function Hero({
           {workedAt.length > 0 ? (
             <div className="mt-8 sm:mt-10">
               <p className="mb-3 text-[11px] tracking-[0.18em] text-muted-foreground uppercase">
-                Worked at
+                {pageContent.home.workedAtLabel || "Worked at"}
               </p>
               <ul className="flex flex-wrap items-center gap-x-4 gap-y-2 font-display text-sm text-foreground/80 sm:gap-x-6 sm:text-base">
                 {workedAt.map((company, index) => (
@@ -221,21 +228,41 @@ function Hero({
   );
 }
 
-function DirectAnswer() {
+function DirectAnswer({ pageContent }: { pageContent: PageContent }) {
   return (
     <Section
       id="direct-answer"
       eyebrow="Direct Answer"
-      title="Who is Madhu Dadi?"
+      title={pageContent.home.directAnswer?.title || "Who is Madhu Dadi?"}
     >
       <div className="relative rounded-3xl border border-border/80 bg-surface/35 p-8 md:p-10 backdrop-blur-md overflow-hidden flex flex-col justify-between min-h-[220px]">
         <div className="absolute top-0 right-0 h-40 w-40 bg-primary/5 rounded-full blur-3xl -z-10" />
-        <p className="text-lg md:text-xl font-medium text-foreground/95 leading-relaxed max-w-3xl">
-          Madhu Dadi is an AI and marketing analytics engineer based in
-          Visakhapatnam, India. He builds production LLM/RAG applications, AI
-          agents, FastAPI/Next.js products, and analytics systems. He has 9+
-          years of experience across Novartis, redBus, GroupM, and Absolinsoft.
-        </p>
+        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-border/50 pt-8 sm:flex-row">
+          <p className="text-base text-muted-foreground">
+            {pageContent.home.directAnswer?.title || "Who is Madhu Dadi?"}
+          </p>
+        </div>
+        <div className="mt-4 grid gap-8 sm:grid-cols-2 lg:gap-12 text-sm sm:text-base leading-relaxed text-muted-foreground">
+          <div className="space-y-4">
+            {(pageContent.home.directAnswer?.paragraphs || [])
+              .slice(
+                0,
+                Math.ceil((pageContent.home.directAnswer?.paragraphs?.length || 0) / 2),
+              )
+              .map((para, i) => (
+                <p key={i}>{para}</p>
+              ))}
+          </div>
+          <div className="space-y-4">
+            {(pageContent.home.directAnswer?.paragraphs || [])
+              .slice(
+                Math.ceil((pageContent.home.directAnswer?.paragraphs?.length || 0) / 2),
+              )
+              .map((para, i) => (
+                <p key={i}>{para}</p>
+              ))}
+          </div>
+        </div>
         <div className="mt-6 flex flex-wrap gap-4 border-t border-border/30 pt-6">
           <Link
             href="/profile/"

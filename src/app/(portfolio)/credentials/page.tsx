@@ -21,12 +21,18 @@ import { getPortfolioData } from "@/lib/portfolio-data";
 export const revalidate = 3600;
 
 export async function generateMetadata(): Promise<Metadata> {
+  const { pageContent } = await getPortfolioData();
   const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
-  const canonicalUrl = `${siteUrl}credentials/`;
+  const canonicalPath =
+    pageContent.credentials.seo?.canonicalPath || "/credentials/";
+  const canonicalUrl = `${siteUrl}${canonicalPath.replace(/^\//, "")}`;
 
   return {
-    title: "Madhu Dadi Credentials — AI, RAG, GA4 & Analytics Certifications",
+    title:
+      pageContent.credentials.seo?.title ||
+      "Madhu Dadi Credentials — AI, RAG, GA4 & Analytics Certifications",
     description:
+      pageContent.credentials.seo?.description ||
       "Verified credentials, certifications, awards, work history, and public proof for Madhu Dadi, AI and marketing analytics engineer.",
     alternates: {
       canonical: canonicalUrl,
@@ -41,112 +47,9 @@ export default async function CredentialsPage() {
     sortedEducation,
     sortedExperiences,
     sortedProjects,
+    sortedNavigationItems,
+    pageContent,
   } = await getPortfolioData();
-
-  // Standard Proof Table Data
-  const proofTable = [
-    {
-      type: "Credential",
-      proof: "Certified LLM Security Professional (CLLMSP)",
-      linkText: "Red Team Leaders Credential",
-      linkUrl:
-        "https://courses.redteamleaders.com/exam-completion/18f1aed947dcd334",
-    },
-    {
-      type: "Credential",
-      proof: "Ultimate RAG Bootcamp",
-      linkText: "Udemy Credential",
-      linkUrl:
-        "https://www.udemy.com/certificate/UC-23e59045-812e-4b6c-9411-9a74284bf425/",
-    },
-    {
-      type: "Credential",
-      proof: "Azure AI Fundamentals",
-      linkText: "Microsoft Credential",
-      linkUrl:
-        "https://learn.microsoft.com/api/credentials/share/en-us/madhudadi/3F89A56D1F9745E4",
-    },
-    {
-      type: "Credential",
-      proof: "MongoDB Python Developer Path",
-      linkText: "MongoDB Credential",
-      linkUrl:
-        "https://learn.mongodb.com/c/3c7f90f2-9d33-4f89-8d62-f703672b1da7",
-    },
-    {
-      type: "Credential",
-      proof: "GitHub Actions Professional",
-      linkText: "Credly Badge",
-      linkUrl:
-        "https://www.credly.com/badges/df23e5a5-91ab-4411-b0e2-f7123bf045ca",
-    },
-    {
-      type: "Credential",
-      proof: "Dataiku Core Designer",
-      linkText: "Skilljar Verification",
-      linkUrl:
-        "https://academy.dataiku.com/certificate/share/48fa91-c27b-4b11-93bf-a8412fa52ba8",
-    },
-    {
-      type: "Award",
-      proof: "Best Performer of the Quarter Q1 2024",
-      linkText: "Novartis Context",
-      linkUrl: "#awards-recognition",
-    },
-    {
-      type: "Award",
-      proof: "Q3 Trailblazer, redBus",
-      linkText: "redBus Context",
-      linkUrl: "#awards-recognition",
-    },
-    {
-      type: "Award",
-      proof: "Performer of the Year 2020–21, WPP NextGen",
-      linkText: "GroupM Context",
-      linkUrl: "#awards-recognition",
-    },
-  ];
-
-  const awards = [
-    {
-      title: "Best Performer of the Quarter Q1 2024",
-      org: "Novartis",
-      desc: "Awarded for lead engineering role in designing Novartis' global Patient Support warehouse telemetry. Mapped complex patient onboarding workflows, established strict schema validation checks, and delivered highly trusted operations dashboards for senior leaders.",
-    },
-    {
-      title: "Q3 Trailblazer",
-      org: "redBus",
-      desc: "Recognized for architecting redBus' campaign measurement and transaction CAC attribution databases. Unified disparate multi-million dollar marketing campaigns under a structured, source-of-truth SQL analytics layer.",
-    },
-    {
-      title: "Performer of the Year 2020–21",
-      org: "WPP NextGen (GroupM)",
-      desc: "Awarded for exceptional engineering delivery during Google Ads Data Hub (ADH) pilot integrations. Developed secure SQL attribution pipelines, preserving cross-channel insights under GDPR-compliant criteria.",
-    },
-  ];
-
-  const externalProfiles = [
-    {
-      name: "GitHub",
-      url: profile.socialLinks.github || "https://github.com",
-      desc: "Open-source projects, automation utilities, and code patterns.",
-    },
-    {
-      name: "LinkedIn",
-      url: profile.socialLinks.linkedin || "https://linkedin.com",
-      desc: "Professional background, verified credentials, and client references.",
-    },
-    {
-      name: "DEV Community",
-      url: "https://dev.to",
-      desc: "Technical articles covering FastAPI, Next.js, and RAG systems.",
-    },
-    {
-      name: "Peerlist",
-      url: "https://peerlist.io",
-      desc: "Work verification history, professional profile, and product launches.",
-    },
-  ];
 
   const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
   const breadcrumbSchema = {
@@ -175,7 +78,7 @@ export default async function CredentialsPage() {
         // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <Header profile={profile} />
+      <Header profile={profile} navigationItems={sortedNavigationItems} />
 
       <main id="main-content" className="flex-1 px-6 py-28 bg-background/50">
         <div className="container mx-auto max-w-4xl space-y-16">
@@ -197,15 +100,12 @@ export default async function CredentialsPage() {
               Professional Proof
             </span>
             <h1 className="text-3xl md:text-5xl font-bold tracking-tight">
-              Madhu Dadi Credentials —{" "}
-              <span className="text-gradient">
-                AI, RAG, GA4 & Analytics Certifications
-              </span>
+              {pageContent.credentials.heroTitle ||
+                "Verified Credentials & Professional Proof"}
             </h1>
             <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Factual, verifiable proof of professional competencies, academic
-              history, quarter achievements, and verified certification
-              registries.
+              {pageContent.credentials.heroSubtitle ||
+                "Factual, verifiable proof of professional competencies, academic history, quarter achievements, and verified certification registries."}
             </p>
           </section>
 
@@ -213,12 +113,13 @@ export default async function CredentialsPage() {
           <section className="rounded-2xl border border-primary/20 bg-surface/20 p-6 md:p-8 backdrop-blur-sm flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="space-y-1.5 text-center md:text-left">
               <h3 className="font-bold text-lg text-foreground flex items-center justify-center md:justify-start gap-2">
-                <IconFileText className="h-5 w-5 text-primary" /> Curated PDF
-                Resume
+                <IconFileText className="h-5 w-5 text-primary" />{" "}
+                {pageContent.credentials.resumeCallout?.title ||
+                  "Curated PDF Resume"}
               </h3>
               <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
-                Download a clean, printer-friendly PDF containing comprehensive
-                project history and technical details.
+                {pageContent.credentials.resumeCallout?.description ||
+                  "Download a clean, printer-friendly PDF containing comprehensive project history and technical details."}
               </p>
             </div>
             <a
@@ -260,7 +161,7 @@ export default async function CredentialsPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border/40 divide-dashed">
-                  {proofTable.map((row) => (
+                  {pageContent.credentials.proofLinks?.map((row) => (
                     <tr
                       key={row.proof}
                       className="hover:bg-surface/10 transition-colors"
@@ -400,7 +301,7 @@ export default async function CredentialsPage() {
             </div>
 
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {awards.map((award) => (
+              {pageContent.credentials.awards?.map((award) => (
                 <div
                   key={award.title}
                   className="rounded-2xl border border-border bg-surface/20 p-6 space-y-3 backdrop-blur-md hover:-translate-y-0.5 transition-all duration-300 relative overflow-hidden"
@@ -412,7 +313,7 @@ export default async function CredentialsPage() {
                     </div>
                     <div>
                       <h4 className="font-bold text-xs text-muted-foreground uppercase font-mono tracking-wider">
-                        {award.org}
+                        {award.organization}
                       </h4>
                     </div>
                   </div>
@@ -420,7 +321,7 @@ export default async function CredentialsPage() {
                     {award.title}
                   </h3>
                   <p className="text-xs text-muted-foreground leading-relaxed pt-1">
-                    {award.desc}
+                    {award.description}
                   </p>
                 </div>
               ))}
@@ -474,17 +375,25 @@ export default async function CredentialsPage() {
 
                     {exp.responsibilities &&
                       exp.responsibilities.length > 0 && (
-                        <ul className="space-y-1.5 text-xs text-muted-foreground pt-2 pl-4 list-disc">
+                        <ul className="space-y-1.5 text-xs text-muted-foreground pt-2 pl-2">
                           {exp.responsibilities.map((resp) => (
-                            <li key={resp}>{resp}</li>
+                            <li
+                              key={resp}
+                              className="relative pl-3 before:absolute before:left-0 before:content-['•'] before:text-muted-foreground/60"
+                            >
+                              {resp}
+                            </li>
                           ))}
                         </ul>
                       )}
 
                     {exp.achievements && exp.achievements.length > 0 && (
-                      <ul className="space-y-1.5 text-xs text-muted-foreground pt-1.5 pl-4 list-disc border-t border-dashed border-border/40 mt-2">
+                      <ul className="space-y-1.5 text-xs text-muted-foreground pt-1.5 pl-2 border-t border-dashed border-border/40 mt-2">
                         {exp.achievements.map((ach) => (
-                          <li key={ach} className="text-primary font-medium">
+                          <li
+                            key={ach}
+                            className="relative pl-3 before:absolute before:left-0 before:content-['•'] before:text-primary/60 text-primary font-medium"
+                          >
                             {ach}
                           </li>
                         ))}
@@ -610,7 +519,7 @@ export default async function CredentialsPage() {
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
-              {externalProfiles.map((profile) => (
+              {pageContent.credentials.externalProfiles?.map((profile) => (
                 <a
                   key={profile.name}
                   href={profile.url}
@@ -624,7 +533,7 @@ export default async function CredentialsPage() {
                       <IconExternalLink className="h-3.5 w-3.5 opacity-60 group-hover:opacity-100 transition-opacity" />
                     </h3>
                     <p className="text-xs text-muted-foreground leading-relaxed">
-                      {profile.desc}
+                      {profile.description}
                     </p>
                   </div>
                 </a>
@@ -640,14 +549,17 @@ export default async function CredentialsPage() {
                 Verification Notes
               </h2>
               <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
-                Credential IDs and verification links are mapped to their issuing platforms where available. This page is maintained as a source of truth for Madhu Dadi’s professional certifications, awards, work history, and public project proof.
+                Credential IDs and verification links are mapped to their
+                issuing platforms where available. This page is maintained as a
+                source of truth for Madhu Dadi’s professional certifications,
+                awards, work history, and public project proof.
               </p>
             </div>
           </section>
         </div>
       </main>
 
-      <Footer profile={profile} projects={sortedProjects} />
+      <Footer profile={profile} navigationItems={sortedNavigationItems} projects={sortedProjects} />
     </div>
   );
 }

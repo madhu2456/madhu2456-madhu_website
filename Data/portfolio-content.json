@@ -701,7 +701,94 @@
         }
       ],
       "order": 1,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z",
+      "citableFacts": [
+        {
+          "label": "Project",
+          "val": "Adticks"
+        },
+        {
+          "label": "Built by",
+          "val": "Madhu Dadi"
+        },
+        {
+          "label": "Category",
+          "val": "SaaS, SEO/AEO/GEO, AI visibility auditing"
+        },
+        {
+          "label": "Role",
+          "val": "Designer and engineer"
+        },
+        {
+          "label": "Stack",
+          "val": "Next.js, React, Tailwind CSS, FastAPI, PostgreSQL, Redis, Celery, Playwright"
+        },
+        {
+          "label": "Core capability",
+          "val": "Parallel crawling and render-parity diagnostics"
+        },
+        {
+          "label": "Scale",
+          "val": "10,000+ pages per audit"
+        },
+        {
+          "label": "Output",
+          "val": "Prioritized fix list for search and AI visibility"
+        },
+        {
+          "label": "Evidence",
+          "val": "Case study, live product, screenshots, methodology"
+        }
+      ],
+      "technicalDecisions": [
+        {
+          "title": "FastAPI Async Core",
+          "desc": "Selected FastAPI as the core API framework to handle thousands of concurrent status updates and job dispatches asynchronously without clogging the web server threads."
+        },
+        {
+          "title": "Redis & Celery Task Queue",
+          "desc": "Isolated Playwright browser executions onto distributed Celery worker pools using Redis as a high-speed broker to prevent chromium instances from draining web resources."
+        },
+        {
+          "title": "Playwright Headless Browser Pooling",
+          "desc": "Designed a browser tab recycling system. Reusing Chromium tabs across crawls reduced browser launching overheads, avoiding memory leaks and resource crashes under large scales."
+        },
+        {
+          "title": "SQLAlchemy & Alembic DB Migrations",
+          "desc": "Implemented clear transactional Postgres models to store audit results, mapping relations and handling versioned migrations securely."
+        }
+      ],
+      "measuredOutcomes": [
+        {
+          "metric": "10,000+ pages",
+          "label": "Pages Crawled Per Audit",
+          "desc": "Verified through sitemap validation audits across major e-commerce properties, maintaining stable memory consumption with no chromium leaks."
+        },
+        {
+          "metric": "40% latency drop",
+          "label": "Audit Execution Overhead",
+          "desc": "Measured as the median processing time per page before and after introducing concurrent browser pooling and tab reuse protocols."
+        },
+        {
+          "metric": "Full dynamic parity test coverage",
+          "label": "Dynamic Parity Detection",
+          "desc": "Confirmed via automated integration checks containing dynamic JS components hidden in raw server HTML but present in Playwright DOM."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "How does Adticks check for search and AI crawler accessibility?",
+          "answer": "It inspects HTTP headers, redirects, robots.txt crawl rules specifically matching AI agent tokens (e.g. GPTBot, Google-Extended, OAI-SearchBot), semantic heading tree depths, sitemap indexing schemas, and counts hidden raw-HTML rendering discrepancies."
+        },
+        {
+          "question": "How does the crawler handle potential request blocks?",
+          "answer": "The crawler uses respectful rate limits, clear timeout boundaries, standard browser-rendering diagnostics, and compliance-aware request controls."
+        },
+        {
+          "question": "How long does a 10,000-page crawl audit take?",
+          "answer": "With a bounded worker pool of 15 Chromium browsers, an audit completes in approximately 45–60 minutes, ensuring detailed render diagnostic checking for every individual URL."
+        }
+      ]
     },
     {
       "title": "Technical Blog",
@@ -764,7 +851,94 @@
         }
       ],
       "order": 2,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z",
+      "citableFacts": [
+        {
+          "label": "Project",
+          "val": "Technical Blog RAG Publishing Portal"
+        },
+        {
+          "label": "Built by",
+          "val": "Madhu Dadi"
+        },
+        {
+          "label": "Category",
+          "val": "Tech publishing, server-side dynamic RAG indexing"
+        },
+        {
+          "label": "Role",
+          "val": "Designer and engineer"
+        },
+        {
+          "label": "Stack",
+          "val": "Next.js 16, React 19, TypeScript, Tailwind CSS, FastAPI, PostgreSQL (pgvector), OpenAI API, Docker"
+        },
+        {
+          "label": "Core capability",
+          "val": "Low-latency server-rendered static templates with dynamic LLM citation feeds"
+        },
+        {
+          "label": "Scale",
+          "val": "Sub-1-second context-caching search latencies"
+        },
+        {
+          "label": "Output",
+          "val": "Automated sitemaps, Person structured schema, and right-side interactive RAG assistant"
+        },
+        {
+          "label": "Evidence",
+          "val": "Case study, live portal, sitemaps, git repository"
+        }
+      ],
+      "technicalDecisions": [
+        {
+          "title": "React 19 Server Components",
+          "desc": "Leveraged Next.js React 19 server components (SSR/SSG) to achieve optimal performance, enabling near-instant page load times (low TTFB) and strong search crawler readability."
+        },
+        {
+          "title": "Local pgvector Embeddings Index",
+          "desc": "Implemented a local PostgreSQL vector store using pgvector to execute cosine-similarity checks, retrieving relevant article context chunks in under 30 milliseconds."
+        },
+        {
+          "title": "OpenAI SSE Streaming Feed",
+          "desc": "Designed Server-Sent Events (SSE) streaming connections from the FastAPI gateway to Next.js clients, rendering dynamic RAG answers character-by-character for optimal user experience."
+        },
+        {
+          "title": "Strict Temperature Controls",
+          "desc": "Configured LLM prompt pipelines with a low temperature (0.1) and absolute context-bounding system instructions to restrict responses strictly to verified local blog text and reduce hallucination risk by restricting answers to retrieved local context."
+        }
+      ],
+      "measuredOutcomes": [
+        {
+          "metric": "80% latency drop",
+          "label": "RAG Prompt Response Time",
+          "desc": "Measured as the median end-to-end response duration before and after replacing dynamic page loads with pgvector context caching and server-side streaming responses."
+        },
+        {
+          "metric": "95% citation accuracy",
+          "label": "Factual Reference Binding",
+          "desc": "Verified through automated regression tests querying complex concepts and measuring citation mapping accuracy against the database."
+        },
+        {
+          "metric": "Clean crawlability",
+          "label": "Search & AI Indexing Rate",
+          "desc": "Verified as clean crawlability across tested sitemap and canonical URLs, ensuring search crawls with zero duplicate slashes."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "How does the RAG assistant verify its sources?",
+          "answer": "When a user types a prompt, the FastAPI backend chunks the query, matches it against pgvector article embeddings, retrieves the top 3 contextual text blocks, feeds them to the LLM, and binds clickable page links directly to corresponding metadata citations."
+        },
+        {
+          "question": "Does it update automatically when new articles are added?",
+          "answer": "Yes. The publishing pipeline triggers a markdown parsing task on new posts, extracts content chunks, generates embeddings via OpenAI API, and updates the pgvector database tables automatically."
+        },
+        {
+          "question": "What happens if a user asks a non-technical or off-topic question?",
+          "answer": "The LLM prompt pipeline is locked down with strict guardrails. It identifies off-topic queries instantly and outputs a polite refusal: 'Cannot be determined reliably from local portfolio context.', avoiding generic pre-trained hallucinations."
+        }
+      ]
     },
     {
       "title": "Udemy Enroller",
@@ -831,7 +1005,94 @@
         }
       ],
       "order": 3,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
+      "updatedAt": "2026-05-31T14:09:41.323Z",
+      "citableFacts": [
+        {
+          "label": "Project",
+          "val": "Udemy Enroller"
+        },
+        {
+          "label": "Built by",
+          "val": "Madhu Dadi"
+        },
+        {
+          "label": "Category",
+          "val": "FastAPI browser-workflow automation"
+        },
+        {
+          "label": "Role",
+          "val": "Designer and engineer"
+        },
+        {
+          "label": "Stack",
+          "val": "FastAPI, Python, Playwright, Celery, Redis, PostgreSQL, Docker"
+        },
+        {
+          "label": "Core capability",
+          "val": "Distributed asynchronous workflow orchestration and secure session-state handling"
+        },
+        {
+          "label": "Scale",
+          "val": "20,000+ workflow executions logged in 6 months"
+        },
+        {
+          "label": "Output",
+          "val": "Scheduled workflow runs, telemetry logs, status alerts, and relational task records"
+        },
+        {
+          "label": "Evidence",
+          "val": "Production platform, GitHub repository, code walkthrough, performance methodology"
+        }
+      ],
+      "technicalDecisions": [
+        {
+          "title": "FastAPI Lightweight Dispatch",
+          "desc": "Selected FastAPI to expose ultra-low-overhead job trigger endpoints. Under heavy incoming workflow event spikes, the gateway instantly dispatches tasks without thread-blocking."
+        },
+        {
+          "title": "Playwright Python API",
+          "desc": "Chose Playwright over Selenium for browser automation due to its robust page-interaction controls, faster cold-launch execution speeds, and clean headless page context isolating."
+        },
+        {
+          "title": "Strict Celery Concurrency Cap",
+          "desc": "Imposed a hard concurrency ceiling of 5 active browser worker tabs in the Celery configuration. This bounds resource consumption, avoiding server crashes due to Chromium leaks."
+        },
+        {
+          "title": "Relational Session DB Store",
+          "desc": "Utilized a structured PostgreSQL table to securely manage user-authorized session states, encryption keys, and session parameters to guarantee session persistence during automated workflows."
+        }
+      ],
+      "measuredOutcomes": [
+        {
+          "metric": "20,000+ execution logs",
+          "label": "Workflow Executions Logged",
+          "desc": "Verified through internal PostgreSQL database logs recording unique workflow success timestamps and receipts."
+        },
+        {
+          "metric": "90% manual drop",
+          "label": "Operational Effort Reduced",
+          "desc": "Measured as the difference in human hours spent parsing task steps manually versus automated script dispatches."
+        },
+        {
+          "metric": "Significant",
+          "label": "Estimated Value Created",
+          "desc": "Based on operational efficiency gains, manual hour reduction, and system reliability metrics."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "How did the project handle session reliability and platform-safety constraints?",
+          "answer": "The system was designed with bounded execution, secure session storage, manual review points, and strict failure handling. Future versions should prioritize user consent, platform-compliance checks, and safer workflow approvals."
+        },
+        {
+          "question": "How does the system handle user-authorized session state?",
+          "answer": "The system stores user-authorized session artifacts in encrypted relational tables with strict access controls. Future versions should favor short-lived tokens, explicit consent checkpoints, and manual review flows for sensitive actions."
+        },
+        {
+          "question": "Can this automation pipeline be deployed in a Docker container?",
+          "answer": "Absolutely. I created a multi-stage Dockerfile containing all necessary Playwright Chromium system dependencies. It deploys smoothly as an isolated, containerized microservice."
+        }
+      ]
     }
   ],
   "services": [
@@ -848,22 +1109,145 @@
         "Hallucination guardrails & security checks"
       ],
       "technologies": [
-        { "name": "Python" },
-        { "name": "OpenAI" },
-        { "name": "Anthropic" },
-        { "name": "LangChain" },
-        { "name": "FastAPI" }
+        {
+          "name": "Python"
+        },
+        {
+          "name": "OpenAI"
+        },
+        {
+          "name": "Anthropic"
+        },
+        {
+          "name": "LangChain"
+        },
+        {
+          "name": "FastAPI"
+        }
       ],
       "deliverables": [
-        "Production-ready LLM service module",
-        "Automated prompt evaluation suite",
-        "LLM execution logging and tracing dashboard",
-        "Detailed API contract & deployment guide"
+        "Architecture plan",
+        "Working application",
+        "API documentation",
+        "Prompt and eval documentation",
+        "Logging and monitoring",
+        "Analytics tracking plan",
+        "Deployment notes",
+        "Handover documentation"
       ],
       "timeline": "3-8 weeks",
       "featured": true,
       "order": 1,
-      "updatedAt": "2026-06-02T12:55:10.000Z"
+      "updatedAt": "2026-06-02T12:55:10.000Z",
+      "audience": [
+        "SaaS teams adding AI features",
+        "Founders building AI-first products",
+        "Analytics/product teams building internal AI copilots",
+        "Content-heavy businesses that need grounded Q&A",
+        "Teams stuck between AI demo and production"
+      ],
+      "problemsSolved": [
+        "RAG systems hallucinate or cite weak sources",
+        "AI agents loop or fail silently",
+        "Chatbots do not connect to real business workflows",
+        "LLM costs are unpredictable",
+        "No evals, logs, guardrails, or user analytics",
+        "AI prototypes are not production-ready"
+      ],
+      "capabilityCards": [
+        {
+          "title": "RAG Chat Systems",
+          "desc": "High-precision conversational interfaces backed by multi-stage retrieval pipelines."
+        },
+        {
+          "title": "Source-Cited AI Assistants",
+          "desc": "Assistants that ground every response in verifiable documents with click-through citations."
+        },
+        {
+          "title": "AI Agents with Tools",
+          "desc": "Controlled workflows featuring sandboxed execution, validation, fallback behavior, and state management."
+        },
+        {
+          "title": "Prompt & Eval Pipelines",
+          "desc": "Versioned prompt assets paired with automated evaluation suites to validate accuracy."
+        },
+        {
+          "title": "FastAPI AI Backends",
+          "desc": "High-performance backends featuring asynchronous queuing, stream parsing, and Pydantic validation."
+        },
+        {
+          "title": "Next.js AI Product Interfaces",
+          "desc": "Ultra-fast frontend layouts supporting streaming chat UI, markdown, and reactive state management."
+        },
+        {
+          "title": "Vector Search Systems",
+          "desc": "Ingestion and extraction pipelines utilizing specialized dense/sparse semantic architectures."
+        },
+        {
+          "title": "Admin & Observability Dashboards",
+          "desc": "Comprehensive instrumentation tracking model runs, telemetry traces, and token costs."
+        },
+        {
+          "title": "Analytics Instrumentation",
+          "desc": "Custom tracking pipelines designed to connect AI application telemetry directly to GA4 and BigQuery metrics."
+        }
+      ],
+      "techStackGroups": [
+        {
+          "category": "Core Language",
+          "items": ["Python", "TypeScript"]
+        },
+        {
+          "category": "Web Frameworks",
+          "items": ["FastAPI", "Next.js", "React"]
+        },
+        {
+          "category": "Databases & Cache",
+          "items": ["Postgres", "Redis"]
+        },
+        {
+          "category": "Task Queuing",
+          "items": ["Celery"]
+        },
+        {
+          "category": "AI Orchestration",
+          "items": ["OpenAI API", "LangChain", "LangSmith"]
+        },
+        {
+          "category": "Vector Storage",
+          "items": ["Pinecone", "Qdrant", "pgvector"]
+        },
+        {
+          "category": "Analytics & Telemetry",
+          "items": ["GA4", "BigQuery"]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Can Madhu Dadi build a RAG system with citations?",
+          "answer": "Yes. Madhu builds RAG systems that retrieve source content, generate grounded answers, display citations, and include evals, logging, and analytics."
+        },
+        {
+          "question": "Can Madhu Dadi improve an existing AI chatbot?",
+          "answer": "Yes. He can audit retrieval quality, prompts, latency, hallucination behavior, observability, and analytics before rebuilding."
+        },
+        {
+          "question": "How long does a production-ready AI application take to build?",
+          "answer": "A typical production-ready minimum viable product (MVP) takes between 4 to 8 weeks depending on the complexity of your custom tools, document schemas, and evaluation protocols."
+        },
+        {
+          "question": "Do you work with OpenAI only?",
+          "answer": "No. While OpenAI is a standard foundation, I construct model-agnostic orchestration patterns leveraging Anthropic Claude, Google Gemini, and open-source models like Llama 3 depending on your budget and accuracy requirements."
+        },
+        {
+          "question": "Do you include evals and guardrails?",
+          "answer": "Yes. Building AI without guardrails is like shipping code without compilation. Every project includes structured input/output validation guardrails (Pydantic, JSON schemas) and automated evaluation rigs before launch."
+        },
+        {
+          "question": "Can you connect AI usage to analytics?",
+          "answer": "Yes. This is my core differentiator. I instrument downstream analytics hooks tracking LLM tokens, model latencies, and user engagement, routing telemetry cleanly into server-side GA4 and BigQuery."
+        }
+      ]
     },
     {
       "title": "RAG System Development",
@@ -878,11 +1262,21 @@
         "Citation verification & factuality audit protocols"
       ],
       "technologies": [
-        { "name": "Pinecone" },
-        { "name": "Qdrant" },
-        { "name": "Postgres (pgvector)" },
-        { "name": "Python" },
-        { "name": "LlamaIndex" }
+        {
+          "name": "Pinecone"
+        },
+        {
+          "name": "Qdrant"
+        },
+        {
+          "name": "Postgres (pgvector)"
+        },
+        {
+          "name": "Python"
+        },
+        {
+          "name": "LlamaIndex"
+        }
       ],
       "deliverables": [
         "Hybrid retrieval & ingestion pipeline code",
@@ -893,7 +1287,25 @@
       "timeline": "4-10 weeks",
       "featured": true,
       "order": 2,
-      "updatedAt": "2026-06-02T12:55:10.000Z"
+      "updatedAt": "2026-06-02T12:55:10.000Z",
+      "faqs": [
+        {
+          "question": "How do you reduce hallucination risk in a RAG assistant?",
+          "answer": "No LLM is 100% immune, but I achieve a reduced hallucination risk through retrieval boundaries and evals by: (1) enforcing strict prompt boundaries that forbid answering without context, (2) using citation parser schemas, and (3) adding evaluation guardrails."
+        },
+        {
+          "question": "Can you implement RAG on private local data?",
+          "answer": "Yes. I build secure vector stores utilizing strict metadata tenant filtering or private VPC deployments to ensure user permissions are respected and private files are never leaked."
+        },
+        {
+          "question": "What embedding models and vector databases do you recommend?",
+          "answer": "I recommend Cohere or OpenAI text-embeddings-3-large for general use, and Pinecone or Qdrant for dedicated vector indexing. If your stack is Postgres, pgvector is an exceptionally clean, low-overhead starting point."
+        },
+        {
+          "question": "How do you trace costs and latencies?",
+          "answer": "I integrate downstream observability layers (such as LangSmith or custom logging) to trace exact prompt/completion tokens, model latencies, and routing flows, giving you full visibility into run costs."
+        }
+      ]
     },
     {
       "title": "AI Agent Development",
@@ -908,10 +1320,18 @@
         "Agentic evaluation frameworks (Evals)"
       ],
       "technologies": [
-        { "name": "LangGraph" },
-        { "name": "Python" },
-        { "name": "OpenAI Function Calling" },
-        { "name": "CrewAI" }
+        {
+          "name": "LangGraph"
+        },
+        {
+          "name": "Python"
+        },
+        {
+          "name": "OpenAI Function Calling"
+        },
+        {
+          "name": "CrewAI"
+        }
       ],
       "deliverables": [
         "Multi-agent state-machine system codebase",
@@ -922,7 +1342,25 @@
       "timeline": "4-12 weeks",
       "featured": true,
       "order": 3,
-      "updatedAt": "2026-06-02T12:55:10.000Z"
+      "updatedAt": "2026-06-02T12:55:10.000Z",
+      "faqs": [
+        {
+          "question": "How do you prevent agents from getting stuck in infinite loops?",
+          "answer": "I enforce strict execution boundaries: (1) setting hard maximum step limits (e.g., max 15 steps per task run), (2) implementing semantic loop detection checks that analyze duplicate tool inputs, and (3) coding graceful fallbacks that hand tasks off to humans."
+        },
+        {
+          "question": "What frameworks do you build agents with?",
+          "answer": "I build primary state-machine agents using LangGraph for deterministic state control, task planners, and multi-agent coordination. I also utilize CrewAI or lightweight custom execution loops depending on the scope."
+        },
+        {
+          "question": "Do you include human approval gates?",
+          "answer": "Yes. I construct custom LangGraph state machines that automatically pause the execution thread when high-impact tools are triggered (e.g., executing a purchase or emailing a client). The agent saves its state and resumes only after receiving a secure HTTP approval signal."
+        },
+        {
+          "question": "Can you connect agent telemetry to marketing and product analytics?",
+          "answer": "Yes. Every tool call, task completion rate, token footprint, and user feedback is instrumented using downstream hooks, sending structured telemetry directly into GA4 and BigQuery to analyze return on investment."
+        }
+      ]
     },
     {
       "title": "Marketing Analytics & Decision Intelligence",
@@ -937,11 +1375,21 @@
         "Automated cohort and funnel analysis"
       ],
       "technologies": [
-        { "name": "SQL" },
-        { "name": "Python" },
-        { "name": "BigQuery" },
-        { "name": "dbt" },
-        { "name": "Pandas" }
+        {
+          "name": "SQL"
+        },
+        {
+          "name": "Python"
+        },
+        {
+          "name": "BigQuery"
+        },
+        {
+          "name": "dbt"
+        },
+        {
+          "name": "Pandas"
+        }
       ],
       "deliverables": [
         "Attribution & predictive modeling pipeline code",
@@ -952,7 +1400,79 @@
       "timeline": "4-8 weeks",
       "featured": true,
       "order": 4,
-      "updatedAt": "2026-06-02T12:55:10.000Z"
+      "updatedAt": "2026-06-02T12:55:10.000Z",
+      "audience": [
+        "Marketing teams mapping complex customer journeys",
+        "Growth teams needing multi-touch attribution models",
+        "Product teams measuring active engagement funnels",
+        "Founders designing structured marketing analytics frameworks",
+        "Agencies running high-stakes paid acquisition workflows",
+        "B2B SaaS teams connecting web trials to downstream MRR"
+      ],
+      "problemsSolved": [
+        "GA4 data is unreliable or missing critical event logs",
+        "Campaign reports do not match actual business bottom lines",
+        "Analytics dashboards are hard to interpret and underused",
+        "Multi-touch attribution is unclear and overrepresented",
+        "A/B experiments are read optimistically without statistical rigor",
+        "Stakeholders and executives do not trust telemetry numbers"
+      ],
+      "capabilityCards": [
+        {
+          "title": "GA4 Measurement Plans",
+          "desc": "Custom event schemas, user properties tracking, and server-side tag container configurations."
+        },
+        {
+          "title": "Campaign Performance Dashboards",
+          "desc": "Interactive dashboards consolidating media spend, impressions, CTRs, and downstream CAC."
+        },
+        {
+          "title": "BigQuery Ingestion Layers",
+          "desc": "Robust ETL pipelines extracting raw GA4 datasets, normalizing columns, and prepping tables for BI."
+        },
+        {
+          "title": "Executive dashboards",
+          "desc": "Polished, high-level business intelligence layers mapping telemetry straight to revenue."
+        },
+        {
+          "title": "Attribution Frameworks",
+          "desc": "Custom multi-touch or marketing mix models designed to trace actual campaign channels."
+        },
+        {
+          "title": "A/B Testing Analysis",
+          "desc": "Statistical experimentation engines calculating confidence intervals, p-values, and conversion lift."
+        },
+        {
+          "title": "CLM Reporting Layers",
+          "desc": "End-to-end Customer Lifecycle Management structures mapping cohort retention and churn rates."
+        },
+        {
+          "title": "Frictionless Funnel Analytics",
+          "desc": "Comprehensive drop-off mapping across onboarding flows, product trials, and payment processes."
+        },
+        {
+          "title": "Marketing Data QA Protocols",
+          "desc": "Automated regression checks to instantly flag data discrepancy, missing tracking tags, or broken forms."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Can Madhu Dadi audit our GA4 and BigQuery setup?",
+          "answer": "Yes. I run diagnostic analytics audits to resolve typical tracking flaws: duplicate transactions, unlinked cross-domain properties, incorrect referral exclusions, missing custom definitions, and misconfigured conversion events. I also build clean SQL pipelines inside BigQuery."
+        },
+        {
+          "question": "Can Madhu Dadi build custom attribution models?",
+          "answer": "Yes. I design custom attribution models (First-touch, Last-touch, Position-based, or Data-driven W-shaped setups) in SQL and Python to correct for self-attributing network bias and connect spend to business results."
+        },
+        {
+          "question": "Can Madhu Dadi build analytics dashboards?",
+          "answer": "Yes. I construct clear, high-performance dashboards using Looker Studio or Power BI. I focus on clean information hierarchy so growth teams can extract actionable decisions inside 5 seconds."
+        },
+        {
+          "question": "Can Madhu Dadi connect product analytics to AI features?",
+          "answer": "Yes. This is my core differentiator. I bridge the gap by instrumenting tracking plans that feed real user feedback (like thumbs up/down, prompt success metrics, and RAG latencies) back into server-side GA4 events and BigQuery."
+        }
+      ]
     },
     {
       "title": "GA4 & BigQuery Analytics Consultant for Campaign Measurement",
@@ -967,11 +1487,21 @@
         "Automated campaign performance dashboards"
       ],
       "technologies": [
-        { "name": "GA4" },
-        { "name": "BigQuery" },
-        { "name": "SQL" },
-        { "name": "Python" },
-        { "name": "Google Tag Manager" }
+        {
+          "name": "GA4"
+        },
+        {
+          "name": "BigQuery"
+        },
+        {
+          "name": "SQL"
+        },
+        {
+          "name": "Python"
+        },
+        {
+          "name": "Google Tag Manager"
+        }
       ],
       "deliverables": [
         "Server-side tracking & sGTM container files",
@@ -982,7 +1512,67 @@
       "timeline": "3-6 weeks",
       "featured": true,
       "order": 5,
-      "updatedAt": "2026-06-02T12:55:10.000Z"
+      "updatedAt": "2026-06-02T12:55:10.000Z",
+      "audience": [
+        "Marketing teams looking for a single source of truth for media spend and conversions",
+        "Growth engineering teams needing server-side tracking setups (sGTM)",
+        "Data leaders aiming to feed raw GA4 event streams into BigQuery",
+        "E-commerce brands seeking accurate checkout and purchase attribution",
+        "Agencies running search and social ad campaigns needing precise conversion API signals",
+        "B2B enterprises tracking lead gen channels and lifecycle progression"
+      ],
+      "problemsSolved": [
+        "Mismatched and bloated ad platform reporting numbers",
+        "Missing checkout funnel events and incorrect revenue values in GA4",
+        "Incomplete measurement caused by browser privacy controls, consent constraints, and client-side blocking",
+        "Slow and inefficient BI dashboards reading from raw unoptimized tables",
+        "Lack of user lifecycle tracking across domain transitions",
+        "Broken lead forms or conversion signals that fail silently without alerting"
+      ],
+      "capabilityCards": [
+        {
+          "title": "Server-Side GTM Setup (sGTM)",
+          "desc": "Implement server-side containers on Google Cloud Platform, routing consented first-party measurement streams through controlled server endpoints to improve data quality, privacy controls, and measurement resilience."
+        },
+        {
+          "title": "GA4 Schema Calibration",
+          "desc": "Define custom event schemas, item arrays, and user properties to map complete customer journeys with exact telemetry specifications."
+        },
+        {
+          "title": "Google Cloud BigQuery Warehouses",
+          "desc": "Connect native GA4 export integrations, build SQL schemas, partition tables, and construct optimized views to reduce query costs."
+        },
+        {
+          "title": "Attribution Transformation Models",
+          "desc": "Create custom multi-touch attribution tables in SQL, combining UTM parameters and user IDs to understand true conversion drivers."
+        },
+        {
+          "title": "Google Ads & Meta Conversion APIs (CAPI)",
+          "desc": "Configure server-side conversion API signals (Meta CAPI, Google Enhanced Conversions) to feed ad platforms high-match-rate signals."
+        },
+        {
+          "title": "Automated Data QA & Alerting",
+          "desc": "Deploy validation scripts to verify tracking logs daily, sending automated alerts to Slack or Email when anomalous drops occur."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Why do I need a server-side tracking (sGTM) setup?",
+          "answer": "Client-side tracking is increasingly blocked by browsers, ad blockers, and network controls. Server-side tracking (sGTM) moves the tag execution process to your server, allowing you to route clean first-party data streams to GA4 and ad platforms. This improves data accuracy, page load speeds, and security."
+        },
+        {
+          "question": "How does the GA4 export to BigQuery help with marketing?",
+          "answer": "The standard GA4 UI limits your ability to query raw data, perform user-level cohort analysis, or run custom attribution. By exporting to BigQuery, you gain access to raw event logs. This allows you to combine GA4 data with CRM databases, build custom models in SQL, and design dashboards in Looker Studio that don't hit GA4 API quota limits."
+        },
+        {
+          "question": "Do you configure Conversion APIs for Meta, Google, and TikTok?",
+          "answer": "Yes. I set up server-side conversion signals (such as Meta Conversions API and Google Enhanced Conversions) via sGTM. I map user identifiers (hashed email, phone) to maximize match rates, leading to more accurate attribution and lower cost-per-acquisition (CPA). All user identifiers should be handled only with appropriate consent, hashing, data minimization, and platform-policy compliance."
+        },
+        {
+          "question": "Can you help optimize our Google Cloud BigQuery query costs?",
+          "answer": "Yes. Raw GA4 exports can quickly become expensive to query if tables are not partitioned and clustered correctly. I optimize schemas, build incremental transformation tables, and design views that limit scanned bytes, significantly reducing monthly GCP analytics costs."
+        }
+      ]
     },
     {
       "title": "Full-Stack AI Product Development",
@@ -997,11 +1587,21 @@
         "Production-grade CI/CD and secure containerized deployment"
       ],
       "technologies": [
-        { "name": "Next.js" },
-        { "name": "FastAPI" },
-        { "name": "TypeScript" },
-        { "name": "Postgres" },
-        { "name": "Tailwind CSS" }
+        {
+          "name": "Next.js"
+        },
+        {
+          "name": "FastAPI"
+        },
+        {
+          "name": "TypeScript"
+        },
+        {
+          "name": "Postgres"
+        },
+        {
+          "name": "Tailwind CSS"
+        }
       ],
       "deliverables": [
         "Complete production-ready web application codebase",
@@ -1012,7 +1612,55 @@
       "timeline": "4-12 weeks",
       "featured": true,
       "order": 6,
-      "updatedAt": "2026-06-02T12:55:10.000Z"
+      "updatedAt": "2026-06-02T12:55:10.000Z",
+      "capabilityCards": [
+        {
+          "title": "SaaS MVPs",
+          "desc": "Fast, end-to-end software products built to scale, featuring complete auth, databases, Stripe payments, and admin controls."
+        },
+        {
+          "title": "AI-Powered Analytics Portals",
+          "desc": "Analytics dashboards that parse dense telemetry schemas and present metrics with clear, interactive controls."
+        },
+        {
+          "title": "Agentic Chat Interfaces",
+          "desc": "Source-cited chatbot frontends that showcase prompt chains, retrieve context dynamically, and stream markdown responses."
+        },
+        {
+          "title": "Internal Productivity Tools",
+          "desc": "Internal workflow tools for approved data operations, browser-based QA, structured imports, admin automation, and operational reporting."
+        },
+        {
+          "title": "API-First Services",
+          "desc": "High-throughput API endpoints designed in Python/FastAPI with Pydantic validations and detailed OpenAPI docs."
+        },
+        {
+          "title": "Vector Retrieval Architectures",
+          "desc": "Embeddings generation, hybrid neural search configurations, and context-aware RAG pipelines mapped directly to databases."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Do you design the product layout and interfaces?",
+          "answer": "Yes. I construct clear, responsive, production-ready, highly interactive web interfaces using Tailwind CSS and motion animations. I focus on curated harmonious color palettes, modern typography, sleek dark modes, and fully responsive layouts that function on all desktop and mobile devices."
+        },
+        {
+          "question": "Can you integrate with existing databases?",
+          "answer": "Yes. I write clean SQLAlchemy database models, design optimized relational database schemas (normalized or data warehouses), and write safe versioned migrations using Alembic to ensure zero data loss during deployment."
+        },
+        {
+          "question": "What vector databases do you support for AI applications?",
+          "answer": "I work with PGVector (to keep your tech stack simplified directly inside your Postgres cluster), Qdrant, Pinecone, or Chroma, depending on your retrieval speeds, scalability needs, and hybrid dense/sparse search requirements."
+        },
+        {
+          "question": "How do you handle user authentication and security?",
+          "answer": "I implement production-ready OAuth2 flows, stateful or stateless JSON Web Tokens (JWT), secure HttpOnly cookies, password hashing via bcrypt or argon2, and strict Cross-Origin Resource Sharing (CORS) configurations to block vulnerabilities."
+        },
+        {
+          "question": "Do you handle server deployment and DevOps?",
+          "answer": "Yes. I deliver fully containerized codebases using Docker and Docker Compose, supported by automated GitHub Actions CI/CD pipelines that deploy cleanly to your virtual servers (VPS) or cloud infrastructure with zero downtime."
+        }
+      ]
     }
   ],
   "certifications": [

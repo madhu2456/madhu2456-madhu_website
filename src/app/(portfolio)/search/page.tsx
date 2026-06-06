@@ -107,6 +107,7 @@ export default async function SearchPage({
     sortedProjects,
     sortedServices,
     skills,
+    sortedNavigationItems
   } = await getPortfolioData();
 
   const projectResults: SearchResult[] = sortedProjects
