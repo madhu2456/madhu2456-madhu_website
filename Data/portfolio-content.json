@@ -991,7 +991,7 @@
       "shortDescription": "Complete web applications combining Next.js frontends, FastAPI backends, secure Postgres schemas, and production AI integrations.",
       "fullDescription": "End-to-end production web applications designed for visual excellence, performance, security, and search engine optimization. Combining ultra-fast Next.js React user interfaces, robust FastAPI backend microservices, secure and optimized Postgres schemas, and reliable AI integration layers.",
       "features": [
-        "Responsive, accessible Next.js interfaces with production-ready interaction patterns",
+        "Responsive Next.js interfaces with accessible layouts and production-ready interaction patterns",
         "High-performance FastAPI backends with Pydantic schemas",
         "Robust relational database design & migrations in Postgres",
         "Production-grade CI/CD and secure containerized deployment"
