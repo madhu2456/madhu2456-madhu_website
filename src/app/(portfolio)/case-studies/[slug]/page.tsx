@@ -91,12 +91,6 @@ const makeEvidenceLinks = (project: ProjectItem, _siteUrl: string) => {
   if (project.githubUrl)
     links.push({ label: "Source code", url: project.githubUrl });
 
-  for (const citation of project.citations ?? []) {
-    if (citation.url) {
-      links.push({ label: citation.label || "Evidence", url: citation.url });
-    }
-  }
-
   return Array.from(new Map(links.map((link) => [link.url, link])).values());
 };
 
@@ -193,7 +187,10 @@ export default async function CaseStudyPage({
         "@id": `${caseStudyUrl}#case-study`,
         headline: project.title,
         description,
+        datePublished: project.updatedAt ?? new Date().toISOString(),
         dateModified: project.updatedAt ?? new Date().toISOString(),
+        image: `${siteUrl}opengraph-image`,
+        about: project.category || "Case Study",
         url: caseStudyUrl,
         author: {
           "@type": "Person",
@@ -257,6 +254,10 @@ export default async function CaseStudyPage({
         </h1>
         <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
           {project.tagline || description}
+        </p>
+
+        <p className="mt-4 text-sm text-muted-foreground/80">
+          By Madhu Dadi &middot; Published <time dateTime={project.updatedAt ?? new Date().toISOString()}>{new Date(project.updatedAt ?? new Date()).toISOString().split('T')[0]}</time>
         </p>
 
         {project.coverImage ? (
@@ -370,6 +371,26 @@ export default async function CaseStudyPage({
             ))}
           </ul>
         </section>
+
+        {project.citations && project.citations.length > 0 ? (
+          <section className="mt-10">
+            <h2 className="font-display text-2xl font-bold">Sources / further reading</h2>
+            <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+              {project.citations.map((citation, i) => (
+                <li key={i}>
+                  {citation.url ? (
+                    <a href={citation.url} target="_blank" rel="noopener noreferrer" className="hover:text-primary underline underline-offset-4 flex items-center gap-2">
+                      {citation.label || citation.url}
+                      <ExternalLink className="h-3 w-3 inline-block" aria-hidden />
+                    </a>
+                  ) : (
+                    <span>{citation.label}</span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
       </main>
     </>
   );
