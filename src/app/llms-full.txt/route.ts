@@ -34,7 +34,7 @@ ${p.tagline}
 ${p.impactSummary}
 
 ${p.problemStatement ? `**The Problem:**\n${p.problemStatement}\n` : ""}
-${p.solutionStatement ? `**The Solution:**\n${p.solutionStatement}\n` : ""}
+${p.solutionApproach ? `**The Solution:**\n${p.solutionApproach}\n` : ""}
 ${p.technicalDecisions && p.technicalDecisions.length > 0 ? `**Technical Decisions:**\n${p.technicalDecisions.map((t) => `- **${t.title}:** ${t.desc}`).join("\n")}\n` : ""}
 ${p.slug ? `URL: ${siteUrl}/case-studies/${p.slug}/` : ""}
 `

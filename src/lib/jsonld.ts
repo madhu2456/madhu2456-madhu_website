@@ -847,6 +847,69 @@ export function buildSoftwareApplicationSchema({
 }
 
 // ---------------------------------------------------------------------------
+// ProfessionalService (LocalBusiness)
+// ---------------------------------------------------------------------------
+export function buildProfessionalServiceSchema({
+  siteUrl,
+  name,
+  description,
+  image,
+  telephone,
+  email,
+  addressLocality,
+  priceRange,
+}: {
+  siteUrl: string;
+  name: string;
+  description: string;
+  image: string;
+  telephone?: string | null;
+  email?: string | null;
+  addressLocality?: string | null;
+  priceRange?: string | null;
+}) {
+  return {
+    "@type": "ProfessionalService",
+    "@id": `${siteUrl}#localbusiness`,
+    name,
+    description,
+    url: siteUrl,
+    image,
+    ...(telephone && { telephone }),
+    ...(email && { email }),
+    ...(addressLocality && {
+      address: {
+        "@type": "PostalAddress",
+        addressLocality,
+        addressCountry: "IN",
+      },
+    }),
+    ...(priceRange && { priceRange }),
+    // Specifically target Visakhapatnam, India
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 17.6868,
+      longitude: 83.2185,
+    },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "09:00",
+        closes: "18:00",
+      },
+    ],
+    serviceArea: [
+      { "@type": "Country", name: "India" },
+      { "@type": "Place", name: "Worldwide" },
+    ],
+    // Links back to the canonical Person and Organization
+    parentOrganization: { "@id": `${siteUrl}#organization` },
+    founder: { "@id": `${siteUrl}#person` },
+  };
+}
+
+// ---------------------------------------------------------------------------
 // Unified @graph — bundles all schemas into one linked-data document
 // This lets search engines and AI models understand the full knowledge graph
 // in a single <script> rather than multiple disconnected ones.
