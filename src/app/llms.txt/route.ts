@@ -26,8 +26,8 @@ RAG-powered learning platform with source-grounded AI assistant.
 Case study: https://madhudadi.in/case-studies/technical-blog/
 
 ### Udemy Enroller
-A private FastAPI automation case study exploring async task queues, Playwright workflow orchestration, bounded concurrency, secure session-state handling, telemetry logging, and background processing.
-Case study: https://madhudadi.in/case-studies/udemy-enroller-fastapi/
+Udemy Enroller is a live production FastAPI and Playwright automation platform that orchestrates asynchronous workflow runs, bounded worker concurrency, secure session-state handling, telemetry logging, and background processing with Celery, Redis, PostgreSQL, and Docker.
+Project URL: https://madhudadi.in/case-studies/udemy-enroller-fastapi/
 `;
 
   return new Response(body, {
