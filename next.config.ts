@@ -187,15 +187,7 @@ const nextConfig: NextConfig = {
           },
         ],
       },
-      {
-        source: "/portfolio-sitemap.xml",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=3600, stale-while-revalidate=86400",
-          },
-        ],
-      },
+
       // robots.txt — cache for a day
       {
         source: "/robots.txt",
