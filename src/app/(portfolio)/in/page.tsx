@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: `${siteUrl}og/home.png`,
+        url: `${siteUrl}opengraph-image`,
         width: 1200,
         height: 630,
         alt: "Madhu Dadi - AI Consultant in India",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: "Madhu Dadi - AI Consultant in India",
     description:
       "Expert AI engineering, RAG applications, and marketing analytics consulting based in Visakhapatnam, India.",
-    images: [`${siteUrl}og/home.png`],
+    images: [`${siteUrl}opengraph-image`],
   },
 };
 

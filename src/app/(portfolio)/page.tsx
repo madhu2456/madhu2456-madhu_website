@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: `${siteUrl}og/home.png`,
+        url: `${siteUrl}opengraph-image`,
         width: 1200,
         height: 630,
         alt: "Madhu Dadi - AI & Marketing Analytics Engineer",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: "Madhu Dadi - AI & Marketing Analytics Engineer",
     description:
       "Production LLM/RAG apps, AI agents, FastAPI/Next.js products, and marketing analytics systems.",
-    images: [`${siteUrl}og/home.png`],
+    images: [`${siteUrl}opengraph-image`],
   },
 };
 

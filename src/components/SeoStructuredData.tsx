@@ -102,7 +102,7 @@ export async function SeoStructuredData() {
       siteUrl,
       name: siteSettings.siteTitle || fullName,
       description: description || "AI & Marketing Analytics Consulting",
-      image: `${siteUrl}og/home.png`,
+      image: `${siteUrl}opengraph-image`,
       telephone: profile?.phone,
       email: profile?.email,
       addressLocality: profile?.location,
