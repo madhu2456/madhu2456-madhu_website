@@ -533,31 +533,19 @@ export default async function ProfilePage() {
             <h2 className="text-lg font-bold tracking-tight text-foreground flex items-center gap-2">
               <IconCircleX className="h-5 w-5 text-destructive" /> Not a Fit For
             </h2>
-            <ul className="grid gap-2 text-xs text-muted-foreground sm:grid-cols-2">
-              <li className="flex gap-2">
-                <span className="text-destructive font-bold">-</span>{" "}
-                <span>
-                  Generic content writing / blogging without code delivery
-                </span>
+            <ul className="grid gap-2 text-xs text-muted-foreground sm:grid-cols-2 list-disc list-inside">
+              <li>
+                Generic content writing / blogging without code delivery
               </li>
-              <li className="flex gap-2">
-                <span className="text-destructive font-bold">-</span>{" "}
-                <span>
-                  No-code-only chatbot demonstrations or toy implementations
-                </span>
+              <li>
+                No-code-only chatbot demonstrations or toy implementations
               </li>
-              <li className="flex gap-2">
-                <span className="text-destructive font-bold">-</span>{" "}
-                <span>
-                  Projects without defined or measurable success metrics
-                </span>
+              <li>
+                Projects without defined or measurable success metrics
               </li>
-              <li className="flex gap-2">
-                <span className="text-destructive font-bold">-</span>{" "}
-                <span>
-                  Unclear web scraping or automation projects that violate
-                  platform terms of service
-                </span>
+              <li>
+                Unclear web scraping or automation projects that violate
+                platform terms of service
               </li>
             </ul>
           </section>
