@@ -859,6 +859,7 @@ export function buildProfessionalServiceSchema({
   email,
   addressLocality,
   priceRange,
+  socialLinks,
 }: {
   siteUrl: string;
   name: string;
