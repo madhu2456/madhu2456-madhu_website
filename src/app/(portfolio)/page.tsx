@@ -27,7 +27,7 @@ export const metadata: Metadata = {
       "Production LLM/RAG apps, AI agents, FastAPI/Next.js products, and marketing analytics systems.",
     url: siteUrl,
     siteName: "Madhu Dadi",
-    type: "profile",
+    type: "website",
     images: [
       {
         url: `${siteUrl}og/home.png`,
