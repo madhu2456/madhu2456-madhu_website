@@ -121,7 +121,7 @@ export default async function FullStackAIProductPage() {
     {
       title: "Adticks SEO Audit Engine",
       url: "/case-studies/adticks/",
-      desc: "Built a complex SEO & AEO audit platform featuring Celery task queues processing hundreds of concurrent crawls, Python scrapers generating vector embeddings, and an interactive Next.js dashboard presenting data analytics.",
+      desc: "Built a complex SEO & AEO audit platform featuring Celery task queues processing hundreds of concurrent crawls, Python crawl workers generating structured audit signals, and an interactive Next.js dashboard presenting data analytics.",
       tech: ["FastAPI", "Next.js", "Celery", "Redis", "Postgres"],
     },
     {
@@ -304,7 +304,7 @@ export default async function FullStackAIProductPage() {
               </h2>
               <p className="text-sm text-muted-foreground">
                 High-quality, modular software products engineered for
-                performance, visual beauty, and seamless search engine
+                performance, usability, accessibility, and clean search engine
                 crawlability.
               </p>
             </div>
