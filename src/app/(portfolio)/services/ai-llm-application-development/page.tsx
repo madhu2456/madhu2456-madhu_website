@@ -331,8 +331,8 @@ export default async function AiLlmApplicationDevelopmentPage() {
                 AI Engineering Core Deliverables
               </h2>
               <p className="text-sm text-muted-foreground">
-                High-fidelity, production-grade custom software built to
-                integrate seamlessly into your commercial product pipeline.
+                Production-grade custom software designed to integrate cleanly
+                into your product, data, and analytics stack.
               </p>
             </div>
 
