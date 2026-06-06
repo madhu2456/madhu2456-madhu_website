@@ -1,5 +1,6 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
+import { cache } from "react";
 import defaultContentJson from "../../Data/portfolio-content.json";
 import { portfolioContentSchema, PortfolioContentSchema } from "./cms-schema";
 import {
@@ -283,10 +284,10 @@ export async function savePortfolioContent(
   return normalizedContent;
 }
 
-export async function getPortfolioData(): Promise<PortfolioData> {
+export const getPortfolioData = cache(async (): Promise<PortfolioData> => {
   const content = await readPortfolioContent();
   return buildDerivedData(content);
-}
+});
 
 export async function getProjectBySlug(slug: string) {
   const { sortedProjects } = await getPortfolioData();
