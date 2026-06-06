@@ -67,7 +67,7 @@ export default async function UdemyEnrollerCaseStudyPage() {
   const technicalDecisions = [
     {
       title: "FastAPI Lightweight Dispatch",
-      desc: "Selected FastAPI to expose ultra-low-overhead job trigger endpoints. Under heavy incoming promotional link spikes, the gateway instantly dispatches tasks without thread-blocking.",
+      desc: "Selected FastAPI to expose ultra-low-overhead job trigger endpoints. Under heavy incoming workflow event spikes, the gateway instantly dispatches tasks without thread-blocking.",
     },
     {
       title: "Playwright Python API",
@@ -381,9 +381,9 @@ export default async function UdemyEnrollerCaseStudyPage() {
                   <span className="text-[10px] font-mono text-primary uppercase font-bold">
                     Monitor
                   </span>
-                  <h4 className="font-bold text-xs mt-1">Promo Parser</h4>
+                  <h4 className="font-bold text-xs mt-1">Metadata Parser</h4>
                   <p className="text-[9px] text-muted-foreground">
-                    URL Promo Extract
+                    Structured Task Extract
                   </p>
                 </div>
                 <IconChevronRight className="h-5 w-5 text-primary/40" />
@@ -573,8 +573,7 @@ export default async function UdemyEnrollerCaseStudyPage() {
                 Asked Questions
               </h2>
               <p className="text-xs text-muted-foreground">
-                Session handling, session cookie security, containerization, and
-                browser rate limits.
+                Session-state handling, containerization, and browser workflow limits.
               </p>
             </div>
 
