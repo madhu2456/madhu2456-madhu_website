@@ -238,7 +238,7 @@ export const buildV2PageContentDefaults = (): PageContentSchema => {
     },
     contact: {
       seo: {
-        title: "Contact | Madhu Dadi",
+        title: "Contact Madhu Dadi | AI & Analytics Engineer",
         description:
           "Get in touch with Madhu Dadi for freelance consulting, full-time opportunities, or collaborations.",
         canonicalPath: "/contact/",
