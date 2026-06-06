@@ -54,6 +54,7 @@ export function Header({ profile, navigationItems }: HeaderProps) {
               alt="Madhu Dadi"
               width={32}
               height={32}
+              priority
               className="h-full w-full object-cover"
             />
           </div>
