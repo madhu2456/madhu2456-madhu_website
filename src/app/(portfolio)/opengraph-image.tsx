@@ -66,7 +66,7 @@ export default async function OGImage() {
         position: "relative",
       }}
     >
-      {/* Decorative blobs — positioned absolute so they don't affect flex flow */}
+      {/* Decorative blobs - positioned absolute so they don't affect flex flow */}
       <div
         style={{
           position: "absolute",
@@ -102,7 +102,7 @@ export default async function OGImage() {
           padding: "60px 80px",
         }}
       >
-        {/* Left — text */}
+        {/* Left - text */}
         <div
           style={{
             display: "flex",
@@ -178,7 +178,7 @@ export default async function OGImage() {
           />
         </div>
 
-        {/* Right — avatar */}
+        {/* Right - avatar */}
         {profileImageUrl && (
           <div
             style={{

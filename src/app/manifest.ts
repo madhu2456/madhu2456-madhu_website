@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Madhu Dadi — Portfolio",
+    name: "Madhu Dadi - Portfolio",
     short_name: "Madhu Dadi",
     description:
       "AI and analytics engineering portfolio for Madhu Dadi, covering LLM applications, RAG systems, full-stack products, and marketing analytics.",

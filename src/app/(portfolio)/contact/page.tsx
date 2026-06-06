@@ -36,7 +36,7 @@ export async function generateMetadata({
 
   const title =
     pageContent.contact.seo?.title ||
-    "Contact Madhu Dadi — Generative AI & Marketing Analytics Engineer";
+    "Contact Madhu Dadi - Generative AI & Marketing Analytics Engineer";
   const description =
     pageContent.contact.seo?.description ||
     "Work with Madhu Dadi on production AI, RAG, AI agents, marketing analytics, or full-stack AI product development. Response time is usually within 24 hours.";

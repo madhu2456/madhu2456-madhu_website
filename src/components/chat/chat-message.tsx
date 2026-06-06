@@ -76,7 +76,7 @@ export function MessageBubble({
             )}
           </div>
 
-          {/* Copy on hover — completed AI messages only */}
+          {/* Copy on hover - completed AI messages only */}
           {!isUser && !isStreaming && displayText && (
             <div className="absolute -bottom-1.5 right-1 opacity-0 transition-opacity duration-150 group-hover:opacity-100">
               <CopyButton text={displayText} />
@@ -85,7 +85,7 @@ export function MessageBubble({
         </div>
       </div>
 
-      {/* Suggestion chips — staggered in */}
+      {/* Suggestion chips - staggered in */}
       {!isUser && !isStreaming && (msg.suggestions?.length ?? 0) > 0 && (
         <div className="ml-8 flex flex-wrap gap-1.5">
           {msg.suggestions?.map((s, idx) => (

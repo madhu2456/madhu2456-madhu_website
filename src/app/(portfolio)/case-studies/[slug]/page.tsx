@@ -24,7 +24,7 @@ const toDescription = (...values: Array<string | null | undefined>) => {
   const merged = values
     .map((value) => value?.trim())
     .filter((value): value is string => Boolean(value))
-    .join(" — ")
+    .join(" - ")
     .replace(/\s+/g, " ")
     .trim();
 

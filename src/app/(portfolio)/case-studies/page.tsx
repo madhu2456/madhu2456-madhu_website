@@ -23,14 +23,14 @@ const getSiteUrl = () => {
 
 export const metadata: Metadata = {
   title:
-    "Generative AI, RAG, FastAPI & Marketing Analytics Case Studies — Madhu Dadi",
+    "Generative AI, RAG, FastAPI & Marketing Analytics Case Studies - Madhu Dadi",
   description: CASE_STUDIES_DESCRIPTION,
   alternates: {
     canonical: "/case-studies/",
   },
   openGraph: {
     title:
-      "Generative AI, RAG, FastAPI & Marketing Analytics Case Studies — Madhu Dadi",
+      "Generative AI, RAG, FastAPI & Marketing Analytics Case Studies - Madhu Dadi",
     description: CASE_STUDIES_DESCRIPTION,
     url: "/case-studies/",
     type: "website",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "Generative AI, RAG, FastAPI & Marketing Analytics Case Studies — Madhu Dadi",
+      "Generative AI, RAG, FastAPI & Marketing Analytics Case Studies - Madhu Dadi",
     description: CASE_STUDIES_DESCRIPTION,
     images: [`${getSiteUrl()}opengraph-image`],
     creator: "@madhu245",
