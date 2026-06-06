@@ -107,6 +107,7 @@ export async function SeoStructuredData() {
       email: profile?.email,
       addressLocality: profile?.location,
       priceRange: "$$",
+      socialLinks: profile?.socialLinks ?? undefined,
     }),
     buildOccupationSchema({
       siteUrl,
