@@ -115,7 +115,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
   const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
   const serviceSchema = {
-    "@context": "https://schema.org",
+
     "@type": "Service",
     "@id": `${siteUrl}services/${slug}/#service`,
     name: service.title,
@@ -129,7 +129,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
   };
 
   const breadcrumbSchema = {
-    "@context": "https://schema.org",
+
     "@type": "BreadcrumbList",
     itemListElement: [
       {
@@ -158,12 +158,12 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [serviceSchema, breadcrumbSchema],
+          }),
+        }}
       />
       <Header profile={profile} navigationItems={sortedNavigationItems} />
 
