@@ -854,7 +854,6 @@ export function buildSoftwareApplicationSchema({
       "Enterprise-grade generative AI engineering, RAG architectures, and custom analytics solutions.",
     applicationCategory: "BusinessApplication",
     operatingSystem: "All",
-    browserRequirements: "Requires HTML5 compatible browser",
     url: siteUrl,
     publisher: { "@id": `${siteUrl}#organization` },
     offers: {
