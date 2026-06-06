@@ -204,19 +204,15 @@ export function buildPersonSchema({
 
   const worksForNode = currentRole
     ? {
-        "@type": "OrganizationRole",
-        roleName: currentRole.position,
-        ...(currentRole.startDate && { startDate: currentRole.startDate }),
-        memberOf: {
-          "@type": "Organization",
-          name: currentRole.company,
-          ...(currentRole.location && {
-            location: {
-              "@type": "PostalAddress",
-              addressLocality: currentRole.location,
-            },
-          }),
-        },
+        "@type": "Organization",
+        name: currentRole.company,
+        description: currentRole.position,
+        ...(currentRole.location && {
+          location: {
+            "@type": "PostalAddress",
+            addressLocality: currentRole.location,
+          },
+        }),
       }
     : undefined;
 
@@ -259,7 +255,6 @@ export function buildPersonSchema({
     }),
     ...(sameAs.length > 0 && { sameAs }),
     publishingPrinciples: `${siteUrl}blog`,
-    inLanguage: "en-US",
     mainEntityOfPage: { "@id": `${siteUrl}#profilepage` },
     hasOccupation: { "@id": `${siteUrl}#occupation` },
     subjectOf: [
@@ -298,12 +293,6 @@ export function buildPersonSchema({
     ...(worksForNode && { worksFor: worksForNode }),
     ...(credentialNodes.length > 0 && { hasCredential: credentialNodes }),
     ...(offerNodes.length > 0 && { makesOffer: offerNodes }),
-    ...(priceRange && { priceRange }),
-    areaServed: [
-      { "@type": "Country", name: "India" },
-      { "@type": "Place", name: "Global (Remote)" },
-    ],
-    availableLanguage: ["English"],
     seeks: {
       "@type": "Demand",
       name: "Freelance, consulting, and full-time opportunities in AI, analytics, and full-stack engineering",
@@ -390,8 +379,6 @@ export function buildWebSiteSchema({
     ...(description && { description }),
     inLanguage: "en-US",
     publisher: { "@id": `${url}#organization` },
-    significantLink: [`${blogUrl}/ask`, `${blogUrl}/posts`],
-    relatedLink: [blogUrl],
     // SiteLinksSearchBox — enables rich search in Google SERPs
     potentialAction: [
       {
@@ -474,7 +461,7 @@ export function buildProfilePageSchema({
     }),
     speakable: {
       "@type": "SpeakableSpecification",
-      cssSelector: ["#home", "#about", "#experience"],
+      cssSelector: ["#home", "#experience"],
     },
   };
 }
@@ -628,7 +615,6 @@ export function buildProjectsListSchema({
         ...(p.tagline && { description: p.tagline }),
         ...((p.slug && { url: `${siteUrl}case-studies/${p.slug}/` }) ||
           (p.liveUrl && { url: p.liveUrl })),
-        ...(p.githubUrl && { codeRepository: p.githubUrl }),
         ...(p.category && { applicationCategory: p.category }),
         author: { "@id": `${siteUrl}#person` },
         ...(p.citations &&
@@ -666,20 +652,15 @@ export function buildWorkExperienceSchema({
       "@type": "ListItem",
       position: i + 1,
       item: {
-        "@type": "OrganizationRole",
-        roleName: e.position,
-        ...(e.startDate && { startDate: e.startDate }),
-        ...(!e.current && e.endDate && { endDate: e.endDate }),
-        memberOf: {
-          "@type": "Organization",
-          name: e.company,
-          ...(e.location && {
-            location: {
-              "@type": "PostalAddress",
-              addressLocality: e.location,
-            },
-          }),
-        },
+        "@type": "Organization",
+        name: e.company,
+        description: e.position,
+        ...(e.location && {
+          location: {
+            "@type": "PostalAddress",
+            addressLocality: e.location,
+          },
+        }),
       },
     })),
   };
