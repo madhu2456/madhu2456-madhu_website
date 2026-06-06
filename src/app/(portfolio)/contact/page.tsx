@@ -87,6 +87,37 @@ export default async function ContactPage() {
     ],
   };
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "What is your typical response time?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: pageContent.contact.responseTimeText || "I usually reply within 24 hours."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "Are you open to remote work?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes, I am remote-first and available worldwide. Relocation is also possible for the right full-time role."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "What projects are the best fit?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "I specialize in LLM/RAG applications, AI agents, FastAPI/Next.js product builds, and marketing analytics pipelines."
+        }
+      }
+    ]
+  };
+
   const bestFitAreas = pageContent.contact.bestFitAreas || [
     "LLM/RAG applications",
     "AI agents and workflow automation",
@@ -104,7 +135,7 @@ export default async function ContactPage() {
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([breadcrumbSchema, faqSchema]) }}
       />
       <Header profile={profile} navigationItems={sortedNavigationItems} />
 
@@ -153,32 +184,37 @@ export default async function ContactPage() {
                 </ul>
               </section>
 
-              {/* Engagement Status & Details */}
+              {/* Common Questions / Engagement Status */}
               <section className="space-y-4">
                 <h2 className="text-lg font-bold tracking-tight border-b border-border/80 pb-2">
-                  Availability & Engagement
+                  Common Questions
                 </h2>
-                <div className="grid gap-4 sm:grid-cols-2 text-xs">
-                  <div className="p-4 rounded-xl border border-border/50 bg-surface/10 space-y-1">
-                    <span className="text-muted-foreground block font-medium">
-                      Availability
-                    </span>
-                    <span className="font-semibold text-foreground flex items-center gap-1">
-                      <IconGlobe className="h-4 w-4 text-primary" />{" "}
-                      Remote-first, available worldwide
-                    </span>
+                <dl className="space-y-4 text-sm">
+                  <div className="p-4 rounded-xl border border-border/50 bg-surface/10 space-y-2">
+                    <dt className="font-semibold text-foreground flex items-center gap-2">
+                      <IconClock className="h-4.5 w-4.5 text-primary" /> What is your typical response time?
+                    </dt>
+                    <dd className="text-muted-foreground leading-relaxed pl-6.5">
+                      {pageContent.contact.responseTimeText || "I usually reply within 24 hours."}
+                    </dd>
                   </div>
-                  <div className="p-4 rounded-xl border border-border/50 bg-surface/10 space-y-1">
-                    <span className="text-muted-foreground block font-medium">
-                      Response Time
-                    </span>
-                    <span className="font-semibold text-foreground flex items-center gap-1">
-                      <IconClock className="h-4 w-4 text-primary" />{" "}
-                      {pageContent.contact.responseTimeText ||
-                        "I usually reply within 24 hours"}
-                    </span>
+                  <div className="p-4 rounded-xl border border-border/50 bg-surface/10 space-y-2">
+                    <dt className="font-semibold text-foreground flex items-center gap-2">
+                      <IconGlobe className="h-4.5 w-4.5 text-primary" /> Are you open to remote work?
+                    </dt>
+                    <dd className="text-muted-foreground leading-relaxed pl-6.5">
+                      Yes, I am remote-first and available worldwide. Relocation is also possible for the right full-time role.
+                    </dd>
                   </div>
-                </div>
+                  <div className="p-4 rounded-xl border border-border/50 bg-surface/10 space-y-2">
+                    <dt className="font-semibold text-foreground flex items-center gap-2">
+                      <IconSparkles className="h-4.5 w-4.5 text-primary" /> What projects are the best fit?
+                    </dt>
+                    <dd className="text-muted-foreground leading-relaxed pl-6.5">
+                      I specialize in LLM/RAG applications, AI agents, FastAPI/Next.js product builds, and marketing analytics pipelines.
+                    </dd>
+                  </div>
+                </dl>
               </section>
 
               {/* Direct Info */}
