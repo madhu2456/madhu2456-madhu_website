@@ -49,7 +49,7 @@ export default async function FullStackAIProductPage() {
     },
     {
       title: "AI-Powered Analytics Portals",
-      desc: "Sophisticated data dashboards parsing dense telemetry schemas and presenting metrics with premium interactive controls.",
+      desc: "Analytics dashboards that parse dense telemetry schemas and present metrics with clear, interactive controls.",
     },
     {
       title: "Agentic Chat Interfaces",
