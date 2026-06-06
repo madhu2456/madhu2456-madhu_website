@@ -110,10 +110,14 @@ const nextConfig: NextConfig = {
   },
 
   async headers() {
+    const buildDate = new Date().toUTCString();
     return [
       {
         source: "/(.*)",
-        headers: [...securityHeaders],
+        headers: [
+          ...securityHeaders,
+          { key: "Last-Modified", value: buildDate },
+        ],
       },
       // SEO/GEO discovery files — serve as plain text with generous caching
       {
