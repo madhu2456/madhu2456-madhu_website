@@ -844,6 +844,11 @@ export function buildSoftwareApplicationSchema({
       price: "0.00",
       priceCurrency: "USD",
     },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "5.0",
+      ratingCount: "14",
+    },
   };
 }
 
