@@ -17,7 +17,7 @@ import { getPortfolioData } from "@/lib/portfolio-data";
 export const revalidate = 3600;
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { pageContent } = await getPortfolioData();
+  const { pageContent, profile } = await getPortfolioData();
   const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
   const canonicalPath = pageContent.profile.seo?.canonicalPath || "/profile/";
   const canonicalUrl = `${siteUrl}${canonicalPath.replace(/^\//, "")}`;
@@ -31,6 +31,20 @@ export async function generateMetadata(): Promise<Metadata> {
       "Profile of Madhu Dadi, AI & marketing analytics engineer. 9+ years exp across Novartis, redBus, and GroupM.",
     alternates: {
       canonical: canonicalUrl,
+    },
+    openGraph: {
+      title:
+        pageContent.profile.seo?.title ||
+        "Madhu Dadi — Generative AI, RAG & Marketing Analytics Engineer",
+      description:
+        pageContent.profile.seo?.description ||
+        "Profile of Madhu Dadi, AI & marketing analytics engineer. 9+ years exp across Novartis, redBus, and GroupM.",
+      url: canonicalUrl,
+      type: "profile",
+      firstName: profile.firstName,
+      lastName: profile.lastName,
+      username: profile.socialLinks?.twitter?.split("/").pop() || "madhu245",
+      gender: "male",
     },
   };
 }

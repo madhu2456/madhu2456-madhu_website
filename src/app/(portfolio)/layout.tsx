@@ -170,7 +170,7 @@ export async function generateMetadata(): Promise<Metadata> {
       },
     },
     openGraph: {
-      type: "profile",
+      type: "website",
       locale: "en_US",
       url: siteUrl,
       siteName,
