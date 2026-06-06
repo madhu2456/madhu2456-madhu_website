@@ -46,9 +46,9 @@ export async function GET() {
       {
         name: "Udemy Enroller",
         url: "https://madhudadi.in/case-studies/udemy-enroller-fastapi/",
-        category: "FastAPI browser-workflow automation",
+        category: "Production FastAPI Automation Platform",
         summary:
-          "A private FastAPI automation case study exploring async task queues, Playwright workflow orchestration, bounded concurrency, secure session-state handling, telemetry logging, and background processing."
+          "Udemy Enroller is a live production FastAPI and Playwright automation platform that orchestrates asynchronous workflow runs, bounded worker concurrency, secure session-state handling, telemetry logging, and background processing with Celery, Redis, PostgreSQL, and Docker."
       }
     ]
   });

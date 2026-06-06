@@ -126,7 +126,7 @@ export default async function FullStackAIProductPage() {
     },
     {
       title: "Udemy Enroller",
-      descriptor: "FastAPI Browser-Workflow Automation",
+      descriptor: "Production FastAPI Automation Platform",
       url: "/case-studies/udemy-enroller-fastapi/",
       desc: "Designed a private FastAPI and Playwright workflow-orchestration system with bounded worker concurrency, secure session-state handling, background queues, and telemetry logging.",
       tech: ["FastAPI", "Python", "Docker", "Background Tasks"],

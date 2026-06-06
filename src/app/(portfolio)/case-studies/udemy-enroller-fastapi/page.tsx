@@ -22,9 +22,9 @@ export const revalidate = 3600;
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title:
-      "Udemy Enroller FastAPI Case Study — Automation System by Madhu Dadi",
+      "Udemy Enroller — Production FastAPI Automation Platform by Madhu Dadi",
     description:
-      "Explore Madhu Dadi's browser automation case study covering async task queues, Playwright workflow orchestration, and background processing.",
+      "Explore Madhu Dadi's live production FastAPI automation platform covering async task queues, Playwright workflow orchestration, and background processing.",
     alternates: {
       canonical: "https://madhudadi.in/case-studies/udemy-enroller-fastapi/",
     },
@@ -60,7 +60,7 @@ export default async function UdemyEnrollerCaseStudyPage() {
     },
     {
       label: "Evidence",
-      val: "Case study, GitHub repository, code walkthrough, performance methodology",
+      val: "Production platform, GitHub repository, code walkthrough, performance methodology",
     },
   ];
 
@@ -204,12 +204,12 @@ export default async function UdemyEnrollerCaseStudyPage() {
               <h1 className="text-3xl md:text-5xl font-bold tracking-tight leading-tight">
                 Udemy Enroller FastAPI —{" "}
                 <span className="text-gradient">
-                  Async Automation Case Study
+                  Production FastAPI Automation Platform
                 </span>
               </h1>
 
               <p className="text-lg text-muted-foreground leading-relaxed">
-                A private FastAPI automation case study exploring async task queues, Playwright workflow orchestration, bounded concurrency, secure session-state handling, telemetry logging, and background processing.
+                A live production FastAPI and Playwright automation platform that orchestrates asynchronous workflow runs, bounded worker concurrency, secure session-state handling, telemetry logging, and background processing with Celery, Redis, PostgreSQL, and Docker.
               </p>
             </div>
           </section>
@@ -220,7 +220,7 @@ export default async function UdemyEnrollerCaseStudyPage() {
               1. Citation-Ready Summary
             </h2>
             <p className="text-sm md:text-base text-foreground/90 font-medium leading-relaxed">
-              This case study explores a private FastAPI automation project that
+              This platform is a live production FastAPI automation system that
               investigates async task queues, browser workflow orchestration,
               session handling, telemetry logging, and background processing
               using Celery, Redis, PostgreSQL, and Playwright. The system was
