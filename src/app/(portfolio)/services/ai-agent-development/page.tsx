@@ -60,7 +60,7 @@ export default async function AiAgentDevelopmentPage() {
       id: "definition",
       title: "1. What I Mean by AI Agents",
       icon: <IconBrain className="h-5 w-5 text-primary" />,
-      desc: "Unlike standard static chatbots that operate on rigid if-else branches, AI agents are software entities designed with autonomous reasoning loops. They analyze a high-level goal, decompose it into sequential sub-tasks, select appropriate external tools, validate their own outputs, and self-correct when errors arise.",
+      desc: "Unlike standard static chatbots that operate on rigid if-else branches, AI agents are software systems designed with controlled planning loops. They analyze a high-level goal, decompose it into sequential sub-tasks, select appropriate external tools, validate their own outputs, and self-correct when errors arise.",
     },
     {
       id: "comparison",
