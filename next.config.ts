@@ -88,6 +88,12 @@ const nextConfig: NextConfig = {
         destination: "/contact/?",
         permanent: true,
       },
+      {
+        source: "/contact",
+        has: [{ type: "query", key: "intent" }],
+        destination: "/contact/?",
+        permanent: true,
+      },
     ];
   },
 
