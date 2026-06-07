@@ -16,7 +16,7 @@ import { Header } from "@/components/Header";
 import { SeoStructuredData } from "@/components/SeoStructuredData";
 import { getPortfolioData } from "@/lib/portfolio-data";
 
-export const revalidate = 3600;
+
 
 export async function generateMetadata(): Promise<Metadata> {
   const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;

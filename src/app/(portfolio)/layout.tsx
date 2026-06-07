@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-export const revalidate = 3600;
+
 
 import { Geist_Mono, Instrument_Serif, Inter } from "next/font/google";
 import { AppSidebar } from "@/components/app-sidebar";

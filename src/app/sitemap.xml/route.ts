@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getPortfolioData } from "@/lib/portfolio-data";
 
-export const revalidate = 3600;
+
 
 const DEFAULT_SITE_URL = "https://madhudadi.in";
 
