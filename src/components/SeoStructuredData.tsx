@@ -18,7 +18,29 @@ import {
 } from "@/lib/jsonld";
 import { getPortfolioData } from "@/lib/portfolio-data";
 
-export async function SeoStructuredData() {
+export type SeoGraphNode =
+  | "Person"
+  | "ProfessionalService"
+  | "Occupation"
+  | "Organization"
+  | "WebSite"
+  | "SoftwareApplication"
+  | "ProfilePage"
+  | "ProjectsList"
+  | "ServicesList"
+  | "WorkExperience"
+  | "CertificationsList"
+  | "Breadcrumb"
+  | "FAQ"
+  | "HowToHire";
+
+interface SeoStructuredDataProps {
+  nodes?: SeoGraphNode[];
+}
+
+export async function SeoStructuredData({
+  nodes,
+}: SeoStructuredDataProps = {}) {
   const {
     featuredProjects: projects,
     profile,
@@ -67,99 +89,129 @@ export async function SeoStructuredData() {
 
   const currentRole = experience.find((e) => e.current);
 
-  const graph = buildFullGraph([
-    buildPersonSchema({
-      fullName,
-      headline: profile?.headline,
-      bio: profile?.shortBio,
-      email: profile?.email,
-      location: profile?.location,
-      profileImageUrl,
-      siteUrl,
-      socialLinks: profile?.socialLinks ?? undefined,
-      yearsOfExperience: profile?.yearsOfExperience,
-      nationality: "India",
-      alumniOf: education
-        .filter((edu) => edu.institution)
-        .map((edu) => ({
-          name: edu.institution,
-          url: edu.website ?? undefined,
-        })),
-      seoKeywords: discoveryKeywords,
-      certifications,
-      services,
-      currentRole: currentRole
-        ? {
-            company: currentRole.company,
-            position: currentRole.position,
-            startDate: currentRole.startDate,
-            location: currentRole.location,
-          }
-        : undefined,
-      priceRange: "$$",
-    }),
-    buildProfessionalServiceSchema({
-      siteUrl,
-      name: siteSettings.siteTitle || fullName,
-      description: description || "AI & Marketing Analytics Consulting",
-      image: `${siteUrl}opengraph-image`,
-      telephone: profile?.phone,
-      email: profile?.email,
-      addressLocality: profile?.location,
-      priceRange: "$$",
-      socialLinks: profile?.socialLinks ?? undefined,
-    }),
-    buildOccupationSchema({
-      siteUrl,
-      jobTitle: profile?.headline,
-      location: profile?.location,
-    }),
-    buildOrganizationSchema({
-      siteUrl,
-      name: (siteSettings as { siteName?: string }).siteName || fullName,
-      logoUrl: `${siteUrl}icon-512.png`,
-      description,
-      socialLinks: profile?.socialLinks ?? undefined,
-    }),
-    buildWebSiteSchema({
-      name: (siteSettings as { siteName?: string }).siteName || fullName,
-      url: siteUrl,
-      description,
-    }),
-    buildSoftwareApplicationSchema({
-      siteUrl,
-      name: (siteSettings as { siteName?: string }).siteName || fullName,
-      description,
-    }),
-    buildProfilePageSchema({
-      fullName,
-      url: siteUrl,
-      description,
-      profileImageUrl,
-      dateModified,
-    }),
-    buildProjectsListSchema({ siteUrl, projects }),
-    buildServicesListSchema({ siteUrl, services }),
-    buildWorkExperienceSchema({ siteUrl, experiences: experience }),
-    buildCertificationsListSchema({ siteUrl, certifications }),
-    buildBreadcrumbSchema(siteUrl),
-    buildFaqSchema({
-      siteUrl,
-      fullName,
-      headline: profile?.headline,
-      location: profile?.location,
-      yearsOfExperience: profile?.yearsOfExperience,
-      projects,
-      services,
-      seoKeywords: discoveryKeywords,
-    }),
-    buildHowToHireSchema({ siteUrl, fullName }),
-  ]);
+  const includeNode = (node: SeoGraphNode) => !nodes || nodes.includes(node);
+
+  const graphNodes = [
+    includeNode("Person")
+      ? buildPersonSchema({
+          fullName,
+          headline: profile?.headline,
+          bio: profile?.shortBio,
+          email: profile?.email,
+          location: profile?.location,
+          profileImageUrl,
+          siteUrl,
+          socialLinks: profile?.socialLinks ?? undefined,
+          yearsOfExperience: profile?.yearsOfExperience,
+          nationality: "India",
+          alumniOf: education
+            .filter((edu) => edu.institution)
+            .map((edu) => ({
+              name: edu.institution,
+              url: edu.website ?? undefined,
+            })),
+          seoKeywords: discoveryKeywords,
+          certifications,
+          services,
+          currentRole: currentRole
+            ? {
+                company: currentRole.company,
+                position: currentRole.position,
+                startDate: currentRole.startDate,
+                location: currentRole.location,
+              }
+            : undefined,
+          priceRange: "$$",
+        })
+      : null,
+    includeNode("ProfessionalService")
+      ? buildProfessionalServiceSchema({
+          siteUrl,
+          name: siteSettings.siteTitle || fullName,
+          description: description || "AI & Marketing Analytics Consulting",
+          image: `${siteUrl}opengraph-image`,
+          telephone: profile?.phone,
+          email: profile?.email,
+          addressLocality: profile?.location,
+          priceRange: "$$",
+          socialLinks: profile?.socialLinks ?? undefined,
+        })
+      : null,
+    includeNode("Occupation")
+      ? buildOccupationSchema({
+          siteUrl,
+          jobTitle: profile?.headline,
+          location: profile?.location,
+        })
+      : null,
+    includeNode("Organization")
+      ? buildOrganizationSchema({
+          siteUrl,
+          name: (siteSettings as { siteName?: string }).siteName || fullName,
+          logoUrl: `${siteUrl}icon-512.png`,
+          description,
+          socialLinks: profile?.socialLinks ?? undefined,
+        })
+      : null,
+    includeNode("WebSite")
+      ? buildWebSiteSchema({
+          name: (siteSettings as { siteName?: string }).siteName || fullName,
+          url: siteUrl,
+          description,
+        })
+      : null,
+    includeNode("SoftwareApplication")
+      ? buildSoftwareApplicationSchema({
+          siteUrl,
+          name: (siteSettings as { siteName?: string }).siteName || fullName,
+          description,
+        })
+      : null,
+    includeNode("ProfilePage")
+      ? buildProfilePageSchema({
+          fullName,
+          url: siteUrl,
+          description,
+          profileImageUrl,
+          dateModified,
+        })
+      : null,
+    includeNode("ProjectsList")
+      ? buildProjectsListSchema({ siteUrl, projects })
+      : null,
+    includeNode("ServicesList")
+      ? buildServicesListSchema({ siteUrl, services })
+      : null,
+    includeNode("WorkExperience")
+      ? buildWorkExperienceSchema({ siteUrl, experiences: experience })
+      : null,
+    includeNode("CertificationsList")
+      ? buildCertificationsListSchema({ siteUrl, certifications })
+      : null,
+    includeNode("Breadcrumb") ? buildBreadcrumbSchema(siteUrl) : null,
+    includeNode("FAQ")
+      ? buildFaqSchema({
+          siteUrl,
+          fullName,
+          headline: profile?.headline,
+          location: profile?.location,
+          yearsOfExperience: profile?.yearsOfExperience,
+          projects,
+          services,
+          seoKeywords: discoveryKeywords,
+        })
+      : null,
+    includeNode("HowToHire")
+      ? buildHowToHireSchema({ siteUrl, fullName })
+      : null,
+  ].filter(Boolean);
+
+  const graph = buildFullGraph(graphNodes);
 
   return (
     <script
       type="application/ld+json"
-      // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: safe - server-controlled JSON-LD only
       dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
     />
   );

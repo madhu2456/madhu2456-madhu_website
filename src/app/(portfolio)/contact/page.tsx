@@ -96,26 +96,28 @@ export default async function ContactPage() {
         name: "What is your typical response time?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: pageContent.contact.responseTimeText || "I usually reply within 24 hours."
-        }
+          text:
+            pageContent.contact.responseTimeText ||
+            "I usually reply within 24 hours.",
+        },
       },
       {
         "@type": "Question",
         name: "Are you open to remote work?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes, I am remote-first and available worldwide. Relocation is also possible for the right full-time role."
-        }
+          text: "Yes, I am remote-first and available worldwide. Relocation is also possible for the right full-time role.",
+        },
       },
       {
         "@type": "Question",
         name: "What projects are the best fit?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "I specialize in LLM/RAG applications, AI agents, FastAPI/Next.js product builds, and marketing analytics pipelines."
-        }
-      }
-    ]
+          text: "I specialize in LLM/RAG applications, AI agents, FastAPI/Next.js product builds, and marketing analytics pipelines.",
+        },
+      },
+    ],
   };
 
   const bestFitAreas = pageContent.contact.bestFitAreas || [
@@ -134,8 +136,10 @@ export default async function ContactPage() {
     <div className="flex flex-col min-h-screen">
       <script
         type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([breadcrumbSchema, faqSchema]) }}
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe - server-controlled JSON-LD only
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([breadcrumbSchema, faqSchema]),
+        }}
       />
       <Header profile={profile} navigationItems={sortedNavigationItems} />
 
@@ -191,45 +195,75 @@ export default async function ContactPage() {
                 </h2>
                 <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
                   <p>
-                    Every engagement starts with a comprehensive discovery phase. I prioritize understanding your underlying business objectives, technical constraints, and data architecture before proposing any solutions. This ensures that the AI products and marketing pipelines we build together are perfectly aligned with your strategic goals and deliver measurable ROI from day one.
+                    Every engagement starts with a comprehensive discovery
+                    phase. I prioritize understanding your underlying business
+                    objectives, technical constraints, and data architecture
+                    before proposing any solutions. This ensures that the AI
+                    products and marketing pipelines we build together are
+                    perfectly aligned with your strategic goals and deliver
+                    measurable ROI from day one.
                   </p>
                   <p>
-                    Whether you need a robust Retrieval-Augmented Generation (RAG) system, custom AI agents, or high-performance FastAPI backends, I follow a transparent, milestone-driven approach. You will have full visibility into the development lifecycle, from initial architectural design and rapid prototyping to production deployment, performance tuning, and ongoing maintenance.
+                    Whether you need a robust Retrieval-Augmented Generation
+                    (RAG) system, custom AI agents, or high-performance FastAPI
+                    backends, I follow a transparent, milestone-driven approach.
+                    You will have full visibility into the development
+                    lifecycle, from initial architectural design and rapid
+                    prototyping to production deployment, performance tuning,
+                    and ongoing maintenance.
                   </p>
                   <p>
-                    For marketing and analytics clients, my focus is on creating single-source-of-truth measurement systems using Google Analytics 4 (GA4) and Google BigQuery. I specialize in resolving data fragmentation, building reliable server-side tracking pipelines, and designing actionable dashboards that empower your marketing teams to make confident, data-driven decisions at scale.
+                    For marketing and analytics clients, my focus is on creating
+                    single-source-of-truth measurement systems using Google
+                    Analytics 4 (GA4) and Google BigQuery. I specialize in
+                    resolving data fragmentation, building reliable server-side
+                    tracking pipelines, and designing actionable dashboards that
+                    empower your marketing teams to make confident, data-driven
+                    decisions at scale.
                   </p>
                 </div>
               </section>
 
-              {/* Common Questions / Engagement Status */}
+              {/* Frequently Asked Questions */}
               <section className="space-y-4">
                 <h2 className="text-lg font-bold tracking-tight border-b border-border/80 pb-2">
-                  Common Questions
+                  Frequently Asked Questions
                 </h2>
                 <dl className="space-y-4 text-sm">
                   <div className="p-4 rounded-xl border border-border/50 bg-surface/10 space-y-2">
                     <dt className="font-semibold text-foreground flex items-center gap-2">
-                      <IconClock className="h-4.5 w-4.5 text-primary" /> What is your typical response time?
+                      <IconClock className="h-4.5 w-4.5 text-primary" /> What is
+                      your typical response time?
                     </dt>
                     <dd className="text-muted-foreground leading-relaxed pl-6.5">
-                      {pageContent.contact.responseTimeText || "I usually reply within 24 hours."}
+                      {pageContent.contact.responseTimeText ||
+                        "I monitor inquiries closely and aim to reply within 24 hours. For technical consultations and discovery calls, please provide as much context as possible regarding your existing tech stack and business objectives."}
                     </dd>
                   </div>
                   <div className="p-4 rounded-xl border border-border/50 bg-surface/10 space-y-2">
                     <dt className="font-semibold text-foreground flex items-center gap-2">
-                      <IconGlobe className="h-4.5 w-4.5 text-primary" /> Are you open to remote work?
+                      <IconGlobe className="h-4.5 w-4.5 text-primary" /> Are you
+                      open to remote work and full-time roles?
                     </dt>
                     <dd className="text-muted-foreground leading-relaxed pl-6.5">
-                      Yes, I am remote-first and available worldwide. Relocation is also possible for the right full-time role.
+                      Absolutely. I am a remote-first engineer available for worldwide collaborations. I am currently open to full-time roles where I can take ownership of AI and marketing analytics pipelines end-to-end. Relocation is also an option for the right opportunity.
                     </dd>
                   </div>
                   <div className="p-4 rounded-xl border border-border/50 bg-surface/10 space-y-2">
                     <dt className="font-semibold text-foreground flex items-center gap-2">
-                      <IconSparkles className="h-4.5 w-4.5 text-primary" /> What projects are the best fit?
+                      <IconSparkles className="h-4.5 w-4.5 text-primary" /> What
+                      types of projects are the best fit?
                     </dt>
                     <dd className="text-muted-foreground leading-relaxed pl-6.5">
-                      I specialize in LLM/RAG applications, AI agents, FastAPI/Next.js product builds, and marketing analytics pipelines.
+                      I specialize in building production-ready LLM and Retrieval-Augmented Generation (RAG) applications, autonomous AI agents, FastAPI/Next.js full-stack systems, and comprehensive marketing analytics pipelines using Google Analytics 4 and BigQuery. If your project involves integrating generative AI into existing workflows or measuring marketing ROI reliably, we will be a great fit.
+                    </dd>
+                  </div>
+                  <div className="p-4 rounded-xl border border-border/50 bg-surface/10 space-y-2">
+                    <dt className="font-semibold text-foreground flex items-center gap-2">
+                      <IconCircleCheck className="h-4.5 w-4.5 text-primary" /> Do you handle both frontend and backend development?
+                    </dt>
+                    <dd className="text-muted-foreground leading-relaxed pl-6.5">
+                      Yes. As a full-stack engineer, I typically build robust, async backend services in Python using FastAPI, paired with sleek, highly responsive frontend interfaces in React and Next.js. This ensures I can deliver end-to-end features without waiting on external dependencies.
                     </dd>
                   </div>
                 </dl>
@@ -330,7 +364,11 @@ export default async function ContactPage() {
         </div>
       </main>
 
-      <Footer profile={profile} navigationItems={sortedNavigationItems} projects={sortedProjects} />
+      <Footer
+        profile={profile}
+        navigationItems={sortedNavigationItems}
+        projects={sortedProjects}
+      />
     </div>
   );
 }

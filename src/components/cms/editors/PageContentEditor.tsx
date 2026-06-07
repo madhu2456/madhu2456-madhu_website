@@ -63,10 +63,7 @@ function HeroEditor({ prefix }: { prefix: string }) {
       <div className="md:col-span-2">
         <h4 className="font-semibold text-sm mb-2">Hero Section</h4>
       </div>
-      <FormField
-        label="Hero Title"
-        error={errs?.[prefix]?.heroTitle?.message}
-      >
+      <FormField label="Hero Title" error={errs?.[prefix]?.heroTitle?.message}>
         <input className={inputClass} {...register(`${prefix}.heroTitle`)} />
       </FormField>
       <FormField label="Eyebrow" error={errs?.[prefix]?.eyebrow?.message}>

@@ -75,7 +75,7 @@ export default async function CredentialsPage() {
     <div className="flex flex-col min-h-screen">
       <script
         type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe - server-controlled JSON-LD only
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <Header profile={profile} navigationItems={sortedNavigationItems} />
@@ -559,7 +559,11 @@ export default async function CredentialsPage() {
         </div>
       </main>
 
-      <Footer profile={profile} navigationItems={sortedNavigationItems} projects={sortedProjects} />
+      <Footer
+        profile={profile}
+        navigationItems={sortedNavigationItems}
+        projects={sortedProjects}
+      />
     </div>
   );
 }

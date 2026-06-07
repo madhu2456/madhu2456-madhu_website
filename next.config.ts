@@ -119,7 +119,7 @@ const nextConfig: NextConfig = {
           { key: "Last-Modified", value: buildDate },
         ],
       },
-      // SEO/GEO discovery files — serve as plain text with generous caching
+      // SEO/GEO discovery files - serve as plain text with generous caching
       {
         source: "/llms.txt",
         headers: [
@@ -177,7 +177,7 @@ const nextConfig: NextConfig = {
           },
         ],
       },
-      // Sitemap — revalidate hourly, serve stale for a day
+      // Sitemap - revalidate hourly, serve stale for a day
       {
         source: "/sitemap.xml",
         headers: [
@@ -188,7 +188,7 @@ const nextConfig: NextConfig = {
         ],
       },
 
-      // robots.txt — cache for a day
+      // robots.txt - cache for a day
       {
         source: "/robots.txt",
         headers: [{ key: "Cache-Control", value: "public, max-age=86400" }],

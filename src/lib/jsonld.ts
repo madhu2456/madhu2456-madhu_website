@@ -10,6 +10,7 @@ type SocialLinks = {
   youtube?: string | null;
   stackoverflow?: string | null;
   wikidata?: string | null;
+  googleBusiness?: string | null;
 };
 
 type Citation = {
@@ -143,7 +144,7 @@ export function buildPersonSchema({
     new Set([...staticKnowsAbout, ...normalizeKeywordList(seoKeywords)]),
   );
 
-  // Build a single description — prefer the short bio, fall back to headline,
+  // Build a single description - prefer the short bio, fall back to headline,
   // append years of experience if available. Multiple spread of the same key
   // produces invalid JSON-LD so we consolidate here.
   const descriptionParts: string[] = [];
@@ -221,7 +222,7 @@ export function buildPersonSchema({
     "@type": "Person",
     "@id": `${siteUrl}#person`,
     name: fullName,
-    url: siteUrl,
+    url: `${siteUrl}profile/`,
     ...(description && { description }),
     ...(headline && { jobTitle: headline }),
     ...(email && { email }),
@@ -255,8 +256,8 @@ export function buildPersonSchema({
       },
     }),
     ...(sameAs.length > 0 && { sameAs }),
-    publishingPrinciples: `${siteUrl}blog`,
-    mainEntityOfPage: { "@id": `${siteUrl}#profilepage` },
+    publishingPrinciples: `${siteUrl}blog/`,
+    mainEntityOfPage: { "@id": `${siteUrl}profile/#webpage` },
     hasOccupation: { "@id": `${siteUrl}#occupation` },
     subjectOf: [
       {
@@ -268,12 +269,17 @@ export function buildPersonSchema({
       {
         "@type": "CreativeWork",
         name: "Technical Articles Index",
-        url: `${siteUrl}blog/posts`,
+        url: `${siteUrl}blog/posts/`,
+      },
+      {
+        "@type": "AboutPage",
+        name: "About the AI, Python & Analytics Learning Platform",
+        url: `${siteUrl}blog/about`,
       },
       {
         "@type": "CreativeWork",
         name: "Technical Blog AI Assistant",
-        url: `${siteUrl}blog/ask`,
+        url: `${siteUrl}blog/ask/`,
       },
     ],
     ...(knowsAbout.length > 0 && { knowsAbout }),
@@ -371,7 +377,7 @@ export function buildWebSiteSchema({
   url: string;
   description?: string | null;
 }) {
-  const blogUrl = `${url}blog`;
+  const blogUrl = `${url}blog/`;
   return {
     "@type": "WebSite",
     "@id": `${url}#website`,
@@ -380,7 +386,7 @@ export function buildWebSiteSchema({
     ...(description && { description }),
     inLanguage: "en-US",
     publisher: { "@id": `${url}#organization` },
-    // SiteLinksSearchBox — enables rich search in Google SERPs
+    // SiteLinksSearchBox - enables rich search in Google SERPs
     potentialAction: [
       {
         "@type": "SearchAction",
@@ -391,7 +397,7 @@ export function buildWebSiteSchema({
         "query-input": "required name=search_term_string",
       },
     ],
-    // Blog is a sub-site on the same domain — linking them helps search engines
+    // Blog is a sub-site on the same domain - linking them helps search engines
     // and AI crawlers understand the relationship between portfolio and blog
     hasPart: {
       "@type": "Blog",
@@ -427,7 +433,7 @@ export function buildWebSiteSchema({
 }
 
 // ---------------------------------------------------------------------------
-// ProfilePage  (schema.org/ProfilePage — the right type for portfolio sites)
+// ProfilePage  (schema.org/ProfilePage - the right type for portfolio sites)
 // ---------------------------------------------------------------------------
 export function buildProfilePageSchema({
   fullName,
@@ -442,17 +448,19 @@ export function buildProfilePageSchema({
   profileImageUrl?: string;
   dateModified?: string;
 }) {
+  const profileUrl = `${url}profile/`;
+
   return {
     "@type": "ProfilePage",
-    "@id": `${url}#profilepage`,
+    "@id": `${profileUrl}#webpage`,
     name: `${fullName} - Portfolio`,
-    url,
+    url: profileUrl,
     ...(description && { description }),
     inLanguage: "en-US",
     isPartOf: { "@id": `${url}#website` },
     about: { "@id": `${url}#person` },
     mainEntity: { "@id": `${url}#person` },
-    breadcrumb: { "@id": `${url}#breadcrumb` },
+    breadcrumb: { "@id": `${profileUrl}#breadcrumb` },
     dateModified: dateModified ?? new Date().toISOString(),
     ...(profileImageUrl && {
       primaryImageOfPage: {
@@ -462,13 +470,13 @@ export function buildProfilePageSchema({
     }),
     speakable: {
       "@type": "SpeakableSpecification",
-      cssSelector: ["#home", "#experience"],
+      cssSelector: ["#main-content h1", "#main-content h2", "#main-content p"],
     },
   };
 }
 
 // ---------------------------------------------------------------------------
-// Services — ItemList of Service nodes
+// Services - ItemList of Service nodes
 // ---------------------------------------------------------------------------
 export function buildServicesListSchema({
   siteUrl,
@@ -537,7 +545,7 @@ export function buildServicesListSchema({
 }
 
 // ---------------------------------------------------------------------------
-// Certifications — ItemList of EducationalOccupationalCredential nodes
+// Certifications - ItemList of EducationalOccupationalCredential nodes
 // ---------------------------------------------------------------------------
 export function buildCertificationsListSchema({
   siteUrl,
@@ -590,7 +598,7 @@ export function buildCertificationsListSchema({
 }
 
 // ---------------------------------------------------------------------------
-// Projects — ItemList of SoftwareApplication nodes
+// Projects - ItemList of SoftwareApplication nodes
 // ---------------------------------------------------------------------------
 export function buildProjectsListSchema({
   siteUrl,
@@ -633,7 +641,7 @@ export function buildProjectsListSchema({
 }
 
 // ---------------------------------------------------------------------------
-// WorkExperience — ItemList of WorkExperience nodes
+// WorkExperience - ItemList of WorkExperience nodes
 // ---------------------------------------------------------------------------
 export function buildWorkExperienceSchema({
   siteUrl,
@@ -691,7 +699,7 @@ export function buildBreadcrumbSchema(
 }
 
 // ---------------------------------------------------------------------------
-// FAQPage — answer-engine friendly Q&A summary for portfolio intent
+// FAQPage - answer-engine friendly Q&A summary for portfolio intent
 // ---------------------------------------------------------------------------
 export function buildFaqSchema({
   siteUrl,
@@ -755,7 +763,7 @@ export function buildFaqSchema({
 }
 
 // ---------------------------------------------------------------------------
-// HowTo — step-by-step guide for hiring / engaging
+// HowTo - step-by-step guide for hiring / engaging
 // Helps AI search engines answer "how do I hire Madhu Dadi?"
 // ---------------------------------------------------------------------------
 export function buildHowToHireSchema({
@@ -897,7 +905,6 @@ export function buildProfessionalServiceSchema({
       },
     }),
     ...(priceRange && { priceRange }),
-    // Specifically target Visakhapatnam, India
     geo: {
       "@type": "GeoCoordinates",
       latitude: 17.6868,
@@ -906,9 +913,17 @@ export function buildProfessionalServiceSchema({
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        opens: "09:00",
-        closes: "18:00",
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ],
+        opens: "10:00",
+        closes: "22:00",
       },
     ],
     serviceArea: [
@@ -922,7 +937,7 @@ export function buildProfessionalServiceSchema({
 }
 
 // ---------------------------------------------------------------------------
-// Unified @graph — bundles all schemas into one linked-data document
+// Unified @graph - bundles all schemas into one linked-data document
 // This lets search engines and AI models understand the full knowledge graph
 // in a single <script> rather than multiple disconnected ones.
 // ---------------------------------------------------------------------------

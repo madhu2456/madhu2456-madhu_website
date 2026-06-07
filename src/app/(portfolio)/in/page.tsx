@@ -10,7 +10,8 @@ const resolveSiteUrl = (rawUrl?: string) => {
 const siteUrl = resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL);
 
 export const metadata: Metadata = {
-  title: "Madhu Dadi - AI Consultant in India | Visakhapatnam, Hyderabad, Bangalore",
+  title:
+    "Madhu Dadi - AI Consultant in India | Visakhapatnam, Hyderabad, Bangalore",
   description:
     "Hire an expert AI consultant and marketing analytics engineer in India. Specializing in production LLM/RAG apps, AI agents, FastAPI, and Next.js.",
   alternates: {
@@ -44,7 +45,17 @@ export const metadata: Metadata = {
 export default async function IndiaLandingPage() {
   return (
     <main id="main-content" className="min-h-screen">
-      <SeoStructuredData />
+      <SeoStructuredData
+        nodes={[
+          "Person",
+          "WebSite",
+          "ProfessionalService",
+          "Organization",
+          "SoftwareApplication",
+          "Breadcrumb",
+          "FAQ",
+        ]}
+      />
       <PortfolioContent />
     </main>
   );

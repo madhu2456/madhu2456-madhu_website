@@ -1,9 +1,11 @@
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { CitationBox } from "@/components/CitationBox";
 import { Header } from "@/components/Header";
+import { ShareButtons } from "@/components/ShareButtons";
 import {
   normalizeImageSource,
   shouldUseUnoptimizedImage,
@@ -112,7 +114,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const { sortedProjects } = await getPortfolioData();
+  const { sortedProjects, sortedServices } = await getPortfolioData();
   const project = sortedProjects.find((item) => item.slug === slug);
 
   if (!project) {
@@ -163,7 +165,9 @@ export default async function CaseStudyPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const { profile, sortedProjects, sortedNavigationItems } = await getPortfolioData();
+  const { sortedProjects, sortedNavigationItems, profile, sortedServices } =
+    await getPortfolioData();
+
   const project = sortedProjects.find((item) => item.slug === slug);
 
   if (!project) notFound();
@@ -236,16 +240,27 @@ export default async function CaseStudyPage({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
         />
 
-        <Link
-          href="/case-studies/"
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-        >
-          <ArrowLeft className="h-4 w-4" aria-hidden />
-          All case studies
-        </Link>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-8">
+          <Link
+            href="/case-studies/"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+          >
+            <ArrowLeft className="h-4 w-4" aria-hidden />
+            All case studies
+          </Link>
+          {project.relatedServiceSlug && (
+            <Link
+              href={`/services/${project.relatedServiceSlug}/`}
+              className="inline-flex items-center gap-2 text-sm text-primary underline-offset-4 hover:text-primary/80 hover:underline"
+            >
+              Related service
+              <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          )}
+        </div>
 
         {project.category ? (
-          <p className="mt-8 text-xs tracking-[0.25em] text-primary uppercase">
+          <p className="mt-8 text-xs tracking-[0.25em] text-muted-foreground uppercase">
             {project.category}
           </p>
         ) : null}
@@ -257,7 +272,13 @@ export default async function CaseStudyPage({
         </p>
 
         <p className="mt-4 text-sm text-muted-foreground/80">
-          By Madhu Dadi &middot; Published <time dateTime={project.updatedAt ?? new Date().toISOString()}>{new Date(project.updatedAt ?? new Date()).toISOString().split('T')[0]}</time>
+          By Madhu Dadi &middot; Updated{" "}
+          <time dateTime={project.updatedAt ?? new Date().toISOString()}>
+            {new Date(project.updatedAt ?? new Date()).toLocaleDateString("en-US", {
+              month: "long",
+              year: "numeric",
+            })}
+          </time>
         </p>
 
         {project.coverImage ? (
@@ -338,6 +359,33 @@ export default async function CaseStudyPage({
           </section>
         ) : null}
 
+        {project.gallery && project.gallery.length > 0 ? (
+          <section className="mt-10">
+            <h2 className="sr-only">Gallery</h2>
+            <div className="mt-6 flex flex-col gap-8">
+              {project.gallery.map((img, i) => (
+                <figure key={i} className="flex flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-card">
+                  <div className="relative aspect-video w-full">
+                    <Image
+                      src={normalizeImageSource(img.url) || ""}
+                      alt={img.alt || project.title}
+                      fill
+                      sizes="(max-width: 1200px) 100vw, 1100px"
+                      className="object-cover"
+                      unoptimized={shouldUseUnoptimizedImage(img.url)}
+                    />
+                  </div>
+                  {img.caption ? (
+                    <figcaption className="border-t border-border/80 p-4 text-sm text-muted-foreground bg-surface/50">
+                      {img.caption}
+                    </figcaption>
+                  ) : null}
+                </figure>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
         {stack.length > 0 ? (
           <section className="mt-10">
             <h2 className="font-display text-2xl font-bold">Stack</h2>
@@ -375,14 +423,24 @@ export default async function CaseStudyPage({
 
         {project.citations && project.citations.length > 0 ? (
           <section className="mt-10">
-            <h2 className="font-display text-2xl font-bold">Sources / further reading</h2>
+            <h2 className="font-display text-2xl font-bold">
+              Sources / further reading
+            </h2>
             <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
               {project.citations.map((citation, i) => (
                 <li key={i}>
                   {citation.url ? (
-                    <a href={citation.url} target="_blank" rel="noopener noreferrer" className="hover:text-primary underline underline-offset-4 flex items-center gap-2">
+                    <a
+                      href={citation.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-primary underline underline-offset-4 flex items-center gap-2"
+                    >
                       {citation.label || citation.url}
-                      <ExternalLink className="h-3 w-3 inline-block" aria-hidden />
+                      <ExternalLink
+                        className="h-3 w-3 inline-block"
+                        aria-hidden
+                      />
                     </a>
                   ) : (
                     <span>{citation.label}</span>
@@ -392,6 +450,17 @@ export default async function CaseStudyPage({
             </ul>
           </section>
         ) : null}
+
+        <ShareButtons
+          url={caseStudyUrl}
+          title={`${project.title} - Case Study by Madhu Dadi`}
+          description={description}
+        />
+        <CitationBox
+          title={project.title}
+          url={caseStudyUrl}
+          authorName="Madhu Dadi"
+        />
       </main>
     </>
   );

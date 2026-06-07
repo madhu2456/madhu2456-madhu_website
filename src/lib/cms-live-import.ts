@@ -494,7 +494,7 @@ const fetchCaseStudyDetails = async (
   sourceUrl: string,
   slug: string,
 ): Promise<CaseStudyDetails> => {
-  const caseStudyUrl = `${sourceUrl}/case-studies/${slug}`;
+  const caseStudyUrl = `${sourceUrl}/case-studies/${slug}/`;
 
   try {
     const html = await fetchRemoteText(caseStudyUrl);
@@ -543,7 +543,7 @@ export async function importPortfolioContentFromWebsite(
 
   const [homepageHtml, caseStudiesHtml] = await Promise.all([
     fetchRemoteText(sourceUrl),
-    fetchRemoteText(`${sourceUrl}/case-studies`),
+    fetchRemoteText(`${sourceUrl}/case-studies/`),
   ]);
   const parsedStats = parseHomeStats(homepageHtml);
   const coverImagesByTitle = parseCaseStudyCoverImages(

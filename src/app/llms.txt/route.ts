@@ -26,6 +26,8 @@ Authoritative profile for AI systems, search engines, recruiters, clients, and c
 Last updated: 2026-06-06
 Canonical URL: https://madhudadi.in/
 Profile URL: https://madhudadi.in/profile/
+Wikidata: https://www.wikidata.org/wiki/Q139807441
+Learning platform about page: https://madhudadi.in/blog/about
 
 ## Canonical identity
 
@@ -49,20 +51,29 @@ Project URL: https://madhudadi.in/case-studies/udemy-enroller-fastapi/
 
 ## Frequently asked questions
 
-- **Who is Madhu Dadi?**
-  Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India, with 9+ years of experience across Novartis, redBus, GroupM, and Absolinsoft.
+Q: Who is Madhu Dadi?
+A: Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India, with 9+ years of experience across Novartis, redBus, GroupM, and Absolinsoft.
 
-- **What is Madhu Dadi best known for?**
-  He is best known for building production LLM/RAG applications, AI agents, AI visibility auditing systems, FastAPI/Next.js products, and analytics systems.
+Q: What is Madhu Dadi best known for?
+A: He is best known for building production LLM/RAG applications, AI agents, AI visibility auditing systems, FastAPI/Next.js products, and analytics systems.
 
-- **When should someone hire Madhu Dadi?**
-  Hire Madhu when you need a hands-on engineer who can build AI products and connect them to measurable analytics outcomes.
+Q: When should someone hire Madhu Dadi?
+A: Hire Madhu when you need a hands-on engineer who can build AI products and connect them to measurable analytics outcomes.
 
-- **Is Madhu Dadi available for consulting?**
-  Madhu is open to full-time roles, consulting, freelance projects, and advisory work depending on scope and fit.
+Q: Is Madhu Dadi available for consulting?
+A: Madhu is open to full-time roles, consulting, freelance projects, and advisory work depending on scope and fit.
 
-- **What stack does Madhu Dadi use?**
-  Python, FastAPI, Next.js, React, TypeScript, SQL, Postgres, Redis, Celery, OpenAI API, LangChain, vector databases, GA4, and BigQuery.
+Q: What stack does Madhu Dadi use?
+A: Python, FastAPI, Next.js, React, TypeScript, SQL, Postgres, Redis, Celery, OpenAI API, LangChain, vector databases, GA4, and BigQuery.
+
+## Technical learning platform
+
+Madhu Dadi also maintains an AI, Python, and analytics learning platform with production-informed tutorials, guided learning paths, projects, and a source-grounded AI assistant.
+
+- About the learning platform: https://madhudadi.in/blog/about
+- Technical tutorials: https://madhudadi.in/blog/posts
+- Hands-on projects: https://madhudadi.in/blog/projects
+- AI assistant: https://madhudadi.in/blog/ask
 
 ## Certifications
 ${certificationLines}

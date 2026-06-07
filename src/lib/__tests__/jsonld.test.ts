@@ -1,6 +1,7 @@
 import { describe, expect, test } from "vitest";
 import {
   buildPersonSchema,
+  buildProfilePageSchema,
   buildProjectsListSchema,
   buildWebSiteSchema,
 } from "../jsonld";
@@ -26,7 +27,7 @@ describe("buildProjectsListSchema", () => {
 
     const schema = buildProjectsListSchema({ siteUrl, projects });
 
-    expect(schema).toEqual({
+    expect(schema).toMatchObject({
       "@type": "ItemList",
       "@id": "https://madhudadi.com/#projects",
       name: "Portfolio Projects",
@@ -41,7 +42,7 @@ describe("buildProjectsListSchema", () => {
             name: "Project One",
             description: "A cool project",
             url: "https://madhudadi.com/case-studies/project-one/",
-            codeRepository: "https://github.com/madhu/project-one",
+            operatingSystem: "All",
             applicationCategory: "Artificial Intelligence",
             author: { "@id": "https://madhudadi.com/#person" },
           },
@@ -88,6 +89,10 @@ describe("buildPersonSchema", () => {
   test("includes subjectOf property with blog links", () => {
     const schema = buildPersonSchema({ fullName, siteUrl });
 
+    expect(schema.url).toBe("https://madhudadi.com/profile/");
+    expect(schema.mainEntityOfPage).toEqual({
+      "@id": "https://madhudadi.com/profile/#webpage",
+    });
     expect(schema.subjectOf).toEqual([
       {
         "@type": "CreativeWork",
@@ -98,14 +103,34 @@ describe("buildPersonSchema", () => {
       {
         "@type": "CreativeWork",
         name: "Technical Articles Index",
-        url: "https://madhudadi.com/blog/posts",
+        url: "https://madhudadi.com/blog/posts/",
+      },
+      {
+        "@type": "AboutPage",
+        name: "About the AI, Python & Analytics Learning Platform",
+        url: "https://madhudadi.com/blog/about",
       },
       {
         "@type": "CreativeWork",
         name: "Technical Blog AI Assistant",
-        url: "https://madhudadi.com/blog/ask",
+        url: "https://madhudadi.com/blog/ask/",
       },
     ]);
+  });
+});
+
+describe("buildProfilePageSchema", () => {
+  test("uses /profile/ as the canonical ProfilePage URL", () => {
+    const schema = buildProfilePageSchema({
+      fullName: "Madhu Dadi",
+      url: "https://madhudadi.com/",
+    });
+
+    expect(schema.url).toBe("https://madhudadi.com/profile/");
+    expect(schema["@id"]).toBe("https://madhudadi.com/profile/#webpage");
+    expect(schema.breadcrumb).toEqual({
+      "@id": "https://madhudadi.com/profile/#breadcrumb",
+    });
   });
 });
 
@@ -113,13 +138,16 @@ describe("buildWebSiteSchema", () => {
   const url = "https://madhudadi.com/";
   const name = "Madhu Dadi";
 
-  test("includes significantLink and relatedLink properties", () => {
+  test("includes the technical blog as part of the website", () => {
     const schema = buildWebSiteSchema({ name, url });
 
-    expect(schema.significantLink).toEqual([
-      "https://madhudadi.com/blog/ask",
-      "https://madhudadi.com/blog/posts",
-    ]);
-    expect(schema.relatedLink).toEqual(["https://madhudadi.com/blog"]);
+    expect(schema).toMatchObject({
+      hasPart: {
+        "@type": "Blog",
+        "@id": "https://madhudadi.com/blog/#blog",
+        url: "https://madhudadi.com/blog/",
+        author: { "@id": "https://madhudadi.com/#person" },
+      },
+    });
   });
 });

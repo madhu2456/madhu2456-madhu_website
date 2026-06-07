@@ -93,8 +93,8 @@ export function NewPortfolioExperience({
           pageContent={pageContent}
         />
         <DirectAnswer pageContent={pageContent} />
-        <Services services={services} />
         <Projects projects={projects} />
+        <Services services={services} />
         <Stats stats={profile.stats} />
         <Skills skills={skills} />
         <Experience experiences={experiences} />
@@ -247,7 +247,9 @@ function DirectAnswer({ pageContent }: { pageContent: PageContent }) {
             {(pageContent.home.directAnswer?.paragraphs || [])
               .slice(
                 0,
-                Math.ceil((pageContent.home.directAnswer?.paragraphs?.length || 0) / 2),
+                Math.ceil(
+                  (pageContent.home.directAnswer?.paragraphs?.length || 0) / 2,
+                ),
               )
               .map((para, i) => (
                 <p key={i}>{para}</p>
@@ -256,7 +258,9 @@ function DirectAnswer({ pageContent }: { pageContent: PageContent }) {
           <div className="space-y-4">
             {(pageContent.home.directAnswer?.paragraphs || [])
               .slice(
-                Math.ceil((pageContent.home.directAnswer?.paragraphs?.length || 0) / 2),
+                Math.ceil(
+                  (pageContent.home.directAnswer?.paragraphs?.length || 0) / 2,
+                ),
               )
               .map((para, i) => (
                 <p key={i}>{para}</p>

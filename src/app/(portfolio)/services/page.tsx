@@ -13,6 +13,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { SeoStructuredData } from "@/components/SeoStructuredData";
 import { getPortfolioData } from "@/lib/portfolio-data";
 
 export const revalidate = 3600;
@@ -32,7 +33,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ServicesHubPage() {
-  const { profile, sortedServices, sortedProjects, sortedNavigationItems } = await getPortfolioData();
+  const { profile, sortedServices, sortedProjects, sortedNavigationItems } =
+    await getPortfolioData();
 
   // Helper to map slugs to premium icons
   const getServiceIcon = (slug: string) => {
@@ -78,9 +80,10 @@ export default async function ServicesHubPage() {
     <div className="flex flex-col min-h-screen">
       <script
         type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe - server-controlled JSON-LD only
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
+      <SeoStructuredData nodes={["ServicesList", "HowToHire"]} />
       <Header profile={profile} navigationItems={sortedNavigationItems} />
 
       <main id="main-content" className="flex-1 px-6 py-28 bg-background/50">
@@ -216,7 +219,11 @@ export default async function ServicesHubPage() {
         </div>
       </main>
 
-      <Footer profile={profile} navigationItems={sortedNavigationItems} projects={sortedProjects} />
+      <Footer
+        profile={profile}
+        navigationItems={sortedNavigationItems}
+        projects={sortedProjects}
+      />
     </div>
   );
 }
