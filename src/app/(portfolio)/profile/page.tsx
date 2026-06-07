@@ -15,7 +15,7 @@ import { Header } from "@/components/Header";
 import { SeoStructuredData } from "@/components/SeoStructuredData";
 import { getPortfolioData } from "@/lib/portfolio-data";
 
-export const revalidate = 3600;
+
 
 export async function generateMetadata(): Promise<Metadata> {
   const { pageContent, profile } = await getPortfolioData();

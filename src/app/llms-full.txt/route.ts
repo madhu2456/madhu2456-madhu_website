@@ -1,6 +1,6 @@
 import { getPortfolioData } from "@/lib/portfolio-data";
 
-export const revalidate = 3600;
+
 
 export async function GET() {
   const { profile, sortedProjects, sortedServices, sortedCertifications } =

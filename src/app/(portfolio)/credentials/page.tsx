@@ -19,7 +19,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { getPortfolioData } from "@/lib/portfolio-data";
 
-export const revalidate = 3600;
+
 
 export async function generateMetadata(): Promise<Metadata> {
   const { pageContent } = await getPortfolioData();
