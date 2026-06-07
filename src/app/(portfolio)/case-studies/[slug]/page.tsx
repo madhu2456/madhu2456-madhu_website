@@ -141,7 +141,7 @@ export async function generateMetadata({
       type: "article",
       images: [
         {
-          url: `${siteUrl}opengraph-image`,
+          url: `${siteUrl}opengraph-image?ext=.png`,
           width: 1200,
           height: 630,
           alt: `${project.title} case study by Madhu Dadi`,
@@ -152,7 +152,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: [`${siteUrl}opengraph-image`],
+      images: [`${siteUrl}opengraph-image?ext=.png`],
       creator: "@madhu245",
       site: "@madhu245",
     },
@@ -193,7 +193,7 @@ export default async function CaseStudyPage({
         description,
         datePublished: project.updatedAt ?? new Date().toISOString(),
         dateModified: project.updatedAt ?? new Date().toISOString(),
-        image: `${siteUrl}opengraph-image`,
+        image: `${siteUrl}opengraph-image?ext=.png`,
         about: project.category || "Case Study",
         url: caseStudyUrl,
         author: {

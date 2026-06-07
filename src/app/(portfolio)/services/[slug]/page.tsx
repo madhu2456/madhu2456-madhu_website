@@ -59,15 +59,38 @@ export async function generateMetadata({
   const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
   const canonicalUrl = `${siteUrl}services/${slug}/`;
 
+  const title =
+    service.seoTitle ||
+    (service.title.length > 45
+      ? service.title
+      : `${service.title} | Madhu Dadi`);
+  const description = service.shortDescription || service.fullDescription;
+
   return {
-    title:
-      service.seoTitle ||
-      (service.title.length > 45
-        ? service.title
-        : `${service.title} | Madhu Dadi`),
-    description: service.shortDescription || service.fullDescription,
+    title,
+    description,
     alternates: {
       canonical: canonicalUrl,
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonicalUrl,
+      type: "article",
+      images: [
+        {
+          url: `${siteUrl}opengraph-image?ext=.png`,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`${siteUrl}opengraph-image?ext=.png`],
     },
   };
 }
@@ -124,7 +147,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
     "@id": `${siteUrl}services/${slug}/#service`,
     name: service.title,
     serviceType: service.title,
-    image: `${siteUrl}opengraph-image`,
+    image: `${siteUrl}opengraph-image?ext=.png`,
     description: service.shortDescription || service.fullDescription || "",
     provider: {
       "@id": `${siteUrl}#person`,
@@ -189,7 +212,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
     description: service.shortDescription || service.fullDescription,
     datePublished: service.updatedAt ?? new Date().toISOString(),
     dateModified: service.updatedAt ?? new Date().toISOString(),
-    image: `${siteUrl}opengraph-image`,
+    image: `${siteUrl}opengraph-image?ext=.png`,
     author: {
       "@type": "Person",
       "@id": `${siteUrl}#person`,
