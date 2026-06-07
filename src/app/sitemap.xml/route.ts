@@ -9,7 +9,7 @@ export async function GET() {
   const siteUrl = `${(
     process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE_URL
   ).replace(/\/+$/, "")}/`;
-  
+
   const { sortedServices, sortedProjects } = await getPortfolioData();
 
   const entries = [
@@ -69,19 +69,23 @@ export async function GET() {
     },
     {
       url: `${siteUrl}resume.pdf`,
-      lastModified: "2026-06-02",
+      lastModified: "2026-06-07",
       changeFrequency: "monthly",
       priority: "0.5",
     },
-    ...sortedServices.map(service => ({
+    ...sortedServices.map((service) => ({
       url: `${siteUrl}services/${service.slug}/`,
-      lastModified: service.updatedAt ? new Date(service.updatedAt).toISOString().split('T')[0] : "2026-06-02",
+      lastModified: service.updatedAt
+        ? new Date(service.updatedAt).toISOString().split("T")[0]
+        : "2026-06-02",
       changeFrequency: "monthly",
       priority: "0.85",
     })),
-    ...sortedProjects.map(project => ({
+    ...sortedProjects.map((project) => ({
       url: `${siteUrl}case-studies/${project.slug}/`,
-      lastModified: project.updatedAt ? new Date(project.updatedAt).toISOString().split('T')[0] : "2026-06-02",
+      lastModified: project.updatedAt
+        ? new Date(project.updatedAt).toISOString().split("T")[0]
+        : "2026-06-02",
       changeFrequency: "monthly",
       priority: "0.8",
     })),

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Header } from "@/components/Header";
+import { SeoStructuredData } from "@/components/SeoStructuredData";
 import {
   normalizeImageSource,
   shouldUseUnoptimizedImage,
@@ -22,13 +23,13 @@ const getSiteUrl = () => {
 };
 
 export const metadata: Metadata = {
-  title: "AI & Analytics Case Studies | Madhu Dadi",
+  title: "AI, RAG & Analytics Case Studies - Production Builds | Madhu Dadi",
   description: CASE_STUDIES_DESCRIPTION,
   alternates: {
     canonical: "/case-studies/",
   },
   openGraph: {
-    title: "AI & Analytics Case Studies | Madhu Dadi",
+    title: "AI, RAG & Analytics Case Studies - Production Builds | Madhu Dadi",
     description: CASE_STUDIES_DESCRIPTION,
     url: "/case-studies/",
     type: "website",
@@ -43,7 +44,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI & Analytics Case Studies | Madhu Dadi",
+    title: "AI, RAG & Analytics Case Studies - Production Builds | Madhu Dadi",
     description: CASE_STUDIES_DESCRIPTION,
     images: [`${getSiteUrl()}opengraph-image`],
     creator: "@madhu245",
@@ -52,7 +53,8 @@ export const metadata: Metadata = {
 };
 
 export default async function CaseStudiesPage() {
-  const { profile, sortedProjects, sortedNavigationItems } = await getPortfolioData();
+  const { profile, sortedProjects, sortedNavigationItems } =
+    await getPortfolioData();
   const siteUrl = getSiteUrl();
   const collectionUrl = `${siteUrl}case-studies/`;
   const itemListElement = sortedProjects.map((project, index) => ({
@@ -63,7 +65,6 @@ export default async function CaseStudiesPage() {
   }));
 
   const collectionSchema = {
-
     "@type": "CollectionPage",
     "@id": `${collectionUrl}#collection`,
     url: collectionUrl,
@@ -80,7 +81,6 @@ export default async function CaseStudiesPage() {
   };
 
   const breadcrumbSchema = {
-
     "@type": "BreadcrumbList",
     itemListElement: [
       {
@@ -100,6 +100,7 @@ export default async function CaseStudiesPage() {
 
   return (
     <>
+      <SeoStructuredData nodes={["ProjectsList"]} />
       <Header profile={profile} navigationItems={sortedNavigationItems} />
       <main className="mx-auto w-[min(1400px,92%)] pt-32 pb-24">
         <script
@@ -126,12 +127,17 @@ export default async function CaseStudiesPage() {
           <h1 className="mt-3 font-display text-5xl font-bold text-gradient md:text-6xl">
             Generative AI, RAG, FastAPI & Marketing Analytics Case Studies
           </h1>
-          <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
-            These case studies show Madhu Dadi’s work across generative AI, RAG,
-            SEO/AEO/GEO auditing, FastAPI automation, and marketing analytics
-            systems. Each project includes architecture, implementation details,
-            measurable outcomes, and citable proof.
-          </p>
+          <div className="mt-5 space-y-4 text-lg leading-relaxed text-muted-foreground">
+            <p>
+              These case studies demonstrate Madhu Dadi’s end-to-end engineering work across generative AI, Retrieval-Augmented Generation (RAG) pipelines, FastAPI backend automation, and high-performance marketing analytics systems. The core methodology behind every project is to bridge the gap between complex architectural challenges and measurable business impact.
+            </p>
+            <p>
+              The primary tech stack revolves around Next.js and React for highly optimized, SEO-friendly frontends, paired with Python and FastAPI for robust, asynchronous backend services. Data and analytics infrastructure typically leverages PostgreSQL, Redis, Google BigQuery, and advanced telemetry pipelines. Whether building a custom LLM agent to automate workflows or auditing enterprise technical SEO, the focus remains on secure, scalable, and maintainable code.
+            </p>
+            <p>
+              Each project below is documented with a clear problem statement, the technical approach used to solve it, and the concrete outcomes achieved. Where applicable, live URLs, open-source GitHub repositories, and verifiable performance metrics are provided as citable proof of execution.
+            </p>
+          </div>
         </header>
 
         <section className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">

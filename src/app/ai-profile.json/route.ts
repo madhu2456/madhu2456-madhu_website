@@ -11,12 +11,14 @@ export async function GET() {
       dateModified: "2026-06-06T00:00:00Z",
       canonical: "https://madhudadi.in/",
       profileUrl: "https://madhudadi.in/profile/",
+      learningPlatformAbout: "https://madhudadi.in/blog/about",
       llmsTxt: "https://madhudadi.in/llms.txt",
       sitemap: "https://madhudadi.in/sitemap.xml",
     },
     person: {
       name: "Madhu Dadi",
       headline: "Generative AI, RAG & Marketing Analytics Engineer",
+      url: "https://madhudadi.in/profile/",
       location: "Visakhapatnam, India",
       summary:
         "Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India. He has 9+ years of experience across Novartis, redBus, GroupM, and Absolinsoft, and builds production LLM/RAG applications, AI agents, FastAPI/Next.js products, and analytics systems.",
@@ -33,6 +35,16 @@ export async function GET() {
         "LLM security",
         "AI security",
       ],
+      sameAs: [
+        "https://www.wikidata.org/wiki/Q139807441",
+        "https://github.com/madhu2456",
+        "https://www.linkedin.com/in/madhu-dadi-54684531",
+        "https://x.com/madhu245",
+      ],
+      relatedPages: {
+        learningPlatformAbout: "https://madhudadi.in/blog/about",
+        technicalTutorials: "https://madhudadi.in/blog/posts",
+      },
     },
     certifications: sortedCertifications.map((certification) => ({
       name: certification.name,

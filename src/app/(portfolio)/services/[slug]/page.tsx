@@ -60,7 +60,11 @@ export async function generateMetadata({
   const canonicalUrl = `${siteUrl}services/${slug}/`;
 
   return {
-    title: service.seoTitle || (service.title.length > 45 ? service.title : `${service.title} | Madhu Dadi`),
+    title:
+      service.seoTitle ||
+      (service.title.length > 45
+        ? service.title
+        : `${service.title} | Madhu Dadi`),
     description: service.shortDescription || service.fullDescription,
     alternates: {
       canonical: canonicalUrl,
@@ -71,7 +75,8 @@ export async function generateMetadata({
 export default async function ServiceDetailPage({ params }: ServicePageProps) {
   const { slug } = await params;
 
-  const { profile, sortedServices, sortedProjects, sortedNavigationItems } = await getPortfolioData();
+  const { profile, sortedServices, sortedProjects, sortedNavigationItems } =
+    await getPortfolioData();
   const service = sortedServices.find((s) => s.slug === slug);
 
   if (!service) {
@@ -115,7 +120,6 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
   const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
   const serviceSchema = {
-
     "@type": ["Service", "Product"],
     "@id": `${siteUrl}services/${slug}/#service`,
     name: service.title,
@@ -141,7 +145,6 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
   };
 
   const breadcrumbSchema = {
-
     "@type": "BreadcrumbList",
     itemListElement: [
       {
@@ -165,15 +168,51 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
     ],
   };
 
+  const faqSchema = service.faqs && service.faqs.length > 0 ? {
+    "@type": "FAQPage",
+    "@id": `${siteUrl}services/${slug}/#faq`,
+    mainEntity: service.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  } : null;
+
+  const articleSchema = {
+    "@type": "Article",
+    "@id": `${siteUrl}services/${slug}/#article`,
+    headline: service.seoTitle || service.title,
+    description: service.shortDescription || service.fullDescription,
+    datePublished: service.updatedAt ?? new Date().toISOString(),
+    dateModified: service.updatedAt ?? new Date().toISOString(),
+    author: {
+      "@type": "Person",
+      "@id": `${siteUrl}#person`,
+      name: `${profile.firstName} ${profile.lastName}`,
+    },
+    publisher: {
+      "@type": "Person",
+      "@id": `${siteUrl}#person`,
+    },
+    url: `${siteUrl}services/${slug}/`,
+    isPartOf: {
+      "@type": "CollectionPage",
+      "@id": `${siteUrl}services/`,
+    },
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       <script
         type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe - server-controlled JSON-LD only
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@graph": [serviceSchema, breadcrumbSchema],
+            "@graph": [serviceSchema, articleSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] : [])],
           }),
         }}
       />
@@ -326,6 +365,23 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             </div>
           </div>
 
+          {/* FAQs Section */}
+          {service.faqs && service.faqs.length > 0 && (
+            <div className="mt-6 md:col-span-3 space-y-4">
+              <h2 className="text-xl font-bold tracking-tight border-b border-border/80 pb-2">
+                Frequently Asked Questions
+              </h2>
+              <dl className="grid gap-4 md:grid-cols-2">
+                {service.faqs.map((faq, index) => (
+                  <div key={index} className="rounded-xl border border-border/50 bg-surface/20 p-5">
+                    <dt className="font-semibold text-foreground text-sm">{faq.question}</dt>
+                    <dd className="mt-2 text-sm leading-relaxed text-muted-foreground">{faq.answer}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          )}
+
           {/* Conversion Section */}
           <section className="relative rounded-3xl border border-border/80 bg-surface/20 p-8 md:p-12 overflow-hidden text-center max-w-4xl mx-auto mt-8">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-64 w-64 bg-primary/5 rounded-full blur-[100px] -z-10" />
@@ -369,7 +425,11 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         </div>
       </main>
 
-      <Footer profile={profile} navigationItems={sortedNavigationItems} projects={sortedProjects} />
+      <Footer
+        profile={profile}
+        navigationItems={sortedNavigationItems}
+        projects={sortedProjects}
+      />
     </div>
   );
 }

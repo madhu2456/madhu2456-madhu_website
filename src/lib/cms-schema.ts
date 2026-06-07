@@ -10,6 +10,7 @@ export const socialLinksSchema = z.object({
   youtube: z.string().url().optional().or(z.literal("")),
   stackoverflow: z.string().url().optional().or(z.literal("")),
   wikidata: z.string().url().optional().or(z.literal("")),
+  googleBusiness: z.string().url().optional().or(z.literal("")),
 });
 
 export const profileStatSchema = z.object({
@@ -109,6 +110,7 @@ export const projectSchema = z.object({
   slug: z.string().min(1, "Slug is required"),
   tagline: z.string().optional(),
   category: z.string().optional(),
+  relatedServiceSlug: z.string().optional(),
   impactSummary: z.string().optional(),
   liveUrl: z.string().url().optional().or(z.literal("")),
   githubUrl: z.string().url().optional().or(z.literal("")),
@@ -151,6 +153,15 @@ export const projectSchema = z.object({
     )
     .optional(),
   faqs: z.array(faqItemSchema).optional(),
+  gallery: z
+    .array(
+      z.object({
+        url: z.string(),
+        alt: z.string().optional(),
+        caption: z.string().optional(),
+      }),
+    )
+    .optional(),
 
   order: z.number().int(),
   updatedAt: z.string(),
@@ -197,8 +208,6 @@ export const ctaSchema = z.object({
   href: z.string().min(1, "Href is required"),
   variant: z.enum(["primary", "secondary", "link"]).optional(),
 });
-
-
 
 export const linkSchema = z.object({
   label: z.string().min(1, "Label is required"),

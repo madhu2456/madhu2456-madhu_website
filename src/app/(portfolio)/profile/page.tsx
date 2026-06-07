@@ -12,6 +12,7 @@ import {
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Header } from "@/components/Header";
+import { SeoStructuredData } from "@/components/SeoStructuredData";
 import { getPortfolioData } from "@/lib/portfolio-data";
 
 export const revalidate = 3600;
@@ -70,7 +71,7 @@ export default async function ProfilePage() {
         givenName: "Madhu",
         familyName: "Dadi",
         alternateName: ["madhu2456"],
-        url: siteUrl,
+        url: `${siteUrl}profile/`,
         image: `${siteUrl}new-ui/hero-portrait.jpg`,
         jobTitle: "AI & Marketing Analytics Engineer",
         description:
@@ -89,6 +90,8 @@ export default async function ProfilePage() {
           "https://dev.to/madhudadi",
           "https://peerlist.io/madhudadi",
           "https://x.com/madhu245",
+          "https://www.wikidata.org/wiki/Q139807441",
+          "https://www.google.com/search?kgmid=/g/11npvk25wc&hl=en-IN&q=Madhu+Dadi+-+Generative+AI,+RAG+%26+Marketing+Analytics+Consultant&shem=epsd1,rimspwouoe&shndl=30&kgs=2dd2acc94bd80f47",
         ],
         knowsAbout: [
           "LLM application development",
@@ -114,10 +117,24 @@ export default async function ProfilePage() {
           {
             "@type": "CollegeOrUniversity",
             name: "Indian Institute of Management Amritsar",
+            sameAs: "https://www.wikidata.org/wiki/Q20647463",
           },
           {
             "@type": "CollegeOrUniversity",
             name: "MVGR College of Engineering",
+            sameAs: "https://www.wikidata.org/wiki/Q6719151",
+          },
+        ],
+        subjectOf: [
+          {
+            "@type": "AboutPage",
+            name: "About the AI, Python & Analytics Learning Platform",
+            url: `${siteUrl}blog/about`,
+          },
+          {
+            "@type": "Blog",
+            name: "Madhu Dadi - AI, Python & Analytics Hub",
+            url: `${siteUrl}blog/`,
           },
         ],
         mainEntityOfPage: `${siteUrl}profile/`,
@@ -140,6 +157,24 @@ export default async function ProfilePage() {
           "@id": `${siteUrl}#person`,
         },
       },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${siteUrl}profile/#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: siteUrl,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Profile",
+            item: `${siteUrl}profile/`,
+          },
+        ],
+      },
     ],
   };
 
@@ -147,8 +182,16 @@ export default async function ProfilePage() {
     <div className="flex flex-col min-h-screen">
       <script
         type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe — server-controlled JSON-LD only
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe - server-controlled JSON-LD only
         dangerouslySetInnerHTML={{ __html: JSON.stringify(coreEntityGraph) }}
+      />
+      <SeoStructuredData
+        nodes={[
+          "Occupation",
+          "ProfilePage",
+          "WorkExperience",
+          "CertificationsList",
+        ]}
       />
       <Header profile={profile} navigationItems={sortedNavigationItems} />
 
@@ -214,6 +257,35 @@ export default async function ProfilePage() {
               )}
             </div>
           </section>
+
+          {/* Technical Learning Platform */}
+          <section className="relative rounded-2xl border border-border bg-surface/20 p-6 md:p-8 space-y-4">
+            <h2 className="text-2xl font-bold tracking-tight">
+              Technical Learning Platform
+            </h2>
+            <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+              I also build and maintain an AI, Python, and analytics learning
+              platform with production-informed tutorials, guided series,
+              hands-on projects, and a source-grounded AI assistant.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="/blog/about"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-xs font-semibold text-primary-foreground transition-all hover:scale-[1.02]"
+              >
+                About the learning platform
+                <IconExternalLink className="h-3.5 w-3.5" />
+              </Link>
+              <Link
+                href="/blog/posts"
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/30 px-5 py-2.5 text-xs font-semibold text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground"
+              >
+                Explore technical tutorials
+                <IconExternalLink className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+          </section>
+
           {/* Current Focus & Services */}
           <section className="space-y-4">
             <h2 className="text-2xl font-bold tracking-tight border-b border-border/80 pb-2">
@@ -537,6 +609,16 @@ export default async function ProfilePage() {
                   className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-muted-foreground hover:text-foreground border border-border bg-surface/30 rounded-xl hover:border-primary/20 transition-all"
                 >
                   Twitter/X <IconExternalLink className="h-3 w-3" />
+                </a>
+              )}
+              {profile.socialLinks.wikidata && (
+                <a
+                  href={profile.socialLinks.wikidata}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-muted-foreground hover:text-foreground border border-border bg-surface/30 rounded-xl hover:border-primary/20 transition-all"
+                >
+                  Wikidata <IconExternalLink className="h-3 w-3" />
                 </a>
               )}
               <a

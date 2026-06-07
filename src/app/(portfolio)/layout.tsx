@@ -96,7 +96,6 @@ export async function generateMetadata(): Promise<Metadata> {
     MAX_META_DESCRIPTION_LENGTH,
   );
 
-
   const twitterHandle = siteSettings.twitterHandle?.replace(/^@/, "");
   const googleSiteVerification =
     process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ||
@@ -153,6 +152,10 @@ export async function generateMetadata(): Promise<Metadata> {
       },
     },
     alternates: {
+      languages: {
+        "en-IN": siteUrl,
+        "x-default": siteUrl,
+      },
       types: {
         "application/rss+xml": [
           {

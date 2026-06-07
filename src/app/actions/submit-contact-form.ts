@@ -2,7 +2,7 @@
 
 import { headers } from "next/headers";
 
-// Email delivery via Resend (HTTPS API — not SMTP, so DigitalOcean port blocks don't apply).
+// Email delivery via Resend (HTTPS API - not SMTP, so DigitalOcean port blocks don't apply).
 // Setup: pnpm add resend
 // Env vars needed in .env.local / production:
 //   RESEND_API_KEY=re_xxxxxxxxxxxx        (from resend.com → API Keys)
@@ -164,7 +164,7 @@ export async function submitContactForm(
     };
   }
 
-  // Honeypot — bots fill hidden fields
+  // Honeypot - bots fill hidden fields
   if (formData.get("hp_field")) {
     return { success: true };
   }

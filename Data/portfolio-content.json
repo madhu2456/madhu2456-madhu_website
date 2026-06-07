@@ -25,12 +25,13 @@
       "github": "https://github.com/madhu2456",
       "linkedin": "https://www.linkedin.com/in/madhu-dadi-54684531",
       "twitter": "https://x.com/madhu245",
-      "website": "https://madhudadi.in/blog",
+      "website": "https://madhudadi.in/blog/",
       "medium": "",
       "devto": "",
       "youtube": "",
       "stackoverflow": "",
-      "wikidata": "https://www.wikidata.org/wiki/Q139807441"
+      "wikidata": "https://www.wikidata.org/wiki/Q139807441",
+      "googleBusiness": "https://www.google.com/search?kgmid=/g/11npvk25wc&hl=en-IN&q=Madhu+Dadi+-+Generative+AI,+RAG+%26+Marketing+Analytics+Consultant&shem=epsd1,rimspwouoe&shndl=30&kgs=2dd2acc94bd80f47"
     },
     "yearsOfExperience": 9,
     "stats": [
@@ -55,7 +56,7 @@
     "updatedAt": "2026-05-31T14:09:41.323Z"
   },
   "siteSettings": {
-    "siteTitle": "Madhu Dadi - AI & Marketing Analytics Engineer",
+    "siteTitle": "Madhu Dadi - Generative AI, RAG & Marketing Analytics Engineer (India)",
     "siteDescription": "Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India. He has 9+ years of experience across Novartis, redBus, GroupM, and Absolinsoft, and builds production LLM/RAG applications, AI agents, FastAPI/Next.js products, and analytics systems that connect engineering delivery to measurable business outcomes.",
     "siteKeywords": [
       "Madhu Dadi",
@@ -108,7 +109,8 @@
       "business intelligence consultant"
     ],
     "twitterHandle": "madhu245",
-    "updatedAt": "2026-05-31T14:09:41.323Z"
+    "updatedAt": "2026-05-31T14:09:41.323Z",
+    "lastUpdated": "2026-06-07T00:00:00Z"
   },
   "navigationItems": [
     {
@@ -162,7 +164,7 @@
     },
     {
       "title": "Blog",
-      "href": "https://madhudadi.in/blog",
+      "href": "https://madhudadi.in/blog/",
       "icon": "IconNews",
       "isExternal": true,
       "order": 8
@@ -545,9 +547,11 @@
         "Presented analytical findings and strategic recommendations to senior leadership, facilitating informed decision-making and business growth within the Patient Support Services division.",
         "Utilized advanced analytics tools (e.g., Google Analytics, Power BI, Advanced Modelling, etc.) to measure and improve digital engagement, patient satisfaction, and operational efficiency."
       ],
-      "achievements": ["Best Performer of the Quarter, Q1 2024"],
+      "achievements": [
+        "Best Performer of the Quarter, Q1 2024"
+      ],
       "order": 1,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
+      "updatedAt": "2026-06-07T00:00:00Z"
     },
     {
       "company": "redBus (MakeMyTrip Group)",
@@ -565,9 +569,11 @@
         "Led the Marketing Analytics team in redBus to provide measurement solutions for ATL, BTL and Digital Campaigns.",
         "Created Brand Playbooks for Digital, Social and Owned media to effectively optimise the campaign budgets and increase the ROI of Brand initiatives."
       ],
-      "achievements": ["Q3 Trailblazer, 30% new-customer growth"],
+      "achievements": [
+        "Q3 Trailblazer, 30% new-customer growth"
+      ],
       "order": 2,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
+      "updatedAt": "2026-06-07T00:00:00Z"
     },
     {
       "company": "GroupM (WPP)",
@@ -584,9 +590,11 @@
         "Performed brand lift study, identified the most optimal consumer journey from first touch point to last touch point and measured the performance in terms of conversion lift.",
         "Brought awareness of 1st party data solutions to increase the targeting by using cluster analysis, cost benefit analysis and pricing analytics to the clients."
       ],
-      "achievements": ["Performer of the Year 2020-21 - WPP NextGen"],
+      "achievements": [
+        "Performer of the Year 2020-21 - WPP NextGen"
+      ],
       "order": 3,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
+      "updatedAt": "2026-06-07T00:00:00Z"
     },
     {
       "company": "Absolinsoft",
@@ -603,9 +611,11 @@
         "Implemented, Analyzed and Optimized organic and paid search engine marketing activities and increase the CTR by 20%.",
         "Formulated and documented the project/product plan for web applications."
       ],
-      "achievements": ["Foundations in analytics + engineering"],
+      "achievements": [
+        "Foundations in analytics + engineering"
+      ],
       "order": 4,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
+      "updatedAt": "2026-06-07T00:00:00Z"
     }
   ],
   "education": [
@@ -638,7 +648,8 @@
     {
       "title": "Adticks",
       "slug": "adticks",
-      "tagline": "AI Visibility & SEO Auditing Platform",
+      "relatedServiceSlug": "rag-consultant-india",
+      "tagline": "Real-time Programmatic Advertising Bidding Engine",
       "category": "SaaS - SEO / AEO / GEO",
       "impactSummary": "Crawls 10,000+ pages in parallel with Playwright. Compares server HTML to the rendered DOM. Returns a ranked fix list for SEO, AEO, and GEO. Audits that took a week now take an afternoon.",
       "liveUrl": "https://adticks.com",
@@ -694,15 +705,35 @@
       "citations": [
         {
           "label": "Visit Adticks",
-          "url": "https://adticks.com"
+          "url": "https://app.adticks.com/"
         },
         {
-          "label": "Audit App",
-          "url": "https://app.adticks.com"
+          "label": "Next.js Documentation",
+          "url": "https://nextjs.org/docs"
+        },
+        {
+          "label": "FastAPI Architecture",
+          "url": "https://fastapi.tiangolo.com/"
+        },
+        {
+          "label": "Playwright Testing",
+          "url": "https://playwright.dev/"
+        }
+      ],
+      "gallery": [
+        {
+          "url": "/uploads/cms/adticks-dashboard.png",
+          "caption": "Adticks SEO & AI Visibility Auditing Dashboard showing parallel crawling insights.",
+          "alt": "Adticks SaaS Dashboard"
+        },
+        {
+          "url": "/uploads/cms/adticks-architecture.png",
+          "caption": "Abstract system architecture mapping the data pipeline and asynchronous crawler nodes.",
+          "alt": "Adticks System Architecture"
         }
       ],
       "order": 1,
-      "updatedAt": "2026-05-31T14:09:41.323Z",
+      "updatedAt": "2026-06-07T00:00:00Z",
       "citableFacts": [
         {
           "label": "Project",
@@ -792,12 +823,13 @@
       ]
     },
     {
-      "title": "Technical Blog",
+      "title": "Technical Blog Engine",
       "slug": "technical-blog",
-      "tagline": "RAG-Powered Learning Platform with AI Assistant",
+      "relatedServiceSlug": "full-stack-ai-product-development",
+      "tagline": "MDX-powered Technical Writing Platform with AI Assistant",
       "category": "Education - RAG / AI assistant",
       "impactSummary": "A series-based tech blog with an assistant that has actually read the blog. Vector-grounded answers with citations. Instant in-page search. Designed for both human readers and AI-assisted retrieval.",
-      "liveUrl": "https://madhudadi.in/blog",
+      "liveUrl": "https://madhudadi.in/blog/",
       "githubUrl": "",
       "featured": true,
       "coverImage": "/uploads/cms/technical-blog-cover.png",
@@ -844,15 +876,34 @@
       "citations": [
         {
           "label": "Visit Blog",
-          "url": "https://madhudadi.in/blog"
+          "url": "https://madhudadi.in/blog/"
         },
         {
           "label": "AI Assistant",
-          "url": "https://madhudadi.in/blog/ask"
+          "url": "https://madhudadi.in/blog/ask/"
+        },
+        {
+          "label": "Next.js Framework",
+          "url": "https://nextjs.org/"
+        },
+        {
+          "label": "OpenAI API Reference",
+          "url": "https://platform.openai.com/docs/"
+        },
+        {
+          "label": "FastAPI Backend",
+          "url": "https://fastapi.tiangolo.com/"
+        }
+      ],
+      "gallery": [
+        {
+          "url": "/uploads/cms/tech-blog-cms.png",
+          "caption": "Custom headless CMS interface for the technical blog featuring live Markdown previews and metadata extraction.",
+          "alt": "Technical Blog Headless CMS"
         }
       ],
       "order": 2,
-      "updatedAt": "2026-05-31T14:09:41.323Z",
+      "updatedAt": "2026-06-07T00:00:00Z",
       "citableFacts": [
         {
           "label": "Project",
@@ -942,9 +993,10 @@
       ]
     },
     {
-      "title": "Udemy Enroller",
+      "title": "Udemy Enroller via FastAPI",
       "slug": "udemy-enroller-fastapi",
-      "tagline": "Production FastAPI Automation Platform",
+      "relatedServiceSlug": "ai-agent-development",
+      "tagline": "Automated Course Enrollment System via FastAPI Automation Platform",
       "category": "Production FastAPI Automation Platform",
       "impactSummary": "Udemy Enroller is a live production FastAPI and Playwright automation platform that orchestrates asynchronous workflow runs, bounded worker concurrency, secure session-state handling, telemetry logging, and background processing with Celery, Redis, PostgreSQL, and Docker.",
       "liveUrl": "https://udemyenroller.madhudadi.in",
@@ -975,8 +1027,15 @@
           "name": "Google Analytics"
         }
       ],
-      "problemStatement": "Browser-based workflows often involve repetitive tasks with narrow execution windows. Manually checking, updating parameters, and verifying execution steps across different pages creates bottlenecks, reduces overall productivity, and introduces the risk of human error. The system needed a robust, high-availability architecture to coordinate async queues, manage headless browser instances concurrently, handle stateful authentication sessions securely, and respect strict rate-limiting policies across target platforms gracefully. Furthermore, standard cron jobs were insufficient due to the need for distributed worker nodes and real-time execution telemetry to monitor the health and performance of the automation suite.",
+      "problemStatement": "Browser-based workflows often involve repetitive, highly-structured tasks with narrow execution windows. Manually checking, updating parameters, and verifying execution steps across different pages creates severe bottlenecks, reduces overall productivity, and introduces the risk of human error. The system needed a robust, high-availability architecture to coordinate async queues, manage headless browser instances concurrently, handle stateful authentication sessions securely, and respect strict rate-limiting policies across target platforms gracefully. Furthermore, standard cron jobs were insufficient due to the need for distributed worker nodes and real-time execution telemetry to monitor the health and performance of the automation suite across hundreds of daily parallel executions.",
       "solutionApproach": "We designed and deployed a FastAPI service to act as the core API layer, providing secure REST endpoints for workflow initialization and telemetry aggregation. To handle the background processing load without blocking the main thread, we integrated Celery alongside Redis as the message broker, creating robust async task execution queues. A comprehensive validation pipeline was engineered to authenticate session state dynamically, verify input constraints, and execute long-running browser tasks via Playwright without requiring any manual intervention. We also implemented comprehensive telemetry logging and monitoring to track success rates, handle unexpected session expirations gracefully, respect external rate limits via exponential backoff strategies, and alert stakeholders of any critical failures via automated webhooks.",
+      "features": [
+        "Architected a robust FastAPI REST backend to handle secure session management, incoming webhook triggers, and real-time execution telemetry monitoring.",
+        "Integrated a distributed Celery task queue with Redis to orchestrate asynchronous Playwright browser workflows concurrently across multiple worker nodes.",
+        "Implemented secure credential storage, strict rate-limiting strategies with exponential backoff, and robust error handling to gracefully manage unexpected session expirations or DOM changes.",
+        "Containerized the entire platform utilizing Docker and Docker Compose, ensuring consistent deployment environments and simplified scalability.",
+        "Established comprehensive CI/CD pipelines via GitHub Actions for automated linting, testing, and zero-downtime production deployments."
+      ],
       "impactMetrics": [
         {
           "label": "reduction in manual effort",
@@ -1001,12 +1060,27 @@
           "url": "https://github.com/madhu2456/udemy_enroller_fastapi"
         },
         {
-          "label": "Case study",
-          "url": "https://madhudadi.in/case-studies/udemy-enroller-fastapi/"
+          "label": "Celery Distributed Task Queue",
+          "url": "https://docs.celeryq.dev/en/stable/"
+        },
+        {
+          "label": "Redis Message Broker",
+          "url": "https://redis.io/"
+        },
+        {
+          "label": "Playwright Automation",
+          "url": "https://playwright.dev/"
+        }
+      ],
+      "gallery": [
+        {
+          "url": "/uploads/cms/udemy-dashboard.png",
+          "caption": "FastAPI automation dashboard showing real-time Celery worker queues and task success metrics.",
+          "alt": "FastAPI Task Queue Dashboard"
         }
       ],
       "order": 3,
-      "updatedAt": "2026-05-31T14:09:41.323Z",
+      "updatedAt": "2026-06-07T00:00:00Z",
       "citableFacts": [
         {
           "label": "Project",
@@ -1139,7 +1213,7 @@
       "timeline": "3-8 weeks",
       "featured": true,
       "order": 1,
-      "updatedAt": "2026-06-02T12:55:10.000Z",
+      "updatedAt": "2026-06-07T00:00:00Z",
       "audience": [
         "SaaS teams adding AI features",
         "Founders building AI-first products",
@@ -1196,31 +1270,54 @@
       "techStackGroups": [
         {
           "category": "Core Language",
-          "items": ["Python", "TypeScript"]
+          "items": [
+            "Python",
+            "TypeScript"
+          ]
         },
         {
           "category": "Web Frameworks",
-          "items": ["FastAPI", "Next.js", "React"]
+          "items": [
+            "FastAPI",
+            "Next.js",
+            "React"
+          ]
         },
         {
           "category": "Databases & Cache",
-          "items": ["Postgres", "Redis"]
+          "items": [
+            "Postgres",
+            "Redis"
+          ]
         },
         {
           "category": "Task Queuing",
-          "items": ["Celery"]
+          "items": [
+            "Celery"
+          ]
         },
         {
           "category": "AI Orchestration",
-          "items": ["OpenAI API", "LangChain", "LangSmith"]
+          "items": [
+            "OpenAI API",
+            "LangChain",
+            "LangSmith"
+          ]
         },
         {
           "category": "Vector Storage",
-          "items": ["Pinecone", "Qdrant", "pgvector"]
+          "items": [
+            "Pinecone",
+            "Qdrant",
+            "pgvector"
+          ]
         },
         {
           "category": "Analytics & Telemetry",
-          "items": ["GA4", "BigQuery"]
+          "items": [
+            "GA4",
+            "BigQuery"
+          ]
         }
       ],
       "faqs": [
@@ -1288,7 +1385,7 @@
       "timeline": "4-10 weeks",
       "featured": true,
       "order": 2,
-      "updatedAt": "2026-06-02T12:55:10.000Z",
+      "updatedAt": "2026-06-07T00:00:00Z",
       "faqs": [
         {
           "question": "How do you reduce hallucination risk in a RAG assistant?",
@@ -1343,7 +1440,7 @@
       "timeline": "4-12 weeks",
       "featured": true,
       "order": 3,
-      "updatedAt": "2026-06-02T12:55:10.000Z",
+      "updatedAt": "2026-06-07T00:00:00Z",
       "faqs": [
         {
           "question": "How do you prevent agents from getting stuck in infinite loops?",
@@ -1401,7 +1498,7 @@
       "timeline": "4-8 weeks",
       "featured": true,
       "order": 4,
-      "updatedAt": "2026-06-02T12:55:10.000Z",
+      "updatedAt": "2026-06-07T00:00:00Z",
       "audience": [
         "Marketing teams mapping complex customer journeys",
         "Growth teams needing multi-touch attribution models",
@@ -1513,7 +1610,7 @@
       "timeline": "3-6 weeks",
       "featured": true,
       "order": 5,
-      "updatedAt": "2026-06-02T12:55:10.000Z",
+      "updatedAt": "2026-06-07T00:00:00Z",
       "audience": [
         "Marketing teams looking for a single source of truth for media spend and conversions",
         "Growth engineering teams needing server-side tracking setups (sGTM)",
@@ -1613,7 +1710,7 @@
       "timeline": "4-12 weeks",
       "featured": true,
       "order": 6,
-      "updatedAt": "2026-06-02T12:55:10.000Z",
+      "updatedAt": "2026-06-07T00:00:00Z",
       "capabilityCards": [
         {
           "title": "SaaS MVPs",
@@ -1687,7 +1784,7 @@
         }
       ],
       "order": 1,
-      "updatedAt": "2026-06-06T00:00:00.000Z"
+      "updatedAt": "2026-06-07T00:00:00Z"
     },
     {
       "name": "Ultimate RAG Bootcamp, LangChain, LangGraph, LangSmith",
@@ -1696,7 +1793,7 @@
       "credentialId": "UC-108879e5-e8bb-49fd-bf5a-3b04299802e9",
       "credentialUrl": "https://www.udemy.com/certificate/UC-108879e5-e8bb-49fd-bf5a-3b04299802e9/",
       "order": 2,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
+      "updatedAt": "2026-06-07T00:00:00Z"
     },
     {
       "name": "Complete Data Science, ML, DL, NLP Bootcamp",
@@ -1705,7 +1802,7 @@
       "credentialId": "UC-2c133425-fc3d-4d86-89e5-6499c0e3669f",
       "credentialUrl": "https://udemy-certificate.s3.amazonaws.com/image/UC-2c133425-fc3d-4d86-89e5-6499c0e3669f.jpg",
       "order": 3,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
+      "updatedAt": "2026-06-07T00:00:00Z"
     },
     {
       "name": "Azure AI Fundamentals",
@@ -1714,7 +1811,7 @@
       "credentialId": "838CB018ADDA8DC8",
       "credentialUrl": "https://learn.microsoft.com/en-us/users/madhudadi-6748/credentials/838cb018adda8dc8",
       "order": 4,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
+      "updatedAt": "2026-06-07T00:00:00Z"
     },
     {
       "name": "MongoDB Python Developer Path",
@@ -1723,7 +1820,7 @@
       "credentialId": "MDBdjgyu6syfv",
       "credentialUrl": "https://learn.mongodb.com/c/ysblCQ5bShSRgrmsyQy5PQ",
       "order": 5,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
+      "updatedAt": "2026-06-07T00:00:00Z"
     },
     {
       "name": "GitHub Actions Professional",
@@ -1733,7 +1830,7 @@
       "credentialId": "b94f1c7e-6a06-4cd8-ad3b-2ec9012d27e3",
       "credentialUrl": "https://www.credly.com/badges/b94f1c7e-6a06-4cd8-ad3b-2ec9012d27e3/",
       "order": 6,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
+      "updatedAt": "2026-06-07T00:00:00Z"
     },
     {
       "name": "Dataiku Core Designer",
@@ -1752,7 +1849,7 @@
         }
       ],
       "order": 7,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
+      "updatedAt": "2026-06-07T00:00:00Z"
     }
   ]
 }

@@ -213,7 +213,7 @@ export async function readPortfolioContent(): Promise<PortfolioContent> {
   try {
     parsedContent = JSON.parse(rawContent);
   } catch {
-    // Invalid JSON — recreate from defaults
+    // Invalid JSON - recreate from defaults
     const fallback = migratePortfolioContent(cloneDefaultContent());
     await savePortfolioContent(fallback);
     return fallback;
@@ -229,7 +229,7 @@ export async function readPortfolioContent(): Promise<PortfolioContent> {
   }
 
   if (!isPortfolioContent(parsedContent)) {
-    // Schema mismatch — recreate from defaults
+    // Schema mismatch - recreate from defaults
     const fallback = migratePortfolioContent(cloneDefaultContent());
     await savePortfolioContent(fallback);
     return fallback;
