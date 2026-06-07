@@ -202,6 +202,14 @@ export default async function CaseStudyPage({
           name: `${profile.firstName} ${profile.lastName}`,
           url: siteUrl,
         },
+        publisher: {
+          "@type": "Organization",
+          name: `${profile.firstName} ${profile.lastName}`,
+          logo: {
+            "@type": "ImageObject",
+            url: `${siteUrl}icon.png`,
+          },
+        },
         isPartOf: {
           "@type": "CollectionPage",
           "@id": `${siteUrl}case-studies/`,

@@ -189,14 +189,19 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
     description: service.shortDescription || service.fullDescription,
     datePublished: service.updatedAt ?? new Date().toISOString(),
     dateModified: service.updatedAt ?? new Date().toISOString(),
+    image: `${siteUrl}opengraph-image`,
     author: {
       "@type": "Person",
       "@id": `${siteUrl}#person`,
       name: `${profile.firstName} ${profile.lastName}`,
     },
     publisher: {
-      "@type": "Person",
-      "@id": `${siteUrl}#person`,
+      "@type": "Organization",
+      name: `${profile.firstName} ${profile.lastName}`,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteUrl}icon.png`,
+      },
     },
     url: `${siteUrl}services/${slug}/`,
     isPartOf: {
