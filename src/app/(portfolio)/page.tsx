@@ -10,14 +10,14 @@ const resolveSiteUrl = (rawUrl?: string) => {
 const siteUrl = resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL);
 
 export const metadata: Metadata = {
-  title: "Madhu Dadi - Generative AI, RAG & Marketing Analytics Engineer (India)",
+  title: "Madhu Dadi - Generative AI, RAG & Marketing Analytics Consultant",
   description:
     "AI and marketing analytics engineer. 9+ years exp (Novartis, redBus, GroupM). I build production LLM/RAG apps, AI agents, FastAPI, Next.js, and analytics.",
   alternates: {
     canonical: siteUrl,
   },
   openGraph: {
-    title: "Madhu Dadi - Generative AI, RAG & Marketing Analytics Engineer (India)",
+    title: "Madhu Dadi - Generative AI, RAG & Marketing Analytics Consultant",
     description:
       "Production LLM/RAG apps, AI agents, FastAPI/Next.js products, and marketing analytics systems.",
     url: siteUrl,
@@ -25,19 +25,19 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: `${siteUrl}opengraph-image`,
+        url: `${siteUrl}opengraph-image?ext=.png`,
         width: 1200,
         height: 630,
-        alt: "Madhu Dadi - Generative AI, RAG & Marketing Analytics Engineer (India)",
+        alt: "Madhu Dadi - Generative AI, RAG & Marketing Analytics Consultant",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Madhu Dadi - Generative AI, RAG & Marketing Analytics Engineer (India)",
+    title: "Madhu Dadi - Generative AI, RAG & Marketing Analytics Consultant",
     description:
       "Production LLM/RAG apps, AI agents, FastAPI/Next.js products, and marketing analytics systems.",
-    images: [`${siteUrl}opengraph-image`],
+    images: [`${siteUrl}opengraph-image?ext=.png`],
   },
 };
 

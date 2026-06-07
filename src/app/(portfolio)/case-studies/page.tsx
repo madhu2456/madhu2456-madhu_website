@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: `${getSiteUrl()}opengraph-image`,
+        url: `${getSiteUrl()}opengraph-image?ext=.png`,
         width: 1200,
         height: 630,
         alt: "Madhu Dadi case studies",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "AI, RAG & Analytics Case Studies - Production Builds | Madhu Dadi",
     description: CASE_STUDIES_DESCRIPTION,
-    images: [`${getSiteUrl()}opengraph-image`],
+    images: [`${getSiteUrl()}opengraph-image?ext=.png`],
     creator: "@madhu245",
     site: "@madhu245",
   },

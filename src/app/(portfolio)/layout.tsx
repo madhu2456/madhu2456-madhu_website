@@ -120,7 +120,7 @@ export async function generateMetadata(): Promise<Metadata> {
         }
       : undefined;
 
-  const ogImageUrl = `${siteUrl}opengraph-image`;
+  const ogImageUrl = `${siteUrl}opengraph-image?ext=.png`;
 
   return {
     metadataBase: new URL(siteUrl),
@@ -166,12 +166,13 @@ export async function generateMetadata(): Promise<Metadata> {
       },
     },
     openGraph: {
-      type: "website",
-      locale: "en_US",
-      url: siteUrl,
-      siteName,
-      title,
+      title: {
+        template: "%s | Madhu Dadi",
+        default: title,
+      },
       description,
+      url: siteUrl,
+      siteName: siteName,
       images: [
         {
           url: ogImageUrl,
