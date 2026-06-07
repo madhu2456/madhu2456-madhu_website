@@ -11,6 +11,7 @@ import {
   IconSchool,
   IconShieldCheck,
   IconTrophy,
+  IconSparkles,
 } from "@tabler/icons-react";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -130,6 +131,22 @@ export default async function CredentialsPage() {
               Download PDF Resume
               <IconDownload className="h-4.5 w-4.5" />
             </a>
+          </section>
+
+          {/* AI Answer Block / Executive Summary */}
+          <section
+            aria-label="Quick Summary"
+            className="rounded-2xl border border-primary/20 bg-primary/5 p-6 md:p-8 backdrop-blur-sm space-y-4"
+          >
+            <h2 className="font-bold text-lg text-foreground flex items-center gap-2">
+              <IconSparkles className="h-5 w-5 text-primary" /> Executive Summary
+            </h2>
+            <ul className="list-disc pl-5 space-y-2 text-sm text-foreground/90">
+              <li><strong>Professional Focus:</strong> Full-Stack AI Engineer and Marketing Analytics Consultant.</li>
+              <li><strong>Key Expertise:</strong> Retrieval-Augmented Generation (RAG), LLM Application Development, and GA4/BigQuery Campaign Analytics.</li>
+              <li><strong>Verifiable Proof:</strong> Comprehensive matrix of certifications, academic degrees, and professional awards.</li>
+              <li><strong>Work History:</strong> Documented chronological work history with measurable engineering milestones and deliverables.</li>
+            </ul>
           </section>
 
           {/* High-Trust Proof Table */}

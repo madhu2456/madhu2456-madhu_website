@@ -281,6 +281,22 @@ export default async function CaseStudyPage({
           </time>
         </p>
 
+        {/* AI Answer Block / Executive Summary */}
+        <div 
+          aria-label="Executive Summary"
+          className="mt-8 p-6 rounded-2xl bg-surface/40 border border-border/60 space-y-4"
+        >
+          <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-2">
+             Executive Summary
+          </h2>
+          <ul className="list-disc pl-5 space-y-2 text-sm text-foreground/90">
+            {project.category && <li><strong>Focus Area:</strong> {project.category}</li>}
+            {project.technologies && project.technologies.length > 0 && <li><strong>Core Stack:</strong> {project.technologies.map(t => t.name).join(", ")}</li>}
+            {project.impactMetrics && project.impactMetrics.length > 0 && <li><strong>Key Impact:</strong> {project.impactMetrics[0]?.value} {project.impactMetrics[0]?.label}</li>}
+            <li><strong>Outcome:</strong> {project.tagline || description}</li>
+          </ul>
+        </div>
+
         {project.coverImage ? (
           <div className="relative mt-8 aspect-video w-full overflow-hidden rounded-2xl border border-border/80 bg-surface shadow-glow">
             <Image

@@ -255,6 +255,22 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             </div>
           </section>
 
+          {/* AI Answer Block / TL;DR Summary */}
+          <div 
+            aria-label="TL;DR Summary"
+            className="p-6 rounded-2xl bg-primary/5 border border-primary/20 space-y-4"
+          >
+            <h2 className="text-sm font-bold uppercase tracking-wider text-primary flex items-center gap-2">
+               <IconSparkles className="h-4 w-4" /> Quick Summary
+            </h2>
+            <ul className="list-disc pl-5 space-y-2 text-sm text-foreground/90">
+              <li><strong>Service:</strong> {service.title}</li>
+              <li><strong>Overview:</strong> {service.shortDescription}</li>
+              {service.pricing?.startingPrice && <li><strong>Pricing:</strong> Custom (starting at ${service.pricing.startingPrice})</li>}
+              {service.timeline && <li><strong>Typical Timeline:</strong> {service.timeline}</li>}
+            </ul>
+          </div>
+
           {/* Detailed Content Split Grid */}
           <div className="grid gap-10 md:grid-cols-3">
             {/* Main detail content column */}
