@@ -25,7 +25,7 @@
       "github": "https://github.com/madhu2456",
       "linkedin": "https://www.linkedin.com/in/madhu-dadi-54684531",
       "twitter": "https://x.com/madhu245",
-      "website": "https://madhudadi.in/blog/",
+      "website": "https://madhudadi.in/blog",
       "medium": "",
       "devto": "",
       "youtube": "",
@@ -164,7 +164,7 @@
     },
     {
       "title": "Blog",
-      "href": "https://madhudadi.in/blog/",
+      "href": "https://madhudadi.in/blog",
       "icon": "IconNews",
       "isExternal": true,
       "order": 8
@@ -829,7 +829,7 @@
       "tagline": "MDX-powered Technical Writing Platform with AI Assistant",
       "category": "Education - RAG / AI assistant",
       "impactSummary": "A series-based tech blog with an assistant that has actually read the blog. Vector-grounded answers with citations. Instant in-page search. Designed for both human readers and AI-assisted retrieval.",
-      "liveUrl": "https://madhudadi.in/blog/",
+      "liveUrl": "https://madhudadi.in/blog",
       "githubUrl": "",
       "featured": true,
       "coverImage": "/uploads/cms/technical-blog-cover.png",
@@ -876,11 +876,11 @@
       "citations": [
         {
           "label": "Visit Blog",
-          "url": "https://madhudadi.in/blog/"
+          "url": "https://madhudadi.in/blog"
         },
         {
           "label": "AI Assistant",
-          "url": "https://madhudadi.in/blog/ask/"
+          "url": "https://madhudadi.in/blog/ask"
         },
         {
           "label": "Next.js Framework",

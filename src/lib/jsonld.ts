@@ -256,7 +256,7 @@ export function buildPersonSchema({
       },
     }),
     ...(sameAs.length > 0 && { sameAs }),
-    publishingPrinciples: `${siteUrl}blog/`,
+    publishingPrinciples: `${siteUrl}blog`,
     mainEntityOfPage: { "@id": `${siteUrl}profile/#webpage` },
     hasOccupation: { "@id": `${siteUrl}#occupation` },
     subjectOf: [
@@ -269,7 +269,7 @@ export function buildPersonSchema({
       {
         "@type": "CreativeWork",
         name: "Technical Articles Index",
-        url: `${siteUrl}blog/posts/`,
+        url: `${siteUrl}blog/posts`,
       },
       {
         "@type": "AboutPage",
@@ -279,7 +279,7 @@ export function buildPersonSchema({
       {
         "@type": "CreativeWork",
         name: "Technical Blog AI Assistant",
-        url: `${siteUrl}blog/ask/`,
+        url: `${siteUrl}blog/ask`,
       },
     ],
     ...(knowsAbout.length > 0 && { knowsAbout }),
@@ -377,7 +377,7 @@ export function buildWebSiteSchema({
   url: string;
   description?: string | null;
 }) {
-  const blogUrl = `${url}blog/`;
+  const blogUrl = `${url}blog`;
   return {
     "@type": "WebSite",
     "@id": `${url}#website`,

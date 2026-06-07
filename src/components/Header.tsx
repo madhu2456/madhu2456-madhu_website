@@ -29,7 +29,7 @@ export function Header({ profile, navigationItems }: HeaderProps) {
   };
 
   const isLinkActive = (href: string) => {
-    if (href === "https://madhudadi.in/blog/") return false;
+    if (href === "https://madhudadi.in/blog") return false;
 
     // Check match for root
     if (href === "/" && pathname === "/") return true;
