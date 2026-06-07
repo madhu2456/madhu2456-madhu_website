@@ -124,6 +124,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
     "@id": `${siteUrl}services/${slug}/#service`,
     name: service.title,
     serviceType: service.title,
+    image: `${siteUrl}opengraph-image`,
     description: service.shortDescription || service.fullDescription || "",
     provider: {
       "@id": `${siteUrl}#person`,
