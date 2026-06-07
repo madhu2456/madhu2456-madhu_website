@@ -50,24 +50,6 @@ export async function GET() {
       priority: "0.7",
     },
     {
-      url: `${siteUrl}search/`,
-      lastModified: "2026-06-02",
-      changeFrequency: "monthly",
-      priority: "0.6",
-    },
-    {
-      url: `${siteUrl}llms.txt`,
-      lastModified: "2026-06-02",
-      changeFrequency: "monthly",
-      priority: "0.5",
-    },
-    {
-      url: `${siteUrl}ai-profile.json`,
-      lastModified: "2026-06-02",
-      changeFrequency: "monthly",
-      priority: "0.5",
-    },
-    {
       url: `${siteUrl}resume.pdf`,
       lastModified: "2026-06-07",
       changeFrequency: "monthly",

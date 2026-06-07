@@ -223,11 +223,13 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="llms" href={`${SITE_URL}llms.txt`} />
+        <link rel="ai-profile" href={`${SITE_URL}ai-profile.json`} />
+      </head>
       <body
         className={`${inter.variable} ${instrumentSerif.variable} ${geistMono.variable} antialiased`}
       >
-        <link rel="llms" href={`${SITE_URL}llms.txt`} />
-        <link rel="ai-profile" href={`${SITE_URL}ai-profile.json`} />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-background focus:text-foreground"
