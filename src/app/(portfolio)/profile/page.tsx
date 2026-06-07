@@ -134,7 +134,7 @@ export default async function ProfilePage() {
           {
             "@type": "Blog",
             name: "Madhu Dadi - AI, Python & Analytics Hub",
-            url: `${siteUrl}blog/`,
+            url: `${siteUrl}blog`,
           },
         ],
         mainEntityOfPage: `${siteUrl}profile/`,
