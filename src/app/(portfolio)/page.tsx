@@ -15,6 +15,10 @@ export const metadata: Metadata = {
     "AI and marketing analytics engineer. 9+ years exp (Novartis, redBus, GroupM). I build production LLM/RAG apps, AI agents, FastAPI, Next.js, and analytics.",
   alternates: {
     canonical: siteUrl,
+    languages: {
+      "en-IN": siteUrl,
+      "x-default": siteUrl,
+    },
   },
   openGraph: {
     title: "Madhu Dadi - Generative AI, RAG & Marketing Analytics Consultant",
