@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 
-
 import { Geist_Mono, Instrument_Serif, Inter } from "next/font/google";
 import { AppSidebar } from "@/components/app-sidebar";
 import { ClientChrome } from "@/components/ClientChrome";

@@ -1,10 +1,13 @@
 import { getPortfolioData } from "@/lib/portfolio-data";
 
-
-
 export async function GET() {
-  const { profile, sortedProjects, sortedServices, sortedCertifications } =
-    await getPortfolioData();
+  const {
+    profile,
+    sortedProjects,
+    sortedServices,
+    sortedCertifications,
+    publishedGuides,
+  } = await getPortfolioData();
 
   const siteUrl = (
     process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in"
@@ -35,6 +38,18 @@ ${p.problemStatement ? `**The Problem:**\n${p.problemStatement}\n` : ""}
 ${p.solutionApproach ? `**The Solution:**\n${p.solutionApproach}\n` : ""}
 ${p.technicalDecisions && p.technicalDecisions.length > 0 ? `**Technical Decisions:**\n${p.technicalDecisions.map((t) => `- **${t.title}:** ${t.desc}`).join("\n")}\n` : ""}
 ${p.slug ? `URL: ${siteUrl}/case-studies/${p.slug}/` : ""}
+`,
+    )
+    .join("\n\n");
+
+  const guidesSection = publishedGuides
+    .map(
+      (g) => `### ${g.title}
+${g.summary}
+
+**Topic:** ${g.primaryTopic}
+**Type:** ${g.guideType}
+${g.slug ? `URL: ${siteUrl}/guides/${g.slug}/` : ""}
 `,
     )
     .join("\n\n");
@@ -75,6 +90,10 @@ ${servicesSection}
 ## Detailed Case Studies
 
 ${projectsSection}
+
+## Technical Guides & Frameworks
+
+${guidesSection}
 
 ## Frequently asked questions
 

@@ -130,54 +130,120 @@ export default async function CaseStudiesPage() {
           <div className="mt-8 space-y-12 text-lg leading-relaxed text-muted-foreground">
             <section className="space-y-4">
               <p>
-                These case studies demonstrate my end-to-end engineering work across generative AI, Retrieval-Augmented Generation (RAG) pipelines, FastAPI backend automation, and high-performance marketing analytics systems. The core methodology behind every project is to bridge the gap between complex architectural challenges and measurable business impact.
+                These case studies demonstrate my end-to-end engineering work
+                across generative AI, Retrieval-Augmented Generation (RAG)
+                pipelines, FastAPI backend automation, and high-performance
+                marketing analytics systems. The core methodology behind every
+                project is to bridge the gap between complex architectural
+                challenges and measurable business impact.
               </p>
               <p>
-                My primary tech stack revolves around Next.js and React for highly optimized, SEO-friendly frontends, paired with Python and FastAPI for robust, asynchronous backend services. Data and analytics infrastructure typically leverages PostgreSQL, Redis, Google BigQuery, and advanced telemetry pipelines.
+                My primary tech stack revolves around Next.js and React for
+                highly optimized, SEO-friendly frontends, paired with Python and
+                FastAPI for robust, asynchronous backend services. Data and
+                analytics infrastructure typically leverages PostgreSQL, Redis,
+                Google BigQuery, and advanced telemetry pipelines.
               </p>
             </section>
 
             <section className="space-y-4">
-              <h2 className="font-display text-3xl font-semibold text-foreground">Core Categories</h2>
+              <h2 className="font-display text-3xl font-semibold text-foreground">
+                Core Categories
+              </h2>
               <div className="space-y-6 mt-4">
                 <div>
-                  <h3 className="font-bold text-foreground">Generative AI & LLM Engineering</h3>
+                  <h3 className="font-bold text-foreground">
+                    Generative AI & LLM Engineering
+                  </h3>
                   <p className="mt-2 text-base">
-                    Building high-performance generative AI systems utilizing modern large language models, structured outputs, robust prompt engineering pipelines, and rigorous runtime evaluation frameworks. I prioritize mitigating hallucination and ensuring data privacy in enterprise environments, ensuring AI tools operate reliably and securely.
+                    Building high-performance generative AI systems utilizing
+                    modern large language models, structured outputs, robust
+                    prompt engineering pipelines, and rigorous runtime
+                    evaluation frameworks. I prioritize mitigating hallucination
+                    and ensuring data privacy in enterprise environments,
+                    ensuring AI tools operate reliably and securely.
                   </p>
                 </div>
                 <div>
-                  <h3 className="font-bold text-foreground">Retrieval-Augmented Generation (RAG)</h3>
+                  <h3 className="font-bold text-foreground">
+                    Retrieval-Augmented Generation (RAG)
+                  </h3>
                   <p className="mt-2 text-base">
-                    Designing bespoke enterprise RAG pipelines for complex document ingestion, semantic chunking, dense/sparse hybrid search, cross-encoder reranking, and citation verification. These systems ensure that AI responses are strictly grounded in verifiable internal knowledge, eliminating fabrication and enabling high-stakes decision-making.
+                    Designing bespoke enterprise RAG pipelines for complex
+                    document ingestion, semantic chunking, dense/sparse hybrid
+                    search, cross-encoder reranking, and citation verification.
+                    These systems ensure that AI responses are strictly grounded
+                    in verifiable internal knowledge, eliminating fabrication
+                    and enabling high-stakes decision-making.
                   </p>
                 </div>
                 <div>
-                  <h3 className="font-bold text-foreground">Marketing Analytics & Measurement</h3>
+                  <h3 className="font-bold text-foreground">
+                    Marketing Analytics & Measurement
+                  </h3>
                   <p className="mt-2 text-base">
-                    Architecting advanced marketing data science and decision intelligence systems. I build reliable multi-touch attribution models, server-side Google Tag Manager deployments, and custom GA4/BigQuery pipelines that translate complex telemetry into clear marketing investment decisions, allowing businesses to scale their ad spend confidently.
+                    Architecting advanced marketing data science and decision
+                    intelligence systems. I build reliable multi-touch
+                    attribution models, server-side Google Tag Manager
+                    deployments, and custom GA4/BigQuery pipelines that
+                    translate complex telemetry into clear marketing investment
+                    decisions, allowing businesses to scale their ad spend
+                    confidently.
                   </p>
                 </div>
                 <div>
-                  <h3 className="font-bold text-foreground">Full-Stack Product Development</h3>
+                  <h3 className="font-bold text-foreground">
+                    Full-Stack Product Development
+                  </h3>
                   <p className="mt-2 text-base">
-                    Shipping end-to-end production web applications designed for visual excellence, performance, security, and search engine optimization. This involves combining ultra-fast Next.js user interfaces with secure, scalable backend microservices, real-time databases, and automated deployment pipelines for seamless user experiences.
+                    Shipping end-to-end production web applications designed for
+                    visual excellence, performance, security, and search engine
+                    optimization. This involves combining ultra-fast Next.js
+                    user interfaces with secure, scalable backend microservices,
+                    real-time databases, and automated deployment pipelines for
+                    seamless user experiences.
                   </p>
                 </div>
               </div>
             </section>
 
             <section className="space-y-4">
-              <h2 className="font-display text-3xl font-semibold text-foreground">How I Pick Projects</h2>
+              <h2 className="font-display text-3xl font-semibold text-foreground">
+                How I Pick Projects
+              </h2>
               <p className="text-base">
-                I actively select projects that present deep technical complexity tied directly to tangible business value. I look for engagements where a high-leverage technical intervention—whether it is automating an operational bottleneck with AI agents, establishing absolute clarity in marketing attribution, or scaling a Next.js platform—will drive immediate ROI. I prefer working directly with stakeholders who value engineering rigor, iterative deployment, and transparent system architecture over quick, unscalable hacks. My ultimate goal is to architect foundational systems that teams can understand, maintain, and rely on long after my direct involvement ends.
+                I actively select projects that present deep technical
+                complexity tied directly to tangible business value. I look for
+                engagements where a high-leverage technical intervention—whether
+                it is automating an operational bottleneck with AI agents,
+                establishing absolute clarity in marketing attribution, or
+                scaling a Next.js platform—will drive immediate ROI. I prefer
+                working directly with stakeholders who value engineering rigor,
+                iterative deployment, and transparent system architecture over
+                quick, unscalable hacks. My ultimate goal is to architect
+                foundational systems that teams can understand, maintain, and
+                rely on long after my direct involvement ends.
               </p>
             </section>
 
             <section className="space-y-4">
-              <h2 className="font-display text-3xl font-semibold text-foreground">What &quot;Shipped&quot; Means Here</h2>
+              <h2 className="font-display text-3xl font-semibold text-foreground">
+                What &quot;Shipped&quot; Means Here
+              </h2>
               <p className="text-base">
-                In these case studies, &quot;shipped&quot; does not just mean the code was successfully merged to the main branch. A shipped project represents a resilient system that is actively running in production environments, handling real user traffic, and generating measurable data. It means the application has been meticulously optimized for Core Web Vitals, secured against common vulnerabilities, and architected with robust error handling and observability from day one. Each project below is comprehensively documented with a clear problem statement, the technical approach used to solve it, and the concrete outcomes achieved. Where applicable, live URLs, open-source GitHub repositories, and verifiable performance metrics are provided as citable proof of execution.
+                In these case studies, &quot;shipped&quot; does not just mean
+                the code was successfully merged to the main branch. A shipped
+                project represents a resilient system that is actively running
+                in production environments, handling real user traffic, and
+                generating measurable data. It means the application has been
+                meticulously optimized for Core Web Vitals, secured against
+                common vulnerabilities, and architected with robust error
+                handling and observability from day one. Each project below is
+                comprehensively documented with a clear problem statement, the
+                technical approach used to solve it, and the concrete outcomes
+                achieved. Where applicable, live URLs, open-source GitHub
+                repositories, and verifiable performance metrics are provided as
+                citable proof of execution.
               </p>
             </section>
           </div>

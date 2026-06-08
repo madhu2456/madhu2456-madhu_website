@@ -13,7 +13,8 @@ export type ChatSection =
   | "skills"
   | "education"
   | "certification"
-  | "contact";
+  | "contact"
+  | "guide";
 
 type KnowledgeChunk = {
   id: string;
@@ -41,6 +42,10 @@ const PROFILE_KEYWORDS = new Set([
   "stack",
   "service",
   "offer",
+  "guide",
+  "framework",
+  "benchmark",
+  "architecture",
   "education",
   "certification",
   "credential",
@@ -148,6 +153,11 @@ const SECTION_SUGGESTIONS: Record<ChatSection | "blog", string[]> = {
     "Would you like to see my latest technical articles?",
     "Want to know what topics I cover on my blog?",
     "Would you like to try the AI Q&A assistant on the blog?",
+  ],
+  guide: [
+    "Would you like to read one of my technical guides?",
+    "Want details on my LLM evaluation frameworks?",
+    "Would you like to see my architectural patterns?",
   ],
 };
 
@@ -384,6 +394,23 @@ export const buildKnowledgeChunks = (data: PortfolioData): KnowledgeChunk[] => {
     });
   }
 
+  for (const guide of data.publishedGuides || []) {
+    pushChunk(chunks, {
+      id: `guide-${guide.slug}`,
+      section: "guide",
+      title: `Guide: ${guide.title}`,
+      content: [
+        `Guide: ${guide.title}`,
+        guide.summary ? `Summary: ${guide.summary}` : "",
+        guide.primaryTopic ? `Topic: ${guide.primaryTopic}` : "",
+        guide.guideType ? `Type: ${guide.guideType}` : "",
+        `URL: https://madhudadi.in/guides/${guide.slug}/`,
+      ]
+        .filter(Boolean)
+        .join(" | "),
+    });
+  }
+
   return chunks;
 };
 
@@ -531,6 +558,11 @@ const formatFallbackChunk = (chunk: KnowledgeChunk) => {
       ]
         .filter(Boolean)
         .join(" | ");
+    }
+    case "guide": {
+      const summary = fields.get("summary");
+      const url = fields.get("url");
+      return `${chunk.title}${summary ? ` - ${summary}` : ""}${url ? ` (${url})` : ""}.`;
     }
     default: {
       return chunk.content.replace(/\s*\|\s*/g, " | ");

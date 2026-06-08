@@ -246,7 +246,11 @@ export default async function ContactPage() {
                       open to remote work and full-time roles?
                     </dt>
                     <dd className="text-muted-foreground leading-relaxed pl-6.5">
-                      Absolutely. I am a remote-first engineer available for worldwide collaborations. I am currently open to full-time roles where I can take ownership of AI and marketing analytics pipelines end-to-end. Relocation is also an option for the right opportunity.
+                      Absolutely. I am a remote-first engineer available for
+                      worldwide collaborations. I am currently open to full-time
+                      roles where I can take ownership of AI and marketing
+                      analytics pipelines end-to-end. Relocation is also an
+                      option for the right opportunity.
                     </dd>
                   </div>
                   <div className="p-4 rounded-xl border border-border/50 bg-surface/10 space-y-2">
@@ -255,15 +259,26 @@ export default async function ContactPage() {
                       types of projects are the best fit?
                     </dt>
                     <dd className="text-muted-foreground leading-relaxed pl-6.5">
-                      I specialize in building production-ready LLM and Retrieval-Augmented Generation (RAG) applications, autonomous AI agents, FastAPI/Next.js full-stack systems, and comprehensive marketing analytics pipelines using Google Analytics 4 and BigQuery. If your project involves integrating generative AI into existing workflows or measuring marketing ROI reliably, we will be a great fit.
+                      I specialize in building production-ready LLM and
+                      Retrieval-Augmented Generation (RAG) applications,
+                      autonomous AI agents, FastAPI/Next.js full-stack systems,
+                      and comprehensive marketing analytics pipelines using
+                      Google Analytics 4 and BigQuery. If your project involves
+                      integrating generative AI into existing workflows or
+                      measuring marketing ROI reliably, we will be a great fit.
                     </dd>
                   </div>
                   <div className="p-4 rounded-xl border border-border/50 bg-surface/10 space-y-2">
                     <dt className="font-semibold text-foreground flex items-center gap-2">
-                      <IconCircleCheck className="h-4.5 w-4.5 text-primary" /> Do you handle both frontend and backend development?
+                      <IconCircleCheck className="h-4.5 w-4.5 text-primary" />{" "}
+                      Do you handle both frontend and backend development?
                     </dt>
                     <dd className="text-muted-foreground leading-relaxed pl-6.5">
-                      Yes. As a full-stack engineer, I typically build robust, async backend services in Python using FastAPI, paired with sleek, highly responsive frontend interfaces in React and Next.js. This ensures I can deliver end-to-end features without waiting on external dependencies.
+                      Yes. As a full-stack engineer, I typically build robust,
+                      async backend services in Python using FastAPI, paired
+                      with sleek, highly responsive frontend interfaces in React
+                      and Next.js. This ensures I can deliver end-to-end
+                      features without waiting on external dependencies.
                     </dd>
                   </div>
                 </dl>

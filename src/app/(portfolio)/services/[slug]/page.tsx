@@ -11,6 +11,7 @@ import {
   IconDatabase,
   IconSettings,
   IconSparkles,
+  IconFileText,
 } from "@tabler/icons-react";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -18,8 +19,6 @@ import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { getPortfolioData } from "@/lib/portfolio-data";
-
-
 
 interface ServicePageProps {
   params: Promise<{
@@ -98,8 +97,13 @@ export async function generateMetadata({
 export default async function ServiceDetailPage({ params }: ServicePageProps) {
   const { slug } = await params;
 
-  const { profile, sortedServices, sortedProjects, sortedNavigationItems } =
-    await getPortfolioData();
+  const {
+    profile,
+    sortedServices,
+    sortedProjects,
+    sortedNavigationItems,
+    publishedGuides,
+  } = await getPortfolioData();
   const service = sortedServices.find((s) => s.slug === slug);
 
   if (!service) {
@@ -128,6 +132,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
   const Icon = getServiceIcon(service.slug);
   const stack = service.technologies?.map((t) => t.name) ?? [];
+
+  const relatedGuides = publishedGuides.filter((g) =>
+    g.relatedServiceSlugs?.includes(service.slug),
+  );
 
   // Map service slug to contact intent hash
   const SERVICE_INTENT_BY_SLUG: Record<string, string> = {
@@ -192,18 +200,21 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
     ],
   };
 
-  const faqSchema = service.faqs && service.faqs.length > 0 ? {
-    "@type": "FAQPage",
-    "@id": `${siteUrl}services/${slug}/#faq`,
-    mainEntity: service.faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    })),
-  } : null;
+  const faqSchema =
+    service.faqs && service.faqs.length > 0
+      ? {
+          "@type": "FAQPage",
+          "@id": `${siteUrl}services/${slug}/#faq`,
+          mainEntity: service.faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: faq.answer,
+            },
+          })),
+        }
+      : null;
 
   const articleSchema = {
     "@type": "Article",
@@ -241,7 +252,12 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@graph": [serviceSchema, articleSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] : [])],
+            "@graph": [
+              serviceSchema,
+              articleSchema,
+              breadcrumbSchema,
+              ...(faqSchema ? [faqSchema] : []),
+            ],
           }),
         }}
       />
@@ -284,18 +300,31 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           </section>
 
           {/* AI Answer Block / TL;DR Summary */}
-          <div 
+          <div
             aria-label="TL;DR Summary"
             className="p-6 rounded-2xl bg-primary/5 border border-primary/20 space-y-4"
           >
             <h2 className="text-sm font-bold uppercase tracking-wider text-primary flex items-center gap-2">
-               <IconSparkles className="h-4 w-4" /> Quick Summary
+              <IconSparkles className="h-4 w-4" /> Quick Summary
             </h2>
             <ul className="list-disc pl-5 space-y-2 text-sm text-foreground/90">
-              <li><strong>Service:</strong> {service.title}</li>
-              <li><strong>Overview:</strong> {service.shortDescription}</li>
-              {service.pricing?.startingPrice && <li><strong>Pricing:</strong> Custom (starting at ${service.pricing.startingPrice})</li>}
-              {service.timeline && <li><strong>Typical Timeline:</strong> {service.timeline}</li>}
+              <li>
+                <strong>Service:</strong> {service.title}
+              </li>
+              <li>
+                <strong>Overview:</strong> {service.shortDescription}
+              </li>
+              {service.pricing?.startingPrice && (
+                <li>
+                  <strong>Pricing:</strong> Custom (starting at $
+                  {service.pricing.startingPrice})
+                </li>
+              )}
+              {service.timeline && (
+                <li>
+                  <strong>Typical Timeline:</strong> {service.timeline}
+                </li>
+              )}
             </ul>
           </div>
 
@@ -418,12 +447,55 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               </h2>
               <dl className="grid gap-4 md:grid-cols-2">
                 {service.faqs.map((faq, index) => (
-                  <div key={index} className="rounded-xl border border-border/50 bg-surface/20 p-5">
-                    <dt className="font-semibold text-foreground text-sm">{faq.question}</dt>
-                    <dd className="mt-2 text-sm leading-relaxed text-muted-foreground">{faq.answer}</dd>
+                  <div
+                    key={index}
+                    className="rounded-xl border border-border/50 bg-surface/20 p-5"
+                  >
+                    <dt className="font-semibold text-foreground text-sm">
+                      {faq.question}
+                    </dt>
+                    <dd className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      {faq.answer}
+                    </dd>
                   </div>
                 ))}
               </dl>
+            </div>
+          )}
+
+          {/* Related Guides Section */}
+          {relatedGuides.length > 0 && (
+            <div className="mt-6 md:col-span-3 space-y-4">
+              <h2 className="text-xl font-bold tracking-tight border-b border-border/80 pb-2 flex items-center gap-2">
+                <IconFileText className="h-5 w-5 text-primary" /> Related
+                Technical Guides
+              </h2>
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {relatedGuides.map((guide) => (
+                  <Link
+                    key={guide.slug}
+                    href={`/guides/${guide.slug}/`}
+                    className="group relative flex flex-col rounded-xl border border-border bg-surface/20 p-5 transition-all hover:-translate-y-1 hover:shadow-lg hover:border-primary/50"
+                  >
+                    <div className="flex flex-col h-full">
+                      <p className="mb-2 text-[10px] tracking-wider text-primary uppercase font-bold">
+                        {guide.primaryTopic ||
+                          guide.guideType.replace("-", " ")}
+                      </p>
+                      <h3 className="mb-2 font-display text-base font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">
+                        {guide.title}
+                      </h3>
+                      <p className="mb-4 text-xs leading-relaxed text-muted-foreground flex-grow line-clamp-2">
+                        {guide.summary}
+                      </p>
+                      <div className="mt-auto flex items-center justify-between text-[10px] font-medium text-muted-foreground">
+                        <span>Read framework</span>
+                        <IconArrowRight className="h-3 w-3 opacity-0 -translate-x-2 transition-all group-hover:opacity-100 group-hover:translate-x-0" />
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
             </div>
           )}
 

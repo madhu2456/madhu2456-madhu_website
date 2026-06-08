@@ -103,7 +103,7 @@ describe("buildPersonSchema", () => {
       {
         "@type": "CreativeWork",
         name: "Technical Articles Index",
-        url: "https://madhudadi.com/blog/posts/",
+        url: "https://madhudadi.com/blog/posts",
       },
       {
         "@type": "AboutPage",
@@ -113,7 +113,7 @@ describe("buildPersonSchema", () => {
       {
         "@type": "CreativeWork",
         name: "Technical Blog AI Assistant",
-        url: "https://madhudadi.com/blog/ask/",
+        url: "https://madhudadi.com/blog/ask",
       },
     ]);
   });
@@ -144,8 +144,8 @@ describe("buildWebSiteSchema", () => {
     expect(schema).toMatchObject({
       hasPart: {
         "@type": "Blog",
-        "@id": "https://madhudadi.com/blog/#blog",
-        url: "https://madhudadi.com/blog/",
+        "@id": "https://madhudadi.com/blog#blog",
+        url: "https://madhudadi.com/blog",
         author: { "@id": "https://madhudadi.com/#person" },
       },
     });
