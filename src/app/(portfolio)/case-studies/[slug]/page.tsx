@@ -353,15 +353,22 @@ export default async function CaseStudyPage({
           <section className="mt-10">
             <h2 className="font-display text-2xl font-bold">Approach</h2>
             <ul className="mt-3 space-y-2">
-              {approach.map((item) => (
-                <li
-                  key={item}
-                  className="flex gap-3 rounded-xl border border-border bg-surface/40 px-4 py-3 text-sm"
-                >
-                  <span className="text-primary">◆</span>
-                  <span>{item}</span>
-                </li>
-              ))}
+              {approach.map((item) => {
+                const parts = item.split(/\*\*(.*?)\*\*/g);
+                return (
+                  <li
+                    key={item}
+                    className="flex gap-3 rounded-xl border border-border bg-surface/40 px-4 py-3 text-sm"
+                  >
+                    <span className="text-primary">◆</span>
+                    <span>
+                      {parts.map((part, i) =>
+                        i % 2 === 1 ? <strong key={i} className="text-foreground">{part}</strong> : part
+                      )}
+                    </span>
+                  </li>
+                );
+              })}
             </ul>
           </section>
         ) : null}
@@ -381,15 +388,22 @@ export default async function CaseStudyPage({
           <section className="mt-10">
             <h2 className="font-display text-2xl font-bold">Results</h2>
             <ul className="mt-3 space-y-2">
-              {outcomes.map((item) => (
-                <li
-                  key={item}
-                  className="flex gap-3 rounded-xl border border-border bg-surface/40 px-4 py-3 text-sm"
-                >
-                  <span className="text-primary">✓</span>
-                  <span>{item}</span>
-                </li>
-              ))}
+              {outcomes.map((item) => {
+                const parts = item.split(/\*\*(.*?)\*\*/g);
+                return (
+                  <li
+                    key={item}
+                    className="flex gap-3 rounded-xl border border-border bg-surface/40 px-4 py-3 text-sm"
+                  >
+                    <span className="text-primary">✓</span>
+                    <span>
+                      {parts.map((part, i) =>
+                        i % 2 === 1 ? <strong key={i} className="text-foreground">{part}</strong> : part
+                      )}
+                    </span>
+                  </li>
+                );
+              })}
             </ul>
           </section>
         ) : null}

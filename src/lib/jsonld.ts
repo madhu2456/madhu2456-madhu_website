@@ -866,6 +866,7 @@ export function buildSoftwareApplicationSchema({
 export function buildProfessionalServiceSchema({
   siteUrl,
   name,
+  alternateName,
   description,
   image,
   telephone,
@@ -876,6 +877,7 @@ export function buildProfessionalServiceSchema({
 }: {
   siteUrl: string;
   name: string;
+  alternateName?: string;
   description: string;
   image: string;
   telephone?: string | null;
@@ -891,6 +893,7 @@ export function buildProfessionalServiceSchema({
     "@type": "ProfessionalService",
     "@id": `${siteUrl}#localbusiness`,
     name,
+    ...(alternateName && { alternateName }),
     description,
     url: siteUrl,
     image,

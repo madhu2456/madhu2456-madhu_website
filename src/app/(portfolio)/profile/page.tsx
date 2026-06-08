@@ -191,6 +191,7 @@ export default async function ProfilePage() {
           "ProfilePage",
           "WorkExperience",
           "CertificationsList",
+          "FAQ",
         ]}
       />
       <Header profile={profile} navigationItems={sortedNavigationItems} />
