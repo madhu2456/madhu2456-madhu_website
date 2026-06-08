@@ -128,6 +128,7 @@ export async function SeoStructuredData({
       ? buildProfessionalServiceSchema({
           siteUrl,
           name: siteSettings.siteTitle || fullName,
+          alternateName: fullName,
           description: description || "AI & Marketing Analytics Consulting",
           image: `${siteUrl}opengraph-image`,
           telephone: profile?.phone,
