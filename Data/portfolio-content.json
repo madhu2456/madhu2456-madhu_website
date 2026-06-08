@@ -1404,6 +1404,14 @@
         {
           "question": "How do you trace costs and latencies?",
           "answer": "I integrate downstream observability layers (such as LangSmith or custom logging) to trace exact prompt/completion tokens, model latencies, and routing flows, giving you full visibility into run costs."
+        },
+        {
+          "question": "How do you handle data privacy and security in RAG systems?",
+          "answer": "I design RAG pipelines to use self-hosted open-source LLMs or secure enterprise endpoints with zero-data-retention policies, ensuring your proprietary documents never leak."
+        },
+        {
+          "question": "Can RAG systems handle complex tables and charts?",
+          "answer": "Yes. I integrate advanced parsing models (like LlamaParse or specialized vision models) that can extract context from complex tabular data and images within documents."
         }
       ]
     },
@@ -1459,6 +1467,14 @@
         {
           "question": "Can you connect agent telemetry to marketing and product analytics?",
           "answer": "Yes. Every tool call, task completion rate, token footprint, and user feedback is instrumented using downstream hooks, sending structured telemetry directly into GA4 and BigQuery to analyze return on investment."
+        },
+        {
+          "question": "What are the main differences between a chatbot and an AI Agent?",
+          "answer": "While a chatbot typically responds to direct questions, an AI agent can plan multi-step workflows, call external APIs, execute code, and self-correct based on errors without human intervention."
+        },
+        {
+          "question": "How do you test and evaluate AI Agents for reliability?",
+          "answer": "I implement strict evaluation frameworks (evals) that programmatically test agents against hundreds of edge cases, ensuring tool-calling accuracy and adherence to safety guardrails."
         }
       ]
     },
@@ -1571,6 +1587,14 @@
         {
           "question": "Can Madhu Dadi connect product analytics to AI features?",
           "answer": "Yes. This is my core differentiator. I bridge the gap by instrumenting tracking plans that feed real user feedback (like thumbs up/down, prompt success metrics, and RAG latencies) back into server-side GA4 events and BigQuery."
+        },
+        {
+          "question": "How long does a typical analytics infrastructure audit take?",
+          "answer": "A comprehensive audit covering tracking pixels, data warehousing, and existing BI dashboards typically takes 1-2 weeks, followed by a prioritized roadmap for implementation."
+        },
+        {
+          "question": "Do you integrate marketing data with CRM systems?",
+          "answer": "Absolutely. I routinely build pipelines that sync ad spend and behavioral data directly into Salesforce, HubSpot, or custom CRMs to calculate true ROI and Customer Lifetime Value."
         }
       ]
     },
@@ -1671,6 +1695,14 @@
         {
           "question": "Can you help optimize our Google Cloud BigQuery query costs?",
           "answer": "Yes. Raw GA4 exports can quickly become expensive to query if tables are not partitioned and clustered correctly. I optimize schemas, build incremental transformation tables, and design views that limit scanned bytes, significantly reducing monthly GCP analytics costs."
+        },
+        {
+          "question": "Why should we export GA4 data to BigQuery?",
+          "answer": "Exporting to BigQuery bypasses the strict sampling limits in the standard GA4 interface, giving you access to raw event-level data for precise, custom attribution modeling."
+        },
+        {
+          "question": "Can you help migrate existing Universal Analytics reports to GA4?",
+          "answer": "Yes. I reconstruct equivalent\u2014and often superior\u2014reporting views using GA4 event data in BigQuery and visualize them via Looker Studio or custom BI dashboards."
         }
       ]
     },
