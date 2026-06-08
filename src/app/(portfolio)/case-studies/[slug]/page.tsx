@@ -272,14 +272,7 @@ export default async function CaseStudyPage({
             {project.category}
           </p>
         ) : null}
-        <h1 className="mt-3 font-display text-4xl font-bold text-gradient md:text-6xl">
-          {project.title}
-        </h1>
-        <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-          {project.tagline || description}
-        </p>
-
-        <p className="mt-4 text-sm text-muted-foreground/80">
+        <p className="mt-6 text-sm text-muted-foreground/80">
           By Madhu Dadi &middot; Updated{" "}
           <time dateTime={project.updatedAt ?? new Date().toISOString()}>
             {new Date(project.updatedAt ?? new Date()).toLocaleDateString("en-US", {
@@ -287,6 +280,12 @@ export default async function CaseStudyPage({
               year: "numeric",
             })}
           </time>
+        </p>
+        <h1 className="mt-3 font-display text-4xl font-bold text-gradient md:text-6xl">
+          {project.title}
+        </h1>
+        <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+          {project.tagline || description}
         </p>
 
         {/* AI Answer Block / Executive Summary */}
