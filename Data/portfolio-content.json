@@ -704,20 +704,16 @@
       ],
       "citations": [
         {
-          "label": "Visit Adticks",
-          "url": "https://app.adticks.com/"
+          "label": "Playwright Official Documentation",
+          "url": "https://playwright.dev/"
         },
         {
-          "label": "Next.js Documentation",
-          "url": "https://nextjs.org/docs"
-        },
-        {
-          "label": "FastAPI Architecture",
+          "label": "FastAPI Documentation",
           "url": "https://fastapi.tiangolo.com/"
         },
         {
-          "label": "Playwright Testing",
-          "url": "https://playwright.dev/"
+          "label": "Generative Engine Optimization (GEO)",
+          "url": "https://arxiv.org/abs/2311.09735"
         }
       ],
       "gallery": [
@@ -877,24 +873,16 @@
       ],
       "citations": [
         {
-          "label": "Visit Blog",
-          "url": "https://madhudadi.in/blog"
+          "label": "LangChain Documentation",
+          "url": "https://python.langchain.com/docs/get_started/introduction"
         },
         {
-          "label": "AI Assistant",
-          "url": "https://madhudadi.in/blog/ask"
+          "label": "Next.js App Router Documentation",
+          "url": "https://nextjs.org/docs/app"
         },
         {
-          "label": "Next.js Framework",
-          "url": "https://nextjs.org/"
-        },
-        {
-          "label": "OpenAI API Reference",
-          "url": "https://platform.openai.com/docs/"
-        },
-        {
-          "label": "FastAPI Backend",
-          "url": "https://fastapi.tiangolo.com/"
+          "label": "Retrieval-Augmented Generation (RAG)",
+          "url": "https://arxiv.org/abs/2005.11401"
         }
       ],
       "gallery": [
@@ -1054,24 +1042,16 @@
       ],
       "citations": [
         {
-          "label": "Live demo",
-          "url": "https://udemyenroller.madhudadi.in/"
-        },
-        {
-          "label": "Source code",
-          "url": "https://github.com/madhu2456/udemy_enroller_fastapi"
-        },
-        {
           "label": "Celery Distributed Task Queue",
-          "url": "https://docs.celeryq.dev/en/stable/"
+          "url": "https://docs.celeryq.dev/"
         },
         {
-          "label": "Redis Message Broker",
-          "url": "https://redis.io/"
+          "label": "PostgreSQL Official Documentation",
+          "url": "https://www.postgresql.org/docs/"
         },
         {
-          "label": "Playwright Automation",
-          "url": "https://playwright.dev/"
+          "label": "FastAPI Background Tasks",
+          "url": "https://fastapi.tiangolo.com/tutorial/background-tasks/"
         }
       ],
       "gallery": [
