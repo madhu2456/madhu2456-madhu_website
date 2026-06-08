@@ -366,9 +366,20 @@ export default async function CaseStudyPage({
           </section>
         ) : null}
 
+        {project.architecture ? (
+          <section className="mt-10">
+            <h2 className="font-display text-2xl font-bold">Architecture</h2>
+            <div className="prose prose-invert mt-4 max-w-none text-muted-foreground">
+              {project.architecture.split('\n').map((paragraph, idx) => (
+                <p key={idx}>{paragraph}</p>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
         {outcomes.length > 0 ? (
           <section className="mt-10">
-            <h2 className="font-display text-2xl font-bold">Outcomes</h2>
+            <h2 className="font-display text-2xl font-bold">Results</h2>
             <ul className="mt-3 space-y-2">
               {outcomes.map((item) => (
                 <li
@@ -382,6 +393,19 @@ export default async function CaseStudyPage({
             </ul>
           </section>
         ) : null}
+
+        {project.lessonsLearned ? (
+          <section className="mt-10">
+            <h2 className="font-display text-2xl font-bold">What I&apos;d do differently</h2>
+            <div className="prose prose-invert mt-4 max-w-none text-muted-foreground">
+              {project.lessonsLearned.split('\n').map((paragraph, idx) => (
+                <p key={idx}>{paragraph}</p>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
+
 
         {project.gallery && project.gallery.length > 0 ? (
           <section className="mt-10">

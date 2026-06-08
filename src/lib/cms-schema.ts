@@ -123,6 +123,8 @@ export const projectSchema = z.object({
   technologies: z.array(technologySchema).optional(),
   problemStatement: z.string().optional(),
   solutionApproach: z.string().optional(),
+  architecture: z.string().optional(),
+  lessonsLearned: z.string().optional(),
   impactMetrics: z.array(impactMetricSchema).optional(),
   citations: z.array(citationSchema).optional(),
 
