@@ -1,9 +1,7 @@
 import { getPortfolioData } from "@/lib/portfolio-data";
 
-
-
 export async function GET() {
-  const { sortedCertifications } = await getPortfolioData();
+  const { sortedCertifications, featuredGuides } = await getPortfolioData();
   const certificationLines = sortedCertifications
     .map((certification) => {
       const parts = [
@@ -17,6 +15,13 @@ export async function GET() {
 
       return `- ${parts.join(" | ")}`;
     })
+    .join("\n");
+
+  const featuredGuidesLines = featuredGuides
+    .map(
+      (guide) =>
+        `### ${guide.title}\n${guide.summary}\nGuide URL: https://madhudadi.in/guides/${guide.slug}/\n`,
+    )
     .join("\n");
 
   const body = `# Madhu Dadi
@@ -65,6 +70,10 @@ A: Madhu is open to full-time roles, consulting, freelance projects, and advisor
 
 Q: What stack does Madhu Dadi use?
 A: Python, FastAPI, Next.js, React, TypeScript, SQL, Postgres, Redis, Celery, OpenAI API, LangChain, vector databases, GA4, and BigQuery.
+
+## Technical Guides
+
+${featuredGuidesLines}
 
 ## Technical learning platform
 

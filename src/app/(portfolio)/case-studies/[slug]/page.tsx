@@ -1,4 +1,5 @@
 import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
+import { IconFileText } from "@tabler/icons-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -165,8 +166,13 @@ export default async function CaseStudyPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const { sortedProjects, sortedNavigationItems, profile, sortedServices } =
-    await getPortfolioData();
+  const {
+    sortedProjects,
+    sortedNavigationItems,
+    profile,
+    sortedServices,
+    publishedGuides,
+  } = await getPortfolioData();
 
   const project = sortedProjects.find((item) => item.slug === slug);
 
@@ -182,6 +188,10 @@ export default async function CaseStudyPage({
     project.impactMetrics?.map((metric) => `${metric.value} ${metric.label}`) ??
     splitIntoList(project.impactSummary);
   const stack = project.technologies?.map((tech) => tech.name) ?? [];
+
+  const relatedGuides = publishedGuides.filter((g) =>
+    g.relatedProjectSlugs?.includes(project.slug),
+  );
 
   const graph = {
     "@context": "https://schema.org",
@@ -275,10 +285,13 @@ export default async function CaseStudyPage({
         <p className="mt-6 text-sm text-muted-foreground/80">
           By Madhu Dadi &middot; Updated{" "}
           <time dateTime={project.updatedAt ?? new Date().toISOString()}>
-            {new Date(project.updatedAt ?? new Date()).toLocaleDateString("en-US", {
-              month: "long",
-              year: "numeric",
-            })}
+            {new Date(project.updatedAt ?? new Date()).toLocaleDateString(
+              "en-US",
+              {
+                month: "long",
+                year: "numeric",
+              },
+            )}
           </time>
         </p>
         <h1 className="mt-3 font-display text-4xl font-bold text-gradient md:text-6xl">
@@ -289,18 +302,34 @@ export default async function CaseStudyPage({
         </p>
 
         {/* AI Answer Block / Executive Summary */}
-        <div 
+        <div
           aria-label="Executive Summary"
           className="mt-8 p-6 rounded-2xl bg-surface/40 border border-border/60 space-y-4"
         >
           <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-2">
-             Executive Summary
+            Executive Summary
           </h2>
           <ul className="list-disc pl-5 space-y-2 text-sm text-foreground/90">
-            {project.category && <li><strong>Focus Area:</strong> {project.category}</li>}
-            {project.technologies && project.technologies.length > 0 && <li><strong>Core Stack:</strong> {project.technologies.map(t => t.name).join(", ")}</li>}
-            {project.impactMetrics && project.impactMetrics.length > 0 && <li><strong>Key Impact:</strong> {project.impactMetrics[0]?.value} {project.impactMetrics[0]?.label}</li>}
-            <li><strong>Outcome:</strong> {project.tagline || description}</li>
+            {project.category && (
+              <li>
+                <strong>Focus Area:</strong> {project.category}
+              </li>
+            )}
+            {project.technologies && project.technologies.length > 0 && (
+              <li>
+                <strong>Core Stack:</strong>{" "}
+                {project.technologies.map((t) => t.name).join(", ")}
+              </li>
+            )}
+            {project.impactMetrics && project.impactMetrics.length > 0 && (
+              <li>
+                <strong>Key Impact:</strong> {project.impactMetrics[0]?.value}{" "}
+                {project.impactMetrics[0]?.label}
+              </li>
+            )}
+            <li>
+              <strong>Outcome:</strong> {project.tagline || description}
+            </li>
           </ul>
         </div>
 
@@ -362,7 +391,13 @@ export default async function CaseStudyPage({
                     <span className="text-primary">◆</span>
                     <span>
                       {parts.map((part, i) =>
-                        i % 2 === 1 ? <strong key={i} className="text-foreground">{part}</strong> : part
+                        i % 2 === 1 ? (
+                          <strong key={i} className="text-foreground">
+                            {part}
+                          </strong>
+                        ) : (
+                          part
+                        ),
                       )}
                     </span>
                   </li>
@@ -376,7 +411,7 @@ export default async function CaseStudyPage({
           <section className="mt-10">
             <h2 className="font-display text-2xl font-bold">Architecture</h2>
             <div className="prose prose-invert mt-4 max-w-none text-muted-foreground">
-              {project.architecture.split('\n').map((paragraph, idx) => (
+              {project.architecture.split("\n").map((paragraph, idx) => (
                 <p key={idx}>{paragraph}</p>
               ))}
             </div>
@@ -397,7 +432,13 @@ export default async function CaseStudyPage({
                     <span className="text-primary">✓</span>
                     <span>
                       {parts.map((part, i) =>
-                        i % 2 === 1 ? <strong key={i} className="text-foreground">{part}</strong> : part
+                        i % 2 === 1 ? (
+                          <strong key={i} className="text-foreground">
+                            {part}
+                          </strong>
+                        ) : (
+                          part
+                        ),
                       )}
                     </span>
                   </li>
@@ -409,23 +450,26 @@ export default async function CaseStudyPage({
 
         {project.lessonsLearned ? (
           <section className="mt-10">
-            <h2 className="font-display text-2xl font-bold">What I&apos;d do differently</h2>
+            <h2 className="font-display text-2xl font-bold">
+              What I&apos;d do differently
+            </h2>
             <div className="prose prose-invert mt-4 max-w-none text-muted-foreground">
-              {project.lessonsLearned.split('\n').map((paragraph, idx) => (
+              {project.lessonsLearned.split("\n").map((paragraph, idx) => (
                 <p key={idx}>{paragraph}</p>
               ))}
             </div>
           </section>
         ) : null}
 
-
-
         {project.gallery && project.gallery.length > 0 ? (
           <section className="mt-10">
             <h2 className="sr-only">Gallery</h2>
             <div className="mt-6 flex flex-col gap-8">
               {project.gallery.map((img, i) => (
-                <figure key={i} className="flex flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-card">
+                <figure
+                  key={i}
+                  className="flex flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-card"
+                >
                   <div className="relative aspect-video w-full">
                     <Image
                       src={normalizeImageSource(img.url) || ""}
@@ -461,6 +505,38 @@ export default async function CaseStudyPage({
                 </li>
               ))}
             </ul>
+          </section>
+        ) : null}
+
+        {relatedGuides.length > 0 ? (
+          <section className="mt-10">
+            <h2 className="font-display text-2xl font-bold flex items-center gap-2">
+              <IconFileText className="h-6 w-6 text-primary" />
+              Related Technical Guides
+            </h2>
+            <div className="mt-4 grid gap-4 md:grid-cols-2">
+              {relatedGuides.map((guide) => (
+                <Link
+                  key={guide.slug}
+                  href={`/guides/${guide.slug}/`}
+                  className="group relative flex flex-col rounded-xl border border-border bg-surface/20 p-5 transition-all hover:-translate-y-1 hover:shadow-lg hover:border-primary/50"
+                >
+                  <p className="mb-2 text-[10px] tracking-wider text-primary uppercase font-bold">
+                    {guide.primaryTopic || guide.guideType.replace("-", " ")}
+                  </p>
+                  <h3 className="mb-2 font-display text-base font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">
+                    {guide.title}
+                  </h3>
+                  <p className="mb-4 text-xs leading-relaxed text-muted-foreground flex-grow line-clamp-2">
+                    {guide.summary}
+                  </p>
+                  <div className="mt-auto flex items-center justify-between text-[10px] font-medium text-muted-foreground">
+                    <span>Read framework</span>
+                    <ArrowRight className="h-3 w-3 opacity-0 -translate-x-2 transition-all group-hover:opacity-100 group-hover:translate-x-0" />
+                  </div>
+                </Link>
+              ))}
+            </div>
           </section>
         ) : null}
 

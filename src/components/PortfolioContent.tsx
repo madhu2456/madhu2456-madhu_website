@@ -10,6 +10,7 @@ async function PortfolioContent() {
     sortedServices,
     sortedCertifications,
     sortedNavigationItems,
+    publishedGuides,
     pageContent,
   } = await getPortfolioData();
 
@@ -23,6 +24,7 @@ async function PortfolioContent() {
       projects={sortedProjects}
       services={sortedServices}
       certifications={sortedCertifications}
+      publishedGuides={publishedGuides}
     />
   );
 }

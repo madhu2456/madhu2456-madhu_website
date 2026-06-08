@@ -19,8 +19,6 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { getPortfolioData } from "@/lib/portfolio-data";
 
-
-
 export async function generateMetadata(): Promise<Metadata> {
   const { pageContent } = await getPortfolioData();
   const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
@@ -139,13 +137,27 @@ export default async function CredentialsPage() {
             className="rounded-2xl border border-primary/20 bg-primary/5 p-6 md:p-8 backdrop-blur-sm space-y-4"
           >
             <h2 className="font-bold text-lg text-foreground flex items-center gap-2">
-              <IconSparkles className="h-5 w-5 text-primary" /> Executive Summary
+              <IconSparkles className="h-5 w-5 text-primary" /> Executive
+              Summary
             </h2>
             <ul className="list-disc pl-5 space-y-2 text-sm text-foreground/90">
-              <li><strong>Professional Focus:</strong> Full-Stack AI Engineer and Marketing Analytics Consultant.</li>
-              <li><strong>Key Expertise:</strong> Retrieval-Augmented Generation (RAG), LLM Application Development, and GA4/BigQuery Campaign Analytics.</li>
-              <li><strong>Verifiable Proof:</strong> Comprehensive matrix of certifications, academic degrees, and professional awards.</li>
-              <li><strong>Work History:</strong> Documented chronological work history with measurable engineering milestones and deliverables.</li>
+              <li>
+                <strong>Professional Focus:</strong> Full-Stack AI Engineer and
+                Marketing Analytics Consultant.
+              </li>
+              <li>
+                <strong>Key Expertise:</strong> Retrieval-Augmented Generation
+                (RAG), LLM Application Development, and GA4/BigQuery Campaign
+                Analytics.
+              </li>
+              <li>
+                <strong>Verifiable Proof:</strong> Comprehensive matrix of
+                certifications, academic degrees, and professional awards.
+              </li>
+              <li>
+                <strong>Work History:</strong> Documented chronological work
+                history with measurable engineering milestones and deliverables.
+              </li>
             </ul>
           </section>
 

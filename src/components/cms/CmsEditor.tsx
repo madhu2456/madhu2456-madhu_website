@@ -33,6 +33,7 @@ import {
   ServicesEditor,
   SiteSettingsEditor,
   SkillsEditor,
+  GuidesEditor,
 } from "./editors";
 
 type SectionKey = keyof PortfolioContentSchema;
@@ -61,6 +62,7 @@ const sectionConfig: Array<{
   { key: "projects", label: "Projects", icon: IconCode },
   { key: "services", label: "Services", icon: IconLayout2 },
   { key: "certifications", label: "Certifications", icon: IconCertificate },
+  { key: "guides", label: "Guides", icon: IconFileText },
 ];
 
 export function CmsEditor() {
@@ -91,6 +93,7 @@ export function CmsEditor() {
     "projects",
     "services",
     "certifications",
+    "guides",
   ]);
 
   const sectionSummary = useMemo(() => {
@@ -106,6 +109,7 @@ export function CmsEditor() {
       projects,
       services,
       certifications,
+      guides,
     ] = summaryData;
 
     return {
@@ -119,7 +123,8 @@ export function CmsEditor() {
       projects: `${projects?.length || 0} items`,
       services: `${services?.length || 0} items`,
       certifications: `${certifications?.length || 0} items`,
-      contentVersion: "v2",
+      guides: `${guides?.length || 0} items`,
+      contentVersion: "v3",
     };
   }, [summaryData]);
 
@@ -250,6 +255,8 @@ export function CmsEditor() {
         return <ServicesEditor />;
       case "certifications":
         return <CertificationsEditor />;
+      case "guides":
+        return <GuidesEditor />;
       default:
         return null;
     }

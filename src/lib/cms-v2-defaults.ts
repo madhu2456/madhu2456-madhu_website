@@ -1,6 +1,6 @@
 import { PageContentSchema, ServiceItem } from "./cms-schema";
 
-export const buildV2PageContentDefaults = (): PageContentSchema => {
+export const buildV2PageContentDefaults = (): any => {
   return {
     home: {
       seo: {

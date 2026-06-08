@@ -7,6 +7,7 @@ import {
   buildV2PageContentDefaults,
   upgradeServiceDefaults,
 } from "./cms-v2-defaults";
+import { buildV3PageContentDefaults } from "./cms-v3-defaults";
 
 export type PortfolioContent = PortfolioContentSchema;
 export type Profile = PortfolioContent["profile"];
@@ -18,6 +19,7 @@ export type EducationItem = PortfolioContent["education"][number];
 export type ProjectItem = PortfolioContent["projects"][number];
 export type ServiceItem = PortfolioContent["services"][number];
 export type CertificationItem = PortfolioContent["certifications"][number];
+export type GuideItem = PortfolioContent["guides"][number];
 export type Technology = NonNullable<
   PortfolioContent["projects"][number]["technologies"]
 >[number];
@@ -40,6 +42,9 @@ export type PortfolioData = PortfolioContent & {
   sortedServices: ServiceItem[];
   featuredServices: ServiceItem[];
   sortedCertifications: CertificationItem[];
+  sortedGuides: GuideItem[];
+  publishedGuides: GuideItem[];
+  featuredGuides: GuideItem[];
   portfolioLastUpdatedAt: string;
 };
 
@@ -78,39 +83,88 @@ const ensurePortfolioContentFile = async () => {
   }
 };
 
-const withUpdatedAt = <T extends { updatedAt?: string }>(
-  items: T[],
-  updatedAt: string,
-) =>
-  items.map((item) => ({
-    ...item,
-    updatedAt: item.updatedAt || updatedAt, // keep existing if present, otherwise set now
-  }));
-
-const normalizeContentForSave = (
-  content: PortfolioContent,
-): PortfolioContent => {
-  const now = new Date().toISOString();
-
-  return {
-    ...content,
-    profile: {
-      ...content.profile,
-      updatedAt: now,
-    },
-    siteSettings: {
-      ...content.siteSettings,
-      updatedAt: now,
-    },
-    skills: withUpdatedAt(content.skills, now),
-    experiences: withUpdatedAt(content.experiences, now),
-    education: withUpdatedAt(content.education, now),
-    projects: withUpdatedAt(content.projects, now),
-    services: withUpdatedAt(content.services, now),
-    certifications: withUpdatedAt(content.certifications, now),
-  };
+const isSame = (a: any, b: any) => {
+  if (a === b) return true;
+  if (!a || !b || typeof a !== "object" || typeof b !== "object") return false;
+  const aCopy = { ...a };
+  const bCopy = { ...b };
+  delete aCopy.updatedAt;
+  delete bCopy.updatedAt;
+  return JSON.stringify(aCopy) === JSON.stringify(bCopy);
 };
 
+export const normalizeContentForSave = (
+  next: PortfolioContent,
+  previous: PortfolioContent | null,
+  nowOverride?: string,
+): PortfolioContent => {
+  const now = nowOverride || new Date().toISOString();
+  if (!previous) {
+    return {
+      ...next,
+      profile: { ...next.profile, updatedAt: now },
+      siteSettings: { ...next.siteSettings, updatedAt: now },
+      skills: next.skills.map((s) => ({ ...s, updatedAt: now })),
+      experiences: next.experiences.map((s) => ({ ...s, updatedAt: now })),
+      education: next.education.map((s) => ({ ...s, updatedAt: now })),
+      projects: next.projects.map((s) => ({ ...s, updatedAt: now })),
+      services: next.services.map((s) => ({ ...s, updatedAt: now })),
+      certifications: next.certifications.map((s) => ({
+        ...s,
+        updatedAt: now,
+      })),
+      guides: next.guides.map((s) => ({ ...s, updatedAt: now })),
+    };
+  }
+
+  const getUpdated = (n: any, p: any) =>
+    isSame(n, p) ? p.updatedAt || now : now;
+
+  const normalizeArray = (
+    nextArr: any[],
+    prevArr: any[],
+    idKeyFn: (item: any) => string,
+  ) => {
+    const prevMap = new Map(prevArr.map((p) => [idKeyFn(p), p]));
+    return nextArr.map((n) => {
+      const id = idKeyFn(n);
+      const p = prevMap.get(id);
+      if (!p) return { ...n, updatedAt: now };
+      return { ...n, updatedAt: getUpdated(n, p) };
+    });
+  };
+
+  return {
+    ...next,
+    profile: {
+      ...next.profile,
+      updatedAt: getUpdated(next.profile, previous.profile),
+    },
+    siteSettings: {
+      ...next.siteSettings,
+      updatedAt: getUpdated(next.siteSettings, previous.siteSettings),
+    },
+    skills: normalizeArray(next.skills, previous.skills, (s) => s.name),
+    experiences: normalizeArray(
+      next.experiences,
+      previous.experiences,
+      (s) => `${s.company}-${s.position}-${s.startDate}`,
+    ),
+    education: normalizeArray(
+      next.education,
+      previous.education,
+      (s) => `${s.institution}-${s.degree}-${s.startDate}`,
+    ),
+    projects: normalizeArray(next.projects, previous.projects, (s) => s.slug),
+    services: normalizeArray(next.services, previous.services, (s) => s.slug),
+    certifications: normalizeArray(
+      next.certifications,
+      previous.certifications,
+      (s) => s.credentialId || `${s.name}-${s.issuer}`,
+    ),
+    guides: normalizeArray(next.guides, previous.guides, (s) => s.slug),
+  };
+};
 const buildDerivedData = (content: PortfolioContent): PortfolioData => {
   const sortedNavigationItems = [...content.navigationItems].sort(
     (a, b) => a.order - b.order,
@@ -133,6 +187,12 @@ const buildDerivedData = (content: PortfolioContent): PortfolioData => {
     (b.issueDate || "").localeCompare(a.issueDate || ""),
   );
 
+  const sortedGuides = [...(content.guides || [])].sort((a, b) =>
+    (b.publishedAt || b.updatedAt).localeCompare(a.publishedAt || a.updatedAt),
+  );
+  const publishedGuides = sortedGuides.filter((g) => g.status === "published");
+  const featuredGuides = publishedGuides.filter((g) => g.featured);
+
   const updatedDates = [
     content.profile.updatedAt,
     content.siteSettings.updatedAt,
@@ -142,6 +202,7 @@ const buildDerivedData = (content: PortfolioContent): PortfolioData => {
     ...sortedServices.map((item) => item.updatedAt),
     ...sortedCertifications.map((item) => item.updatedAt),
     ...content.skills.map((item) => item.updatedAt),
+    ...(content.guides || []).map((item) => item.updatedAt),
   ].filter(Boolean) as string[];
 
   const timestamps = updatedDates
@@ -161,8 +222,17 @@ const buildDerivedData = (content: PortfolioContent): PortfolioData => {
     sortedServices,
     featuredServices,
     sortedCertifications,
+    sortedGuides,
+    publishedGuides,
+    featuredGuides,
     portfolioLastUpdatedAt,
   };
+};
+
+export const getGuideBySlug = async (slug: string) => {
+  const data = await readPortfolioContent();
+  const derived = buildDerivedData(data);
+  return derived.publishedGuides.find((g) => g.slug === slug);
 };
 
 export const getPortfolioContentPath = () => PORTFOLIO_CONTENT_FILE_PATH;
@@ -172,27 +242,40 @@ export function migratePortfolioContent(raw: any): PortfolioContent {
     throw new Error("Invalid raw data for migration");
   }
 
-  // If already v2 and has pageContent, just ensure shape
-  if (raw.contentVersion === 2 && raw.pageContent) {
-    return raw as PortfolioContent;
-  }
+  let migrated = { ...raw };
 
   // V1 to V2 Migration
-  const v2Defaults = buildV2PageContentDefaults();
-  const migrated = {
-    ...raw,
-    contentVersion: 2,
-    pageContent: raw.pageContent
-      ? { ...v2Defaults, ...raw.pageContent }
-      : v2Defaults,
-    services: (raw.services || []).map((s: any) => {
-      // If service lacks seoTitle, it's likely a v1 service. Upgrade it.
-      if (!s.seoTitle) {
-        return upgradeServiceDefaults(s);
-      }
-      return s;
-    }),
-  };
+  if (!migrated.contentVersion || migrated.contentVersion === 1) {
+    const v2Defaults = buildV2PageContentDefaults();
+    migrated = {
+      ...migrated,
+      contentVersion: 2,
+      pageContent: migrated.pageContent
+        ? { ...v2Defaults, ...migrated.pageContent }
+        : v2Defaults,
+      services: (migrated.services || []).map((s: any) => {
+        if (!s.seoTitle) {
+          return upgradeServiceDefaults(s);
+        }
+        return s;
+      }),
+    };
+  }
+
+  // V2 to V3 Migration
+  if (migrated.contentVersion === 2) {
+    const v3Defaults = buildV3PageContentDefaults();
+    migrated = {
+      ...migrated,
+      contentVersion: 3,
+      guides: migrated.guides || [],
+      pageContent: {
+        ...migrated.pageContent,
+        guidesIndex:
+          migrated.pageContent?.guidesIndex || v3Defaults.guidesIndex,
+      },
+    };
+  }
 
   return migrated as PortfolioContent;
 }
@@ -212,30 +295,27 @@ export async function readPortfolioContent(): Promise<PortfolioContent> {
   let parsedContent: any;
   try {
     parsedContent = JSON.parse(rawContent);
-  } catch {
-    // Invalid JSON - recreate from defaults
-    const fallback = migratePortfolioContent(cloneDefaultContent());
-    await savePortfolioContent(fallback);
-    return fallback;
+  } catch (err) {
+    throw new Error(
+      "Invalid JSON in portfolio content file. Please fix it or restore from a backup.",
+    );
   }
 
   // Attempt Migration
-  try {
-    parsedContent = migratePortfolioContent(parsedContent);
-  } catch (e) {
-    const fallback = migratePortfolioContent(cloneDefaultContent());
-    await savePortfolioContent(fallback);
-    return fallback;
+  parsedContent = migratePortfolioContent(parsedContent);
+
+  const validationResult = portfolioContentSchema.safeParse(parsedContent);
+  if (!validationResult.success) {
+    console.error(
+      "Portfolio content validation errors:",
+      JSON.stringify(validationResult.error.format(), null, 2),
+    );
+    throw new Error(
+      "Portfolio content fails schema validation. Check the console logs for detailed Zod errors, fix the file, or restore from a backup.",
+    );
   }
 
-  if (!isPortfolioContent(parsedContent)) {
-    // Schema mismatch - recreate from defaults
-    const fallback = migratePortfolioContent(cloneDefaultContent());
-    await savePortfolioContent(fallback);
-    return fallback;
-  }
-
-  return parsedContent;
+  return validationResult.data as PortfolioContent;
 }
 
 export async function savePortfolioContent(
@@ -245,7 +325,13 @@ export async function savePortfolioContent(
     throw new Error("Cannot save invalid portfolio content.");
   }
 
-  const normalizedContent = normalizeContentForSave(nextContent);
+  let previous: PortfolioContent | null = null;
+  try {
+    const raw = await fs.readFile(PORTFOLIO_CONTENT_FILE_PATH, "utf8");
+    previous = JSON.parse(raw);
+  } catch {}
+
+  const normalizedContent = normalizeContentForSave(nextContent, previous);
 
   await fs.mkdir(path.dirname(PORTFOLIO_CONTENT_FILE_PATH), {
     recursive: true,

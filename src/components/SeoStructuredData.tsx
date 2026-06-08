@@ -17,6 +17,7 @@ import {
   buildWorkExperienceSchema,
 } from "@/lib/jsonld";
 import { getPortfolioData } from "@/lib/portfolio-data";
+import { resolveAbsoluteImageUrl } from "@/lib/image-source";
 
 export type SeoGraphNode =
   | "Person"
@@ -68,9 +69,8 @@ export async function SeoStructuredData({
     services,
     projects,
   });
-  const profileImageUrl = profile.profileImage
-    ? `${siteUrl}${profile.profileImage.replace(/^\/+/, "")}`
-    : undefined;
+  const profileImageUrl =
+    resolveAbsoluteImageUrl(profile.profileImage) || undefined;
   const updatedAtValues = [
     siteSettings.updatedAt,
     profile.updatedAt,

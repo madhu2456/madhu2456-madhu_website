@@ -950,3 +950,67 @@ export function buildFullGraph(nodes: (object | null)[]) {
     "@graph": nodes.filter((node): node is object => Boolean(node)),
   };
 }
+
+// ---------------------------------------------------------------------------
+// Article (TechArticle) for Guides
+// ---------------------------------------------------------------------------
+export function buildArticleSchema({
+  siteUrl,
+  url,
+  headline,
+  description,
+  image,
+  datePublished,
+  dateModified,
+  authorName,
+  authorUrl,
+  publisherName,
+  publisherLogo,
+  keywords,
+}: {
+  siteUrl: string;
+  url: string;
+  headline: string;
+  description: string;
+  image?: string | null;
+  datePublished: string;
+  dateModified: string;
+  authorName: string;
+  authorUrl: string;
+  publisherName: string;
+  publisherLogo?: string;
+  keywords?: string[];
+}) {
+  return {
+    "@type": "TechArticle",
+    "@id": `${url}#article`,
+    headline,
+    description,
+    url,
+    ...(image && { image }),
+    datePublished,
+    dateModified,
+    author: {
+      "@type": "Person",
+      "@id": `${siteUrl}#person`,
+      name: authorName,
+      url: authorUrl,
+    },
+    publisher: {
+      "@type": "Organization",
+      "@id": `${siteUrl}#organization`,
+      name: publisherName,
+      ...(publisherLogo && {
+        logo: {
+          "@type": "ImageObject",
+          url: publisherLogo,
+        },
+      }),
+    },
+    ...(keywords && keywords.length > 0 && { keywords: keywords.join(", ") }),
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": url,
+    },
+  };
+}

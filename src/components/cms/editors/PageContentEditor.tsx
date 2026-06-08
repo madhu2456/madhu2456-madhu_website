@@ -450,6 +450,7 @@ export function PageContentEditor() {
     | "profile"
     | "servicesIndex"
     | "caseStudiesIndex"
+    | "guidesIndex"
     | "credentials"
     | "contact"
   >("home");
@@ -459,6 +460,7 @@ export function PageContentEditor() {
     { id: "profile", label: "Profile" },
     { id: "servicesIndex", label: "Services" },
     { id: "caseStudiesIndex", label: "Case Studies" },
+    { id: "guidesIndex", label: "Guides" },
     { id: "credentials", label: "Credentials" },
     { id: "contact", label: "Contact" },
   ] as const;
@@ -501,6 +503,12 @@ export function PageContentEditor() {
           <div className="space-y-6">
             <SeoEditor prefix="pageContent.caseStudiesIndex" />
             <HeroEditor prefix="pageContent.caseStudiesIndex" />
+          </div>
+        )}
+        {activeTab === "guidesIndex" && (
+          <div className="space-y-6">
+            <SeoEditor prefix="pageContent.guidesIndex" />
+            <HeroEditor prefix="pageContent.guidesIndex" />
           </div>
         )}
         {activeTab === "credentials" && <CredentialsEditor />}

@@ -8,4 +8,5 @@ export * from "./PageContentEditor";
 export * from "./ServicesEditor";
 export * from "./SiteSettingsEditor";
 export * from "./SkillsEditor";
+export * from "./GuidesEditor";
 export * from "./shared";
