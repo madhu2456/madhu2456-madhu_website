@@ -246,8 +246,8 @@ export default async function ProfilePage() {
               {pageContent.home.directAnswer?.title || "Who is Madhu Dadi?"}
             </h2>
             <div className="text-lg text-foreground/80 leading-relaxed bg-surface-elevated/20 border border-border/40 p-6 rounded-2xl space-y-4">
-              {pageContent.home.directAnswer?.paragraphs?.map((para, i) => (
-                <p key={i}>{para}</p>
+              {pageContent.home.directAnswer?.paragraphs?.map((para) => (
+                <p key={para}>{para}</p>
               )) || (
                 <p>
                   Madhu Dadi is an AI and marketing analytics engineer based in
@@ -362,9 +362,9 @@ export default async function ProfilePage() {
               Core Tech Stack
             </h2>
             <div className="grid gap-6 sm:grid-cols-2">
-              {pageContent.profile.coreStackGroups?.map((group, index) => (
+              {pageContent.profile.coreStackGroups?.map((group) => (
                 <div
-                  key={index}
+                  key={group.title}
                   className="p-5 border border-border bg-surface/10 rounded-xl space-y-3"
                 >
                   <h3 className="text-sm font-semibold tracking-widest text-muted-foreground uppercase">

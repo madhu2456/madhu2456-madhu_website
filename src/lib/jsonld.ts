@@ -97,7 +97,6 @@ export function buildPersonSchema({
   certifications,
   services,
   currentRole,
-  priceRange,
 }: {
   fullName: string;
   headline?: string | null;
@@ -114,7 +113,6 @@ export function buildPersonSchema({
   certifications?: Certification[] | null;
   services?: RichService[] | null;
   currentRole?: CurrentRole | null;
-  priceRange?: string | null;
 }) {
   const sameAs = Object.values(socialLinks ?? {}).filter(
     (v): v is string => typeof v === "string" && v.length > 0,

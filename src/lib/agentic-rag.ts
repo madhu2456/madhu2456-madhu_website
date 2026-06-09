@@ -385,8 +385,6 @@ export const buildKnowledgeChunks = (data: PortfolioData): KnowledgeChunk[] => {
     });
   }
 
-
-
   return chunks;
 };
 

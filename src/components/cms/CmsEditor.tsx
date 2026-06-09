@@ -33,7 +33,6 @@ import {
   ServicesEditor,
   SiteSettingsEditor,
   SkillsEditor,
-
 } from "./editors";
 
 type SectionKey = keyof PortfolioContentSchema;
@@ -62,7 +61,6 @@ const sectionConfig: Array<{
   { key: "projects", label: "Projects", icon: IconCode },
   { key: "services", label: "Services", icon: IconLayout2 },
   { key: "certifications", label: "Certifications", icon: IconCertificate },
-
 ];
 
 export function CmsEditor() {
@@ -93,7 +91,6 @@ export function CmsEditor() {
     "projects",
     "services",
     "certifications",
-
   ]);
 
   const sectionSummary = useMemo(() => {
@@ -101,7 +98,7 @@ export function CmsEditor() {
       firstName,
       lastName,
       siteTitle,
-      pageContent,
+      _pageContent,
       navigationItems,
       skills,
       experiences,
@@ -109,7 +106,6 @@ export function CmsEditor() {
       projects,
       services,
       certifications,
-
     ] = summaryData;
 
     return {

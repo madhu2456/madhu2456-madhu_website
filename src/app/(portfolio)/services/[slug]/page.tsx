@@ -11,7 +11,6 @@ import {
   IconDatabase,
   IconSettings,
   IconSparkles,
-  IconFileText,
 } from "@tabler/icons-react";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -97,12 +96,8 @@ export async function generateMetadata({
 export default async function ServiceDetailPage({ params }: ServicePageProps) {
   const { slug } = await params;
 
-  const {
-    profile,
-    sortedServices,
-    sortedProjects,
-    sortedNavigationItems,
-  } = await getPortfolioData();
+  const { profile, sortedServices, sortedProjects, sortedNavigationItems } =
+    await getPortfolioData();
   const service = sortedServices.find((s) => s.slug === slug);
 
   if (!service) {
@@ -132,7 +127,6 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
   const Icon = getServiceIcon(service.slug);
   const stack = service.technologies?.map((t) => t.name) ?? [];
 
-
   // Map service slug to contact intent hash
   const SERVICE_INTENT_BY_SLUG: Record<string, string> = {
     "ai-llm-application-development": "ai-llm",
@@ -158,7 +152,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
     },
     brand: {
       "@type": "Brand",
-      name: profile.firstName + " " + profile.lastName,
+      name: `${profile.firstName} ${profile.lastName}`,
     },
     areaServed: ["India", "Worldwide", "Remote"],
     url: `${siteUrl}services/${slug}/`,
@@ -296,7 +290,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           </section>
 
           {/* AI Answer Block / TL;DR Summary */}
-          <div
+          <section
             aria-label="TL;DR Summary"
             className="p-6 rounded-2xl bg-primary/5 border border-primary/20 space-y-4"
           >
@@ -322,7 +316,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 </li>
               )}
             </ul>
-          </div>
+          </section>
 
           {/* Detailed Content Split Grid */}
           <div className="grid gap-10 md:grid-cols-3">
@@ -442,9 +436,9 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 Frequently Asked Questions
               </h2>
               <dl className="grid gap-4 md:grid-cols-2">
-                {service.faqs.map((faq, index) => (
+                {service.faqs.map((faq) => (
                   <div
-                    key={index}
+                    key={faq.question}
                     className="rounded-xl border border-border/50 bg-surface/20 p-5"
                   >
                     <dt className="font-semibold text-foreground text-sm">
@@ -458,7 +452,6 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               </dl>
             </div>
           )}
-
 
           {/* Conversion Section */}
           <section className="relative rounded-3xl border border-border/80 bg-surface/20 p-8 md:p-12 overflow-hidden text-center max-w-4xl mx-auto mt-8">

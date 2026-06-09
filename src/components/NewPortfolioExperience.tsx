@@ -31,14 +31,14 @@ import {
 import type {
   CertificationItem,
   ExperienceItem,
+  NavigationItem,
+  PageContent,
   Profile,
   ProjectItem,
   ServiceItem,
   SkillItem,
-  PageContent,
 } from "@/lib/portfolio-data";
 
-import type { NavigationItem } from "@/lib/portfolio-data";
 type NewPortfolioExperienceProps = {
   navigationItems: NavigationItem[];
   pageContent: PageContent;
@@ -48,7 +48,6 @@ type NewPortfolioExperienceProps = {
   projects: ProjectItem[];
   services: ServiceItem[];
   certifications: CertificationItem[];
-
 };
 
 type Prefill = {
@@ -81,7 +80,6 @@ export function NewPortfolioExperience({
   services,
   certifications,
   pageContent,
-
 }: NewPortfolioExperienceProps) {
   const faqItems = useMemo(() => buildFaqItems(), []);
 
@@ -154,8 +152,8 @@ function Hero({
             <span className="text-gradient">{pageContent.home.heroTitle}</span>
           </h1>
           <div className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:mt-6 sm:text-lg space-y-4">
-            {(pageContent.home.introParagraphs || []).map((para, i) => (
-              <p key={i}>{para}</p>
+            {(pageContent.home.introParagraphs || []).map((para) => (
+              <p key={para}>{para}</p>
             ))}
           </div>
           <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center">
@@ -256,8 +254,8 @@ function DirectAnswer({ pageContent }: { pageContent: PageContent }) {
                   (pageContent.home.directAnswer?.paragraphs?.length || 0) / 2,
                 ),
               )
-              .map((para, i) => (
-                <p key={i}>{para}</p>
+              .map((para) => (
+                <p key={para}>{para}</p>
               ))}
           </div>
           <div className="space-y-4">
@@ -267,8 +265,8 @@ function DirectAnswer({ pageContent }: { pageContent: PageContent }) {
                   (pageContent.home.directAnswer?.paragraphs?.length || 0) / 2,
                 ),
               )
-              .map((para, i) => (
-                <p key={i}>{para}</p>
+              .map((para) => (
+                <p key={para}>{para}</p>
               ))}
           </div>
         </div>

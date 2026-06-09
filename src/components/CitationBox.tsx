@@ -42,6 +42,7 @@ export function CitationBox({ title, url, authorName }: CitationBoxProps) {
               Markdown
             </span>
             <button
+              type="button"
               onClick={() => copyToClipboard(markdownSnippet, "markdown")}
               className="group flex items-center gap-1.5 rounded-md px-2 py-1 text-xs text-muted-foreground transition-colors hover:bg-surface-elevated hover:text-foreground"
             >
@@ -65,6 +66,7 @@ export function CitationBox({ title, url, authorName }: CitationBoxProps) {
               HTML
             </span>
             <button
+              type="button"
               onClick={() => copyToClipboard(htmlSnippet, "html")}
               className="group flex items-center gap-1.5 rounded-md px-2 py-1 text-xs text-muted-foreground transition-colors hover:bg-surface-elevated hover:text-foreground"
             >

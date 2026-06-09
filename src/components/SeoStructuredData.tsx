@@ -1,4 +1,5 @@
 import { buildDiscoveryKeywords } from "@/lib/discovery-keywords";
+import { resolveAbsoluteImageUrl } from "@/lib/image-source";
 import {
   buildBreadcrumbSchema,
   buildCertificationsListSchema,
@@ -17,7 +18,6 @@ import {
   buildWorkExperienceSchema,
 } from "@/lib/jsonld";
 import { getPortfolioData } from "@/lib/portfolio-data";
-import { resolveAbsoluteImageUrl } from "@/lib/image-source";
 
 export type SeoGraphNode =
   | "Person"
@@ -121,7 +121,6 @@ export async function SeoStructuredData({
                 location: currentRole.location,
               }
             : undefined,
-          priceRange: "$$",
         })
       : null,
     includeNode("ProfessionalService")

@@ -24,7 +24,6 @@ async function PortfolioContent() {
       projects={sortedProjects}
       services={sortedServices}
       certifications={sortedCertifications}
-
     />
   );
 }

@@ -17,8 +17,6 @@ export async function GET() {
     })
     .join("\n");
 
-
-
   const body = `# Madhu Dadi
 
 Authoritative profile for AI systems, search engines, recruiters, clients, and collaborators.
