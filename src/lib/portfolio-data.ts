@@ -7,7 +7,7 @@ import {
   buildV2PageContentDefaults,
   upgradeServiceDefaults,
 } from "./cms-v2-defaults";
-import { buildV3PageContentDefaults } from "./cms-v3-defaults";
+
 
 export type PortfolioContent = PortfolioContentSchema;
 export type Profile = PortfolioContent["profile"];
@@ -19,7 +19,7 @@ export type EducationItem = PortfolioContent["education"][number];
 export type ProjectItem = PortfolioContent["projects"][number];
 export type ServiceItem = PortfolioContent["services"][number];
 export type CertificationItem = PortfolioContent["certifications"][number];
-export type GuideItem = PortfolioContent["guides"][number];
+
 export type Technology = NonNullable<
   PortfolioContent["projects"][number]["technologies"]
 >[number];
@@ -42,9 +42,7 @@ export type PortfolioData = PortfolioContent & {
   sortedServices: ServiceItem[];
   featuredServices: ServiceItem[];
   sortedCertifications: CertificationItem[];
-  sortedGuides: GuideItem[];
-  publishedGuides: GuideItem[];
-  featuredGuides: GuideItem[];
+
   portfolioLastUpdatedAt: string;
 };
 
@@ -113,7 +111,7 @@ export const normalizeContentForSave = (
         ...s,
         updatedAt: now,
       })),
-      guides: next.guides.map((s) => ({ ...s, updatedAt: now })),
+
     };
   }
 
@@ -162,7 +160,7 @@ export const normalizeContentForSave = (
       previous.certifications,
       (s) => s.credentialId || `${s.name}-${s.issuer}`,
     ),
-    guides: normalizeArray(next.guides, previous.guides, (s) => s.slug),
+
   };
 };
 const buildDerivedData = (content: PortfolioContent): PortfolioData => {
@@ -187,11 +185,7 @@ const buildDerivedData = (content: PortfolioContent): PortfolioData => {
     (b.issueDate || "").localeCompare(a.issueDate || ""),
   );
 
-  const sortedGuides = [...(content.guides || [])].sort((a, b) =>
-    (b.publishedAt || b.updatedAt).localeCompare(a.publishedAt || a.updatedAt),
-  );
-  const publishedGuides = sortedGuides.filter((g) => g.status === "published");
-  const featuredGuides = publishedGuides.filter((g) => g.featured);
+
 
   const updatedDates = [
     content.profile.updatedAt,
@@ -202,7 +196,7 @@ const buildDerivedData = (content: PortfolioContent): PortfolioData => {
     ...sortedServices.map((item) => item.updatedAt),
     ...sortedCertifications.map((item) => item.updatedAt),
     ...content.skills.map((item) => item.updatedAt),
-    ...(content.guides || []).map((item) => item.updatedAt),
+
   ].filter(Boolean) as string[];
 
   const timestamps = updatedDates
@@ -222,18 +216,12 @@ const buildDerivedData = (content: PortfolioContent): PortfolioData => {
     sortedServices,
     featuredServices,
     sortedCertifications,
-    sortedGuides,
-    publishedGuides,
-    featuredGuides,
+
     portfolioLastUpdatedAt,
   };
 };
 
-export const getGuideBySlug = async (slug: string) => {
-  const data = await readPortfolioContent();
-  const derived = buildDerivedData(data);
-  return derived.publishedGuides.find((g) => g.slug === slug);
-};
+
 
 export const getPortfolioContentPath = () => PORTFOLIO_CONTENT_FILE_PATH;
 
@@ -264,16 +252,9 @@ export function migratePortfolioContent(raw: any): PortfolioContent {
 
   // V2 to V3 Migration
   if (migrated.contentVersion === 2) {
-    const v3Defaults = buildV3PageContentDefaults();
     migrated = {
       ...migrated,
       contentVersion: 3,
-      guides: migrated.guides || [],
-      pageContent: {
-        ...migrated.pageContent,
-        guidesIndex:
-          migrated.pageContent?.guidesIndex || v3Defaults.guidesIndex,
-      },
     };
   }
 

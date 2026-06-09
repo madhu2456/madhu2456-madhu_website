@@ -1,5 +1,5 @@
-import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import { IconFileText } from "@tabler/icons-react";
+import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -171,7 +171,6 @@ export default async function CaseStudyPage({
     sortedNavigationItems,
     profile,
     sortedServices,
-    publishedGuides,
   } = await getPortfolioData();
 
   const project = sortedProjects.find((item) => item.slug === slug);
@@ -188,10 +187,6 @@ export default async function CaseStudyPage({
     project.impactMetrics?.map((metric) => `${metric.value} ${metric.label}`) ??
     splitIntoList(project.impactSummary);
   const stack = project.technologies?.map((tech) => tech.name) ?? [];
-
-  const relatedGuides = publishedGuides.filter((g) =>
-    g.relatedProjectSlugs?.includes(project.slug),
-  );
 
   const graph = {
     "@context": "https://schema.org",
@@ -302,7 +297,7 @@ export default async function CaseStudyPage({
         </p>
 
         {/* AI Answer Block / Executive Summary */}
-        <div
+        <section
           aria-label="Executive Summary"
           className="mt-8 p-6 rounded-2xl bg-surface/40 border border-border/60 space-y-4"
         >
@@ -331,7 +326,7 @@ export default async function CaseStudyPage({
               <strong>Outcome:</strong> {project.tagline || description}
             </li>
           </ul>
-        </div>
+        </section>
 
         {project.coverImage ? (
           <div className="relative mt-8 aspect-video w-full overflow-hidden rounded-2xl border border-border/80 bg-surface shadow-glow">
@@ -505,38 +500,6 @@ export default async function CaseStudyPage({
                 </li>
               ))}
             </ul>
-          </section>
-        ) : null}
-
-        {relatedGuides.length > 0 ? (
-          <section className="mt-10">
-            <h2 className="font-display text-2xl font-bold flex items-center gap-2">
-              <IconFileText className="h-6 w-6 text-primary" />
-              Related Technical Guides
-            </h2>
-            <div className="mt-4 grid gap-4 md:grid-cols-2">
-              {relatedGuides.map((guide) => (
-                <Link
-                  key={guide.slug}
-                  href={`/guides/${guide.slug}/`}
-                  className="group relative flex flex-col rounded-xl border border-border bg-surface/20 p-5 transition-all hover:-translate-y-1 hover:shadow-lg hover:border-primary/50"
-                >
-                  <p className="mb-2 text-[10px] tracking-wider text-primary uppercase font-bold">
-                    {guide.primaryTopic || guide.guideType.replace("-", " ")}
-                  </p>
-                  <h3 className="mb-2 font-display text-base font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">
-                    {guide.title}
-                  </h3>
-                  <p className="mb-4 text-xs leading-relaxed text-muted-foreground flex-grow line-clamp-2">
-                    {guide.summary}
-                  </p>
-                  <div className="mt-auto flex items-center justify-between text-[10px] font-medium text-muted-foreground">
-                    <span>Read framework</span>
-                    <ArrowRight className="h-3 w-3 opacity-0 -translate-x-2 transition-all group-hover:opacity-100 group-hover:translate-x-0" />
-                  </div>
-                </Link>
-              ))}
-            </div>
           </section>
         ) : null}
 

@@ -1,7 +1,7 @@
 import { getPortfolioData } from "@/lib/portfolio-data";
 
 export async function GET() {
-  const { sortedCertifications, featuredGuides } = await getPortfolioData();
+  const { sortedCertifications } = await getPortfolioData();
 
   return Response.json({
     meta: {
@@ -75,11 +75,5 @@ export async function GET() {
           "Udemy Enroller is a live production FastAPI and Playwright automation platform that orchestrates asynchronous workflow runs, bounded worker concurrency, secure session-state handling, telemetry logging, and background processing with Celery, Redis, PostgreSQL, and Docker.",
       },
     ],
-    guides: featuredGuides.map((guide) => ({
-      name: guide.title,
-      url: `https://madhudadi.in/guides/${guide.slug}/`,
-      category: guide.guideType,
-      summary: guide.summary,
-    })),
   });
 }

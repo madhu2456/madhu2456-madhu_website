@@ -46,7 +46,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
+
   return (
     <main id="main-content" className="min-h-screen">
       <SeoStructuredData

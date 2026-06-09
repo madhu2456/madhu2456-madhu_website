@@ -126,63 +126,6 @@ export const faqItemSchema = z.object({
 });
 export type FaqItemSchema = z.infer<typeof faqItemSchema>;
 
-export const guideTypeSchema = z.enum([
-  "framework",
-  "guide",
-  "benchmark-methodology",
-  "benchmark-results",
-]);
-
-export const guideCitationSchema = z.object({
-  label: z.string().min(1),
-  publisher: z.string().optional(),
-  url: z.string().url(),
-  accessedAt: isoDateSchema.optional().or(z.literal("")),
-});
-
-export const guideArtifactSchema = z.object({
-  label: z.string().min(1),
-  url: localOrAbsoluteUrlSchema.min(1),
-  type: z.enum(["repository", "dataset", "download", "demo", "worksheet"]),
-});
-
-export const benchmarkDetailsSchema = z
-  .object({
-    methodologySummary: z.string(),
-    datasetDescription: z.string().optional(),
-    embeddingModel: z.string().optional(),
-    testedSystems: z.array(z.string()).optional(),
-    hardwareDescription: z.string().optional(),
-    repetitions: z.number().int().positive().optional(),
-    repositoryUrl: z.string().url().optional().or(z.literal("")),
-    rawResultsUrl: z.string().url().optional().or(z.literal("")),
-  })
-  .optional();
-
-export const guideSchema = z.object({
-  title: z.string().min(1),
-  slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
-  guideType: guideTypeSchema,
-  status: z.enum(["draft", "published"]),
-  featured: z.boolean().optional(),
-  summary: z.string().min(1),
-  seoTitle: z.string().min(1),
-  seoDescription: z.string().min(1),
-  bodyMarkdown: z.string().min(1),
-  coverImage: localOrAbsoluteUrlSchema.optional().or(z.literal("")),
-  coverImageAlt: z.string().optional(),
-  primaryTopic: z.string().min(1),
-  supportingTopics: z.array(z.string()).optional(),
-  citations: z.array(guideCitationSchema),
-  artifacts: z.array(guideArtifactSchema).optional(),
-  relatedServiceSlugs: z.array(z.string()).optional(),
-  relatedProjectSlugs: z.array(z.string()).optional(),
-  benchmarkDetails: benchmarkDetailsSchema,
-  publishedAt: optionalIsoDateTimeSchema,
-  updatedAt: isoDateTimeSchema,
-});
-export type GuideItem = z.infer<typeof guideSchema>;
-
 export const projectSchema = z.object({
   title: z.string().min(1, "Title is required"),
   slug: z.string().min(1, "Slug is required"),
@@ -337,7 +280,7 @@ export const pageContentSchema = z.object({
       .optional(),
   }),
   caseStudiesIndex: richTextPageSchema,
-  guidesIndex: richTextPageSchema.extend({}),
+
   credentials: richTextPageSchema.extend({
     resumeCallout: z
       .object({
@@ -459,7 +402,7 @@ export const portfolioContentSchema = z
     projects: z.array(projectSchema),
     services: z.array(serviceSchema),
     certifications: z.array(certificationSchema),
-    guides: z.array(guideSchema),
+  
   })
   .superRefine((data, ctx) => {
     // Validate unique slugs for projects
@@ -488,127 +431,6 @@ export const portfolioContentSchema = z
       });
     }
 
-    // Validate unique slugs for guides
-    const guideSlugs = data.guides.map((g) => g.slug);
-    const duplicateGuideSlugs = guideSlugs.filter(
-      (s, i) => guideSlugs.indexOf(s) !== i,
-    );
-    if (duplicateGuideSlugs.length > 0) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: `Duplicate guide slugs found: ${duplicateGuideSlugs.join(", ")}`,
-        path: ["guides"],
-      });
-    }
-
-    // Validate guide states
-    data.guides.forEach((guide, idx) => {
-      if (guide.coverImage && !guide.coverImageAlt) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "Guide cover image requires alt text.",
-          path: ["guides", idx, "coverImageAlt"],
-        });
-      }
-      if (guide.status === "published") {
-        if (!guide.publishedAt) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: "Published guide must have a publishedAt date.",
-            path: ["guides", idx, "publishedAt"],
-          });
-        }
-        if (!guide.citations || guide.citations.length === 0) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: "Published guide requires at least one citation.",
-            path: ["guides", idx, "citations"],
-          });
-        }
-        if (!guide.bodyMarkdown || guide.bodyMarkdown.trim().length === 0) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: "Published guide requires a markdown body.",
-            path: ["guides", idx, "bodyMarkdown"],
-          });
-        }
-        if (!guide.summary || guide.summary.trim().length === 0) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: "Published guide requires a summary.",
-            path: ["guides", idx, "summary"],
-          });
-        }
-        if (!guide.seoTitle || guide.seoTitle.trim().length === 0) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: "Published guide requires an SEO title.",
-            path: ["guides", idx, "seoTitle"],
-          });
-        }
-        if (!guide.primaryTopic || guide.primaryTopic.trim().length === 0) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: "Published guide requires a primary topic.",
-            path: ["guides", idx, "primaryTopic"],
-          });
-        }
-      }
-      if (guide.guideType === "benchmark-results") {
-        if (!guide.benchmarkDetails) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: "Benchmark results require benchmarkDetails.",
-            path: ["guides", idx, "benchmarkDetails"],
-          });
-        } else {
-          if (
-            !guide.benchmarkDetails.methodologySummary ||
-            guide.benchmarkDetails.methodologySummary.trim().length === 0
-          ) {
-            ctx.addIssue({
-              code: z.ZodIssueCode.custom,
-              message: "Benchmark results require a methodology summary.",
-              path: ["guides", idx, "benchmarkDetails", "methodologySummary"],
-            });
-          }
-          const hasRepo = !!guide.benchmarkDetails.repositoryUrl;
-          const hasRaw = !!guide.benchmarkDetails.rawResultsUrl;
-          if (!hasRepo && !hasRaw) {
-            ctx.addIssue({
-              code: z.ZodIssueCode.custom,
-              message:
-                "Benchmark results require repositoryUrl or rawResultsUrl.",
-              path: ["guides", idx, "benchmarkDetails"],
-            });
-          }
-        }
-      }
-      if (guide.relatedServiceSlugs) {
-        const invalidServices = guide.relatedServiceSlugs.filter(
-          (slug) => !serviceSlugs.includes(slug),
-        );
-        if (invalidServices.length > 0) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: `Guide '${guide.slug}' references missing services: ${invalidServices.join(", ")}`,
-            path: ["guides", idx, "relatedServiceSlugs"],
-          });
-        }
-      }
-      if (guide.relatedProjectSlugs) {
-        const invalidProjects = guide.relatedProjectSlugs.filter(
-          (slug) => !projectSlugs.includes(slug),
-        );
-        if (invalidProjects.length > 0) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: `Guide '${guide.slug}' references missing projects: ${invalidProjects.join(", ")}`,
-            path: ["guides", idx, "relatedProjectSlugs"],
-          });
-        }
-      }
-    });
   });
 
 export type PortfolioContentSchema = z.infer<typeof portfolioContentSchema>;

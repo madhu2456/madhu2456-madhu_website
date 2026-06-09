@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { portfolioContentSchema } from "../cms-schema";
-import { buildV3PageContentDefaults } from "../cms-v3-defaults";
+import { buildV2PageContentDefaults } from "../cms-v2-defaults";
 
 describe("portfolioContentSchema", () => {
   const validData = {
@@ -36,9 +36,8 @@ describe("portfolioContentSchema", () => {
     projects: [],
     services: [],
     certifications: [],
-    guides: [],
     contentVersion: 3,
-    pageContent: buildV3PageContentDefaults(),
+    pageContent: buildV2PageContentDefaults(),
   };
 
   it("should validate a correct portfolio payload", () => {
