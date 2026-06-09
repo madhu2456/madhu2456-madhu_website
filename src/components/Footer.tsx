@@ -82,6 +82,7 @@ export function Footer({ profile, projects, navigationItems }: FooterProps) {
           </div>
           <Link
             href="/contact/"
+            prefetch={false}
             className="mt-8 group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-transform hover:scale-[1.03]"
           >
             Hire me
@@ -187,6 +188,7 @@ function FooterLink({ href, children }: { href: string; children: ReactNode }) {
   return (
     <Link
       href={href}
+      prefetch={false}
       className="text-muted-foreground hover:text-foreground transition-colors"
     >
       {children}
