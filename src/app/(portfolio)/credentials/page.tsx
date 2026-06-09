@@ -10,8 +10,8 @@ import {
   IconLink,
   IconSchool,
   IconShieldCheck,
-  IconTrophy,
   IconSparkles,
+  IconTrophy,
 } from "@tabler/icons-react";
 import type { Metadata } from "next";
 import Link from "next/link";

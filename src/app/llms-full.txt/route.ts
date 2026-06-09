@@ -1,12 +1,8 @@
 import { getPortfolioData } from "@/lib/portfolio-data";
 
 export async function GET() {
-  const {
-    profile,
-    sortedProjects,
-    sortedServices,
-    sortedCertifications,
-  } = await getPortfolioData();
+  const { profile, sortedProjects, sortedServices, sortedCertifications } =
+    await getPortfolioData();
 
   const siteUrl = (
     process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in"
@@ -40,8 +36,6 @@ ${p.slug ? `URL: ${siteUrl}/case-studies/${p.slug}/` : ""}
 `,
     )
     .join("\n\n");
-
-
 
   const certificationLines = sortedCertifications
     .map((certification) => {

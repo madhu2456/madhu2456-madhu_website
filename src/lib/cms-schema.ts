@@ -402,7 +402,6 @@ export const portfolioContentSchema = z
     projects: z.array(projectSchema),
     services: z.array(serviceSchema),
     certifications: z.array(certificationSchema),
-  
   })
   .superRefine((data, ctx) => {
     // Validate unique slugs for projects
@@ -430,7 +429,6 @@ export const portfolioContentSchema = z
         path: ["services"],
       });
     }
-
   });
 
 export type PortfolioContentSchema = z.infer<typeof portfolioContentSchema>;

@@ -1,5 +1,5 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 
 const baseDir = "f:/Codes/Projects/madhu_portfolio";
 const servicesDir = path.join(baseDir, "src/app/(portfolio)/services");

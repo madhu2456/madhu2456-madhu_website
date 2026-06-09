@@ -1,16 +1,15 @@
 "use client";
 
-import { useFormContext, useFieldArray, Controller } from "react-hook-form";
-import type { PortfolioContentSchema } from "@/lib/cms-schema";
+import { useState } from "react";
+import { Controller, useFieldArray, useFormContext } from "react-hook-form";
 import {
+  AutoResizeTextarea,
   FormField,
   inputClass,
-  textareaClass,
-  AutoResizeTextarea,
   parseLines,
+  textareaClass,
   toLineText,
 } from "./shared";
-import { useState } from "react";
 
 function SeoEditor({ prefix }: { prefix: string }) {
   const {

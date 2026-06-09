@@ -8,8 +8,7 @@ export async function GET() {
     process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE_URL
   ).replace(/\/+$/, "")}/`;
 
-  const { sortedServices, sortedProjects } =
-    await getPortfolioData();
+  const { sortedServices, sortedProjects } = await getPortfolioData();
 
   const entries = [
     {

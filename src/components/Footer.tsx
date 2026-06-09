@@ -1,6 +1,6 @@
+import { IconArrowRight } from "@tabler/icons-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { IconArrowRight } from "@tabler/icons-react";
 import type {
   NavigationItem,
   Profile,
@@ -22,7 +22,6 @@ export function Footer({ profile, projects, navigationItems }: FooterProps) {
           label: item.title,
           href: item.href,
         })),
-
       ],
     },
     {

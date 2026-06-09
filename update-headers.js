@@ -1,5 +1,5 @@
-const fs = require("fs");
-const path = require("path");
+const fs = require("node:fs");
+const path = require("node:path");
 
 function walkDir(dir, callback) {
   fs.readdirSync(dir).forEach((f) => {
@@ -37,7 +37,7 @@ for (const file of filesToUpdate) {
       const match = content.match(regex);
       if (match) {
         const inner = match[1];
-        const newInner = inner + ", sortedNavigationItems";
+        const newInner = `${inner}, sortedNavigationItems`;
         content = content.replace(match[0], match[0].replace(inner, newInner));
         changed = true;
       } else {

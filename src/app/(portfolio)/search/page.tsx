@@ -14,12 +14,7 @@ type SearchResult = {
   title: string;
   description: string;
   href: string;
-  label:
-    | "Project"
-    | "Service"
-    | "Skill"
-    | "Experience"
-    | "Certification";
+  label: "Project" | "Service" | "Skill" | "Experience" | "Certification";
 };
 
 const toQuery = (value?: string | string[]) => {
@@ -112,7 +107,6 @@ export default async function SearchPage({
     sortedProjects,
     sortedServices,
     skills,
-
   } = await getPortfolioData();
 
   const projectResults: SearchResult[] = sortedProjects
@@ -157,8 +151,6 @@ export default async function SearchPage({
       href: "/#services",
       label: "Service",
     }));
-
-
 
   const skillResults: SearchResult[] = skills
     .filter((skill) =>

@@ -1,4 +1,3 @@
-import { IconFileText } from "@tabler/icons-react";
 import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -115,7 +114,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const { sortedProjects, sortedServices } = await getPortfolioData();
+  const { sortedProjects } = await getPortfolioData();
   const project = sortedProjects.find((item) => item.slug === slug);
 
   if (!project) {
@@ -166,12 +165,8 @@ export default async function CaseStudyPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const {
-    sortedProjects,
-    sortedNavigationItems,
-    profile,
-    sortedServices,
-  } = await getPortfolioData();
+  const { sortedProjects, sortedNavigationItems, profile } =
+    await getPortfolioData();
 
   const project = sortedProjects.find((item) => item.slug === slug);
 
@@ -387,7 +382,7 @@ export default async function CaseStudyPage({
                     <span>
                       {parts.map((part, i) =>
                         i % 2 === 1 ? (
-                          <strong key={i} className="text-foreground">
+                          <strong key={part} className="text-foreground">
                             {part}
                           </strong>
                         ) : (
@@ -406,8 +401,8 @@ export default async function CaseStudyPage({
           <section className="mt-10">
             <h2 className="font-display text-2xl font-bold">Architecture</h2>
             <div className="prose prose-invert mt-4 max-w-none text-muted-foreground">
-              {project.architecture.split("\n").map((paragraph, idx) => (
-                <p key={idx}>{paragraph}</p>
+              {project.architecture.split("\n").map((paragraph, _idx) => (
+                <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
           </section>
@@ -428,7 +423,7 @@ export default async function CaseStudyPage({
                     <span>
                       {parts.map((part, i) =>
                         i % 2 === 1 ? (
-                          <strong key={i} className="text-foreground">
+                          <strong key={part} className="text-foreground">
                             {part}
                           </strong>
                         ) : (
@@ -449,8 +444,8 @@ export default async function CaseStudyPage({
               What I&apos;d do differently
             </h2>
             <div className="prose prose-invert mt-4 max-w-none text-muted-foreground">
-              {project.lessonsLearned.split("\n").map((paragraph, idx) => (
-                <p key={idx}>{paragraph}</p>
+              {project.lessonsLearned.split("\n").map((paragraph, _idx) => (
+                <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
           </section>
@@ -460,9 +455,9 @@ export default async function CaseStudyPage({
           <section className="mt-10">
             <h2 className="sr-only">Gallery</h2>
             <div className="mt-6 flex flex-col gap-8">
-              {project.gallery.map((img, i) => (
+              {project.gallery.map((img, _i) => (
                 <figure
-                  key={i}
+                  key={img.url}
                   className="flex flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-card"
                 >
                   <div className="relative aspect-video w-full">
@@ -529,7 +524,7 @@ export default async function CaseStudyPage({
             </h2>
             <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
               {project.citations.map((citation, i) => (
-                <li key={i}>
+                <li key={citation.url || i}>
                   {citation.url ? (
                     <a
                       href={citation.url}

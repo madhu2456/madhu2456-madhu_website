@@ -2,12 +2,14 @@ import { promises as fs } from "node:fs";
 import path from "node:path";
 import { cache } from "react";
 import defaultContentJson from "../../Data/portfolio-content.json";
-import { portfolioContentSchema, PortfolioContentSchema } from "./cms-schema";
+import {
+  type PortfolioContentSchema,
+  portfolioContentSchema,
+} from "./cms-schema";
 import {
   buildV2PageContentDefaults,
   upgradeServiceDefaults,
 } from "./cms-v2-defaults";
-
 
 export type PortfolioContent = PortfolioContentSchema;
 export type Profile = PortfolioContent["profile"];
@@ -111,7 +113,6 @@ export const normalizeContentForSave = (
         ...s,
         updatedAt: now,
       })),
-
     };
   }
 
@@ -160,7 +161,6 @@ export const normalizeContentForSave = (
       previous.certifications,
       (s) => s.credentialId || `${s.name}-${s.issuer}`,
     ),
-
   };
 };
 const buildDerivedData = (content: PortfolioContent): PortfolioData => {
@@ -185,8 +185,6 @@ const buildDerivedData = (content: PortfolioContent): PortfolioData => {
     (b.issueDate || "").localeCompare(a.issueDate || ""),
   );
 
-
-
   const updatedDates = [
     content.profile.updatedAt,
     content.siteSettings.updatedAt,
@@ -196,7 +194,6 @@ const buildDerivedData = (content: PortfolioContent): PortfolioData => {
     ...sortedServices.map((item) => item.updatedAt),
     ...sortedCertifications.map((item) => item.updatedAt),
     ...content.skills.map((item) => item.updatedAt),
-
   ].filter(Boolean) as string[];
 
   const timestamps = updatedDates
@@ -220,8 +217,6 @@ const buildDerivedData = (content: PortfolioContent): PortfolioData => {
     portfolioLastUpdatedAt,
   };
 };
-
-
 
 export const getPortfolioContentPath = () => PORTFOLIO_CONTENT_FILE_PATH;
 
@@ -276,7 +271,7 @@ export async function readPortfolioContent(): Promise<PortfolioContent> {
   let parsedContent: any;
   try {
     parsedContent = JSON.parse(rawContent);
-  } catch (err) {
+  } catch (_err) {
     throw new Error(
       "Invalid JSON in portfolio content file. Please fix it or restore from a backup.",
     );

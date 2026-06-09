@@ -1,6 +1,5 @@
 import {
   IconBrandLinkedin,
-  IconCalendar,
   IconChevronLeft,
   IconCircleCheck,
   IconClock,
@@ -17,7 +16,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { getPortfolioData } from "@/lib/portfolio-data";
 
-const CONTACT_CANONICAL = "https://madhudadi.in/contact/";
+const _CONTACT_CANONICAL = "https://madhudadi.in/contact/";
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 
