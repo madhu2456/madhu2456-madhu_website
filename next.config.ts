@@ -94,6 +94,16 @@ const nextConfig: NextConfig = {
         destination: "/contact/?",
         permanent: true,
       },
+      {
+        source: "/feed.xml",
+        destination: "/blog/feed.xml",
+        permanent: true,
+      },
+      {
+        source: "/feed.atom",
+        destination: "/blog/feed.xml",
+        permanent: true,
+      },
     ];
   },
 
