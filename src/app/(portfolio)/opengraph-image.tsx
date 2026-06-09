@@ -28,7 +28,7 @@ const toDataUrlFromPublicAsset = async (assetPath: string) => {
 };
 
 export default async function OGImage() {
-  const { profile, sortedNavigationItems } = await getPortfolioData();
+  const { profile } = await getPortfolioData();
   const fullName =
     [profile.firstName, profile.lastName].filter(Boolean).join(" ") ||
     "Portfolio";

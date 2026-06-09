@@ -22,7 +22,7 @@ export function Footer({ profile, projects, navigationItems }: FooterProps) {
           label: item.title,
           href: item.href,
         })),
-        { label: "Technical Guides", href: "/guides/" },
+
       ],
     },
     {

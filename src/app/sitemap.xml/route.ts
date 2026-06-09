@@ -8,7 +8,7 @@ export async function GET() {
     process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE_URL
   ).replace(/\/+$/, "")}/`;
 
-  const { sortedServices, sortedProjects, publishedGuides } =
+  const { sortedServices, sortedProjects } =
     await getPortfolioData();
 
   const entries = [
@@ -28,12 +28,6 @@ export async function GET() {
       url: `${siteUrl}services/`,
       lastModified: "2026-06-02",
       changeFrequency: "monthly",
-      priority: "0.9",
-    },
-    {
-      url: `${siteUrl}guides/`,
-      lastModified: "2026-06-08",
-      changeFrequency: "weekly",
       priority: "0.9",
     },
     {
@@ -65,17 +59,6 @@ export async function GET() {
       lastModified: service.updatedAt
         ? new Date(service.updatedAt).toISOString().split("T")[0]
         : "2026-06-02",
-      changeFrequency: "monthly",
-      priority: "0.85",
-    })),
-    ...publishedGuides.map((guide) => ({
-      url: `${siteUrl}guides/${guide.slug}/`,
-      lastModified:
-        guide.updatedAt || guide.publishedAt
-          ? new Date(guide.updatedAt || guide.publishedAt!)
-              .toISOString()
-              .split("T")[0]
-          : "2026-06-08",
       changeFrequency: "monthly",
       priority: "0.85",
     })),

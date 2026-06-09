@@ -36,7 +36,6 @@ import type {
   ServiceItem,
   SkillItem,
   PageContent,
-  GuideItem,
 } from "@/lib/portfolio-data";
 
 import type { NavigationItem } from "@/lib/portfolio-data";
@@ -49,7 +48,7 @@ type NewPortfolioExperienceProps = {
   projects: ProjectItem[];
   services: ServiceItem[];
   certifications: CertificationItem[];
-  publishedGuides?: GuideItem[];
+
 };
 
 type Prefill = {
@@ -82,7 +81,7 @@ export function NewPortfolioExperience({
   services,
   certifications,
   pageContent,
-  publishedGuides = [],
+
 }: NewPortfolioExperienceProps) {
   const faqItems = useMemo(() => buildFaqItems(), []);
 
@@ -98,7 +97,7 @@ export function NewPortfolioExperience({
         <DirectAnswer pageContent={pageContent} />
         <Projects projects={projects} />
         <Services services={services} />
-        <Guides guides={publishedGuides} />
+
         <Stats stats={profile.stats} />
         <Skills skills={skills} />
         <Experience experiences={experiences} />
@@ -579,65 +578,6 @@ function Services({ services }: { services: ServiceItem[] }) {
           );
         })}
       </div>
-    </Section>
-  );
-}
-
-import { IconFileText } from "@tabler/icons-react";
-
-function Guides({ guides }: { guides: GuideItem[] }) {
-  if (!guides || guides.length === 0) return null;
-
-  return (
-    <Section
-      id="guides"
-      eyebrow="Knowledge Base"
-      title="Technical Guides & Architecture Frameworks."
-    >
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {guides.slice(0, 3).map((guide) => (
-          <Link
-            key={guide.slug}
-            href={`/guides/${guide.slug}/`}
-            prefetch={false}
-            className="group relative flex flex-col rounded-2xl border border-border bg-surface/60 p-6 shadow-card transition-all hover:-translate-y-1 hover:border-primary/40"
-          >
-            <div className="flex flex-col h-full">
-              <div
-                className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/15 text-primary"
-                aria-hidden="true"
-              >
-                <IconFileText className="h-5 w-5 text-primary" />
-              </div>
-              <p className="mb-2 text-[10px] tracking-wider text-primary uppercase font-bold">
-                {guide.primaryTopic || guide.guideType.replace("-", " ")}
-              </p>
-              <h3 className="mb-2 font-display text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
-                {guide.title}
-              </h3>
-              <p className="mb-4 text-sm leading-relaxed text-muted-foreground flex-grow line-clamp-3">
-                {guide.summary}
-              </p>
-              <div className="mt-auto flex items-center justify-between text-xs font-medium text-muted-foreground border-t border-border pt-4">
-                <span>Read framework</span>
-                <ArrowRight className="h-4 w-4 opacity-0 -translate-x-2 transition-all group-hover:opacity-100 group-hover:translate-x-0" />
-              </div>
-            </div>
-          </Link>
-        ))}
-      </div>
-      {guides.length > 3 && (
-        <div className="mt-12 flex justify-center">
-          <Link
-            href="/guides/"
-            prefetch={false}
-            className="group inline-flex items-center justify-center gap-2 rounded-full border border-border bg-surface-elevated px-6 py-3 text-sm font-medium transition-all hover:bg-surface-elevated/80 hover:border-primary/30 hover:text-primary"
-          >
-            View all guides
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-          </Link>
-        </div>
-      )}
     </Section>
   );
 }

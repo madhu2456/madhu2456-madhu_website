@@ -6,7 +6,6 @@ export async function GET() {
     sortedProjects,
     sortedServices,
     sortedCertifications,
-    publishedGuides,
   } = await getPortfolioData();
 
   const siteUrl = (
@@ -42,17 +41,7 @@ ${p.slug ? `URL: ${siteUrl}/case-studies/${p.slug}/` : ""}
     )
     .join("\n\n");
 
-  const guidesSection = publishedGuides
-    .map(
-      (g) => `### ${g.title}
-${g.summary}
 
-**Topic:** ${g.primaryTopic}
-**Type:** ${g.guideType}
-${g.slug ? `URL: ${siteUrl}/guides/${g.slug}/` : ""}
-`,
-    )
-    .join("\n\n");
 
   const certificationLines = sortedCertifications
     .map((certification) => {
@@ -91,9 +80,7 @@ ${servicesSection}
 
 ${projectsSection}
 
-## Technical Guides & Frameworks
 
-${guidesSection}
 
 ## Frequently asked questions
 

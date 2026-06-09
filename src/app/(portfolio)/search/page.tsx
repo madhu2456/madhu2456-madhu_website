@@ -19,8 +19,7 @@ type SearchResult = {
     | "Service"
     | "Skill"
     | "Experience"
-    | "Certification"
-    | "Guide";
+    | "Certification";
 };
 
 const toQuery = (value?: string | string[]) => {
@@ -113,8 +112,7 @@ export default async function SearchPage({
     sortedProjects,
     sortedServices,
     skills,
-    sortedNavigationItems,
-    publishedGuides,
+
   } = await getPortfolioData();
 
   const projectResults: SearchResult[] = sortedProjects
@@ -160,23 +158,7 @@ export default async function SearchPage({
       label: "Service",
     }));
 
-  const guideResults: SearchResult[] = publishedGuides
-    .filter((guide) =>
-      matchesQuery(queryTokens, [
-        guide.title,
-        guide.summary ?? null,
-        guide.primaryTopic ?? null,
-      ]),
-    )
-    .slice(0, RESULT_LIMIT_PER_SECTION)
-    .map((guide) => ({
-      id: `guide-${guide.slug}`,
-      title: guide.title,
-      description:
-        guide.summary || "Technical guide and architecture framework.",
-      href: `/guides/${guide.slug}/`,
-      label: "Guide",
-    }));
+
 
   const skillResults: SearchResult[] = skills
     .filter((skill) =>
@@ -234,7 +216,6 @@ export default async function SearchPage({
   const allResults = [
     ...projectResults,
     ...serviceResults,
-    ...guideResults,
     ...skillResults,
     ...experienceResults,
     ...certificationResults,

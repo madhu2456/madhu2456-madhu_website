@@ -75,7 +75,7 @@ export async function generateMetadata(): Promise<Metadata> {
     skills,
     sortedProjects,
     sortedServices,
-    sortedNavigationItems,
+
   } = await getPortfolioData();
   const siteUrl = resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL);
   const fullName =

@@ -102,7 +102,6 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
     sortedServices,
     sortedProjects,
     sortedNavigationItems,
-    publishedGuides,
   } = await getPortfolioData();
   const service = sortedServices.find((s) => s.slug === slug);
 
@@ -133,9 +132,6 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
   const Icon = getServiceIcon(service.slug);
   const stack = service.technologies?.map((t) => t.name) ?? [];
 
-  const relatedGuides = publishedGuides.filter((g) =>
-    g.relatedServiceSlugs?.includes(service.slug),
-  );
 
   // Map service slug to contact intent hash
   const SERVICE_INTENT_BY_SLUG: Record<string, string> = {
@@ -463,41 +459,6 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             </div>
           )}
 
-          {/* Related Guides Section */}
-          {relatedGuides.length > 0 && (
-            <div className="mt-6 md:col-span-3 space-y-4">
-              <h2 className="text-xl font-bold tracking-tight border-b border-border/80 pb-2 flex items-center gap-2">
-                <IconFileText className="h-5 w-5 text-primary" /> Related
-                Technical Guides
-              </h2>
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                {relatedGuides.map((guide) => (
-                  <Link
-                    key={guide.slug}
-                    href={`/guides/${guide.slug}/`}
-                    className="group relative flex flex-col rounded-xl border border-border bg-surface/20 p-5 transition-all hover:-translate-y-1 hover:shadow-lg hover:border-primary/50"
-                  >
-                    <div className="flex flex-col h-full">
-                      <p className="mb-2 text-[10px] tracking-wider text-primary uppercase font-bold">
-                        {guide.primaryTopic ||
-                          guide.guideType.replace("-", " ")}
-                      </p>
-                      <h3 className="mb-2 font-display text-base font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">
-                        {guide.title}
-                      </h3>
-                      <p className="mb-4 text-xs leading-relaxed text-muted-foreground flex-grow line-clamp-2">
-                        {guide.summary}
-                      </p>
-                      <div className="mt-auto flex items-center justify-between text-[10px] font-medium text-muted-foreground">
-                        <span>Read framework</span>
-                        <IconArrowRight className="h-3 w-3 opacity-0 -translate-x-2 transition-all group-hover:opacity-100 group-hover:translate-x-0" />
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          )}
 
           {/* Conversion Section */}
           <section className="relative rounded-3xl border border-border/80 bg-surface/20 p-8 md:p-12 overflow-hidden text-center max-w-4xl mx-auto mt-8">
