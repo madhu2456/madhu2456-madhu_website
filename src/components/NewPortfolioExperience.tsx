@@ -93,10 +93,9 @@ export function NewPortfolioExperience({
           pageContent={pageContent}
         />
         <DirectAnswer pageContent={pageContent} />
+        <Stats stats={profile.stats} />
         <Projects projects={projects} />
         <Services services={services} />
-
-        <Stats stats={profile.stats} />
         <Skills skills={skills} />
         <Experience experiences={experiences} />
         <Certifications certifications={certifications} />
@@ -240,12 +239,7 @@ function DirectAnswer({ pageContent }: { pageContent: PageContent }) {
     >
       <div className="relative rounded-3xl border border-border/80 bg-surface/35 p-8 md:p-10 backdrop-blur-md overflow-hidden flex flex-col justify-between min-h-[220px]">
         <div className="absolute top-0 right-0 h-40 w-40 bg-primary/5 rounded-full blur-3xl -z-10" />
-        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-border/50 pt-8 sm:flex-row">
-          <p className="text-base text-muted-foreground">
-            {pageContent.home.directAnswer?.title || "Who is Madhu Dadi?"}
-          </p>
-        </div>
-        <div className="mt-4 grid gap-8 sm:grid-cols-2 lg:gap-12 text-sm sm:text-base leading-relaxed text-muted-foreground">
+        <div className="grid gap-8 sm:grid-cols-2 lg:gap-12 text-sm sm:text-base leading-relaxed text-muted-foreground">
           <div className="space-y-4">
             {(pageContent.home.directAnswer?.paragraphs || [])
               .slice(
@@ -1240,7 +1234,7 @@ function buildFaqItems() {
   return [
     {
       q: "Who is Madhu Dadi?",
-      a: "Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India, with 9+ years of experience across Novartis, redBus, GroupM, and Absolinsoft.",
+      a: "Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India, with 9+ years of experience across Novartis, redBus, GroupM (WPP), and Absolinsoft.",
     },
     {
       q: "What is Madhu Dadi best known for?",
@@ -1263,7 +1257,7 @@ function buildFaqItems() {
 
 function normalizeCompanyName(company: string) {
   if (/redbus/i.test(company)) return "redBus";
-  if (/groupm/i.test(company)) return "GroupM";
+  if (/groupm/i.test(company)) return "GroupM (WPP)";
   return company.replace(/\s*\([^)]*\)\s*/g, "").trim();
 }
 

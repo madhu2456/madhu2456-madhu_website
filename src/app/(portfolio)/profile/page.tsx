@@ -27,7 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
       "Madhu Dadi - Generative AI, RAG & Marketing Analytics Engineer",
     description:
       pageContent.profile.seo?.description ||
-      "Profile of Madhu Dadi, AI & marketing analytics engineer. 9+ years exp across Novartis, redBus, and GroupM.",
+      "Profile of Madhu Dadi, AI & marketing analytics engineer. 9+ years exp across Novartis, redBus, and GroupM (WPP).",
     alternates: {
       canonical: canonicalUrl,
     },
@@ -37,7 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
         "Madhu Dadi - Generative AI, RAG & Marketing Analytics Engineer",
       description:
         pageContent.profile.seo?.description ||
-        "Profile of Madhu Dadi, AI & marketing analytics engineer. 9+ years exp across Novartis, redBus, and GroupM.",
+        "Profile of Madhu Dadi, AI & marketing analytics engineer. 9+ years exp across Novartis, redBus, and GroupM (WPP).",
       url: canonicalUrl,
       type: "profile",
       firstName: profile.firstName,
@@ -73,7 +73,7 @@ export default async function ProfilePage() {
         image: `${siteUrl}new-ui/hero-portrait.jpg`,
         jobTitle: "AI & Marketing Analytics Engineer",
         description:
-          "Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India. He has 9+ years of experience across Novartis, redBus, GroupM, and Absolinsoft, and builds production LLM/RAG applications, AI agents, FastAPI/Next.js products, and analytics systems.",
+          "Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India. He has 9+ years of experience across Novartis, redBus, GroupM (WPP), and Absolinsoft, and builds production LLM/RAG applications, AI agents, FastAPI/Next.js products, and analytics systems.",
         disambiguatingDescription:
           "AI and marketing analytics engineer based in Visakhapatnam, India; specializes in LLM/RAG applications, AI agents, FastAPI/Next.js products, and marketing analytics.",
         address: {

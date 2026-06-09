@@ -120,15 +120,18 @@ export default async function CaseStudiesPage() {
           Home
         </Link>
 
-        <header className="mt-8 max-w-3xl">
-          <p className="text-xs tracking-[0.25em] text-primary uppercase">
-            Selected work
-          </p>
-          <h1 className="mt-3 font-display text-5xl font-bold text-gradient md:text-6xl">
-            Generative AI, RAG, FastAPI & Marketing Analytics Case Studies
-          </h1>
-          <div className="mt-8 space-y-12 text-lg leading-relaxed text-muted-foreground">
-            <section className="space-y-4">
+        <header className="mt-8 max-w-none">
+          <div className="max-w-4xl">
+            <p className="text-xs tracking-[0.25em] text-primary uppercase">
+              Selected work
+            </p>
+            <h1 className="mt-3 font-display text-5xl font-bold text-gradient md:text-6xl">
+              Generative AI, RAG, FastAPI & Marketing Analytics Case Studies
+            </h1>
+          </div>
+          
+          <div className="mt-12 space-y-16 text-lg leading-relaxed text-muted-foreground">
+            <section className="space-y-6 max-w-4xl">
               <p>
                 These case studies demonstrate my end-to-end engineering work
                 across generative AI, Retrieval-Augmented Generation (RAG)
@@ -146,16 +149,16 @@ export default async function CaseStudiesPage() {
               </p>
             </section>
 
-            <section className="space-y-4">
+            <section className="space-y-6">
               <h2 className="font-display text-3xl font-semibold text-foreground">
                 Core Categories
               </h2>
-              <div className="space-y-6 mt-4">
-                <div>
+              <div className="grid gap-6 mt-4 sm:grid-cols-2 lg:grid-cols-2">
+                <div className="rounded-2xl border border-border/50 bg-surface/30 p-6 flex flex-col hover:border-primary/30 transition-colors">
                   <h3 className="font-bold text-foreground">
                     Generative AI & LLM Engineering
                   </h3>
-                  <p className="mt-2 text-base">
+                  <p className="mt-3 text-base flex-1">
                     Building high-performance generative AI systems utilizing
                     modern large language models, structured outputs, robust
                     prompt engineering pipelines, and rigorous runtime
@@ -164,11 +167,11 @@ export default async function CaseStudiesPage() {
                     ensuring AI tools operate reliably and securely.
                   </p>
                 </div>
-                <div>
+                <div className="rounded-2xl border border-border/50 bg-surface/30 p-6 flex flex-col hover:border-primary/30 transition-colors">
                   <h3 className="font-bold text-foreground">
                     Retrieval-Augmented Generation (RAG)
                   </h3>
-                  <p className="mt-2 text-base">
+                  <p className="mt-3 text-base flex-1">
                     Designing bespoke enterprise RAG pipelines for complex
                     document ingestion, semantic chunking, dense/sparse hybrid
                     search, cross-encoder reranking, and citation verification.
@@ -177,11 +180,11 @@ export default async function CaseStudiesPage() {
                     and enabling high-stakes decision-making.
                   </p>
                 </div>
-                <div>
+                <div className="rounded-2xl border border-border/50 bg-surface/30 p-6 flex flex-col hover:border-primary/30 transition-colors">
                   <h3 className="font-bold text-foreground">
                     Marketing Analytics & Measurement
                   </h3>
-                  <p className="mt-2 text-base">
+                  <p className="mt-3 text-base flex-1">
                     Architecting advanced marketing data science and decision
                     intelligence systems. I build reliable multi-touch
                     attribution models, server-side Google Tag Manager
@@ -191,11 +194,11 @@ export default async function CaseStudiesPage() {
                     confidently.
                   </p>
                 </div>
-                <div>
+                <div className="rounded-2xl border border-border/50 bg-surface/30 p-6 flex flex-col hover:border-primary/30 transition-colors">
                   <h3 className="font-bold text-foreground">
                     Full-Stack Product Development
                   </h3>
-                  <p className="mt-2 text-base">
+                  <p className="mt-3 text-base flex-1">
                     Shipping end-to-end production web applications designed for
                     visual excellence, performance, security, and search engine
                     optimization. This involves combining ultra-fast Next.js
@@ -207,45 +210,47 @@ export default async function CaseStudiesPage() {
               </div>
             </section>
 
-            <section className="space-y-4">
-              <h2 className="font-display text-3xl font-semibold text-foreground">
-                How I Pick Projects
-              </h2>
-              <p className="text-base">
-                I actively select projects that present deep technical
-                complexity tied directly to tangible business value. I look for
-                engagements where a high-leverage technical intervention—whether
-                it is automating an operational bottleneck with AI agents,
-                establishing absolute clarity in marketing attribution, or
-                scaling a Next.js platform—will drive immediate ROI. I prefer
-                working directly with stakeholders who value engineering rigor,
-                iterative deployment, and transparent system architecture over
-                quick, unscalable hacks. My ultimate goal is to architect
-                foundational systems that teams can understand, maintain, and
-                rely on long after my direct involvement ends.
-              </p>
-            </section>
+            <div className="grid gap-12 sm:grid-cols-2">
+              <section className="space-y-4">
+                <h2 className="font-display text-3xl font-semibold text-foreground">
+                  How I Pick Projects
+                </h2>
+                <p className="text-base">
+                  I actively select projects that present deep technical
+                  complexity tied directly to tangible business value. I look for
+                  engagements where a high-leverage technical intervention—whether
+                  it is automating an operational bottleneck with AI agents,
+                  establishing absolute clarity in marketing attribution, or
+                  scaling a Next.js platform—will drive immediate ROI. I prefer
+                  working directly with stakeholders who value engineering rigor,
+                  iterative deployment, and transparent system architecture over
+                  quick, unscalable hacks. My ultimate goal is to architect
+                  foundational systems that teams can understand, maintain, and
+                  rely on long after my direct involvement ends.
+                </p>
+              </section>
 
-            <section className="space-y-4">
-              <h2 className="font-display text-3xl font-semibold text-foreground">
-                What &quot;Shipped&quot; Means Here
-              </h2>
-              <p className="text-base">
-                In these case studies, &quot;shipped&quot; does not just mean
-                the code was successfully merged to the main branch. A shipped
-                project represents a resilient system that is actively running
-                in production environments, handling real user traffic, and
-                generating measurable data. It means the application has been
-                meticulously optimized for Core Web Vitals, secured against
-                common vulnerabilities, and architected with robust error
-                handling and observability from day one. Each project below is
-                comprehensively documented with a clear problem statement, the
-                technical approach used to solve it, and the concrete outcomes
-                achieved. Where applicable, live URLs, open-source GitHub
-                repositories, and verifiable performance metrics are provided as
-                citable proof of execution.
-              </p>
-            </section>
+              <section className="space-y-4">
+                <h2 className="font-display text-3xl font-semibold text-foreground">
+                  What &quot;Shipped&quot; Means Here
+                </h2>
+                <p className="text-base">
+                  In these case studies, &quot;shipped&quot; does not just mean
+                  the code was successfully merged to the main branch. A shipped
+                  project represents a resilient system that is actively running
+                  in production environments, handling real user traffic, and
+                  generating measurable data. It means the application has been
+                  meticulously optimized for Core Web Vitals, secured against
+                  common vulnerabilities, and architected with robust error
+                  handling and observability from day one. Each project below is
+                  comprehensively documented with a clear problem statement, the
+                  technical approach used to solve it, and the concrete outcomes
+                  achieved. Where applicable, live URLs, open-source GitHub
+                  repositories, and verifiable performance metrics are provided as
+                  citable proof of execution.
+                </p>
+              </section>
+            </div>
           </div>
         </header>
 

@@ -19,7 +19,7 @@ export async function GET() {
       url: "https://madhudadi.in/profile/",
       location: "Visakhapatnam, India",
       summary:
-        "Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India. He has 9+ years of experience across Novartis, redBus, GroupM, and Absolinsoft, and builds production LLM/RAG applications, AI agents, FastAPI/Next.js products, and analytics systems.",
+        "Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India. He has 9+ years of experience across Novartis, redBus, GroupM (WPP), and Absolinsoft, and builds production LLM/RAG applications, AI agents, FastAPI/Next.js products, and analytics systems.",
       primaryExpertise: [
         "LLM application development",
         "Retrieval-Augmented Generation",

@@ -18,10 +18,12 @@ export function Footer({ profile, projects, navigationItems }: FooterProps) {
     {
       heading: "Explore",
       links: [
-        ...navigationItems.map((item) => ({
-          label: item.title,
-          href: item.href,
-        })),
+        ...navigationItems
+          .filter((item) => item.title !== "Blog" && item.title !== "GitHub")
+          .map((item) => ({
+            label: item.title,
+            href: item.href,
+          })),
       ],
     },
     {

@@ -54,16 +54,30 @@ const splitIntoList = (value?: string) => {
 
   const newlineItems = value
     .split(/\n+/)
-    .map((item) => item.replace(/^[-*]\s*/, "").trim())
+    .map((item) => item.replace(/^[-*]\s+/, "").trim())
     .filter(Boolean);
 
   if (newlineItems.length > 1) return newlineItems;
 
-  return value
-    .split(/(?<=[.!?])\s+/)
-    .map((item) => item.trim())
-    .filter(Boolean)
-    .slice(0, 5);
+  return value.split(/(?<=[.!?])\s+(?=[A-Z])/).filter(Boolean);
+};
+
+const FormattedText = ({ text }: { text: string }) => {
+  if (!text) return null;
+  const parts = text.split(/(?:\*\*|\*)(.*?)(?:\*\*|\*)/g);
+  return (
+    <>
+      {parts.map((part, i) =>
+        i % 2 === 1 ? (
+          <strong key={`${part}-${i}`} className="text-foreground font-semibold">
+            {part}
+          </strong>
+        ) : (
+          part
+        ),
+      )}
+    </>
+  );
 };
 
 const getProjectMeta = (project: ProjectItem) => {
@@ -362,8 +376,7 @@ export default async function CaseStudyPage({
         <section className="mt-12">
           <h2 className="font-display text-2xl font-bold">Problem</h2>
           <p className="mt-3 leading-relaxed text-muted-foreground">
-            {project.problemStatement ||
-              "The project addressed a real-world workflow bottleneck and focused on improving decision speed, reliability, and usability."}
+            <FormattedText text={project.problemStatement || "The project addressed a real-world workflow bottleneck and focused on improving decision speed, reliability, and usability."} />
           </p>
         </section>
 
@@ -371,28 +384,15 @@ export default async function CaseStudyPage({
           <section className="mt-10">
             <h2 className="font-display text-2xl font-bold">Approach</h2>
             <ul className="mt-3 space-y-2">
-              {approach.map((item) => {
-                const parts = item.split(/\*\*(.*?)\*\*/g);
-                return (
-                  <li
-                    key={item}
-                    className="flex gap-3 rounded-xl border border-border bg-surface/40 px-4 py-3 text-sm"
-                  >
-                    <span className="text-primary">◆</span>
-                    <span>
-                      {parts.map((part, i) =>
-                        i % 2 === 1 ? (
-                          <strong key={part} className="text-foreground">
-                            {part}
-                          </strong>
-                        ) : (
-                          part
-                        ),
-                      )}
-                    </span>
-                  </li>
-                );
-              })}
+              {approach.map((item) => (
+                <li
+                  key={item}
+                  className="flex gap-3 rounded-xl border border-border bg-surface/40 px-4 py-3 text-sm leading-relaxed"
+                >
+                  <span className="text-primary mt-0.5">◆</span>
+                  <span><FormattedText text={item} /></span>
+                </li>
+              ))}
             </ul>
           </section>
         ) : null}
@@ -402,7 +402,7 @@ export default async function CaseStudyPage({
             <h2 className="font-display text-2xl font-bold">Architecture</h2>
             <div className="prose prose-invert mt-4 max-w-none text-muted-foreground">
               {project.architecture.split("\n").map((paragraph, _idx) => (
-                <p key={paragraph}>{paragraph}</p>
+                <p key={paragraph}><FormattedText text={paragraph} /></p>
               ))}
             </div>
           </section>
@@ -412,28 +412,15 @@ export default async function CaseStudyPage({
           <section className="mt-10">
             <h2 className="font-display text-2xl font-bold">Results</h2>
             <ul className="mt-3 space-y-2">
-              {outcomes.map((item) => {
-                const parts = item.split(/\*\*(.*?)\*\*/g);
-                return (
-                  <li
-                    key={item}
-                    className="flex gap-3 rounded-xl border border-border bg-surface/40 px-4 py-3 text-sm"
-                  >
-                    <span className="text-primary">✓</span>
-                    <span>
-                      {parts.map((part, i) =>
-                        i % 2 === 1 ? (
-                          <strong key={part} className="text-foreground">
-                            {part}
-                          </strong>
-                        ) : (
-                          part
-                        ),
-                      )}
-                    </span>
-                  </li>
-                );
-              })}
+              {outcomes.map((item) => (
+                <li
+                  key={item}
+                  className="flex gap-3 rounded-xl border border-border bg-surface/40 px-4 py-3 text-sm leading-relaxed"
+                >
+                  <span className="text-primary mt-0.5">✓</span>
+                  <span><FormattedText text={item} /></span>
+                </li>
+              ))}
             </ul>
           </section>
         ) : null}
@@ -445,7 +432,7 @@ export default async function CaseStudyPage({
             </h2>
             <div className="prose prose-invert mt-4 max-w-none text-muted-foreground">
               {project.lessonsLearned.split("\n").map((paragraph, _idx) => (
-                <p key={paragraph}>{paragraph}</p>
+                <p key={paragraph}><FormattedText text={paragraph} /></p>
               ))}
             </div>
           </section>

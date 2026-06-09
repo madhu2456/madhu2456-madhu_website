@@ -49,7 +49,7 @@ export async function GET() {
     },
     {
       url: `${siteUrl}resume.pdf`,
-      lastModified: "2026-06-07",
+      lastModified: "2026-06-09",
       changeFrequency: "monthly",
       priority: "0.5",
     },
