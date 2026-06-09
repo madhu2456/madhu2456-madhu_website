@@ -162,6 +162,7 @@ function Hero({
           <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center">
             <Link
               href="/contact/"
+              prefetch={false}
               className="group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-transform hover:scale-[1.03] sm:px-6"
             >
               Hire me
@@ -180,6 +181,7 @@ function Hero({
             </a>
             <Link
               href="/case-studies/"
+              prefetch={false}
               className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-white/5 px-5 py-3 text-sm font-medium hover:bg-surface-elevated hover:border-primary/30 sm:px-6 transition-all duration-300"
             >
               See case studies
@@ -274,6 +276,7 @@ function DirectAnswer({ pageContent }: { pageContent: PageContent }) {
         <div className="mt-6 flex flex-wrap gap-4 border-t border-border/30 pt-6">
           <Link
             href="/profile/"
+            prefetch={false}
             className="group inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-primary-hover transition-colors"
           >
             Full profile
@@ -284,6 +287,7 @@ function DirectAnswer({ pageContent }: { pageContent: PageContent }) {
           </span>
           <Link
             href="/credentials/"
+            prefetch={false}
             className="group inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-primary-hover transition-colors"
           >
             Credentials
@@ -468,6 +472,7 @@ function Projects({ projects }: { projects: ProjectItem[] }) {
                 <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
                   <Link
                     href={`/case-studies/${project.slug}/`}
+                    prefetch={false}
                     className="inline-flex items-center gap-1 font-medium text-primary underline-offset-4 transition-colors hover:underline"
                   >
                     Read case study <ArrowRight className="h-3.5 w-3.5" />
@@ -561,6 +566,7 @@ function Services({ services }: { services: ServiceItem[] }) {
               </div>
               <Link
                 href={`/services/${service.slug}/`}
+                prefetch={false}
                 className="group mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-transform hover:scale-[1.02]"
               >
                 Explore {service.title.split(" ")[0]}
@@ -593,6 +599,7 @@ function Guides({ guides }: { guides: GuideItem[] }) {
           <Link
             key={guide.slug}
             href={`/guides/${guide.slug}/`}
+            prefetch={false}
             className="group relative flex flex-col rounded-2xl border border-border bg-surface/60 p-6 shadow-card transition-all hover:-translate-y-1 hover:border-primary/40"
           >
             <div className="flex flex-col h-full">
@@ -623,6 +630,7 @@ function Guides({ guides }: { guides: GuideItem[] }) {
         <div className="mt-12 flex justify-center">
           <Link
             href="/guides/"
+            prefetch={false}
             className="group inline-flex items-center justify-center gap-2 rounded-full border border-border bg-surface-elevated px-6 py-3 text-sm font-medium transition-all hover:bg-surface-elevated/80 hover:border-primary/30 hover:text-primary"
           >
             View all guides
