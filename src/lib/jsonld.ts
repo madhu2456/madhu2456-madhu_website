@@ -721,7 +721,7 @@ export function buildFaqSchema({
         name: "Who is Madhu Dadi?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: `${fullName} is an AI and marketing analytics engineer based in Visakhapatnam, India, with 9+ years of experience across Novartis, redBus, GroupM, and Absolinsoft.`,
+          text: `${fullName} is an AI and marketing analytics engineer based in Visakhapatnam, India, with 9+ years of experience across Novartis, redBus, GroupM (WPP), and Absolinsoft.`,
         },
       },
       {

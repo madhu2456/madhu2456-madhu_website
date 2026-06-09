@@ -12,7 +12,7 @@ const siteUrl = resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL);
 export const metadata: Metadata = {
   title: "Madhu Dadi - Generative AI, RAG & Marketing Analytics Consultant",
   description:
-    "AI and marketing analytics engineer. 9+ years exp (Novartis, redBus, GroupM). I build production LLM/RAG apps, AI agents, FastAPI, Next.js, and analytics.",
+    "AI and marketing analytics engineer. 9+ years exp (Novartis, redBus, GroupM (WPP)). I build production LLM/RAG apps, AI agents, FastAPI, Next.js, and analytics.",
   alternates: {
     canonical: siteUrl,
     languages: {

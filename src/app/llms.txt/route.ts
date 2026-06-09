@@ -31,7 +31,7 @@ Learning platform about page: https://madhudadi.in/blog/about
 
 Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India.
 
-He has 9+ years of experience across Novartis, redBus, GroupM, and Absolinsoft, and builds production LLM/RAG applications, AI agents, FastAPI/Next.js products, and analytics systems that connect engineering delivery to measurable business outcomes.
+He has 9+ years of experience across Novartis, redBus, GroupM (WPP), and Absolinsoft, and builds production LLM/RAG applications, AI agents, FastAPI/Next.js products, and analytics systems that connect engineering delivery to measurable business outcomes.
 
 ## Featured proof
 
@@ -50,7 +50,7 @@ Project URL: https://madhudadi.in/case-studies/udemy-enroller-fastapi/
 ## Frequently asked questions
 
 Q: Who is Madhu Dadi?
-A: Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India, with 9+ years of experience across Novartis, redBus, GroupM, and Absolinsoft.
+A: Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India, with 9+ years of experience across Novartis, redBus, GroupM (WPP), and Absolinsoft.
 
 Q: What is Madhu Dadi best known for?
 A: He is best known for building production LLM/RAG applications, AI agents, AI visibility auditing systems, FastAPI/Next.js products, and analytics systems.

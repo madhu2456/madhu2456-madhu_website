@@ -10,7 +10,7 @@
       "Full-stack Web Product Development"
     ],
     "headlineAnimationDuration": 3000,
-    "shortBio": "Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India. He has 9+ years of experience across Novartis, redBus, GroupM, and Absolinsoft, and builds production LLM/RAG applications, AI agents, FastAPI/Next.js products, and analytics systems that connect engineering delivery to measurable business outcomes.",
+    "shortBio": "Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India. He has 9+ years of experience across Novartis, redBus, GroupM (WPP), and Absolinsoft, and builds production LLM/RAG applications, AI agents, FastAPI/Next.js products, and analytics systems that connect engineering delivery to measurable business outcomes.",
     "fullBioParagraphs": [
       "I build AI. I don't just talk about it. My work splits in two. I help teams put LLMs, RAG, and AI agents into real products without the demo-to-prod cliff. And I clean up the marketing data that's meant to tell them whether any of it actually works.",
       "I write Python and TypeScript every day. I live in FastAPI, Next.js, and SQL. I care about the boring things that keep AI shipping: evals, guardrails, logs, p95s, and who gets paged at 2am. If a project doesn't have a number attached to it, I'll ask for one before we start.",
@@ -57,7 +57,7 @@
   },
   "siteSettings": {
     "siteTitle": "Madhu Dadi - Generative AI, RAG & Marketing Analytics Engineer (India)",
-    "siteDescription": "Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India. He has 9+ years of experience across Novartis, redBus, GroupM, and Absolinsoft, and builds production LLM/RAG applications, AI agents, FastAPI/Next.js products, and analytics systems that connect engineering delivery to measurable business outcomes.",
+    "siteDescription": "Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India. He has 9+ years of experience across Novartis, redBus, GroupM (WPP), and Absolinsoft, and builds production LLM/RAG applications, AI agents, FastAPI/Next.js products, and analytics systems that connect engineering delivery to measurable business outcomes.",
     "siteKeywords": [
       "Madhu Dadi",
       "AI consultant",
@@ -579,9 +579,9 @@
       "startDate": "2020-09-14",
       "endDate": "2022-05-13",
       "current": false,
-      "description": "Led Google Ads Data Hub projects for top-5% GroupM clients: frequency reach, brand lift studies, and first-party data activation.",
+      "description": "Led Google Ads Data Hub projects for top-5% GroupM (WPP) clients: frequency reach, brand lift studies, and first-party data activation.",
       "responsibilities": [
-        "Led the Google Ads Data Hub projects across GroupM agencies and worked for the top 5% of the clients of GroupM.",
+        "Led the Google Ads Data Hub projects across GroupM (WPP) agencies and worked for the top 5% of the clients of GroupM (WPP).",
         "Performed frequency reach analysis to find the optimal number of exposures of ads in a cost-effective way.",
         "Performed brand lift study, identified the most optimal consumer journey from first touch point to last touch point and measured the performance in terms of conversion lift.",
         "Brought awareness of 1st party data solutions to increase the targeting by using cluster analysis, cost benefit analysis and pricing analytics to the clients."
@@ -813,10 +813,10 @@
       "lessonsLearned": "Building Adticks presented several unique technical challenges, and if I were to architect it again from scratch, there are a few key areas I would approach differently.\n\n**Memory Management in Headless Browsers:** Initially, scaling Playwright to handle thousands of parallel pages led to severe memory bloat and frequent worker crashes. I learned the hard way that browser contexts need aggressive garbage collection and strict timeout enforcements. In the future, I would implement a more robust browser pool manager to recycle contexts proactively before they hit memory limits.\n\n**Parsing Bottlenecks:** While selectolax is incredibly fast, running complex XPath queries across massive DOM trees still created CPU bottlenecks. If rebuilding the system, I would explore offloading the heaviest parsing tasks to Rust-based microservices or utilizing WebAssembly to parse the DOM directly within the crawler execution environment, reducing the data transfer overhead between the crawler and the backend.\n\n**State Management for Large Reports:** Generating and serving the final diagnostic reports, which can contain tens of thousands of individual data points, initially strained the frontend. Implementing virtualized lists and infinite scrolling was necessary, but I would design the data aggregation pipeline differently from day one to pre-calculate and cache summary statistics, rather than computing them on the fly."
     },
     {
-      "title": "Technical Blog Engine",
+      "title": "Python & AI Learning Platform",
       "slug": "technical-blog",
       "relatedServiceSlug": "full-stack-ai-product-development",
-      "tagline": "MDX-powered Technical Writing Platform with AI Assistant",
+      "tagline": "Python & AI Learning Platform with AI Assistant",
       "category": "Education - RAG / AI assistant",
       "impactSummary": "A series-based tech blog with an assistant that has actually read the blog. Vector-grounded answers with citations. Instant in-page search. Designed for both human readers and AI-assisted retrieval.",
       "liveUrl": "https://madhudadi.in/blog",
