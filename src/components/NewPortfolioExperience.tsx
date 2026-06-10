@@ -1163,70 +1163,19 @@ function useHydratedCountUp(target: string, start: boolean, duration = 1400) {
 }
 
 function buildSkillGroups(skills: SkillItem[]) {
-  const byName = new Map(
-    skills.map((skill) => [skill.name.toLowerCase(), skill.name]),
-  );
-  const byCategory = (categories: string[], preferred: string[]) => {
-    const preferredMatches = preferred
-      .map((name) => byName.get(name.toLowerCase()))
-      .filter((name): name is string => Boolean(name));
-    const categoryMatches = skills
-      .filter((skill) => skill.category && categories.includes(skill.category))
-      .map((skill) => skill.name);
-
-    return Array.from(new Set([...preferredMatches, ...categoryMatches])).slice(
-      0,
-      10,
-    );
-  };
+  const grouped = new Map<string, string[]>();
+  for (const skill of skills) {
+    const cat = skill.category || "other";
+    if (!grouped.has(cat)) grouped.set(cat, []);
+    grouped.get(cat)!.push(skill.name);
+  }
 
   return [
-    {
-      title: "AI & LLM Engineering",
-      items: byCategory(
-        ["ai-ml"],
-        [
-          "OpenAI API",
-          "RAG",
-          "LangChain",
-          "LangSmith",
-          "Agentic AI",
-          "Machine Learning",
-          "NLP",
-        ],
-      ),
-    },
-    {
-      title: "Backend & Data Engineering",
-      items: byCategory(
-        ["backend", "database", "devops", "cloud"],
-        [
-          "Python",
-          "FastAPI",
-          "SQL",
-          "PostgreSQL",
-          "Redis",
-          "Docker",
-          "GCP",
-          "AWS",
-        ],
-      ),
-    },
-    {
-      title: "Marketing & Product Analytics",
-      items: byCategory(
-        ["tools", "other"],
-        [
-          "Google Analytics",
-          "BigQuery",
-          "Dataiku",
-          "Power BI",
-          "Tableau",
-          "Looker Studio",
-          "Campaign Analytics",
-        ],
-      ),
-    },
+    { title: "AI / LLM", items: grouped.get("ai-llm") || [] },
+    { title: "Analytics", items: grouped.get("analytics") || [] },
+    { title: "Data / Cloud", items: grouped.get("data-cloud") || [] },
+    { title: "Marketing", items: grouped.get("marketing") || [] },
+    { title: "Product", items: grouped.get("product") || [] },
   ].filter((group) => group.items.length > 0);
 }
 

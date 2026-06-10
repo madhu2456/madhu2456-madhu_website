@@ -179,354 +179,298 @@
   ],
   "skills": [
     {
-      "name": "Python",
-      "category": "backend",
-      "proficiency": "expert",
-      "yearsOfExperience": 9,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "SQL",
-      "category": "backend",
-      "proficiency": "expert",
-      "yearsOfExperience": 9,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "Campaign Analytics",
-      "category": "other",
-      "proficiency": "expert",
-      "yearsOfExperience": 8,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "Communication",
-      "category": "soft-skills",
-      "proficiency": "expert",
-      "yearsOfExperience": 8,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "Git",
-      "category": "tools",
-      "proficiency": "expert",
-      "yearsOfExperience": 8,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "GitHub",
-      "category": "devops",
-      "proficiency": "advanced",
-      "yearsOfExperience": 8,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "Problem Solving",
-      "category": "soft-skills",
-      "proficiency": "expert",
-      "yearsOfExperience": 8,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "Agile/Scrum",
-      "category": "soft-skills",
-      "proficiency": "expert",
-      "yearsOfExperience": 7,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "REST API Design",
-      "category": "backend",
-      "proficiency": "expert",
-      "yearsOfExperience": 7,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "Advanced Models",
-      "category": "ai-ml",
-      "proficiency": "expert",
-      "yearsOfExperience": 6,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "FastAPI",
-      "category": "backend",
-      "proficiency": "expert",
-      "yearsOfExperience": 6,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "Responsive Design",
-      "category": "design",
-      "proficiency": "expert",
-      "yearsOfExperience": 6,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "Django",
-      "category": "backend",
-      "proficiency": "advanced",
-      "yearsOfExperience": 5,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "Technical Leadership",
-      "category": "soft-skills",
-      "proficiency": "advanced",
-      "yearsOfExperience": 5,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "Google Analytics",
-      "category": "tools",
+      "name": "Generative AI",
+      "category": "ai-llm",
       "proficiency": "expert",
       "yearsOfExperience": 4,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "Jenkins",
-      "category": "devops",
-      "proficiency": "advanced",
-      "yearsOfExperience": 4,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "Snowflake",
-      "category": "database",
-      "proficiency": "advanced",
-      "yearsOfExperience": 4,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "Web Accessibility",
-      "category": "frontend",
-      "proficiency": "advanced",
-      "yearsOfExperience": 4,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "Dataiku",
-      "category": "tools",
-      "proficiency": "advanced",
-      "yearsOfExperience": 3,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "Figma",
-      "category": "design",
-      "proficiency": "intermediate",
-      "yearsOfExperience": 3,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "Firebase",
-      "category": "cloud",
-      "proficiency": "advanced",
-      "yearsOfExperience": 3,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "GCP",
-      "category": "cloud",
-      "proficiency": "advanced",
-      "yearsOfExperience": 3,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "GraphQL",
-      "category": "backend",
-      "proficiency": "advanced",
-      "yearsOfExperience": 3,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "JavaScript",
-      "category": "frontend",
-      "proficiency": "expert",
-      "yearsOfExperience": 3,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "React Native",
-      "category": "mobile",
-      "proficiency": "advanced",
-      "yearsOfExperience": 3,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "Vercel",
-      "category": "cloud",
-      "proficiency": "expert",
-      "yearsOfExperience": 3,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "WebSockets",
-      "category": "backend",
-      "proficiency": "advanced",
-      "yearsOfExperience": 3,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "AWS",
-      "category": "cloud",
-      "proficiency": "beginner",
-      "yearsOfExperience": 2,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "Elasticsearch",
-      "category": "database",
-      "proficiency": "intermediate",
-      "yearsOfExperience": 2,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "Google Cloud Platform",
-      "category": "cloud",
-      "proficiency": "intermediate",
-      "yearsOfExperience": 2,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "Kubernetes",
-      "category": "devops",
-      "proficiency": "intermediate",
-      "yearsOfExperience": 2,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "LangChain",
-      "category": "ai-ml",
-      "proficiency": "advanced",
-      "yearsOfExperience": 2,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "LangSmith",
-      "category": "ai-ml",
-      "proficiency": "advanced",
-      "yearsOfExperience": 2,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "MongoDB",
-      "category": "database",
-      "proficiency": "intermediate",
-      "yearsOfExperience": 2,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "OpenAI API",
-      "category": "ai-ml",
-      "proficiency": "expert",
-      "yearsOfExperience": 2,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
+      "updatedAt": "2026-06-10T08:51:45.988Z"
     },
     {
       "name": "RAG",
-      "category": "ai-ml",
-      "proficiency": "advanced",
-      "yearsOfExperience": 2,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "Terraform",
-      "category": "devops",
-      "proficiency": "intermediate",
-      "yearsOfExperience": 2,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "Azure",
-      "category": "cloud",
-      "proficiency": "beginner",
-      "yearsOfExperience": 1,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
+      "category": "ai-llm",
+      "proficiency": "expert",
+      "yearsOfExperience": 4,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
     },
     {
       "name": "Agentic AI",
-      "category": "ai-ml",
-      "proficiency": "advanced",
-      "yearsOfExperience": 2,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "MLOps",
-      "category": "devops",
-      "proficiency": "advanced",
-      "yearsOfExperience": 2,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "BigQuery",
-      "category": "database",
-      "proficiency": "advanced",
-      "yearsOfExperience": 4,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "Power BI",
-      "category": "tools",
+      "category": "ai-llm",
       "proficiency": "expert",
       "yearsOfExperience": 4,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
+      "updatedAt": "2026-06-10T08:51:45.989Z"
     },
     {
-      "name": "Tableau",
-      "category": "tools",
-      "proficiency": "advanced",
+      "name": "LLM Orchestration",
+      "category": "ai-llm",
+      "proficiency": "expert",
       "yearsOfExperience": 4,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
+      "updatedAt": "2026-06-10T08:51:45.989Z"
     },
     {
-      "name": "Looker Studio",
-      "category": "tools",
-      "proficiency": "advanced",
-      "yearsOfExperience": 3,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "BigData",
-      "category": "other",
-      "proficiency": "advanced",
+      "name": "LangChain",
+      "category": "ai-llm",
+      "proficiency": "expert",
       "yearsOfExperience": 4,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "MCPs",
+      "category": "ai-llm",
+      "proficiency": "expert",
+      "yearsOfExperience": 4,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "Machine/Deep Learning",
+      "category": "ai-llm",
+      "proficiency": "expert",
+      "yearsOfExperience": 4,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
     },
     {
       "name": "NLP",
-      "category": "ai-ml",
-      "proficiency": "advanced",
-      "yearsOfExperience": 2,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
+      "category": "ai-llm",
+      "proficiency": "expert",
+      "yearsOfExperience": 4,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "MLOps",
+      "category": "ai-llm",
+      "proficiency": "expert",
+      "yearsOfExperience": 4,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
     },
     {
       "name": "DevOps",
-      "category": "devops",
-      "proficiency": "advanced",
-      "yearsOfExperience": 3,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
+      "category": "ai-llm",
+      "proficiency": "expert",
+      "yearsOfExperience": 4,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "KPI frameworks",
+      "category": "analytics",
+      "proficiency": "expert",
+      "yearsOfExperience": 9,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "Marketing Mix Modeling",
+      "category": "analytics",
+      "proficiency": "expert",
+      "yearsOfExperience": 9,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "Hypothesis Testing",
+      "category": "analytics",
+      "proficiency": "expert",
+      "yearsOfExperience": 9,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "A/B Testing",
+      "category": "analytics",
+      "proficiency": "expert",
+      "yearsOfExperience": 9,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "Regression",
+      "category": "analytics",
+      "proficiency": "expert",
+      "yearsOfExperience": 9,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "Clustering",
+      "category": "analytics",
+      "proficiency": "expert",
+      "yearsOfExperience": 9,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "Boosting",
+      "category": "analytics",
+      "proficiency": "expert",
+      "yearsOfExperience": 9,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "Classification",
+      "category": "analytics",
+      "proficiency": "expert",
+      "yearsOfExperience": 9,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "Sentiment Analysis",
+      "category": "analytics",
+      "proficiency": "expert",
+      "yearsOfExperience": 9,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "Python",
+      "category": "data-cloud",
+      "proficiency": "expert",
+      "yearsOfExperience": 9,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "SQL",
+      "category": "data-cloud",
+      "proficiency": "expert",
+      "yearsOfExperience": 9,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "BigQuery",
+      "category": "data-cloud",
+      "proficiency": "expert",
+      "yearsOfExperience": 9,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "GCP (Cloud Functions, BigQuery)",
+      "category": "data-cloud",
+      "proficiency": "expert",
+      "yearsOfExperience": 9,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "AWS (S3, Lambda)",
+      "category": "data-cloud",
+      "proficiency": "expert",
+      "yearsOfExperience": 9,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "Big Data",
+      "category": "data-cloud",
+      "proficiency": "expert",
+      "yearsOfExperience": 9,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "Power BI",
+      "category": "data-cloud",
+      "proficiency": "expert",
+      "yearsOfExperience": 9,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "Tableau",
+      "category": "data-cloud",
+      "proficiency": "expert",
+      "yearsOfExperience": 9,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "Looker Studio",
+      "category": "data-cloud",
+      "proficiency": "expert",
+      "yearsOfExperience": 9,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "Performance & Brand Marketing",
+      "category": "marketing",
+      "proficiency": "expert",
+      "yearsOfExperience": 8,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "Loyalty Analytics",
+      "category": "marketing",
+      "proficiency": "expert",
+      "yearsOfExperience": 8,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "Web Analytics",
+      "category": "marketing",
+      "proficiency": "expert",
+      "yearsOfExperience": 8,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "Product Recommendation",
+      "category": "marketing",
+      "proficiency": "expert",
+      "yearsOfExperience": 8,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "CLM",
+      "category": "marketing",
+      "proficiency": "expert",
+      "yearsOfExperience": 8,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "ATL/BTL/Digital measurement",
+      "category": "marketing",
+      "proficiency": "expert",
+      "yearsOfExperience": 8,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "FastAPI",
+      "category": "product",
+      "proficiency": "expert",
+      "yearsOfExperience": 6,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
     },
     {
       "name": "Next.js",
-      "category": "frontend",
-      "proficiency": "expert",
-      "yearsOfExperience": 3,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
-    },
-    {
-      "name": "Machine Learning",
-      "category": "ai-ml",
+      "category": "product",
       "proficiency": "expert",
       "yearsOfExperience": 6,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
+      "updatedAt": "2026-06-10T08:51:45.989Z"
     },
     {
-      "name": "Deep Learning",
-      "category": "ai-ml",
-      "proficiency": "advanced",
-      "yearsOfExperience": 2,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
+      "name": "PostgreSQL",
+      "category": "product",
+      "proficiency": "expert",
+      "yearsOfExperience": 6,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "Redis",
+      "category": "product",
+      "proficiency": "expert",
+      "yearsOfExperience": 6,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "Celery",
+      "category": "product",
+      "proficiency": "expert",
+      "yearsOfExperience": 6,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "Playwright",
+      "category": "product",
+      "proficiency": "expert",
+      "yearsOfExperience": 6,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "Tailwind CSS",
+      "category": "product",
+      "proficiency": "expert",
+      "yearsOfExperience": 6,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
+    },
+    {
+      "name": "GitHub Actions",
+      "category": "product",
+      "proficiency": "expert",
+      "yearsOfExperience": 6,
+      "updatedAt": "2026-06-10T08:51:45.989Z"
     }
   ],
   "experiences": [
@@ -547,7 +491,9 @@
         "Presented analytical findings and strategic recommendations to senior leadership, facilitating informed decision-making and business growth within the Patient Support Services division.",
         "Utilized advanced analytics tools (e.g., Google Analytics, Power BI, Advanced Modelling, etc.) to measure and improve digital engagement, patient satisfaction, and operational efficiency."
       ],
-      "achievements": ["Best Performer of the Quarter, Q1 2024"],
+      "achievements": [
+        "Best Performer of the Quarter, Q1 2024"
+      ],
       "order": 1,
       "updatedAt": "2026-06-07T00:00:00Z"
     },
@@ -567,7 +513,9 @@
         "Led the Marketing Analytics team in redBus to provide measurement solutions for ATL, BTL and Digital Campaigns.",
         "Created Brand Playbooks for Digital, Social and Owned media to effectively optimise the campaign budgets and increase the ROI of Brand initiatives."
       ],
-      "achievements": ["Q3 Trailblazer, 30% new-customer growth"],
+      "achievements": [
+        "Q3 Trailblazer, 30% new-customer growth"
+      ],
       "order": 2,
       "updatedAt": "2026-06-07T00:00:00Z"
     },
@@ -586,7 +534,9 @@
         "Performed brand lift study, identified the most optimal consumer journey from first touch point to last touch point and measured the performance in terms of conversion lift.",
         "Brought awareness of 1st party data solutions to increase the targeting by using cluster analysis, cost benefit analysis and pricing analytics to the clients."
       ],
-      "achievements": ["Performer of the Year 2020-21 - WPP NextGen"],
+      "achievements": [
+        "Performer of the Year 2020-21 - WPP NextGen"
+      ],
       "order": 3,
       "updatedAt": "2026-06-07T00:00:00Z"
     },
@@ -605,7 +555,9 @@
         "Implemented, Analyzed and Optimized organic and paid search engine marketing activities and increase the CTR by 20%.",
         "Formulated and documented the project/product plan for web applications."
       ],
-      "achievements": ["Foundations in analytics + engineering"],
+      "achievements": [
+        "Foundations in analytics + engineering"
+      ],
       "order": 4,
       "updatedAt": "2026-06-07T00:00:00Z"
     }
@@ -1244,31 +1196,54 @@
       "techStackGroups": [
         {
           "category": "Core Language",
-          "items": ["Python", "TypeScript"]
+          "items": [
+            "Python",
+            "TypeScript"
+          ]
         },
         {
           "category": "Web Frameworks",
-          "items": ["FastAPI", "Next.js", "React"]
+          "items": [
+            "FastAPI",
+            "Next.js",
+            "React"
+          ]
         },
         {
           "category": "Databases & Cache",
-          "items": ["Postgres", "Redis"]
+          "items": [
+            "Postgres",
+            "Redis"
+          ]
         },
         {
           "category": "Task Queuing",
-          "items": ["Celery"]
+          "items": [
+            "Celery"
+          ]
         },
         {
           "category": "AI Orchestration",
-          "items": ["OpenAI API", "LangChain", "LangSmith"]
+          "items": [
+            "OpenAI API",
+            "LangChain",
+            "LangSmith"
+          ]
         },
         {
           "category": "Vector Storage",
-          "items": ["Pinecone", "Qdrant", "pgvector"]
+          "items": [
+            "Pinecone",
+            "Qdrant",
+            "pgvector"
+          ]
         },
         {
           "category": "Analytics & Telemetry",
-          "items": ["GA4", "BigQuery"]
+          "items": [
+            "GA4",
+            "BigQuery"
+          ]
         }
       ],
       "faqs": [
