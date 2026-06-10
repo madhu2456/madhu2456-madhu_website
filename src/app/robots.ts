@@ -27,46 +27,27 @@ export default function robots(): MetadataRoute.Robots {
           "/cdn-cgi/",
         ],
       },
-      // OpenAI search visibility
+      // AI Search & Chatbot visibility
       {
-        userAgent: "OAI-SearchBot",
-        allow: "/",
-      },
-      // OpenAI trainingbot (GPTBot)
-      {
-        userAgent: "GPTBot",
-        allow: "/",
-      },
-      // Perplexity search visibility
-      {
-        userAgent: "PerplexityBot",
-        allow: "/",
-      },
-      // Anthropic / Claude visibility
-      {
-        userAgent: "ClaudeBot",
-        allow: "/",
-      },
-      {
-        userAgent: "Claude-SearchBot",
-        allow: "/",
-      },
-      {
-        userAgent: "Claude-User",
+        userAgent: [
+          "OAI-SearchBot",
+          "GPTBot",
+          "ChatGPT-User",
+          "PerplexityBot",
+          "perplexity-user",
+          "ClaudeBot",
+          "Claude-SearchBot",
+          "Claude-User",
+          "anthropic-ai",
+          "Google-Extended",
+          "Applebot-Extended",
+          "omny-ai",
+        ],
         allow: "/",
       },
       // Google standard search
       {
-        userAgent: "Googlebot",
-        allow: "/",
-      },
-      {
-        userAgent: "Googlebot-Image",
-        allow: "/",
-      },
-      // Google AI controls
-      {
-        userAgent: "Google-Extended",
+        userAgent: ["Googlebot", "Googlebot-Image"],
         allow: "/",
       },
     ],

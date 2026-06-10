@@ -82,14 +82,6 @@ export async function generateMetadata({
         },
       ],
     },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: ["https://madhudadi.in/opengraph-image"],
-      creator: "@madhu245",
-      site: "@madhu245",
-    },
   };
 }
 

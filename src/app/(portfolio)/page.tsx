@@ -36,13 +36,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Madhu Dadi - Generative AI, RAG & Marketing Analytics Consultant",
-    description:
-      "Production LLM/RAG apps, AI agents, FastAPI/Next.js products, and marketing analytics systems.",
-    images: [`${siteUrl}opengraph-image?ext=.png`],
-  },
 };
 
 export default async function Home() {

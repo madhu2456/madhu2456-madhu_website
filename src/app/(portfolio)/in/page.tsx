@@ -33,13 +33,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Madhu Dadi - AI Consultant in India",
-    description:
-      "Expert AI engineering, RAG applications, and marketing analytics consulting based in Visakhapatnam, India.",
-    images: [`${siteUrl}opengraph-image`],
-  },
 };
 
 export default async function IndiaLandingPage() {

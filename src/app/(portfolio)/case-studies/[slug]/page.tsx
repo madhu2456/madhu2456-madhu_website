@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CitationBox } from "@/components/CitationBox";
+import { FormattedText } from "@/components/FormattedText";
 import { Header } from "@/components/Header";
 import { ShareButtons } from "@/components/ShareButtons";
 import {
@@ -60,24 +61,6 @@ const splitIntoList = (value?: string) => {
   if (newlineItems.length > 1) return newlineItems;
 
   return value.split(/(?<=[.!?])\s+(?=[A-Z])/).filter(Boolean);
-};
-
-const FormattedText = ({ text }: { text: string }) => {
-  if (!text) return null;
-  const parts = text.split(/(?:\*\*|\*)(.*?)(?:\*\*|\*)/g);
-  return (
-    <>
-      {parts.map((part, i) =>
-        i % 2 === 1 ? (
-          <strong key={`${part}-${i}`} className="text-foreground font-semibold">
-            {part}
-          </strong>
-        ) : (
-          part
-        ),
-      )}
-    </>
-  );
 };
 
 const getProjectMeta = (project: ProjectItem) => {
@@ -161,14 +144,6 @@ export async function generateMetadata({
           alt: `${project.title} case study by Madhu Dadi`,
         },
       ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [`${siteUrl}opengraph-image?ext=.png`],
-      creator: "@madhu245",
-      site: "@madhu245",
     },
   };
 }
@@ -376,7 +351,12 @@ export default async function CaseStudyPage({
         <section className="mt-12">
           <h2 className="font-display text-2xl font-bold">Problem</h2>
           <p className="mt-3 leading-relaxed text-muted-foreground">
-            <FormattedText text={project.problemStatement || "The project addressed a real-world workflow bottleneck and focused on improving decision speed, reliability, and usability."} />
+            <FormattedText
+              text={
+                project.problemStatement ||
+                "The project addressed a real-world workflow bottleneck and focused on improving decision speed, reliability, and usability."
+              }
+            />
           </p>
         </section>
 
@@ -390,7 +370,9 @@ export default async function CaseStudyPage({
                   className="flex gap-3 rounded-xl border border-border bg-surface/40 px-4 py-3 text-sm leading-relaxed"
                 >
                   <span className="text-primary mt-0.5">◆</span>
-                  <span><FormattedText text={item} /></span>
+                  <span>
+                    <FormattedText text={item} />
+                  </span>
                 </li>
               ))}
             </ul>
@@ -402,7 +384,9 @@ export default async function CaseStudyPage({
             <h2 className="font-display text-2xl font-bold">Architecture</h2>
             <div className="prose prose-invert mt-4 max-w-none text-muted-foreground">
               {project.architecture.split("\n").map((paragraph, _idx) => (
-                <p key={paragraph}><FormattedText text={paragraph} /></p>
+                <p key={paragraph}>
+                  <FormattedText text={paragraph} />
+                </p>
               ))}
             </div>
           </section>
@@ -418,7 +402,9 @@ export default async function CaseStudyPage({
                   className="flex gap-3 rounded-xl border border-border bg-surface/40 px-4 py-3 text-sm leading-relaxed"
                 >
                   <span className="text-primary mt-0.5">✓</span>
-                  <span><FormattedText text={item} /></span>
+                  <span>
+                    <FormattedText text={item} />
+                  </span>
                 </li>
               ))}
             </ul>
@@ -432,7 +418,9 @@ export default async function CaseStudyPage({
             </h2>
             <div className="prose prose-invert mt-4 max-w-none text-muted-foreground">
               {project.lessonsLearned.split("\n").map((paragraph, _idx) => (
-                <p key={paragraph}><FormattedText text={paragraph} /></p>
+                <p key={paragraph}>
+                  <FormattedText text={paragraph} />
+                </p>
               ))}
             </div>
           </section>
