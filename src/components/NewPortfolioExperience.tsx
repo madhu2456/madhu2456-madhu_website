@@ -23,6 +23,7 @@ import {
 } from "react";
 import { submitContactForm } from "@/app/actions/submit-contact-form";
 import { Footer } from "@/components/Footer";
+import { FormattedText } from "@/components/FormattedText";
 import { Header } from "@/components/Header";
 import {
   normalizeImageSource,
@@ -440,14 +441,14 @@ function Projects({ projects }: { projects: ProjectItem[] }) {
                   </p>
                 ) : null}
                 <h3 className="mt-2 min-h-[3.75rem] font-display text-xl font-semibold leading-tight sm:text-2xl">
-                  {project.tagline || project.title}
-                </h3>
-                <p className="mt-1 text-sm font-medium text-foreground/80">
                   {project.title}
+                </h3>
+                <p className="mt-2 text-sm font-medium text-foreground/80">
+                  <FormattedText text={project.tagline} />
                 </p>
                 {project.impactSummary ? (
                   <p className="mt-3 min-h-[9rem] text-sm leading-relaxed text-muted-foreground">
-                    {project.impactSummary}
+                    <FormattedText text={project.impactSummary} />
                   </p>
                 ) : null}
                 <div className="mt-4 flex min-h-[3.5rem] flex-wrap content-start gap-1.5">
@@ -1167,7 +1168,7 @@ function buildSkillGroups(skills: SkillItem[]) {
   for (const skill of skills) {
     const cat = skill.category || "other";
     if (!grouped.has(cat)) grouped.set(cat, []);
-    grouped.get(cat)!.push(skill.name);
+    grouped.get(cat)?.push(skill.name);
   }
 
   return [

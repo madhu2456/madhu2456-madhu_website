@@ -2,6 +2,7 @@ import { ArrowRight, ExternalLink } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { FormattedText } from "@/components/FormattedText";
 import { Header } from "@/components/Header";
 import { SeoStructuredData } from "@/components/SeoStructuredData";
 import {
@@ -41,14 +42,6 @@ export const metadata: Metadata = {
         alt: "Madhu Dadi case studies",
       },
     ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "AI, RAG & Analytics Case Studies - Production Builds | Madhu Dadi",
-    description: CASE_STUDIES_DESCRIPTION,
-    images: [`${getSiteUrl()}opengraph-image?ext=.png`],
-    creator: "@madhu245",
-    site: "@madhu245",
   },
 };
 
@@ -102,7 +95,7 @@ export default async function CaseStudiesPage() {
     <>
       <SeoStructuredData nodes={["ProjectsList"]} />
       <Header profile={profile} navigationItems={sortedNavigationItems} />
-      <main className="mx-auto w-[min(1400px,92%)] pt-32 pb-24">
+      <main className="mx-auto max-w-6xl w-[92%] pt-32 pb-24">
         <script
           type="application/ld+json"
           // biome-ignore lint/security/noDangerouslySetInnerHtml: server-side JSON-LD
@@ -129,7 +122,7 @@ export default async function CaseStudiesPage() {
               Generative AI, RAG, FastAPI & Marketing Analytics Case Studies
             </h1>
           </div>
-          
+
           <div className="mt-12 space-y-16 text-lg leading-relaxed text-muted-foreground">
             <section className="space-y-6 max-w-4xl">
               <p>
@@ -217,14 +210,15 @@ export default async function CaseStudiesPage() {
                 </h2>
                 <p className="text-base">
                   I actively select projects that present deep technical
-                  complexity tied directly to tangible business value. I look for
-                  engagements where a high-leverage technical intervention—whether
-                  it is automating an operational bottleneck with AI agents,
-                  establishing absolute clarity in marketing attribution, or
-                  scaling a Next.js platform—will drive immediate ROI. I prefer
-                  working directly with stakeholders who value engineering rigor,
-                  iterative deployment, and transparent system architecture over
-                  quick, unscalable hacks. My ultimate goal is to architect
+                  complexity tied directly to tangible business value. I look
+                  for engagements where a high-leverage technical
+                  intervention—whether it is automating an operational
+                  bottleneck with AI agents, establishing absolute clarity in
+                  marketing attribution, or scaling a Next.js platform—will
+                  drive immediate ROI. I prefer working directly with
+                  stakeholders who value engineering rigor, iterative
+                  deployment, and transparent system architecture over quick,
+                  unscalable hacks. My ultimate goal is to architect
                   foundational systems that teams can understand, maintain, and
                   rely on long after my direct involvement ends.
                 </p>
@@ -246,8 +240,8 @@ export default async function CaseStudiesPage() {
                   comprehensively documented with a clear problem statement, the
                   technical approach used to solve it, and the concrete outcomes
                   achieved. Where applicable, live URLs, open-source GitHub
-                  repositories, and verifiable performance metrics are provided as
-                  citable proof of execution.
+                  repositories, and verifiable performance metrics are provided
+                  as citable proof of execution.
                 </p>
               </section>
             </div>
@@ -289,12 +283,12 @@ export default async function CaseStudiesPage() {
                   </h2>
                   {project.tagline ? (
                     <p className="mt-2 text-sm font-medium text-foreground/80">
-                      {project.tagline}
+                      <FormattedText text={project.tagline} />
                     </p>
                   ) : null}
                   {project.impactSummary ? (
                     <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
-                      {project.impactSummary}
+                      <FormattedText text={project.impactSummary} />
                     </p>
                   ) : null}
                   <div className="mt-5 flex flex-wrap gap-1.5">

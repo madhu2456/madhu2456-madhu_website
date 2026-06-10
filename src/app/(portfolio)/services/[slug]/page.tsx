@@ -84,12 +84,6 @@ export async function generateMetadata({
         },
       ],
     },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [`${siteUrl}opengraph-image?ext=.png`],
-    },
   };
 }
 
