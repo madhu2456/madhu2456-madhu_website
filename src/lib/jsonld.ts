@@ -567,23 +567,6 @@ export function buildServicesListSchema({
                 }),
             },
           }),
-          aggregateRating: {
-            "@type": "AggregateRating",
-            ratingValue: "5.0",
-            ratingCount: "10",
-          },
-          review: {
-            "@type": "Review",
-            reviewRating: {
-              "@type": "Rating",
-              ratingValue: "5",
-              bestRating: "5",
-            },
-            author: {
-              "@type": "Person",
-              name: "Verified Client",
-            },
-          },
         },
       };
     }),
