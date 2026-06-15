@@ -67,21 +67,6 @@
       "RAG consultant",
       "marketing analytics consultant",
       "FastAPI Next.js AI developer",
-      "AI consulting services",
-      "generative AI consulting",
-      "generative AI consulting services",
-      "AI strategy consulting",
-      "enterprise AI consulting",
-      "AI automation consulting",
-      "AI transformation consulting",
-      "AI integration services",
-      "LLM consulting",
-      "LLM development services",
-      "RAG development services",
-      "AI agent development services",
-      "AI chatbot development services",
-      "machine learning consulting services",
-      "OpenAI consulting",
       "hire AI developer",
       "hire AI consultant",
       "hire ML engineer",
@@ -491,7 +476,9 @@
         "Presented analytical findings and strategic recommendations to senior leadership, facilitating informed decision-making and business growth within the Patient Support Services division.",
         "Utilized advanced analytics tools (e.g., Google Analytics, Power BI, Advanced Modelling, etc.) to measure and improve digital engagement, patient satisfaction, and operational efficiency."
       ],
-      "achievements": ["Best Performer of the Quarter, Q1 2024"],
+      "achievements": [
+        "Best Performer of the Quarter, Q1 2024"
+      ],
       "order": 1,
       "updatedAt": "2026-06-07T00:00:00Z"
     },
@@ -511,7 +498,9 @@
         "Led the Marketing Analytics team in redBus to provide measurement solutions for ATL, BTL and Digital Campaigns.",
         "Created Brand Playbooks for Digital, Social and Owned media to effectively optimise the campaign budgets and increase the ROI of Brand initiatives."
       ],
-      "achievements": ["Q3 Trailblazer, 30% new-customer growth"],
+      "achievements": [
+        "Q3 Trailblazer, 30% new-customer growth"
+      ],
       "order": 2,
       "updatedAt": "2026-06-07T00:00:00Z"
     },
@@ -530,7 +519,9 @@
         "Performed brand lift study, identified the most optimal consumer journey from first touch point to last touch point and measured the performance in terms of conversion lift.",
         "Brought awareness of 1st party data solutions to increase the targeting by using cluster analysis, cost benefit analysis and pricing analytics to the clients."
       ],
-      "achievements": ["Performer of the Year 2020-21 - WPP NextGen"],
+      "achievements": [
+        "Performer of the Year 2020-21 - WPP NextGen"
+      ],
       "order": 3,
       "updatedAt": "2026-06-07T00:00:00Z"
     },
@@ -549,7 +540,9 @@
         "Implemented, Analyzed and Optimized organic and paid search engine marketing activities and increase the CTR by 20%.",
         "Formulated and documented the project/product plan for web applications."
       ],
-      "achievements": ["Foundations in analytics + engineering"],
+      "achievements": [
+        "Foundations in analytics + engineering"
+      ],
       "order": 4,
       "updatedAt": "2026-06-07T00:00:00Z"
     }
@@ -1150,69 +1143,92 @@
       "capabilityCards": [
         {
           "title": "RAG Chat Systems",
-          "desc": "High-precision conversational interfaces backed by multi-stage retrieval pipelines."
+          "description": "High-precision conversational interfaces backed by multi-stage retrieval pipelines."
         },
         {
           "title": "Source-Cited AI Assistants",
-          "desc": "Assistants that ground every response in verifiable documents with click-through citations."
+          "description": "Assistants that ground every response in verifiable documents with click-through citations."
         },
         {
           "title": "AI Agents with Tools",
-          "desc": "Controlled workflows featuring sandboxed execution, validation, fallback behavior, and state management."
+          "description": "Controlled workflows featuring sandboxed execution, validation, fallback behavior, and state management."
         },
         {
           "title": "Prompt & Eval Pipelines",
-          "desc": "Versioned prompt assets paired with automated evaluation suites to validate accuracy."
+          "description": "Versioned prompt assets paired with automated evaluation suites to validate accuracy."
         },
         {
           "title": "FastAPI AI Backends",
-          "desc": "High-performance backends featuring asynchronous queuing, stream parsing, and Pydantic validation."
+          "description": "High-performance backends featuring asynchronous queuing, stream parsing, and Pydantic validation."
         },
         {
           "title": "Next.js AI Product Interfaces",
-          "desc": "Ultra-fast frontend layouts supporting streaming chat UI, markdown, and reactive state management."
+          "description": "Ultra-fast frontend layouts supporting streaming chat UI, markdown, and reactive state management."
         },
         {
           "title": "Vector Search Systems",
-          "desc": "Ingestion and extraction pipelines utilizing specialized dense/sparse semantic architectures."
+          "description": "Ingestion and extraction pipelines utilizing specialized dense/sparse semantic architectures."
         },
         {
           "title": "Admin & Observability Dashboards",
-          "desc": "Comprehensive instrumentation tracking model runs, telemetry traces, and token costs."
+          "description": "Comprehensive instrumentation tracking model runs, telemetry traces, and token costs."
         },
         {
           "title": "Analytics Instrumentation",
-          "desc": "Custom tracking pipelines designed to connect AI application telemetry directly to GA4 and BigQuery metrics."
+          "description": "Custom tracking pipelines designed to connect AI application telemetry directly to GA4 and BigQuery metrics."
         }
       ],
       "techStackGroups": [
         {
           "category": "Core Language",
-          "items": ["Python", "TypeScript"]
+          "items": [
+            "Python",
+            "TypeScript"
+          ]
         },
         {
           "category": "Web Frameworks",
-          "items": ["FastAPI", "Next.js", "React"]
+          "items": [
+            "FastAPI",
+            "Next.js",
+            "React"
+          ]
         },
         {
           "category": "Databases & Cache",
-          "items": ["Postgres", "Redis"]
+          "items": [
+            "Postgres",
+            "Redis"
+          ]
         },
         {
           "category": "Task Queuing",
-          "items": ["Celery"]
+          "items": [
+            "Celery"
+          ]
         },
         {
           "category": "AI Orchestration",
-          "items": ["OpenAI API", "LangChain", "LangSmith"]
+          "items": [
+            "OpenAI API",
+            "LangChain",
+            "LangSmith"
+          ]
         },
         {
           "category": "Vector Storage",
-          "items": ["Pinecone", "Qdrant", "pgvector"]
+          "items": [
+            "Pinecone",
+            "Qdrant",
+            "pgvector"
+          ]
         },
         {
           "category": "Analytics & Telemetry",
-          "items": ["GA4", "BigQuery"]
+          "items": [
+            "GA4",
+            "BigQuery"
+          ]
         }
       ],
       "faqs": [
@@ -1281,7 +1297,7 @@
       "featured": true,
       "order": 2,
       "updatedAt": "2026-06-07T00:00:00Z",
-      "seoTitle": "RAG Consultant India: Enterprise Vector Search & LLM Apps | Madhu Dadi",
+      "seoTitle": "RAG development consultant",
       "seoDescription": "Hire a specialized RAG consultant in India to build high-precision vector search pipelines, enterprise LLM applications, and semantic retrieval systems.",
       "heroTitle": "RAG Consultant & AI Search Engineer",
       "heroEyebrow": "ENTERPRISE RETRIEVAL-AUGMENTED GENERATION",
@@ -1370,6 +1386,7 @@
       "featured": true,
       "order": 3,
       "updatedAt": "2026-06-07T00:00:00Z",
+      "seoTitle": "AI workflow automation consultant",
       "faqs": [
         {
           "question": "How do you prevent agents from getting stuck in infinite loops?",
@@ -1436,6 +1453,7 @@
       "featured": true,
       "order": 4,
       "updatedAt": "2026-06-07T00:00:00Z",
+      "seoTitle": "GA4 BigQuery analytics consultant",
       "audience": [
         "Marketing teams mapping complex customer journeys",
         "Growth teams needing multi-touch attribution models",
@@ -1455,39 +1473,39 @@
       "capabilityCards": [
         {
           "title": "GA4 Measurement Plans",
-          "desc": "Custom event schemas, user properties tracking, and server-side tag container configurations."
+          "description": "Custom event schemas, user properties tracking, and server-side tag container configurations."
         },
         {
           "title": "Campaign Performance Dashboards",
-          "desc": "Interactive dashboards consolidating media spend, impressions, CTRs, and downstream CAC."
+          "description": "Interactive dashboards consolidating media spend, impressions, CTRs, and downstream CAC."
         },
         {
           "title": "BigQuery Ingestion Layers",
-          "desc": "Robust ETL pipelines extracting raw GA4 datasets, normalizing columns, and prepping tables for BI."
+          "description": "Robust ETL pipelines extracting raw GA4 datasets, normalizing columns, and prepping tables for BI."
         },
         {
           "title": "Executive dashboards",
-          "desc": "Polished, high-level business intelligence layers mapping telemetry straight to revenue."
+          "description": "Polished, high-level business intelligence layers mapping telemetry straight to revenue."
         },
         {
           "title": "Attribution Frameworks",
-          "desc": "Custom multi-touch or marketing mix models designed to trace actual campaign channels."
+          "description": "Custom multi-touch or marketing mix models designed to trace actual campaign channels."
         },
         {
           "title": "A/B Testing Analysis",
-          "desc": "Statistical experimentation engines calculating confidence intervals, p-values, and conversion lift."
+          "description": "Statistical experimentation engines calculating confidence intervals, p-values, and conversion lift."
         },
         {
           "title": "CLM Reporting Layers",
-          "desc": "End-to-end Customer Lifecycle Management structures mapping cohort retention and churn rates."
+          "description": "End-to-end Customer Lifecycle Management structures mapping cohort retention and churn rates."
         },
         {
           "title": "Frictionless Funnel Analytics",
-          "desc": "Comprehensive drop-off mapping across onboarding flows, product trials, and payment processes."
+          "description": "Comprehensive drop-off mapping across onboarding flows, product trials, and payment processes."
         },
         {
           "title": "Marketing Data QA Protocols",
-          "desc": "Automated regression checks to instantly flag data discrepancy, missing tracking tags, or broken forms."
+          "description": "Automated regression checks to instantly flag data discrepancy, missing tracking tags, or broken forms."
         }
       ],
       "faqs": [
@@ -1575,27 +1593,27 @@
       "capabilityCards": [
         {
           "title": "Server-Side GTM Setup (sGTM)",
-          "desc": "Implement server-side containers on Google Cloud Platform, routing consented first-party measurement streams through controlled server endpoints to improve data quality, privacy controls, and measurement resilience."
+          "description": "Implement server-side containers on Google Cloud Platform, routing consented first-party measurement streams through controlled server endpoints to improve data quality, privacy controls, and measurement resilience."
         },
         {
           "title": "GA4 Schema Calibration",
-          "desc": "Define custom event schemas, item arrays, and user properties to map complete customer journeys with exact telemetry specifications."
+          "description": "Define custom event schemas, item arrays, and user properties to map complete customer journeys with exact telemetry specifications."
         },
         {
           "title": "Google Cloud BigQuery Warehouses",
-          "desc": "Connect native GA4 export integrations, build SQL schemas, partition tables, and construct optimized views to reduce query costs."
+          "description": "Connect native GA4 export integrations, build SQL schemas, partition tables, and construct optimized views to reduce query costs."
         },
         {
           "title": "Attribution Transformation Models",
-          "desc": "Create custom multi-touch attribution tables in SQL, combining UTM parameters and user IDs to understand true conversion drivers."
+          "description": "Create custom multi-touch attribution tables in SQL, combining UTM parameters and user IDs to understand true conversion drivers."
         },
         {
           "title": "Google Ads & Meta Conversion APIs (CAPI)",
-          "desc": "Configure server-side conversion API signals (Meta CAPI, Google Enhanced Conversions) to feed ad platforms high-match-rate signals."
+          "description": "Configure server-side conversion API signals (Meta CAPI, Google Enhanced Conversions) to feed ad platforms high-match-rate signals."
         },
         {
           "title": "Automated Data QA & Alerting",
-          "desc": "Deploy validation scripts to verify tracking logs daily, sending automated alerts to Slack or Email when anomalous drops occur."
+          "description": "Deploy validation scripts to verify tracking logs daily, sending automated alerts to Slack or Email when anomalous drops occur."
         }
       ],
       "faqs": [
@@ -1664,30 +1682,31 @@
       "featured": true,
       "order": 6,
       "updatedAt": "2026-06-07T00:00:00Z",
+      "seoTitle": "FastAPI/Next.js AI product development",
       "capabilityCards": [
         {
           "title": "SaaS MVPs",
-          "desc": "Fast, end-to-end software products built to scale, featuring complete auth, databases, Stripe payments, and admin controls."
+          "description": "Fast, end-to-end software products built to scale, featuring complete auth, databases, Stripe payments, and admin controls."
         },
         {
           "title": "AI-Powered Analytics Portals",
-          "desc": "Analytics dashboards that parse dense telemetry schemas and present metrics with clear, interactive controls."
+          "description": "Analytics dashboards that parse dense telemetry schemas and present metrics with clear, interactive controls."
         },
         {
           "title": "Agentic Chat Interfaces",
-          "desc": "Source-cited chatbot frontends that showcase prompt chains, retrieve context dynamically, and stream markdown responses."
+          "description": "Source-cited chatbot frontends that showcase prompt chains, retrieve context dynamically, and stream markdown responses."
         },
         {
           "title": "Internal Productivity Tools",
-          "desc": "Internal workflow tools for approved data operations, browser-based QA, structured imports, admin automation, and operational reporting."
+          "description": "Internal workflow tools for approved data operations, browser-based QA, structured imports, admin automation, and operational reporting."
         },
         {
           "title": "API-First Services",
-          "desc": "High-throughput API endpoints designed in Python/FastAPI with Pydantic validations and detailed OpenAPI docs."
+          "description": "High-throughput API endpoints designed in Python/FastAPI with Pydantic validations and detailed OpenAPI docs."
         },
         {
           "title": "Vector Retrieval Architectures",
-          "desc": "Embeddings generation, hybrid neural search configurations, and context-aware RAG pipelines mapped directly to databases."
+          "description": "Embeddings generation, hybrid neural search configurations, and context-aware RAG pipelines mapped directly to databases."
         }
       ],
       "faqs": [

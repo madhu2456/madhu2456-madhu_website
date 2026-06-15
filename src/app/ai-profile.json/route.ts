@@ -1,7 +1,7 @@
 import { getPortfolioData } from "@/lib/portfolio-data";
 
 export async function GET() {
-  const { sortedCertifications } = await getPortfolioData();
+  const { sortedCertifications, sortedServices } = await getPortfolioData();
 
   return Response.json({
     meta: {
@@ -43,6 +43,13 @@ export async function GET() {
         learningPlatformAbout: "https://madhudadi.in/blog/about",
         technicalTutorials: "https://madhudadi.in/blog/posts",
       },
+      contactPoints: [
+        {
+          contactType: "Consulting and projects",
+          email: "madhu.kumar245@gmail.com",
+          url: "https://madhudadi.in/contact/",
+        },
+      ],
     },
     certifications: sortedCertifications.map((certification) => ({
       name: certification.name,
@@ -51,6 +58,11 @@ export async function GET() {
       credentialId: certification.credentialId,
       credentialUrl: certification.credentialUrl,
       description: certification.description,
+    })),
+    services: sortedServices.map((service) => ({
+      title: service.title,
+      url: `https://madhudadi.in/services/${service.slug}/`,
+      description: service.shortDescription,
     })),
     caseStudies: [
       {
