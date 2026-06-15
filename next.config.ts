@@ -214,6 +214,11 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      // Prevent AI markdown endpoint indexation
+      {
+        source: "/:path*/markdown",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, follow" }],
+      },
     ];
   },
 };

@@ -49,6 +49,7 @@ export default async function Home() {
           "Organization",
           "SoftwareApplication",
           "Breadcrumb",
+          "FAQ",
         ]}
       />
       <PortfolioContent />

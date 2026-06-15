@@ -527,7 +527,8 @@ export function buildServicesListSchema({
               url: `${siteUrl}#services`,
               hasMerchantReturnPolicy: {
                 "@type": "MerchantReturnPolicy",
-                returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted",
+                returnPolicyCategory:
+                  "https://schema.org/MerchantReturnNotPermitted",
               },
               shippingDetails: {
                 "@type": "OfferShippingDetails",
