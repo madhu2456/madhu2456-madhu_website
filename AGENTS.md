@@ -194,12 +194,11 @@ pnpm format
 
 ## Conventions for contributors and agents
 
-1. Use Superpowers plugin skills by default. At the start of each task, check and follow any relevant Superpowers workflow skill without requiring the user to explicitly request it.
-2. Use `motion/react` for animation imports; do not use `framer-motion`.
-3. Keep all portfolio content data-driven via `getPortfolioData()`.
-4. Do not add hardcoded portfolio facts in UI sections.
-5. Extend JSON-LD through `src/lib/jsonld.ts` and render through `SeoStructuredData.tsx`.
-6. Preserve machine-readable endpoint consistency (`llms.txt`, `ai-profile.json`, sitemap, robots).
-7. Validate edits with:
+1. Use `motion/react` for animation imports; do not use `framer-motion`.
+2. Keep all portfolio content data-driven via `getPortfolioData()`.
+3. Do not add hardcoded portfolio facts in UI sections.
+4. Extend JSON-LD through `src/lib/jsonld.ts` and render through `SeoStructuredData.tsx`.
+5. Preserve machine-readable endpoint consistency (`llms.txt`, `ai-profile.json`, sitemap, robots).
+6. Validate edits with:
    - `pnpm lint`
    - `pnpm build`

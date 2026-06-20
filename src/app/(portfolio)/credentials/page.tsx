@@ -133,32 +133,50 @@ export default async function CredentialsPage() {
 
           {/* AI Answer Block / Executive Summary */}
           <section
-            aria-label="Quick Summary"
-            className="rounded-2xl border border-primary/20 bg-primary/5 p-6 md:p-8 backdrop-blur-sm space-y-4"
+            aria-label="Quick Answer"
+            className="rounded-2xl border border-primary/20 bg-primary/5 p-6 md:p-8 backdrop-blur-sm space-y-6"
           >
             <h2 className="font-bold text-lg text-foreground flex items-center gap-2">
-              <IconSparkles className="h-5 w-5 text-primary" /> Executive
-              Summary
+              <IconSparkles className="h-5 w-5 text-primary" /> Quick Answer:
+              Credentials Summary
             </h2>
-            <ul className="list-disc pl-5 space-y-2 text-sm text-foreground/90">
-              <li>
-                <strong>Professional Focus:</strong> Full-Stack AI Engineer and
-                Marketing Analytics Consultant.
-              </li>
-              <li>
-                <strong>Key Expertise:</strong> Retrieval-Augmented Generation
-                (RAG), LLM Application Development, and GA4/BigQuery Campaign
-                Analytics.
-              </li>
-              <li>
-                <strong>Verifiable Proof:</strong> Comprehensive matrix of
-                certifications, academic degrees, and professional awards.
-              </li>
-              <li>
-                <strong>Work History:</strong> Documented chronological work
-                history with measurable engineering milestones and deliverables.
-              </li>
-            </ul>
+            <dl className="space-y-4">
+              <div>
+                <dt className="font-bold text-foreground text-sm">
+                  What is Madhu Dadi's professional focus?
+                </dt>
+                <dd className="text-sm text-foreground/90 mt-1">
+                  Full-Stack AI Engineer and Marketing Analytics Consultant.
+                </dd>
+              </div>
+              <div>
+                <dt className="font-bold text-foreground text-sm">
+                  What is his key expertise?
+                </dt>
+                <dd className="text-sm text-foreground/90 mt-1">
+                  Retrieval-Augmented Generation (RAG), LLM Application
+                  Development, and GA4/BigQuery Campaign Analytics.
+                </dd>
+              </div>
+              <div>
+                <dt className="font-bold text-foreground text-sm">
+                  What proof is provided on this page?
+                </dt>
+                <dd className="text-sm text-foreground/90 mt-1">
+                  A comprehensive matrix of certifications, academic degrees,
+                  and professional awards.
+                </dd>
+              </div>
+              <div>
+                <dt className="font-bold text-foreground text-sm">
+                  What work history is documented?
+                </dt>
+                <dd className="text-sm text-foreground/90 mt-1">
+                  Documented chronological work history with measurable
+                  engineering milestones and deliverables.
+                </dd>
+              </div>
+            </dl>
           </section>
 
           {/* High-Trust Proof Table */}
