@@ -47,7 +47,6 @@ next-env.d.ts
 .idea/
 .gemini/
 gha-creds-*.json
-.superpowers/
 scratch/
 
 # Data backups

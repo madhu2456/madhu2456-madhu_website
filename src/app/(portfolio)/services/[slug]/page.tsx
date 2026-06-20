@@ -285,31 +285,50 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
           {/* AI Answer Block / TL;DR Summary */}
           <section
-            aria-label="TL;DR Summary"
+            aria-label="Quick Answer"
             className="p-6 rounded-2xl bg-primary/5 border border-primary/20 space-y-4"
           >
             <h2 className="text-sm font-bold uppercase tracking-wider text-primary flex items-center gap-2">
-              <IconSparkles className="h-4 w-4" /> Quick Summary
+              <IconSparkles className="h-4 w-4" /> Quick Answer: Service Summary
             </h2>
-            <ul className="list-disc pl-5 space-y-2 text-sm text-foreground/90">
-              <li>
-                <strong>Service:</strong> {service.title}
-              </li>
-              <li>
-                <strong>Overview:</strong> {service.shortDescription}
-              </li>
+            <dl className="space-y-4">
+              <div>
+                <dt className="font-bold text-foreground text-sm">
+                  What is the service?
+                </dt>
+                <dd className="text-sm text-foreground/90 mt-1">
+                  {service.title}
+                </dd>
+              </div>
+              <div>
+                <dt className="font-bold text-foreground text-sm">
+                  What does this service involve?
+                </dt>
+                <dd className="text-sm text-foreground/90 mt-1">
+                  {service.shortDescription}
+                </dd>
+              </div>
               {service.pricing?.startingPrice && (
-                <li>
-                  <strong>Pricing:</strong> Custom (starting at $
-                  {service.pricing.startingPrice})
-                </li>
+                <div>
+                  <dt className="font-bold text-foreground text-sm">
+                    What is the starting price?
+                  </dt>
+                  <dd className="text-sm text-foreground/90 mt-1">
+                    Custom (starting at ${service.pricing.startingPrice})
+                  </dd>
+                </div>
               )}
               {service.timeline && (
-                <li>
-                  <strong>Typical Timeline:</strong> {service.timeline}
-                </li>
+                <div>
+                  <dt className="font-bold text-foreground text-sm">
+                    What is the typical timeline?
+                  </dt>
+                  <dd className="text-sm text-foreground/90 mt-1">
+                    {service.timeline}
+                  </dd>
+                </div>
               )}
-            </ul>
+            </dl>
           </section>
 
           {/* Detailed Content Split Grid */}

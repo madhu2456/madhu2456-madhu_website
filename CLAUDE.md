@@ -8,10 +8,6 @@ This repository uses newer Next.js behavior and patterns. Before implementing fr
 
 For full architecture and flow details, read `AGENTS.md` first.
 
-## Default workflow
-
-- Use Superpowers plugin skills by default. At the start of each task, check and follow any relevant Superpowers workflow skill without requiring the user to explicitly request it.
-
 ## Imports and libraries
 
 - Animations: `import { motion, AnimatePresence } from "motion/react"` (never from `framer-motion`)

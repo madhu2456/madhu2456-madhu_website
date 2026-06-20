@@ -282,34 +282,53 @@ export default async function CaseStudyPage({
 
         {/* AI Answer Block / Executive Summary */}
         <section
-          aria-label="Executive Summary"
+          aria-label="Quick Answer"
           className="mt-8 p-6 rounded-2xl bg-surface/40 border border-border/60 space-y-4"
         >
           <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-2">
-            Executive Summary
+            Quick Answer: Case Study Summary
           </h2>
-          <ul className="list-disc pl-5 space-y-2 text-sm text-foreground/90">
+          <dl className="space-y-4">
             {project.category && (
-              <li>
-                <strong>Focus Area:</strong> {project.category}
-              </li>
+              <div>
+                <dt className="font-bold text-foreground text-sm">
+                  What is the focus area of this project?
+                </dt>
+                <dd className="text-sm text-foreground/90 mt-1">
+                  {project.category}
+                </dd>
+              </div>
             )}
             {project.technologies && project.technologies.length > 0 && (
-              <li>
-                <strong>Core Stack:</strong>{" "}
-                {project.technologies.map((t) => t.name).join(", ")}
-              </li>
+              <div>
+                <dt className="font-bold text-foreground text-sm">
+                  What core stack was used?
+                </dt>
+                <dd className="text-sm text-foreground/90 mt-1">
+                  {project.technologies.map((t) => t.name).join(", ")}
+                </dd>
+              </div>
             )}
             {project.impactMetrics && project.impactMetrics.length > 0 && (
-              <li>
-                <strong>Key Impact:</strong> {project.impactMetrics[0]?.value}{" "}
-                {project.impactMetrics[0]?.label}
-              </li>
+              <div>
+                <dt className="font-bold text-foreground text-sm">
+                  What was the key impact?
+                </dt>
+                <dd className="text-sm text-foreground/90 mt-1">
+                  {project.impactMetrics[0]?.value}{" "}
+                  {project.impactMetrics[0]?.label}
+                </dd>
+              </div>
             )}
-            <li>
-              <strong>Outcome:</strong> {project.tagline || description}
-            </li>
-          </ul>
+            <div>
+              <dt className="font-bold text-foreground text-sm">
+                What was the project outcome?
+              </dt>
+              <dd className="text-sm text-foreground/90 mt-1">
+                {project.tagline || description}
+              </dd>
+            </div>
+          </dl>
         </section>
 
         {project.coverImage ? (
