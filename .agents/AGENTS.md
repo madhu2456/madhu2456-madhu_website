@@ -217,3 +217,4 @@ pnpm format
 8. Validate edits with:
    - `pnpm lint`
    - `pnpm build`
+9. **MANDATORY REVIEWER PROTOCOL**: Under no circumstances can the Orchestrator merge or request user approval for a merge immediately after the Implementer finishes. The Orchestrator MUST mandatorily spawn a dedicated **Reviewer** subagent to validate the pipeline (`pnpm lint && pnpm build`) after every implementation phase. Skipping the Reviewer is a critical violation of the swarm lifecycle.
