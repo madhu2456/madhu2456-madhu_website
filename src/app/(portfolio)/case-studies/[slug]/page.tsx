@@ -12,15 +12,10 @@ import {
   shouldUseUnoptimizedImage,
 } from "@/lib/image-source";
 import { getPortfolioData, type ProjectItem } from "@/lib/portfolio-data";
-
-const DEFAULT_SITE_URL = "https://madhudadi.in";
+import { resolveSiteUrl } from "@/lib/site-url";
 
 const getSiteUrl = () => {
-  const url = (process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE_URL).replace(
-    /\/+$/,
-    "",
-  );
-  return `${url}/`;
+  return `${resolveSiteUrl()}/`;
 };
 
 const toDescription = (...values: Array<string | null | undefined>) => {
@@ -95,14 +90,7 @@ const makeEvidenceLinks = (project: ProjectItem, _siteUrl: string) => {
 
 export async function generateStaticParams() {
   const { sortedProjects } = await getPortfolioData();
-  return sortedProjects
-    .filter(
-      (project) =>
-        project.slug !== "adticks" &&
-        project.slug !== "technical-blog" &&
-        project.slug !== "udemy-enroller-fastapi",
-    )
-    .map((project) => ({ slug: project.slug }));
+  return sortedProjects.map((project) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata({

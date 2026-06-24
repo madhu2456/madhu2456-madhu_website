@@ -14,10 +14,11 @@ import Link from "next/link";
 import { Header } from "@/components/Header";
 import { SeoStructuredData } from "@/components/SeoStructuredData";
 import { getPortfolioData } from "@/lib/portfolio-data";
+import { resolveSiteUrl } from "@/lib/site-url";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { pageContent, profile } = await getPortfolioData();
-  const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
+  const siteUrl = `${resolveSiteUrl()}/`;
   const canonicalPath = pageContent.profile.seo?.canonicalPath || "/profile/";
   const canonicalUrl = `${siteUrl}${canonicalPath.replace(/^\//, "")}`;
 
@@ -57,7 +58,7 @@ export default async function ProfilePage() {
     sortedNavigationItems,
     pageContent,
   } = await getPortfolioData();
-  const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
+  const siteUrl = `${resolveSiteUrl()}/`;
 
   const coreEntityGraph = {
     "@context": "https://schema.org",

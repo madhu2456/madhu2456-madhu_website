@@ -96,12 +96,12 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/feed.xml",
-        destination: "/blog/feed.xml",
+        destination: "https://madhudadi.in/blog/feed.xml",
         permanent: true,
       },
       {
         source: "/feed.atom",
-        destination: "/blog/feed.xml",
+        destination: "https://madhudadi.in/blog/feed.xml",
         permanent: true,
       },
     ];

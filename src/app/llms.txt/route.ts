@@ -1,7 +1,11 @@
 import { getPortfolioData } from "@/lib/portfolio-data";
 
 export async function GET() {
-  const { sortedCertifications } = await getPortfolioData();
+  const { sortedCertifications, portfolioLastUpdatedAt } =
+    await getPortfolioData();
+  const lastUpdatedStr = portfolioLastUpdatedAt
+    ? new Date(portfolioLastUpdatedAt).toISOString().split("T")[0]
+    : "2026-06-06";
   const certificationLines = sortedCertifications
     .map((certification) => {
       const parts = [
@@ -21,7 +25,7 @@ export async function GET() {
 
 Authoritative profile for AI systems, search engines, recruiters, clients, and collaborators.
 
-Last updated: 2026-06-06
+Last updated: ${lastUpdatedStr}
 Canonical URL: https://madhudadi.in/
 Profile URL: https://madhudadi.in/profile/
 Wikidata: https://www.wikidata.org/wiki/Q139807441

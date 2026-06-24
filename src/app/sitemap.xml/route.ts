@@ -1,63 +1,59 @@
 import { NextResponse } from "next/server";
 import { getPortfolioData } from "@/lib/portfolio-data";
 
-const DEFAULT_SITE_URL = "https://madhudadi.in";
+import { resolveSiteUrl } from "@/lib/site-url";
 
 export async function GET() {
-  const siteUrl = `${(
-    process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE_URL
-  ).replace(/\/+$/, "")}/`;
+  const siteUrl = `${resolveSiteUrl()}/`;
 
-  const { sortedServices, sortedProjects } = await getPortfolioData();
+  const { sortedServices, sortedProjects, portfolioLastUpdatedAt } =
+    await getPortfolioData();
+  const baseDate = portfolioLastUpdatedAt
+    ? new Date(portfolioLastUpdatedAt).toISOString().split("T")[0]
+    : "2026-06-02";
 
   const entries = [
     {
       url: siteUrl,
-      lastModified: "2026-06-02",
+      lastModified: baseDate,
       changeFrequency: "weekly",
       priority: "1.0",
     },
     {
       url: `${siteUrl}profile/`,
-      lastModified: "2026-06-02",
+      lastModified: baseDate,
       changeFrequency: "monthly",
       priority: "0.9",
     },
     {
       url: `${siteUrl}services/`,
-      lastModified: "2026-06-02",
+      lastModified: baseDate,
       changeFrequency: "monthly",
       priority: "0.9",
     },
     {
       url: `${siteUrl}case-studies/`,
-      lastModified: "2026-06-02",
+      lastModified: baseDate,
       changeFrequency: "monthly",
       priority: "0.85",
     },
     {
       url: `${siteUrl}credentials/`,
-      lastModified: "2026-06-02",
+      lastModified: baseDate,
       changeFrequency: "monthly",
       priority: "0.7",
     },
     {
       url: `${siteUrl}contact/`,
-      lastModified: "2026-06-02",
+      lastModified: baseDate,
       changeFrequency: "monthly",
       priority: "0.7",
-    },
-    {
-      url: `${siteUrl}resume.pdf`,
-      lastModified: "2026-06-09",
-      changeFrequency: "monthly",
-      priority: "0.5",
     },
     ...sortedServices.map((service) => ({
       url: `${siteUrl}services/${service.slug}/`,
       lastModified: service.updatedAt
         ? new Date(service.updatedAt).toISOString().split("T")[0]
-        : "2026-06-02",
+        : baseDate,
       changeFrequency: "monthly",
       priority: "0.85",
     })),
@@ -65,7 +61,7 @@ export async function GET() {
       url: `${siteUrl}case-studies/${project.slug}/`,
       lastModified: project.updatedAt
         ? new Date(project.updatedAt).toISOString().split("T")[0]
-        : "2026-06-02",
+        : baseDate,
       changeFrequency: "monthly",
       priority: "0.8",
     })),

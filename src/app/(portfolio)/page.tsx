@@ -2,12 +2,9 @@ import type { Metadata } from "next";
 import PortfolioContent from "@/components/PortfolioContent";
 import { SeoStructuredData } from "@/components/SeoStructuredData";
 
-const DEFAULT_SITE_URL = "https://madhudadi.in";
-const resolveSiteUrl = (rawUrl?: string) => {
-  const url = (rawUrl?.trim() || DEFAULT_SITE_URL).replace(/\/+$/, "");
-  return `${url}/`;
-};
-const siteUrl = resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL);
+import { resolveSiteUrl } from "@/lib/site-url";
+
+const siteUrl = `${resolveSiteUrl()}/`;
 
 export const metadata: Metadata = {
   title: "Madhu Dadi - Generative AI, RAG & Marketing Analytics Consultant",
@@ -16,7 +13,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: siteUrl,
     languages: {
-      "en-IN": siteUrl,
+      "en-IN": `${siteUrl}in/`,
       "x-default": siteUrl,
     },
   },
@@ -40,7 +37,7 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   return (
-    <main id="main-content" className="min-h-screen">
+    <div className="min-h-screen">
       <SeoStructuredData
         nodes={[
           "Person",
@@ -53,6 +50,6 @@ export default async function Home() {
         ]}
       />
       <PortfolioContent />
-    </main>
+    </div>
   );
 }

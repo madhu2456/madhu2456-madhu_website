@@ -23,6 +23,7 @@ function isRateLimited(ip: string): boolean {
   const record = rateLimitMap.get(ip);
 
   if (!record || now > record.resetAt) {
+    if (record) rateLimitMap.delete(ip); // Evict expired
     rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
     return false;
   }

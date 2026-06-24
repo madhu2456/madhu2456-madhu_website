@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 
 export const runtime = "edge";
 
-const THEME_PURPLE = "#7c3aed";
+const THEME_AMBER = "#d69137";
 
 export async function GET(req: NextRequest) {
   try {
@@ -27,7 +27,7 @@ export async function GET(req: NextRequest) {
           justifyContent: "center",
           backgroundColor: "#09090b", // zinc-950
           backgroundImage:
-            "radial-gradient(circle at 25% 25%, #1e1b4b 0%, transparent 50%), radial-gradient(circle at 75% 75%, #2e1065 0%, transparent 50%)",
+            "radial-gradient(circle at 25% 25%, #452a0a 0%, transparent 50%), radial-gradient(circle at 75% 75%, #78350f 0%, transparent 50%)",
           padding: "80px",
           color: "white",
           fontFamily: "sans-serif",
@@ -46,7 +46,7 @@ export async function GET(req: NextRequest) {
               width: "48px",
               height: "48px",
               borderRadius: "12px",
-              backgroundColor: THEME_PURPLE,
+              backgroundColor: THEME_AMBER,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -68,7 +68,7 @@ export async function GET(req: NextRequest) {
           >
             Madhu Dadi{" "}
             <span style={{ color: "#a1a1aa", marginLeft: "8px" }}>/</span>
-            <span style={{ color: THEME_PURPLE, marginLeft: "8px" }}>
+            <span style={{ color: THEME_AMBER, marginLeft: "8px" }}>
               {type === "case-study" ? "Case Study" : "Portfolio"}
             </span>
           </div>
@@ -109,9 +109,9 @@ export async function GET(req: NextRequest) {
               <div
                 key={item}
                 style={{
-                  backgroundColor: "rgba(124, 58, 237, 0.1)",
-                  border: "1px solid rgba(124, 58, 237, 0.3)",
-                  color: THEME_PURPLE,
+                  backgroundColor: "rgba(214, 145, 55, 0.1)",
+                  border: "1px solid rgba(214, 145, 55, 0.3)",
+                  color: THEME_AMBER,
                   padding: "8px 20px",
                   borderRadius: "100px",
                   fontSize: "20px",
@@ -132,7 +132,7 @@ export async function GET(req: NextRequest) {
             left: "0",
             right: "0",
             height: "8px",
-            backgroundColor: THEME_PURPLE,
+            backgroundColor: THEME_AMBER,
           }}
         />
       </div>,

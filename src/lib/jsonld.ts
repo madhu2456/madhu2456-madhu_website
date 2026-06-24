@@ -733,7 +733,7 @@ export function buildBreadcrumbSchema(
 // ---------------------------------------------------------------------------
 export function buildFaqSchema({
   siteUrl,
-  fullName,
+  faqItems,
 }: {
   siteUrl: string;
   fullName: string;
@@ -743,52 +743,21 @@ export function buildFaqSchema({
   projects?: Project[];
   services?: Service[];
   seoKeywords?: string[] | null;
+  faqItems?: { question: string; answer: string }[];
 }) {
+  if (!faqItems || faqItems.length === 0) return null;
+
   return {
     "@type": "FAQPage",
     "@id": `${siteUrl}#faq`,
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: "Who is Madhu Dadi?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: `${fullName} is an AI and marketing analytics engineer based in Visakhapatnam, India, with 9+ years of experience across Novartis, redBus, GroupM (WPP), and Absolinsoft.`,
-        },
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
       },
-      {
-        "@type": "Question",
-        name: `What is ${fullName} best known for?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "He is best known for building production LLM/RAG applications, AI agents, AI visibility auditing systems, FastAPI/Next.js products, and analytics systems.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: `When should someone hire ${fullName}?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: `Hire ${fullName} when you need a hands-on engineer who can build AI products and connect them to measurable analytics outcomes.`,
-        },
-      },
-      {
-        "@type": "Question",
-        name: `Is ${fullName} available for consulting?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: `${fullName} is open to full-time roles, consulting, freelance projects, and advisory work depending on scope and fit.`,
-        },
-      },
-      {
-        "@type": "Question",
-        name: `What stack does ${fullName} use?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Python, FastAPI, Next.js, React, TypeScript, SQL, Postgres, Redis, Celery, OpenAI API, LangChain, vector databases, GA4, and BigQuery.",
-        },
-      },
-    ],
+    })),
   };
 }
 
@@ -913,23 +882,6 @@ export function buildSoftwareApplicationSchema({
         },
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "5.0",
-      ratingCount: "14",
-    },
-    review: {
-      "@type": "Review",
-      reviewRating: {
-        "@type": "Rating",
-        ratingValue: "5",
-        bestRating: "5",
-      },
-      author: {
-        "@type": "Person",
-        name: "Verified Client",
-      },
-    },
   };
 }
 
@@ -1009,23 +961,6 @@ export function buildProfessionalServiceSchema({
     // Links back to the canonical Person and Organization
     parentOrganization: { "@id": `${siteUrl}#organization` },
     founder: { "@id": `${siteUrl}#person` },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "5.0",
-      ratingCount: "25",
-    },
-    review: {
-      "@type": "Review",
-      reviewRating: {
-        "@type": "Rating",
-        ratingValue: "5",
-        bestRating: "5",
-      },
-      author: {
-        "@type": "Person",
-        name: "Verified Client",
-      },
-    },
   };
 }
 

@@ -229,57 +229,29 @@ export default async function ContactPage() {
                   Frequently Asked Questions
                 </h2>
                 <dl className="space-y-4 text-sm">
-                  <div className="p-4 rounded-xl border border-border/50 bg-surface/10 space-y-2">
-                    <dt className="font-semibold text-foreground flex items-center gap-2">
-                      <IconClock className="h-4.5 w-4.5 text-primary" /> What is
-                      your typical response time?
-                    </dt>
-                    <dd className="text-muted-foreground leading-relaxed pl-6.5">
-                      {pageContent.contact.responseTimeText ||
-                        "I monitor inquiries closely and aim to reply within 24 hours. For technical consultations and discovery calls, please provide as much context as possible regarding your existing tech stack and business objectives."}
-                    </dd>
-                  </div>
-                  <div className="p-4 rounded-xl border border-border/50 bg-surface/10 space-y-2">
-                    <dt className="font-semibold text-foreground flex items-center gap-2">
-                      <IconGlobe className="h-4.5 w-4.5 text-primary" /> Are you
-                      open to remote work and full-time roles?
-                    </dt>
-                    <dd className="text-muted-foreground leading-relaxed pl-6.5">
-                      Absolutely. I am a remote-first engineer available for
-                      worldwide collaborations. I am currently open to full-time
-                      roles where I can take ownership of AI and marketing
-                      analytics pipelines end-to-end. Relocation is also an
-                      option for the right opportunity.
-                    </dd>
-                  </div>
-                  <div className="p-4 rounded-xl border border-border/50 bg-surface/10 space-y-2">
-                    <dt className="font-semibold text-foreground flex items-center gap-2">
-                      <IconSparkles className="h-4.5 w-4.5 text-primary" /> What
-                      types of projects are the best fit?
-                    </dt>
-                    <dd className="text-muted-foreground leading-relaxed pl-6.5">
-                      I specialize in building production-ready LLM and
-                      Retrieval-Augmented Generation (RAG) applications,
-                      autonomous AI agents, FastAPI/Next.js full-stack systems,
-                      and comprehensive marketing analytics pipelines using
-                      Google Analytics 4 and BigQuery. If your project involves
-                      integrating generative AI into existing workflows or
-                      measuring marketing ROI reliably, we will be a great fit.
-                    </dd>
-                  </div>
-                  <div className="p-4 rounded-xl border border-border/50 bg-surface/10 space-y-2">
-                    <dt className="font-semibold text-foreground flex items-center gap-2">
-                      <IconCircleCheck className="h-4.5 w-4.5 text-primary" />{" "}
-                      Do you handle both frontend and backend development?
-                    </dt>
-                    <dd className="text-muted-foreground leading-relaxed pl-6.5">
-                      Yes. As a full-stack engineer, I typically build robust,
-                      async backend services in Python using FastAPI, paired
-                      with sleek, highly responsive frontend interfaces in React
-                      and Next.js. This ensures I can deliver end-to-end
-                      features without waiting on external dependencies.
-                    </dd>
-                  </div>
+                  {faqSchema.mainEntity.map((faq, index) => {
+                    const icons = [
+                      IconClock,
+                      IconGlobe,
+                      IconSparkles,
+                      IconCircleCheck,
+                    ];
+                    const Icon = icons[index % icons.length];
+                    return (
+                      <div
+                        key={faq.name}
+                        className="p-4 rounded-xl border border-border/50 bg-surface/10 space-y-2"
+                      >
+                        <dt className="font-semibold text-foreground flex items-center gap-2">
+                          <Icon className="h-4.5 w-4.5 text-primary" />{" "}
+                          {faq.name}
+                        </dt>
+                        <dd className="text-muted-foreground leading-relaxed pl-[26px]">
+                          {faq.acceptedAnswer.text}
+                        </dd>
+                      </div>
+                    );
+                  })}
                 </dl>
               </section>
 
