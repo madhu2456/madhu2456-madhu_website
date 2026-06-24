@@ -11,16 +11,13 @@ import {
 } from "@/lib/image-source";
 import { getPortfolioData } from "@/lib/portfolio-data";
 
-const DEFAULT_SITE_URL = "https://madhudadi.in";
+import { resolveSiteUrl } from "@/lib/site-url";
+
 const CASE_STUDIES_DESCRIPTION =
   "Selected case studies by Madhu Dadi across AI visibility, RAG-powered learning, automation, marketing analytics, and full-stack engineering.";
 
 const getSiteUrl = () => {
-  const url = (process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE_URL).replace(
-    /\/+$/,
-    "",
-  );
-  return `${url}/`;
+  return `${resolveSiteUrl()}/`;
 };
 
 export const metadata: Metadata = {

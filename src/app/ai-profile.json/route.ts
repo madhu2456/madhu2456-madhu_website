@@ -1,12 +1,20 @@
 import { getPortfolioData } from "@/lib/portfolio-data";
 
 export async function GET() {
-  const { sortedCertifications, sortedServices } = await getPortfolioData();
+  const {
+    sortedCertifications,
+    sortedServices,
+    sortedProjects,
+    portfolioLastUpdatedAt,
+  } = await getPortfolioData();
+  const lastUpdatedStr = portfolioLastUpdatedAt
+    ? new Date(portfolioLastUpdatedAt).toISOString()
+    : "2026-06-06T00:00:00Z";
 
   return Response.json({
     meta: {
-      generatedAt: "2026-06-06T00:00:00Z",
-      dateModified: "2026-06-06T00:00:00Z",
+      generatedAt: lastUpdatedStr,
+      dateModified: lastUpdatedStr,
       canonical: "https://madhudadi.in/",
       profileUrl: "https://madhudadi.in/profile/",
       learningPlatformAbout: "https://madhudadi.in/blog/about",
@@ -64,28 +72,11 @@ export async function GET() {
       url: `https://madhudadi.in/services/${service.slug}/`,
       description: service.shortDescription,
     })),
-    caseStudies: [
-      {
-        name: "Adticks",
-        url: "https://madhudadi.in/case-studies/adticks/",
-        category: "AI visibility and SEO/AEO/GEO auditing",
-        summary:
-          "Crawls large websites, compares server HTML with rendered DOM, and returns prioritized search and AI visibility fixes.",
-      },
-      {
-        name: "Technical Blog RAG Assistant",
-        url: "https://madhudadi.in/case-studies/technical-blog/",
-        category: "RAG-powered learning platform",
-        summary:
-          "Source-grounded AI assistant and search experience for structured technical learning content.",
-      },
-      {
-        name: "Udemy Enroller",
-        url: "https://madhudadi.in/case-studies/udemy-enroller-fastapi/",
-        category: "Production FastAPI Automation Platform",
-        summary:
-          "Udemy Enroller is a live production FastAPI and Playwright automation platform that orchestrates asynchronous workflow runs, bounded worker concurrency, secure session-state handling, telemetry logging, and background processing with Celery, Redis, PostgreSQL, and Docker.",
-      },
-    ],
+    caseStudies: sortedProjects.map((project) => ({
+      name: project.title,
+      url: `https://madhudadi.in/case-studies/${project.slug}/`,
+      category: project.category,
+      summary: project.impactSummary || project.tagline,
+    })),
   });
 }

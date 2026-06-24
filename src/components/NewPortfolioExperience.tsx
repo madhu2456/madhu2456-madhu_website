@@ -25,6 +25,7 @@ import { submitContactForm } from "@/app/actions/submit-contact-form";
 import { Footer } from "@/components/Footer";
 import { FormattedText } from "@/components/FormattedText";
 import { Header } from "@/components/Header";
+import { Section } from "@/components/Section";
 import {
   normalizeImageSource,
   shouldUseUnoptimizedImage,
@@ -58,17 +59,6 @@ type Prefill = {
   message?: string;
 };
 
-const _navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#projects", label: "Work" },
-  { href: "#services", label: "Services" },
-  { href: "#skills", label: "Skills" },
-  { href: "#experience", label: "Experience" },
-  { href: "#faq", label: "FAQ" },
-  { href: "#contact", label: "Contact" },
-  { href: "https://madhudadi.in/blog", label: "Blog" },
-];
-
 const LINKEDIN_CERTS_URL =
   "https://www.linkedin.com/in/madhu-dadi-54684531/details/certifications/";
 
@@ -82,12 +72,19 @@ export function NewPortfolioExperience({
   certifications,
   pageContent,
 }: NewPortfolioExperienceProps) {
-  const faqItems = useMemo(() => buildFaqItems(), []);
+  const faqItems = useMemo(
+    () =>
+      pageContent.home.faqItems?.map((item) => ({
+        q: item.question,
+        a: item.answer,
+      })) || [],
+    [pageContent.home.faqItems],
+  );
 
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
       <Header profile={profile} navigationItems={navigationItems} />
-      <main id="main">
+      <main id="main-content" className="min-h-screen">
         <Hero
           profile={profile}
           experiences={experiences}
@@ -238,7 +235,7 @@ function DirectAnswer({ pageContent }: { pageContent: PageContent }) {
       eyebrow="Direct Answer"
       title={pageContent.home.directAnswer?.title || "Who is Madhu Dadi?"}
     >
-      <div className="relative rounded-3xl border border-border/80 bg-surface/35 p-8 md:p-10 backdrop-blur-md overflow-hidden flex flex-col justify-between min-h-[220px]">
+      <div className="relative flex min-h-56 flex-col justify-between overflow-hidden rounded-3xl border border-border/80 bg-surface/35 p-8 backdrop-blur-md md:p-10">
         <div className="absolute top-0 right-0 h-40 w-40 bg-primary/5 rounded-full blur-3xl -z-10" />
         <div className="grid gap-8 sm:grid-cols-2 lg:gap-12 text-sm sm:text-base leading-relaxed text-muted-foreground">
           <div className="space-y-4">
@@ -440,18 +437,18 @@ function Projects({ projects }: { projects: ProjectItem[] }) {
                     {project.category}
                   </p>
                 ) : null}
-                <h3 className="mt-2 min-h-[3.75rem] font-display text-xl font-semibold leading-tight sm:text-2xl">
+                <h3 className="mt-2 min-h-15 font-display text-xl font-semibold leading-tight sm:text-2xl">
                   {project.title}
                 </h3>
                 <p className="mt-2 text-sm font-medium text-foreground/80">
                   <FormattedText text={project.tagline} />
                 </p>
                 {project.impactSummary ? (
-                  <p className="mt-3 min-h-[9rem] text-sm leading-relaxed text-muted-foreground">
+                  <p className="mt-3 min-h-36 text-sm leading-relaxed text-muted-foreground">
                     <FormattedText text={project.impactSummary} />
                   </p>
                 ) : null}
-                <div className="mt-4 flex min-h-[3.5rem] flex-wrap content-start gap-1.5">
+                <div className="mt-4 flex min-h-14 flex-wrap content-start gap-1.5">
                   {stack.slice(0, 8).map((tech) => (
                     <span
                       key={`${project.slug}-${tech}`}
@@ -1049,44 +1046,6 @@ function Field({
 
 // Shared Footer is imported from @/components/Footer
 
-function Section({
-  id,
-  eyebrow,
-  title,
-  children,
-}: {
-  id: string;
-  eyebrow: string;
-  title: string;
-  children: ReactNode;
-}) {
-  const { ref, inView } = useInView<HTMLElement>();
-
-  return (
-    <section
-      id={id}
-      ref={ref}
-      className="scroll-mt-28 py-8 transition-all duration-700 md:py-12"
-      style={{
-        opacity: inView ? 1 : 0,
-        transform: inView ? "translateY(0)" : "translateY(20px)",
-      }}
-    >
-      <div className="mx-auto w-[min(1400px,92%)]">
-        <header className="mb-8 max-w-none">
-          <p className="mb-3 text-xs tracking-[0.25em] text-primary uppercase">
-            {eyebrow}
-          </p>
-          <h2 className="font-display text-3xl font-bold leading-tight sm:text-4xl lg:text-[clamp(2.25rem,2.8vw,3.25rem)]">
-            <span className="text-gradient">{title}</span>
-          </h2>
-        </header>
-        {children}
-      </div>
-    </section>
-  );
-}
-
 function useInView<T extends HTMLElement>(options?: IntersectionObserverInit) {
   const ref = useRef<T | null>(null);
   const [inView, setInView] = useState(false);
@@ -1178,31 +1137,6 @@ function buildSkillGroups(skills: SkillItem[]) {
     { title: "Marketing", items: grouped.get("marketing") || [] },
     { title: "Product", items: grouped.get("product") || [] },
   ].filter((group) => group.items.length > 0);
-}
-
-function buildFaqItems() {
-  return [
-    {
-      q: "Who is Madhu Dadi?",
-      a: "Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India, with 9+ years of experience across Novartis, redBus, GroupM (WPP), and Absolinsoft.",
-    },
-    {
-      q: "What is Madhu Dadi best known for?",
-      a: "He is best known for building production LLM/RAG applications, AI agents, AI visibility auditing systems, FastAPI/Next.js products, and analytics systems.",
-    },
-    {
-      q: "When should someone hire Madhu Dadi?",
-      a: "Hire Madhu when you need a hands-on engineer who can build AI products and connect them to measurable analytics outcomes.",
-    },
-    {
-      q: "Is Madhu Dadi available for consulting?",
-      a: "Madhu is open to full-time roles, consulting, freelance projects, and advisory work depending on scope and fit.",
-    },
-    {
-      q: "What stack does Madhu Dadi use?",
-      a: "Python, FastAPI, Next.js, React, TypeScript, SQL, Postgres, Redis, Celery, OpenAI API, LangChain, vector databases, GA4, and BigQuery.",
-    },
-  ];
 }
 
 function normalizeCompanyName(company: string) {

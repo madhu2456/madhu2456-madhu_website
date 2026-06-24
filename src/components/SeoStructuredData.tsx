@@ -18,6 +18,7 @@ import {
   buildWorkExperienceSchema,
 } from "@/lib/jsonld";
 import { getPortfolioData } from "@/lib/portfolio-data";
+import { resolveSiteUrl } from "@/lib/site-url";
 
 export type SeoGraphNode =
   | "Person"
@@ -51,11 +52,10 @@ export async function SeoStructuredData({
     sortedEducation: education,
     sortedExperiences: experience,
     sortedServices: services,
+    pageContent,
   } = await getPortfolioData();
 
-  const siteUrl = `${(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in"
-  ).replace(/\/+$/, "")}/`;
+  const siteUrl = `${resolveSiteUrl()}/`;
   const fullName =
     [profile.firstName, profile.lastName].filter(Boolean).join(" ") ||
     "Madhu Dadi";
@@ -147,7 +147,7 @@ export async function SeoStructuredData({
     includeNode("Organization")
       ? buildOrganizationSchema({
           siteUrl,
-          name: (siteSettings as { siteName?: string }).siteName || fullName,
+          name: siteSettings.siteName || fullName,
           logoUrl: `${siteUrl}icon-512.png`,
           description,
           socialLinks: profile?.socialLinks ?? undefined,
@@ -155,7 +155,7 @@ export async function SeoStructuredData({
       : null,
     includeNode("WebSite")
       ? buildWebSiteSchema({
-          name: (siteSettings as { siteName?: string }).siteName || fullName,
+          name: siteSettings.siteName || fullName,
           url: siteUrl,
           description,
         })
@@ -163,7 +163,7 @@ export async function SeoStructuredData({
     includeNode("SoftwareApplication")
       ? buildSoftwareApplicationSchema({
           siteUrl,
-          name: (siteSettings as { siteName?: string }).siteName || fullName,
+          name: siteSettings.siteName || fullName,
           description,
         })
       : null,
@@ -199,6 +199,7 @@ export async function SeoStructuredData({
           projects,
           services,
           seoKeywords: discoveryKeywords,
+          faqItems: pageContent.home.faqItems,
         })
       : null,
     includeNode("HowToHire")

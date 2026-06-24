@@ -1,9 +1,9 @@
 import type { MetadataRoute } from "next";
 
+import { resolveSiteUrl } from "@/lib/site-url";
+
 export default function robots(): MetadataRoute.Robots {
-  const siteUrl = `${(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in"
-  ).replace(/\/+$/, "")}/`;
+  const siteUrl = `${resolveSiteUrl()}/`;
 
   return {
     rules: [
@@ -42,6 +42,11 @@ export default function robots(): MetadataRoute.Robots {
           "Google-Extended",
           "Applebot-Extended",
           "omny-ai",
+          "Meta-ExternalAgent",
+          "Diffbot",
+          "YouBot",
+          "Amazonbot",
+          "Bytespider",
         ],
         allow: "/",
       },

@@ -28,19 +28,9 @@ interface ServicePageProps {
 // Generate static routes for the dynamic services (excluding bespoke pages)
 export async function generateStaticParams() {
   const { sortedServices } = await getPortfolioData();
-  return sortedServices
-    .filter(
-      (service) =>
-        service.slug !== "ai-llm-application-development" &&
-        service.slug !== "rag-consultant-india" &&
-        service.slug !== "ai-agent-development" &&
-        service.slug !== "marketing-analytics-consultant" &&
-        service.slug !== "full-stack-ai-product-development" &&
-        service.slug !== "ga4-bigquery-campaign-analytics",
-    )
-    .map((service) => ({
-      slug: service.slug,
-    }));
+  return sortedServices.map((service) => ({
+    slug: service.slug,
+  }));
 }
 
 export async function generateMetadata({

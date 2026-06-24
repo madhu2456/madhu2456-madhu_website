@@ -60,6 +60,7 @@ export const profileSchema = z.object({
 });
 
 export const siteSettingsSchema = z.object({
+  siteName: z.string().optional(),
   siteTitle: z.string().min(1, "Site title is required"),
   siteDescription: z.string().min(1, "Site description is required"),
   siteKeywords: z.array(z.string()),

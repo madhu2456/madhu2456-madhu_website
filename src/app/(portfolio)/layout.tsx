@@ -9,16 +9,12 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 import { getPortfolioData } from "@/lib/portfolio-data";
 import "../globals.css";
+import { resolveSiteUrl } from "@/lib/site-url";
 
-const DEFAULT_SITE_URL = "https://madhudadi.in";
 const THEME_COLOR = "#1a1410";
 const MAX_META_DESCRIPTION_LENGTH = 160;
 
-const resolveSiteUrl = (rawUrl?: string) => {
-  const url = (rawUrl?.trim() || DEFAULT_SITE_URL).replace(/\/+$/, "");
-  return `${url}/`;
-};
-const SITE_URL = resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL);
+const SITE_URL = `${resolveSiteUrl()}/`;
 
 const normalizeWhitespace = (value: string) =>
   value.replace(/\s+/g, " ").trim();
@@ -70,12 +66,12 @@ export const viewport: Viewport = {
 
 export async function generateMetadata(): Promise<Metadata> {
   const { profile, siteSettings } = await getPortfolioData();
-  const siteUrl = resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL);
+  const siteUrl = `${resolveSiteUrl()}/`;
   const fullName =
     [profile.firstName, profile.lastName].filter(Boolean).join(" ") ||
     "Madhu Dadi";
   const siteName =
-    (siteSettings as { siteName?: string }).siteName ||
+    siteSettings.siteName ||
     siteSettings.siteTitle ||
     `${fullName} - Portfolio`;
   const title = siteSettings.siteTitle || siteName;
@@ -145,7 +141,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     alternates: {
       languages: {
-        "en-IN": siteUrl,
+        "en-IN": `${siteUrl}in/`,
         "x-default": siteUrl,
       },
       types: {
