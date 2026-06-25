@@ -50,7 +50,7 @@ jobs:
       - name: Test CMS Authentication Bypass
         run: |
           echo "Testing /api/cms/content without credentials..."
-          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:3000/api/cms/content)
+          HTTP_STATUS=$(curl -s -L -o /dev/null -w "%{http_code}" http://localhost:3000/api/cms/content/)
           if [ "$HTTP_STATUS" != "401" ]; then
             echo "Security Risk: CMS accessible without authentication! Status: $HTTP_STATUS"
             exit 1
