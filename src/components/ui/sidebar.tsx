@@ -266,11 +266,11 @@ function SidebarRail({ className, ...props }: React.ComponentProps<"button">) {
   );
 }
 
-function SidebarInset({
+export function SidebarInset({
   className,
   onClick,
   ...props
-}: React.ComponentProps<"main">) {
+}: React.ComponentProps<"div">) {
   const { setOpen, setOpenMobile, open, openMobile, isMobile } = useSidebar();
   const isOpen = isMobile ? openMobile : open;
 
@@ -284,7 +284,7 @@ function SidebarInset({
 
   return (
     // biome-ignore lint/a11y/useKeyWithClickEvents: Inset container click closes sidebar, not a focused keyboard interactive element
-    <main
+    <div
       data-slot="sidebar-inset"
       onClick={handleInsetClick}
       className={cn(
