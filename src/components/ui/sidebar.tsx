@@ -266,7 +266,7 @@ function SidebarRail({ className, ...props }: React.ComponentProps<"button">) {
   );
 }
 
-export function SidebarInset({
+function SidebarInset({
   className,
   onClick,
   ...props
