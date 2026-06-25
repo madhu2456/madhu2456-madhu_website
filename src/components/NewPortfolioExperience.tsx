@@ -25,6 +25,7 @@ import { submitContactForm } from "@/app/actions/submit-contact-form";
 import { Footer } from "@/components/Footer";
 import { FormattedText } from "@/components/FormattedText";
 import { Header } from "@/components/Header";
+import { SafeEmailLink } from "@/components/SafeEmailLink";
 import { Section } from "@/components/Section";
 import {
   normalizeImageSource,
@@ -211,6 +212,7 @@ function Hero({
               width={694}
               height={925}
               priority
+              fetchPriority="high"
               className="h-full w-full object-cover"
             />
           </div>
@@ -955,12 +957,21 @@ function ContactRow({
 
   return href ? (
     <li>
-      <a
-        href={href}
-        className="block transition-colors hover:[&_span]:text-primary"
-      >
-        {content}
-      </a>
+      {href.startsWith("mailto:") ? (
+        <SafeEmailLink
+          email={href.replace("mailto:", "")}
+          className="block transition-colors hover:[&_span]:text-primary"
+        >
+          {content}
+        </SafeEmailLink>
+      ) : (
+        <a
+          href={href}
+          className="block transition-colors hover:[&_span]:text-primary"
+        >
+          {content}
+        </a>
+      )}
     </li>
   ) : (
     <li>{content}</li>
