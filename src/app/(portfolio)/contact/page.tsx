@@ -93,7 +93,7 @@ export default async function ContactPage() {
     mainEntity: [
       {
         "@type": "Question",
-        name: "What is your typical response time?",
+        name: "What is your typical turnaround time?",
         acceptedAnswer: {
           "@type": "Answer",
           text:
