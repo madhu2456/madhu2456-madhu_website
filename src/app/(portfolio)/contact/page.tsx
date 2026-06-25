@@ -14,6 +14,7 @@ import { Suspense } from "react";
 import { ContactForm } from "@/components/ContactForm";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { SafeEmailLink } from "@/components/SafeEmailLink";
 import { getPortfolioData } from "@/lib/portfolio-data";
 
 const _CONTACT_CANONICAL = "https://madhudadi.in/contact/";
@@ -269,12 +270,12 @@ export default async function ContactPage() {
                       <span className="text-[10px] text-muted-foreground block uppercase font-mono">
                         Email Address
                       </span>
-                      <a
-                        href={`mailto:${profile.email}`}
+                      <SafeEmailLink
+                        email={profile.email}
                         className="font-semibold text-foreground hover:text-primary transition-colors"
                       >
                         {profile.email}
-                      </a>
+                      </SafeEmailLink>
                     </div>
                   </li>
                   <li className="flex items-center gap-3 p-4 rounded-xl border border-border/60 bg-surface/20">
@@ -331,12 +332,12 @@ export default async function ContactPage() {
                       <div className="h-8 w-8 rounded-full border-4 border-t-primary border-r-transparent border-b-transparent border-l-transparent animate-spin" />
                       <p className="text-sm text-muted-foreground max-w-xs leading-relaxed">
                         Contact form loading. You can also email me directly at{" "}
-                        <a
-                          href={`mailto:${profile.email}`}
+                        <SafeEmailLink
+                          email={profile.email}
                           className="text-primary hover:underline transition-colors font-medium break-all"
                         >
                           {profile.email}
-                        </a>
+                        </SafeEmailLink>
                         .
                       </p>
                     </div>

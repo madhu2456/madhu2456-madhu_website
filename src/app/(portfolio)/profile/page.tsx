@@ -12,6 +12,7 @@ import {
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Header } from "@/components/Header";
+import { SafeEmailLink } from "@/components/SafeEmailLink";
 import { SeoStructuredData } from "@/components/SeoStructuredData";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { resolveSiteUrl } from "@/lib/site-url";
@@ -646,12 +647,12 @@ export default async function ProfilePage() {
               >
                 Book technical discovery call
               </Link>
-              <a
-                href={`mailto:${profile.email}`}
+              <SafeEmailLink
+                email={profile.email}
                 className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/30 px-5 py-2.5 text-xs font-semibold text-muted-foreground hover:text-foreground hover:border-primary/20 transition-all"
               >
                 Email Directly
-              </a>
+              </SafeEmailLink>
             </div>
           </section>
         </div>

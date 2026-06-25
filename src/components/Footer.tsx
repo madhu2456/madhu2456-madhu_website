@@ -1,6 +1,7 @@
 import { IconArrowRight } from "@tabler/icons-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { SafeEmailLink } from "@/components/SafeEmailLink";
 import type {
   NavigationItem,
   Profile,
@@ -174,6 +175,16 @@ function FooterLink({ href, children }: { href: string; children: ReactNode }) {
     href.startsWith("tel:");
 
   if (isExternal) {
+    if (href.startsWith("mailto:")) {
+      return (
+        <SafeEmailLink
+          email={href.replace("mailto:", "")}
+          className="text-muted-foreground hover:text-foreground transition-colors"
+        >
+          {children}
+        </SafeEmailLink>
+      );
+    }
     return (
       <a
         href={href}

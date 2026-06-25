@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { preload } from "react-dom";
 import PortfolioContent from "@/components/PortfolioContent";
 import { SeoStructuredData } from "@/components/SeoStructuredData";
 
@@ -36,6 +37,8 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
+  preload("/new-ui/hero-portrait.jpg", { as: "image", fetchPriority: "high" });
+
   return (
     <div className="min-h-screen">
       <SeoStructuredData
