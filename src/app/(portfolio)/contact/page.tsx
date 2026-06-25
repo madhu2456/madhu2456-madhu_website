@@ -117,6 +117,14 @@ export default async function ContactPage() {
           text: "I specialize in LLM/RAG applications, AI agents, FastAPI/Next.js product builds, and marketing analytics pipelines.",
         },
       },
+      {
+        "@type": "Question",
+        name: "Do you take on freelance or contract work?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes, I am available for freelance consulting, contract roles, and full-time opportunities depending on the scope.",
+        },
+      },
     ],
   };
 
