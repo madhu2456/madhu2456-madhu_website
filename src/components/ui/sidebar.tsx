@@ -274,7 +274,7 @@ function SidebarInset({
   const { setOpen, setOpenMobile, open, openMobile, isMobile } = useSidebar();
   const isOpen = isMobile ? openMobile : open;
 
-  const handleInsetClick = (e: React.MouseEvent<HTMLElement>) => {
+  const handleInsetClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (isOpen) {
       setOpen(false);
       setOpenMobile(false);
