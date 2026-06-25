@@ -1,17 +1,16 @@
 "use client";
 
-import { type ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-interface SafeEmailLinkProps {
+interface SafeEmailLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   email: string;
-  children?: ReactNode;
-  className?: string;
 }
 
 export function SafeEmailLink({
   email,
   children,
   className,
+  ...props
 }: SafeEmailLinkProps) {
   const [href, setHref] = useState<string>("#");
 
@@ -24,10 +23,13 @@ export function SafeEmailLink({
       e.preventDefault();
       window.location.href = `mailto:${email}`;
     }
+    if (props.onClick) {
+      props.onClick(e);
+    }
   };
 
   return (
-    <a href={href} onClick={handleClick} className={className}>
+    <a href={href} onClick={handleClick} className={className} {...props}>
       {children || email}
     </a>
   );
