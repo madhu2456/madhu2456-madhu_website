@@ -46,6 +46,22 @@ export default async function IndiaLandingPage() {
           "FAQ",
         ]}
       />
+
+      {/* Unique Regional Context for India */}
+      <section className="bg-primary/5 py-3 px-6 border-b border-primary/10">
+        <div className="container mx-auto max-w-4xl flex items-center gap-3 text-sm text-foreground/80 font-medium">
+          <span className="text-xl shrink-0" aria-hidden="true">
+            🇮🇳
+          </span>
+          <p>
+            <strong>India Regional Profile:</strong> Operating from
+            Visakhapatnam, Andhra Pradesh. Providing AI consulting, Next.js
+            engineering, and RAG architectures for businesses across Hyderabad,
+            Bangalore, and all of India.
+          </p>
+        </div>
+      </section>
+
       <PortfolioContent />
     </div>
   );

@@ -351,7 +351,15 @@ export function CmsEditor() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => void syncFromLiveSite()}
+                  onClick={() => {
+                    if (
+                      window.confirm(
+                        "Are you sure you want to sync content from the live site? This will overwrite your local changes.",
+                      )
+                    ) {
+                      void syncFromLiveSite();
+                    }
+                  }}
                   disabled={saving || syncing}
                   className="inline-flex items-center gap-2 rounded-lg border border-foreground/10 px-4 py-2 text-xs font-semibold transition-colors hover:bg-foreground/5 disabled:cursor-not-allowed disabled:opacity-60"
                 >

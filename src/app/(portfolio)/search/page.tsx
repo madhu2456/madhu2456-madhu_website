@@ -217,10 +217,31 @@ export default async function SearchPage({
             <span className="text-foreground">Search</span>
           </nav>
           <h1 className="text-3xl md:text-4xl font-bold">Portfolio Search</h1>
-          <p className="text-muted-foreground">
+
+          <form
+            method="GET"
+            action="/search/"
+            className="flex w-full max-w-lg gap-2 pt-2 pb-2"
+          >
+            <input
+              type="search"
+              name="q"
+              defaultValue={query}
+              placeholder="Search projects, skills, experience..."
+              className="flex-1 rounded-full border border-input bg-background px-4 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+            />
+            <button
+              type="submit"
+              className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+            >
+              Search
+            </button>
+          </form>
+
+          <p className="text-muted-foreground text-sm">
             {query
               ? `Showing results for "${query}"`
-              : "Use ?q= in the URL to search projects, services, skills, and experience."}
+              : "Use the search bar to find projects, services, skills, and experience."}
           </p>
         </header>
 

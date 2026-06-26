@@ -87,11 +87,9 @@ const ensurePortfolioContentFile = async () => {
 const isSame = (a: any, b: any) => {
   if (a === b) return true;
   if (!a || !b || typeof a !== "object" || typeof b !== "object") return false;
-  const aCopy = { ...a };
-  const bCopy = { ...b };
-  delete aCopy.updatedAt;
-  delete bCopy.updatedAt;
-  return JSON.stringify(aCopy) === JSON.stringify(bCopy);
+  const replacer = (key: string, value: any) =>
+    key === "updatedAt" ? undefined : value;
+  return JSON.stringify(a, replacer) === JSON.stringify(b, replacer);
 };
 
 export const normalizeContentForSave = (

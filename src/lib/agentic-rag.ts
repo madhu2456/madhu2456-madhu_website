@@ -155,7 +155,9 @@ const SECTION_SUGGESTIONS: Record<ChatSection | "blog", string[]> = {
 const toTokens = (value: string) =>
   (value.toLowerCase().match(/[a-z0-9+#.-]+/g) ?? [])
     .map((token) =>
-      token.endsWith("s") && token.length > 3 ? token.slice(0, -1) : token,
+      token.endsWith("s") && !token.endsWith("ss") && token.length > 3
+        ? token.slice(0, -1)
+        : token,
     )
     .filter((token) => token.length > 1);
 

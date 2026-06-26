@@ -1,5 +1,4 @@
 import { Buffer } from "node:buffer";
-import crypto from "node:crypto";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
@@ -44,18 +43,13 @@ export default function proxy(request: NextRequest) {
   }
 
   let isEqual = false;
-  try {
-    const expectedBuffer = Buffer.from(expectedCredentials);
-    const actualBuffer = Buffer.from(credentials);
-    isEqual = crypto.timingSafeEqual(expectedBuffer, actualBuffer);
-  } catch (_err) {
-    // manual fallback for edge environments that mock crypto but lack timingSafeEqual
-    let result = 0;
-    for (let i = 0; i < expectedCredentials.length; i++) {
-      result |= expectedCredentials.charCodeAt(i) ^ credentials.charCodeAt(i);
-    }
-    isEqual = result === 0;
+  
+  // manual fallback for edge environments that lack timingSafeEqual
+  let result = 0;
+  for (let i = 0; i < expectedCredentials.length; i++) {
+    result |= expectedCredentials.charCodeAt(i) ^ credentials.charCodeAt(i);
   }
+  isEqual = result === 0 && expectedCredentials.length === credentials.length;
 
   if (!isEqual) {
     return unauthorized();
