@@ -17,7 +17,6 @@ import {
   type ReactNode,
   useEffect,
   useMemo,
-  useRef,
   useState,
   useTransition,
 } from "react";
@@ -41,6 +40,7 @@ import type {
   ServiceItem,
   SkillItem,
 } from "@/lib/portfolio-data";
+import { useInView } from "@/lib/useInView";
 
 type NewPortfolioExperienceProps = {
   navigationItems: NavigationItem[];
@@ -1056,38 +1056,6 @@ function Field({
 }
 
 // Shared Footer is imported from @/components/Footer
-
-function useInView<T extends HTMLElement>(options?: IntersectionObserverInit) {
-  const ref = useRef<T | null>(null);
-  const [inView, setInView] = useState(false);
-
-  useEffect(() => {
-    const element = ref.current;
-    if (!element || inView) return;
-
-    if (typeof IntersectionObserver === "undefined") {
-      setInView(true);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setInView(true);
-            observer.disconnect();
-          }
-        }
-      },
-      { threshold: 0.15, rootMargin: "0px 0px -40px 0px", ...options },
-    );
-
-    observer.observe(element);
-    return () => observer.disconnect();
-  }, [inView, options]);
-
-  return { ref, inView };
-}
 
 function useHydratedCountUp(target: string, start: boolean, duration = 1400) {
   const match = target.match(/^([^\d]*)(\d+(?:\.\d+)?)(.*)$/);

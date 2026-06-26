@@ -18,6 +18,7 @@ import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { getPortfolioData } from "@/lib/portfolio-data";
+import { resolveSiteUrl } from "@/lib/site-url";
 
 interface ServicePageProps {
   params: Promise<{
@@ -44,7 +45,7 @@ export async function generateMetadata({
     return {};
   }
 
-  const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
+  const siteUrl = `${resolveSiteUrl()}/`;
   const canonicalUrl = `${siteUrl}services/${slug}/`;
 
   const title =
@@ -123,7 +124,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
   const intent = SERVICE_INTENT_BY_SLUG[service.slug];
   const prefillContactUrl = intent ? `/contact/#intent=${intent}` : "/contact/";
 
-  const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
+  const siteUrl = `${resolveSiteUrl()}/`;
   const serviceSchema = {
     "@type": ["Service", "Product"],
     "@id": `${siteUrl}services/${slug}/#service`,

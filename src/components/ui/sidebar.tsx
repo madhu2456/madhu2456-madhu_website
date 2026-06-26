@@ -284,6 +284,7 @@ function SidebarInset({
 
   return (
     // biome-ignore lint/a11y/useKeyWithClickEvents: Inset container click closes sidebar, not a focused keyboard interactive element
+    // biome-ignore lint/a11y/noStaticElementInteractions: Inset container click closes sidebar, not a keyboard interactive element
     <div
       data-slot="sidebar-inset"
       onClick={handleInsetClick}
