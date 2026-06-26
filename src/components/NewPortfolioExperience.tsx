@@ -268,17 +268,17 @@ function StatItem({
         {getIcon(label)}
       </div>
 
-      <dd
+      <p
         className="text-gradient-amber font-display text-4xl font-extrabold tracking-tight sm:text-5xl"
         data-count-to={value}
         suppressHydrationWarning
       >
         {display}
-      </dd>
+      </p>
 
-      <dt className="mt-3 text-xs font-semibold text-foreground/90 tracking-wider uppercase sm:text-sm">
+      <span className="mt-3 text-xs font-semibold text-foreground/90 tracking-wider uppercase sm:text-sm">
         {label}
-      </dt>
+      </span>
     </div>
   );
 }

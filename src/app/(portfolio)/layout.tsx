@@ -214,6 +214,16 @@ export default async function RootLayout({
       <head>
         <link rel="llms" href={`${SITE_URL}llms.txt`} />
         <link rel="ai-profile" href={`${SITE_URL}ai-profile.json`} />
+        {/* Make motion/react sections visible when JS is disabled (AI crawlers, no-JS users) */}
+        <noscript>
+          <style
+            // biome-ignore lint/security/noDangerouslySetInnerHtml: safe - static noscript CSS for AEO visibility
+            dangerouslySetInnerHTML={{
+              __html:
+                "[data-motion-initial]{opacity:1!important;transform:none!important}",
+            }}
+          />
+        </noscript>
       </head>
       <body
         className={`${inter.variable} ${instrumentSerif.variable} ${geistMono.variable} antialiased`}

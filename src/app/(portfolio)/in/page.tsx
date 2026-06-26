@@ -34,11 +34,12 @@ export const metadata: Metadata = {
 
 export default async function IndiaLandingPage() {
   return (
-    <div id="main-content" className="min-h-screen">
+    <div className="min-h-screen">
       <SeoStructuredData
         nodes={[
           "Person",
           "WebSite",
+          "WebPage",
           "ProfessionalService",
           "Organization",
           "SoftwareApplication",

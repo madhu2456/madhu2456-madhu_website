@@ -182,6 +182,20 @@ export async function submitContactForm(
     return { success: false, error: "Please fill in all required fields." };
   }
 
+  if (name.length > 200) {
+    return {
+      success: false,
+      error: "Name is too long. Maximum 200 characters.",
+    };
+  }
+
+  if (subject.length > 300) {
+    return {
+      success: false,
+      error: "Subject is too long. Maximum 300 characters.",
+    };
+  }
+
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return { success: false, error: "Please provide a valid email address." };
   }
@@ -216,8 +230,10 @@ export async function submitContactForm(
   }
 
   try {
-    const sanitizedName = name.replace(/[\r\n<>"]/g, "");
-    const sanitizedEmail = email.replace(/[\r\n<>"]/g, "");
+    // biome-ignore lint/suspicious/noControlCharactersInRegex: intentional control-char stripping for email header injection prevention
+    const sanitizedName = name.replace(/[\r\n<>"\x00-\x1f]/g, "");
+    // biome-ignore lint/suspicious/noControlCharactersInRegex: intentional control-char stripping for email header injection prevention
+    const sanitizedEmail = email.replace(/[\r\n<>"\x00-\x1f]/g, "");
 
     await sendViaResend({
       from: fromEmail,
