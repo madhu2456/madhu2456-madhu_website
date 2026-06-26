@@ -3,7 +3,7 @@
 import { headers } from "next/headers";
 
 // Email delivery via Resend (HTTPS API - not SMTP, so DigitalOcean port blocks don't apply).
-// Setup: pnpm add resend
+
 // Env vars needed in .env.local / production:
 //   RESEND_API_KEY=re_xxxxxxxxxxxx        (from resend.com → API Keys)
 //   CONTACT_FORM_TO=madhu.kumar245@gmail.com
@@ -156,7 +156,9 @@ function buildEmailHtml(opts: {
 export async function submitContactForm(
   formData: FormData,
 ): Promise<SubmitResult> {
-  const ip = (await headers()).get("x-forwarded-for") || "anonymous";
+  // When hosted behind a proxy, x-forwarded-for may contain multiple IPs. Extract the first one.
+  const forwardedFor = (await headers()).get("x-forwarded-for");
+  const ip = forwardedFor ? forwardedFor.split(",")[0].trim() : "anonymous";
 
   if (isRateLimited(ip)) {
     return {
