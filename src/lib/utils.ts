@@ -15,3 +15,15 @@ export function formatMonthYear(value?: string) {
     timeZone: "UTC",
   }).format(date);
 }
+
+export function normalizeCompanyName(company: string) {
+  if (/redbus/i.test(company)) return "redBus";
+  if (/groupm/i.test(company)) return "GroupM (WPP)";
+  return company.replace(/\s*\([^)]*\)\s*/g, "").trim();
+}
+
+export function formatPeriod(startDate: string, endDate?: string, current?: boolean) {
+  const start = formatMonthYear(startDate);
+  const end = current ? "Present" : formatMonthYear(endDate);
+  return start + " to " + end;
+}
