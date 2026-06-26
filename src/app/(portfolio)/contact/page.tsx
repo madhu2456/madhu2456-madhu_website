@@ -201,7 +201,13 @@ export default async function ContactPage() {
                 </h2>
                 <ul className="space-y-3">
                   {bestFitAreas
-                    .filter((area) => area?.trim())
+                    .filter(
+                      (area) =>
+                        area?.replace(
+                          /[\s\u00A0\u200B-\u200D\uFEFF\u200E\u200F\u202A-\u202E\u2066-\u2069]/g,
+                          "",
+                        ).length,
+                    )
                     .map((area) => (
                       <li key={area} className="flex gap-2.5 items-start">
                         <IconCircleCheck className="h-5 w-5 text-primary shrink-0 mt-0.5" />
