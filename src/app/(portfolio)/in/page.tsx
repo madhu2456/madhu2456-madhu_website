@@ -39,7 +39,6 @@ export default async function IndiaLandingPage() {
         nodes={[
           "Person",
           "WebSite",
-          "WebPage",
           "ProfessionalService",
           "Organization",
           "SoftwareApplication",

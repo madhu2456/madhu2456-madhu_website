@@ -8,6 +8,7 @@ export async function GET() {
     sortedServices,
     sortedCertifications,
     sortedExperiences,
+    sortedEducation,
     pageContent,
     portfolioLastUpdatedAt,
   } = await getPortfolioData();
@@ -67,6 +68,13 @@ ${e.responsibilities ? e.responsibilities.map((r) => `- ${r}`).join("\n") : ""}`
     })
     .join("\n");
 
+  const educationSection = sortedEducation
+    .map(
+      (edu) =>
+        `### ${edu.institution}\n${edu.degree}${edu.fieldOfStudy ? ` in ${edu.fieldOfStudy}` : ""}\n${edu.startDate ? `${edu.startDate} - ` : ""}${edu.endDate || "Present"}${edu.description ? `\n${edu.description}` : ""}`,
+    )
+    .join("\n\n");
+
   const faqs = (pageContent?.home?.faqItems || [])
     .map((item) => `Q: ${item.question}\nA: ${item.answer}`)
     .join("\n\n");
@@ -98,6 +106,10 @@ ${projectsSection}
 
 ${experienceSection}
 
+## Education
+
+${educationSection}
+
 ## Frequently asked questions
 
 ${faqs}
@@ -119,7 +131,7 @@ ${certificationLines}
   return new Response(body, {
     headers: {
       "Content-Type": "text/plain; charset=utf-8",
-      "Cache-Control": "public, max-age=3600",
+      "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
     },
   });
 }

@@ -200,12 +200,16 @@ export default async function ContactPage() {
                   Best fit projects:
                 </h2>
                 <ul className="space-y-3">
-                  {bestFitAreas.filter(Boolean).map((area) => (
-                    <li key={area} className="flex gap-2.5 items-start">
-                      <IconCircleCheck className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm text-foreground/90">{area}</span>
-                    </li>
-                  ))}
+                  {bestFitAreas
+                    .filter((area) => area?.trim())
+                    .map((area) => (
+                      <li key={area} className="flex gap-2.5 items-start">
+                        <IconCircleCheck className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                        <span className="text-sm text-foreground/90">
+                          {area}
+                        </span>
+                      </li>
+                    ))}
                 </ul>
               </section>
 
@@ -268,7 +272,7 @@ export default async function ContactPage() {
                           <Icon className="h-4.5 w-4.5 text-primary" />{" "}
                           {faq.name}
                         </dt>
-                        <dd className="text-muted-foreground leading-relaxed pl-[26px]">
+                        <dd className="text-muted-foreground leading-relaxed pl-6.5">
                           {faq.acceptedAnswer.text}
                         </dd>
                       </div>
