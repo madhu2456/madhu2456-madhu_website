@@ -15,9 +15,10 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { SeoStructuredData } from "@/components/SeoStructuredData";
 import { getPortfolioData } from "@/lib/portfolio-data";
+import { resolveSiteUrl } from "@/lib/site-url";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
+  const siteUrl = `${resolveSiteUrl()}/`;
   const canonicalUrl = `${siteUrl}services/`;
 
   return {
@@ -54,7 +55,7 @@ export default async function ServicesHubPage() {
     }
   };
 
-  const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
+  const siteUrl = `${resolveSiteUrl()}/`;
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
