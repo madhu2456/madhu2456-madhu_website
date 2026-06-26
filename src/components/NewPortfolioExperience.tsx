@@ -22,18 +22,12 @@ import {
 } from "react";
 import { submitContactForm } from "@/app/actions/submit-contact-form";
 import { Footer } from "@/components/Footer";
-import { Hero } from "@/components/sections/Hero";
-import { Projects } from "@/components/sections/Projects";
-import { Experience } from "@/components/sections/Experience";
-import { formatMonthYear } from "@/lib/utils";
-import { FormattedText } from "@/components/FormattedText";
 import { Header } from "@/components/Header";
 import { SafeEmailLink } from "@/components/SafeEmailLink";
 import { Section } from "@/components/Section";
-import {
-  normalizeImageSource,
-  shouldUseUnoptimizedImage,
-} from "@/lib/image-source";
+import { Experience } from "@/components/sections/Experience";
+import { Hero } from "@/components/sections/Hero";
+import { Projects } from "@/components/sections/Projects";
 import type {
   CertificationItem,
   ExperienceItem,
@@ -45,6 +39,7 @@ import type {
   SkillItem,
 } from "@/lib/portfolio-data";
 import { useInView } from "@/lib/useInView";
+import { formatMonthYear } from "@/lib/utils";
 
 type NewPortfolioExperienceProps = {
   navigationItems: NavigationItem[];
@@ -115,7 +110,6 @@ export function NewPortfolioExperience({
 }
 
 // Shared Header is imported from @/components/Header
-
 
 function DirectAnswer({ pageContent }: { pageContent: PageContent }) {
   return (
@@ -289,7 +283,6 @@ function StatItem({
   );
 }
 
-
 function Services({ services }: { services: ServiceItem[] }) {
   if (services.length === 0) return null;
 
@@ -402,7 +395,6 @@ function Skills({ skills }: { skills: SkillItem[] }) {
     </Section>
   );
 }
-
 
 function Certifications({
   certifications,
@@ -858,6 +850,3 @@ function buildSkillGroups(skills: SkillItem[]) {
     { title: "Product", items: grouped.get("product") || [] },
   ].filter((group) => group.items.length > 0);
 }
-
-
-

@@ -22,8 +22,12 @@ export function normalizeCompanyName(company: string) {
   return company.replace(/\s*\([^)]*\)\s*/g, "").trim();
 }
 
-export function formatPeriod(startDate: string, endDate?: string, current?: boolean) {
+export function formatPeriod(
+  startDate: string,
+  endDate?: string,
+  current?: boolean,
+) {
   const start = formatMonthYear(startDate);
   const end = current ? "Present" : formatMonthYear(endDate);
-  return start + " to " + end;
+  return `${start} to ${end}`;
 }
