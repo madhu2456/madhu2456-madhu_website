@@ -43,12 +43,17 @@ const MAX_REQUESTS_PER_WINDOW = 10;
 
 function isRateLimited(ip: string): boolean {
   const now = Date.now();
-  const record = rateLimitMap.get(ip);
 
   // Evict expired rate limit records on-demand during new requests
   // instead of using a setInterval timer to avoid memory leaks in serverless.
-  if (!record || now > record.resetAt) {
-    if (record) rateLimitMap.delete(ip); // Evict expired
+  for (const [key, value] of rateLimitMap.entries()) {
+    if (now > value.resetAt) {
+      rateLimitMap.delete(key);
+    }
+  }
+
+  const record = rateLimitMap.get(ip);
+  if (!record) {
     rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
     return false;
   }
