@@ -1,7 +1,11 @@
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import type { ExperienceItem, PageContent, Profile } from "@/lib/portfolio-data";
+import type {
+  ExperienceItem,
+  PageContent,
+  Profile,
+} from "@/lib/portfolio-data";
 import { normalizeCompanyName } from "@/lib/utils";
 
 export function Hero({

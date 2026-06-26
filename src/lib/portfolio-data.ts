@@ -55,7 +55,8 @@ const PORTFOLIO_CONTENT_FILE_PATH = path.join(
 );
 
 // We keep the old shape around for fallback scenarios where the file is unreadable.
-export const defaultPortfolioContent = defaultContentJson as unknown as PortfolioContent;
+export const defaultPortfolioContent =
+  defaultContentJson as unknown as PortfolioContent;
 
 const cloneDefaultContent = (): any =>
   JSON.parse(JSON.stringify(defaultPortfolioContent));
@@ -328,7 +329,9 @@ export async function savePortfolioContent(
     // Keep last 10 backups
     const dir = path.dirname(PORTFOLIO_CONTENT_FILE_PATH);
     const files = await fs.readdir(dir);
-    const backups = files.filter((f) => f.startsWith("portfolio-content.backup-"));
+    const backups = files.filter((f) =>
+      f.startsWith("portfolio-content.backup-"),
+    );
     if (backups.length > 10) {
       backups.sort();
       const toDelete = backups.slice(0, backups.length - 10);
