@@ -52,8 +52,6 @@ const nextConfig: NextConfig = {
 
   experimental: {
     optimizePackageImports: ["@tabler/icons-react", "motion"],
-    // Enable scroll restoration for better UX on navigation
-    scrollRestoration: true,
     // Inline CSS for first-load paint to reduce render-blocking stylesheet requests.
     inlineCss: false,
     // Ensure unmatched routes use a single global 404 with multiple root layouts.
@@ -74,24 +72,6 @@ const nextConfig: NextConfig = {
         source: "/:path*",
         has: [{ type: "host", value: "www.madhudadi.in" }],
         destination: "https://madhudadi.in/:path*",
-        permanent: true,
-      },
-      {
-        source: "/contact",
-        has: [{ type: "query", key: "subject" }],
-        destination: "/contact/?",
-        permanent: true,
-      },
-      {
-        source: "/contact",
-        has: [{ type: "query", key: "message" }],
-        destination: "/contact/?",
-        permanent: true,
-      },
-      {
-        source: "/contact",
-        has: [{ type: "query", key: "intent" }],
-        destination: "/contact/?",
         permanent: true,
       },
       {
@@ -120,14 +100,10 @@ const nextConfig: NextConfig = {
   },
 
   async headers() {
-    const buildDate = new Date().toUTCString();
     return [
       {
         source: "/(.*)",
-        headers: [
-          ...securityHeaders,
-          { key: "Last-Modified", value: buildDate },
-        ],
+        headers: securityHeaders,
       },
       // SEO/GEO discovery files - serve as plain text with generous caching
       {
