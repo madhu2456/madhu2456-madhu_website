@@ -41,6 +41,7 @@ const parseHistory = (value: unknown): ChatTurn[] => {
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
 const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
 const MAX_REQUESTS_PER_WINDOW = 10;
+const MAX_RATE_LIMIT_ENTRIES = 10_000;
 
 function isRateLimited(ip: string): boolean {
   const now = Date.now();
@@ -50,6 +51,18 @@ function isRateLimited(ip: string): boolean {
   for (const [key, value] of rateLimitMap.entries()) {
     if (now > value.resetAt) {
       rateLimitMap.delete(key);
+    }
+  }
+
+  // Bounded eviction: if the map is still too large after cleanup, drop the
+  // oldest entries (first inserted) to cap memory usage on long-lived servers.
+  if (rateLimitMap.size >= MAX_RATE_LIMIT_ENTRIES) {
+    const evictCount = MAX_RATE_LIMIT_ENTRIES >> 2; // evict 25%
+    let evicted = 0;
+    for (const key of rateLimitMap.keys()) {
+      if (evicted >= evictCount) break;
+      rateLimitMap.delete(key);
+      evicted++;
     }
   }
 

@@ -18,6 +18,7 @@ type SubmitResult =
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000; // 10 minutes
 const MAX_REQUESTS_PER_WINDOW = 3;
+const MAX_RATE_LIMIT_ENTRIES = 10_000;
 
 function isRateLimited(ip: string): boolean {
   const now = Date.now();
@@ -25,6 +26,18 @@ function isRateLimited(ip: string): boolean {
 
   if (!record || now > record.resetAt) {
     if (record) rateLimitMap.delete(ip); // Evict expired
+
+    // Bounded eviction: cap memory usage on long-lived servers.
+    if (rateLimitMap.size >= MAX_RATE_LIMIT_ENTRIES) {
+      const evictCount = MAX_RATE_LIMIT_ENTRIES >> 2; // evict 25%
+      let evicted = 0;
+      for (const key of rateLimitMap.keys()) {
+        if (evicted >= evictCount) break;
+        rateLimitMap.delete(key);
+        evicted++;
+      }
+    }
+
     rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
     return false;
   }
