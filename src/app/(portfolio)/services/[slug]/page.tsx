@@ -191,10 +191,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         }
       : null;
 
-  const articleSchema = {
-    "@type": "Article",
-    "@id": `${siteUrl}services/${slug}/#article`,
-    headline: service.seoTitle || service.title,
+  const webpageSchema = {
+    "@type": "WebPage",
+    "@id": `${siteUrl}services/${slug}/#webpage`,
+    name: service.seoTitle || service.title,
     description: service.shortDescription || service.fullDescription,
     datePublished: service.updatedAt ?? new Date().toISOString(),
     dateModified: service.updatedAt ?? new Date().toISOString(),
@@ -217,6 +217,9 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
       "@type": "CollectionPage",
       "@id": `${siteUrl}services/`,
     },
+    mainEntity: {
+      "@id": `${siteUrl}services/${slug}/#service`,
+    },
     speakable: {
       "@type": "SpeakableSpecification",
       cssSelector: ["#main-content h1", "#main-content h2", "#main-content p"],
@@ -233,7 +236,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             "@context": "https://schema.org",
             "@graph": [
               serviceSchema,
-              articleSchema,
+              webpageSchema,
               breadcrumbSchema,
               ...(faqSchema ? [faqSchema] : []),
             ],
