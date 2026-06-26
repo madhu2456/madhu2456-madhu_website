@@ -431,7 +431,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                         key={tech}
                         className="rounded-xl border border-border bg-background/50 px-3 py-1.5 text-xs font-mono text-foreground"
                       >
-                        {tech}{" "}
+                        {tech}
                       </span>
                     ))}
                   </div>

@@ -25,12 +25,12 @@ export const metadata: Metadata = {
   title: "AI, RAG & Analytics Case Studies - Production Builds | Madhu Dadi",
   description: CASE_STUDIES_DESCRIPTION,
   alternates: {
-    canonical: "/case-studies/",
+    canonical: `${getSiteUrl()}case-studies/`,
   },
   openGraph: {
     title: "AI, RAG & Analytics Case Studies - Production Builds | Madhu Dadi",
     description: CASE_STUDIES_DESCRIPTION,
-    url: "/case-studies/",
+    url: `${getSiteUrl()}case-studies/`,
     type: "website",
     images: [
       {
@@ -90,10 +90,13 @@ export default async function CaseStudiesPage() {
   };
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <SeoStructuredData nodes={["ProjectsList"]} />
       <Header profile={profile} navigationItems={sortedNavigationItems} />
-      <main id="main-content" className="mx-auto max-w-6xl w-[92%] pt-32 pb-24">
+      <main
+        id="main-content"
+        className="flex-1 mx-auto max-w-6xl w-[92%] pt-32 pb-24"
+      >
         <script
           type="application/ld+json"
           // biome-ignore lint/security/noDangerouslySetInnerHtml: server-side JSON-LD
@@ -295,7 +298,7 @@ export default async function CaseStudiesPage() {
                         key={`${project.slug}-${tech}`}
                         className="rounded-full border border-border px-2 py-0.5 text-[11px] text-muted-foreground"
                       >
-                        {tech}{" "}
+                        {tech}
                       </span>
                     ))}
                   </div>
@@ -328,6 +331,6 @@ export default async function CaseStudiesPage() {
         projects={sortedProjects}
         navigationItems={sortedNavigationItems}
       />
-    </>
+    </div>
   );
 }

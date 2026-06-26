@@ -4,7 +4,7 @@ import { IconMenu2, IconX } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { NavigationItem, Profile } from "@/lib/portfolio-data";
 
 type HeaderProps = {
@@ -16,6 +16,30 @@ export function Header({ profile, navigationItems }: HeaderProps) {
   const pathname = usePathname();
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      const target = event.target as Node;
+      if (
+        menuRef.current?.contains(target) ||
+        toggleRef.current?.contains(target)
+      ) {
+        return;
+      }
+      setIsMobileMenuOpen(false);
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, [isMobileMenuOpen]);
 
   const getHref = (href: string) => {
     // If the link is external, return as is
@@ -120,6 +144,7 @@ export function Header({ profile, navigationItems }: HeaderProps) {
           </Link>
           <button
             type="button"
+            ref={toggleRef}
             className="md:hidden flex items-center justify-center h-9 w-9 rounded-full border border-border/80 bg-surface/50 text-foreground transition-colors hover:bg-surface-elevated hover:text-primary"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle navigation menu"
@@ -135,7 +160,10 @@ export function Header({ profile, navigationItems }: HeaderProps) {
 
       {/* Mobile Menu Dropdown */}
       {isMobileMenuOpen && (
-        <div className="absolute top-full left-0 right-0 mt-2 px-3 sm:px-5 md:hidden">
+        <div
+          ref={menuRef}
+          className="absolute top-full left-0 right-0 mt-2 px-3 sm:px-5 md:hidden"
+        >
           <nav className="flex flex-col gap-1 rounded-2xl border border-border/90 bg-surface-elevated/95 p-3 shadow-lg shadow-black/20 backdrop-blur-xl">
             {navigationItems.map((link) => {
               const isActive = isLinkActive(link.href);

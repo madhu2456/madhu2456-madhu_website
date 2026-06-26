@@ -470,7 +470,7 @@ export default async function CredentialsPage() {
                             key={tech.name}
                             className="rounded-full border border-border/40 bg-background/20 px-2 py-0.5 text-[9px] font-mono text-muted-foreground"
                           >
-                            {tech.name}{" "}
+                            {tech.name}
                           </span>
                         ))}
                       </div>

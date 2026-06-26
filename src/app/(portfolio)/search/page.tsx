@@ -144,7 +144,7 @@ export default async function SearchPage({
       description:
         service.shortDescription ||
         "Service delivery focused on practical business outcomes.",
-      href: "/#services",
+      href: service.slug ? `/services/${service.slug}/` : "/services/",
       label: "Service",
     }));
 
