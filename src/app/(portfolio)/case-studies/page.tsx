@@ -92,7 +92,7 @@ export default async function CaseStudiesPage() {
     <>
       <SeoStructuredData nodes={["ProjectsList"]} />
       <Header profile={profile} navigationItems={sortedNavigationItems} />
-      <main className="mx-auto max-w-6xl w-[92%] pt-32 pb-24">
+      <main id="main-content" className="mx-auto max-w-6xl w-[92%] pt-32 pb-24">
         <script
           type="application/ld+json"
           // biome-ignore lint/security/noDangerouslySetInnerHtml: server-side JSON-LD
