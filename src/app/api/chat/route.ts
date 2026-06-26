@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { answerWithAgenticRag, type ChatTurn } from "@/lib/agentic-rag";
 import { getPortfolioData } from "@/lib/portfolio-data";
+import { resolveSiteUrl } from "@/lib/site-url";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -66,8 +67,8 @@ export async function POST(request: Request) {
   const origin = request.headers.get("origin");
   if (
     origin &&
-    origin !== process.env.NEXT_PUBLIC_SITE_URL &&
-    origin !== "https://madhudadi.in" &&
+    origin !== resolveSiteUrl() &&
+    origin !== `${resolveSiteUrl()}/` &&
     !origin.startsWith("http://localhost:")
   ) {
     return NextResponse.json(

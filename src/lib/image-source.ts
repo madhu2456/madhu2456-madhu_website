@@ -1,3 +1,5 @@
+import { resolveSiteUrl } from "@/lib/site-url";
+
 const ABSOLUTE_HTTP_URL = /^https?:\/\//i;
 const DATA_URL = /^data:/i;
 const SVG_EXTENSION = /\.svg(?:$|\?)/i;
@@ -28,6 +30,6 @@ export const resolveAbsoluteImageUrl = (value?: string | null) => {
   if (ABSOLUTE_HTTP_URL.test(normalized) || DATA_URL.test(normalized)) {
     return normalized;
   }
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in";
+  const siteUrl = resolveSiteUrl();
   return `${siteUrl.replace(/\/$/, "")}${normalized}`;
 };

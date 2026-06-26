@@ -2,6 +2,7 @@ import { promises as fs } from "node:fs";
 import path from "node:path";
 import { ImageResponse } from "next/og";
 import { getPortfolioData } from "@/lib/portfolio-data";
+import { resolveSiteUrl } from "@/lib/site-url";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
@@ -33,12 +34,8 @@ export default async function OGImage() {
     [profile.firstName, profile.lastName].filter(Boolean).join(" ") ||
     "Portfolio";
   const headline = profile.headline ?? "";
-  const siteLabel = (
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://madhudadi.in"
-  ).replace(/^https?:\/\//, "");
-  const siteUrl = `${(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://madhudadi.in"
-  ).replace(/\/+$/, "")}/`;
+  const siteLabel = resolveSiteUrl().replace(/^https?:\/\//, "");
+  const siteUrl = `${resolveSiteUrl()}/`;
 
   let profileImageUrl: string | null = null;
   if (profile.profileImage) {

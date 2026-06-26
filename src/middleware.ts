@@ -43,7 +43,7 @@ export default function proxy(request: NextRequest) {
   }
 
   let isEqual = false;
-  
+
   // manual fallback for edge environments that lack timingSafeEqual
   let result = 0;
   for (let i = 0; i < expectedCredentials.length; i++) {

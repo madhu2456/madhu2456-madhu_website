@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
 import { getPortfolioData } from "@/lib/portfolio-data";
 
 const RESULT_LIMIT_PER_SECTION = 6;
@@ -94,10 +96,12 @@ export default async function SearchPage({
   const query = toQuery(resolvedParams.q);
   const queryTokens = queryToTokens(query);
   const {
+    profile,
     sortedCertifications,
     sortedExperiences,
     sortedProjects,
     sortedServices,
+    sortedNavigationItems,
     skills,
   } = await getPortfolioData();
 
@@ -206,119 +210,130 @@ export default async function SearchPage({
   ].slice(0, TOTAL_RESULT_LIMIT);
 
   return (
-    <main className="min-h-screen py-16 px-6 bg-muted/10">
-      <div className="container mx-auto max-w-4xl space-y-8">
-        <header className="rounded-2xl border bg-background p-6 md:p-8 space-y-4 shadow-sm">
-          <nav className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-            <Link href="/" className="hover:text-foreground transition-colors">
-              Home
-            </Link>
-            <span>/</span>
-            <span className="text-foreground">Search</span>
-          </nav>
-          <h1 className="text-3xl md:text-4xl font-bold">Portfolio Search</h1>
+    <>
+      <Header profile={profile} navigationItems={sortedNavigationItems} />
+      <main id="main-content" className="min-h-screen py-16 px-6 bg-muted/10">
+        <div className="container mx-auto max-w-4xl space-y-8">
+          <header className="rounded-2xl border bg-background p-6 md:p-8 space-y-4 shadow-sm">
+            <nav className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+              <Link
+                href="/"
+                className="hover:text-foreground transition-colors"
+              >
+                Home
+              </Link>
+              <span>/</span>
+              <span className="text-foreground">Search</span>
+            </nav>
+            <h1 className="text-3xl md:text-4xl font-bold">Portfolio Search</h1>
 
-          <form
-            method="GET"
-            action="/search/"
-            className="flex w-full max-w-lg gap-2 pt-2 pb-2"
-          >
-            <input
-              type="search"
-              name="q"
-              defaultValue={query}
-              placeholder="Search projects, skills, experience..."
-              className="flex-1 rounded-full border border-input bg-background px-4 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-            />
-            <button
-              type="submit"
-              className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+            <form
+              method="GET"
+              action="/search/"
+              className="flex w-full max-w-lg gap-2 pt-2 pb-2"
             >
-              Search
-            </button>
-          </form>
+              <input
+                type="search"
+                name="q"
+                defaultValue={query}
+                placeholder="Search projects, skills, experience..."
+                className="flex-1 rounded-full border border-input bg-background px-4 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+              />
+              <button
+                type="submit"
+                className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+              >
+                Search
+              </button>
+            </form>
 
-          <p className="text-muted-foreground text-sm">
-            {query
-              ? `Showing results for "${query}"`
-              : "Use the search bar to find projects, services, skills, and experience."}
-          </p>
-        </header>
-
-        {query.length === 0 ? (
-          <section className="rounded-2xl border bg-background p-6 md:p-8 space-y-4 shadow-sm">
-            <p className="text-muted-foreground">
-              Example:{" "}
-              <code className="font-mono">/search/?q=rag+consulting</code>
+            <p className="text-muted-foreground text-sm">
+              {query
+                ? `Showing results for "${query}"`
+                : "Use the search bar to find projects, services, skills, and experience."}
             </p>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href="/search/?q=ai+consulting"
-                className="inline-flex items-center rounded-full border px-4 py-2 text-sm hover:bg-accent"
-              >
-                AI consulting
+          </header>
+
+          {query.length === 0 ? (
+            <section className="rounded-2xl border bg-background p-6 md:p-8 space-y-4 shadow-sm">
+              <p className="text-muted-foreground">
+                Example:{" "}
+                <code className="font-mono">/search/?q=rag+consulting</code>
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href="/search/?q=ai+consulting"
+                  className="inline-flex items-center rounded-full border px-4 py-2 text-sm hover:bg-accent"
+                >
+                  AI consulting
+                </Link>
+                <Link
+                  href="/search/?q=rag"
+                  className="inline-flex items-center rounded-full border px-4 py-2 text-sm hover:bg-accent"
+                >
+                  RAG
+                </Link>
+                <Link
+                  href="/search/?q=next.js"
+                  className="inline-flex items-center rounded-full border px-4 py-2 text-sm hover:bg-accent"
+                >
+                  Next.js
+                </Link>
+              </div>
+            </section>
+          ) : allResults.length === 0 ? (
+            <section className="rounded-2xl border bg-background p-6 md:p-8 text-muted-foreground shadow-sm">
+              No matches found for "{query}". Try broader terms such as{" "}
+              <Link href="/search/?q=ai" className="text-primary underline">
+                AI
               </Link>
+              ,{" "}
               <Link
-                href="/search/?q=rag"
-                className="inline-flex items-center rounded-full border px-4 py-2 text-sm hover:bg-accent"
+                href="/search/?q=analytics"
+                className="text-primary underline"
               >
-                RAG
+                analytics
               </Link>
+              , or{" "}
               <Link
-                href="/search/?q=next.js"
-                className="inline-flex items-center rounded-full border px-4 py-2 text-sm hover:bg-accent"
+                href="/search/?q=full-stack"
+                className="text-primary underline"
               >
-                Next.js
+                full-stack
               </Link>
-            </div>
-          </section>
-        ) : allResults.length === 0 ? (
-          <section className="rounded-2xl border bg-background p-6 md:p-8 text-muted-foreground shadow-sm">
-            No matches found for "{query}". Try broader terms such as{" "}
-            <Link href="/search/?q=ai" className="text-primary underline">
-              AI
-            </Link>
-            ,{" "}
-            <Link
-              href="/search/?q=analytics"
-              className="text-primary underline"
-            >
-              analytics
-            </Link>
-            , or{" "}
-            <Link
-              href="/search/?q=full-stack"
-              className="text-primary underline"
-            >
-              full-stack
-            </Link>
-            .
-          </section>
-        ) : (
-          <section className="space-y-4">
-            {allResults.map((result) => (
-              <article
-                key={result.id}
-                className="rounded-2xl border bg-background p-5 md:p-6 shadow-sm"
-              >
-                <div className="flex flex-wrap items-center gap-2 mb-2">
-                  <span className="inline-flex rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">
-                    {result.label}
-                  </span>
-                </div>
-                <h2 className="text-xl font-semibold">
-                  <Link href={result.href} className="hover:underline">
-                    {result.title}
-                  </Link>
-                </h2>
-                <p className="mt-2 text-muted-foreground">
-                  {result.description}
-                </p>
-              </article>
-            ))}
-          </section>
-        )}
-      </div>
-    </main>
+              .
+            </section>
+          ) : (
+            <section className="space-y-4">
+              {allResults.map((result) => (
+                <article
+                  key={result.id}
+                  className="rounded-2xl border bg-background p-5 md:p-6 shadow-sm"
+                >
+                  <div className="flex flex-wrap items-center gap-2 mb-2">
+                    <span className="inline-flex rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">
+                      {result.label}
+                    </span>
+                  </div>
+                  <h2 className="text-xl font-semibold">
+                    <Link href={result.href} className="hover:underline">
+                      {result.title}
+                    </Link>
+                  </h2>
+                  <p className="mt-2 text-muted-foreground">
+                    {result.description}
+                  </p>
+                </article>
+              ))}
+            </section>
+          )}
+        </div>
+      </main>
+      <Footer
+        profile={profile}
+        projects={sortedProjects}
+        navigationItems={sortedNavigationItems}
+      />
+    </>
   );
 }

@@ -1,6 +1,7 @@
 "use server";
 
 import { headers } from "next/headers";
+import { resolveSiteUrl } from "@/lib/site-url";
 
 // Email delivery via Resend (HTTPS API - not SMTP, so DigitalOcean port blocks don't apply).
 
@@ -136,14 +137,14 @@ function buildEmailHtml(opts: {
           <td style="padding:0 32px 32px;">
             <a href="mailto:${email}?subject=Re: ${encodeURIComponent(subject || `Your message to madhudadi.in`)}"
                style="display:inline-block;background:#0f0f0f;color:#fff;text-decoration:none;font-size:14px;font-weight:500;padding:12px 24px;border-radius:8px;">
-              Reply to ${name} &rarr;
-            </a>
-          </td>
-        </tr>
-        <!-- Footer -->
-        <tr>
-          <td style="padding:16px 32px;background:#f9f9f9;border-top:1px solid #f0f0f0;">
-            <p style="margin:0;font-size:12px;color:#aaa;">Sent via the contact form on <a href="https://madhudadi.in/" style="color:#6366f1;text-decoration:none;">madhudadi.in</a></p>
+                     Reply to ${name} &rarr;
+                   </a>
+                 </td>
+               </tr>
+               <!-- Footer -->
+               <tr>
+                 <td style="padding:16px 32px;background:#f9f9f9;border-top:1px solid #f0f0f0;">
+                   <p style="margin:0;font-size:12px;color:#aaa;">Sent via the contact form on <a href="${resolveSiteUrl()}/" style="color:#6366f1;text-decoration:none;">${resolveSiteUrl().replace(/^https?:\/\//, "")}</a></p>
           </td>
         </tr>
       </table>
