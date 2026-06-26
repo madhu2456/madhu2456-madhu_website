@@ -47,8 +47,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'pnpm'
+          node-version: "20"
+          cache: "pnpm"
 
       - name: Install dependencies
         run: pnpm install
@@ -79,7 +79,7 @@ jobs:
           host: 134.209.154.101
           username: madhu
           key: ${{ secrets.SSH_KEY }}
-          command_timeout: '20m'
+          command_timeout: "20m"
           script: |
             set -e
 
@@ -91,14 +91,14 @@ jobs:
             echo "📥 Fetching and resetting to latest main"
             git fetch origin main
             git reset --hard origin/main
-            
+
             # 👇 LOAD NVM (CRITICAL FIX)
             export NVM_DIR="$HOME/.nvm"
             . "$NVM_DIR/nvm.sh"
-            
+
             # 👇 Use correct Node version
             nvm use 24.14.1
-            
+
             # 👇 Verify
             node -v
             pnpm -v
@@ -110,7 +110,7 @@ jobs:
             NODE_OPTIONS="--max-old-space-size=1536" pnpm build
 
             echo "🔁 Managing PM2 process"
-  
+
             if pm2 describe portfolio > /dev/null 2>&1; then
             echo "🔁 Reloading existing app"
             pm2 reload portfolio --update-env
@@ -118,7 +118,16 @@ jobs:
             echo "🚀 Starting new app"
             pm2 start "pnpm start" --name portfolio
             fi
-            
+
             pm2 save
 
             echo "✅ Deployment successful"
+
+            echo "🧹 Purging Cloudflare cache"
+            curl -s -X POST \
+              "https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE_ID }}/purge_cache" \
+              -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+              -H "Content-Type: application/json" \
+              --data '{"purge_everything":true}' \
+              | jq -r '.success'
+            echo "✅ Cache purged"
