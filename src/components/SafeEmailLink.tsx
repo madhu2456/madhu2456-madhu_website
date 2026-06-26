@@ -1,5 +1,3 @@
-"use client";
-
 interface SafeEmailLinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   email: string;

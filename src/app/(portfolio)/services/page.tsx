@@ -186,7 +186,7 @@ export default async function ServicesHubPage() {
                           key={`${service.slug}-${tech}`}
                           className="rounded-full border border-border bg-background/40 px-2 py-0.5 text-[10px] font-mono text-muted-foreground"
                         >
-                          {tech}{" "}
+                          {tech}
                         </span>
                       ))}
                     </div>

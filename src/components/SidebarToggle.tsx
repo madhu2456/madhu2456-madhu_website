@@ -34,9 +34,6 @@ function SidebarToggle() {
         className="relative flex h-16 w-16 items-center justify-center rounded-full border border-border bg-primary text-primary-foreground shadow-card transition-transform duration-300 hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary motion-reduce:transition-none motion-reduce:hover:scale-100"
         aria-label="Open AI assistant"
       >
-        <span aria-hidden="true" className="sr-only">
-          Open chat
-        </span>
         <MessageCircle className="h-7 w-7" aria-hidden />
       </button>
     </div>
