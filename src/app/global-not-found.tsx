@@ -3,7 +3,7 @@ import { Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
-  variable: "--font-geist-sans",
+  variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
 });
