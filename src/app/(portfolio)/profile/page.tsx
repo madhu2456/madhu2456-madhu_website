@@ -84,7 +84,7 @@ export default async function ProfilePage() {
           addressLocality: "Visakhapatnam",
           addressCountry: "IN",
         },
-        email: "mailto:madhu.kumar245@gmail.com",
+        email: "madhu.kumar245@gmail.com",
         sameAs: [
           "https://github.com/madhu2456",
           "https://www.linkedin.com/in/madhu-dadi-54684531",

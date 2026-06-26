@@ -2,6 +2,7 @@ import { ArrowRight, ExternalLink } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { Footer } from "@/components/Footer";
 import { FormattedText } from "@/components/FormattedText";
 import { Header } from "@/components/Header";
 import { SeoStructuredData } from "@/components/SeoStructuredData";
@@ -322,6 +323,11 @@ export default async function CaseStudiesPage() {
           })}
         </section>
       </main>
+      <Footer
+        profile={profile}
+        projects={sortedProjects}
+        navigationItems={sortedNavigationItems}
+      />
     </>
   );
 }

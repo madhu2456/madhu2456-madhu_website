@@ -13,6 +13,22 @@ export default function manifest(): MetadataRoute.Manifest {
     orientation: "portrait-primary",
     categories: ["portfolio", "technology", "developer"],
     lang: "en",
+    shortcuts: [
+      {
+        name: "Contact",
+        short_name: "Contact",
+        url: "/contact/",
+        description: "Get in touch with Madhu Dadi",
+        icons: [{ src: "/icon.png", sizes: "192x192" }],
+      },
+      {
+        name: "Case Studies",
+        short_name: "Cases",
+        url: "/case-studies/",
+        description: "View AI, RAG, and analytics case studies",
+        icons: [{ src: "/icon.png", sizes: "192x192" }],
+      },
+    ],
     icons: [
       {
         src: "/favicon.ico",

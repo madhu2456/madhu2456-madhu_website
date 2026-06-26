@@ -770,6 +770,7 @@ function Field({
           name={name}
           required={required}
           rows={4}
+          maxLength={5000}
           className={className}
           defaultValue={defaultValue}
         />
@@ -780,6 +781,7 @@ function Field({
           name={name}
           type={type}
           required={required}
+          maxLength={name === "subject" ? 300 : 200}
           className={className}
           defaultValue={defaultValue}
         />
@@ -842,11 +844,19 @@ function buildSkillGroups(skills: SkillItem[]) {
     grouped.get(cat)?.push(skill.name);
   }
 
-  return [
-    { title: "AI / LLM", items: grouped.get("ai-llm") || [] },
-    { title: "Analytics", items: grouped.get("analytics") || [] },
-    { title: "Data / Cloud", items: grouped.get("data-cloud") || [] },
-    { title: "Marketing", items: grouped.get("marketing") || [] },
-    { title: "Product", items: grouped.get("product") || [] },
-  ].filter((group) => group.items.length > 0);
+  // Human-friendly labels for known categories; others use the raw key
+  const labelMap: Record<string, string> = {
+    "ai-llm": "AI / LLM",
+    analytics: "Analytics",
+    "data-cloud": "Data / Cloud",
+    marketing: "Marketing",
+    product: "Product",
+  };
+
+  return [...grouped.entries()]
+    .map(([key, items]) => ({
+      title: labelMap[key] ?? key.charAt(0).toUpperCase() + key.slice(1),
+      items,
+    }))
+    .filter((group) => group.items.length > 0);
 }

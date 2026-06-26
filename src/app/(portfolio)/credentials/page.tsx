@@ -53,8 +53,6 @@ export default async function CredentialsPage() {
     pageContent,
   } = await getPortfolioData();
 
-  const _siteUrl = `${resolveSiteUrl()}/`;
-
   return (
     <div className="flex flex-col min-h-screen">
       <SeoStructuredData

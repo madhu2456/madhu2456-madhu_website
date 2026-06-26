@@ -9,7 +9,7 @@ Tailwind CSS — https://tailwindcss.com
 OpenAI ChatKit — https://platform.openai.com
 
 /* SITE */
-Last update: 2026/04
+Last update: 2026/06
 Language: English
 Doctype: HTML5
 IDE: VS Code

@@ -277,6 +277,7 @@ function Field({
           name={name}
           required={required}
           rows={5}
+          maxLength={5000}
           className={className}
           {...(value !== undefined ? { value } : { defaultValue })}
           onChange={onChange ? (e) => onChange(e.target.value) : undefined}
@@ -287,6 +288,7 @@ function Field({
           name={name}
           type={type}
           required={required}
+          maxLength={name === "subject" ? 300 : 200}
           className={className}
           {...(value !== undefined ? { value } : { defaultValue })}
           onChange={onChange ? (e) => onChange(e.target.value) : undefined}

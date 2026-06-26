@@ -62,6 +62,61 @@ export default async function IndiaLandingPage() {
         </div>
       </section>
 
+      {/* India-specific content for SEO/AEO differentiation */}
+      <section className="py-12 px-6">
+        <div className="container mx-auto max-w-4xl space-y-8">
+          <div className="rounded-2xl border border-border bg-surface/30 p-6 md:p-8 space-y-4">
+            <h2 className="font-display text-2xl font-semibold text-foreground">
+              AI Consulting Services in India
+            </h2>
+            <p className="text-muted-foreground leading-relaxed">
+              Based in Visakhapatnam, Andhra Pradesh, Madhu Dadi provides
+              end-to-end AI engineering and marketing analytics consulting to
+              startups and enterprises across India — including Hyderabad,
+              Bangalore, Mumbai, Delhi NCR, Chennai, and Pune. With 9+ years of
+              experience spanning Novartis, redBus, GroupM (WPP), and
+              Absolinsoft, he brings production-grade LLM/RAG architectures, AI
+              agent development, FastAPI backends, and Next.js full-stack
+              products to Indian businesses scaling their digital operations.
+            </p>
+            <p className="text-muted-foreground leading-relaxed">
+              Whether you are a SaaS startup in Koramangala, a fintech firm in
+              HITEC City, or an e-commerce brand in Noida — the core challenge
+              is the same: turning complex AI and data infrastructure into
+              measurable business outcomes. Madhu specializes in building
+              retrieval-augmented generation (RAG) pipelines for Indian
+              enterprise knowledge bases, deploying server-side GTM and GA4 /
+              BigQuery analytics stacks for multi-region campaigns, and shipping
+              production Next.js applications optimized for Indian mobile-first
+              audiences.
+            </p>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2">
+            <div className="rounded-2xl border border-border bg-surface/30 p-6 space-y-3">
+              <h3 className="font-semibold text-foreground">
+                Hyderabad & Bangalore
+              </h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Serving the major Indian tech hubs. AI agent development, RAG
+                pipelines, and marketing analytics for SaaS, fintech, and
+                e-commerce companies in South India.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-border bg-surface/30 p-6 space-y-3">
+              <h3 className="font-semibold text-foreground">
+                Mumbai, Delhi NCR & Pan-India
+              </h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Remote-first consulting for enterprises across India. Full-stack
+                AI product development, GA4/BigQuery analytics, and production
+                LLM applications delivered end-to-end.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <PortfolioContent />
     </div>
   );
