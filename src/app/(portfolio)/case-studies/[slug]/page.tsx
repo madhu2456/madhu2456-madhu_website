@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CitationBox } from "@/components/CitationBox";
+import { Footer } from "@/components/Footer";
 import { FormattedText } from "@/components/FormattedText";
 import { Header } from "@/components/Header";
 import { ShareButtons } from "@/components/ShareButtons";
@@ -74,7 +75,7 @@ const getProjectMeta = (project: ProjectItem) => {
       (project.slug === "adticks"
         ? "Founder & Full-stack / AI Engineer"
         : "Designer & Engineer"),
-    period: project.period || "2026 to Present",
+    period: project.period || `${new Date().getFullYear()} to Present`,
   };
 };
 
@@ -218,7 +219,10 @@ export default async function CaseStudyPage({
   return (
     <>
       <Header profile={profile} navigationItems={sortedNavigationItems} />
-      <main className="mx-auto w-[min(1100px,92%)] pt-32 pb-24">
+      <main
+        id="main-content"
+        className="mx-auto w-[min(1100px,92%)] pt-32 pb-24"
+      >
         <script
           type="application/ld+json"
           // biome-ignore lint/security/noDangerouslySetInnerHtml: server-side JSON-LD
@@ -538,6 +542,11 @@ export default async function CaseStudyPage({
           title={project.title}
           url={caseStudyUrl}
           authorName="Madhu Dadi"
+        />
+        <Footer
+          profile={profile}
+          navigationItems={sortedNavigationItems}
+          projects={sortedProjects}
         />
       </main>
     </>

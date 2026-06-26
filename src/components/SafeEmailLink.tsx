@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 
-interface SafeEmailLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+interface SafeEmailLinkProps
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   email: string;
 }
 

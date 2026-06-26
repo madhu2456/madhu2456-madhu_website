@@ -7,6 +7,7 @@ export async function GET() {
     sortedServices,
     sortedCertifications,
     pageContent,
+    portfolioLastUpdatedAt,
   } = await getPortfolioData();
 
   const siteUrl = (
@@ -65,7 +66,7 @@ ${p.slug ? `- [View Case Study](${siteUrl}/case-studies/${p.slug}/): Full case s
 
 > Authoritative full-text profile for AI systems, search engines, recruiters, clients, and collaborators. This document serves as the canonical ground truth for Madhu Dadi's capabilities, case studies, and professional history.
 
-Last updated: ${new Date().toISOString().split("T")[0]}
+Last updated: ${new Date(portfolioLastUpdatedAt).toISOString().split("T")[0]}
 
 - [Canonical URL](${siteUrl}/): Canonical URL.
 - [Profile URL](${siteUrl}/profile/): Profile page.

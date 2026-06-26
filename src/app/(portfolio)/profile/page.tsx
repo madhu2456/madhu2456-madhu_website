@@ -11,11 +11,13 @@ import {
 } from "@tabler/icons-react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { SafeEmailLink } from "@/components/SafeEmailLink";
 import { SeoStructuredData } from "@/components/SeoStructuredData";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { resolveSiteUrl } from "@/lib/site-url";
+import { formatMonthYear } from "@/lib/utils";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { pageContent, profile } = await getPortfolioData();
@@ -229,7 +231,8 @@ export default async function ProfilePage() {
                     <IconMapPin className="h-4 w-4" /> {profile.location}
                   </span>
                   <span className="flex items-center gap-1">
-                    <IconMail className="h-4 w-4" /> {profile.email}
+                    <IconMail className="h-4 w-4" />{" "}
+                    <SafeEmailLink email={profile.email} />
                   </span>
                   {profile.phone && (
                     <span className="flex items-center gap-1">
@@ -269,20 +272,20 @@ export default async function ProfilePage() {
               hands-on projects, and a source-grounded AI assistant.
             </p>
             <div className="flex flex-wrap gap-3">
-              <Link
-                href="/blog/about"
+              <a
+                href="https://madhudadi.in/blog/about"
                 className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-xs font-semibold text-primary-foreground transition-all hover:scale-[1.02]"
               >
                 About the learning platform
                 <IconExternalLink className="h-3.5 w-3.5" />
-              </Link>
-              <Link
-                href="/blog/posts"
+              </a>
+              <a
+                href="https://madhudadi.in/blog/posts"
                 className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/30 px-5 py-2.5 text-xs font-semibold text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground"
               >
                 Explore technical tutorials
                 <IconExternalLink className="h-3.5 w-3.5" />
-              </Link>
+              </a>
             </div>
           </section>
 
@@ -405,8 +408,8 @@ export default async function ProfilePage() {
                       <span className="text-primary">@ {exp.company}</span>
                     </h3>
                     <span className="text-xs font-mono text-muted-foreground bg-surface/60 border border-border/40 px-2.5 py-1 rounded-full">
-                      {exp.startDate.slice(0, 7)} –{" "}
-                      {exp.current ? "Present" : exp.endDate?.slice(0, 7)}
+                      {formatMonthYear(exp.startDate)} –{" "}
+                      {exp.current ? "Present" : formatMonthYear(exp.endDate)}
                     </span>
                   </div>
                   {exp.location && (
@@ -466,8 +469,8 @@ export default async function ProfilePage() {
                       {edu.fieldOfStudy}
                     </p>
                     <p className="text-xs font-mono text-muted-foreground pt-1">
-                      {edu.startDate.slice(0, 4)} –{" "}
-                      {edu.endDate ? edu.endDate.slice(0, 4) : "Present"}
+                      {formatMonthYear(edu.startDate)} –{" "}
+                      {formatMonthYear(edu.endDate)}
                     </p>
                   </div>
                 ))}
@@ -657,6 +660,11 @@ export default async function ProfilePage() {
           </section>
         </div>
       </main>
+      <Footer
+        profile={profile}
+        navigationItems={sortedNavigationItems}
+        projects={sortedProjects}
+      />
     </div>
   );
 }

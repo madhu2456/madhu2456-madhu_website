@@ -16,8 +16,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { SafeEmailLink } from "@/components/SafeEmailLink";
 import { getPortfolioData } from "@/lib/portfolio-data";
-
-const _CONTACT_CANONICAL = "https://madhudadi.in/contact/";
+import { resolveSiteUrl } from "@/lib/site-url";
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 
@@ -30,7 +29,7 @@ export async function generateMetadata({
   const params = searchParams ? await searchParams : {};
   const hasSearchParams = Object.keys(params ?? {}).length > 0;
 
-  const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
+  const siteUrl = `${resolveSiteUrl()}/`;
   const canonicalPath = pageContent.contact.seo?.canonicalPath || "/contact/";
   const canonicalUrl = `${siteUrl}${canonicalPath.replace(/^\//, "")}`;
 
@@ -67,7 +66,7 @@ export default async function ContactPage() {
   const { profile, sortedProjects, sortedNavigationItems, pageContent } =
     await getPortfolioData();
 
-  const siteUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in").replace(/\/+$/, "")}/`;
+  const siteUrl = `${resolveSiteUrl()}/`;
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",

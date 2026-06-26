@@ -19,6 +19,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { resolveSiteUrl } from "@/lib/site-url";
+import { formatMonthYear } from "@/lib/utils";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { pageContent } = await getPortfolioData();
@@ -295,7 +296,7 @@ export default async function CredentialsPage() {
                         <p className="text-muted-foreground">
                           Issue Date:{" "}
                           <span className="font-mono text-foreground">
-                            {cert.issueDate}
+                            {formatMonthYear(cert.issueDate)}
                           </span>
                         </p>
                       )}
@@ -411,7 +412,8 @@ export default async function CredentialsPage() {
                         </p>
                       </div>
                       <span className="text-[10px] font-mono font-semibold text-muted-foreground bg-surface-elevated/60 border border-border/40 px-2 py-0.5 rounded w-fit sm:mt-0">
-                        {exp.startDate} – {exp.endDate || "Present"}
+                        {formatMonthYear(exp.startDate)} –{" "}
+                        {formatMonthYear(exp.endDate)}
                       </span>
                     </div>
 
@@ -544,8 +546,8 @@ export default async function CredentialsPage() {
                         {edu.fieldOfStudy}
                       </p>
                       <p className="text-xs font-mono text-muted-foreground mt-2">
-                        {edu.startDate.slice(0, 4)} –{" "}
-                        {edu.endDate ? edu.endDate.slice(0, 4) : "Present"}
+                        {formatMonthYear(edu.startDate)} –{" "}
+                        {formatMonthYear(edu.endDate)}
                       </p>
                     </div>
                   </div>
