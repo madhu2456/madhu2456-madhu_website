@@ -14,7 +14,6 @@ import Link from "next/link";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { SafeEmailLink } from "@/components/SafeEmailLink";
-import { SeoStructuredData } from "@/components/SeoStructuredData";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { resolveSiteUrl } from "@/lib/site-url";
 import { formatMonthYear } from "@/lib/utils";
@@ -186,9 +185,6 @@ export default async function ProfilePage() {
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: safe - server-controlled JSON-LD only
         dangerouslySetInnerHTML={{ __html: JSON.stringify(coreEntityGraph) }}
-      />
-      <SeoStructuredData
-        nodes={["Occupation", "WorkExperience", "CertificationsList"]}
       />
       <Header profile={profile} navigationItems={sortedNavigationItems} />
 

@@ -74,16 +74,23 @@ export async function GET() {
   ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${entries
-  .map(
-    (entry) => `  <url>
+  .map((entry) => {
+    let alternateTags = "";
+    if (entry.url === siteUrl) {
+      alternateTags = `\n    <xhtml:link rel="alternate" hreflang="en-IN" href="${siteUrl}in/" />\n    <xhtml:link rel="alternate" hreflang="x-default" href="${siteUrl}" />`;
+    } else if (entry.url === `${siteUrl}in/`) {
+      alternateTags = `\n    <xhtml:link rel="alternate" hreflang="x-default" href="${siteUrl}" />\n    <xhtml:link rel="alternate" hreflang="en-IN" href="${siteUrl}in/" />`;
+    }
+
+    return `  <url>
     <loc>${entry.url}</loc>
     <lastmod>${entry.lastModified}</lastmod>
     <changefreq>${entry.changeFrequency}</changefreq>
-    <priority>${entry.priority}</priority>
-  </url>`,
-  )
+    <priority>${entry.priority}</priority>${alternateTags}
+  </url>`;
+  })
   .join("\n")}
 </urlset>`;
 

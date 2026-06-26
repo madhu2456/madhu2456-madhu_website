@@ -1,4 +1,5 @@
 import { getPortfolioData } from "@/lib/portfolio-data";
+import { resolveSiteUrl } from "@/lib/site-url";
 
 export async function GET() {
   const {
@@ -11,9 +12,7 @@ export async function GET() {
     portfolioLastUpdatedAt,
   } = await getPortfolioData();
 
-  const siteUrl = (
-    process.env.NEXT_PUBLIC_SITE_URL || "https://madhudadi.in"
-  ).replace(/\/+$/, "");
+  const siteUrl = resolveSiteUrl();
 
   const fullBio = profile.fullBioParagraphs?.join("\n\n") || profile.shortBio;
 
