@@ -254,7 +254,7 @@ export function buildPersonSchema({
       },
     }),
     ...(sameAs.length > 0 && { sameAs }),
-    publishingPrinciples: `${siteUrl}blog`,
+    publishingPrinciples: `${siteUrl}blog/`,
     mainEntityOfPage: { "@id": `${siteUrl}profile/#webpage` },
     hasOccupation: { "@id": `${siteUrl}#occupation` },
     subjectOf: [
@@ -509,7 +509,7 @@ export function buildServicesListSchema({
         "@type": "ListItem",
         position: i + 1,
         item: {
-          "@type": "Service",
+          "@type": ["Service", "Product"],
           "@id": `${siteUrl}#service-${i + 1}`,
           name: service.title,
           serviceType: service.title,
@@ -525,38 +525,6 @@ export function buildServicesListSchema({
               priceCurrency: "USD",
               availability: "https://schema.org/InStock",
               url: `${siteUrl}#services`,
-              hasMerchantReturnPolicy: {
-                "@type": "MerchantReturnPolicy",
-                returnPolicyCategory:
-                  "https://schema.org/MerchantReturnNotPermitted",
-              },
-              shippingDetails: {
-                "@type": "OfferShippingDetails",
-                shippingRate: {
-                  "@type": "MonetaryAmount",
-                  value: 0,
-                  currency: "USD",
-                },
-                shippingDestination: {
-                  "@type": "DefinedRegion",
-                  addressCountry: "US",
-                },
-                deliveryTime: {
-                  "@type": "ShippingDeliveryTime",
-                  handlingTime: {
-                    "@type": "QuantitativeValue",
-                    minValue: 0,
-                    maxValue: 0,
-                    unitCode: "DAY",
-                  },
-                  transitTime: {
-                    "@type": "QuantitativeValue",
-                    minValue: 0,
-                    maxValue: 0,
-                    unitCode: "DAY",
-                  },
-                },
-              },
               ...(priceType &&
                 unitTextByPriceType[priceType] && {
                   priceSpecification: {
@@ -652,8 +620,11 @@ export function buildProjectsListSchema({
         "@type": "SoftwareApplication",
         name: p.title,
         ...(p.tagline && { description: p.tagline }),
-        ...((p.slug && { url: `${siteUrl}case-studies/${p.slug}/` }) ||
-          (p.liveUrl && { url: p.liveUrl })),
+        ...(p.slug
+          ? { url: `${siteUrl}case-studies/${p.slug}/` }
+          : p.liveUrl
+            ? { url: p.liveUrl }
+            : {}),
         ...(p.category && { applicationCategory: p.category }),
         operatingSystem: "All",
         author: { "@id": `${siteUrl}#person` },

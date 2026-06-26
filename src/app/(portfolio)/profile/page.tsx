@@ -188,12 +188,7 @@ export default async function ProfilePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(coreEntityGraph) }}
       />
       <SeoStructuredData
-        nodes={[
-          "Occupation",
-          "ProfilePage",
-          "WorkExperience",
-          "CertificationsList",
-        ]}
+        nodes={["Occupation", "WorkExperience", "CertificationsList"]}
       />
       <Header profile={profile} navigationItems={sortedNavigationItems} />
 

@@ -45,6 +45,7 @@ export default async function Home() {
         nodes={[
           "Person",
           "WebSite",
+          "WebPage",
           "ProfessionalService",
           "Organization",
           "SoftwareApplication",

@@ -1,4 +1,5 @@
 import { getPortfolioData } from "@/lib/portfolio-data";
+import { resolveSiteUrl } from "@/lib/site-url";
 
 export async function GET() {
   const {
@@ -7,6 +8,7 @@ export async function GET() {
     sortedProjects,
     pageContent,
   } = await getPortfolioData();
+  const siteUrl = resolveSiteUrl();
   const lastUpdatedStr = portfolioLastUpdatedAt
     ? new Date(portfolioLastUpdatedAt).toISOString().split("T")[0]
     : "2026-06-06";
@@ -27,8 +29,7 @@ export async function GET() {
 
   const featuredProof = sortedProjects
     .map(
-      (p) =>
-        `- [${p.title}](https://madhudadi.in/case-studies/${p.slug}/): ${p.tagline}`,
+      (p) => `- [${p.title}](${siteUrl}/case-studies/${p.slug}/): ${p.tagline}`,
     )
     .join("\n");
 
@@ -42,10 +43,11 @@ export async function GET() {
 
 Last updated: ${lastUpdatedStr}
 
-- [Canonical URL](https://madhudadi.in/): Canonical identity.
-- [Profile URL](https://madhudadi.in/profile/): Profile page.
+- [Canonical URL](${siteUrl}/): Canonical identity.
+- [Profile URL](${siteUrl}/profile/): Profile page.
 - [Wikidata](https://www.wikidata.org/wiki/Q139807441): Wikidata entity.
-- [Learning platform about page](https://madhudadi.in/blog/about): Learning platform about page.
+- [Learning platform about page](${siteUrl}/blog/about): Learning platform about page.
+- Preferred Citation: [Madhu Dadi](${siteUrl}/)
 
 ## Canonical identity
 
@@ -65,10 +67,10 @@ ${faqs}
 
 Madhu Dadi also maintains an AI, Python, and analytics learning platform with production-informed tutorials, guided learning paths, projects, and a source-grounded AI assistant.
 
-- [About the learning platform](https://madhudadi.in/blog/about): AI, Python, and analytics learning platform about page.
-- [Technical tutorials](https://madhudadi.in/blog/posts): Production-informed tutorials.
-- [Hands-on projects](https://madhudadi.in/blog/projects): Guided learning paths and projects.
-- [AI assistant](https://madhudadi.in/blog/ask): Source-grounded AI assistant.
+- [About the learning platform](${siteUrl}/blog/about): AI, Python, and analytics learning platform about page.
+- [Technical tutorials](${siteUrl}/blog/posts): Production-informed tutorials.
+- [Hands-on projects](${siteUrl}/blog/projects): Guided learning paths and projects.
+- [AI assistant](${siteUrl}/blog/ask): Source-grounded AI assistant.
 
 ## Certifications
 
@@ -76,7 +78,7 @@ ${certificationLines}
 
 ## Optional
 
-- [Full Profile](https://madhudadi.in/llms-full.txt): Detailed biography, full services, and comprehensive case study breakdowns.
+- [Full Profile](${siteUrl}/llms-full.txt): Detailed biography, full services, and comprehensive case study breakdowns.
 `;
 
   return new Response(body, {

@@ -28,6 +28,7 @@ export type SeoGraphNode =
   | "WebSite"
   | "SoftwareApplication"
   | "ProfilePage"
+  | "WebPage"
   | "ProjectsList"
   | "ServicesList"
   | "WorkExperience"
@@ -175,6 +176,17 @@ export async function SeoStructuredData({
           profileImageUrl,
           dateModified,
         })
+      : null,
+    includeNode("WebPage")
+      ? {
+          "@type": "WebPage",
+          "@id": `${siteUrl}#webpage`,
+          url: siteUrl,
+          name: siteSettings.siteTitle || fullName,
+          description: description,
+          isPartOf: { "@id": `${siteUrl}#website` },
+          about: { "@id": `${siteUrl}#person` },
+        }
       : null,
     includeNode("ProjectsList")
       ? buildProjectsListSchema({ siteUrl, projects })

@@ -26,6 +26,12 @@ export async function GET() {
       priority: "0.9",
     },
     {
+      url: `${siteUrl}in/`,
+      lastModified: baseDate,
+      changeFrequency: "monthly",
+      priority: "0.9",
+    },
+    {
       url: `${siteUrl}services/`,
       lastModified: baseDate,
       changeFrequency: "monthly",

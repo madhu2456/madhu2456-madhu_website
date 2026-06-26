@@ -368,6 +368,7 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
               disabled={sending}
               className="w-full resize-none rounded-xl border border-foreground/12 bg-background px-3.5 py-2.5 text-sm leading-relaxed placeholder:text-muted-foreground/60 outline-none transition-shadow focus:border-foreground/20 focus:ring-2 focus:ring-primary/20 disabled:cursor-not-allowed disabled:opacity-50"
               style={{ minHeight: "44px", maxHeight: "160px" }}
+              maxLength={1000}
             />
             <button
               type="button"

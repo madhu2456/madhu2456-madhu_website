@@ -6,6 +6,7 @@ export async function GET() {
     sortedProjects,
     sortedServices,
     sortedCertifications,
+    sortedExperiences,
     pageContent,
     portfolioLastUpdatedAt,
   } = await getPortfolioData();
@@ -40,6 +41,15 @@ ${p.solutionApproach ? `**The Solution:**\n${p.solutionApproach}\n` : ""}
 ${p.technicalDecisions && p.technicalDecisions.length > 0 ? `**Technical Decisions:**\n${p.technicalDecisions.map((t) => `- **${t.title}:** ${t.desc}`).join("\n")}\n` : ""}
 ${p.slug ? `- [View Case Study](${siteUrl}/case-studies/${p.slug}/): Full case study breakdown.` : ""}
 `,
+    )
+    .join("\n\n");
+
+  const experienceSection = sortedExperiences
+    .map(
+      (e) => `### ${e.position} at ${e.company}
+${e.startDate ? `${e.startDate} - ` : ""}${e.current ? "Present" : e.endDate || ""}
+${e.description}
+${e.responsibilities ? e.responsibilities.map((r) => `- ${r}`).join("\n") : ""}`,
     )
     .join("\n\n");
 
@@ -85,7 +95,9 @@ ${servicesSection}
 
 ${projectsSection}
 
+## Work Experience
 
+${experienceSection}
 
 ## Frequently asked questions
 

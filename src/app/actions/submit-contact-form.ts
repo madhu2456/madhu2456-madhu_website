@@ -185,6 +185,13 @@ export async function submitContactForm(
     return { success: false, error: "Please provide a valid email address." };
   }
 
+  if (message.length > 5000) {
+    return {
+      success: false,
+      error: "Message is too long. Maximum 5000 characters.",
+    };
+  }
+
   const submittedAt = new Date().toISOString();
 
   console.info("[contact-form] submission", {
@@ -208,10 +215,13 @@ export async function submitContactForm(
   }
 
   try {
+    const sanitizedName = name.replace(/[\r\n<>"]/g, "");
+    const sanitizedEmail = email.replace(/[\r\n<>"]/g, "");
+
     await sendViaResend({
       from: fromEmail,
       to: [toEmail],
-      reply_to: `${name} <${email}>`,
+      reply_to: `${sanitizedName} <${sanitizedEmail}>`,
       subject: subject
         ? `[madhudadi.in] ${subject}`
         : `[madhudadi.in] New message from ${name}`,

@@ -68,8 +68,8 @@ export default async function ContactPage() {
 
   const siteUrl = `${resolveSiteUrl()}/`;
   const breadcrumbSchema = {
-    "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "@id": `${siteUrl}contact/#breadcrumb`,
     itemListElement: [
       {
         "@type": "ListItem",
@@ -87,8 +87,8 @@ export default async function ContactPage() {
   };
 
   const faqSchema = {
-    "@context": "https://schema.org",
     "@type": "FAQPage",
+    "@id": `${siteUrl}contact/#faq`,
     mainEntity: [
       {
         "@type": "Question",
@@ -139,13 +139,27 @@ export default async function ContactPage() {
     profile.socialLinks.linkedin ||
     "https://www.linkedin.com/in/madhu-dadi-54684531";
 
+  const contactPageSchema = {
+    "@type": "ContactPage",
+    "@id": `${siteUrl}contact/#webpage`,
+    url: `${siteUrl}contact/`,
+    name: "Contact Madhu Dadi",
+    description:
+      "Work with Madhu Dadi on production AI, RAG, AI agents, marketing analytics, or full-stack AI product development.",
+    mainEntity: { "@id": `${siteUrl}#person` },
+    breadcrumb: { "@id": `${siteUrl}contact/#breadcrumb` },
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: safe - server-controlled JSON-LD only
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify([breadcrumbSchema, faqSchema]),
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [breadcrumbSchema, faqSchema, contactPageSchema],
+          }),
         }}
       />
       <Header profile={profile} navigationItems={sortedNavigationItems} />
@@ -186,7 +200,7 @@ export default async function ContactPage() {
                   Best fit projects:
                 </h2>
                 <ul className="space-y-3">
-                  {bestFitAreas.map((area) => (
+                  {bestFitAreas.filter(Boolean).map((area) => (
                     <li key={area} className="flex gap-2.5 items-start">
                       <IconCircleCheck className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                       <span className="text-sm text-foreground/90">{area}</span>
