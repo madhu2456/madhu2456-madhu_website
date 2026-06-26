@@ -63,6 +63,19 @@ function isRateLimited(ip: string): boolean {
 }
 
 export async function POST(request: Request) {
+  const origin = request.headers.get("origin");
+  if (
+    origin &&
+    origin !== process.env.NEXT_PUBLIC_SITE_URL &&
+    origin !== "https://madhudadi.in" &&
+    !origin.startsWith("http://localhost:")
+  ) {
+    return NextResponse.json(
+      { error: "Forbidden origin." },
+      { status: 403, headers: { "Cache-Control": "no-store" } },
+    );
+  }
+
   // When hosted behind a proxy, x-forwarded-for may contain multiple IPs. Extract the first one.
   const forwardedFor = request.headers.get("x-forwarded-for");
   const ip = forwardedFor ? forwardedFor.split(",")[0].trim() : "anonymous";

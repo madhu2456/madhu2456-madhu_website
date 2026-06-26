@@ -1,7 +1,7 @@
 "use client";
 
+import { motion } from "motion/react";
 import type { ReactNode } from "react";
-import { useInView } from "@/lib/useInView";
 
 export function Section({
   id,
@@ -14,17 +14,14 @@ export function Section({
   title: string;
   children: ReactNode;
 }) {
-  const { ref, inView } = useInView<HTMLElement>();
-
   return (
-    <section
+    <motion.section
       id={id}
-      ref={ref}
-      className="scroll-mt-28 py-8 transition-all duration-700 md:py-12"
-      style={{
-        opacity: inView ? 1 : 0,
-        transform: inView ? "translateY(0)" : "translateY(20px)",
-      }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7 }}
+      className="scroll-mt-28 py-8 md:py-12"
     >
       <div className="mx-auto w-[min(1400px,92%)]">
         <header className="mb-8 max-w-none">
@@ -37,6 +34,6 @@ export function Section({
         </header>
         {children}
       </div>
-    </section>
+    </motion.section>
   );
 }

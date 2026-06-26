@@ -134,10 +134,7 @@ export function Footer({ profile, projects, navigationItems }: FooterProps) {
               itemScope
               itemType="https://schema.org/PostalAddress"
             >
-              <span itemProp="addressLocality">Visakhapatnam</span>,{" "}
-              <span itemProp="addressRegion">Andhra Pradesh</span>
-              <br />
-              <span itemProp="addressCountry">India</span>
+              <span itemProp="addressLocality">{profile.location}</span>
             </div>
             {profile.phone && (
               <a

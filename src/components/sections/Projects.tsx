@@ -27,7 +27,8 @@ export function Projects({ projects }: { projects: ProjectItem[] }) {
               key={project.slug}
               className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface/60 transition-all hover:-translate-y-1 hover:border-primary/40 shadow-card"
             >
-              {project.coverImage ? (
+              {project.coverImage &&
+              normalizeImageSource(project.coverImage) ? (
                 <div className="relative aspect-video w-full overflow-hidden border-b border-border/80 bg-surface">
                   <Image
                     src={normalizeImageSource(project.coverImage) || ""}

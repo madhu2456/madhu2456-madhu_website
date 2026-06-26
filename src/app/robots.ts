@@ -51,6 +51,7 @@ export default function robots(): MetadataRoute.Robots {
           "Bytespider",
         ],
         allow: "/",
+        disallow: ["/cms/", "/api/cms/"],
       },
       // Google standard search
       {

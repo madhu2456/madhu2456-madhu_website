@@ -1,8 +1,10 @@
 "use client";
 
+import { IconMenu2, IconX } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import type { NavigationItem, Profile } from "@/lib/portfolio-data";
 
 type HeaderProps = {
@@ -12,6 +14,8 @@ type HeaderProps = {
 
 export function Header({ profile, navigationItems }: HeaderProps) {
   const pathname = usePathname();
+
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const getHref = (href: string) => {
     // If the link is external, return as is
@@ -29,7 +33,7 @@ export function Header({ profile, navigationItems }: HeaderProps) {
   };
 
   const isLinkActive = (href: string) => {
-    if (href === "https://madhudadi.in/blog") return false;
+    if (href.startsWith("http")) return false;
 
     // Check match for root
     if (href === "/" && pathname === "/") return true;
@@ -103,7 +107,7 @@ export function Header({ profile, navigationItems }: HeaderProps) {
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full border border-border/80 bg-surface/50 px-4 py-2 text-xs font-semibold text-foreground shadow-sm transition-all duration-300 hover:scale-[1.04] hover:bg-surface-elevated hover:border-primary/30 sm:px-5 sm:text-sm"
+            className="hidden sm:inline-block rounded-full border border-border/80 bg-surface/50 px-4 py-2 text-xs font-semibold text-foreground shadow-sm transition-all duration-300 hover:scale-[1.04] hover:bg-surface-elevated hover:border-primary/30 sm:px-5 sm:text-sm"
           >
             Resume
           </a>
@@ -114,8 +118,61 @@ export function Header({ profile, navigationItems }: HeaderProps) {
           >
             Hire me
           </Link>
+          <button
+            type="button"
+            className="md:hidden flex items-center justify-center h-9 w-9 rounded-full border border-border/80 bg-surface/50 text-foreground transition-colors hover:bg-surface-elevated hover:text-primary"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle navigation menu"
+          >
+            {isMobileMenuOpen ? (
+              <IconX className="h-5 w-5" />
+            ) : (
+              <IconMenu2 className="h-5 w-5" />
+            )}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu Dropdown */}
+      {isMobileMenuOpen && (
+        <div className="absolute top-full left-0 right-0 mt-2 px-3 sm:px-5 md:hidden">
+          <nav className="flex flex-col gap-1 rounded-2xl border border-border/90 bg-surface-elevated/95 p-3 shadow-lg shadow-black/20 backdrop-blur-xl">
+            {navigationItems.map((link) => {
+              const isActive = isLinkActive(link.href);
+              const isExternal =
+                link.isExternal || link.href.startsWith("http");
+
+              return (
+                <Link
+                  key={link.href}
+                  href={getHref(link.href)}
+                  prefetch={false}
+                  target={isExternal ? "_blank" : undefined}
+                  rel={isExternal ? "noreferrer" : undefined}
+                  aria-current={isActive ? "page" : undefined}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`rounded-xl px-4 py-3 text-sm font-semibold tracking-wide transition-all ${
+                    isActive
+                      ? "bg-primary/15 text-primary border border-primary/20"
+                      : "text-muted-foreground border border-transparent hover:bg-white/5 hover:text-foreground"
+                  }`}
+                >
+                  {link.title}
+                </Link>
+              );
+            })}
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="mt-2 text-center rounded-xl border border-border/80 bg-surface/50 px-4 py-3 text-sm font-semibold text-foreground transition-all hover:bg-surface-elevated hover:text-primary"
+            >
+              Resume
+            </a>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }

@@ -193,6 +193,14 @@ export default async function CaseStudyPage({
           "@id": `${siteUrl}case-studies/`,
         },
         citation: evidenceLinks.map((link) => link.url),
+        speakable: {
+          "@type": "SpeakableSpecification",
+          cssSelector: [
+            "#main-content h1",
+            "#main-content h2",
+            "#main-content p",
+          ],
+        },
       },
       {
         "@type": "BreadcrumbList",

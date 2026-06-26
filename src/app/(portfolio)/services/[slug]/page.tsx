@@ -217,6 +217,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
       "@type": "CollectionPage",
       "@id": `${siteUrl}services/`,
     },
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["#main-content h1", "#main-content h2", "#main-content p"],
+    },
   };
 
   return (

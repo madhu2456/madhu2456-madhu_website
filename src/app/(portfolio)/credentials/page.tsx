@@ -17,6 +17,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { SeoStructuredData } from "@/components/SeoStructuredData";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { resolveSiteUrl } from "@/lib/site-url";
 import { formatMonthYear } from "@/lib/utils";
@@ -52,32 +53,12 @@ export default async function CredentialsPage() {
     pageContent,
   } = await getPortfolioData();
 
-  const siteUrl = `${resolveSiteUrl()}/`;
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: siteUrl,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Credentials",
-        item: `${siteUrl}credentials/`,
-      },
-    ],
-  };
+  const _siteUrl = `${resolveSiteUrl()}/`;
 
   return (
     <div className="flex flex-col min-h-screen">
-      <script
-        type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe - server-controlled JSON-LD only
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      <SeoStructuredData
+        nodes={["Breadcrumb", "CertificationsList", "WorkExperience"]}
       />
       <Header profile={profile} navigationItems={sortedNavigationItems} />
 
