@@ -22,6 +22,7 @@ import {
 } from "react";
 import { submitContactForm } from "@/app/actions/submit-contact-form";
 import { Footer } from "@/components/Footer";
+import { FormField } from "@/components/FormField";
 import { Header } from "@/components/Header";
 import { SafeEmailLink } from "@/components/SafeEmailLink";
 import { Section } from "@/components/Section";
@@ -620,26 +621,26 @@ function Contact({ profile }: { profile: Profile }) {
           onSubmit={handleSubmit}
         >
           <input type="text" name="hp_field" className="hidden" tabIndex={-1} />
-          <Field
+          <FormField
             label="Name"
             name="name"
             required
             defaultValue={prefill.name}
           />
-          <Field
+          <FormField
             label="Email"
             name="email"
             type="email"
             required
             defaultValue={prefill.email}
           />
-          <Field
+          <FormField
             label="Subject"
             name="subject"
             required
             defaultValue={prefill.subject}
           />
-          <Field
+          <FormField
             label="Message"
             name="message"
             textarea
@@ -737,58 +738,7 @@ function SocialLink({
   );
 }
 
-function Field({
-  label,
-  name,
-  type = "text",
-  required,
-  textarea,
-  defaultValue,
-}: {
-  label: string;
-  name: string;
-  type?: string;
-  required?: boolean;
-  textarea?: boolean;
-  defaultValue?: string;
-}) {
-  const className =
-    "w-full rounded-lg border border-border bg-background/60 px-4 py-3 text-sm outline-none transition-colors focus:border-primary";
-
-  const id = `contact-${name}`;
-
-  return (
-    <label htmlFor={id} className="block">
-      <span className="mb-1.5 block text-xs tracking-widest text-muted-foreground uppercase">
-        {label}
-        {required ? " *" : ""}
-      </span>
-      {textarea ? (
-        <textarea
-          key={defaultValue ?? ""}
-          id={id}
-          name={name}
-          required={required}
-          rows={4}
-          maxLength={5000}
-          className={className}
-          defaultValue={defaultValue}
-        />
-      ) : (
-        <input
-          key={defaultValue ?? ""}
-          id={id}
-          name={name}
-          type={type}
-          required={required}
-          maxLength={name === "subject" ? 300 : 200}
-          className={className}
-          defaultValue={defaultValue}
-        />
-      )}
-    </label>
-  );
-}
+// Field component is now shared via @/components/FormField
 
 // Shared Footer is imported from @/components/Footer
 

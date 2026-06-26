@@ -14,6 +14,9 @@ import Link from "next/link";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { SafeEmailLink } from "@/components/SafeEmailLink";
+import { buildDiscoveryKeywords } from "@/lib/discovery-keywords";
+import { resolveAbsoluteImageUrl } from "@/lib/image-source";
+import { buildPersonSchema } from "@/lib/jsonld";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { resolveSiteUrl } from "@/lib/site-url";
 import { formatMonthYear } from "@/lib/utils";
@@ -59,87 +62,70 @@ export default async function ProfilePage() {
     sortedProjects,
     sortedNavigationItems,
     pageContent,
+    skills,
+    sortedServices: services,
+    sortedCertifications: certifications,
+    siteSettings,
   } = await getPortfolioData();
   const siteUrl = `${resolveSiteUrl()}/`;
+
+  // Build the full Person schema via the shared builder to ensure parity with
+  // the homepage and other pages (hasCredential, makesOffer, seeks, etc.).
+  const fullName =
+    [profile.firstName, profile.lastName].filter(Boolean).join(" ") ||
+    "Madhu Dadi";
+  const profileImageUrl =
+    resolveAbsoluteImageUrl(profile.profileImage) || undefined;
+  const discoveryKeywords = buildDiscoveryKeywords({
+    siteKeywords: siteSettings.siteKeywords,
+    headline: profile.headline,
+    location: profile.location,
+    skills,
+    services,
+    projects: sortedProjects,
+  });
+  const currentRole = sortedExperiences.find((e) => e.current);
+
+  const personSchema = {
+    ...buildPersonSchema({
+      fullName,
+      headline: profile.headline,
+      bio: profile.shortBio,
+      email: profile.email,
+      location: profile.location,
+      profileImageUrl,
+      siteUrl,
+      socialLinks: profile.socialLinks ?? undefined,
+      yearsOfExperience: profile.yearsOfExperience,
+      nationality: "India",
+      alumniOf: sortedEducation
+        .filter((edu) => edu.institution)
+        .map((edu) => ({
+          name: edu.institution,
+          url: edu.website ?? undefined,
+        })),
+      seoKeywords: discoveryKeywords,
+      certifications,
+      services,
+      currentRole: currentRole
+        ? {
+            company: currentRole.company,
+            position: currentRole.position,
+            startDate: currentRole.startDate,
+            location: currentRole.location,
+          }
+        : undefined,
+    }),
+    // Profile-page-specific enrichments not in the shared builder
+    alternateName: ["madhu2456"],
+    disambiguatingDescription:
+      "AI and marketing analytics engineer based in Visakhapatnam, India; specializes in LLM/RAG applications, AI agents, FastAPI/Next.js products, and marketing analytics.",
+  };
 
   const coreEntityGraph = {
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@type": "Person",
-        "@id": `${siteUrl}#person`,
-        name: "Madhu Dadi",
-        givenName: "Madhu",
-        familyName: "Dadi",
-        alternateName: ["madhu2456"],
-        url: `${siteUrl}profile/`,
-        image: `${siteUrl}new-ui/hero-portrait.jpg`,
-        jobTitle: "AI & Marketing Analytics Engineer",
-        description:
-          "Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India. He has 9+ years of experience across Novartis, redBus, GroupM (WPP), and Absolinsoft, and builds production LLM/RAG applications, AI agents, FastAPI/Next.js products, and analytics systems.",
-        disambiguatingDescription:
-          "AI and marketing analytics engineer based in Visakhapatnam, India; specializes in LLM/RAG applications, AI agents, FastAPI/Next.js products, and marketing analytics.",
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: "Visakhapatnam",
-          addressCountry: "IN",
-        },
-        email: "madhu.kumar245@gmail.com",
-        sameAs: [
-          "https://github.com/madhu2456",
-          "https://www.linkedin.com/in/madhu-dadi-54684531",
-          "https://dev.to/madhudadi",
-          "https://peerlist.io/madhudadi",
-          "https://x.com/madhu245",
-          "https://www.wikidata.org/wiki/Q139807441",
-          "https://www.google.com/search?kgmid=/g/11npvk25wc&hl=en-IN&q=Madhu+Dadi+-+Generative+AI,+RAG+%26+Marketing+Analytics+Consultant&shem=epsd1,rimspwouoe&shndl=30&kgs=2dd2acc94bd80f47",
-        ],
-        knowsAbout: [
-          "LLM application development",
-          "Retrieval-Augmented Generation",
-          "AI agents",
-          "FastAPI",
-          "Next.js",
-          "Python",
-          "SQL",
-          "PostgreSQL",
-          "Marketing analytics",
-          "GA4",
-          "BigQuery",
-          "Campaign measurement",
-          "Data pipelines",
-          "Full-stack AI product development",
-        ],
-        worksFor: {
-          "@type": "Organization",
-          name: "Novartis",
-        },
-        alumniOf: [
-          {
-            "@type": "CollegeOrUniversity",
-            name: "Indian Institute of Management Amritsar",
-            sameAs: "https://www.wikidata.org/wiki/Q20647463",
-          },
-          {
-            "@type": "CollegeOrUniversity",
-            name: "MVGR College of Engineering",
-            sameAs: "https://www.wikidata.org/wiki/Q6719151",
-          },
-        ],
-        subjectOf: [
-          {
-            "@type": "AboutPage",
-            name: "About the AI, Python & Analytics Learning Platform",
-            url: `${siteUrl}blog/about`,
-          },
-          {
-            "@type": "Blog",
-            name: "Madhu Dadi - AI, Python & Analytics Hub",
-            url: `${siteUrl}blog`,
-          },
-        ],
-        mainEntityOfPage: `${siteUrl}profile/`,
-      },
+      personSchema,
       {
         "@type": "WebSite",
         "@id": `${siteUrl}#website`,

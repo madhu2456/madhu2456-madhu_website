@@ -3,6 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import { type FormEvent, useEffect, useState, useTransition } from "react";
 import { submitContactForm } from "@/app/actions/submit-contact-form";
+import { FormField } from "@/components/FormField";
 
 type ContactIntent = {
   subject: string;
@@ -191,31 +192,40 @@ export function ContactForm() {
     >
       <input type="text" name="hp_field" className="hidden" tabIndex={-1} />
 
-      <Field label="Name" name="name" required defaultValue={namePrefill} />
+      <FormField
+        label="Name"
+        name="name"
+        required
+        defaultValue={namePrefill}
+        idPrefix="contact-page"
+      />
 
-      <Field
+      <FormField
         label="Email"
         name="email"
         type="email"
         required
         defaultValue={emailPrefill}
+        idPrefix="contact-page"
       />
 
-      <Field
+      <FormField
         label="Subject"
         name="subject"
         required
         value={subject}
         onChange={(val) => setSubject(val)}
+        idPrefix="contact-page"
       />
 
-      <Field
+      <FormField
         label="Message"
         name="message"
         textarea
         required
         value={message}
         onChange={(val) => setMessage(val)}
+        idPrefix="contact-page"
       />
 
       <button
@@ -241,59 +251,4 @@ export function ContactForm() {
   );
 }
 
-function Field({
-  label,
-  name,
-  type = "text",
-  required,
-  textarea,
-  defaultValue,
-  value,
-  onChange,
-}: {
-  label: string;
-  name: string;
-  type?: string;
-  required?: boolean;
-  textarea?: boolean;
-  defaultValue?: string;
-  value?: string;
-  onChange?: (val: string) => void;
-}) {
-  const className =
-    "w-full rounded-lg border border-border bg-background/60 px-4 py-3 text-sm outline-none transition-all focus:border-primary focus:bg-background";
-
-  const id = `contact-page-${name}`;
-
-  return (
-    <label htmlFor={id} className="block text-left">
-      <span className="mb-1.5 block text-xs tracking-widest text-muted-foreground uppercase font-medium">
-        {label}
-        {required ? " *" : ""}
-      </span>
-      {textarea ? (
-        <textarea
-          id={id}
-          name={name}
-          required={required}
-          rows={5}
-          maxLength={5000}
-          className={className}
-          {...(value !== undefined ? { value } : { defaultValue })}
-          onChange={onChange ? (e) => onChange(e.target.value) : undefined}
-        />
-      ) : (
-        <input
-          id={id}
-          name={name}
-          type={type}
-          required={required}
-          maxLength={name === "subject" ? 300 : 200}
-          className={className}
-          {...(value !== undefined ? { value } : { defaultValue })}
-          onChange={onChange ? (e) => onChange(e.target.value) : undefined}
-        />
-      )}
-    </label>
-  );
-}
+// Field component is now shared via @/components/FormField
