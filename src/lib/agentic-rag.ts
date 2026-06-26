@@ -437,25 +437,14 @@ const parseResponseText = (payload: unknown) => {
   }
 
   const responsePayload = payload as {
-    output_text?: unknown;
-    output?: Array<{
-      content?: Array<{ type?: string; text?: string }>;
+    choices?: Array<{
+      message?: {
+        content?: string;
+      };
     }>;
   };
 
-  if (typeof responsePayload.output_text === "string") {
-    return responsePayload.output_text.trim();
-  }
-
-  const content =
-    responsePayload.output?.flatMap((item) => item.content ?? []) ?? [];
-  const textParts = content
-    .filter(
-      (part) => part.type === "output_text" && typeof part.text === "string",
-    )
-    .map((part) => part.text as string);
-
-  return textParts.join("\n").trim();
+  return responsePayload.choices?.[0]?.message?.content?.trim() ?? "";
 };
 
 const toFields = (content: string) => {
@@ -658,7 +647,7 @@ ${contextBlock}
   try {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), OPENAI_TIMEOUT_MS);
-    const response = await fetch("https://api.openai.com/v1/responses", {
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -666,18 +655,12 @@ ${contextBlock}
       },
       body: JSON.stringify({
         model,
-        input: [
-          {
-            role: "system",
-            content: [{ type: "input_text", text: systemPrompt }],
-          },
-          {
-            role: "user",
-            content: [{ type: "input_text", text: userPrompt }],
-          },
+        messages: [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: userPrompt },
         ],
         temperature: 0.2,
-        max_output_tokens: 420,
+        max_tokens: 420,
       }),
       signal: controller.signal,
     });
