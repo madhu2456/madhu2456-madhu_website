@@ -45,6 +45,8 @@ function isRateLimited(ip: string): boolean {
   const now = Date.now();
   const record = rateLimitMap.get(ip);
 
+  // Evict expired rate limit records on-demand during new requests
+  // instead of using a setInterval timer to avoid memory leaks in serverless.
   if (!record || now > record.resetAt) {
     if (record) rateLimitMap.delete(ip); // Evict expired
     rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
@@ -56,7 +58,9 @@ function isRateLimited(ip: string): boolean {
 }
 
 export async function POST(request: Request) {
-  const ip = request.headers.get("x-forwarded-for") || "anonymous";
+  // When hosted behind a proxy, x-forwarded-for may contain multiple IPs. Extract the first one.
+  const forwardedFor = request.headers.get("x-forwarded-for");
+  const ip = forwardedFor ? forwardedFor.split(",")[0].trim() : "anonymous";
 
   if (isRateLimited(ip)) {
     return NextResponse.json(
