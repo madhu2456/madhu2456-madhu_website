@@ -7,6 +7,7 @@ export async function GET() {
     sortedServices,
     sortedProjects,
     sortedExperiences,
+    sortedEducation,
     portfolioLastUpdatedAt,
   } = await getPortfolioData();
   const siteUrl = resolveSiteUrl();
@@ -89,6 +90,14 @@ export async function GET() {
       url: `${siteUrl}/case-studies/${project.slug}/`,
       category: project.category,
       summary: project.impactSummary || project.tagline,
+    })),
+    education: sortedEducation.map((edu) => ({
+      institution: edu.institution,
+      degree: edu.degree,
+      field: edu.fieldOfStudy,
+      startDate: edu.startDate,
+      endDate: edu.endDate,
+      description: edu.description,
     })),
   });
 }
