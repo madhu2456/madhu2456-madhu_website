@@ -78,6 +78,7 @@ export default function robots(): MetadataRoute.Robots {
           "/blog/llms-full.txt",
           "/blog/ai-profile.json",
           "/blog/api/og",
+          "/.well-known/ai-plugin.json",
         ],
         disallow: PRIVATE_DISALLOWS,
       },

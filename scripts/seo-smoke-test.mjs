@@ -91,6 +91,7 @@ async function main() {
     ["/llms.txt", "text/plain"],
     ["/llms-full.txt", "text/plain"],
     ["/ai-profile.json", "application/json"],
+    ["/.well-known/ai-plugin.json", "application/json"],
   ];
   console.log("\n📡 Discovery endpoints");
   for (const [path, expectedType] of discoveryEndpoints) {
