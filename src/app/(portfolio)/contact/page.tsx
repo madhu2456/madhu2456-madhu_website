@@ -1,6 +1,5 @@
 import {
   IconBrandLinkedin,
-  IconChevronLeft,
   IconCircleCheck,
   IconClock,
   IconGlobe,
@@ -11,6 +10,7 @@ import {
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { ContactForm } from "@/components/ContactForm";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
@@ -183,15 +183,7 @@ export default async function ContactPage() {
 
       <main id="main-content" className="flex-1 px-6 py-28 bg-background/50">
         <div className="container mx-auto max-w-4xl space-y-12">
-          {/* Back Button */}
-          <div>
-            <Link
-              href="/"
-              className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors"
-            >
-              <IconChevronLeft className="h-4 w-4" /> Back to Home
-            </Link>
-          </div>
+          <Breadcrumb items={[{ label: "Contact" }]} />
 
           <div className="grid gap-10 lg:grid-cols-2">
             {/* Left Column: Context, Best Fit, and Direct Details */}
@@ -371,7 +363,14 @@ export default async function ContactPage() {
                   </h2>
                   <p className="text-xs text-muted-foreground leading-relaxed">
                     Submit your requirements below to instantly start our review
-                    pipeline.
+                    pipeline. By submitting, you agree to the{" "}
+                    <Link
+                      href="/privacy/"
+                      className="text-primary hover:underline"
+                    >
+                      privacy policy
+                    </Link>
+                    .
                   </p>
                 </div>
                 <Suspense

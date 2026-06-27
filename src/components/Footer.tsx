@@ -38,6 +38,10 @@ export function Footer({ profile, projects, navigationItems }: FooterProps) {
       ],
     },
     {
+      heading: "Legal",
+      links: [{ label: "Privacy Policy", href: "/privacy/" }],
+    },
+    {
       heading: "Connect",
       links: [
         { label: "Email", href: `mailto:${profile.email}` },

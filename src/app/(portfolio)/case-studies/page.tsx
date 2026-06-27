@@ -2,6 +2,7 @@ import { ArrowRight, ExternalLink } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { Footer } from "@/components/Footer";
 import { FormattedText } from "@/components/FormattedText";
 import { Header } from "@/components/Header";
@@ -111,12 +112,7 @@ export default async function CaseStudiesPage() {
             }),
           }}
         />
-        <Link
-          href="/"
-          className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-        >
-          Home
-        </Link>
+        <Breadcrumb items={[{ label: "Case Studies" }]} />
 
         <header className="mt-8 max-w-none">
           <div className="max-w-4xl">

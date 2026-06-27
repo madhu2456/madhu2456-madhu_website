@@ -29,7 +29,7 @@
       "recommended": true,
       "suspicious": {
         "noUnknownAtRules": "off",
-        "noExplicitAny": "off"
+        "noExplicitAny": "warn"
       }
     },
     "domains": {

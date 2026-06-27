@@ -1,4 +1,5 @@
 import { Buffer } from "node:buffer";
+import { timingSafeEqual } from "node:crypto";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
@@ -42,14 +43,11 @@ export default function proxy(request: NextRequest) {
     return unauthorized();
   }
 
-  let isEqual = false;
-
-  // manual fallback for edge environments that lack timingSafeEqual
-  let result = 0;
-  for (let i = 0; i < expectedCredentials.length; i++) {
-    result |= expectedCredentials.charCodeAt(i) ^ credentials.charCodeAt(i);
-  }
-  isEqual = result === 0 && expectedCredentials.length === credentials.length;
+  const expectedBuf = Buffer.from(expectedCredentials);
+  const receivedBuf = Buffer.from(credentials);
+  const isEqual =
+    expectedBuf.length === receivedBuf.length &&
+    timingSafeEqual(expectedBuf, receivedBuf);
 
   if (!isEqual) {
     return unauthorized();
