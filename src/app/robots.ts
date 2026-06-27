@@ -82,10 +82,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: PRIVATE_DISALLOWS,
       },
     ],
-    sitemap: [
-      `${siteUrl}sitemap.xml`,
-      `${siteUrl}blog/sitemap.xml`,
-      `${siteUrl}blog/api/v1/sitemap-index.xml`,
-    ],
+    sitemap: [`${siteUrl}sitemap.xml`, `${siteUrl}blog/sitemap.xml`],
   };
 }
