@@ -1,11 +1,11 @@
 import type { Metadata, Viewport } from "next";
 
-import { geistMono, instrumentSerif, inter } from "@/lib/fonts";
 import { AppSidebar } from "@/components/app-sidebar";
 import { ClientChrome } from "@/components/ClientChrome";
 import { DeferredGTM } from "@/components/DeferredGTM";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { geistMono, instrumentSerif, inter } from "@/lib/fonts";
 
 import { getPortfolioData } from "@/lib/portfolio-data";
 import "../globals.css";

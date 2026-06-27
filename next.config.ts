@@ -84,6 +84,11 @@ const nextConfig: NextConfig = {
         destination: "https://madhudadi.in/blog/feed.xml",
         permanent: true,
       },
+      {
+        source: "/sitemap-portfolio.xml",
+        destination: "/sitemap.xml",
+        permanent: true,
+      },
     ];
   },
 

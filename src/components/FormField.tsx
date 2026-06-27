@@ -17,6 +17,8 @@ type FormFieldProps = {
   idPrefix?: string;
   /** Rows for textarea mode (defaults to 5). */
   rows?: number;
+  /** HTML autocomplete attribute for form fields. */
+  autoComplete?: string;
 } & (
   | { defaultValue?: string; value?: never; onChange?: never }
   | { defaultValue?: never; value?: string; onChange?: (val: string) => void }
@@ -33,6 +35,7 @@ export function FormField({
   defaultValue,
   value,
   onChange,
+  autoComplete,
 }: FormFieldProps) {
   const className =
     "w-full rounded-lg border border-border bg-background/60 px-4 py-3 text-sm outline-none transition-all focus:border-primary focus:bg-background";
@@ -71,6 +74,7 @@ export function FormField({
           required={required}
           maxLength={name === "subject" ? 300 : 200}
           className={className}
+          autoComplete={autoComplete}
           {...(value !== undefined ? { value } : { defaultValue })}
           onChange={onChange ? (e) => onChange(e.target.value) : undefined}
         />

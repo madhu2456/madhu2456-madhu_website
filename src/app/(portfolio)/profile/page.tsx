@@ -32,7 +32,7 @@ export async function generateMetadata(): Promise<Metadata> {
     "Madhu Dadi - Generative AI, RAG & Marketing Analytics Engineer";
   const description =
     pageContent.profile.seo?.description ||
-    "Profile of Madhu Dadi, AI & marketing analytics engineer. 9+ years exp across Novartis, redBus, and GroupM (WPP).";
+    "Profile of Madhu Dadi, AI & marketing analytics engineer. 9+ years across Novartis, redBus, and GroupM (WPP).";
   const image = `${siteUrl}opengraph-image?ext=.png`;
 
   return {
@@ -42,7 +42,7 @@ export async function generateMetadata(): Promise<Metadata> {
       canonical: canonicalUrl,
     },
     openGraph: {
-      title,
+      title: { absolute: title },
       description,
       url: canonicalUrl,
       siteName: "Madhu Dadi",

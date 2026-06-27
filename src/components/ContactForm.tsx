@@ -198,6 +198,7 @@ export function ContactForm() {
         required
         defaultValue={namePrefill}
         idPrefix="contact-page"
+        autoComplete="name"
       />
 
       <FormField
@@ -207,6 +208,7 @@ export function ContactForm() {
         required
         defaultValue={emailPrefill}
         idPrefix="contact-page"
+        autoComplete="email"
       />
 
       <FormField
@@ -238,6 +240,8 @@ export function ContactForm() {
 
       {status ? (
         <p
+          role={status.tone === "error" ? "alert" : "status"}
+          aria-live={status.tone === "error" ? "assertive" : "polite"}
           className={`rounded-lg border px-4 py-3 text-sm transition-all duration-300 ${
             status.tone === "success"
               ? "border-emerald-400/30 bg-emerald-400/10 text-emerald-200"

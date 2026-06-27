@@ -642,6 +642,7 @@ function Contact({ profile }: { profile: Profile }) {
             name="name"
             required
             defaultValue={prefill.name}
+            autoComplete="name"
           />
           <FormField
             label="Email"
@@ -649,6 +650,7 @@ function Contact({ profile }: { profile: Profile }) {
             type="email"
             required
             defaultValue={prefill.email}
+            autoComplete="email"
           />
           <FormField
             label="Subject"
@@ -672,6 +674,8 @@ function Contact({ profile }: { profile: Profile }) {
           </button>
           {status ? (
             <p
+              role={status.tone === "error" ? "alert" : "status"}
+              aria-live={status.tone === "error" ? "assertive" : "polite"}
               className={`rounded-lg border px-4 py-3 text-sm ${
                 status.tone === "success"
                   ? "border-emerald-400/30 bg-emerald-400/10 text-emerald-200"

@@ -122,7 +122,7 @@ export async function generateMetadata({
     description,
     alternates: { canonical: url },
     openGraph: {
-      title,
+      title: { absolute: title },
       description,
       url,
       type: "article",
@@ -134,6 +134,11 @@ export async function generateMetadata({
           alt: `${project.title} case study by Madhu Dadi`,
         },
       ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
     },
   };
 }

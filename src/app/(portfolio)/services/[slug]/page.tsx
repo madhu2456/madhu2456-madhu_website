@@ -49,11 +49,14 @@ export async function generateMetadata({
   const siteUrl = `${resolveSiteUrl()}/`;
   const canonicalUrl = `${siteUrl}services/${slug}/`;
 
-  const title =
+  const rawTitle =
     service.seoTitle ||
     (service.title.length > 45
       ? service.title
       : `${service.title} | Madhu Dadi`);
+  const title = rawTitle.includes("Madhu Dadi")
+    ? rawTitle
+    : `${rawTitle} | Madhu Dadi`;
   const description = service.shortDescription || service.fullDescription;
   const image = `${siteUrl}opengraph-image?ext=.png`;
 
