@@ -42,12 +42,12 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 10
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
           cache: "pnpm"
 
       - name: Install dependencies
@@ -128,8 +128,11 @@ jobs:
             echo "⏳ Waiting for app to start"
             sleep 10
 
-            echo "🔍 Verifying sitemap-portfolio.xml"
-            curl -sS http://localhost:3000/sitemap-portfolio.xml | head -5
+            echo "🔍 Verifying sitemap.xml"
+            curl --fail --show-error http://localhost:3000/sitemap.xml | grep -q '<urlset' && echo 'sitemap OK' || (echo 'sitemap MISSING'; exit 1)
+
+            echo "🔍 Verifying robots.txt"
+            curl --fail --show-error http://localhost:3000/robots.txt | grep -q 'Sitemap:' && echo 'robots OK' || (echo 'robots MISSING'; exit 1)
 
             echo "✅ Deployment successful"
 
@@ -141,3 +144,19 @@ jobs:
               --data '{"purge_everything":true}' \
               | jq -r '.success'
             echo "✅ Cache purged"
+
+      - name: Checkout code for smoke test
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js for smoke test
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Post-deploy SEO smoke test
+        run: |
+          echo "⏳ Waiting for Cloudflare to propagate"
+          sleep 15
+          node scripts/seo-smoke-test.mjs
+        env:
+          SITE_URL: "https://madhudadi.in"

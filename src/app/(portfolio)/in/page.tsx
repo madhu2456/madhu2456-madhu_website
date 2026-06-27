@@ -19,7 +19,10 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Madhu Dadi - AI Consultant in India",
+    title: {
+      absolute:
+        "Madhu Dadi - AI Consultant in India | Visakhapatnam, Hyderabad, Bangalore",
+    },
     description:
       "Expert AI engineering, RAG applications, and marketing analytics consulting based in Visakhapatnam, India.",
     url: `${siteUrl}in/`,

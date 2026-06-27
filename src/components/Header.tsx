@@ -22,6 +22,13 @@ export function Header({ profile, navigationItems }: HeaderProps) {
   useEffect(() => {
     if (!isMobileMenuOpen) return;
 
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsMobileMenuOpen(false);
+        toggleRef.current?.focus();
+      }
+    };
+
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       const target = event.target as Node;
       if (
@@ -33,9 +40,11 @@ export function Header({ profile, navigationItems }: HeaderProps) {
       setIsMobileMenuOpen(false);
     };
 
+    document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("mousedown", handleClickOutside);
     document.addEventListener("touchstart", handleClickOutside);
     return () => {
+      document.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("touchstart", handleClickOutside);
     };
@@ -145,9 +154,11 @@ export function Header({ profile, navigationItems }: HeaderProps) {
           <button
             type="button"
             ref={toggleRef}
-            className="md:hidden flex items-center justify-center h-9 w-9 rounded-full border border-border/80 bg-surface/50 text-foreground transition-colors hover:bg-surface-elevated hover:text-primary"
+            className="md:hidden flex items-center justify-center h-11 w-11 rounded-full border border-border/80 bg-surface/50 text-foreground transition-colors hover:bg-surface-elevated hover:text-primary"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle navigation menu"
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-navigation"
           >
             {isMobileMenuOpen ? (
               <IconX className="h-5 w-5" />
@@ -164,7 +175,11 @@ export function Header({ profile, navigationItems }: HeaderProps) {
           ref={menuRef}
           className="absolute top-full left-0 right-0 mt-2 px-3 sm:px-5 md:hidden"
         >
-          <nav className="flex flex-col gap-1 rounded-2xl border border-border/90 bg-surface-elevated/95 p-3 shadow-lg shadow-black/20 backdrop-blur-xl">
+          <nav
+            id="mobile-navigation"
+            aria-label="Mobile navigation"
+            className="flex flex-col gap-1 rounded-2xl border border-border/90 bg-surface-elevated/95 p-3 shadow-lg shadow-black/20 backdrop-blur-xl"
+          >
             {navigationItems.map((link) => {
               const isActive = isLinkActive(link.href);
               const isExternal =
