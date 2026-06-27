@@ -30,7 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
       canonical: canonicalUrl,
     },
     openGraph: {
-      title: "AI, RAG & Analytics Services | Madhu Dadi",
+      title: { absolute: "AI, RAG & Analytics Services | Madhu Dadi" },
       description:
         "Hire Madhu Dadi for production AI/LLM development, RAG systems, AI agents, marketing analytics, GA4/BigQuery pipelines, and full-stack FastAPI/Next.js apps.",
       url: canonicalUrl,
@@ -145,7 +145,7 @@ export default async function ServicesHubPage() {
                         aria-hidden="true"
                         className="text-xs font-mono text-muted-foreground bg-surface-elevated px-2.5 py-1 rounded-full border border-border/50"
                       >
-                        {`0${index + 1}`}
+                        {String(index + 1).padStart(2, "0")}
                       </span>
                     </div>
 

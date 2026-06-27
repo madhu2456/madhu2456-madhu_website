@@ -1,25 +1,6 @@
 import type { Metadata } from "next";
-import { Geist_Mono, Instrument_Serif, Inter } from "next/font/google";
+import { geistMono, instrumentSerif, inter } from "@/lib/fonts";
 import "./globals.css";
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument-serif",
-  subsets: ["latin"],
-  weight: "400",
-  display: "swap",
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "404 Error: Page Not Found | AI, Python & Analytics",

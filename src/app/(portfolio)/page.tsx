@@ -18,7 +18,10 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Madhu Dadi - Generative AI, RAG & Marketing Analytics Consultant",
+    title: {
+      absolute:
+        "Madhu Dadi - Generative AI, RAG & Marketing Analytics Consultant",
+    },
     description:
       "Production LLM/RAG apps, AI agents, FastAPI/Next.js products, and marketing analytics systems.",
     url: siteUrl,
@@ -39,7 +42,7 @@ export default async function Home() {
   // Hero image preload is handled by Next.js Image `priority` prop in Hero.tsx
 
   return (
-    <div className="min-h-screen">
+    <main id="main-content" className="min-h-screen">
       <SeoStructuredData
         nodes={[
           "Person",
@@ -53,6 +56,6 @@ export default async function Home() {
         ]}
       />
       <PortfolioContent />
-    </div>
+    </main>
   );
 }
