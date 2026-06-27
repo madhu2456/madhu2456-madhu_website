@@ -106,6 +106,9 @@ jobs:
             echo "📦 Installing dependencies"
             pnpm install --frozen-lockfile --prefer-offline --reporter=append-only
 
+            echo "🧹 Cleaning old build cache"
+            rm -rf .next
+
             echo "🏗️ Building project"
             NODE_OPTIONS="--max-old-space-size=1536" pnpm build
 
