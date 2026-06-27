@@ -56,7 +56,7 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["@tabler/icons-react", "motion"],
     // Inline CSS for first-load paint to reduce render-blocking stylesheet requests.
-    inlineCss: false,
+    inlineCss: true,
   },
 
   compiler: {

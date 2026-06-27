@@ -19,13 +19,49 @@ export function Header({ profile, navigationItems }: HeaderProps) {
   const menuRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
 
+  // Close mobile menu when viewport resizes past md breakpoint
+  useEffect(() => {
+    const mql = window.matchMedia("(min-width: 768px)");
+    const onChange = (e: MediaQueryListEvent) => {
+      if (e.matches) setIsMobileMenuOpen(false);
+    };
+    mql.addEventListener("change", onChange);
+    return () => mql.removeEventListener("change", onChange);
+  }, []);
+
   useEffect(() => {
     if (!isMobileMenuOpen) return;
+
+    // Move focus into the menu on open
+    requestAnimationFrame(() => {
+      const firstLink =
+        menuRef.current?.querySelector<HTMLElement>("a, button");
+      firstLink?.focus();
+    });
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setIsMobileMenuOpen(false);
         toggleRef.current?.focus();
+        return;
+      }
+
+      // Focus trap: cycle through focusable elements within the menu
+      if (event.key === "Tab" && menuRef.current) {
+        const focusable = menuRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
       }
     };
 

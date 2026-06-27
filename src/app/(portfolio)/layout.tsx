@@ -5,7 +5,7 @@ import { ClientChrome } from "@/components/ClientChrome";
 import { DeferredGTM } from "@/components/DeferredGTM";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { geistMono, instrumentSerif, inter } from "@/lib/fonts";
+import { geistMono, inter } from "@/lib/fonts";
 
 import { getPortfolioData } from "@/lib/portfolio-data";
 import "../globals.css";
@@ -121,7 +121,6 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     alternates: {
       languages: {
-        "en-IN": `${siteUrl}in/`,
         "x-default": siteUrl,
       },
       types: {
@@ -208,9 +207,7 @@ export default async function RootLayout({
           />
         </noscript>
       </head>
-      <body
-        className={`${inter.variable} ${instrumentSerif.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${inter.variable} ${geistMono.variable} antialiased`}>
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-background focus:text-foreground"
