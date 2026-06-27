@@ -64,17 +64,8 @@ test.describe("SEO/AEO pre-deploy checks", () => {
     const sitemap = await request.get("/sitemap.xml");
     expect(sitemap.ok()).toBe(true);
     const sitemapText = await sitemap.text();
-    expect(sitemapText).toContain("<sitemapindex");
-    expect(sitemapText).toContain("/sitemap-portfolio.xml");
-
-    const portfolioSitemap = await request.get("/sitemap-portfolio.xml");
-    expect(portfolioSitemap.ok()).toBe(true);
-    const portfolioSitemapText = await portfolioSitemap.text();
-    expect(portfolioSitemapText).toContain("<urlset");
-    expect(portfolioSitemapText).toContain("/services/rag-consultant-india/");
-    expect(portfolioSitemapText).not.toContain(
-      "<loc>https://madhudadi.in/sitemap-portfolio.xml</loc>",
-    );
+    expect(sitemapText).toContain("<urlset");
+    expect(sitemapText).toContain("/services/rag-consultant-india/");
   });
 });
 
