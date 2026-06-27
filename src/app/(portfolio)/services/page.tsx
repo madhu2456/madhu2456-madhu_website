@@ -11,6 +11,7 @@ import {
 } from "@tabler/icons-react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { SeoStructuredData } from "@/components/SeoStructuredData";
@@ -23,14 +24,16 @@ export async function generateMetadata(): Promise<Metadata> {
   const canonicalUrl = `${siteUrl}services/`;
 
   return {
-    title: "AI, RAG & Analytics Services | Madhu Dadi",
+    title: "AI, RAG, AI Agents & Analytics Services | Madhu Dadi",
     description:
       "Hire Madhu Dadi for production AI/LLM development, RAG systems, AI agents, marketing analytics, GA4/BigQuery pipelines, and full-stack FastAPI/Next.js apps.",
     alternates: {
       canonical: canonicalUrl,
     },
     openGraph: {
-      title: { absolute: "AI, RAG & Analytics Services | Madhu Dadi" },
+      title: {
+        absolute: "AI, RAG, AI Agents & Analytics Services | Madhu Dadi",
+      },
       description:
         "Hire Madhu Dadi for production AI/LLM development, RAG systems, AI agents, marketing analytics, GA4/BigQuery pipelines, and full-stack FastAPI/Next.js apps.",
       url: canonicalUrl,
@@ -104,6 +107,7 @@ export default async function ServicesHubPage() {
 
       <main id="main-content" className="flex-1 px-6 py-28 bg-background/50">
         <div className="container mx-auto max-w-6xl space-y-16">
+          <Breadcrumb items={[{ label: "Services" }]} />
           {/* Hero Section */}
           <section className="text-center space-y-4 max-w-3xl mx-auto pt-4">
             <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">

@@ -896,6 +896,7 @@ export function buildProfessionalServiceSchema({
       },
     }),
     ...(priceRange && { priceRange }),
+    // Verified: coordinates point to Visakhapatnam, Andhra Pradesh, India
     geo: {
       "@type": "GeoCoordinates",
       latitude: 17.6868,

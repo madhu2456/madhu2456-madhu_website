@@ -1,6 +1,5 @@
 import {
   IconBookmark,
-  IconChevronLeft,
   IconCircleCheck,
   IconCircleX,
   IconExternalLink,
@@ -11,6 +10,7 @@ import {
 } from "@tabler/icons-react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { SafeEmailLink } from "@/components/SafeEmailLink";
@@ -32,7 +32,7 @@ export async function generateMetadata(): Promise<Metadata> {
     "Madhu Dadi - Generative AI, RAG & Marketing Analytics Engineer";
   const description =
     pageContent.profile.seo?.description ||
-    "Profile of Madhu Dadi, AI & marketing analytics engineer. 9+ years across Novartis, redBus, and GroupM (WPP).";
+    "Profile of Madhu Dadi, AI & marketing analytics engineer with 9+ years across Novartis, redBus, and GroupM (WPP). Specializing in LLM/RAG apps, AI agents, and marketing analytics.";
   const image = `${siteUrl}opengraph-image?ext=.png`;
 
   return {
@@ -191,15 +191,7 @@ export default async function ProfilePage() {
 
       <main id="main-content" className="flex-1 px-6 py-20 bg-background/50">
         <div className="container mx-auto max-w-4xl space-y-12">
-          {/* Back Button */}
-          <div>
-            <Link
-              href="/"
-              className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors"
-            >
-              <IconChevronLeft className="h-4 w-4" /> Back to Home
-            </Link>
-          </div>
+          <Breadcrumb items={[{ label: "Profile" }]} />
 
           {/* Hero Header Card */}
           <section className="relative rounded-2xl border border-border bg-surface/30 p-8 md:p-10 backdrop-blur-md overflow-hidden">
