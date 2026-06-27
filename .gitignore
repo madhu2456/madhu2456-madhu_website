@@ -51,3 +51,7 @@ scratch/
 
 # Data backups
 Data/*.backup-*.json
+
+# Playwright generated artifacts
+playwright-report/
+test-results/

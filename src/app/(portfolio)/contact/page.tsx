@@ -16,6 +16,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { SafeEmailLink } from "@/components/SafeEmailLink";
 import { getPortfolioData } from "@/lib/portfolio-data";
+import { serializeJsonLd } from "@/lib/seo/json-ld";
 import { resolveSiteUrl } from "@/lib/site-url";
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
@@ -39,6 +40,7 @@ export async function generateMetadata({
   const description =
     pageContent.contact.seo?.description ||
     "Work with Madhu Dadi on production AI, RAG, AI agents, marketing analytics, or full-stack AI product development. Response time is usually within 24 hours.";
+  const image = `${siteUrl}opengraph-image?ext=.png`;
 
   return {
     title,
@@ -57,7 +59,22 @@ export async function generateMetadata({
       title,
       description,
       url: canonicalUrl,
+      siteName: "Madhu Dadi",
       type: "website",
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
     },
   };
 }
@@ -154,9 +171,9 @@ export default async function ContactPage() {
     <div className="flex flex-col min-h-screen">
       <script
         type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe - server-controlled JSON-LD only
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is escaped by serializeJsonLd
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+          __html: serializeJsonLd({
             "@context": "https://schema.org",
             "@graph": [breadcrumbSchema, faqSchema, contactPageSchema],
           }),

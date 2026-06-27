@@ -6,9 +6,19 @@ import {
   readPortfolioContent,
   savePortfolioContent,
 } from "@/lib/portfolio-data";
+import { resolveSiteUrl } from "@/lib/site-url";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
+
+const validateCmsOrigin = (request: Request) => {
+  const origin = request.headers.get("origin");
+  if (!origin) return true;
+  const siteUrl = resolveSiteUrl();
+  return origin === siteUrl || origin === `${siteUrl}/`;
+};
+
+const MAX_CMS_BODY_BYTES = 2 * 1024 * 1024; // 2 MB
 
 const BLOCKED_HOSTNAMES = new Set(["localhost", "127.0.0.1", "::1", "0.0.0.0"]);
 
@@ -92,6 +102,18 @@ const toSourceUrl = (value?: string) => {
 };
 
 export async function POST(request: Request) {
+  const contentLength = Number(request.headers.get("content-length") ?? 0);
+  if (contentLength > MAX_CMS_BODY_BYTES) {
+    return NextResponse.json(
+      { error: "Request body too large." },
+      { status: 413 },
+    );
+  }
+
+  if (!validateCmsOrigin(request)) {
+    return NextResponse.json({ error: "Forbidden origin." }, { status: 403 });
+  }
+
   const body: unknown = await request.json().catch(() => ({}));
   const requestedSourceUrl =
     typeof body === "object" && body !== null && "sourceUrl" in body
@@ -114,7 +136,9 @@ export async function POST(request: Request) {
   return NextResponse.json(
     {
       content: savedContent,
-      contentPath: getPortfolioContentPath(),
+      ...(process.env.NODE_ENV === "production"
+        ? {}
+        : { contentPath: getPortfolioContentPath() }),
       updatedAt: savedContent.profile.updatedAt,
       sourceUrl: importedResult.sourceUrl,
       importedAt: importedResult.importedAt,

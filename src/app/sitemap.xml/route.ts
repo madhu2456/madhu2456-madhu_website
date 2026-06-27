@@ -1,98 +1,49 @@
 import { NextResponse } from "next/server";
 import { getPortfolioData } from "@/lib/portfolio-data";
-
 import { resolveSiteUrl } from "@/lib/site-url";
+
+const toSitemapDate = (value: string | null | undefined) => {
+  if (!value) return new Date().toISOString().split("T")[0];
+  const timestamp = new Date(value).getTime();
+  if (Number.isNaN(timestamp)) return new Date().toISOString().split("T")[0];
+  return new Date(timestamp).toISOString().split("T")[0];
+};
+
+const escapeXml = (value: string) =>
+  value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
 
 export async function GET() {
   const siteUrl = `${resolveSiteUrl()}/`;
+  const { portfolioLastUpdatedAt } = await getPortfolioData();
+  const lastModified = toSitemapDate(portfolioLastUpdatedAt);
 
-  const { sortedServices, sortedProjects, portfolioLastUpdatedAt } =
-    await getPortfolioData();
-  const baseDate = portfolioLastUpdatedAt
-    ? new Date(portfolioLastUpdatedAt).toISOString().split("T")[0]
-    : "2026-06-02";
-
-  const entries = [
+  const sitemaps = [
     {
-      url: siteUrl,
-      lastModified: baseDate,
-      changeFrequency: "weekly",
-      priority: "1.0",
+      loc: `${siteUrl}sitemap-portfolio.xml`,
+      lastModified,
     },
     {
-      url: `${siteUrl}profile/`,
-      lastModified: baseDate,
-      changeFrequency: "monthly",
-      priority: "0.9",
+      loc: `${siteUrl}blog/sitemap.xml`,
+      lastModified,
     },
-    {
-      url: `${siteUrl}in/`,
-      lastModified: baseDate,
-      changeFrequency: "monthly",
-      priority: "0.9",
-    },
-    {
-      url: `${siteUrl}services/`,
-      lastModified: baseDate,
-      changeFrequency: "monthly",
-      priority: "0.9",
-    },
-    {
-      url: `${siteUrl}case-studies/`,
-      lastModified: baseDate,
-      changeFrequency: "monthly",
-      priority: "0.85",
-    },
-    {
-      url: `${siteUrl}credentials/`,
-      lastModified: baseDate,
-      changeFrequency: "monthly",
-      priority: "0.7",
-    },
-    {
-      url: `${siteUrl}contact/`,
-      lastModified: baseDate,
-      changeFrequency: "monthly",
-      priority: "0.7",
-    },
-    ...sortedServices.map((service) => ({
-      url: `${siteUrl}services/${service.slug}/`,
-      lastModified: service.updatedAt
-        ? new Date(service.updatedAt).toISOString().split("T")[0]
-        : baseDate,
-      changeFrequency: "monthly",
-      priority: "0.85",
-    })),
-    ...sortedProjects.map((project) => ({
-      url: `${siteUrl}case-studies/${project.slug}/`,
-      lastModified: project.updatedAt
-        ? new Date(project.updatedAt).toISOString().split("T")[0]
-        : baseDate,
-      changeFrequency: "monthly",
-      priority: "0.8",
-    })),
   ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-${entries
-  .map((entry) => {
-    let alternateTags = "";
-    if (entry.url === siteUrl) {
-      alternateTags = `\n    <xhtml:link rel="alternate" hreflang="en-IN" href="${siteUrl}in/" />\n    <xhtml:link rel="alternate" hreflang="x-default" href="${siteUrl}" />`;
-    } else if (entry.url === `${siteUrl}in/`) {
-      alternateTags = `\n    <xhtml:link rel="alternate" hreflang="x-default" href="${siteUrl}" />\n    <xhtml:link rel="alternate" hreflang="en-IN" href="${siteUrl}in/" />`;
-    }
-
-    return `  <url>
-    <loc>${entry.url}</loc>
-    <lastmod>${entry.lastModified}</lastmod>
-    <changefreq>${entry.changeFrequency}</changefreq>
-    <priority>${entry.priority}</priority>${alternateTags}
-  </url>`;
-  })
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemaps
+  .map(
+    (sitemap) => `  <sitemap>
+    <loc>${escapeXml(sitemap.loc)}</loc>
+    <lastmod>${escapeXml(sitemap.lastModified)}</lastmod>
+  </sitemap>`,
+  )
   .join("\n")}
-</urlset>`;
+</sitemapindex>`;
 
   return new NextResponse(xml, {
     headers: {

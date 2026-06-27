@@ -1,7 +1,9 @@
 import { ImageResponse } from "next/og";
 import type { NextRequest } from "next/server";
 
-export const runtime = "edge";
+// Node.js runtime avoids the edge-runtime static-generation warning and
+// is fully supported by Next.js 16's built-in ImageResponse.
+export const runtime = "nodejs";
 
 const THEME_AMBER = "#d69137";
 

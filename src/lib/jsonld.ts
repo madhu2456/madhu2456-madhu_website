@@ -39,6 +39,7 @@ type Experience = {
 
 type Service = {
   title: string;
+  slug?: string | null;
   shortDescription?: string | null;
   pricing?: {
     startingPrice?: number | null;
@@ -77,6 +78,15 @@ type CurrentRole = {
   startDate?: string | null;
   location?: string | null;
 };
+
+const SCHEMA_LANGUAGE = "en-IN";
+const TRANSACTIONAL_KNOWS_ABOUT_PATTERN =
+  /\b(hire|freelance|freelancer|for hire|near me|contractor|available|remote|services? in)\b/i;
+
+const toExpertiseKeywords = (keywords?: string[] | null) =>
+  normalizeKeywordList(keywords).filter(
+    (keyword) => !TRANSACTIONAL_KNOWS_ABOUT_PATTERN.test(keyword),
+  );
 
 // ---------------------------------------------------------------------------
 // Person
@@ -139,7 +149,7 @@ export function buildPersonSchema({
     "System Design",
   ];
   const knowsAbout = Array.from(
-    new Set([...staticKnowsAbout, ...normalizeKeywordList(seoKeywords)]),
+    new Set([...staticKnowsAbout, ...toExpertiseKeywords(seoKeywords)]),
   );
 
   // Build a single description - prefer the short bio, fall back to headline,
@@ -181,12 +191,17 @@ export function buildPersonSchema({
             const hasPrice =
               typeof s.pricing?.startingPrice === "number" &&
               s.pricing.startingPrice > 0;
+            const serviceUrl = s.slug
+              ? `${siteUrl}services/${s.slug}/`
+              : `${siteUrl}services/`;
             return {
               "@type": "Offer",
-              "@id": `${siteUrl}#offer-${i + 1}`,
+              "@id": s.slug
+                ? `${serviceUrl}#offer`
+                : `${siteUrl}#offer-${i + 1}`,
               name: s.title,
               description: s.shortDescription ?? undefined,
-              url: `${siteUrl}#services`,
+              url: serviceUrl,
               availability: "https://schema.org/InStock",
               ...(hasPrice && {
                 price: s.pricing?.startingPrice,
@@ -382,7 +397,7 @@ export function buildWebSiteSchema({
     name,
     url,
     ...(description && { description }),
-    inLanguage: "en-US",
+    inLanguage: SCHEMA_LANGUAGE,
     publisher: { "@id": `${url}#organization` },
     // SiteLinksSearchBox - enables rich search in Google SERPs
     potentialAction: [
@@ -390,7 +405,7 @@ export function buildWebSiteSchema({
         "@type": "SearchAction",
         target: {
           "@type": "EntryPoint",
-          urlTemplate: `${url}search?q={search_term_string}`,
+          urlTemplate: `${url}search/?q={search_term_string}`,
         },
         "query-input": "required name=search_term_string",
       },
@@ -404,7 +419,7 @@ export function buildWebSiteSchema({
       url: blogUrl,
       description:
         "A learning-focused technical blog covering AI engineering, full-stack development, RAG systems, and analytics best practices.",
-      inLanguage: "en-US",
+      inLanguage: SCHEMA_LANGUAGE,
       author: { "@id": `${url}#person` },
       copyrightHolder: { "@id": `${url}#person` },
       publisher: { "@id": `${url}#person` },
@@ -422,7 +437,7 @@ export function buildWebSiteSchema({
         "@type": "SearchAction",
         target: {
           "@type": "EntryPoint",
-          urlTemplate: `${blogUrl}search?q={search_term_string}`,
+          urlTemplate: `${blogUrl}/search?q={search_term_string}`,
         },
         "query-input": "required name=search_term_string",
       },
@@ -454,7 +469,7 @@ export function buildProfilePageSchema({
     name: `${fullName} - Portfolio`,
     url: profileUrl,
     ...(description && { description }),
-    inLanguage: "en-US",
+    inLanguage: SCHEMA_LANGUAGE,
     isPartOf: { "@id": `${url}#website` },
     about: { "@id": `${url}#person` },
     mainEntity: { "@id": `${url}#person` },
@@ -509,11 +524,15 @@ export function buildServicesListSchema({
         "@type": "ListItem",
         position: i + 1,
         item: {
-          "@type": ["Service", "Product"],
-          "@id": `${siteUrl}#service-${i + 1}`,
+          "@type": "Service",
+          "@id": service.slug
+            ? `${siteUrl}services/${service.slug}/#service`
+            : `${siteUrl}#service-${i + 1}`,
           name: service.title,
           serviceType: service.title,
-          url: `${siteUrl}#services`,
+          url: service.slug
+            ? `${siteUrl}services/${service.slug}/`
+            : `${siteUrl}services/`,
           provider: { "@id": `${siteUrl}#person` },
           ...(service.shortDescription && {
             description: service.shortDescription,
@@ -524,7 +543,9 @@ export function buildServicesListSchema({
               price: startingPrice,
               priceCurrency: "USD",
               availability: "https://schema.org/InStock",
-              url: `${siteUrl}#services`,
+              url: service.slug
+                ? `${siteUrl}services/${service.slug}/`
+                : `${siteUrl}services/`,
               ...(priceType &&
                 unitTextByPriceType[priceType] && {
                   priceSpecification: {
@@ -819,8 +840,10 @@ export function buildSoftwareApplicationSchema({
     publisher: { "@id": `${siteUrl}#organization` },
     offers: {
       "@type": "Offer",
-      price: "0.00",
-      priceCurrency: "USD",
+      url: `${siteUrl}contact/`,
+      availability: "https://schema.org/InStock",
+      description:
+        "Custom project pricing based on scope, timeline, and delivery model.",
     },
   };
 }

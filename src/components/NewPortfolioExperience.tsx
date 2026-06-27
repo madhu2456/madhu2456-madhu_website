@@ -449,6 +449,7 @@ function Faq({ items }: { items: Array<{ q: string; a: string }> }) {
 
   return (
     <Section id="faq" eyebrow="FAQ" title="Frequently asked questions.">
+      {/* Interactive accordion for JS-enabled users */}
       <div className="mx-auto max-w-3xl divide-y divide-border rounded-2xl border border-border bg-surface/50">
         {items.map((item, index) => {
           const isOpen = open === index;
@@ -491,6 +492,21 @@ function Faq({ items }: { items: Array<{ q: string; a: string }> }) {
           );
         })}
       </div>
+      {/* No-JS fallback: show all answers for AI crawlers, search engines, and users without JavaScript */}
+      <noscript>
+        <div className="mx-auto max-w-3xl divide-y divide-border rounded-2xl border border-border bg-surface/50">
+          <dl className="space-y-0">
+            {items.map((item) => (
+              <div key={item.q} className="px-6 py-5">
+                <dt className="font-display text-lg font-semibold">{item.q}</dt>
+                <dd className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  {item.a}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </noscript>
     </Section>
   );
 }
