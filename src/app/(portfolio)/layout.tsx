@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 
-import { Geist_Mono, Instrument_Serif, Inter } from "next/font/google";
+import { geistMono, instrumentSerif, inter } from "@/lib/fonts";
 import { AppSidebar } from "@/components/app-sidebar";
 import { ClientChrome } from "@/components/ClientChrome";
 import { DeferredGTM } from "@/components/DeferredGTM";
@@ -39,26 +39,6 @@ const toMetaDescription = (text: string, maxLength: number) => {
 
   return clipped.endsWith(".") ? clipped : `${clipped}.`;
 };
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-  display: "swap",
-});
-
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument-serif",
-  subsets: ["latin"],
-  weight: "400",
-  display: "swap",
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export const viewport: Viewport = {
   themeColor: THEME_COLOR,
@@ -161,6 +141,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description,
       url: siteUrl,
       siteName: siteName,
+      type: "website",
       images: [
         {
           url: ogImageUrl,
@@ -174,6 +155,8 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
+      title,
+      description,
       ...(twitterHandle && {
         creator: `@${twitterHandle}`,
         site: `@${twitterHandle}`,

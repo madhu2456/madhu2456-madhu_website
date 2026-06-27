@@ -43,7 +43,7 @@ export async function generateMetadata(): Promise<Metadata> {
       canonical: canonicalUrl,
     },
     openGraph: {
-      title,
+      title: { absolute: title },
       description,
       url: canonicalUrl,
       siteName: "Madhu Dadi",

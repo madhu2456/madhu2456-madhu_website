@@ -64,7 +64,7 @@ export async function generateMetadata({
       canonical: canonicalUrl,
     },
     openGraph: {
-      title,
+      title: { absolute: title },
       description,
       url: canonicalUrl,
       siteName: "Madhu Dadi",

@@ -29,7 +29,10 @@ export const metadata: Metadata = {
     canonical: `${getSiteUrl()}case-studies/`,
   },
   openGraph: {
-    title: "AI, RAG & Analytics Case Studies - Production Builds | Madhu Dadi",
+    title: {
+      absolute:
+        "AI, RAG & Analytics Case Studies - Production Builds | Madhu Dadi",
+    },
     description: CASE_STUDIES_DESCRIPTION,
     url: `${getSiteUrl()}case-studies/`,
     type: "website",
@@ -259,21 +262,24 @@ export default async function CaseStudiesPage() {
                 key={project.slug}
                 className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface/60 transition-all hover:-translate-y-1 hover:border-primary/40 shadow-card"
               >
-                {project.coverImage ? (
-                  <div className="relative aspect-video w-full overflow-hidden border-b border-border/80 bg-surface">
-                    <Image
-                      src={normalizeImageSource(project.coverImage) || ""}
-                      alt={project.coverImageAlt || project.title}
-                      width={800}
-                      height={450}
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-[1.04]"
-                      unoptimized={shouldUseUnoptimizedImage(
-                        project.coverImage,
-                      )}
-                    />
-                  </div>
-                ) : null}
+                {(() => {
+                  const coverSrc = normalizeImageSource(project.coverImage);
+                  return project.coverImage && coverSrc ? (
+                    <div className="relative aspect-video w-full overflow-hidden border-b border-border/80 bg-surface">
+                      <Image
+                        src={coverSrc}
+                        alt={project.coverImageAlt || project.title}
+                        width={800}
+                        height={450}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-[1.04]"
+                        unoptimized={shouldUseUnoptimizedImage(
+                          project.coverImage,
+                        )}
+                      />
+                    </div>
+                  ) : null;
+                })()}
                 <div className="flex flex-1 flex-col p-6">
                   {project.category ? (
                     <p className="text-xs tracking-widest text-primary uppercase">
