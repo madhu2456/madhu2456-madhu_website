@@ -185,10 +185,13 @@ export async function SeoStructuredData({
           url: siteUrl,
           name: siteSettings.siteTitle || fullName,
           description: description,
-          datePublished: "2024-01-01",
           dateModified: dateModified,
           isPartOf: { "@id": `${siteUrl}#website` },
           about: { "@id": `${siteUrl}#person` },
+          speakable: {
+            "@type": "SpeakableSpecification",
+            cssSelector: ["main"],
+          },
         }
       : null,
     includeNode("ProjectsList")

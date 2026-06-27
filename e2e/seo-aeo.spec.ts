@@ -5,7 +5,6 @@ const indexablePaths = [
   "/profile/",
   "/contact/",
   "/credentials/",
-  "/in/",
   "/services/",
   "/case-studies/",
   "/services/rag-consultant-india/",

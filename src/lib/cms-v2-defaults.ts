@@ -27,6 +27,36 @@ export const buildV2PageContentDefaults = (): any => {
           answer:
             "Yes, I am available for freelance consulting, part-time engagements, and full-time roles depending on project fit.",
         },
+        {
+          question: "Are you available for new projects?",
+          answer:
+            "Yes. I am currently open to full-time roles, freelance consulting, and part-time engagements. You can reach out via the contact form or email me directly.",
+        },
+        {
+          question: "Do you work remotely?",
+          answer:
+            "Yes. I am remote-first and available worldwide. Relocation is also possible for the right full-time role.",
+        },
+        {
+          question: "What industries have you worked in?",
+          answer:
+            "Healthcare (Novartis), travel-tech (redBus), media and advertising (GroupM / WPP), SaaS, and education. I adapt quickly to new domains.",
+        },
+        {
+          question: "How can I contact you?",
+          answer:
+            "Use the contact form on this site, email madhu.kumar245@gmail.com, or message me on LinkedIn. I usually respond within 24 hours.",
+        },
+        {
+          question: "What is your typical project timeline?",
+          answer:
+            "It depends on scope. A focused RAG or analytics engagement can be 2–6 weeks. A full-stack product build is typically 4–12 weeks. I share a clear timeline after the discovery call.",
+        },
+        {
+          question: "Do you build AI agents and RAG systems?",
+          answer:
+            "Yes. I build production-grade AI agents with tool calling and guardrails, and RAG systems with hybrid search, cross-encoder reranking, and citation verification.",
+        },
       ],
       primaryCta: {
         label: "Contact Me",

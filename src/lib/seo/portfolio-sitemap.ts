@@ -27,18 +27,8 @@ const escapeXml = (value: string) =>
 
 const renderAlternateTags = (entryUrl: string, siteUrl: string) => {
   if (entryUrl === siteUrl) {
-    return `\n    <xhtml:link rel="alternate" hreflang="en-IN" href="${escapeXml(
-      `${siteUrl}in/`,
-    )}" />\n    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(
-      siteUrl,
-    )}" />`;
-  }
-
-  if (entryUrl === `${siteUrl}in/`) {
     return `\n    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(
       siteUrl,
-    )}" />\n    <xhtml:link rel="alternate" hreflang="en-IN" href="${escapeXml(
-      `${siteUrl}in/`,
     )}" />`;
   }
 
@@ -63,12 +53,6 @@ export async function buildPortfolioSitemapXml() {
     },
     {
       url: `${siteUrl}profile/`,
-      lastModified: baseDate,
-      changeFrequency: "monthly",
-      priority: "0.9",
-    },
-    {
-      url: `${siteUrl}in/`,
       lastModified: baseDate,
       changeFrequency: "monthly",
       priority: "0.9",
