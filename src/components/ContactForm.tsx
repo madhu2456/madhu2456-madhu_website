@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { type FormEvent, useEffect, useState, useTransition } from "react";
 import { submitContactForm } from "@/app/actions/submit-contact-form";
 import { FormField } from "@/components/FormField";
+import { pushToDataLayer } from "@/lib/gtm";
 
 type ContactIntent = {
   subject: string;
@@ -171,6 +172,10 @@ export function ContactForm() {
       const result = await submitContactForm(formData);
       if (result.success) {
         form.reset();
+        pushToDataLayer({
+          event: "contact_form_submit",
+          form_location: "contact_page",
+        });
         setSubject("");
         setMessage("");
         setStatus({
