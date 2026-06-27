@@ -2,9 +2,17 @@ import { Buffer } from "node:buffer";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import { NextResponse } from "next/server";
+import { resolveSiteUrl } from "@/lib/site-url";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
+
+const validateCmsOrigin = (request: Request) => {
+  const origin = request.headers.get("origin");
+  if (!origin) return true;
+  const siteUrl = resolveSiteUrl();
+  return origin === siteUrl || origin === `${siteUrl}/`;
+};
 
 const MAX_FILE_SIZE_BYTES = 8 * 1024 * 1024;
 const ALLOWED_TYPES = new Set([
@@ -32,6 +40,10 @@ const sanitizeBaseName = (value: string) =>
     .slice(0, 48) || "image";
 
 export async function POST(request: Request) {
+  if (!validateCmsOrigin(request)) {
+    return NextResponse.json({ error: "Forbidden origin." }, { status: 403 });
+  }
+
   const formData = await request.formData();
   const fileValue = formData.get("file");
 

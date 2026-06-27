@@ -18,6 +18,7 @@ import {
   buildWorkExperienceSchema,
 } from "@/lib/jsonld";
 import { getPortfolioData } from "@/lib/portfolio-data";
+import { serializeJsonLd } from "@/lib/seo/json-ld";
 import { resolveSiteUrl } from "@/lib/site-url";
 
 export type SeoGraphNode =
@@ -226,8 +227,8 @@ export async function SeoStructuredData({
   return (
     <script
       type="application/ld+json"
-      // biome-ignore lint/security/noDangerouslySetInnerHtml: safe - server-controlled JSON-LD only
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is escaped by serializeJsonLd
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(graph) }}
     />
   );
 }

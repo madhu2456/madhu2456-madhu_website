@@ -11,6 +11,7 @@ import {
   shouldUseUnoptimizedImage,
 } from "@/lib/image-source";
 import { getPortfolioData } from "@/lib/portfolio-data";
+import { serializeJsonLd } from "@/lib/seo/json-ld";
 
 import { resolveSiteUrl } from "@/lib/site-url";
 
@@ -61,7 +62,7 @@ export default async function CaseStudiesPage() {
     url: collectionUrl,
     name: "Case studies by Madhu Dadi",
     description: CASE_STUDIES_DESCRIPTION,
-    inLanguage: "en-US",
+    inLanguage: "en-IN",
     isPartOf: { "@id": `${siteUrl}#website` },
     mainEntity: {
       "@type": "ItemList",
@@ -99,9 +100,9 @@ export default async function CaseStudiesPage() {
       >
         <script
           type="application/ld+json"
-          // biome-ignore lint/security/noDangerouslySetInnerHtml: server-side JSON-LD
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is escaped by serializeJsonLd
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: serializeJsonLd({
               "@context": "https://schema.org",
               "@graph": [collectionSchema, breadcrumbSchema],
             }),

@@ -28,16 +28,40 @@ export async function generateMetadata(): Promise<Metadata> {
   const canonicalPath =
     pageContent.credentials.seo?.canonicalPath || "/credentials/";
   const canonicalUrl = `${siteUrl}${canonicalPath.replace(/^\//, "")}`;
+  const title =
+    pageContent.credentials.seo?.title ||
+    "Madhu Dadi Credentials - AI, RAG, GA4 & Analytics Certifications";
+  const description =
+    pageContent.credentials.seo?.description ||
+    "Verified credentials, certifications, awards, work history, and public proof for Madhu Dadi, AI and marketing analytics engineer.";
+  const image = `${siteUrl}opengraph-image?ext=.png`;
 
   return {
-    title:
-      pageContent.credentials.seo?.title ||
-      "Madhu Dadi Credentials - AI, RAG, GA4 & Analytics Certifications",
-    description:
-      pageContent.credentials.seo?.description ||
-      "Verified credentials, certifications, awards, work history, and public proof for Madhu Dadi, AI and marketing analytics engineer.",
+    title,
+    description,
     alternates: {
       canonical: canonicalUrl,
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonicalUrl,
+      siteName: "Madhu Dadi",
+      type: "profile",
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
     },
   };
 }

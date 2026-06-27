@@ -13,6 +13,10 @@ export const metadata: Metadata = {
     "Hire an expert AI consultant and marketing analytics engineer in India. Specializing in production LLM/RAG apps, AI agents, FastAPI, and Next.js.",
   alternates: {
     canonical: `${siteUrl}in/`,
+    languages: {
+      "en-IN": `${siteUrl}in/`,
+      "x-default": siteUrl,
+    },
   },
   openGraph: {
     title: "Madhu Dadi - AI Consultant in India",

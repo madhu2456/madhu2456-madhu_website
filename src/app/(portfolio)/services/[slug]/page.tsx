@@ -18,6 +18,7 @@ import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { getPortfolioData } from "@/lib/portfolio-data";
+import { serializeJsonLd } from "@/lib/seo/json-ld";
 import { resolveSiteUrl } from "@/lib/site-url";
 
 interface ServicePageProps {
@@ -54,6 +55,7 @@ export async function generateMetadata({
       ? service.title
       : `${service.title} | Madhu Dadi`);
   const description = service.shortDescription || service.fullDescription;
+  const image = `${siteUrl}opengraph-image?ext=.png`;
 
   return {
     title,
@@ -65,15 +67,22 @@ export async function generateMetadata({
       title,
       description,
       url: canonicalUrl,
+      siteName: "Madhu Dadi",
       type: "article",
       images: [
         {
-          url: `${siteUrl}opengraph-image?ext=.png`,
+          url: image,
           width: 1200,
           height: 630,
           alt: title,
         },
       ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
     },
   };
 }
@@ -126,7 +135,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
   const siteUrl = `${resolveSiteUrl()}/`;
   const serviceSchema = {
-    "@type": ["Service", "Product"],
+    "@type": "Service",
     "@id": `${siteUrl}services/${slug}/#service`,
     name: service.title,
     serviceType: service.title,
@@ -145,9 +154,8 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
       "@type": "Offer",
       url: `${siteUrl}contact/`,
       availability: "https://schema.org/InStock",
-      price: "0",
-      priceCurrency: "USD",
-      description: "Contact for custom pricing",
+      description:
+        "Custom pricing based on scope, timeline, and delivery model.",
     },
   };
 
@@ -230,9 +238,9 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
     <div className="flex flex-col min-h-screen">
       <script
         type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe - server-controlled JSON-LD only
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is escaped by serializeJsonLd
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+          __html: serializeJsonLd({
             "@context": "https://schema.org",
             "@graph": [
               serviceSchema,

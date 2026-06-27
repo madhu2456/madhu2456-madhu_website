@@ -13,6 +13,7 @@ import {
   shouldUseUnoptimizedImage,
 } from "@/lib/image-source";
 import { getPortfolioData, type ProjectItem } from "@/lib/portfolio-data";
+import { serializeJsonLd } from "@/lib/seo/json-ld";
 import { resolveSiteUrl } from "@/lib/site-url";
 
 const getSiteUrl = () => {
@@ -233,8 +234,8 @@ export default async function CaseStudyPage({
       >
         <script
           type="application/ld+json"
-          // biome-ignore lint/security/noDangerouslySetInnerHtml: server-side JSON-LD
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is escaped by serializeJsonLd
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(graph) }}
         />
 
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-8">

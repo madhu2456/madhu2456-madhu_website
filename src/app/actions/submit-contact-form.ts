@@ -60,18 +60,26 @@ async function sendViaResend(payload: ResendPayload): Promise<void> {
     throw new Error("RESEND_API_KEY not configured");
   }
 
-  const res = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
-  });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 15_000);
 
-  if (!res.ok) {
-    const body = await res.text().catch(() => "");
-    throw new Error(`Resend API error ${res.status}: ${body}`);
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+      signal: controller.signal,
+    });
+
+    if (!res.ok) {
+      const body = await res.text().catch(() => "");
+      throw new Error(`Resend API error ${res.status}: ${body}`);
+    }
+  } finally {
+    clearTimeout(timeout);
   }
 }
 
@@ -170,6 +178,12 @@ function buildEmailHtml(opts: {
 export async function submitContactForm(
   formData: FormData,
 ): Promise<SubmitResult> {
+  // Honeypot - bots fill hidden fields. Check before rate limiting so bots
+  // don't waste rate-limit slots on real users.
+  if (formData.get("hp_field")) {
+    return { success: true };
+  }
+
   // When hosted behind a proxy, x-forwarded-for may contain multiple IPs. Extract the first one.
   const forwardedFor = (await headers()).get("x-forwarded-for");
   const ip = forwardedFor ? forwardedFor.split(",")[0].trim() : "anonymous";
@@ -179,11 +193,6 @@ export async function submitContactForm(
       success: false,
       error: "Too many submissions. Please try again in 10 minutes.",
     };
-  }
-
-  // Honeypot - bots fill hidden fields
-  if (formData.get("hp_field")) {
-    return { success: true };
   }
 
   const name = String(formData.get("name") || "").trim();
@@ -224,9 +233,6 @@ export async function submitContactForm(
 
   console.info("[contact-form] submission", {
     submittedAt,
-    name,
-    email,
-    subject,
     messageLength: message.length,
   });
 
@@ -247,14 +253,16 @@ export async function submitContactForm(
     const sanitizedName = name.replace(/[\r\n<>"\x00-\x1f]/g, "");
     // biome-ignore lint/suspicious/noControlCharactersInRegex: intentional control-char stripping for email header injection prevention
     const sanitizedEmail = email.replace(/[\r\n<>"\x00-\x1f]/g, "");
+    // biome-ignore lint/suspicious/noControlCharactersInRegex: intentional control-char stripping for email header injection prevention
+    const sanitizedSubject = subject.replace(/[\r\n<>"\x00-\x1f]/g, "").trim();
 
     await sendViaResend({
       from: fromEmail,
       to: [toEmail],
       reply_to: `${sanitizedName} <${sanitizedEmail}>`,
-      subject: subject
-        ? `[madhudadi.in] ${subject}`
-        : `[madhudadi.in] New message from ${name}`,
+      subject: sanitizedSubject
+        ? `[madhudadi.in] ${sanitizedSubject}`
+        : `[madhudadi.in] New message from ${sanitizedName}`,
       html: buildEmailHtml({ name, email, subject, message, submittedAt }),
     });
     console.info("[contact-form] email sent via Resend to", toEmail);

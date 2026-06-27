@@ -3,8 +3,11 @@ import {
   buildPersonSchema,
   buildProfilePageSchema,
   buildProjectsListSchema,
+  buildServicesListSchema,
+  buildSoftwareApplicationSchema,
   buildWebSiteSchema,
 } from "../jsonld";
+import { serializeJsonLd } from "../seo/json-ld";
 
 describe("buildProjectsListSchema", () => {
   const siteUrl = "https://madhudadi.com/";
@@ -117,6 +120,22 @@ describe("buildPersonSchema", () => {
       },
     ]);
   });
+
+  test("keeps transactional intent keywords out of knowsAbout", () => {
+    const schema = buildPersonSchema({
+      fullName,
+      siteUrl,
+      seoKeywords: [
+        "RAG system development",
+        "hire ai developer india",
+        "remote ai engineer for hire",
+      ],
+    });
+
+    expect(schema.knowsAbout).toContain("RAG system development");
+    expect(schema.knowsAbout).not.toContain("hire ai developer india");
+    expect(schema.knowsAbout).not.toContain("remote ai engineer for hire");
+  });
 });
 
 describe("buildProfilePageSchema", () => {
@@ -142,12 +161,77 @@ describe("buildWebSiteSchema", () => {
     const schema = buildWebSiteSchema({ name, url });
 
     expect(schema).toMatchObject({
+      inLanguage: "en-IN",
+      potentialAction: [
+        {
+          target: {
+            urlTemplate: "https://madhudadi.com/search/?q={search_term_string}",
+          },
+        },
+      ],
       hasPart: {
         "@type": "Blog",
         "@id": "https://madhudadi.com/blog#blog",
         url: "https://madhudadi.com/blog",
+        inLanguage: "en-IN",
         author: { "@id": "https://madhudadi.com/#person" },
+        potentialAction: {
+          target: {
+            urlTemplate:
+              "https://madhudadi.com/blog/search?q={search_term_string}",
+          },
+        },
       },
+    });
+  });
+});
+
+describe("buildServicesListSchema", () => {
+  test("links service items to their canonical detail pages", () => {
+    const schema = buildServicesListSchema({
+      siteUrl: "https://madhudadi.com/",
+      services: [
+        {
+          title: "RAG System Development",
+          slug: "rag-consultant-india",
+          shortDescription: "High-precision retrieval systems.",
+        },
+      ],
+    });
+
+    expect(schema?.itemListElement[0].item).toMatchObject({
+      "@type": "Service",
+      "@id": "https://madhudadi.com/services/rag-consultant-india/#service",
+      url: "https://madhudadi.com/services/rag-consultant-india/",
+    });
+  });
+});
+
+describe("buildSoftwareApplicationSchema", () => {
+  test("does not imply custom consulting solutions are free", () => {
+    const schema = buildSoftwareApplicationSchema({
+      siteUrl: "https://madhudadi.com/",
+      name: "Madhu Dadi",
+    });
+
+    expect(schema.offers).toMatchObject({
+      "@type": "Offer",
+      url: "https://madhudadi.com/contact/",
+    });
+    expect(schema.offers).not.toHaveProperty("price", "0.00");
+  });
+});
+
+describe("serializeJsonLd", () => {
+  test("escapes script-breaking characters while preserving valid JSON", () => {
+    const serialized = serializeJsonLd({
+      text: "</script><script>alert(1)</script> & data",
+    });
+
+    expect(serialized).not.toContain("</script>");
+    expect(serialized).toContain("\\u003c/script\\u003e");
+    expect(JSON.parse(serialized)).toEqual({
+      text: "</script><script>alert(1)</script> & data",
     });
   });
 });

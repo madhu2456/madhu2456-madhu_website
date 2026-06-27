@@ -6,9 +6,12 @@ import {
   readPortfolioContent,
   savePortfolioContent,
 } from "@/lib/portfolio-data";
+import { resolveSiteUrl } from "@/lib/site-url";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
+
+const MAX_CMS_BODY_BYTES = 2 * 1024 * 1024; // 2 MB
 
 const LOCK_KEY = "cms-content-write";
 const locks = new Map<string, Promise<void>>();
@@ -38,11 +41,12 @@ async function acquireLock(key: string): Promise<() => void> {
 
 export async function GET() {
   const content = await readPortfolioContent();
+  const isProd = process.env.NODE_ENV === "production";
 
   return NextResponse.json(
     {
       content,
-      contentPath: getPortfolioContentPath(),
+      ...(isProd ? {} : { contentPath: getPortfolioContentPath() }),
     },
     {
       headers: {
@@ -52,7 +56,26 @@ export async function GET() {
   );
 }
 
+const validateCmsOrigin = (request: Request) => {
+  const origin = request.headers.get("origin");
+  if (!origin) return true;
+  const siteUrl = resolveSiteUrl();
+  return origin === siteUrl || origin === `${siteUrl}/`;
+};
+
+const tooLarge = () =>
+  NextResponse.json({ error: "Request body too large." }, { status: 413 });
+
 export async function PUT(request: Request) {
+  const contentLength = Number(request.headers.get("content-length") ?? 0);
+  if (contentLength > MAX_CMS_BODY_BYTES) {
+    return tooLarge();
+  }
+
+  if (!validateCmsOrigin(request)) {
+    return NextResponse.json({ error: "Forbidden origin." }, { status: 403 });
+  }
+
   const release = await acquireLock(LOCK_KEY);
 
   try {
@@ -80,10 +103,12 @@ export async function PUT(request: Request) {
     const savedContent = await savePortfolioContent(result.data);
     revalidatePortfolioRoutes();
 
+    const isProd = process.env.NODE_ENV === "production";
+
     return NextResponse.json(
       {
         content: savedContent,
-        contentPath: getPortfolioContentPath(),
+        ...(isProd ? {} : { contentPath: getPortfolioContentPath() }),
         updatedAt: savedContent.profile.updatedAt,
       },
       {

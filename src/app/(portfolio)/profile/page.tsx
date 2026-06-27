@@ -18,6 +18,7 @@ import { buildDiscoveryKeywords } from "@/lib/discovery-keywords";
 import { resolveAbsoluteImageUrl } from "@/lib/image-source";
 import { buildPersonSchema } from "@/lib/jsonld";
 import { getPortfolioData } from "@/lib/portfolio-data";
+import { serializeJsonLd } from "@/lib/seo/json-ld";
 import { resolveSiteUrl } from "@/lib/site-url";
 import { formatMonthYear } from "@/lib/utils";
 
@@ -26,30 +27,44 @@ export async function generateMetadata(): Promise<Metadata> {
   const siteUrl = `${resolveSiteUrl()}/`;
   const canonicalPath = pageContent.profile.seo?.canonicalPath || "/profile/";
   const canonicalUrl = `${siteUrl}${canonicalPath.replace(/^\//, "")}`;
+  const title =
+    pageContent.profile.seo?.title ||
+    "Madhu Dadi - Generative AI, RAG & Marketing Analytics Engineer";
+  const description =
+    pageContent.profile.seo?.description ||
+    "Profile of Madhu Dadi, AI & marketing analytics engineer. 9+ years exp across Novartis, redBus, and GroupM (WPP).";
+  const image = `${siteUrl}opengraph-image?ext=.png`;
 
   return {
-    title:
-      pageContent.profile.seo?.title ||
-      "Madhu Dadi - Generative AI, RAG & Marketing Analytics Engineer",
-    description:
-      pageContent.profile.seo?.description ||
-      "Profile of Madhu Dadi, AI & marketing analytics engineer. 9+ years exp across Novartis, redBus, and GroupM (WPP).",
+    title,
+    description,
     alternates: {
       canonical: canonicalUrl,
     },
     openGraph: {
-      title:
-        pageContent.profile.seo?.title ||
-        "Madhu Dadi - Generative AI, RAG & Marketing Analytics Engineer",
-      description:
-        pageContent.profile.seo?.description ||
-        "Profile of Madhu Dadi, AI & marketing analytics engineer. 9+ years exp across Novartis, redBus, and GroupM (WPP).",
+      title,
+      description,
       url: canonicalUrl,
+      siteName: "Madhu Dadi",
       type: "profile",
       firstName: profile.firstName,
       lastName: profile.lastName,
       username: profile.socialLinks?.twitter?.split("/").pop() || "madhu245",
       gender: "male",
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
     },
   };
 }
@@ -169,8 +184,8 @@ export default async function ProfilePage() {
     <div className="flex flex-col min-h-screen">
       <script
         type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: safe - server-controlled JSON-LD only
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(coreEntityGraph) }}
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is escaped by serializeJsonLd
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(coreEntityGraph) }}
       />
       <Header profile={profile} navigationItems={sortedNavigationItems} />
 
@@ -377,7 +392,7 @@ export default async function ProfilePage() {
                   key={exp.company + exp.startDate}
                   className="relative group space-y-2"
                 >
-                  <div className="absolute -left-[31px] top-1.5 h-4 w-4 rounded-full border-2 border-primary bg-background group-hover:scale-115 transition-transform" />
+                  <div className="absolute -left-8 top-1.5 h-4 w-4 rounded-full border-2 border-primary bg-background group-hover:scale-115 transition-transform" />
 
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                     <h3 className="font-semibold text-lg text-foreground">
