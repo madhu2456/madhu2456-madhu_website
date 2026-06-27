@@ -2,10 +2,12 @@ import type { NextConfig } from "next";
 
 const isProd = process.env.NODE_ENV === "production";
 
+// NOTE: 'unsafe-inline' in script-src weakens XSS protection. Next.js requires it without nonce setup.
+// TODO: Replace with nonce-based approach — see https://nextjs.org/docs/app/building-your-application/configuring/content-security-policy
 const cspHeader = `
     default-src 'self';
     script-src 'self' 'unsafe-inline' ${!isProd ? "'unsafe-eval'" : ""} https://www.googletagmanager.com https://static.cloudflareinsights.com;
-    connect-src 'self' https: ws: wss: https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com;
+    connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com https://api.resend.com${!isProd ? " ws: wss:" : ""};
     style-src 'self' 'unsafe-inline';
     img-src 'self' blob: data: https://images.unsplash.com https://www.googletagmanager.com https://www.google-analytics.com;
     font-src 'self' data:;
@@ -13,6 +15,7 @@ const cspHeader = `
     base-uri 'self';
     form-action 'self';
     frame-ancestors 'none';
+    frame-src 'self' https://www.googletagmanager.com;
     ${isProd ? "upgrade-insecure-requests;" : ""}
 `
   .replace(/\s{2,}/g, " ")
@@ -54,8 +57,6 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ["@tabler/icons-react", "motion"],
     // Inline CSS for first-load paint to reduce render-blocking stylesheet requests.
     inlineCss: false,
-    // Ensure unmatched routes use a single global 404 with multiple root layouts.
-    globalNotFound: true,
   },
 
   compiler: {

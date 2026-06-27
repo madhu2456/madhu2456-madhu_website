@@ -35,11 +35,23 @@ export default defineConfig({
     trace: "on-first-retry",
   },
 
-  /* Configure projects for major browsers */
+  /* Configure projects for major browsers and devices */
   projects: [
     {
       name: "chromium",
       use: { ...devices["Desktop Chrome"] },
+    },
+    {
+      name: "iphone",
+      use: { ...devices["iPhone 14"] },
+    },
+    {
+      name: "pixel",
+      use: { ...devices["Pixel 7"] },
+    },
+    {
+      name: "ipad",
+      use: { ...devices["iPad (gen 7)"] },
     },
   ],
 
