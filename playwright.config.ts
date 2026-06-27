@@ -43,15 +43,15 @@ export default defineConfig({
     },
     {
       name: "iphone",
-      use: { ...devices["iPhone 14"] },
+      use: { ...devices["iPhone 14"], browserName: "chromium" },
     },
     {
       name: "pixel",
-      use: { ...devices["Pixel 7"] },
+      use: { ...devices["Pixel 7"], browserName: "chromium" },
     },
     {
       name: "ipad",
-      use: { ...devices["iPad (gen 7)"] },
+      use: { ...devices["iPad (gen 7)"], browserName: "chromium" },
     },
   ],
 
