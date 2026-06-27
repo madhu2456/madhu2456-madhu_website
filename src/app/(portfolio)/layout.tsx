@@ -164,8 +164,6 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     other: {
       "ai-crawl-rate": "fast",
-      keywords:
-        "AI consultant India, RAG engineer, marketing analytics, Next.js developer, FastAPI, LLM applications, AI agents, GA4 BigQuery, Visakhapatnam, Hyderabad, Bangalore",
     },
     // Explicit icon declarations so Google Search picks up the favicon
     // (file-based conventions alone can be missed if generateMetadata overrides them)
