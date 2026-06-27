@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { TrackedLink } from "@/components/TrackedLink";
 import type { NavigationItem, Profile } from "@/lib/portfolio-data";
 
 type HeaderProps = {
@@ -172,21 +173,24 @@ export function Header({ profile, navigationItems }: HeaderProps) {
         </nav>
 
         <div className="flex items-center gap-2">
-          <a
+          <TrackedLink
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
+            gtmEvent="resume_download"
+            gtmData={{ download_type: "pdf", download_location: "header" }}
             className="hidden sm:inline-block rounded-full border border-border/80 bg-surface/50 px-4 py-2 text-xs font-semibold text-foreground shadow-sm transition-all duration-300 hover:scale-[1.04] hover:bg-surface-elevated hover:border-primary/30 sm:px-5 sm:text-sm"
           >
             Resume
-          </a>
-          <Link
+          </TrackedLink>
+          <TrackedLink
             href="/contact/#intent=full-time"
-            prefetch={false}
+            gtmEvent="hire_me_click"
+            gtmData={{ click_location: "header" }}
             className="rounded-full bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground shadow-sm shadow-primary/25 transition-all duration-300 hover:scale-[1.04] hover:shadow-glow sm:px-5 sm:text-sm"
           >
             Hire me
-          </Link>
+          </TrackedLink>
           <button
             type="button"
             ref={toggleRef}

@@ -1,6 +1,7 @@
 "use server";
 
 import { headers } from "next/headers";
+import { z } from "zod";
 import { resolveSiteUrl } from "@/lib/site-url";
 
 // Email delivery via Resend (HTTPS API - not SMTP, so DigitalOcean port blocks don't apply).
@@ -9,6 +10,25 @@ import { resolveSiteUrl } from "@/lib/site-url";
 //   RESEND_API_KEY=re_xxxxxxxxxxxx        (from resend.com → API Keys)
 //   CONTACT_FORM_TO=madhu.kumar245@gmail.com
 //   CONTACT_FORM_FROM=noreply@madhudadi.in  (optional; requires domain verified on Resend)
+
+const contactFormSchema = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(1, "Name is required.")
+    .max(200, "Name is too long. Maximum 200 characters."),
+  email: z.string().trim().email("Please provide a valid email address."),
+  subject: z
+    .string()
+    .trim()
+    .min(1, "Subject is required.")
+    .max(300, "Subject is too long. Maximum 300 characters."),
+  message: z
+    .string()
+    .trim()
+    .min(1, "Message is required.")
+    .max(5000, "Message is too long. Maximum 5000 characters."),
+});
 
 type SubmitResult =
   | { success: true; data?: { submittedAt: string } }
@@ -195,39 +215,19 @@ export async function submitContactForm(
     };
   }
 
-  const name = String(formData.get("name") || "").trim();
-  const email = String(formData.get("email") || "").trim();
-  const subject = String(formData.get("subject") || "").trim();
-  const message = String(formData.get("message") || "").trim();
+  const parsed = contactFormSchema.safeParse({
+    name: formData.get("name"),
+    email: formData.get("email"),
+    subject: formData.get("subject"),
+    message: formData.get("message"),
+  });
 
-  if (!name || !email || !subject || !message) {
-    return { success: false, error: "Please fill in all required fields." };
+  if (!parsed.success) {
+    const firstError = parsed.error.issues[0];
+    return { success: false, error: firstError.message };
   }
 
-  if (name.length > 200) {
-    return {
-      success: false,
-      error: "Name is too long. Maximum 200 characters.",
-    };
-  }
-
-  if (subject.length > 300) {
-    return {
-      success: false,
-      error: "Subject is too long. Maximum 300 characters.",
-    };
-  }
-
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return { success: false, error: "Please provide a valid email address." };
-  }
-
-  if (message.length > 5000) {
-    return {
-      success: false,
-      error: "Message is too long. Maximum 5000 characters.",
-    };
-  }
+  const { name, email, subject, message } = parsed.data;
 
   const submittedAt = new Date().toISOString();
 

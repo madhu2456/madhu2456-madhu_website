@@ -71,6 +71,9 @@ importers:
       unist-util-visit:
         specifier: ^5.1.0
         version: 5.1.0
+      web-vitals:
+        specifier: ^5.3.0
+        version: 5.3.0
       zod:
         specifier: ^4.4.1
         version: 4.4.3
@@ -1684,6 +1687,9 @@ packages:
       jsdom:
         optional: true
 
+  web-vitals@5.3.0:
+    resolution: {integrity: sha512-q6LWsLatGYZp5VGBIOvbTj6JBV2nOmC8KvWztXBmwJcfFAzhwKwbOxhUH306XY3CcaZDUlSmSuNPBsCn0bFu+g==}
+
   why-is-node-running@2.3.0:
     resolution: {integrity: sha512-hUrmaWBdVDcxvYqnyh09zunKzROWjbZTiNy8dBEjkS7ehEDQibXJ7XvlmtbwuTclUiIyN+CyXQD4Vmko8fNm8w==}
     engines: {node: '>=8'}
@@ -3248,6 +3254,8 @@ snapshots:
       '@types/node': 20.19.41
     transitivePeerDependencies:
       - msw
+
+  web-vitals@5.3.0: {}
 
   why-is-node-running@2.3.0:
     dependencies:

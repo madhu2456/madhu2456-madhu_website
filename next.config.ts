@@ -90,6 +90,16 @@ const nextConfig: NextConfig = {
         destination: "/sitemap.xml",
         permanent: true,
       },
+      {
+        source: "/about",
+        destination: "/profile",
+        permanent: true,
+      },
+      {
+        source: "/about/",
+        destination: "/profile/",
+        permanent: true,
+      },
     ];
   },
 
