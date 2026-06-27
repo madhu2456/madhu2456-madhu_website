@@ -42,7 +42,7 @@ export default async function Home() {
   // Hero image preload is handled by Next.js Image `priority` prop in Hero.tsx
 
   return (
-    <main id="main-content" className="min-h-screen">
+    <div className="min-h-screen">
       <SeoStructuredData
         nodes={[
           "Person",
@@ -56,6 +56,6 @@ export default async function Home() {
         ]}
       />
       <PortfolioContent />
-    </main>
+    </div>
   );
 }
