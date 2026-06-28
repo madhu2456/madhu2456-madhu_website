@@ -258,6 +258,15 @@ export function Header({ profile, navigationItems }: HeaderProps) {
             >
               Resume
             </TrackedLink>
+            <TrackedLink
+              href="/contact/#intent=full-time"
+              gtmEvent="hire_me_click"
+              gtmData={{ click_location: "mobile_nav" }}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-center rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground shadow-sm shadow-primary/25 transition-all hover:scale-[1.02]"
+            >
+              Hire me
+            </TrackedLink>
           </nav>
         </div>
       )}

@@ -91,7 +91,7 @@ export function Hero({
                   <li key={company} className="contents">
                     <span>{company}</span>
                     {index < workedAt.length - 1 ? (
-                      <span aria-hidden className="text-muted-foreground/40">
+                      <span aria-hidden className="text-muted-foreground/60">
                         ·
                       </span>
                     ) : null}

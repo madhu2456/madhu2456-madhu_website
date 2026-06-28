@@ -117,7 +117,7 @@ export function CopyButton({ text }: { text: string }) {
     <button
       type="button"
       onClick={handleCopy}
-      className="flex h-6 w-6 items-center justify-center rounded-md text-foreground/25 transition-all hover:bg-foreground/8 hover:text-foreground/60"
+      className="flex h-6 w-6 items-center justify-center rounded-md text-foreground/40 transition-all hover:bg-foreground/8 hover:text-foreground/60"
       aria-label="Copy message"
     >
       <AnimatePresence mode="wait">
@@ -193,7 +193,7 @@ export function ChatInitSkeleton({ profile }: { profile: ChatProfile | null }) {
       {/* Fact card */}
       <div className="flex flex-1 flex-col items-center justify-center gap-4 px-5">
         <div className="w-full max-w-xs overflow-hidden rounded-2xl border border-primary/15 bg-primary/5 p-4">
-          <p className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-primary/60">
+          <p className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-primary/70">
             <IconSparkles className="h-3 w-3" />
             Did you know?
           </p>
@@ -210,7 +210,7 @@ export function ChatInitSkeleton({ profile }: { profile: ChatProfile | null }) {
             </motion.p>
           </AnimatePresence>
         </div>
-        <p className="text-xs text-foreground/35">
+        <p className="text-xs text-foreground/50">
           {name ? `Connecting to ${name}'s AI\u2026` : "Connecting\u2026"}
         </p>
       </div>
