@@ -118,11 +118,10 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        // Branded short link to the Google Knowledge Panel / search presence.
-        // 302 (permanent: false) because the destination query may change.
+        // Branded short link to the Google Business Profile.
+        // 302 (permanent: false) because the destination may change.
         source: "/google",
-        destination:
-          "https://www.google.com/search?q=Madhu+Dadi+-+Generative+AI,+RAG+%26+Marketing+Analytics+Consultant",
+        destination: "https://maps.google.com/?cid=CXaUijPkQhVkEBM",
         permanent: false,
       },
       {

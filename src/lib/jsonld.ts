@@ -845,39 +845,6 @@ export function buildHowToHireSchema({
 }
 
 // ---------------------------------------------------------------------------
-// SoftwareApplication
-// ---------------------------------------------------------------------------
-export function buildSoftwareApplicationSchema({
-  siteUrl,
-  name,
-  description,
-}: {
-  siteUrl: string;
-  name: string;
-  description?: string;
-}) {
-  return {
-    "@type": "SoftwareApplication",
-    "@id": `${siteUrl}#software`,
-    name: `${name} AI & Analytics Solutions`,
-    description:
-      description ||
-      "Enterprise-grade generative AI engineering, RAG architectures, and custom analytics solutions.",
-    applicationCategory: "BusinessApplication",
-    operatingSystem: "All",
-    url: siteUrl,
-    publisher: { "@id": `${siteUrl}#organization` },
-    offers: {
-      "@type": "Offer",
-      url: `${siteUrl}contact/`,
-      availability: "https://schema.org/InStock",
-      description:
-        "Custom project pricing based on scope, timeline, and delivery model.",
-    },
-  };
-}
-
-// ---------------------------------------------------------------------------
 // Unified @graph - bundles all schemas into one linked-data document
 // This lets search engines and AI models understand the full knowledge graph
 // in a single <script> rather than multiple disconnected ones.
