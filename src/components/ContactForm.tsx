@@ -127,6 +127,7 @@ export function ContactForm() {
 
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   const queryIntent = searchParams.get("intent");
   const querySubject = searchParams.get("subject");
@@ -167,6 +168,7 @@ export function ContactForm() {
     const form = event.currentTarget;
     const formData = new FormData(form);
     setStatus(null);
+    setFieldErrors({});
 
     startTransition(async () => {
       const result = await submitContactForm(formData);
@@ -186,6 +188,7 @@ export function ContactForm() {
       }
 
       setStatus({ tone: "error", message: result.error });
+      setFieldErrors(result.fieldErrors ?? {});
       pushToDataLayer({
         event: "contact_form_error",
         form_location: "contact_page",
@@ -200,7 +203,14 @@ export function ContactForm() {
       className="space-y-4 rounded-2xl border border-border bg-surface/60 p-6 backdrop-blur-md"
       onSubmit={handleSubmit}
     >
-      <input type="text" name="hp_field" className="hidden" tabIndex={-1} />
+      <input
+        type="text"
+        name="hp_field"
+        className="hidden"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+      />
 
       <FormField
         label="Name"
@@ -209,6 +219,7 @@ export function ContactForm() {
         defaultValue={namePrefill}
         idPrefix="contact-page"
         autoComplete="name"
+        error={fieldErrors.name}
       />
 
       <FormField
@@ -219,6 +230,7 @@ export function ContactForm() {
         defaultValue={emailPrefill}
         idPrefix="contact-page"
         autoComplete="email"
+        error={fieldErrors.email}
       />
 
       <FormField
@@ -228,6 +240,7 @@ export function ContactForm() {
         value={subject}
         onChange={(val) => setSubject(val)}
         idPrefix="contact-page"
+        error={fieldErrors.subject}
       />
 
       <FormField
@@ -238,6 +251,7 @@ export function ContactForm() {
         value={message}
         onChange={(val) => setMessage(val)}
         idPrefix="contact-page"
+        error={fieldErrors.message}
       />
 
       <button

@@ -127,14 +127,60 @@ describe("buildPersonSchema", () => {
       siteUrl,
       seoKeywords: [
         "RAG system development",
+        "agentic ai consulting",
         "hire ai developer india",
         "remote ai engineer for hire",
+        "rag system development in visakhapatnam, india",
+        "enterprise genai solutions in visakhapatnam, india",
+        "Madhu Dadi blog",
       ],
     });
 
     expect(schema.knowsAbout).toContain("RAG system development");
+    expect(schema.knowsAbout).toContain("agentic ai consulting");
     expect(schema.knowsAbout).not.toContain("hire ai developer india");
     expect(schema.knowsAbout).not.toContain("remote ai engineer for hire");
+    expect(schema.knowsAbout).not.toContain(
+      "rag system development in visakhapatnam, india",
+    );
+    expect(schema.knowsAbout).not.toContain(
+      "enterprise genai solutions in visakhapatnam, india",
+    );
+    expect(schema.knowsAbout).not.toContain("Madhu Dadi blog");
+  });
+
+  test("emits deliveryLeadTime as numeric minValue/maxValue with unitText", () => {
+    const schema = buildPersonSchema({
+      fullName,
+      siteUrl,
+      services: [
+        { title: "RAG Consulting", slug: "rag", timeline: "3-8 weeks" },
+      ],
+    });
+
+    expect(schema.makesOffer?.[0]?.deliveryLeadTime).toEqual({
+      "@type": "QuantitativeValue",
+      minValue: 3,
+      maxValue: 8,
+      unitText: "weeks",
+    });
+  });
+
+  test("excludes googleBusiness from sameAs but includes real profiles", () => {
+    const schema = buildPersonSchema({
+      fullName,
+      siteUrl,
+      socialLinks: {
+        github: "https://github.com/madhu2456",
+        linkedin: "https://www.linkedin.com/in/madhu-dadi-54684531",
+        medium: "https://medium.com/@madhu.kumar245",
+        googleBusiness: "https://madhudadi.in/google",
+      },
+    });
+
+    expect(schema.sameAs).toContain("https://github.com/madhu2456");
+    expect(schema.sameAs).toContain("https://medium.com/@madhu.kumar245");
+    expect(schema.sameAs).not.toContain("https://madhudadi.in/google");
   });
 });
 

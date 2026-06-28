@@ -39,7 +39,8 @@ const securityHeaders = [
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   {
     key: "Permissions-Policy",
-    value: "camera=(), microphone=(), geolocation=()",
+    value:
+      "geolocation=(), microphone=(), camera=(), otp-credentials=(self), payment=(), usb=(), midi=(), display-capture=(), accelerometer=(), gyroscope=(), magnetometer=()",
   },
   {
     key: "Strict-Transport-Security",
@@ -55,6 +56,11 @@ const securityHeaders = [
   {
     key: "Cross-Origin-Embedder-Policy",
     value: "unsafe-none",
+  },
+  // Restricts who can load this origin's resources cross-origin
+  {
+    key: "Cross-Origin-Resource-Policy",
+    value: "same-site",
   },
 ];
 
@@ -110,6 +116,21 @@ const nextConfig: NextConfig = {
         source: "/about/",
         destination: "/profile/",
         permanent: true,
+      },
+      {
+        // Branded short link to the Google Knowledge Panel / search presence.
+        // 302 (permanent: false) because the destination query may change.
+        source: "/google",
+        destination:
+          "https://www.google.com/search?q=Madhu+Dadi+-+Generative+AI,+RAG+%26+Marketing+Analytics+Consultant",
+        permanent: false,
+      },
+      {
+        // Branded short link for Google Business Profile review requests.
+        // 302 (permanent: false) because the GBP review URL may change.
+        source: "/reviews",
+        destination: "https://g.page/r/CXaUijPkQhVkEBM/review",
+        permanent: false,
       },
     ];
   },
