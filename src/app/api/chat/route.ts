@@ -131,15 +131,24 @@ export async function POST(request: Request) {
 
   const history = parseHistory(body.history);
   const portfolioData = await getPortfolioData();
-  const result = await answerWithAgenticRag(message, history, portfolioData);
 
-  return NextResponse.json(
-    {
-      reply: result.reply,
-      blocked: result.blocked,
-      suggestedPrompts: result.suggestedPrompts ?? [],
-      updatedAt: portfolioData.portfolioLastUpdatedAt,
-    },
-    { headers: { "Cache-Control": "no-store" } },
-  );
+  try {
+    const result = await answerWithAgenticRag(message, history, portfolioData);
+
+    return NextResponse.json(
+      {
+        reply: result.reply,
+        blocked: result.blocked,
+        suggestedPrompts: result.suggestedPrompts ?? [],
+        updatedAt: portfolioData.portfolioLastUpdatedAt,
+      },
+      { headers: { "Cache-Control": "no-store" } },
+    );
+  } catch (error) {
+    console.error("Chat API error:", error);
+    return NextResponse.json(
+      { error: "Something went wrong. Please try again later." },
+      { status: 500, headers: { "Cache-Control": "no-store" } },
+    );
+  }
 }

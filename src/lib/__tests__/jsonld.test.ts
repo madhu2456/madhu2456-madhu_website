@@ -4,7 +4,6 @@ import {
   buildProfilePageSchema,
   buildProjectsListSchema,
   buildServicesListSchema,
-  buildSoftwareApplicationSchema,
   buildWebSiteSchema,
 } from "../jsonld";
 import { serializeJsonLd } from "../seo/json-ld";
@@ -250,21 +249,6 @@ describe("buildServicesListSchema", () => {
       "@id": "https://madhudadi.com/services/rag-consultant-india/#service",
       url: "https://madhudadi.com/services/rag-consultant-india/",
     });
-  });
-});
-
-describe("buildSoftwareApplicationSchema", () => {
-  test("does not imply custom consulting solutions are free", () => {
-    const schema = buildSoftwareApplicationSchema({
-      siteUrl: "https://madhudadi.com/",
-      name: "Madhu Dadi",
-    });
-
-    expect(schema.offers).toMatchObject({
-      "@type": "Offer",
-      url: "https://madhudadi.com/contact/",
-    });
-    expect(schema.offers).not.toHaveProperty("price", "0.00");
   });
 });
 

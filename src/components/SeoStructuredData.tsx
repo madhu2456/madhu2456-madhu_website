@@ -12,7 +12,6 @@ import {
   buildProfilePageSchema,
   buildProjectsListSchema,
   buildServicesListSchema,
-  buildSoftwareApplicationSchema,
   buildWebSiteSchema,
   buildWorkExperienceSchema,
 } from "@/lib/jsonld";
@@ -25,7 +24,6 @@ export type SeoGraphNode =
   | "Occupation"
   | "Organization"
   | "WebSite"
-  | "SoftwareApplication"
   | "ProfilePage"
   | "WebPage"
   | "ProjectsList"
@@ -143,13 +141,6 @@ export async function SeoStructuredData({
       ? buildWebSiteSchema({
           name: siteSettings.siteName || fullName,
           url: siteUrl,
-          description,
-        })
-      : null,
-    includeNode("SoftwareApplication")
-      ? buildSoftwareApplicationSchema({
-          siteUrl,
-          name: siteSettings.siteName || fullName,
           description,
         })
       : null,

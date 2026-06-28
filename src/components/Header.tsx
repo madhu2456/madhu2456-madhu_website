@@ -125,7 +125,6 @@ export function Header({ profile, navigationItems }: HeaderProps) {
       <div className="mx-auto mt-3 flex w-[min(1400px,94%)] items-center justify-between rounded-full border border-border/90 bg-surface-elevated/85 px-3 py-2 sm:mt-4 sm:px-5 sm:py-3 shadow-lg shadow-black/20 backdrop-blur-md">
         <Link
           href="/"
-          prefetch={false}
           className="group flex items-center gap-2.5 font-display text-base font-semibold tracking-tight transition-colors hover:text-primary sm:text-lg"
           aria-label="Madhu Dadi home"
         >
@@ -156,7 +155,6 @@ export function Header({ profile, navigationItems }: HeaderProps) {
               <Link
                 key={link.href}
                 href={getHref(link.href)}
-                prefetch={false}
                 target={isExternal ? "_blank" : undefined}
                 rel={isExternal ? "noopener noreferrer" : undefined}
                 aria-current={isActive ? "page" : undefined}
@@ -229,7 +227,6 @@ export function Header({ profile, navigationItems }: HeaderProps) {
                 <Link
                   key={link.href}
                   href={getHref(link.href)}
-                  prefetch={false}
                   target={isExternal ? "_blank" : undefined}
                   rel={isExternal ? "noopener noreferrer" : undefined}
                   aria-current={isActive ? "page" : undefined}
