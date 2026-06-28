@@ -58,7 +58,7 @@ export async function generateMetadata({
     ? rawTitle
     : `${rawTitle} | Madhu Dadi`;
   const description = service.shortDescription || service.fullDescription;
-  const image = `${siteUrl}opengraph-image?ext=.png`;
+  const image = `${siteUrl}opengraph-image/?ext=.png`;
 
   return {
     title,
@@ -142,7 +142,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
     "@id": `${siteUrl}services/${slug}/#service`,
     name: service.title,
     serviceType: service.title,
-    image: `${siteUrl}opengraph-image?ext=.png`,
+    image: `${siteUrl}opengraph-image/?ext=.png`,
     description: service.shortDescription || service.fullDescription || "",
     provider: {
       "@id": `${siteUrl}#person`,
@@ -209,7 +209,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
     description: service.shortDescription || service.fullDescription,
     datePublished: service.updatedAt ?? new Date().toISOString(),
     dateModified: service.updatedAt ?? new Date().toISOString(),
-    image: `${siteUrl}opengraph-image?ext=.png`,
+    image: `${siteUrl}opengraph-image/?ext=.png`,
     author: {
       "@type": "Person",
       "@id": `${siteUrl}#person`,

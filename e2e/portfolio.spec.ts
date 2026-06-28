@@ -37,6 +37,65 @@ test.describe("Portfolio Audit UI Checks", () => {
     ).toBeVisible();
   });
 
+  test("Contact form enforces required and email validation", async ({
+    page,
+  }) => {
+    await page.goto("/contact");
+
+    const form = page.locator("form", {
+      has: page.getByRole("button", { name: "Send message" }),
+    });
+    const name = form.locator("#contact-page-name");
+    const email = form.locator("#contact-page-email");
+    const subject = form.locator("#contact-page-subject");
+    const message = form.locator("#contact-page-message");
+
+    await form.getByRole("button", { name: "Send message" }).click();
+
+    await expect(name).toHaveJSProperty("validity.valueMissing", true);
+    await expect(email).toHaveJSProperty("validity.valueMissing", true);
+    await expect(subject).toHaveJSProperty("validity.valueMissing", true);
+    await expect(message).toHaveJSProperty("validity.valueMissing", true);
+
+    await name.fill("Test Visitor");
+    await email.fill("not-an-email");
+    await subject.fill("Portfolio inquiry");
+    await message.fill("This is a validation smoke test.");
+
+    await expect(email).toHaveJSProperty("validity.typeMismatch", true);
+  });
+
+  test("Resume PDF is linked and available", async ({ page, request }) => {
+    await page.goto("/");
+
+    await expect(
+      page.getByRole("link", { name: "Resume" }).first(),
+    ).toHaveAttribute("href", "/resume.pdf");
+
+    const resume = await request.get("/resume.pdf");
+    expect(resume.ok()).toBe(true);
+    expect(resume.headers()["content-type"]).toContain("application/pdf");
+  });
+
+  test("Mobile navigation exposes recruiter actions", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/");
+
+    await page.getByRole("button", { name: "Toggle navigation menu" }).click();
+
+    const mobileNav = page.getByRole("navigation", {
+      name: "Mobile navigation",
+    });
+
+    await expect(mobileNav).toBeVisible();
+    await expect(
+      mobileNav.getByRole("link", { name: "Resume" }),
+    ).toHaveAttribute("href", "/resume.pdf");
+    await expect(
+      mobileNav.getByRole("link", { name: "Hire me" }),
+    ).toHaveAttribute("href", "/contact/#intent=full-time");
+  });
+
   test("Profile and Credentials pages semantic HTML structure", async ({
     page,
   }) => {

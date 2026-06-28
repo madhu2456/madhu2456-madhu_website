@@ -33,7 +33,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const description =
     pageContent.profile.seo?.description ||
     "Profile of Madhu Dadi, AI & marketing analytics engineer with 9+ years across Novartis, redBus, and GroupM (WPP). Specializing in LLM/RAG apps, AI agents, and marketing analytics.";
-  const image = `${siteUrl}opengraph-image?ext=.png`;
+  const image = `${siteUrl}opengraph-image/?ext=.png`;
 
   return {
     title,

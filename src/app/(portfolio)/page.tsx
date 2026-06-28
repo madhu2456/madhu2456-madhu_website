@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: `${siteUrl}opengraph-image?ext=.png`,
+        url: `${siteUrl}opengraph-image/?ext=.png`,
         width: 1200,
         height: 630,
         alt: "Madhu Dadi - Generative AI, RAG & Marketing Analytics Consultant",

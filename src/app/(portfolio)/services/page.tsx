@@ -41,7 +41,7 @@ export async function generateMetadata(): Promise<Metadata> {
       type: "website",
       images: [
         {
-          url: `${siteUrl}opengraph-image?ext=.png`,
+          url: `${siteUrl}opengraph-image/?ext=.png`,
           width: 1200,
           height: 630,
           alt: "AI, RAG & Analytics Services | Madhu Dadi",
