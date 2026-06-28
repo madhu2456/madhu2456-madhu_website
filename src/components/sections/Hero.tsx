@@ -55,7 +55,6 @@ export function Hero({
           <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center">
             <Link
               href="/contact/"
-              prefetch={false}
               onClick={() =>
                 pushToDataLayer({
                   event: "hire_me_click",
@@ -82,7 +81,6 @@ export function Hero({
             </TrackedLink>
             <Link
               href="/case-studies/"
-              prefetch={false}
               onClick={() =>
                 pushToDataLayer({
                   event: "case_study_click",
