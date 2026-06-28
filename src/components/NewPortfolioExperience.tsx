@@ -446,7 +446,7 @@ function Certifications({
 }
 
 function Faq({ items }: { items: Array<{ q: string; a: string }> }) {
-  const [open, setOpen] = useState<number | null>(0);
+  const [open, setOpen] = useState<number | null>(null);
 
   return (
     <Section id="faq" eyebrow="FAQ" title="Frequently asked questions.">
@@ -690,6 +690,16 @@ function Contact({ profile }: { profile: Profile }) {
               {status.message}
             </p>
           ) : null}
+          <p className="text-xs text-muted-foreground/60">
+            By submitting, you agree to the{" "}
+            <Link
+              href="/privacy/"
+              className="underline hover:text-foreground transition-colors"
+            >
+              privacy policy
+            </Link>
+            .
+          </p>
         </form>
       </div>
     </Section>

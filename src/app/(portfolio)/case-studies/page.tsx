@@ -24,15 +24,14 @@ const getSiteUrl = () => {
 };
 
 export const metadata: Metadata = {
-  title: "AI, RAG & Analytics Case Studies - Production Builds | Madhu Dadi",
+  title: "AI, RAG & Analytics Case Studies | Madhu Dadi",
   description: CASE_STUDIES_DESCRIPTION,
   alternates: {
     canonical: `${getSiteUrl()}case-studies/`,
   },
   openGraph: {
     title: {
-      absolute:
-        "AI, RAG & Analytics Case Studies - Production Builds | Madhu Dadi",
+      absolute: "AI, RAG & Analytics Case Studies | Madhu Dadi",
     },
     description: CASE_STUDIES_DESCRIPTION,
     url: `${getSiteUrl()}case-studies/`,
