@@ -56,44 +56,46 @@ export function FormField({
     : {};
 
   return (
-    <label htmlFor={id} className="block text-left">
-      <span className="mb-1.5 block text-xs font-medium tracking-widest text-muted-foreground uppercase">
-        {label}
-        {required ? " *" : ""}
-      </span>
-      {textarea ? (
-        <textarea
-          key={inputKey}
-          id={id}
-          name={name}
-          required={required}
-          rows={rows}
-          maxLength={5000}
-          className={className}
-          {...ariaProps}
-          {...(value !== undefined ? { value } : { defaultValue })}
-          onChange={onChange ? (e) => onChange(e.target.value) : undefined}
-        />
-      ) : (
-        <input
-          key={inputKey}
-          id={id}
-          name={name}
-          type={type}
-          required={required}
-          maxLength={name === "subject" ? 300 : 200}
-          className={className}
-          autoComplete={autoComplete}
-          {...ariaProps}
-          {...(value !== undefined ? { value } : { defaultValue })}
-          onChange={onChange ? (e) => onChange(e.target.value) : undefined}
-        />
-      )}
+    <div className="block text-left">
+      <label htmlFor={id}>
+        <span className="mb-1.5 block text-xs font-medium tracking-widest text-muted-foreground uppercase">
+          {label}
+          {required ? " *" : ""}
+        </span>
+        {textarea ? (
+          <textarea
+            key={inputKey}
+            id={id}
+            name={name}
+            required={required}
+            rows={rows}
+            maxLength={5000}
+            className={className}
+            {...ariaProps}
+            {...(value !== undefined ? { value } : { defaultValue })}
+            onChange={onChange ? (e) => onChange(e.target.value) : undefined}
+          />
+        ) : (
+          <input
+            key={inputKey}
+            id={id}
+            name={name}
+            type={type}
+            required={required}
+            maxLength={name === "subject" ? 300 : 200}
+            className={className}
+            autoComplete={autoComplete}
+            {...ariaProps}
+            {...(value !== undefined ? { value } : { defaultValue })}
+            onChange={onChange ? (e) => onChange(e.target.value) : undefined}
+          />
+        )}
+      </label>
       {error ? (
         <p id={errorId} className="mt-1.5 text-xs text-destructive">
           {error}
         </p>
       ) : null}
-    </label>
+    </div>
   );
 }
