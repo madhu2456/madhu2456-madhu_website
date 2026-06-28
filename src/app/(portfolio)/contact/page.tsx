@@ -307,7 +307,7 @@ export default async function ContactPage() {
                       <IconMail className="h-4.5 w-4.5" />
                     </div>
                     <div>
-                      <span className="text-[10px] text-muted-foreground block uppercase font-mono">
+                      <span className="text-xs text-muted-foreground block uppercase font-mono">
                         Email Address
                       </span>
                       <SafeEmailLink
@@ -323,7 +323,7 @@ export default async function ContactPage() {
                       <IconBrandLinkedin className="h-4.5 w-4.5" />
                     </div>
                     <div>
-                      <span className="text-[10px] text-muted-foreground block uppercase font-mono">
+                      <span className="text-xs text-muted-foreground block uppercase font-mono">
                         LinkedIn Profile
                       </span>
                       <a
@@ -342,7 +342,7 @@ export default async function ContactPage() {
                       <IconMapPin className="h-4.5 w-4.5" />
                     </div>
                     <div>
-                      <span className="text-[10px] text-muted-foreground block uppercase font-mono">
+                      <span className="text-xs text-muted-foreground block uppercase font-mono">
                         Location
                       </span>
                       <span className="font-semibold text-foreground">

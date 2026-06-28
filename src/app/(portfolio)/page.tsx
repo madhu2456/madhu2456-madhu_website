@@ -43,7 +43,14 @@ export default async function Home() {
   return (
     <div className="min-h-screen">
       <SeoStructuredData
-        nodes={["Person", "WebSite", "WebPage", "Breadcrumb", "FAQ"]}
+        nodes={[
+          "Person",
+          "Occupation",
+          "WebSite",
+          "WebPage",
+          "Breadcrumb",
+          "FAQ",
+        ]}
       />
       <PortfolioContent />
     </div>
