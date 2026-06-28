@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FormattedText } from "@/components/FormattedText";
 import { Section } from "@/components/Section";
+import { pushToDataLayer } from "@/lib/gtm";
 import {
   normalizeImageSource,
   shouldUseUnoptimizedImage,
@@ -81,6 +82,14 @@ export function Projects({ projects }: { projects: ProjectItem[] }) {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() =>
+                        pushToDataLayer({
+                          event: "outbound_click",
+                          outbound_url: project.liveUrl,
+                          project_name: project.title,
+                          click_location: "case_study_card",
+                        })
+                      }
                       className="inline-flex items-center gap-1 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
                     >
                       Live <ExternalLink className="h-3.5 w-3.5" />
@@ -91,6 +100,14 @@ export function Projects({ projects }: { projects: ProjectItem[] }) {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() =>
+                        pushToDataLayer({
+                          event: "outbound_click",
+                          outbound_url: project.githubUrl,
+                          project_name: project.title,
+                          click_location: "case_study_card",
+                        })
+                      }
                       className="inline-flex items-center gap-1 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
                     >
                       GitHub <ExternalLink className="h-3.5 w-3.5" />

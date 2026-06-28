@@ -345,6 +345,13 @@ function Services({ services }: { services: ServiceItem[] }) {
               <Link
                 href={`/services/${service.slug}/`}
                 prefetch={false}
+                onClick={() =>
+                  pushToDataLayer({
+                    event: "service_click",
+                    service_name: service.title,
+                    click_location: "homepage_services",
+                  })
+                }
                 className="group mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-transform hover:scale-[1.02]"
               >
                 Explore {service.title.split(" ")[0]}
@@ -565,6 +572,11 @@ function Contact({ profile }: { profile: Profile }) {
       }
 
       setStatus({ tone: "error", message: result.error });
+      pushToDataLayer({
+        event: "contact_form_error",
+        form_location: "homepage",
+        error_message: result.error,
+      });
     });
   };
 

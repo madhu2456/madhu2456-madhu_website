@@ -2,6 +2,7 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { TrackedLink } from "@/components/TrackedLink";
+import { pushToDataLayer } from "@/lib/gtm";
 import type {
   ExperienceItem,
   PageContent,
@@ -55,6 +56,12 @@ export function Hero({
             <Link
               href="/contact/"
               prefetch={false}
+              onClick={() =>
+                pushToDataLayer({
+                  event: "hire_me_click",
+                  click_location: "hero",
+                })
+              }
               className="group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-transform hover:scale-[1.03] sm:px-6"
             >
               Hire me
@@ -76,6 +83,12 @@ export function Hero({
             <Link
               href="/case-studies/"
               prefetch={false}
+              onClick={() =>
+                pushToDataLayer({
+                  event: "case_study_click",
+                  click_location: "hero",
+                })
+              }
               className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-white/5 px-5 py-3 text-sm font-medium hover:bg-surface-elevated hover:border-primary/30 sm:px-6 transition-all duration-300"
             >
               See case studies
