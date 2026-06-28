@@ -80,7 +80,7 @@ export function Projects({ projects }: { projects: ProjectItem[] }) {
                     <a
                       href={project.liveUrl}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       className="inline-flex items-center gap-1 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
                     >
                       Live <ExternalLink className="h-3.5 w-3.5" />
@@ -90,7 +90,7 @@ export function Projects({ projects }: { projects: ProjectItem[] }) {
                     <a
                       href={project.githubUrl}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       className="inline-flex items-center gap-1 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
                     >
                       GitHub <ExternalLink className="h-3.5 w-3.5" />

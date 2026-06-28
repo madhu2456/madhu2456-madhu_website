@@ -23,7 +23,7 @@ export function Footer({ profile, projects, navigationItems }: FooterProps) {
           .filter((item) => item.title !== "Blog" && item.title !== "GitHub")
           .map((item) => ({
             label: item.title,
-            href: item.href,
+            href: normalizeFooterHref(item.href),
           })),
       ],
     },
@@ -169,6 +169,10 @@ export function Footer({ profile, projects, navigationItems }: FooterProps) {
   );
 }
 
+function normalizeFooterHref(href: string) {
+  return href.startsWith("#") ? `/${href}` : href;
+}
+
 function FooterLink({ href, children }: { href: string; children: ReactNode }) {
   const isExternal =
     href.startsWith("http") ||
@@ -190,7 +194,7 @@ function FooterLink({ href, children }: { href: string; children: ReactNode }) {
       <a
         href={href}
         target={href.startsWith("http") ? "_blank" : undefined}
-        rel={href.startsWith("http") ? "noreferrer" : undefined}
+        rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
         className="text-muted-foreground hover:text-foreground transition-colors"
       >
         {children}

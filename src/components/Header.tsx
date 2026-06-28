@@ -158,7 +158,7 @@ export function Header({ profile, navigationItems }: HeaderProps) {
                 href={getHref(link.href)}
                 prefetch={false}
                 target={isExternal ? "_blank" : undefined}
-                rel={isExternal ? "noreferrer" : undefined}
+                rel={isExternal ? "noopener noreferrer" : undefined}
                 aria-current={isActive ? "page" : undefined}
                 className={`rounded-full px-3.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-300 ${
                   isActive
@@ -231,7 +231,7 @@ export function Header({ profile, navigationItems }: HeaderProps) {
                   href={getHref(link.href)}
                   prefetch={false}
                   target={isExternal ? "_blank" : undefined}
-                  rel={isExternal ? "noreferrer" : undefined}
+                  rel={isExternal ? "noopener noreferrer" : undefined}
                   aria-current={isActive ? "page" : undefined}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`rounded-xl px-4 py-3 text-sm font-semibold tracking-wide transition-all ${
@@ -244,15 +244,20 @@ export function Header({ profile, navigationItems }: HeaderProps) {
                 </Link>
               );
             })}
-            <a
+            <TrackedLink
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
+              gtmEvent="resume_download"
+              gtmData={{
+                download_type: "pdf",
+                download_location: "mobile_nav",
+              }}
               onClick={() => setIsMobileMenuOpen(false)}
               className="mt-2 text-center rounded-xl border border-border/80 bg-surface/50 px-4 py-3 text-sm font-semibold text-foreground transition-all hover:bg-surface-elevated hover:text-primary"
             >
               Resume
-            </a>
+            </TrackedLink>
           </nav>
         </div>
       )}

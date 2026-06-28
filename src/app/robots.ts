@@ -18,30 +18,56 @@ const PRIVATE_DISALLOWS = [
   "/cdn-cgi/",
 ];
 
-const AI_CRAWLERS = [
-  "GPTBot",
-  "ChatGPT-User",
+const AI_SEARCH_AND_CITATION_CRAWLERS = [
   "OAI-SearchBot",
-  "anthropic-ai",
-  "ClaudeBot",
-  "Claude-Web",
   "Claude-SearchBot",
-  "Claude-User",
   "PerplexityBot",
+  "Applebot",
+  "facebookexternalhit",
+  "BraveBot",
+];
+
+const USER_TRIGGERED_FETCHERS = [
+  "ChatGPT-User",
+  "Claude-User",
+  "Claude-Web",
+  "Perplexity-User",
   "perplexity-user",
+  "Meta-ExternalFetcher",
+];
+
+const TRAINING_AND_EXTENDED_USE_CRAWLERS = [
+  "GPTBot",
   "Google-Extended",
   "Googlebot-Extended",
-  "Applebot",
   "Applebot-Extended",
+  "ClaudeBot",
+  "anthropic-ai",
   "Meta-ExternalAgent",
-  "Meta-ExternalFetcher",
-  "facebookexternalhit",
+  "CCBot",
   "cohere-ai",
   "Diffbot",
   "YouBot",
-  "BraveBot",
   "Amazonbot",
   "Bytespider",
+];
+
+const PUBLIC_DISCOVERY_ALLOWS = [
+  "/",
+  "/llms.txt",
+  "/llms-full.txt",
+  "/ai-profile.json",
+  "/humans.txt",
+  "/blog/",
+  "/blog/posts",
+  "/blog/series",
+  "/blog/tags",
+  "/blog/ask",
+  "/blog/llms.txt",
+  "/blog/llms-full.txt",
+  "/blog/ai-profile.json",
+  "/blog/api/og",
+  "/.well-known/ai-plugin.json",
 ];
 
 export default function robots(): MetadataRoute.Robots {
@@ -62,25 +88,18 @@ export default function robots(): MetadataRoute.Robots {
         crawlDelay: 1,
       },
       {
-        userAgent: AI_CRAWLERS,
-        allow: [
-          "/",
-          "/llms.txt",
-          "/llms-full.txt",
-          "/ai-profile.json",
-          "/humans.txt",
-          "/blog/",
-          "/blog/posts",
-          "/blog/series",
-          "/blog/tags",
-          "/blog/ask",
-          "/blog/llms.txt",
-          "/blog/llms-full.txt",
-          "/blog/ai-profile.json",
-          "/blog/api/og",
-          "/.well-known/ai-plugin.json",
-        ],
+        userAgent: AI_SEARCH_AND_CITATION_CRAWLERS,
+        allow: PUBLIC_DISCOVERY_ALLOWS,
         disallow: PRIVATE_DISALLOWS,
+      },
+      {
+        userAgent: USER_TRIGGERED_FETCHERS,
+        allow: PUBLIC_DISCOVERY_ALLOWS,
+        disallow: PRIVATE_DISALLOWS,
+      },
+      {
+        userAgent: TRAINING_AND_EXTENDED_USE_CRAWLERS,
+        disallow: "/",
       },
     ],
     sitemap: [`${siteUrl}sitemap.xml`, `${siteUrl}blog/sitemap.xml`],

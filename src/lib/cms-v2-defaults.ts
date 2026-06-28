@@ -1,4 +1,6 @@
-export const buildV2PageContentDefaults = (): any => {
+import type { PageContentSchema, ServiceItem } from "./cms-schema";
+
+export const buildV2PageContentDefaults = (): PageContentSchema => {
   return {
     home: {
       seo: {
@@ -283,17 +285,27 @@ export const buildV2PageContentDefaults = (): any => {
   };
 };
 
-export const upgradeServiceDefaults = (service: any): any => {
+export const upgradeServiceDefaults = (
+  service: unknown,
+): Partial<ServiceItem> => {
+  const source =
+    service && typeof service === "object"
+      ? (service as Partial<ServiceItem>)
+      : {};
+  const title = typeof source.title === "string" ? source.title : "Service";
+  const shortDescription =
+    typeof source.shortDescription === "string" ? source.shortDescription : "";
+  const fullDescription =
+    typeof source.fullDescription === "string" ? source.fullDescription : "";
+
   // Minimal defaults so migration doesn't fail; we preserve existing slug/title
   return {
-    ...service,
-    seoTitle: `${service.title} | Madhu Dadi`,
-    seoDescription: service.shortDescription || service.title,
-    heroTitle: service.title,
+    ...source,
+    seoTitle: `${title} | Madhu Dadi`,
+    seoDescription: shortDescription || title,
+    heroTitle: title,
     heroEyebrow: "Service",
-    directAnswerParagraphs: service.fullDescription
-      ? [service.fullDescription]
-      : [],
+    directAnswerParagraphs: fullDescription ? [fullDescription] : [],
     targetQueries: [],
     audience: [],
     problemsSolved: [],
@@ -301,7 +313,7 @@ export const upgradeServiceDefaults = (service: any): any => {
     techStackGroups: [],
     faqs: [],
     proofProjectSlugs: [],
-    contactIntent: `Inquiry regarding ${service.title}`,
+    contactIntent: `Inquiry regarding ${title}`,
     offerCatalog: [],
   };
 };

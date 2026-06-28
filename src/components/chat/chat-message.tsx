@@ -24,6 +24,7 @@ export function MessageBubble({
 }: Props) {
   const isUser = msg.role === "user";
   const displayText = isStreaming ? streamedText : msg.text;
+  const suggestionCounts = new Map<string, number>();
 
   return (
     <motion.div
@@ -88,24 +89,29 @@ export function MessageBubble({
       {/* Suggestion chips - staggered in */}
       {!isUser && !isStreaming && (msg.suggestions?.length ?? 0) > 0 && (
         <div className="ml-8 flex flex-wrap gap-1.5">
-          {msg.suggestions?.map((s, idx) => (
-            <motion.button
-              key={`${msg.id}-${s}`}
-              type="button"
-              initial={{ opacity: 0, scale: 0.88 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{
-                delay: idx * 0.06,
-                duration: 0.18,
-                ease: "easeOut",
-              }}
-              onClick={() => onSuggestionClick(s)}
-              disabled={sending}
-              className="rounded-full border border-foreground/12 bg-background px-3 py-1.5 text-xs font-medium text-foreground/65 transition-all hover:border-primary/35 hover:bg-primary/6 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-40"
-            >
-              {s}
-            </motion.button>
-          ))}
+          {msg.suggestions?.map((s, idx) => {
+            const occurrence = suggestionCounts.get(s) ?? 0;
+            suggestionCounts.set(s, occurrence + 1);
+
+            return (
+              <motion.button
+                key={`${msg.id}-${s}-${occurrence}`}
+                type="button"
+                initial={{ opacity: 0, scale: 0.88 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                  delay: idx * 0.06,
+                  duration: 0.18,
+                  ease: "easeOut",
+                }}
+                onClick={() => onSuggestionClick(s)}
+                disabled={sending}
+                className="rounded-full border border-foreground/12 bg-background px-3 py-1.5 text-xs font-medium text-foreground/65 transition-all hover:border-primary/35 hover:bg-primary/6 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                {s}
+              </motion.button>
+            );
+          })}
         </div>
       )}
     </motion.div>

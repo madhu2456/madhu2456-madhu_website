@@ -112,6 +112,7 @@ export function Hero({
               height={925}
               priority
               fetchPriority="high"
+              sizes="(min-width: 1024px) 44vw, 92vw"
               className="h-full w-full object-cover"
             />
           </div>
