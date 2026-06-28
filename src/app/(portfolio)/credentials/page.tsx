@@ -34,7 +34,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const description =
     pageContent.credentials.seo?.description ||
     "Verified credentials, certifications, awards, work history, and public proof for Madhu Dadi, AI and marketing analytics engineer.";
-  const image = `${siteUrl}opengraph-image?ext=.png`;
+  const image = `${siteUrl}opengraph-image/?ext=.png`;
 
   return {
     title,

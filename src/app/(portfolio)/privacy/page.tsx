@@ -8,16 +8,44 @@ import { resolveSiteUrl } from "@/lib/site-url";
 
 export async function generateMetadata(): Promise<Metadata> {
   const siteUrl = `${resolveSiteUrl()}/`;
+  const title = "Privacy Policy | Madhu Dadi";
+  const description =
+    "Privacy policy for madhudadi.in. Learn how personal data collected via the contact form is handled.";
+  const url = `${siteUrl}privacy/`;
+  const image = `${siteUrl}opengraph-image/?ext=.png`;
+
   return {
-    title: "Privacy Policy | Madhu Dadi",
-    description:
-      "Privacy policy for madhudadi.in. Learn how personal data collected via the contact form is handled.",
+    title,
+    description,
     alternates: {
-      canonical: `${siteUrl}privacy/`,
+      canonical: url,
     },
     robots: {
       index: true,
       follow: true,
+    },
+    openGraph: {
+      title: {
+        absolute: title,
+      },
+      description,
+      url,
+      siteName: "Madhu Dadi",
+      type: "website",
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: `${title} - Open Graph preview`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
     },
   };
 }
@@ -45,14 +73,17 @@ export default async function PrivacyPage() {
           <section className="space-y-4">
             <h2 className="text-xl font-semibold">1. Information I Collect</h2>
             <p className="text-muted-foreground leading-relaxed">
-              When you use the contact form on this website, I collect the
-              following personal information:
+              When you use the contact form or portfolio assistant on this
+              website, I collect the following information:
             </p>
             <ul className="list-disc list-inside text-muted-foreground space-y-1">
               <li>Your name</li>
               <li>Your email address</li>
               <li>The subject of your message</li>
               <li>Your message content</li>
+              <li>
+                Portfolio assistant messages and recent conversation context
+              </li>
             </ul>
             <p className="text-muted-foreground leading-relaxed">
               I do not collect personal information through cookies or tracking
@@ -65,9 +96,15 @@ export default async function PrivacyPage() {
               2. How I Use Your Information
             </h2>
             <p className="text-muted-foreground leading-relaxed">
-              The information you submit through the contact form is used solely
-              to respond to your inquiry and to communicate with you about
+              The information you submit through the contact form is used to
+              respond to your inquiry and to communicate with you about
               potential projects, consulting engagements, or job opportunities.
+              Portfolio assistant messages are used to generate a response about
+              my experience, services, projects, and skills.
+            </p>
+            <p className="text-muted-foreground leading-relaxed">
+              Do not submit confidential, sensitive, or regulated information
+              through the portfolio assistant.
             </p>
           </section>
 
@@ -80,6 +117,10 @@ export default async function PrivacyPage() {
               third-party email service). I do not store your personal data in a
               database. Your information is retained only in my email inbox for
               the purpose of our correspondence.
+            </p>
+            <p className="text-muted-foreground leading-relaxed">
+              Portfolio assistant messages are processed to answer your question
+              and are not stored in a website database by this portfolio app.
             </p>
           </section>
 
@@ -97,6 +138,10 @@ export default async function PrivacyPage() {
               <li>
                 <strong>Resend</strong> — for delivering contact form
                 submissions via email.
+              </li>
+              <li>
+                <strong>OpenAI</strong> — for generating portfolio assistant
+                responses when the assistant is used.
               </li>
             </ul>
           </section>

@@ -60,6 +60,26 @@ const splitIntoList = (value?: string) => {
   return value.split(/(?<=[.!?])\s+(?=[A-Z])/).filter(Boolean);
 };
 
+const splitIntoParagraphs = (value?: string) => {
+  if (!value) return [];
+
+  const seenParagraphs = new Map<string, number>();
+
+  return value
+    .split(/\n{2,}/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean)
+    .map((text) => {
+      const seenCount = seenParagraphs.get(text) ?? 0;
+      seenParagraphs.set(text, seenCount + 1);
+
+      return {
+        key: seenCount > 0 ? `${text}-${seenCount}` : text,
+        text,
+      };
+    });
+};
+
 const getProjectMeta = (project: ProjectItem) => {
   return {
     client:
@@ -113,7 +133,10 @@ export async function generateMetadata({
   }
 
   const siteUrl = getSiteUrl();
-  const title = `${project.title} Case Study | Madhu Dadi`;
+  const title =
+    project.slug === "adticks"
+      ? "Adticks AI Visibility Case Study | Madhu Dadi"
+      : `${project.title} Case Study | Madhu Dadi`;
   const description = toDescription(project.tagline, project.impactSummary);
   const url = `/case-studies/${slug}/`;
 
@@ -128,7 +151,7 @@ export async function generateMetadata({
       type: "article",
       images: [
         {
-          url: `${siteUrl}opengraph-image?ext=.png`,
+          url: `${siteUrl}opengraph-image/?ext=.png`,
           width: 1200,
           height: 630,
           alt: `${project.title} case study by Madhu Dadi`,
@@ -166,6 +189,8 @@ export default async function CaseStudyPage({
     project.impactMetrics?.map((metric) => `${metric.value} ${metric.label}`) ??
     splitIntoList(project.impactSummary);
   const stack = project.technologies?.map((tech) => tech.name) ?? [];
+  const architectureParagraphs = splitIntoParagraphs(project.architecture);
+  const lessonsLearnedParagraphs = splitIntoParagraphs(project.lessonsLearned);
 
   const graph = {
     "@context": "https://schema.org",
@@ -177,7 +202,7 @@ export default async function CaseStudyPage({
         description,
         datePublished: project.updatedAt ?? new Date().toISOString(),
         dateModified: project.updatedAt ?? new Date().toISOString(),
-        image: `${siteUrl}opengraph-image?ext=.png`,
+        image: `${siteUrl}opengraph-image/?ext=.png`,
         about: project.category || "Case Study",
         url: caseStudyUrl,
         author: {
@@ -404,13 +429,13 @@ export default async function CaseStudyPage({
           </section>
         ) : null}
 
-        {project.architecture ? (
+        {architectureParagraphs.length > 0 ? (
           <section className="mt-10">
             <h2 className="font-display text-2xl font-bold">Architecture</h2>
             <div className="prose prose-invert mt-4 max-w-none text-muted-foreground">
-              {project.architecture.split("\n").map((paragraph, _idx) => (
-                <p key={paragraph}>
-                  <FormattedText text={paragraph} />
+              {architectureParagraphs.map((paragraph) => (
+                <p key={`architecture-${paragraph.key}`}>
+                  <FormattedText text={paragraph.text} />
                 </p>
               ))}
             </div>
@@ -436,15 +461,15 @@ export default async function CaseStudyPage({
           </section>
         ) : null}
 
-        {project.lessonsLearned ? (
+        {lessonsLearnedParagraphs.length > 0 ? (
           <section className="mt-10">
             <h2 className="font-display text-2xl font-bold">
               What I&apos;d do differently
             </h2>
             <div className="prose prose-invert mt-4 max-w-none text-muted-foreground">
-              {project.lessonsLearned.split("\n").map((paragraph, _idx) => (
-                <p key={paragraph}>
-                  <FormattedText text={paragraph} />
+              {lessonsLearnedParagraphs.map((paragraph) => (
+                <p key={`lessons-${paragraph.key}`}>
+                  <FormattedText text={paragraph.text} />
                 </p>
               ))}
             </div>

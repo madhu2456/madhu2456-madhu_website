@@ -89,7 +89,7 @@ export async function generateMetadata(): Promise<Metadata> {
         }
       : undefined;
 
-  const ogImageUrl = `${siteUrl}opengraph-image?ext=.png`;
+  const ogImageUrl = `${siteUrl}opengraph-image/?ext=.png`;
 
   return {
     metadataBase: new URL(siteUrl),

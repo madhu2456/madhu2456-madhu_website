@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: `${getSiteUrl()}opengraph-image?ext=.png`,
+        url: `${getSiteUrl()}opengraph-image/?ext=.png`,
         width: 1200,
         height: 630,
         alt: "Madhu Dadi case studies",

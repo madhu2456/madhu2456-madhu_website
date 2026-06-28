@@ -352,6 +352,7 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
         <div className="shrink-0 border-t border-foreground/8 px-3 pb-4 pt-3">
           <div className="flex items-end gap-2">
             <textarea
+              aria-label="Ask the portfolio assistant"
               ref={textareaRef}
               value={input}
               onChange={(e) => {

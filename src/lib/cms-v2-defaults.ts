@@ -177,7 +177,7 @@ export const buildV2PageContentDefaults = (): PageContentSchema => {
           proof: "Azure AI Fundamentals",
           linkText: "Microsoft Credential",
           linkUrl:
-            "https://learn.microsoft.com/api/credentials/share/en-us/madhudadi/3F89A56D1F9745E4",
+            "https://learn.microsoft.com/en-us/users/madhudadi-6748/credentials/838cb018adda8dc8",
         },
         {
           type: "Credential",
@@ -197,8 +197,7 @@ export const buildV2PageContentDefaults = (): PageContentSchema => {
           type: "Credential",
           proof: "Dataiku Core Designer",
           linkText: "Skilljar Verification",
-          linkUrl:
-            "https://academy.dataiku.com/certificate/share/48fa91-c27b-4b11-93bf-a8412fa52ba8",
+          linkUrl: "https://verify.skilljar.com/c/bm4dvx7mymim",
         },
         {
           type: "Award",
