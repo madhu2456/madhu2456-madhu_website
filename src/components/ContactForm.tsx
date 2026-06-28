@@ -186,6 +186,11 @@ export function ContactForm() {
       }
 
       setStatus({ tone: "error", message: result.error });
+      pushToDataLayer({
+        event: "contact_form_error",
+        form_location: "contact_page",
+        error_message: result.error,
+      });
     });
   };
 
