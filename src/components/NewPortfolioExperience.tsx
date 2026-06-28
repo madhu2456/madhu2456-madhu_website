@@ -29,6 +29,7 @@ import { Section } from "@/components/Section";
 import { Experience } from "@/components/sections/Experience";
 import { Hero } from "@/components/sections/Hero";
 import { Projects } from "@/components/sections/Projects";
+import { pushToDataLayer } from "@/lib/gtm";
 import type {
   CertificationItem,
   ExperienceItem,
@@ -552,6 +553,10 @@ function Contact({ profile }: { profile: Profile }) {
       if (result.success) {
         form.reset();
         setPrefill({});
+        pushToDataLayer({
+          event: "contact_form_submit",
+          form_location: "homepage",
+        });
         setStatus({
           tone: "success",
           message: "Message sent. Madhu will reply as soon as possible.",
@@ -714,6 +719,7 @@ function ContactRow({
       {href.startsWith("mailto:") ? (
         <SafeEmailLink
           email={href.replace("mailto:", "")}
+          trackingLocation={`homepage_${label.toLowerCase()}`}
           className="block transition-colors hover:[&_span]:text-primary"
         >
           {content}
@@ -721,6 +727,13 @@ function ContactRow({
       ) : (
         <a
           href={href}
+          onClick={() => {
+            pushToDataLayer({
+              event: "contact_click",
+              contact_type: label.toLowerCase(),
+              contact_location: "homepage_contact",
+            });
+          }}
           className="block transition-colors hover:[&_span]:text-primary"
         >
           {content}
@@ -747,7 +760,14 @@ function SocialLink({
     <a
       href={href}
       target="_blank"
-      rel="noreferrer"
+      rel="noopener noreferrer"
+      onClick={() => {
+        pushToDataLayer({
+          event: "social_click",
+          social_platform: label.toLowerCase(),
+          click_location: "homepage_contact",
+        });
+      }}
       className="inline-flex items-center gap-2 rounded-full border border-border bg-white/5 px-4 py-2 text-sm hover:bg-surface-elevated hover:border-primary/30 transition-all duration-300"
     >
       {icon}

@@ -231,11 +231,6 @@ export async function submitContactForm(
 
   const submittedAt = new Date().toISOString();
 
-  console.info("[contact-form] submission", {
-    submittedAt,
-    messageLength: message.length,
-  });
-
   const toEmail = process.env.CONTACT_FORM_TO;
   const fromEmail =
     process.env.CONTACT_FORM_FROM ?? "Portfolio <onboarding@resend.dev>";
@@ -265,7 +260,6 @@ export async function submitContactForm(
         : `[madhudadi.in] New message from ${sanitizedName}`,
       html: buildEmailHtml({ name, email, subject, message, submittedAt }),
     });
-    console.info("[contact-form] email sent via Resend to", toEmail);
   } catch (err) {
     console.error("[contact-form] Resend delivery failed", err);
     return {

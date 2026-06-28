@@ -58,7 +58,14 @@ const PORTFOLIO_CONTENT_FILE_PATH = path.join(
 export const defaultPortfolioContent =
   defaultContentJson as unknown as PortfolioContent;
 
-const cloneDefaultContent = (): any =>
+type UpdatedRecord = { updatedAt?: string };
+type MigratablePortfolioContent = Record<string, unknown> & {
+  contentVersion?: unknown;
+  pageContent?: unknown;
+  services?: unknown;
+};
+
+const cloneDefaultContent = (): PortfolioContent =>
   JSON.parse(JSON.stringify(defaultPortfolioContent));
 
 const isPortfolioContent = (value: unknown): value is PortfolioContent => {
@@ -84,10 +91,10 @@ const ensurePortfolioContentFile = async () => {
   }
 };
 
-const isSame = (a: any, b: any) => {
+const isSame = (a: unknown, b: unknown) => {
   if (a === b) return true;
   if (!a || !b || typeof a !== "object" || typeof b !== "object") return false;
-  const replacer = (key: string, value: any) =>
+  const replacer = (key: string, value: unknown) =>
     key === "updatedAt" ? undefined : value;
   return JSON.stringify(a, replacer) === JSON.stringify(b, replacer);
 };
@@ -115,13 +122,13 @@ export const normalizeContentForSave = (
     };
   }
 
-  const getUpdated = (n: any, p: any) =>
+  const getUpdated = <T extends UpdatedRecord>(n: T, p: T) =>
     isSame(n, p) ? p.updatedAt || now : now;
 
-  const normalizeArray = (
-    nextArr: any[],
-    prevArr: any[],
-    idKeyFn: (item: any) => string,
+  const normalizeArray = <T extends UpdatedRecord>(
+    nextArr: T[],
+    prevArr: T[],
+    idKeyFn: (item: T) => string,
   ) => {
     const prevMap = new Map(prevArr.map((p) => [idKeyFn(p), p]));
     return nextArr.map((n) => {
@@ -219,28 +226,40 @@ const buildDerivedData = (content: PortfolioContent): PortfolioData => {
 
 export const getPortfolioContentPath = () => PORTFOLIO_CONTENT_FILE_PATH;
 
-export function migratePortfolioContent(raw: any): PortfolioContent {
+const hasSeoTitle = (value: unknown): value is { seoTitle?: unknown } => {
+  return !!value && typeof value === "object" && "seoTitle" in value;
+};
+
+export function migratePortfolioContent(raw: unknown): PortfolioContent {
   if (!raw || typeof raw !== "object") {
     throw new Error("Invalid raw data for migration");
   }
 
-  let migrated = { ...raw };
+  let migrated = {
+    ...(raw as Record<string, unknown>),
+  } as MigratablePortfolioContent;
 
   // V1 to V2 Migration
   if (!migrated.contentVersion || migrated.contentVersion === 1) {
     const v2Defaults = buildV2PageContentDefaults();
+    const pageContent =
+      migrated.pageContent && typeof migrated.pageContent === "object"
+        ? { ...v2Defaults, ...migrated.pageContent }
+        : v2Defaults;
+    const services = Array.isArray(migrated.services)
+      ? migrated.services.map((service) => {
+          if (hasSeoTitle(service) && service.seoTitle) {
+            return service;
+          }
+          return upgradeServiceDefaults(service);
+        })
+      : [];
+
     migrated = {
       ...migrated,
       contentVersion: 2,
-      pageContent: migrated.pageContent
-        ? { ...v2Defaults, ...migrated.pageContent }
-        : v2Defaults,
-      services: (migrated.services || []).map((s: any) => {
-        if (!s.seoTitle) {
-          return upgradeServiceDefaults(s);
-        }
-        return s;
-      }),
+      pageContent,
+      services,
     };
   }
 
@@ -252,7 +271,7 @@ export function migratePortfolioContent(raw: any): PortfolioContent {
     };
   }
 
-  return migrated as PortfolioContent;
+  return portfolioContentSchema.parse(migrated);
 }
 
 export async function readPortfolioContent(): Promise<PortfolioContent> {
@@ -267,7 +286,7 @@ export async function readPortfolioContent(): Promise<PortfolioContent> {
     return fallback;
   }
 
-  let parsedContent: any;
+  let parsedContent: unknown;
   try {
     parsedContent = JSON.parse(rawContent);
   } catch (_err) {
@@ -303,7 +322,7 @@ export async function savePortfolioContent(
   let previous: PortfolioContent | null = null;
   try {
     const raw = await fs.readFile(PORTFOLIO_CONTENT_FILE_PATH, "utf8");
-    previous = JSON.parse(raw);
+    previous = migratePortfolioContent(JSON.parse(raw) as unknown);
   } catch {}
 
   const normalizedContent = normalizeContentForSave(nextContent, previous);

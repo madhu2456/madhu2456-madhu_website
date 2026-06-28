@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const isProd = process.env.NODE_ENV === "production";
+const cspReportOnlyEnabled = process.env.CSP_REPORT_ONLY === "true";
+const cspReportUri = process.env.CSP_REPORT_URI?.trim() || "/api/csp-report/";
 
 // NOTE: 'unsafe-inline' in script-src weakens XSS protection. Next.js requires it without nonce setup.
 // TODO: Replace with nonce-based approach — see https://nextjs.org/docs/app/building-your-application/configuring/content-security-policy
@@ -23,6 +25,14 @@ const cspHeader = `
 
 const securityHeaders = [
   { key: "Content-Security-Policy", value: cspHeader },
+  ...(cspReportOnlyEnabled
+    ? [
+        {
+          key: "Content-Security-Policy-Report-Only",
+          value: `${cspHeader} report-uri ${cspReportUri};`,
+        },
+      ]
+    : []),
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "X-Frame-Options", value: "DENY" },
   { key: "X-XSS-Protection", value: "0" },
@@ -54,6 +64,7 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
 
   experimental: {
+    globalNotFound: true,
     optimizePackageImports: ["@tabler/icons-react", "motion"],
     // Inline CSS for first-load paint to reduce render-blocking stylesheet requests.
     inlineCss: true,

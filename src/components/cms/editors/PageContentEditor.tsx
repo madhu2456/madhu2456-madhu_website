@@ -1,7 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { Controller, useFieldArray, useFormContext } from "react-hook-form";
+import {
+  Controller,
+  type FieldErrors,
+  type FieldValues,
+  useFieldArray,
+  useFormContext,
+} from "react-hook-form";
 import {
   AutoResizeTextarea,
   FormField,
@@ -11,23 +17,40 @@ import {
   toLineText,
 } from "./shared";
 
+const readPath = (value: unknown, path: string[]): unknown => {
+  return path.reduce<unknown>((current, segment) => {
+    if (!current || typeof current !== "object") return undefined;
+    return (current as Record<string, unknown>)[segment];
+  }, value);
+};
+
+const errorMessage = (
+  errors: FieldErrors<FieldValues>,
+  path: string,
+): string | undefined => {
+  const message = readPath(errors, path.split("."));
+  return typeof message === "string" ? message : undefined;
+};
+
 function SeoEditor({ prefix }: { prefix: string }) {
   const {
     register,
     formState: { errors },
-  } = useFormContext<any>();
-  const errs = errors as any;
+  } = useFormContext();
   return (
     <div className="grid gap-3 rounded-lg border p-4 bg-muted/20 md:grid-cols-2">
       <div className="md:col-span-2">
         <h4 className="font-semibold text-sm mb-2">SEO Settings</h4>
       </div>
-      <FormField label="Title" error={errs?.[prefix]?.seo?.title?.message}>
+      <FormField
+        label="Title"
+        error={errorMessage(errors, `${prefix}.seo.title.message`)}
+      >
         <input className={inputClass} {...register(`${prefix}.seo.title`)} />
       </FormField>
       <FormField
         label="Canonical Path"
-        error={errs?.[prefix]?.seo?.canonicalPath?.message}
+        error={errorMessage(errors, `${prefix}.seo.canonicalPath.message`)}
       >
         <input
           className={inputClass}
@@ -37,7 +60,7 @@ function SeoEditor({ prefix }: { prefix: string }) {
       <div className="md:col-span-2">
         <FormField
           label="Description"
-          error={errs?.[prefix]?.seo?.description?.message}
+          error={errorMessage(errors, `${prefix}.seo.description.message`)}
         >
           <textarea
             className={inputClass}
@@ -55,23 +78,28 @@ function HeroEditor({ prefix }: { prefix: string }) {
     register,
     control,
     formState: { errors },
-  } = useFormContext<any>();
-  const errs = errors as any;
+  } = useFormContext();
   return (
     <div className="grid gap-3 rounded-lg border p-4 md:grid-cols-2">
       <div className="md:col-span-2">
         <h4 className="font-semibold text-sm mb-2">Hero Section</h4>
       </div>
-      <FormField label="Hero Title" error={errs?.[prefix]?.heroTitle?.message}>
+      <FormField
+        label="Hero Title"
+        error={errorMessage(errors, `${prefix}.heroTitle.message`)}
+      >
         <input className={inputClass} {...register(`${prefix}.heroTitle`)} />
       </FormField>
-      <FormField label="Eyebrow" error={errs?.[prefix]?.eyebrow?.message}>
+      <FormField
+        label="Eyebrow"
+        error={errorMessage(errors, `${prefix}.eyebrow.message`)}
+      >
         <input className={inputClass} {...register(`${prefix}.eyebrow`)} />
       </FormField>
       <div className="md:col-span-2">
         <FormField
           label="Subtitle"
-          error={errs?.[prefix]?.heroSubtitle?.message}
+          error={errorMessage(errors, `${prefix}.heroSubtitle.message`)}
         >
           <input
             className={inputClass}
@@ -82,7 +110,7 @@ function HeroEditor({ prefix }: { prefix: string }) {
       <div className="md:col-span-2">
         <FormField
           label="Intro Paragraphs (One per line)"
-          error={errs?.[prefix]?.introParagraphs?.message}
+          error={errorMessage(errors, `${prefix}.introParagraphs.message`)}
         >
           <Controller
             control={control}
@@ -102,7 +130,7 @@ function HeroEditor({ prefix }: { prefix: string }) {
 }
 
 function HomeEditor() {
-  const { register, control } = useFormContext<any>();
+  const { register, control } = useFormContext();
   const prefix = "pageContent.home";
 
   const {
@@ -201,7 +229,7 @@ function HomeEditor() {
 }
 
 function CredentialsEditor() {
-  const { register, control } = useFormContext<any>();
+  const { register, control } = useFormContext();
   const prefix = "pageContent.credentials";
 
   const {
@@ -411,7 +439,7 @@ function CredentialsEditor() {
 
 function ContactEditor() {
   const prefix = "pageContent.contact";
-  const { register, control } = useFormContext<any>();
+  const { register, control } = useFormContext();
 
   return (
     <div className="space-y-6">
