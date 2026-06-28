@@ -19,6 +19,8 @@ type FormFieldProps = {
   rows?: number;
   /** HTML autocomplete attribute for form fields. */
   autoComplete?: string;
+  /** Per-field validation error message rendered with aria-invalid/aria-describedby. */
+  error?: string;
 } & (
   | { defaultValue?: string; value?: never; onChange?: never }
   | { defaultValue?: never; value?: string; onChange?: (val: string) => void }
@@ -36,16 +38,22 @@ export function FormField({
   value,
   onChange,
   autoComplete,
+  error,
 }: FormFieldProps) {
-  const className =
-    "w-full rounded-lg border border-border bg-background/60 px-4 py-3 text-sm outline-none transition-all focus:border-primary focus:bg-background";
-
   const id = `${idPrefix}-${name}`;
+  const errorId = `${id}-error`;
+  const className = `w-full rounded-lg border bg-background/60 px-4 py-3 text-sm outline-none transition-all focus:border-primary focus:bg-background ${
+    error ? "border-destructive" : "border-border"
+  }`;
 
   // In uncontrolled mode, re-key the element so React re-creates it when
   // `defaultValue` changes (e.g. intent prefill on the homepage).
   const inputKey =
     value === undefined ? `default-${defaultValue ?? ""}` : undefined;
+
+  const ariaProps = error
+    ? { "aria-invalid": true, "aria-describedby": errorId }
+    : {};
 
   return (
     <label htmlFor={id} className="block text-left">
@@ -62,6 +70,7 @@ export function FormField({
           rows={rows}
           maxLength={5000}
           className={className}
+          {...ariaProps}
           {...(value !== undefined ? { value } : { defaultValue })}
           onChange={onChange ? (e) => onChange(e.target.value) : undefined}
         />
@@ -75,10 +84,16 @@ export function FormField({
           maxLength={name === "subject" ? 300 : 200}
           className={className}
           autoComplete={autoComplete}
+          {...ariaProps}
           {...(value !== undefined ? { value } : { defaultValue })}
           onChange={onChange ? (e) => onChange(e.target.value) : undefined}
         />
       )}
+      {error ? (
+        <p id={errorId} className="mt-1.5 text-xs text-destructive">
+          {error}
+        </p>
+      ) : null}
     </label>
   );
 }

@@ -82,11 +82,40 @@ type CurrentRole = {
 const SCHEMA_LANGUAGE = "en-IN";
 const TRANSACTIONAL_KNOWS_ABOUT_PATTERN =
   /\b(hire|freelance|freelancer|for hire|near me|contractor|available|remote|services? in)\b/i;
+const LOCATION_KNOWS_ABOUT_PATTERN = /\s+in\s+/i;
+const SELF_REFERENTIAL_KNOWS_ABOUT_PATTERN = /\bmadhu\s+dadi\b/i;
 
 const toExpertiseKeywords = (keywords?: string[] | null) =>
   normalizeKeywordList(keywords).filter(
-    (keyword) => !TRANSACTIONAL_KNOWS_ABOUT_PATTERN.test(keyword),
+    (keyword) =>
+      !TRANSACTIONAL_KNOWS_ABOUT_PATTERN.test(keyword) &&
+      !LOCATION_KNOWS_ABOUT_PATTERN.test(keyword) &&
+      !SELF_REFERENTIAL_KNOWS_ABOUT_PATTERN.test(keyword),
   );
+
+const buildDeliveryLeadTime = (timeline: string) => {
+  const rangeMatch = timeline.match(/(\d+)\s*[-–—]\s*(\d+)\s*([a-zA-Z]+)/);
+  if (rangeMatch) {
+    return {
+      "@type": "QuantitativeValue",
+      minValue: Number(rangeMatch[1]),
+      maxValue: Number(rangeMatch[2]),
+      unitText: rangeMatch[3].toLowerCase(),
+    };
+  }
+  const singleMatch = timeline.match(/(\d+)\s*([a-zA-Z]+)/);
+  if (singleMatch) {
+    return {
+      "@type": "QuantitativeValue",
+      value: Number(singleMatch[1]),
+      unitText: singleMatch[2].toLowerCase(),
+    };
+  }
+  return {
+    "@type": "QuantitativeValue",
+    value: timeline,
+  };
+};
 
 // ---------------------------------------------------------------------------
 // Person
@@ -124,9 +153,12 @@ export function buildPersonSchema({
   services?: RichService[] | null;
   currentRole?: CurrentRole | null;
 }) {
-  const sameAs = Object.values(socialLinks ?? {}).filter(
-    (v): v is string => typeof v === "string" && v.length > 0,
-  );
+  const sameAs = Object.entries(socialLinks ?? {})
+    .filter(
+      ([key, v]) =>
+        key !== "googleBusiness" && typeof v === "string" && v.length > 0,
+    )
+    .map(([, v]) => v as string);
   const staticKnowsAbout = [
     "Analytics",
     "Full-Stack Development",
@@ -208,10 +240,7 @@ export function buildPersonSchema({
                 priceCurrency: "USD",
               }),
               ...(s.timeline && {
-                deliveryLeadTime: {
-                  "@type": "QuantitativeValue",
-                  value: s.timeline,
-                },
+                deliveryLeadTime: buildDeliveryLeadTime(s.timeline),
               }),
             };
           })
@@ -845,86 +874,6 @@ export function buildSoftwareApplicationSchema({
       description:
         "Custom project pricing based on scope, timeline, and delivery model.",
     },
-  };
-}
-
-// ---------------------------------------------------------------------------
-// ProfessionalService (LocalBusiness)
-// ---------------------------------------------------------------------------
-export function buildProfessionalServiceSchema({
-  siteUrl,
-  name,
-  alternateName,
-  description,
-  image,
-  telephone,
-  email,
-  addressLocality,
-  priceRange,
-  socialLinks,
-}: {
-  siteUrl: string;
-  name: string;
-  alternateName?: string;
-  description: string;
-  image: string;
-  telephone?: string | null;
-  email?: string | null;
-  addressLocality?: string | null;
-  priceRange?: string | null;
-  socialLinks?: SocialLinks;
-}) {
-  const sameAs = Object.values(socialLinks ?? {}).filter(
-    (v): v is string => typeof v === "string" && v.length > 0,
-  );
-  return {
-    "@type": "ProfessionalService",
-    "@id": `${siteUrl}#localbusiness`,
-    name,
-    ...(alternateName && { alternateName }),
-    description,
-    url: siteUrl,
-    image,
-    ...(sameAs.length > 0 && { sameAs }),
-    ...(telephone && { telephone }),
-    ...(email && { email }),
-    ...(addressLocality && {
-      address: {
-        "@type": "PostalAddress",
-        addressLocality,
-        addressCountry: "IN",
-      },
-    }),
-    ...(priceRange && { priceRange }),
-    // Verified: coordinates point to Visakhapatnam, Andhra Pradesh, India
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: 17.6868,
-      longitude: 83.2185,
-    },
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday",
-        ],
-        opens: "10:00",
-        closes: "22:00",
-      },
-    ],
-    serviceArea: [
-      { "@type": "Country", name: "India" },
-      { "@type": "Place", name: "Worldwide" },
-    ],
-    // Links back to the canonical Person and Organization
-    parentOrganization: { "@id": `${siteUrl}#organization` },
-    founder: { "@id": `${siteUrl}#person` },
   };
 }
 

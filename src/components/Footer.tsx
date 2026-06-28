@@ -54,10 +54,19 @@ export function Footer({ profile, projects, navigationItems }: FooterProps) {
         ...(profile.socialLinks.website
           ? [{ label: "Blog", href: profile.socialLinks.website }]
           : []),
+        ...(profile.socialLinks.medium
+          ? [{ label: "Medium", href: profile.socialLinks.medium }]
+          : []),
+        ...(profile.socialLinks.devto
+          ? [{ label: "Dev.to", href: profile.socialLinks.devto }]
+          : []),
+        ...(profile.socialLinks.youtube
+          ? [{ label: "YouTube", href: profile.socialLinks.youtube }]
+          : []),
         ...(profile.socialLinks.googleBusiness
           ? [
               {
-                label: "Google Business",
+                label: "View on Google",
                 href: profile.socialLinks.googleBusiness,
               },
             ]
@@ -125,7 +134,7 @@ export function Footer({ profile, projects, navigationItems }: FooterProps) {
           <address
             className="not-italic leading-relaxed text-sm text-muted-foreground"
             itemScope
-            itemType="https://schema.org/LocalBusiness"
+            itemType="https://schema.org/Person"
           >
             <strong
               className="font-semibold text-foreground block mb-1"

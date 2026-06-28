@@ -70,7 +70,7 @@
   --destructive-foreground: oklch(0.98 0 0);
   --border: oklch(1 0 0 / 15%);
   --input: oklch(1 0 0 / 10%);
-  --ring: oklch(0.78 0.14 65 / 50%);
+  --ring: oklch(0.78 0.14 65 / 80%);
 
   --sidebar: oklch(0 0 0);
   --sidebar-foreground: oklch(0.98 0 0);
@@ -113,6 +113,11 @@
   * {
     border-color: var(--color-border);
     outline-color: color-mix(in oklab, var(--ring) 50%, transparent);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
   }
 
   html {

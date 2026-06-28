@@ -32,7 +32,7 @@ const contactFormSchema = z.object({
 
 type SubmitResult =
   | { success: true; data?: { submittedAt: string } }
-  | { success: false; error: string };
+  | { success: false; error: string; fieldErrors?: Record<string, string> };
 
 // Basic in-memory rate limiting for contact form
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
@@ -204,9 +204,12 @@ export async function submitContactForm(
     return { success: true };
   }
 
-  // When hosted behind a proxy, x-forwarded-for may contain multiple IPs. Extract the first one.
-  const forwardedFor = (await headers()).get("x-forwarded-for");
-  const ip = forwardedFor ? forwardedFor.split(",")[0].trim() : "anonymous";
+  const requestHeaders = await headers();
+  const cfConnectingIp = requestHeaders.get("cf-connecting-ip");
+  const forwardedFor = requestHeaders.get("x-forwarded-for");
+  const ip =
+    cfConnectingIp?.trim() ||
+    (forwardedFor ? forwardedFor.split(",")[0].trim() : "anonymous");
 
   if (isRateLimited(ip)) {
     return {
@@ -223,8 +226,21 @@ export async function submitContactForm(
   });
 
   if (!parsed.success) {
-    const firstError = parsed.error.issues[0];
-    return { success: false, error: firstError.message };
+    const fieldErrors: Record<string, string> = {};
+    for (const issue of parsed.error.issues) {
+      const field = String(issue.path[0] ?? "");
+      if (field && !(field in fieldErrors)) {
+        fieldErrors[field] = issue.message;
+      }
+    }
+    return {
+      success: false,
+      error:
+        Object.keys(fieldErrors).length > 0
+          ? "Please fix the highlighted fields."
+          : (parsed.error.issues[0]?.message ?? "Validation failed."),
+      fieldErrors,
+    };
   }
 
   const { name, email, subject, message } = parsed.data;

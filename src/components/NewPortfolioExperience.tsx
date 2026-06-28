@@ -525,6 +525,7 @@ function Contact({ profile }: { profile: Profile }) {
     tone: "success" | "error";
     message: string;
   } | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
@@ -554,6 +555,7 @@ function Contact({ profile }: { profile: Profile }) {
     const form = event.currentTarget;
     const formData = new FormData(form);
     setStatus(null);
+    setFieldErrors({});
 
     startTransition(async () => {
       const result = await submitContactForm(formData);
@@ -572,6 +574,7 @@ function Contact({ profile }: { profile: Profile }) {
       }
 
       setStatus({ tone: "error", message: result.error });
+      setFieldErrors(result.fieldErrors ?? {});
       pushToDataLayer({
         event: "contact_form_error",
         form_location: "homepage",
@@ -653,13 +656,21 @@ function Contact({ profile }: { profile: Profile }) {
           className="space-y-4 rounded-2xl border border-border bg-surface/60 p-6"
           onSubmit={handleSubmit}
         >
-          <input type="text" name="hp_field" className="hidden" tabIndex={-1} />
+          <input
+            type="text"
+            name="hp_field"
+            className="hidden"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+          />
           <FormField
             label="Name"
             name="name"
             required
             defaultValue={prefill.name}
             autoComplete="name"
+            error={fieldErrors.name}
           />
           <FormField
             label="Email"
@@ -668,12 +679,14 @@ function Contact({ profile }: { profile: Profile }) {
             required
             defaultValue={prefill.email}
             autoComplete="email"
+            error={fieldErrors.email}
           />
           <FormField
             label="Subject"
             name="subject"
             required
             defaultValue={prefill.subject}
+            error={fieldErrors.subject}
           />
           <FormField
             label="Message"
@@ -681,6 +694,7 @@ function Contact({ profile }: { profile: Profile }) {
             textarea
             required
             defaultValue={prefill.message}
+            error={fieldErrors.message}
           />
           <button
             type="submit"

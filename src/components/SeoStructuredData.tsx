@@ -9,7 +9,6 @@ import {
   buildOccupationSchema,
   buildOrganizationSchema,
   buildPersonSchema,
-  buildProfessionalServiceSchema,
   buildProfilePageSchema,
   buildProjectsListSchema,
   buildServicesListSchema,
@@ -23,7 +22,6 @@ import { resolveSiteUrl } from "@/lib/site-url";
 
 export type SeoGraphNode =
   | "Person"
-  | "ProfessionalService"
   | "Occupation"
   | "Organization"
   | "WebSite"
@@ -123,20 +121,6 @@ export async function SeoStructuredData({
                 location: currentRole.location,
               }
             : undefined,
-        })
-      : null,
-    includeNode("ProfessionalService")
-      ? buildProfessionalServiceSchema({
-          siteUrl,
-          name: siteSettings.siteTitle || fullName,
-          alternateName: fullName,
-          description: description || "AI & Marketing Analytics Consulting",
-          image: `${siteUrl}opengraph-image`,
-          telephone: profile?.phone,
-          email: profile?.email,
-          addressLocality: profile?.location,
-          priceRange: "$$",
-          socialLinks: profile?.socialLinks ?? undefined,
         })
       : null,
     includeNode("Occupation")
