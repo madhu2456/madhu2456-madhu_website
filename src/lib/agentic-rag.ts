@@ -689,7 +689,7 @@ export async function answerWithAgenticRag(
     throw new Error("OPENAI_API_KEY not configured");
   }
 
-  const model = process.env.OPENAI_CHAT_MODEL?.trim() || "gpt-4.1-mini";
+  const model = process.env.OPENAI_CHAT_MODEL?.trim() || "gpt-4o-mini";
   const contextBlock = relevantChunks
     .map(
       (chunk, index) =>

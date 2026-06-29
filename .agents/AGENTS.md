@@ -98,6 +98,12 @@ Flow:
 Required env var:
 - `OPENAI_API_KEY`
 
+### 5. Security
+
+- Content Security Policy (CSP) is implemented via Next.js Middleware (`middleware.ts`) in Report-Only mode.
+- Uses a dynamically generated UUID-based nonce injected via request headers (`x-nonce`).
+- Static security headers (X-Frame-Options, HSTS, etc.) are enforced via `next.config.ts`.
+
 ## SEO / GEO / AEO
 
 ### Technical SEO

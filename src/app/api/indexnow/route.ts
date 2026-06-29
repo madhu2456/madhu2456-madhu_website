@@ -1,4 +1,3 @@
-import { timingSafeEqual } from "node:crypto";
 import { NextResponse } from "next/server";
 import { resolveSiteUrl } from "@/lib/site-url";
 
@@ -126,14 +125,16 @@ function readProvidedSecret(request: Request): string | null {
 }
 
 function safeEquals(provided: string, expected: string) {
-  const providedBuffer = Buffer.from(provided);
-  const expectedBuffer = Buffer.from(expected);
-
-  if (providedBuffer.length !== expectedBuffer.length) {
+  if (provided.length !== expected.length) {
     return false;
   }
 
-  return timingSafeEqual(providedBuffer, expectedBuffer);
+  let result = 0;
+  for (let i = 0; i < provided.length; i++) {
+    result |= provided.charCodeAt(i) ^ expected.charCodeAt(i);
+  }
+
+  return result === 0;
 }
 
 function isRateLimited(request: Request) {

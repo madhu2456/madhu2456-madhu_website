@@ -1,5 +1,3 @@
-import { Buffer } from "node:buffer";
-import { timingSafeEqual } from "node:crypto";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
@@ -16,14 +14,23 @@ const unauthorized = () =>
     },
   });
 
+function constantTimeEqual(a: string, b: string): boolean {
+  if (a.length !== b.length) {
+    return false;
+  }
+  let result = 0;
+  for (let i = 0; i < a.length; i++) {
+    result |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  }
+  return result === 0;
+}
+
 export default function proxy(request: NextRequest) {
   const cmsUsername = process.env.CMS_AUTH_USERNAME?.trim() ?? "";
   const cmsPassword = process.env.CMS_AUTH_PASSWORD ?? "";
 
   const expectedCredentials =
-    cmsUsername && cmsPassword
-      ? Buffer.from(`${cmsUsername}:${cmsPassword}`).toString("base64")
-      : "";
+    cmsUsername && cmsPassword ? btoa(`${cmsUsername}:${cmsPassword}`) : "";
 
   if (!expectedCredentials) {
     return unauthorized();
@@ -39,17 +46,7 @@ export default function proxy(request: NextRequest) {
     return unauthorized();
   }
 
-  if (credentials.length !== expectedCredentials.length) {
-    return unauthorized();
-  }
-
-  const expectedBuf = Buffer.from(expectedCredentials);
-  const receivedBuf = Buffer.from(credentials);
-  const isEqual =
-    expectedBuf.length === receivedBuf.length &&
-    timingSafeEqual(expectedBuf, receivedBuf);
-
-  if (!isEqual) {
+  if (!constantTimeEqual(credentials, expectedCredentials)) {
     return unauthorized();
   }
 

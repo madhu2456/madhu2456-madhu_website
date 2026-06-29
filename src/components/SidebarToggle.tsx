@@ -1,14 +1,17 @@
 "use client";
 
 import { MessageCircle, Sparkles } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { useSidebar } from "./ui/sidebar";
 
 function SidebarToggle() {
+  const pathname = usePathname();
   const { toggleSidebar, open, isMobile, openMobile } = useSidebar();
 
   const isSidebarOpen = isMobile ? openMobile : open;
 
   if (isSidebarOpen) return null;
+  if (pathname === "/contact" || pathname === "/contact/") return null;
 
   return (
     <div className="group fixed right-5 bottom-5 z-50 sm:right-6 sm:bottom-6">

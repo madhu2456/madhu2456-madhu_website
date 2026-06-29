@@ -94,6 +94,12 @@ Data/
   - `src/app/ai-profile.json/route.ts`
 - AI crawler-aware robots policy in `src/app/robots.ts`
 
+## Security
+
+- Content Security Policy (CSP) is implemented via Next.js Middleware (`src/middleware.ts`) in Report-Only mode.
+- Uses a dynamically generated UUID-based nonce for strict inline script execution (`strict-dynamic`).
+- Static security headers (X-Frame-Options, HSTS, etc.) are applied in `next.config.ts`.
+
 ## Image handling
 
 - CMS uploads: `POST /api/cms/upload`

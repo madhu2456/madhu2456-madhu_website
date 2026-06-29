@@ -1,7 +1,16 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import proxy from "./src/proxy";
 
 export function middleware(request: NextRequest) {
+  const pathname = request.nextUrl.pathname;
+  if (pathname.startsWith("/cms") || pathname.startsWith("/api/cms")) {
+    const authResponse = proxy(request);
+    if (authResponse.status === 401) {
+      return authResponse;
+    }
+  }
+
   const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
   const isProd = process.env.NODE_ENV === "production";
   const cspReportUri = process.env.CSP_REPORT_URI?.trim() || "/api/csp-report/";
@@ -44,11 +53,11 @@ export const config = {
   matcher: [
     /*
      * Match all request paths except for the ones starting with:
-     * - api (API routes)
+     * - api (API routes), UNLESS starting with api/cms
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico, sitemap.xml, robots.txt (metadata files)
      */
-    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
+    "/((?!api(?!/cms)|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
   ],
 };
