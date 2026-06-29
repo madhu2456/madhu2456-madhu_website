@@ -1,38 +1,6 @@
 import type { NextConfig } from "next";
 
-const isProd = process.env.NODE_ENV === "production";
-const cspReportOnlyEnabled = process.env.CSP_REPORT_ONLY === "true";
-const cspReportUri = process.env.CSP_REPORT_URI?.trim() || "/api/csp-report/";
-
-// NOTE: 'unsafe-inline' in script-src weakens XSS protection. Next.js requires it without nonce setup.
-// TODO: Replace with nonce-based approach — see https://nextjs.org/docs/app/building-your-application/configuring/content-security-policy
-const cspHeader = `
-    default-src 'self';
-    script-src 'self' 'unsafe-inline' ${!isProd ? "'unsafe-eval'" : ""} https://www.googletagmanager.com https://static.cloudflareinsights.com;
-    connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com https://api.resend.com${!isProd ? " ws: wss:" : ""};
-    style-src 'self' 'unsafe-inline';
-    img-src 'self' blob: data: https://images.unsplash.com https://www.googletagmanager.com https://www.google-analytics.com;
-    font-src 'self' data:;
-    object-src 'none';
-    base-uri 'self';
-    form-action 'self';
-    frame-ancestors 'none';
-    frame-src 'self' https://www.googletagmanager.com;
-    ${isProd ? "upgrade-insecure-requests;" : ""}
-`
-  .replace(/\s{2,}/g, " ")
-  .trim();
-
 const securityHeaders = [
-  { key: "Content-Security-Policy", value: cspHeader },
-  ...(cspReportOnlyEnabled
-    ? [
-        {
-          key: "Content-Security-Policy-Report-Only",
-          value: `${cspHeader} report-uri ${cspReportUri};`,
-        },
-      ]
-    : []),
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "X-Frame-Options", value: "DENY" },
   { key: "X-XSS-Protection", value: "0" },
