@@ -128,6 +128,12 @@ export function ContactForm() {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    const wasSubmitted = sessionStorage.getItem("contact_submitted");
+    if (wasSubmitted) setSubmitted(true);
+  }, []);
 
   const queryIntent = searchParams.get("intent");
   const querySubject = searchParams.get("subject");
@@ -174,6 +180,8 @@ export function ContactForm() {
       const result = await submitContactForm(formData);
       if (result.success) {
         form.reset();
+        sessionStorage.setItem("contact_submitted", "true");
+        setSubmitted(true);
         pushToDataLayer({
           event: "contact_form_submit",
           form_location: "contact_page",
@@ -256,10 +264,10 @@ export function ContactForm() {
 
       <button
         type="submit"
-        disabled={isPending}
+        disabled={isPending || submitted}
         className="w-full rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition-transform hover:scale-[1.02] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {isPending ? "Sending..." : "Send message"}
+        {isPending ? "Sending..." : submitted ? "Sent!" : "Send message"}
       </button>
 
       {status ? (

@@ -165,7 +165,7 @@ describe("buildPersonSchema", () => {
     });
   });
 
-  test("excludes googleBusiness from sameAs but includes real profiles", () => {
+  test("includes googleBusiness in sameAs alongside real profiles", () => {
     const schema = buildPersonSchema({
       fullName,
       siteUrl,
@@ -179,7 +179,7 @@ describe("buildPersonSchema", () => {
 
     expect(schema.sameAs).toContain("https://github.com/madhu2456");
     expect(schema.sameAs).toContain("https://medium.com/@madhu.kumar245");
-    expect(schema.sameAs).not.toContain("https://madhudadi.in/google");
+    expect(schema.sameAs).toContain("https://madhudadi.in/google");
   });
 });
 

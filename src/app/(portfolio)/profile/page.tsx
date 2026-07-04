@@ -14,6 +14,7 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { SafeEmailLink } from "@/components/SafeEmailLink";
+import { TrackedLink } from "@/components/TrackedLink";
 import { buildDiscoveryKeywords } from "@/lib/discovery-keywords";
 import { resolveAbsoluteImageUrl } from "@/lib/image-source";
 import { buildPersonSchema } from "@/lib/jsonld";
@@ -610,15 +611,17 @@ export default async function ProfilePage() {
 
           {/* Resume Download CTA */}
           <section className="text-center">
-            <a
+            <TrackedLink
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/30 px-6 py-3 text-sm font-semibold text-muted-foreground hover:text-foreground hover:border-primary/20 transition-all"
+              gtmEvent="resume_download"
+              gtmData={{ download_type: "pdf", download_location: "profile" }}
             >
               Download PDF Resume
               <IconExternalLink className="h-4 w-4" />
-            </a>
+            </TrackedLink>
           </section>
 
           {/* Contact CTA */}

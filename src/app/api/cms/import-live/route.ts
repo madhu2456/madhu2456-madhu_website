@@ -13,9 +13,16 @@ export const runtime = "nodejs";
 
 const validateCmsOrigin = (request: Request) => {
   const origin = request.headers.get("origin");
-  if (!origin) return true;
   const siteUrl = resolveSiteUrl();
-  return origin === siteUrl || origin === `${siteUrl}/`;
+  const isAllowedOrigin =
+    origin === siteUrl ||
+    origin === `${siteUrl}/` ||
+    (process.env.NODE_ENV !== "production" &&
+      Boolean(
+        origin?.startsWith("http://localhost:") ||
+          origin?.startsWith("http://127.0.0.1:"),
+      ));
+  return isAllowedOrigin;
 };
 
 const MAX_CMS_BODY_BYTES = 2 * 1024 * 1024; // 2 MB

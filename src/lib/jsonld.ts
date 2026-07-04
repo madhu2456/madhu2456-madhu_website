@@ -154,10 +154,7 @@ export function buildPersonSchema({
   currentRole?: CurrentRole | null;
 }) {
   const sameAs = Object.entries(socialLinks ?? {})
-    .filter(
-      ([key, v]) =>
-        key !== "googleBusiness" && typeof v === "string" && v.length > 0,
-    )
+    .filter(([, v]) => typeof v === "string" && v.length > 0)
     .map(([, v]) => v as string);
   const staticKnowsAbout = [
     "Analytics",
@@ -352,15 +349,33 @@ export function buildPersonSchema({
 // ---------------------------------------------------------------------------
 // Occupation
 // ---------------------------------------------------------------------------
+const staticOccupationSkills = [
+  "AI/ML Development",
+  "LLM Engineering",
+  "Full-Stack Development",
+  "React",
+  "Next.js",
+  "TypeScript",
+  "Node.js",
+  "Cloud Infrastructure",
+];
+
 export function buildOccupationSchema({
   siteUrl,
   jobTitle,
   location,
+  skills,
 }: {
   siteUrl: string;
   jobTitle?: string | null;
   location?: string | null;
+  skills?: Array<{ name: string } | string> | null;
 }) {
+  const derivedSkills =
+    skills && skills.length > 0
+      ? skills.map((s) => (typeof s === "string" ? s : s.name)).filter(Boolean)
+      : staticOccupationSkills;
+
   return {
     "@type": "Occupation",
     "@id": `${siteUrl}#occupation`,
@@ -369,8 +384,7 @@ export function buildOccupationSchema({
       "@type": "AdministrativeArea",
       name: location ?? "Remote",
     },
-    skills:
-      "AI/ML Development, LLM Engineering, Full-Stack Development, React, Next.js, TypeScript, Node.js, Cloud Infrastructure",
+    skills: derivedSkills.join(", "),
   };
 }
 

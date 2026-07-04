@@ -527,6 +527,12 @@ function Contact({ profile }: { profile: Profile }) {
   } | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [isPending, startTransition] = useTransition();
+  const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    const wasSubmitted = sessionStorage.getItem("contact_submitted");
+    if (wasSubmitted) setSubmitted(true);
+  }, []);
 
   useEffect(() => {
     const read = () => {
@@ -562,6 +568,8 @@ function Contact({ profile }: { profile: Profile }) {
       if (result.success) {
         form.reset();
         setPrefill({});
+        sessionStorage.setItem("contact_submitted", "true");
+        setSubmitted(true);
         pushToDataLayer({
           event: "contact_form_submit",
           form_location: "homepage",
@@ -638,7 +646,7 @@ function Contact({ profile }: { profile: Profile }) {
                   <div className="flex h-4 w-4 items-center justify-center overflow-hidden rounded-full border border-border/50 bg-surface shadow-inner">
                     <Image
                       src="/new-ui/logo.png"
-                      alt="Blog icon"
+                      alt=""
                       aria-hidden="true"
                       width={16}
                       height={16}
@@ -698,10 +706,10 @@ function Contact({ profile }: { profile: Profile }) {
           />
           <button
             type="submit"
-            disabled={isPending}
+            disabled={isPending || submitted}
             className="w-full rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-transform hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {isPending ? "Sending..." : "Send message"}
+            {isPending ? "Sending..." : submitted ? "Sent!" : "Send message"}
           </button>
           {status ? (
             <p

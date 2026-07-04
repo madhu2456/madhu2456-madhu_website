@@ -128,6 +128,7 @@ export async function SeoStructuredData({
           siteUrl,
           jobTitle: profile?.headline,
           location: profile?.location,
+          skills,
         })
       : null,
     includeNode("Organization")
@@ -167,7 +168,11 @@ export async function SeoStructuredData({
           about: { "@id": `${siteUrl}#person` },
           speakable: {
             "@type": "SpeakableSpecification",
-            cssSelector: ["main"],
+            cssSelector: [
+              "#main-content h1",
+              "#main-content h2",
+              "#main-content p",
+            ],
           },
         }
       : null,

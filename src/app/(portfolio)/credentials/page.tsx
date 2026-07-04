@@ -18,6 +18,7 @@ import Link from "next/link";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { SeoStructuredData } from "@/components/SeoStructuredData";
+import { TrackedLink } from "@/components/TrackedLink";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { resolveSiteUrl } from "@/lib/site-url";
 import { formatMonthYear } from "@/lib/utils";
@@ -115,14 +116,19 @@ export default async function CredentialsPage() {
                   "Download a clean, printer-friendly PDF containing comprehensive project history and technical details."}
               </p>
             </div>
-            <a
+            <TrackedLink
               href="/resume.pdf"
               download
               className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground shadow-md hover:scale-[1.02] transition-all whitespace-nowrap"
+              gtmEvent="resume_download"
+              gtmData={{
+                download_type: "pdf",
+                download_location: "credentials",
+              }}
             >
               Download PDF Resume
               <IconDownload className="h-4.5 w-4.5" />
-            </a>
+            </TrackedLink>
           </section>
 
           {/* AI Answer Block / Executive Summary */}

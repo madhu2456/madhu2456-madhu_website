@@ -63,7 +63,10 @@ async function main() {
   const sitemapUrl = `${SITE_URL}/sitemap.xml`;
   const { status: smStatus, text: smText } = await fetchText(sitemapUrl);
 
-  if (smStatus !== 200 || (!smText.includes("<urlset") && !smText.includes("<sitemapindex"))) {
+  if (
+    smStatus !== 200 ||
+    (!smText.includes("<urlset") && !smText.includes("<sitemapindex"))
+  ) {
     console.error(`❌ FAIL: ${sitemapUrl} returned status ${smStatus}`);
     process.exit(1);
   }

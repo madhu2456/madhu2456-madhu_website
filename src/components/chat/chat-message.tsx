@@ -1,7 +1,7 @@
 "use client";
 
 import { IconSparkles } from "@tabler/icons-react";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import type { ChatMessage } from "./chat-types";
 import { CopyButton, MarkdownText } from "./chat-ui";
 
@@ -22,6 +22,7 @@ export function MessageBubble({
   sending,
   onSuggestionClick,
 }: Props) {
+  const prefersReducedMotion = useReducedMotion();
   const isUser = msg.role === "user";
   const displayText = isStreaming ? streamedText : msg.text;
   const suggestionCounts = new Map<string, number>();
@@ -29,9 +30,16 @@ export function MessageBubble({
   return (
     <motion.div
       key={msg.id}
-      initial={{ opacity: 0, y: 10, scale: 0.98 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.22, ease: "easeOut" }}
+      initial={
+        prefersReducedMotion ? undefined : { opacity: 0, y: 10, scale: 0.98 }
+      }
+      animate={
+        prefersReducedMotion ? undefined : { opacity: 1, y: 0, scale: 1 }
+      }
+      transition={{
+        duration: prefersReducedMotion ? 0 : 0.22,
+        ease: "easeOut",
+      }}
       className="space-y-2"
     >
       {/* Bubble row */}
@@ -64,12 +72,20 @@ export function MessageBubble({
                 <MarkdownText text={displayText || "\u00a0"} />
                 {isStreaming && (
                   <motion.span
-                    animate={{ opacity: [1, 0] }}
-                    transition={{
-                      duration: 0.5,
-                      repeat: Number.POSITIVE_INFINITY,
-                      ease: "linear",
-                    }}
+                    animate={
+                      prefersReducedMotion
+                        ? { opacity: 1 }
+                        : { opacity: [1, 0] }
+                    }
+                    transition={
+                      prefersReducedMotion
+                        ? undefined
+                        : {
+                            duration: 0.5,
+                            repeat: Number.POSITIVE_INFINITY,
+                            ease: "linear",
+                          }
+                    }
                     className="ml-0.5 inline-block h-3.5 w-[2px] rounded-full bg-foreground/50 align-middle"
                   />
                 )}
@@ -97,11 +113,15 @@ export function MessageBubble({
               <motion.button
                 key={`${msg.id}-${s}-${occurrence}`}
                 type="button"
-                initial={{ opacity: 0, scale: 0.88 }}
-                animate={{ opacity: 1, scale: 1 }}
+                initial={
+                  prefersReducedMotion ? undefined : { opacity: 0, scale: 0.88 }
+                }
+                animate={
+                  prefersReducedMotion ? undefined : { opacity: 1, scale: 1 }
+                }
                 transition={{
-                  delay: idx * 0.06,
-                  duration: 0.18,
+                  delay: prefersReducedMotion ? 0 : idx * 0.06,
+                  duration: prefersReducedMotion ? 0 : 0.18,
                   ease: "easeOut",
                 }}
                 onClick={() => onSuggestionClick(s)}

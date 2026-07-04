@@ -86,8 +86,12 @@ export default async function PrivacyPage() {
               </li>
             </ul>
             <p className="text-muted-foreground leading-relaxed">
-              I do not collect personal information through cookies or tracking
-              technologies for the purpose of identifying you individually.
+              I use Google Tag Manager for anonymous usage analytics and Core
+              Web Vitals monitoring. Google Tag Manager may set functional
+              cookies (such as _ga, _gid) for analytics purposes. These cookies
+              do not contain personally identifiable information. No personally
+              identifiable information is collected through these technologies
+              for the purpose of identifying you individually.
             </p>
           </section>
 

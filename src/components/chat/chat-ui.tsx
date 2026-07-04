@@ -1,7 +1,7 @@
 "use client";
 
 import { IconCheck, IconCopy, IconSparkles } from "@tabler/icons-react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useMemo, useState } from "react";
 import type { ChatProfile } from "./chat-profile";
 import { buildProfileFacts } from "./profile-facts";
@@ -76,6 +76,7 @@ export function MarkdownText({ text }: { text: string }) {
 // ─── Typing Dots ──────────────────────────────────────────────────────────────
 
 export function TypingDots() {
+  const prefersReducedMotion = useReducedMotion();
   const dots = [0, 1, 2].map((val, index) => ({ val, id: String(index) }));
   return (
     <div className="flex items-center gap-1 px-1 py-0.5">
@@ -84,13 +85,21 @@ export function TypingDots() {
           <motion.span
             key={id}
             className="block h-2 w-2 rounded-full bg-foreground/35"
-            animate={{ y: [0, -5, 0], opacity: [0.35, 1, 0.35] }}
-            transition={{
-              duration: 0.75,
-              repeat: Number.POSITIVE_INFINITY,
-              delay: val * 0.15,
-              ease: "easeInOut",
-            }}
+            animate={
+              prefersReducedMotion
+                ? { opacity: 0.75 }
+                : { y: [0, -5, 0], opacity: [0.35, 1, 0.35] }
+            }
+            transition={
+              prefersReducedMotion
+                ? undefined
+                : {
+                    duration: 0.75,
+                    repeat: Number.POSITIVE_INFINITY,
+                    delay: val * 0.15,
+                    ease: "easeInOut",
+                  }
+            }
           />
         );
       })}
@@ -101,6 +110,7 @@ export function TypingDots() {
 // ─── Copy Button ──────────────────────────────────────────────────────────────
 
 export function CopyButton({ text }: { text: string }) {
+  const prefersReducedMotion = useReducedMotion();
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -113,6 +123,13 @@ export function CopyButton({ text }: { text: string }) {
     }
   };
 
+  const iconProps = {
+    initial: prefersReducedMotion ? undefined : { scale: 0.6, opacity: 0 },
+    animate: prefersReducedMotion ? undefined : { scale: 1, opacity: 1 },
+    exit: prefersReducedMotion ? undefined : { scale: 0.6, opacity: 0 },
+    transition: { duration: prefersReducedMotion ? 0 : 0.15 },
+  } as const;
+
   return (
     <button
       type="button"
@@ -122,23 +139,11 @@ export function CopyButton({ text }: { text: string }) {
     >
       <AnimatePresence mode="wait">
         {copied ? (
-          <motion.span
-            key="check"
-            initial={{ scale: 0.6, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.6, opacity: 0 }}
-            transition={{ duration: 0.15 }}
-          >
+          <motion.span key="check" {...iconProps}>
             <IconCheck className="h-3.5 w-3.5 text-green-500" />
           </motion.span>
         ) : (
-          <motion.span
-            key="copy"
-            initial={{ scale: 0.6, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.6, opacity: 0 }}
-            transition={{ duration: 0.15 }}
-          >
+          <motion.span key="copy" {...iconProps}>
             <IconCopy className="h-3.5 w-3.5" />
           </motion.span>
         )}
@@ -150,6 +155,7 @@ export function CopyButton({ text }: { text: string }) {
 // ─── ChatInitSkeleton ─────────────────────────────────────────────────────────
 
 export function ChatInitSkeleton({ profile }: { profile: ChatProfile | null }) {
+  const prefersReducedMotion = useReducedMotion();
   const facts = useMemo(() => buildProfileFacts(profile), [profile]);
   const [factIndex, setFactIndex] = useState(0);
   const [cycleKey, setCycleKey] = useState(0);
@@ -200,10 +206,13 @@ export function ChatInitSkeleton({ profile }: { profile: ChatProfile | null }) {
           <AnimatePresence mode="wait">
             <motion.p
               key={cycleKey}
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.28, ease: "easeOut" }}
+              initial={prefersReducedMotion ? undefined : { opacity: 0, y: 6 }}
+              animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+              exit={prefersReducedMotion ? undefined : { opacity: 0, y: -6 }}
+              transition={{
+                duration: prefersReducedMotion ? 0 : 0.28,
+                ease: "easeOut",
+              }}
               className="mt-2 text-sm leading-relaxed text-foreground/80"
             >
               {activeFact}

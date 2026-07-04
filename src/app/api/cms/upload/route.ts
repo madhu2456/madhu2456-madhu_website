@@ -4,14 +4,62 @@ import path from "node:path";
 import { NextResponse } from "next/server";
 import { resolveSiteUrl } from "@/lib/site-url";
 
+const uploadRateLimit = new Map<string, { count: number; resetAt: number }>();
+const UPLOAD_RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
+const MAX_UPLOADS_PER_WINDOW = 5;
+const MAX_RATE_LIMIT_ENTRIES = 10_000;
+
+function isUploadRateLimited(ip: string): boolean {
+  const now = Date.now();
+
+  // Evict expired rate limit records on-demand during new requests
+  // instead of using a setInterval timer to avoid memory leaks in serverless.
+  for (const [key, value] of uploadRateLimit.entries()) {
+    if (now > value.resetAt) {
+      uploadRateLimit.delete(key);
+    }
+  }
+
+  // Bounded eviction: if the map is still too large after cleanup, drop the
+  // oldest entries (first inserted) to cap memory usage on long-lived servers.
+  if (uploadRateLimit.size >= MAX_RATE_LIMIT_ENTRIES) {
+    const evictCount = MAX_RATE_LIMIT_ENTRIES >> 2; // evict 25%
+    let evicted = 0;
+    for (const key of uploadRateLimit.keys()) {
+      if (evicted >= evictCount) break;
+      uploadRateLimit.delete(key);
+      evicted++;
+    }
+  }
+
+  const record = uploadRateLimit.get(ip);
+  if (!record) {
+    uploadRateLimit.set(ip, {
+      count: 1,
+      resetAt: now + UPLOAD_RATE_LIMIT_WINDOW,
+    });
+    return false;
+  }
+
+  record.count += 1;
+  return record.count > MAX_UPLOADS_PER_WINDOW;
+}
+
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
 const validateCmsOrigin = (request: Request) => {
   const origin = request.headers.get("origin");
-  if (!origin) return true;
   const siteUrl = resolveSiteUrl();
-  return origin === siteUrl || origin === `${siteUrl}/`;
+  const isAllowedOrigin =
+    origin === siteUrl ||
+    origin === `${siteUrl}/` ||
+    (process.env.NODE_ENV !== "production" &&
+      Boolean(
+        origin?.startsWith("http://localhost:") ||
+          origin?.startsWith("http://127.0.0.1:"),
+      ));
+  return isAllowedOrigin;
 };
 
 const MAX_FILE_SIZE_BYTES = 8 * 1024 * 1024;
@@ -74,6 +122,18 @@ const hasValidMagicBytes = (buffer: Buffer, mimeType: string): boolean => {
 export async function POST(request: Request) {
   if (!validateCmsOrigin(request)) {
     return NextResponse.json({ error: "Forbidden origin." }, { status: 403 });
+  }
+
+  const cfConnectingIp = request.headers.get("cf-connecting-ip");
+  const forwardedFor = request.headers.get("x-forwarded-for");
+  const ip =
+    cfConnectingIp?.trim() ||
+    (forwardedFor ? forwardedFor.split(",")[0].trim() : "anonymous");
+  if (isUploadRateLimited(ip)) {
+    return NextResponse.json(
+      { error: "Rate limit exceeded." },
+      { status: 429 },
+    );
   }
 
   const formData = await request.formData();

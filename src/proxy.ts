@@ -15,14 +15,12 @@ const unauthorized = () =>
   });
 
 function constantTimeEqual(a: string, b: string): boolean {
-  if (a.length !== b.length) {
-    return false;
-  }
+  const len = Math.max(a.length, b.length);
   let result = 0;
-  for (let i = 0; i < a.length; i++) {
-    result |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  for (let i = 0; i < len; i++) {
+    result |= a.charCodeAt(i % a.length) ^ b.charCodeAt(i % b.length);
   }
-  return result === 0;
+  return result === 0 && a.length === b.length;
 }
 
 export default function proxy(request: NextRequest) {

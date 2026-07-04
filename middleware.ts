@@ -17,7 +17,7 @@ export function middleware(request: NextRequest) {
 
   const cspHeader = `
     default-src 'self';
-    script-src 'self' 'nonce-${nonce}' 'strict-dynamic' https: 'unsafe-inline' ${!isProd ? "'unsafe-eval'" : ""} https://www.googletagmanager.com https://static.cloudflareinsights.com;
+    script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'unsafe-inline' https: ${!isProd ? "'unsafe-eval'" : ""} https://www.googletagmanager.com https://static.cloudflareinsights.com;
     connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com https://api.resend.com${!isProd ? " ws: wss:" : ""};
     style-src 'self' 'unsafe-inline';
     img-src 'self' blob: data: https://images.unsplash.com https://www.googletagmanager.com https://www.google-analytics.com;
@@ -36,7 +36,7 @@ export function middleware(request: NextRequest) {
 
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-nonce", nonce);
-  requestHeaders.set("Content-Security-Policy-Report-Only", cspWithReport);
+  requestHeaders.set("Content-Security-Policy", cspWithReport);
 
   const response = NextResponse.next({
     request: {
@@ -44,7 +44,7 @@ export function middleware(request: NextRequest) {
     },
   });
 
-  response.headers.set("Content-Security-Policy-Report-Only", cspWithReport);
+  response.headers.set("Content-Security-Policy", cspWithReport);
 
   return response;
 }

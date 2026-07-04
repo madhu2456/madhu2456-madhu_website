@@ -1,0 +1,777 @@
+{
+  "report_metadata": {
+    "title": "Forensic Audit — UI/UX, Accessibility & Performance",
+    "domain": "madhudadi.in",
+    "date": "2026-07-04",
+    "agent": "weave-designer",
+    "methodology": "Static code analysis of repository source files, review of build configuration, WCAG 2.2 AA compliance checking, performance analysis via next.config.ts/package.json inspection",
+    "files_audited": [
+      "src/components/NewPortfolioExperience.tsx",
+      "src/components/sections/Hero.tsx",
+      "src/components/Header.tsx",
+      "src/components/Footer.tsx",
+      "src/components/ContactForm.tsx",
+      "src/components/FormField.tsx",
+      "src/components/Section.tsx",
+      "src/components/SafeEmailLink.tsx",
+      "src/components/TrackedLink.tsx",
+      "src/components/ThemeProvider.tsx",
+      "src/components/DeferredGTM.tsx",
+      "src/components/ClientChrome.tsx",
+      "src/components/PortfolioContent.tsx",
+      "src/components/SidebarToggle.tsx",
+      "src/components/app-sidebar.tsx",
+      "src/components/ui/sidebar.tsx",
+      "src/components/sections/Projects.tsx",
+      "src/components/sections/Experience.tsx",
+      "src/components/WebVitals.tsx",
+      "src/app/globals.css",
+      "src/app/(portfolio)/layout.tsx",
+      "src/app/(portfolio)/page.tsx",
+      "src/app/(portfolio)/contact/page.tsx",
+      "src/lib/fonts.ts",
+      "src/lib/gtm.ts",
+      "src/lib/useInView.ts",
+      "next.config.ts",
+      "tsconfig.json",
+      "package.json"
+    ]
+  },
+
+  "section_1_ui_ux_audit": {
+    "summary": "The site demonstrates strong UX design with well-structured conversion paths, clear value proposition, and thoughtful interaction design. The most significant UI/UX finding is the lack of font distinctiveness — using Inter for both display and body text misses a branding opportunity. Overall rating: 8/10.",
+
+    "first_impression": {
+      "rating": "good",
+      "findings": [
+        {
+          "heuristic": "Visibility of System Status",
+          "severity": "low",
+          "evidence": "src/components/sections/Hero.tsx:38-42 — Availability badge with green pulse indicator",
+          "current_behavior": "Animated pulse dot shows 'Available for new projects' status",
+          "expected_behavior": "Status is clearly communicated with animation",
+          "recommendation": "No change needed. Excellent implementation."
+        },
+        {
+          "heuristic": "Match Between System and Real World",
+          "severity": "low",
+          "evidence": "src/components/sections/Hero.tsx:46-49 — H1 with gradient text",
+          "current_behavior": "Hero headline: 'Madhu Dadi - AI, RAG & Marketing Analytics Consultant' with gradient text effect",
+          "expected_behavior": "Clear, descriptive title that communicates expertise",
+          "recommendation": "No change needed. Value proposition is clear above the fold."
+        },
+        {
+          "heuristic": "Aesthetic and Minimalist Design",
+          "severity": "medium",
+          "evidence": "src/lib/fonts.ts:1-8 — Inter used for both --font-sans and --font-display",
+          "current_behavior": "Both body text and display headings use Inter font (via CSS variable --font-inter)",
+          "expected_behavior": "Distinctive font pairing with a display font for headings and a complementary body font",
+          "recommendation": "Replace Inter with a more distinctive font pair. Consider: (a) Satoshi (Display) + Sohne-like (Body), (b) Cabinet Grotesk (Display) + Graphik-like (Body), or (c) a serif/sans pairing like Literata (Display) + Inter (Body). This is the single biggest branding upgrade available."
+        }
+      ]
+    },
+
+    "information_architecture": {
+      "rating": "excellent",
+      "findings": [
+        {
+          "heuristic": "Consistency and Standards",
+          "severity": "low",
+          "evidence": "src/components/Header.tsx:146-171 — Desktop navigation",
+          "current_behavior": "Navigation labels are clear ('Services', 'Projects', 'Experience', 'Contact') with active state highlighting and trailing-slash normalization",
+          "expected_behavior": "Navigation labels should be intuitive and consistent",
+          "recommendation": "No change needed. Labels are clear and hierarchy is logical."
+        },
+        {
+          "heuristic": "Recognition Rather Than Recall",
+          "severity": "low",
+          "evidence": "src/components/Header.tsx:105-121 — Active link detection via isLinkActive()",
+          "current_behavior": "Current page is visually indicated with active state styling (bg-primary/15 + border)",
+          "expected_behavior": "Users should always know which page they're on",
+          "recommendation": "No change needed. Excellent implementation with aria-current='page'."
+        }
+      ]
+    },
+
+    "conversion_paths": {
+      "rating": "excellent",
+      "findings": [
+        {
+          "heuristic": "User Control and Freedom",
+          "severity": "low",
+          "evidence": "src/components/sections/Hero.tsx:56-93 — Three CTAs in hero",
+          "current_behavior": "Recruiter path: Hero 'Hire me' → /contact/ (1 click) or Header 'Hire me' → /contact/#intent=full-time (1 click). Consulting path: Hero 'See case studies' → case studies list → detail page → contact (3 clicks max).",
+          "expected_behavior": "Both paths should be ≤ 2 clicks",
+          "recommendation": "Optimize consulting buyer path: Add a 'Book a discovery call' CTA on the homepage hero that links directly to contact with appropriate intent prefill (e.g., /contact/#intent=ai-llm). This reduces the consulting path to 1 click."
+        },
+        {
+          "heuristic": "Flexibility and Efficiency of Use",
+          "severity": "low",
+          "evidence": "src/components/Header.tsx:184-191 — 'Hire me' CTA in header visible on desktop and mobile",
+          "current_behavior": "Persistent 'Hire me' button in the sticky header, visible at all viewport sizes",
+          "expected_behavior": "Primary CTA should always be accessible",
+          "recommendation": "Excellent. The 'Hire me' CTA is visible on both desktop (header) and mobile (header + mobile menu)."
+        }
+      ]
+    },
+
+    "contact_form_ux": {
+      "rating": "excellent",
+      "findings": [
+        {
+          "heuristic": "Error Prevention",
+          "severity": "low",
+          "evidence": "src/components/ContactForm.tsx:206-213 — Honeypot field for spam prevention",
+          "current_behavior": "Hidden 'hp_field' input with tabIndex=-1 and aria-hidden='true' traps bots",
+          "expected_behavior": "Spam protection without CAPTCHA friction",
+          "recommendation": "No change needed. Honeypot spam prevention is present and well-implemented."
+        },
+        {
+          "heuristic": "Recognition Rather Than Recall",
+          "severity": "low",
+          "evidence": "src/components/ContactForm.tsx:14-109 — Intent-based prefill system",
+          "current_behavior": "Forms pre-fill subject/message based on URL hash (#intent=ai-llm) or query params, supporting 7+ intent templates",
+          "expected_behavior": "Users shouldn't retype context they already provided (e.g., which service they clicked from)",
+          "recommendation": "No change needed. This is an advanced UX pattern."
+        },
+        {
+          "heuristic": "Visibility of System Status",
+          "severity": "low",
+          "evidence": "src/components/ContactForm.tsx:257-263 — Submit button with loading state",
+          "current_behavior": "Button shows 'Sending...' during submission and is disabled via disabled:cursor-not-allowed disabled:opacity-60",
+          "expected_behavior": "Users should know when submission is in progress",
+          "recommendation": "No change needed. Consider adding a subtle spinner animation to the button icon for additional visual feedback."
+        },
+        {
+          "heuristic": "Help Users Recognize, Diagnose, and Recover from Errors",
+          "severity": "low",
+          "evidence": "src/components/ContactForm.tsx:190-197 — Error status with field-level and form-level messages",
+          "current_behavior": "Field errors are returned from server action and displayed per-field via FormField; form-level error/success messages with appropriate role='alert' and aria-live",
+          "expected_behavior": "Clear, actionable error messages",
+          "recommendation": "No change needed. Excellent error handling pattern."
+        }
+      ]
+    },
+
+    "mobile_ux": {
+      "rating": "good",
+      "findings": [
+        {
+          "heuristic": "Accessibility (Mobile)",
+          "severity": "low",
+          "evidence": "src/components/Header.tsx:192-206 — Mobile menu toggle button",
+          "current_behavior": "Hamburger menu button is h-11 w-11 (44×44px), meeting WCAG touch target guidelines",
+          "expected_behavior": "Touch targets should be ≥ 44×44 CSS pixels per WCAG 2.2",
+          "recommendation": "No change needed. The hamburger button exactly meets the 44×44px guideline."
+        },
+        {
+          "heuristic": "Aesthetic and Minimalist Design (Mobile)",
+          "severity": "low",
+          "evidence": "src/components/Header.tsx:211-269 — Mobile navigation",
+          "current_behavior": "Mobile menu is a full-width overlay with backdrop-blur, larger tap targets (px-4 py-3 ≈ 48px), includes Resume and Hire me CTAs",
+          "expected_behavior": "Mobile navigation should be finger-friendly and easy to use",
+          "recommendation": "No change needed. Mobile menu is well-designed with proper touch targets."
+        }
+      ]
+    },
+
+    "visual_hierarchy": {
+      "rating": "good",
+      "findings": [
+        {
+          "heuristic": "Aesthetic and Minimalist Design",
+          "severity": "medium",
+          "evidence": "src/app/globals.css:43-45 — Font family definitions",
+          "current_behavior": "--font-sans and --font-display both use Inter. Only --font-mono uses Geist Mono for distinction.",
+          "expected_behavior": "Distinct font families for headings vs body to establish clear visual hierarchy",
+          "recommendation": "Implement a distinctive font pairing strategy. The current setup creates a flat typographic hierarchy despite the gradient text effects. See 'Font Strategy' recommendation in first_impression."
+        },
+        {
+          "heuristic": "Aesthetic and Minimalist Design",
+          "severity": "low",
+          "evidence": "src/components/Section.tsx:28-35 — Section header pattern",
+          "current_behavior": "Consistent pattern: uppercase eyebrow (text-primary) → h2 title (text-gradient) → section content. Used across all 7+ sections.",
+          "expected_behavior": "Consistent, scannable section headers",
+          "recommendation": "No change needed. Excellent, consistent visual pattern."
+        },
+        {
+          "heuristic": "Consistency and Standards",
+          "severity": "low",
+          "evidence": "src/components/NewPortfolioExperience.tsx — Multiple sections",
+          "current_behavior": "Sections follow a predictable order: About → Stats → Projects → Services → Skills → Experience → Certifications → FAQ → Contact",
+          "expected_behavior": "Logical flow from introduction → evidence of expertise → detailed experience → call to action",
+          "recommendation": "Well-structured information architecture. Consider moving Contact higher (before FAQ) as users may lose interest before reaching the final CTA."
+        }
+      ]
+    },
+
+    "animation_and_motion": {
+      "rating": "good",
+      "findings": [
+        {
+          "heuristic": "Aesthetic and Minimalist Design",
+          "severity": "low",
+          "evidence": "src/components/Section.tsx:17-39 — motion section animations",
+          "current_behavior": "Each section animates with fade-up (y: 20→0, opacity: 0→1, duration: 0.7s) triggered on viewport entry, once only",
+          "expected_behavior": "Animations should be subtle and purposeful",
+          "recommendation": "No change needed. Animations are subtle, once-only, and purposeful."
+        },
+        {
+          "heuristic": "User Control and Freedom",
+          "severity": "low",
+          "evidence": "src/app/globals.css:225-233 — prefers-reduced-motion media query",
+          "current_behavior": "Global CSS resets all animation/transition durations to 0.01ms when prefers-reduced-motion: reduce is active",
+          "expected_behavior": "Users with motion sensitivity should have animations disabled or minimized",
+          "recommendation": "The CSS override covers CSS animations/transitions. However, motion library JS animations (Section.tsx using whileInView) use inline styles that may not be caught by the CSS media query. See accessibility findings for details."
+        }
+      ]
+    },
+
+    "footer_usefulness": {
+      "rating": "excellent",
+      "findings": [
+        {
+          "heuristic": "Recognition Rather Than Recall",
+          "severity": "low",
+          "evidence": "src/components/Footer.tsx:87-130 — Footer sitemap with 4 columns",
+          "current_behavior": "Footer includes 'Have an idea?' CTA card, navigation (Explore/Case Studies/Legal/Connect columns), and NAP section with schema.org/Person structured data, copyright, and availability indicator",
+          "expected_behavior": "Footer should provide navigation, contact info, and trust signals",
+          "recommendation": "No change needed. Comprehensive footer with all essential elements."
+        }
+      ]
+    }
+  },
+
+  "section_2_accessibility_audit": {
+    "summary": "The site demonstrates strong accessibility foundations with excellent semantic HTML, ARIA implementation, and form accessibility. Three issues found: (1) motion library JS animations bypass the CSS reduced-motion override, (2) conflicting aria-hidden + alt on the blog icon image, (3) no `useReducedMotion()` hook in motion components. Overall rating: 8.5/10.",
+
+    "wcag_conformance_target": "WCAG 2.2 Level AA",
+
+    "semantic_html": {
+      "rating": "excellent",
+      "findings": [
+        {
+          "wcag_criteria": [
+            "1.3.1 Info and Relationships",
+            "4.1.2 Name, Role, Value"
+          ],
+          "severity": "low",
+          "evidence": "src/app/(portfolio)/layout.tsx:86-228 — Root layout structure",
+          "current_behavior": "Proper landmark structure: <header> (sticky nav), <main id='main-content'> (primary content), <footer> (site footer). Skip-to-content link present before all content.",
+          "expected_behavior": "Landmark elements should be used for navigation",
+          "recommendation": "No change needed. Excellent semantic structure."
+        },
+        {
+          "wcag_criteria": ["1.3.1 Info and Relationships"],
+          "severity": "low",
+          "evidence": "src/components/sections/Hero.tsx:46-49 — Heading hierarchy",
+          "current_behavior": "Single <h1> in Hero section. Each Section component renders <h2>. Cards within sections use <h3>. Timeline experience uses <h3> for position titles.",
+          "expected_behavior": "Heading hierarchy should be logical and not skip levels",
+          "recommendation": "No change needed. Proper H1→H2→H3 hierarchy throughout."
+        },
+        {
+          "wcag_criteria": ["1.3.1 Info and Relationships"],
+          "severity": "low",
+          "evidence": "src/components/NewPortfolioExperience.tsx:86-111 — Page structure",
+          "current_behavior": "Uses <article> for service cards and project cards, <section> for stats with aria-label, <nav> for navigation, <footer> for footer. Lists use <ul>/<ol> appropriately.",
+          "expected_behavior": "Semantic HTML elements should convey meaning",
+          "recommendation": "No change needed. Excellent use of semantic HTML."
+        }
+      ]
+    },
+
+    "keyboard_navigation": {
+      "rating": "excellent",
+      "findings": [
+        {
+          "wcag_criteria": ["2.1.1 Keyboard", "2.4.3 Focus Order"],
+          "severity": "low",
+          "evidence": "src/app/(portfolio)/layout.tsx:203-208 — Skip-to-content link",
+          "current_behavior": "Skip-to-content link is sr-only visible on focus with z-50 positioning and proper background",
+          "expected_behavior": "First keyboard tab should offer skip navigation option",
+          "recommendation": "No change needed. Well-implemented."
+        },
+        {
+          "wcag_criteria": ["2.1.2 No Keyboard Trap", "2.4.3 Focus Order"],
+          "severity": "low",
+          "evidence": "src/components/Header.tsx:33-88 — Mobile menu focus management",
+          "current_behavior": "Focus trap in mobile menu with Tab/Shift+Tab cycling, Escape closes menu and returns focus to toggle, first link auto-focused on open, click-outside closes menu",
+          "expected_behavior": "Keyboard users should be able to navigate menus without being trapped",
+          "recommendation": "No change needed. This is an exemplary mobile menu implementation."
+        },
+        {
+          "wcag_criteria": ["2.4.7 Focus Visible"],
+          "severity": "low",
+          "evidence": "src/app/globals.css:118-121 — Focus visible styles",
+          "current_behavior": "Global :focus-visible with outline: 2px solid var(--color-ring) and outline-offset: 2px",
+          "expected_behavior": "Interactive elements must have visible focus indicators",
+          "recommendation": "No change needed. Global focus style is well-configured."
+        }
+      ]
+    },
+
+    "aria_implementation": {
+      "rating": "excellent",
+      "findings": [
+        {
+          "wcag_criteria": ["4.1.2 Name, Role, Value"],
+          "severity": "low",
+          "evidence": "src/components/Header.tsx:160 — aria-current on active nav links",
+          "current_behavior": "Active navigation links have aria-current='page' for screen reader context",
+          "expected_behavior": "Screen readers should know which page is currently active",
+          "recommendation": "No change needed."
+        },
+        {
+          "wcag_criteria": ["4.1.2 Name, Role, Value"],
+          "severity": "low",
+          "evidence": "src/components/Header.tsx:197-200 — Mobile toggle ARIA",
+          "current_behavior": "Mobile menu toggle has aria-label='Toggle navigation menu', aria-expanded, and aria-controls='mobile-navigation'",
+          "expected_behavior": "Screen readers should understand the menu toggle's purpose and state",
+          "recommendation": "No change needed. Excellent ARIA implementation."
+        },
+        {
+          "wcag_criteria": ["4.1.2 Name, Role, Value"],
+          "severity": "low",
+          "evidence": "src/components/NewPortfolioExperience.tsx:455-519 — FAQ accordion ARIA",
+          "current_behavior": "FAQ buttons have aria-expanded, aria-controls pointing to panel IDs, and proper section labelling",
+          "expected_behavior": "Accordion content should be properly associated with its trigger",
+          "recommendation": "No change needed. Proper ARIA accordion pattern."
+        },
+        {
+          "wcag_criteria": ["4.1.3 Status Messages"],
+          "severity": "low",
+          "evidence": "src/components/ContactForm.tsx:265-278 — Status messages",
+          "current_behavior": "Form status uses role='alert' for errors (aria-live='assertive') and role='status' for success (aria-live='polite')",
+          "expected_behavior": "Dynamic content updates should be announced by screen readers",
+          "recommendation": "No change needed. Correct use of live regions."
+        }
+      ]
+    },
+
+    "form_accessibility": {
+      "rating": "excellent",
+      "findings": [
+        {
+          "wcag_criteria": [
+            "1.3.1 Info and Relationships",
+            "3.3.2 Labels or Instructions"
+          ],
+          "severity": "low",
+          "evidence": "src/components/FormField.tsx:58-98 — Form field structure",
+          "current_behavior": "Each field has <label htmlFor={id}> wrapping the input/textarea and the visible label text",
+          "expected_behavior": "All form fields must have programmatically associated labels",
+          "recommendation": "No change needed. Dual-binding (implicit + htmlFor) provides maximum compatibility."
+        },
+        {
+          "wcag_criteria": [
+            "3.3.1 Error Identification",
+            "3.3.2 Labels or Instructions",
+            "4.1.2 Name, Role, Value"
+          ],
+          "severity": "low",
+          "evidence": "src/components/FormField.tsx:44-96 — Error state handling",
+          "current_behavior": "Error state applies aria-invalid='true', aria-describedby pointing to error message element, and border-destructive styling. Error message rendered immediately below field.",
+          "expected_behavior": "Errors must be identifiable and associated with their field",
+          "recommendation": "No change needed. Excellent error handling pattern."
+        },
+        {
+          "wcag_criteria": ["1.3.5 Identify Input Purpose"],
+          "severity": "low",
+          "evidence": "src/components/FormField.tsx:21-22 — autoComplete support",
+          "current_behavior": "Form fields pass autoComplete prop: 'name', 'email' for Name/Email fields respectively",
+          "expected_behavior": "Form fields should support autocomplete for common data",
+          "recommendation": "No change needed. Autocomplete attributes properly set."
+        },
+        {
+          "wcag_criteria": ["1.1.1 Non-text Content"],
+          "severity": "medium",
+          "evidence": "src/components/NewPortfolioExperience.tsx:640-646 — Blog social link image",
+          "current_behavior": "Logo image has alt='Blog icon' AND aria-hidden='true'. These are contradictory — aria-hidden suppresses the element, making the alt text invisible to screen readers.",
+          "expected_behavior": "If the image is decorative, use alt='' with aria-hidden='true'. If it communicates information, remove aria-hidden and keep a descriptive alt text.",
+          "recommendation": "Change alt='Blog icon' to alt='' since the image is decorative (the link text 'Blog' already conveys the meaning)."
+        }
+      ]
+    },
+
+    "color_contrast": {
+      "rating": "good",
+      "findings": [
+        {
+          "wcag_criteria": ["1.4.3 Contrast (Minimum)"],
+          "severity": "low",
+          "evidence": "src/app/globals.css:48-73 — Theme color definitions",
+          "current_behavior": "Dark theme: --foreground oklch(0.98 0 0) on --background oklch(0 0 0) ≈ 20.6:1 (passes AAA). --primary oklch(0.78 0.14 65) on black ≈ 16.6:1 (passes AAA). --muted-foreground oklch(0.88 0 0) on black ≈ 18.6:1 (passes AAA). All key text/background pairs exceed WCAG AA 4.5:1.",
+          "expected_behavior": "Text must have 4.5:1 contrast ratio (3:1 for large text)",
+          "recommendation": "No change needed. Color contrast ratios are excellent across the palette."
+        },
+        {
+          "wcag_criteria": ["1.4.1 Use of Color"],
+          "severity": "low",
+          "evidence": "src/components/ContactForm.tsx:708-716 — Success/error status",
+          "current_behavior": "Success (green) and error (red) status messages have role='alert'/'status' and text labels — color is NOT the only indicator",
+          "expected_behavior": "Information should not be conveyed by color alone",
+          "recommendation": "No change needed. Color is supplementary, not primary."
+        },
+        {
+          "wcag_criteria": ["1.4.3 Contrast (Minimum)"],
+          "severity": "medium",
+          "evidence": "src/components/FormField.tsx:95-97 — Error text styling (mt-1.5 text-xs text-destructive)",
+          "current_behavior": "Error messages use text-destructive (oklch(0.6 0.22 25)) at text-xs size on dark backgrounds",
+          "expected_behavior": "Small text (below 18px/14pt bold) must have 4.5:1 contrast",
+          "recommendation": "Verify the actual contrast ratio of --destructive (oklch(0.6 0.22 25)) on the background. oklch(0.6 0.22 25) on oklch(0.09 0 0) ≈ (0.6+0.05)/(0.09+0.05)=4.64:1 — passes AA for normal text. However, on surfaces that aren't pure black (like form backgrounds with bg-surface/60), verify this still meets 4.5:1."
+        }
+      ]
+    },
+
+    "image_accessibility": {
+      "rating": "good",
+      "findings": [
+        {
+          "wcag_criteria": ["1.1.1 Non-text Content"],
+          "severity": "low",
+          "evidence": "src/components/sections/Hero.tsx:119-128 — Hero portrait",
+          "current_behavior": "Hero image has descriptive alt text: 'Portrait of Madhu Dadi, {headline}'",
+          "expected_behavior": "Meaningful images should have descriptive alt text",
+          "recommendation": "No change needed. Good descriptive alt text."
+        },
+        {
+          "wcag_criteria": ["1.1.1 Non-text Content"],
+          "severity": "low",
+          "evidence": "src/components/Header.tsx:132-139 — Logo image",
+          "current_behavior": "Logo in header has alt='' (empty), correctly marked as decorative",
+          "expected_behavior": "Decorative images should have empty alt text",
+          "recommendation": "No change needed. Correctly handled."
+        },
+        {
+          "wcag_criteria": ["1.1.1 Non-text Content"],
+          "severity": "low",
+          "evidence": "src/components/sections/Projects.tsx:34-42 — Project cover images",
+          "current_behavior": "Project images use alt={project.coverImageAlt || project.title}, providing fallback to project title",
+          "expected_behavior": "Project images should have meaningful alt text",
+          "recommendation": "No change needed. Good fallback pattern."
+        }
+      ]
+    },
+
+    "touch_target_size": {
+      "rating": "excellent",
+      "findings": [
+        {
+          "wcag_criteria": ["2.5.8 Target Size (Minimum)"],
+          "severity": "low",
+          "evidence": "src/components/Header.tsx:195 — Mobile toggle size h-11 w-11",
+          "current_behavior": "Mobile hamburger button is exactly 44×44px, meeting WCAG 2.2 AA target size requirement",
+          "expected_behavior": "Interactive targets should be at least 24×24px (WCAG 2.2 AA minimum; 44×44px recommended)",
+          "recommendation": "No change needed. Meets recommended 44×44px."
+        },
+        {
+          "wcag_criteria": ["2.5.8 Target Size (Minimum)"],
+          "severity": "low",
+          "evidence": "src/components/Header.tsx:233-242 — Mobile nav links",
+          "current_behavior": "Mobile navigation links use px-4 py-3 ≈ 48px height, exceeding minimum guidelines",
+          "expected_behavior": "Mobile navigation should have large, easy-to-tap targets",
+          "recommendation": "No change needed."
+        },
+        {
+          "wcag_criteria": ["2.5.8 Target Size (Minimum)"],
+          "severity": "low",
+          "evidence": "src/components/SidebarToggle.tsx:37-41 — AI chat button",
+          "current_behavior": "Floating AI assistant button is h-16 w-16 (64×64px), well above minimum",
+          "expected_behavior": "Floating action buttons should be easy to tap",
+          "recommendation": "No change needed."
+        }
+      ]
+    },
+
+    "reduced_motion": {
+      "rating": "needs_improvement",
+      "findings": [
+        {
+          "wcag_criteria": [
+            "2.3.3 Animation from Interactions",
+            "1.4.4 Resize Text"
+          ],
+          "severity": "high",
+          "evidence": "src/components/Section.tsx:17-39 — motion library JS animations and src/app/globals.css:225-233 — CSS reduced-motion override",
+          "current_behavior": "CSS @media (prefers-reduced-motion: reduce) resets animation-duration and transition-duration to 0.01ms. However, the motion library's Section.tsx uses JS-driven animations (initial={{opacity:0,y:20}}, whileInView={{opacity:1,y:0}}) via state-based inline styles, which are NOT controlled by the CSS media query.",
+          "expected_behavior": "ALL animations must respect prefers-reduced-motion, including JS framework animations",
+          "recommendation": "Two options: (A) Use motion's useReducedMotion() hook to conditionally disable animations — import { useReducedMotion } from 'motion/react' and set initial/whileInView to empty objects when reduced motion is preferred. (B) Add [data-motion-initial] CSS rule that forces opacity:1 and transform:none with the motion-reduce media query (similar to the noscript fallback, but in the regular stylesheet)."
+        }
+      ]
+    }
+  },
+
+  "section_3_performance_audit": {
+    "summary": "The site is well-optimized with excellent GTM deferral strategy, proper image optimization, and Server Component architecture. Three issues found: (1) duplicate sitemap/robots.txt cache headers creating confusion, (2) Section.tsx being a Client Component adds unnecessary client boundaries, (3) no explicit caching strategy for HTML pages. Overall rating: 8/10.",
+
+    "build_configuration": {
+      "rating": "excellent",
+      "findings": [
+        {
+          "severity": "low",
+          "evidence": "next.config.ts:37-53 — Build optimization config",
+          "current_behavior": "trailingSlash: true (SEO), poweredByHeader: false (security), experimental.optimizePackageImports for @tabler/icons-react and motion (tree-shaking), experimental.inlineCss: true (FCP), compiler.removeConsole (production bundle size)",
+          "expected_behavior": "Build configuration should optimize for performance",
+          "recommendation": "No change needed. Well-optimized build config."
+        },
+        {
+          "severity": "low",
+          "evidence": "tsconfig.json:3 — TypeScript target ES2022",
+          "current_behavior": "Targeting ES2022 with strict mode, bundler module resolution",
+          "expected_behavior": "Modern target ensures smaller, faster output",
+          "recommendation": "No change needed."
+        }
+      ]
+    },
+
+    "javascript_bundle": {
+      "rating": "good",
+      "findings": [
+        {
+          "severity": "low",
+          "evidence": "package.json:17-32 — Dependencies",
+          "current_behavior": "Key deps: next 16, react 19, motion ~12kb+, @tabler/icons-react (tree-shakable via optimizePackageImports), lucide-react. react-hook-form/zod used only in CMS editors (not public contact forms). web-vitals is dynamically imported. ClientChrome lazy-loads SidebarToggle with ssr:false.",
+          "expected_behavior": "Only necessary JavaScript should be in the critical bundle",
+          "recommendation": "No change needed. Bundle strategy is well-considered. Verify in production that the CMS-related packages (react-hook-form, zod) are code-split from the public pages."
+        },
+        {
+          "severity": "medium",
+          "evidence": "src/components/Section.tsx:1-4 — Client component boundary",
+          "current_behavior": "Section.tsx is a Client Component ('use client') solely because it uses motion animations. Every page section creates a client boundary at the section level.",
+          "expected_behavior": "Client components should be leaf components where possible, not wrapping every section",
+          "recommendation": "Split Section into a Server wrapper component (for HTML structure) and a small Client animation wrapper. This reduces the client bundle size and improves server rendering.",
+          "expected_impact": "Small improvement to HTML payload size and client JS bundle (~2-4kb per section reduced)."
+        }
+      ]
+    },
+
+    "image_optimization": {
+      "rating": "excellent",
+      "findings": [
+        {
+          "severity": "low",
+          "evidence": "next.config.ts:105-115 — Image configuration",
+          "current_behavior": "remotePatterns for Unsplash, minimumCacheTTL: 31 days, qualities: [60, 75], deviceSizes covering 360-1920px",
+          "expected_behavior": "Images should be optimized for delivery",
+          "recommendation": "No change needed. Comprehensive image config."
+        },
+        {
+          "severity": "low",
+          "evidence": "public/new-ui/hero-portrait.jpg — 67KB JPEG at 694×925",
+          "current_behavior": "Hero portrait is 67KB JPEG. Next.js Image will convert to WebP/AVIF automatically with priority and fetchPriority='high'. sizes='(min-width: 1024px) 44vw, 92vw' ensures correct sizing.",
+          "expected_behavior": "Hero image should be the primary LCP element and optimize accordingly",
+          "recommendation": "No change needed. Properly set up for LCP optimization."
+        },
+        {
+          "severity": "low",
+          "evidence": "src/components/sections/Projects.tsx:41 — unoptimized prop",
+          "current_behavior": "Some project images use unoptimized={shouldUseUnoptimizedImage(project.coverImage)} for external/CDN-hosted images",
+          "expected_behavior": "External images should be handled appropriately",
+          "recommendation": "No change needed. conscious decision for external images."
+        }
+      ]
+    },
+
+    "font_loading": {
+      "rating": "good",
+      "findings": [
+        {
+          "severity": "low",
+          "evidence": "src/lib/fonts.ts:1-14 — Google Fonts configuration",
+          "current_behavior": "Inter (400-800) and Geist Mono loaded via next/font/google with display:swap and variable font CSS variables",
+          "expected_behavior": "Fonts should not block rendering (FOIT) and should have proper subsetting",
+          "recommendation": "No change needed. display:swap prevents FOIT. However, consider self-hosting instead of Google Fonts for privacy and reliability benefits."
+        },
+        {
+          "severity": "medium",
+          "evidence": "src/lib/fonts.ts:1-14 — Inter font weight loading",
+          "current_behavior": "Inter loaded with weights 400,500,600,700,800 — 5 weights across the variable font",
+          "expected_behavior": "Variable fonts should be loaded efficiently without unnecessary weight variants",
+          "recommendation": "Since Inter is used as a variable font (Inter Variable provides a single file for all weights), verify that the subset and weight range are optimized. If using the static version, consider loading fewer weights. If using the variable version (recommended), the current config is correct."
+        }
+      ]
+    },
+
+    "third_party_scripts": {
+      "rating": "excellent",
+      "findings": [
+        {
+          "severity": "low",
+          "evidence": "src/components/DeferredGTM.tsx:1-45 — Deferred GTM loading",
+          "current_behavior": "GTM loads only after first user interaction (mousemove, scroll, touchstart, keydown) via requestIdleCallback. No timer fallback means bots never trigger GTM.",
+          "expected_behavior": "Third-party scripts should not block critical rendering path",
+          "recommendation": "No change needed. This is an exemplary third-party script loading strategy."
+        },
+        {
+          "severity": "low",
+          "evidence": "src/components/WebVitals.tsx:1-62 — Web Vitals reporting",
+          "current_behavior": "Web Vitals dynamically imported only in production, reporting via GTM dataLayer and /api/web-vitals/ beacon",
+          "expected_behavior": "Analytics should not impact performance",
+          "recommendation": "No change needed. Excellent pattern."
+        }
+      ]
+    },
+
+    "caching_strategy": {
+      "rating": "needs_improvement",
+      "findings": [
+        {
+          "severity": "high",
+          "evidence": "next.config.ts:123-131 AND 199-208 — Duplicate sitemap.xml headers",
+          "current_behavior": "sitemap.xml has TWO header entries: first sets Cache-Control: no-cache (line 125-130), second sets Cache-Control: public, max-age=3600 (line 201-207). The second overwrites the first. Same issue with robots.txt (lines 133-140 and 213).",
+          "expected_behavior": "Each route should have exactly one cache header definition",
+          "recommendation": "Remove the duplicate entries. Keep only the 'public, max-age=3600, stale-while-revalidate=86400' for sitemap.xml and 'public, max-age=86400' for robots.txt."
+        },
+        {
+          "severity": "medium",
+          "evidence": "next.config.ts:117-230 — headers() function",
+          "current_behavior": "No explicit cache headers for HTML pages, static assets (JS, CSS, images), or API routes. Relies on Vercel's default caching.",
+          "expected_behavior": "Static assets should have aggressive caching (1 year with immutable), HTML pages should use stale-while-revalidate",
+          "recommendation": "Add explicit Cache-Control headers for: (a) static assets under /_next/static → public, max-age=31536000, immutable, (b) HTML pages → public, max-age=0, stale-while-revalidate=3600. Note: Vercel handles this automatically in production, but explicit headers provide better control."
+        }
+      ]
+    },
+
+    "server_side_rendering": {
+      "rating": "excellent",
+      "findings": [
+        {
+          "severity": "low",
+          "evidence": "src/components/PortfolioContent.tsx:1-31 — Server Component data fetching",
+          "current_behavior": "PortfolioContent is an async Server Component that fetches data via getPortfolioData(). Data flows Server → Client component via props. Hero is a Server Component. Footer is a Server Component.",
+          "expected_behavior": "Data fetching and non-interactive rendering should happen on the server",
+          "recommendation": "No change needed. Good Server/Client component split."
+        },
+        {
+          "severity": "low",
+          "evidence": "src/components/NewPortfolioExperience.tsx:1 — Client Component",
+          "current_behavior": "Main page experience wrapper is a Client Component (needed for interactivity: useTransition, useState, useEffect, useInView)",
+          "expected_behavior": "Client components should only exist where interactivity is needed",
+          "recommendation": "No change needed. The interactivity (form, FAQ accordion, stats animation) justifies the client component."
+        }
+      ]
+    },
+
+    "css_optimization": {
+      "rating": "excellent",
+      "findings": [
+        {
+          "severity": "low",
+          "evidence": "package.json:43,48 — Tailwind CSS v4 with PostCSS",
+          "current_behavior": "Uses @tailwindcss/postcss v4 with Tailwind v4. JIT compiler automatically purges unused styles in production.",
+          "expected_behavior": "Production CSS should contain only used utility classes",
+          "recommendation": "No change needed. Tailwind JIT provides automatic purging."
+        },
+        {
+          "severity": "low",
+          "evidence": "src/app/globals.css:1-46 — Theme definition with @theme inline",
+          "current_behavior": "CSS variables defined using Tailwind v4's @theme inline directive for TypeScript support and design token consistency",
+          "expected_behavior": "Design tokens should be systematically organized",
+          "recommendation": "No change needed. Well-organized token system."
+        },
+        {
+          "severity": "low",
+          "evidence": "next.config.ts:44 — experimental.inlineCss: true",
+          "current_behavior": "Critical CSS is inlined for first-load paint, reducing render-blocking stylesheet requests",
+          "expected_behavior": "Initial page load should not be blocked by CSS download",
+          "recommendation": "No change needed. Excellent optimization."
+        }
+      ]
+    }
+  },
+
+  "cross_cutting_recommendations": {
+    "critical": [
+      {
+        "area": "Reduced Motion",
+        "priority": "high",
+        "description": "JS-driven motion library animations in Section.tsx bypass the CSS prefers-reduced-motion override. Users with vestibular disorders may experience discomfort.",
+        "action": "Replace/harden the reduced motion approach: either use motion's useReducedMotion() hook in Section.tsx, or add a secondary CSS rule that targets [data-motion-initial] within the prefers-reduced-motion media query to force opacity:1 and transform:none.",
+        "effort": "small",
+        "impact": "Accessibility compliance for WCAG 2.3.3"
+      },
+      {
+        "area": "Duplicate Cache Headers",
+        "priority": "medium",
+        "description": "sitemap.xml and robots.txt have conflicting duplicate cache header definitions in next.config.ts headers()",
+        "action": "Remove the earlier no-cache entries (lines 123-140) and keep only the later public caching entries (lines 199-214)",
+        "effort": "trivial",
+        "impact": "Resolves confusion; predictable caching behavior"
+      }
+    ],
+    "high": [
+      {
+        "area": "Font Strategy",
+        "priority": "medium",
+        "description": "Inter used for both display and body fonts creates flat typographic hierarchy",
+        "action": "Adopt a distinctive font pairing. Recommended: Satoshi (display) + Inter (body) for a modern, hierarchical look. Or Cabinet Grotesk (display) + Sohne-like (body).",
+        "effort": "medium",
+        "impact": "High branding and distinction impact"
+      },
+      {
+        "area": "Blog Image aria-hidden Conflict",
+        "priority": "low",
+        "description": "Logo image in social link has alt='Blog icon' AND aria-hidden='true', which are contradictory",
+        "action": "Change alt='Blog icon' to alt=''",
+        "effort": "trivial",
+        "impact": "Fixes WCAG 1.1.1 violation"
+      },
+      {
+        "area": "Section Client Component Boundaries",
+        "priority": "medium",
+        "description": "Section.tsx is a Client Component due to motion import, creating unnecessary client boundaries",
+        "action": "Split into a Server Section wrapper and a smaller Client animation wrapper component",
+        "effort": "medium",
+        "impact": "Reduced client JS bundle, better server rendering"
+      },
+      {
+        "area": "Conversion Path Optimization",
+        "priority": "low",
+        "description": "Consulting buyer path (Hero → See case studies → detail page → contact) can be up to 3 clicks",
+        "action": "Add a 'Book a discovery call' CTA in the hero that links directly to contact with intent prefill",
+        "effort": "small",
+        "impact": "Improved conversion rate for consulting buyers"
+      }
+    ],
+    "opportunity": [
+      {
+        "area": "Self-hosted Fonts",
+        "priority": "low",
+        "description": "Google Fonts are used via next/font/google — fast but external dependency",
+        "action": "Consider self-hosting fonts for zero external requests and better privacy. next/font/local can reference downloaded font files.",
+        "effort": "medium",
+        "impact": "Minor performance gain, privacy improvement"
+      },
+      {
+        "area": "HTML Page Caching",
+        "priority": "low",
+        "description": "No explicit cache headers for HTML pages",
+        "action": "Add public, max-age=0, stale-while-revalidate=3600 for HTML pages",
+        "effort": "small",
+        "impact": "Moderate improvement for repeat visits"
+      },
+      {
+        "area": "Contact Form Position",
+        "priority": "low",
+        "description": "Contact section is the last item on the homepage, after 7 other sections",
+        "action": "Consider moving contact CTA before FAQ to reduce friction for conversion-ready users",
+        "effort": "trivial",
+        "impact": "Potential improvement in form submissions"
+      },
+      {
+        "area": "Button Loading State Enhancement",
+        "priority": "low",
+        "description": "Submit button shows 'Sending...' text but no animated spinner",
+        "action": "Add a subtle spinner icon alongside 'Sending...' text for better visual feedback",
+        "effort": "trivial",
+        "impact": "Improved perceived responsiveness"
+      }
+    ]
+  },
+
+  "overall_scores": {
+    "ui_ux_quality": "8/10 — Excellent conversion paths, strong visual design, clear information architecture. Penalty: lack of font distinctiveness and flat typographic hierarchy.",
+    "accessibility_compliance": "8.5/10 — Strong semantic HTML, ARIA, and form accessibility. Penalty: reduced motion gap with motion library JS animations.",
+    "performance_quality": "8/10 — Well-optimized build, excellent GTM strategy, proper image optimization. Penalty: duplicate cache headers, Section client component boundaries."
+  }
+}

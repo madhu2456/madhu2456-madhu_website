@@ -7,7 +7,7 @@ import {
   IconSparkles,
   IconX,
 } from "@tabler/icons-react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useSidebar } from "@/components/ui/sidebar";
 import { trackChatInteraction } from "@/lib/gtm";
@@ -44,6 +44,7 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
   );
 
   const { setOpen, setOpenMobile } = useSidebar();
+  const prefersReducedMotion = useReducedMotion();
 
   const [booting, setBooting] = useState(true);
   const [sending, setSending] = useState(false);
@@ -235,8 +236,8 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
         {booting && (
           <motion.div
             className="absolute inset-0 z-10"
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
+            exit={prefersReducedMotion ? undefined : { opacity: 0 }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.25 }}
           >
             <ChatInitSkeleton profile={profile} />
           </motion.div>
@@ -308,10 +309,14 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
             <AnimatePresence>
               {sending && (
                 <motion.div
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 4 }}
-                  transition={{ duration: 0.2 }}
+                  initial={
+                    prefersReducedMotion ? undefined : { opacity: 0, y: 8 }
+                  }
+                  animate={
+                    prefersReducedMotion ? undefined : { opacity: 1, y: 0 }
+                  }
+                  exit={prefersReducedMotion ? undefined : { opacity: 0, y: 4 }}
+                  transition={{ duration: prefersReducedMotion ? 0 : 0.2 }}
                   className="flex items-end gap-2"
                 >
                   <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
@@ -330,10 +335,16 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
         <AnimatePresence>
           {showScrollBtn && (
             <motion.button
-              initial={{ opacity: 0, scale: 0.75 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.75 }}
-              transition={{ duration: 0.15 }}
+              initial={
+                prefersReducedMotion ? undefined : { opacity: 0, scale: 0.75 }
+              }
+              animate={
+                prefersReducedMotion ? undefined : { opacity: 1, scale: 1 }
+              }
+              exit={
+                prefersReducedMotion ? undefined : { opacity: 0, scale: 0.75 }
+              }
+              transition={{ duration: prefersReducedMotion ? 0 : 0.15 }}
               type="button"
               onClick={() =>
                 viewportRef.current?.scrollTo({
