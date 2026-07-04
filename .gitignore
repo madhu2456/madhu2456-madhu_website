@@ -55,6 +55,7 @@ migrate.js
 migrate_data.py
 /*.docx
 /*.pdf
+public/uploads/cms/test-*
 
 # Data backups
 Data/*.backup-*.json
