@@ -123,13 +123,19 @@ const nextConfig: NextConfig = {
       {
         source: "/sitemap.xml",
         headers: [
-          { key: "Cache-Control", value: "no-cache, no-store, must-revalidate" },
+          {
+            key: "Cache-Control",
+            value: "no-cache, no-store, must-revalidate",
+          },
         ],
       },
       {
         source: "/robots.txt",
         headers: [
-          { key: "Cache-Control", value: "no-cache, no-store, must-revalidate" },
+          {
+            key: "Cache-Control",
+            value: "no-cache, no-store, must-revalidate",
+          },
         ],
       },
       // SEO/GEO discovery files - serve as plain text with generous caching

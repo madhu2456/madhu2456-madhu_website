@@ -9,6 +9,7 @@ import {
   buildOccupationSchema,
   buildOrganizationSchema,
   buildPersonSchema,
+  buildProfessionalServiceSchema,
   buildProfilePageSchema,
   buildProjectsListSchema,
   buildServicesListSchema,
@@ -32,7 +33,8 @@ export type SeoGraphNode =
   | "CertificationsList"
   | "Breadcrumb"
   | "FAQ"
-  | "HowToHire";
+  | "HowToHire"
+  | "ProfessionalService";
 
 interface SeoStructuredDataProps {
   nodes?: SeoGraphNode[];
@@ -197,6 +199,9 @@ export async function SeoStructuredData({
       : null,
     includeNode("HowToHire")
       ? buildHowToHireSchema({ siteUrl, fullName })
+      : null,
+    includeNode("ProfessionalService")
+      ? buildProfessionalServiceSchema({ siteUrl })
       : null,
   ].filter(Boolean);
 

@@ -408,6 +408,26 @@ export function buildOrganizationSchema({
 }
 
 // ---------------------------------------------------------------------------
+// ProfessionalService - helps with local/search visibility
+// ---------------------------------------------------------------------------
+export function buildProfessionalServiceSchema({
+  siteUrl,
+}: {
+  siteUrl: string;
+}) {
+  return {
+    "@type": "ProfessionalService",
+    "@id": `${siteUrl}#service`,
+    name: "Madhu Dadi - AI & Analytics Engineering",
+    url: siteUrl,
+    description:
+      "AI and marketing analytics engineering consulting — LLM/RAG applications, AI agents, FastAPI/Next.js products, and marketing analytics systems.",
+    areaServed: "Worldwide",
+    provider: { "@id": `${siteUrl}#person` },
+  };
+}
+
+// ---------------------------------------------------------------------------
 // WebSite
 // ---------------------------------------------------------------------------
 export function buildWebSiteSchema({

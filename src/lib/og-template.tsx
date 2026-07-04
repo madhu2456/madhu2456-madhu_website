@@ -68,13 +68,13 @@ export function createOgImage({
         <div
           style={{
             display: "flex",
+            alignSelf: "flex-start",
             alignItems: "center",
             background: "rgba(214,145,55,0.22)",
             border: "1px solid rgba(255,184,77,0.38)",
             borderRadius: "100px",
             padding: "6px 22px",
             marginBottom: "26px",
-            width: "fit-content",
           }}
         >
           <span

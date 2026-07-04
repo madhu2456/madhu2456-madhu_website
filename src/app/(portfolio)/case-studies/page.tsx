@@ -319,6 +319,26 @@ export default async function CaseStudiesPage() {
             );
           })}
         </section>
+
+        {/* Hire Me CTA */}
+        <section className="mt-16 text-center space-y-4">
+          <h2 className="text-2xl font-bold tracking-tight">
+            Need a hands-on AI engineer?
+          </h2>
+          <p className="text-muted-foreground max-w-lg mx-auto">
+            I specialize in production LLM/RAG applications, AI agents, and
+            marketing analytics systems.
+          </p>
+          <div className="pt-4">
+            <Link
+              href="/contact/"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all"
+            >
+              Hire me for your next project
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </section>
       </main>
       <Footer
         profile={profile}

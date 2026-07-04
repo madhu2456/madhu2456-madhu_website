@@ -561,7 +561,7 @@ export default async function ProfilePage() {
                 <a
                   href={profile.socialLinks.github}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer me"
                   className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-muted-foreground hover:text-foreground border border-border bg-surface/30 rounded-xl hover:border-primary/20 transition-all"
                 >
                   GitHub <IconExternalLink className="h-3 w-3" />
@@ -571,7 +571,7 @@ export default async function ProfilePage() {
                 <a
                   href={profile.socialLinks.linkedin}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer me"
                   className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-muted-foreground hover:text-foreground border border-border bg-surface/30 rounded-xl hover:border-primary/20 transition-all"
                 >
                   LinkedIn <IconExternalLink className="h-3 w-3" />
@@ -581,7 +581,7 @@ export default async function ProfilePage() {
                 <a
                   href={profile.socialLinks.twitter}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer me"
                   className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-muted-foreground hover:text-foreground border border-border bg-surface/30 rounded-xl hover:border-primary/20 transition-all"
                 >
                   Twitter/X <IconExternalLink className="h-3 w-3" />
@@ -591,7 +591,7 @@ export default async function ProfilePage() {
                 <a
                   href={profile.socialLinks.wikidata}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer me"
                   className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-muted-foreground hover:text-foreground border border-border bg-surface/30 rounded-xl hover:border-primary/20 transition-all"
                 >
                   Wikidata <IconExternalLink className="h-3 w-3" />
@@ -600,12 +600,25 @@ export default async function ProfilePage() {
               <a
                 href="https://peerlist.io/madhudadi"
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer me"
                 className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-muted-foreground hover:text-foreground border border-border bg-surface/30 rounded-xl hover:border-primary/20 transition-all"
               >
                 Peerlist <IconExternalLink className="h-3 w-3" />
               </a>
             </div>
+          </section>
+
+          {/* Resume Download CTA */}
+          <section className="text-center">
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/30 px-6 py-3 text-sm font-semibold text-muted-foreground hover:text-foreground hover:border-primary/20 transition-all"
+            >
+              Download PDF Resume
+              <IconExternalLink className="h-4 w-4" />
+            </a>
           </section>
 
           {/* Contact CTA */}

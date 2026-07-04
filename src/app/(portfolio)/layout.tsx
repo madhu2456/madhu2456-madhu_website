@@ -72,6 +72,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const yandexSiteVerification =
     process.env.NEXT_PUBLIC_YANDEX_SITE_VERIFICATION ||
     process.env.YANDEX_SITE_VERIFICATION;
+  // Bing Webmaster: verified via DNS — env var is optional (only needed for meta-tag fallback).
   const bingSiteVerification =
     process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION ||
     process.env.BING_SITE_VERIFICATION;

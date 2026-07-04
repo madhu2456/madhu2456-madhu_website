@@ -7,7 +7,7 @@ import { resolveSiteUrl } from "@/lib/site-url";
 const siteUrl = `${resolveSiteUrl()}/`;
 
 export const metadata: Metadata = {
-  title: "Madhu Dadi - Generative AI, RAG & Marketing Analytics Consultant",
+  title: "Madhu Dadi - AI, RAG & Marketing Analytics Consultant",
   description:
     "AI and marketing analytics engineer. 9+ years exp (Novartis, redBus, GroupM (WPP)). I build production LLM/RAG apps, AI agents, FastAPI, Next.js, and analytics",
   alternates: {

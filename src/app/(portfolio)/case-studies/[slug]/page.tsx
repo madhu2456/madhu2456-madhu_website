@@ -132,7 +132,6 @@ export async function generateMetadata({
     };
   }
 
-  const siteUrl = getSiteUrl();
   const title =
     project.slug === "adticks"
       ? "Adticks AI Visibility Case Study | Madhu Dadi"
