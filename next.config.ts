@@ -102,23 +102,6 @@ const nextConfig: NextConfig = {
     ];
   },
 
-  async headers() {
-    return [
-      {
-        source: "/sitemap.xml",
-        headers: [
-          { key: "Cache-Control", value: "no-cache, no-store, must-revalidate" },
-        ],
-      },
-      {
-        source: "/robots.txt",
-        headers: [
-          { key: "Cache-Control", value: "no-cache, no-store, must-revalidate" },
-        ],
-      },
-    ];
-  },
-
   images: {
     remotePatterns: [
       {
@@ -136,6 +119,18 @@ const nextConfig: NextConfig = {
       {
         source: "/(.*)",
         headers: securityHeaders,
+      },
+      {
+        source: "/sitemap.xml",
+        headers: [
+          { key: "Cache-Control", value: "no-cache, no-store, must-revalidate" },
+        ],
+      },
+      {
+        source: "/robots.txt",
+        headers: [
+          { key: "Cache-Control", value: "no-cache, no-store, must-revalidate" },
+        ],
       },
       // SEO/GEO discovery files - serve as plain text with generous caching
       {
