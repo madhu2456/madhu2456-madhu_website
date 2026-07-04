@@ -39,6 +39,38 @@ const sanitizeBaseName = (value: string) =>
     .replace(/^-+|-+$/g, "")
     .slice(0, 48) || "image";
 
+const MIME_MAGIC_BYTES: Record<string, (buf: Buffer) => boolean> = {
+  "image/jpeg": (b) => b[0] === 0xff && b[1] === 0xd8 && b[2] === 0xff,
+  "image/png": (b) =>
+    b[0] === 0x89 && b[1] === 0x50 && b[2] === 0x4e && b[3] === 0x47,
+  "image/gif": (b) =>
+    b[0] === 0x47 && b[1] === 0x49 && b[2] === 0x46 && b[3] === 0x38,
+  "image/webp": (b) =>
+    b[0] === 0x52 &&
+    b[1] === 0x49 &&
+    b[2] === 0x46 &&
+    b[3] === 0x46 &&
+    b[8] === 0x57 &&
+    b[9] === 0x45 &&
+    b[10] === 0x42 &&
+    b[11] === 0x50,
+  "image/avif": (b) =>
+    b[4] === 0x66 &&
+    b[5] === 0x74 &&
+    b[6] === 0x79 &&
+    b[7] === 0x70 &&
+    b[8] === 0x61 &&
+    b[9] === 0x76 &&
+    b[10] === 0x69 &&
+    b[11] === 0x66,
+};
+
+const hasValidMagicBytes = (buffer: Buffer, mimeType: string): boolean => {
+  const check = MIME_MAGIC_BYTES[mimeType];
+  if (!check) return false;
+  return buffer.length >= 12 && check(buffer);
+};
+
 export async function POST(request: Request) {
   if (!validateCmsOrigin(request)) {
     return NextResponse.json({ error: "Forbidden origin." }, { status: 403 });
@@ -71,6 +103,14 @@ export async function POST(request: Request) {
     );
   }
 
+  const buffer = Buffer.from(await fileValue.arrayBuffer());
+  if (!hasValidMagicBytes(buffer, fileValue.type)) {
+    return NextResponse.json(
+      { error: "File content does not match the declared image type." },
+      { status: 400 },
+    );
+  }
+
   const outputDirectory = path.join(process.cwd(), "public", "uploads", "cms");
   await fs.mkdir(outputDirectory, { recursive: true });
 
@@ -79,7 +119,6 @@ export async function POST(request: Request) {
   const fileName = `${baseName}-${Date.now()}-${crypto.randomUUID().slice(0, 8)}${extension}`;
   const outputFilePath = path.join(outputDirectory, fileName);
 
-  const buffer = Buffer.from(await fileValue.arrayBuffer());
   await fs.writeFile(outputFilePath, buffer);
 
   return NextResponse.json(

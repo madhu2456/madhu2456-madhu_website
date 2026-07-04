@@ -2,6 +2,7 @@ import { IconArrowRight } from "@tabler/icons-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { SafeEmailLink } from "@/components/SafeEmailLink";
+import { TrackedLink } from "@/components/TrackedLink";
 import type {
   NavigationItem,
   Profile,
@@ -149,13 +150,15 @@ export function Footer({ profile, projects, navigationItems }: FooterProps) {
               <span itemProp="addressLocality">{profile.location}</span>
             </div>
             {profile.phone && (
-              <a
+              <TrackedLink
                 href={`tel:${profile.phone.replace(/\s+/g, "")}`}
+                gtmEvent="contact_click"
+                gtmData={{ contact_type: "phone", contact_location: "footer" }}
                 className="hover:text-foreground transition-colors block mt-2"
                 itemProp="telephone"
               >
                 {profile.phone}
-              </a>
+              </TrackedLink>
             )}
           </address>
 
@@ -192,6 +195,7 @@ function FooterLink({ href, children }: { href: string; children: ReactNode }) {
       return (
         <SafeEmailLink
           email={href.replace("mailto:", "")}
+          trackingLocation="footer"
           className="text-muted-foreground hover:text-foreground transition-colors"
         >
           {children}
@@ -199,14 +203,16 @@ function FooterLink({ href, children }: { href: string; children: ReactNode }) {
       );
     }
     return (
-      <a
+      <TrackedLink
         href={href}
-        target={href.startsWith("http") ? "_blank" : undefined}
-        rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+        target="_blank"
+        rel="noopener noreferrer"
+        gtmEvent="outbound_click"
+        gtmData={{ link_url: href, click_location: "footer" }}
         className="text-muted-foreground hover:text-foreground transition-colors"
       >
         {children}
-      </a>
+      </TrackedLink>
     );
   }
 

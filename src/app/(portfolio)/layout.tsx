@@ -89,8 +89,6 @@ export async function generateMetadata(): Promise<Metadata> {
         }
       : undefined;
 
-  const ogImageUrl = `${siteUrl}opengraph-image/?ext=.png`;
-
   return {
     metadataBase: new URL(siteUrl),
     title: title,
@@ -142,14 +140,8 @@ export async function generateMetadata(): Promise<Metadata> {
       url: siteUrl,
       siteName: siteName,
       type: "website",
-      images: [
-        {
-          url: ogImageUrl,
-          width: 1200,
-          height: 630,
-          alt: `${title} - Open Graph preview`,
-        },
-      ],
+      // og:image is handled per-page by opengraph-image.tsx files.
+      // Do NOT set openGraph.images here — it overrides per-page OG images.
       ...(profile.firstName && { firstName: profile.firstName }),
       ...(profile.lastName && { lastName: profile.lastName }),
     },

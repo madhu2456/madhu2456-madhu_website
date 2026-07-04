@@ -78,21 +78,27 @@ function isRateLimited(ip: string): boolean {
 
 export async function POST(request: Request) {
   const origin = request.headers.get("origin");
-  if (
-    origin &&
-    origin !== resolveSiteUrl() &&
-    origin !== `${resolveSiteUrl()}/` &&
-    !origin.startsWith("http://localhost:")
-  ) {
+  const siteUrl = resolveSiteUrl();
+  const isAllowedOrigin =
+    origin === siteUrl ||
+    origin === `${siteUrl}/` ||
+    (process.env.NODE_ENV !== "production" &&
+      Boolean(
+        origin?.startsWith("http://localhost:") ||
+          origin?.startsWith("http://127.0.0.1:"),
+      ));
+  if (!isAllowedOrigin) {
     return NextResponse.json(
       { error: "Forbidden origin." },
       { status: 403, headers: { "Cache-Control": "no-store" } },
     );
   }
 
-  // When hosted behind a proxy, x-forwarded-for may contain multiple IPs. Extract the first one.
+  const cfConnectingIp = request.headers.get("cf-connecting-ip");
   const forwardedFor = request.headers.get("x-forwarded-for");
-  const ip = forwardedFor ? forwardedFor.split(",")[0].trim() : "anonymous";
+  const ip =
+    cfConnectingIp?.trim() ||
+    (forwardedFor ? forwardedFor.split(",")[0].trim() : "anonymous");
 
   if (isRateLimited(ip)) {
     return NextResponse.json(

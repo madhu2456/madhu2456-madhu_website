@@ -105,15 +105,15 @@
       "order": 1
     },
     {
-      "title": "Work",
-      "href": "#projects",
+      "title": "Case Studies",
+      "href": "/case-studies/",
       "icon": "IconCode",
       "isExternal": false,
       "order": 2
     },
     {
       "title": "Services",
-      "href": "#services",
+      "href": "/services/",
       "icon": "IconBriefcase",
       "isExternal": false,
       "order": 3

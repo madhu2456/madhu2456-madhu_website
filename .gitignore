@@ -48,6 +48,13 @@ next-env.d.ts
 .gemini/
 gha-creds-*.json
 scratch/
+build.log
+gtm-external-links-final.json
+update-headers.js
+migrate.js
+migrate_data.py
+/*.docx
+/*.pdf
 
 # Data backups
 Data/*.backup-*.json

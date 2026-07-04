@@ -149,14 +149,6 @@ export async function generateMetadata({
       description,
       url,
       type: "article",
-      images: [
-        {
-          url: `${siteUrl}opengraph-image/?ext=.png`,
-          width: 1200,
-          height: 630,
-          alt: `${project.title} case study by Madhu Dadi`,
-        },
-      ],
     },
     twitter: {
       card: "summary_large_image",

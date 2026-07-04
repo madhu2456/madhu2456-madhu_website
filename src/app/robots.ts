@@ -36,22 +36,6 @@ const USER_TRIGGERED_FETCHERS = [
   "Meta-ExternalFetcher",
 ];
 
-const TRAINING_AND_EXTENDED_USE_CRAWLERS = [
-  "GPTBot",
-  "Google-Extended",
-  "Googlebot-Extended",
-  "Applebot-Extended",
-  "ClaudeBot",
-  "anthropic-ai",
-  "Meta-ExternalAgent",
-  "CCBot",
-  "cohere-ai",
-  "Diffbot",
-  "YouBot",
-  "Amazonbot",
-  "Bytespider",
-];
-
 const PUBLIC_DISCOVERY_ALLOWS = [
   "/",
   "/llms.txt",
@@ -96,10 +80,6 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: USER_TRIGGERED_FETCHERS,
         allow: PUBLIC_DISCOVERY_ALLOWS,
         disallow: PRIVATE_DISALLOWS,
-      },
-      {
-        userAgent: TRAINING_AND_EXTENDED_USE_CRAWLERS,
-        disallow: "/",
       },
     ],
     sitemap: [`${siteUrl}sitemap.xml`, `${siteUrl}blog/sitemap.xml`],

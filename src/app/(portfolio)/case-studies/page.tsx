@@ -36,14 +36,6 @@ export const metadata: Metadata = {
     description: CASE_STUDIES_DESCRIPTION,
     url: `${getSiteUrl()}case-studies/`,
     type: "website",
-    images: [
-      {
-        url: `${getSiteUrl()}opengraph-image/?ext=.png`,
-        width: 1200,
-        height: 630,
-        alt: "Madhu Dadi case studies",
-      },
-    ],
   },
 };
 

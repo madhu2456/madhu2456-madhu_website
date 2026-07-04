@@ -33,8 +33,6 @@ export async function generateMetadata(): Promise<Metadata> {
   const description =
     pageContent.profile.seo?.description ||
     "Profile of Madhu Dadi, AI & marketing analytics engineer with 9+ years across Novartis, redBus, and GroupM (WPP). Specializing in LLM/RAG apps, AI agents, and marketing analytics.";
-  const image = `${siteUrl}opengraph-image/?ext=.png`;
-
   return {
     title,
     description,
@@ -51,20 +49,11 @@ export async function generateMetadata(): Promise<Metadata> {
       lastName: profile.lastName,
       username: profile.socialLinks?.twitter?.split("/").pop() || "madhu245",
       gender: "male",
-      images: [
-        {
-          url: image,
-          width: 1200,
-          height: 630,
-          alt: title,
-        },
-      ],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [image],
     },
   };
 }

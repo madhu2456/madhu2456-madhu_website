@@ -42,8 +42,6 @@ export async function generateMetadata({
   const description =
     pageContent.contact.seo?.description ||
     "Work with Madhu Dadi on production AI, RAG, AI agents, marketing analytics, or full-stack AI product development. Response time is usually within 24 hours.";
-  const image = `${siteUrl}opengraph-image/?ext=.png`;
-
   return {
     title,
     description,
@@ -63,20 +61,11 @@ export async function generateMetadata({
       url: canonicalUrl,
       siteName: "Madhu Dadi",
       type: "website",
-      images: [
-        {
-          url: image,
-          width: 1200,
-          height: 630,
-          alt: title,
-        },
-      ],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [image],
     },
   };
 }

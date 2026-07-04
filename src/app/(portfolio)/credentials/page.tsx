@@ -34,8 +34,6 @@ export async function generateMetadata(): Promise<Metadata> {
   const description =
     pageContent.credentials.seo?.description ||
     "Verified credentials, certifications, awards, work history, and public proof for Madhu Dadi, AI and marketing analytics engineer.";
-  const image = `${siteUrl}opengraph-image/?ext=.png`;
-
   return {
     title,
     description,
@@ -48,20 +46,11 @@ export async function generateMetadata(): Promise<Metadata> {
       url: canonicalUrl,
       siteName: "Madhu Dadi",
       type: "profile",
-      images: [
-        {
-          url: image,
-          width: 1200,
-          height: 630,
-          alt: title,
-        },
-      ],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [image],
     },
   };
 }
