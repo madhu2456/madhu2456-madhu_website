@@ -137,8 +137,8 @@ WAVE 6 (After Wave 5 - Optional/Low Priority)
 **File:** `.env.local`
 **Current State:**
 ```bash
-OPENAI_API_KEY="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"
-RESEND_API_KEY=re_DnmF2LJr_JxpxT63btPkUC1NBvccBgrst
+OPENAI_API_KEY="sk-proj-8-7B2aUz__...[REDACTED]"
+RESEND_API_KEY=re_DnmF2LJr_...[REDACTED]
 ```
 
 **Implementation:**
@@ -166,7 +166,7 @@ RESEND_API_KEY=re_DnmF2LJr_JxpxT63btPkUC1NBvccBgrst
 **Current State:**
 ```bash
 CMS_AUTH_USERNAME=madhu
-CMS_AUTH_PASSWORD=Madhu22444@.
+CMS_AUTH_PASSWORD=...[REDACTED]
 ```
 
 **Implementation:**

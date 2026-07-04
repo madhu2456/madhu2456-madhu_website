@@ -638,7 +638,7 @@ The presence of plaintext secrets in `.env.local` is the most critical finding. 
 ```
 OPENAI_API_KEY="sk-proj-8-7B2aUz__..."
 CMS_AUTH_USERNAME=madhu
-CMS_AUTH_PASSWORD=Madhu22444@.
+CMS_AUTH_PASSWORD=...[REDACTED]
 RESEND_API_KEY=re_DnmF2LJr_...
 ```
 - **Risk:** If `.env.local` is committed to git or exposed through any means (misconfigured web server, CI/CD leak, etc.), all these services are compromised.
@@ -1012,7 +1012,7 @@ In `src/lib/jsonld.ts`, change line 302 conditionally. But Option A is simpler a
 
 1. Generate new OpenAI API key: [platform.openai.com/api-keys](https://platform.openai.com/api-keys) → Revoke `sk-proj-8-7B2aUz__...`
 2. Generate new Resend API key: [resend.com/api-keys](https://resend.com/api-keys) → Revoke `re_DnmF2LJr_...`
-3. Change CMS_AUTH_PASSWORD from `Madhu22444@.` to a strong, random password
+3. Change CMS_AUTH_PASSWORD from `...[REDACTED]` to a strong, random password
 4. Update `.env.local` with new values
 5. Update production environment variables (Vercel dashboard or deployment platform)
 6. Verify `.env.local` is in `.gitignore`:

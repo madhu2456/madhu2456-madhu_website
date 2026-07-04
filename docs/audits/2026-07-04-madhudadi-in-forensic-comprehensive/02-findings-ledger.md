@@ -30,7 +30,7 @@ Effort: XS, S, M, L, XL.
 ### SEC-004 — Basic Auth credentials in plaintext
 - **Status:** Confirmed issue
 - **Severity:** High | **Confidence:** High | **Effort:** S
-- **Evidence:** `CMS_AUTH_USERNAME=madhu` and `CMS_AUTH_PASSWORD=Madhu22444@.` in `.env.local`.
+- **Evidence:** `CMS_AUTH_USERNAME=madhu` and `CMS_AUTH_PASSWORD=...[REDACTED]` in `.env.local`.
 - **Recommendation:** Use strong random password. Store only in environment variables.
 
 ### SEC-005 — Constant-time comparison has early exit
