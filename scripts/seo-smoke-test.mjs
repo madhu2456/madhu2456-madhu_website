@@ -110,6 +110,11 @@ async function main() {
 
   console.log("\n📄 Page metadata");
   for (const url of urls) {
+    // Skip XML sitemap files — they're not HTML pages
+    if (url.endsWith(".xml") || url.includes("sitemap")) {
+      continue;
+    }
+
     const path = url.replace(SITE_URL, "") || "/";
     const { status, text: html } = await fetchText(url);
 
