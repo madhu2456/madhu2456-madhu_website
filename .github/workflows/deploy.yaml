@@ -154,7 +154,7 @@ jobs:
       - name: Post-deploy SEO smoke test
         run: |
           echo "⏳ Waiting for Cloudflare to propagate"
-          sleep 15
+          sleep 60
           node scripts/seo-smoke-test.mjs
         env:
           SITE_URL: "https://madhudadi.in"
