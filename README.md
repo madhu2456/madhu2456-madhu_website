@@ -96,8 +96,8 @@ Data/
 
 ## Security
 
-- Content Security Policy (CSP) is implemented via Next.js Middleware (`src/middleware.ts`) in Report-Only mode.
-- Uses a dynamically generated UUID-based nonce for strict inline script execution (`strict-dynamic`).
+- Content Security Policy (CSP) is enforced via Next.js Middleware (`middleware.ts`).
+- Uses a per-request UUID-based nonce for Next.js framework scripts, theme bootstrapping, Google Tag Manager, and JSON-LD scripts.
 - Static security headers (X-Frame-Options, HSTS, etc.) are applied in `next.config.ts`.
 
 ## Image handling

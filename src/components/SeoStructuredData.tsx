@@ -1,3 +1,4 @@
+import { JsonLdScript } from "@/components/JsonLdScript";
 import { buildDiscoveryKeywords } from "@/lib/discovery-keywords";
 import { resolveAbsoluteImageUrl } from "@/lib/image-source";
 import {
@@ -17,7 +18,6 @@ import {
   buildWorkExperienceSchema,
 } from "@/lib/jsonld";
 import { getPortfolioData } from "@/lib/portfolio-data";
-import { serializeJsonLd } from "@/lib/seo/json-ld";
 import { resolveSiteUrl } from "@/lib/site-url";
 
 export type SeoGraphNode =
@@ -212,11 +212,5 @@ export async function SeoStructuredData({
 
   const graph = buildFullGraph(graphNodes);
 
-  return (
-    <script
-      type="application/ld+json"
-      // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is escaped by serializeJsonLd
-      dangerouslySetInnerHTML={{ __html: serializeJsonLd(graph) }}
-    />
-  );
+  return <JsonLdScript data={graph} />;
 }

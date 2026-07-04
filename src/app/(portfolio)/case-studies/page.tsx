@@ -6,13 +6,13 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { Footer } from "@/components/Footer";
 import { FormattedText } from "@/components/FormattedText";
 import { Header } from "@/components/Header";
+import { JsonLdScript } from "@/components/JsonLdScript";
 import { SeoStructuredData } from "@/components/SeoStructuredData";
 import {
   normalizeImageSource,
   shouldUseUnoptimizedImage,
 } from "@/lib/image-source";
 import { getPortfolioData } from "@/lib/portfolio-data";
-import { serializeJsonLd } from "@/lib/seo/json-ld";
 
 import { resolveSiteUrl } from "@/lib/site-url";
 
@@ -93,14 +93,10 @@ export default async function CaseStudiesPage() {
         id="main-content"
         className="flex-1 mx-auto max-w-6xl w-[92%] pt-32 pb-24"
       >
-        <script
-          type="application/ld+json"
-          // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is escaped by serializeJsonLd
-          dangerouslySetInnerHTML={{
-            __html: serializeJsonLd({
-              "@context": "https://schema.org",
-              "@graph": [collectionSchema, breadcrumbSchema],
-            }),
+        <JsonLdScript
+          data={{
+            "@context": "https://schema.org",
+            "@graph": [collectionSchema, breadcrumbSchema],
           }}
         />
         <Breadcrumb items={[{ label: "Case Studies" }]} />

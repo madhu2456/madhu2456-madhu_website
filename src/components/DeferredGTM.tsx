@@ -18,7 +18,13 @@ import { useEffect, useState } from "react";
 
 const EVENTS = ["mousemove", "scroll", "touchstart", "keydown"] as const;
 
-export function DeferredGTM({ gtmId }: { gtmId: string }) {
+export function DeferredGTM({
+  gtmId,
+  nonce,
+}: {
+  gtmId: string;
+  nonce?: string;
+}) {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -41,5 +47,5 @@ export function DeferredGTM({ gtmId }: { gtmId: string }) {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!ready) return null;
-  return <GoogleTagManager gtmId={gtmId} />;
+  return <GoogleTagManager gtmId={gtmId} nonce={nonce} />;
 }

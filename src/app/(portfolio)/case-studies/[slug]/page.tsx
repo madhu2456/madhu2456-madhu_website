@@ -7,13 +7,13 @@ import { CitationBox } from "@/components/CitationBox";
 import { Footer } from "@/components/Footer";
 import { FormattedText } from "@/components/FormattedText";
 import { Header } from "@/components/Header";
+import { JsonLdScript } from "@/components/JsonLdScript";
 import { ShareButtons } from "@/components/ShareButtons";
 import {
   normalizeImageSource,
   shouldUseUnoptimizedImage,
 } from "@/lib/image-source";
 import { getPortfolioData, type ProjectItem } from "@/lib/portfolio-data";
-import { serializeJsonLd } from "@/lib/seo/json-ld";
 import { resolveSiteUrl } from "@/lib/site-url";
 
 const getSiteUrl = () => {
@@ -253,11 +253,7 @@ export default async function CaseStudyPage({
         id="main-content"
         className="mx-auto w-[min(1100px,92%)] pt-32 pb-24"
       >
-        <script
-          type="application/ld+json"
-          // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is escaped by serializeJsonLd
-          dangerouslySetInnerHTML={{ __html: serializeJsonLd(graph) }}
-        />
+        <JsonLdScript data={graph} />
 
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-8">
           <Link

@@ -17,8 +17,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { JsonLdScript } from "@/components/JsonLdScript";
 import { getPortfolioData } from "@/lib/portfolio-data";
-import { serializeJsonLd } from "@/lib/seo/json-ld";
 import { resolveSiteUrl } from "@/lib/site-url";
 
 interface ServicePageProps {
@@ -239,19 +239,15 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <script
-        type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is escaped by serializeJsonLd
-        dangerouslySetInnerHTML={{
-          __html: serializeJsonLd({
-            "@context": "https://schema.org",
-            "@graph": [
-              serviceSchema,
-              webpageSchema,
-              breadcrumbSchema,
-              ...(faqSchema ? [faqSchema] : []),
-            ],
-          }),
+      <JsonLdScript
+        data={{
+          "@context": "https://schema.org",
+          "@graph": [
+            serviceSchema,
+            webpageSchema,
+            breadcrumbSchema,
+            ...(faqSchema ? [faqSchema] : []),
+          ],
         }}
       />
       <Header profile={profile} navigationItems={sortedNavigationItems} />

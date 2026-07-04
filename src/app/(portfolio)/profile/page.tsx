@@ -13,13 +13,13 @@ import Link from "next/link";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { JsonLdScript } from "@/components/JsonLdScript";
 import { SafeEmailLink } from "@/components/SafeEmailLink";
 import { TrackedLink } from "@/components/TrackedLink";
 import { buildDiscoveryKeywords } from "@/lib/discovery-keywords";
 import { resolveAbsoluteImageUrl } from "@/lib/image-source";
 import { buildPersonSchema } from "@/lib/jsonld";
 import { getPortfolioData } from "@/lib/portfolio-data";
-import { serializeJsonLd } from "@/lib/seo/json-ld";
 import { resolveSiteUrl } from "@/lib/site-url";
 import { formatMonthYear } from "@/lib/utils";
 
@@ -172,11 +172,7 @@ export default async function ProfilePage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <script
-        type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is escaped by serializeJsonLd
-        dangerouslySetInnerHTML={{ __html: serializeJsonLd(coreEntityGraph) }}
-      />
+      <JsonLdScript data={coreEntityGraph} />
       <Header profile={profile} navigationItems={sortedNavigationItems} />
 
       <main id="main-content" className="flex-1 px-6 py-20 bg-background/50">

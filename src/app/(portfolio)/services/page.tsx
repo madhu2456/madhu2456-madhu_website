@@ -14,9 +14,9 @@ import Link from "next/link";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { JsonLdScript } from "@/components/JsonLdScript";
 import { SeoStructuredData } from "@/components/SeoStructuredData";
 import { getPortfolioData } from "@/lib/portfolio-data";
-import { serializeJsonLd } from "@/lib/seo/json-ld";
 import { resolveSiteUrl } from "@/lib/site-url";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -89,11 +89,7 @@ export default async function ServicesHubPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <script
-        type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is escaped by serializeJsonLd
-        dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbSchema) }}
-      />
+      <JsonLdScript data={breadcrumbSchema} />
       <SeoStructuredData nodes={["ServicesList", "HowToHire"]} />
       <Header profile={profile} navigationItems={sortedNavigationItems} />
 

@@ -17,7 +17,9 @@ export function middleware(request: NextRequest) {
 
   const cspHeader = `
     default-src 'self';
-    script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'unsafe-inline' https: ${!isProd ? "'unsafe-eval'" : ""} https://www.googletagmanager.com https://static.cloudflareinsights.com;
+    script-src 'self' 'nonce-${nonce}' 'strict-dynamic' ${!isProd ? "'unsafe-eval'" : ""} https: https://www.googletagmanager.com https://static.cloudflareinsights.com;
+    script-src-elem 'self' 'nonce-${nonce}' https://www.googletagmanager.com https://static.cloudflareinsights.com;
+    script-src-attr 'none';
     connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com https://api.resend.com${!isProd ? " ws: wss:" : ""};
     style-src 'self' 'unsafe-inline';
     img-src 'self' blob: data: https://images.unsplash.com https://www.googletagmanager.com https://www.google-analytics.com;

@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { headers } from "next/headers";
 
 import { AppSidebar } from "@/components/app-sidebar";
 import { ClientChrome } from "@/components/ClientChrome";
@@ -183,6 +184,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -191,6 +194,7 @@ export default async function RootLayout({
         {/* Make motion/react sections visible when JS is disabled (AI crawlers, no-JS users) */}
         <noscript>
           <style
+            nonce={nonce}
             // biome-ignore lint/security/noDangerouslySetInnerHtml: safe - static noscript CSS for AEO visibility
             dangerouslySetInnerHTML={{
               __html:
@@ -208,6 +212,7 @@ export default async function RootLayout({
         </a>
         <DeferredGTM
           gtmId={process.env.NEXT_PUBLIC_GTM_ID?.trim() || "GTM-PBB2W9VG"}
+          nonce={nonce}
         />
         <WebVitals />
         <ThemeProvider
@@ -215,6 +220,7 @@ export default async function RootLayout({
           defaultTheme="dark"
           enableSystem={false}
           disableTransitionOnChange
+          nonce={nonce}
         >
           <SidebarProvider defaultOpen={false}>
             <SidebarInset>{children}</SidebarInset>

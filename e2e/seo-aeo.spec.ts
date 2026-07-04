@@ -74,7 +74,7 @@ test.describe("No-JS crawler visibility", () => {
   test("homepage keeps primary answer content visible without JavaScript", async ({
     page,
   }) => {
-    await page.goto("/");
+    await page.goto("/", { waitUntil: "domcontentloaded" });
 
     await expect(page.locator("main#main-content")).toHaveCount(1);
     await expect(

@@ -16,9 +16,9 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { ContactForm } from "@/components/ContactForm";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { JsonLdScript } from "@/components/JsonLdScript";
 import { SafeEmailLink } from "@/components/SafeEmailLink";
 import { getPortfolioData } from "@/lib/portfolio-data";
-import { serializeJsonLd } from "@/lib/seo/json-ld";
 import { resolveSiteUrl } from "@/lib/site-url";
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
@@ -160,14 +160,10 @@ export default async function ContactPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <script
-        type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is escaped by serializeJsonLd
-        dangerouslySetInnerHTML={{
-          __html: serializeJsonLd({
-            "@context": "https://schema.org",
-            "@graph": [breadcrumbSchema, faqSchema, contactPageSchema],
-          }),
+      <JsonLdScript
+        data={{
+          "@context": "https://schema.org",
+          "@graph": [breadcrumbSchema, faqSchema, contactPageSchema],
         }}
       />
       <Header profile={profile} navigationItems={sortedNavigationItems} />
