@@ -604,6 +604,26 @@ export default async function CredentialsPage() {
               </p>
             </div>
           </section>
+
+          {/* Contact CTA */}
+          <section className="relative rounded-3xl border border-border bg-surface/20 p-8 md:p-10 overflow-hidden text-center max-w-2xl mx-auto">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-32 w-32 bg-primary/5 rounded-full blur-[60px] -z-10" />
+            <h2 className="text-xl font-bold tracking-tight">
+              Let&apos;s work together
+            </h2>
+            <p className="text-xs md:text-sm text-muted-foreground leading-relaxed mt-2">
+              Interested in what you see? Reach out to discuss your project or
+              role.
+            </p>
+            <div className="mt-6">
+              <Link
+                href="/contact/"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-xs font-semibold text-primary-foreground shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all"
+              >
+                Get in touch
+              </Link>
+            </div>
+          </section>
         </div>
       </main>
 
