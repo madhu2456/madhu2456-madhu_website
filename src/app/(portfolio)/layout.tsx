@@ -211,7 +211,7 @@ export default async function RootLayout({
           Skip to content
         </a>
         <DeferredGTM
-          gtmId={process.env.NEXT_PUBLIC_GTM_ID?.trim() || "GTM-PBB2W9VG"}
+          gtmId={process.env.NEXT_PUBLIC_GTM_ID?.trim() ?? ""}
           nonce={nonce}
         />
         <WebVitals />
