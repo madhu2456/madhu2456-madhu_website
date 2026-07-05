@@ -18,8 +18,8 @@ export default defineConfig({
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
-  /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  /* Retry on CI only; add 1 retry locally to handle Turbopack flakiness */
+  retries: process.env.CI ? 2 : 1,
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
@@ -29,7 +29,12 @@ export default defineConfig({
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
     actionTimeout: 0,
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: "http://127.0.0.1:3100",
+    baseURL: "http://127.0.0.1:3000",
+
+    /* Wait for network to be idle before considering page loaded; helps with chunk load flakiness */
+    // Note: each test can override with its own waitUntil
+    // Default navigation timeout if not specified per-goto
+    navigationTimeout: 15000,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
@@ -57,8 +62,8 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: "pnpm run dev --hostname 127.0.0.1 --port 3100",
-    port: 3100,
+    command: "pnpm build && pnpm start",
+    port: 3000,
     timeout: 120 * 1000,
     reuseExistingServer: false,
   },

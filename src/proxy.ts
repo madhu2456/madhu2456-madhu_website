@@ -14,7 +14,19 @@ const AUTH_WINDOW_MS = 15 * 60 * 1000; // 15 minutes
 const AUTH_MAX_ATTEMPTS = 5;
 const AUTH_MAP_CAP = 5_000;
 
-function isAuthRateLimited(ip: string): boolean {
+// Read-only check — does NOT increment counter
+function isOverRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const record = authRateLimitMap.get(ip);
+  return (
+    record !== undefined &&
+    now <= record.resetAt &&
+    record.count > AUTH_MAX_ATTEMPTS
+  );
+}
+
+// Record a failed auth attempt (increments counter)
+function recordAuthFailure(ip: string): void {
   const now = Date.now();
   const record = authRateLimitMap.get(ip);
 
@@ -31,11 +43,10 @@ function isAuthRateLimited(ip: string): boolean {
       }
     }
     authRateLimitMap.set(ip, { count: 1, resetAt: now + AUTH_WINDOW_MS });
-    return false;
+    return;
   }
 
   record.count += 1;
-  return record.count > AUTH_MAX_ATTEMPTS;
 }
 
 const unauthorized = () =>
@@ -64,13 +75,13 @@ function constantTimeEqual(a: string, b: string): boolean {
 }
 
 export default function proxy(request: NextRequest) {
-  // --- Rate-limit check (before any credential validation) ----------------
   const ip =
     request.headers.get("cf-connecting-ip")?.trim() ||
     request.headers.get("x-forwarded-for")?.split(",")[0].trim() ||
     "anonymous";
 
-  if (isAuthRateLimited(ip)) {
+  // Read-only rate limit check — does NOT consume budget
+  if (isOverRateLimit(ip)) {
     return new NextResponse(
       "Too many authentication attempts. Try again later.",
       {
@@ -92,15 +103,17 @@ export default function proxy(request: NextRequest) {
 
   const authorizationHeader = request.headers.get("authorization");
   if (!authorizationHeader) {
-    return unauthorized();
+    return unauthorized(); // No auth header — NOT counted as failure
   }
 
   const [scheme, credentials] = authorizationHeader.trim().split(/\s+/, 2);
   if (scheme.toLowerCase() !== "basic" || !credentials) {
+    recordAuthFailure(ip); // Invalid auth format — counted
     return unauthorized();
   }
 
   if (!constantTimeEqual(credentials, expectedCredentials)) {
+    recordAuthFailure(ip); // Wrong credentials — counted
     return unauthorized();
   }
 

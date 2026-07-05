@@ -16,7 +16,9 @@ test.describe("SEO/AEO pre-deploy checks", () => {
     test(`${path} exposes canonical, robots, and Open Graph image`, async ({
       page,
     }) => {
-      await page.goto(path);
+      // Use domcontentloaded for meta tags (they're in the <head>)
+      // networkidle is too slow; load is fine since we only need DOM
+      await page.goto(path, { waitUntil: "domcontentloaded" });
 
       await expect(page.locator("head link[rel='canonical']")).toHaveCount(1);
       await expect(page.locator("head meta[property='og:image']")).toHaveCount(
@@ -38,7 +40,7 @@ test.describe("SEO/AEO pre-deploy checks", () => {
   }
 
   test("homepage exposes fixed SearchAction JSON-LD", async ({ page }) => {
-    await page.goto("/");
+    await page.goto("/", { waitUntil: "networkidle" });
     const jsonLd = await page
       .locator("script[type='application/ld+json']")
       .allTextContents();
