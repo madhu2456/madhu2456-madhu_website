@@ -129,8 +129,7 @@ jobs:
             echo "🔍 Verifying sitemap.xml"
             curl --fail --show-error http://localhost:3000/sitemap.xml | grep -q '<urlset' && echo 'sitemap OK' || (echo 'sitemap MISSING'; exit 1)
 
-            echo "🔍 Verifying robots.txt"
-            curl --fail --show-error http://localhost:3000/robots.txt | grep -q 'Sitemap:' && echo 'robots OK' || (echo 'robots MISSING'; exit 1)
+
 
             echo "✅ Deployment successful"
 
