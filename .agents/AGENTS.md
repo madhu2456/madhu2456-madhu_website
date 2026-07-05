@@ -100,7 +100,7 @@ Required env var:
 
 ### 5. Security
 
-- Content Security Policy (CSP) is implemented via Next.js Middleware (`middleware.ts`) in Report-Only mode.
+- Content Security Policy (CSP) is implemented via Next.js Middleware (`middleware.ts`) in enforcing mode with `report-uri` for violation logging.
 - Uses a dynamically generated UUID-based nonce injected via request headers (`x-nonce`).
 - Static security headers (X-Frame-Options, HSTS, etc.) are enforced via `next.config.ts`.
 
