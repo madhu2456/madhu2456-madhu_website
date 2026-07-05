@@ -1,7 +1,5 @@
-"use client";
-
-import { motion, useReducedMotion } from "motion/react";
 import type { ReactNode } from "react";
+import { AnimatedSection } from "@/components/AnimatedSection";
 
 export function Section({
   id,
@@ -14,18 +12,8 @@ export function Section({
   title: string;
   children: ReactNode;
 }) {
-  const prefersReducedMotion = useReducedMotion();
-
   return (
-    <motion.section
-      id={id}
-      data-motion-initial
-      initial={prefersReducedMotion ? undefined : { opacity: 0, y: 20 }}
-      whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: prefersReducedMotion ? 0 : 0.7 }}
-      className="scroll-mt-28 py-8 md:py-12"
-    >
+    <AnimatedSection id={id}>
       <div className="mx-auto w-[min(1400px,92%)]">
         <header className="mb-8 max-w-none">
           <p className="mb-3 text-xs tracking-[0.25em] text-primary uppercase">
@@ -37,6 +25,6 @@ export function Section({
         </header>
         {children}
       </div>
-    </motion.section>
+    </AnimatedSection>
   );
 }

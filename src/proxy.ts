@@ -47,12 +47,19 @@ const unauthorized = () =>
     },
   });
 
+const CREDENTIAL_MAX_LEN = 256; // Base64 auth headers won't exceed this
+
 function constantTimeEqual(a: string, b: string): boolean {
-  const len = Math.max(a.length, b.length);
+  // Pad both strings to a fixed length to prevent timing-based length inference
+  const paddedA = a.padEnd(CREDENTIAL_MAX_LEN, "\0");
+  const paddedB = b.padEnd(CREDENTIAL_MAX_LEN, "\0");
+
   let result = 0;
-  for (let i = 0; i < len; i++) {
-    result |= a.charCodeAt(i % a.length) ^ b.charCodeAt(i % b.length);
+  for (let i = 0; i < CREDENTIAL_MAX_LEN; i++) {
+    result |= paddedA.charCodeAt(i) ^ paddedB.charCodeAt(i);
   }
+  // Length check ensures correctness (different-length strings ARE different)
+  // but the fixed-length loop prevents timing-based length inference
   return result === 0 && a.length === b.length;
 }
 
