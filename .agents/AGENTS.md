@@ -109,7 +109,7 @@ Required env var:
 ### Technical SEO
 
 - Dynamic metadata in `src/app/(portfolio)/layout.tsx`
-- Robots in `src/app/robots.ts`
+- Robots: Managed at the NGINX proxy level (static file), not by Next.js
 - Sitemap in `src/app/sitemap.ts`
 - OG image in `src/app/(portfolio)/opengraph-image.tsx`
 
