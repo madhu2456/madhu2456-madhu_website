@@ -575,7 +575,7 @@
       "liveUrl": "https://adticks.com",
       "githubUrl": "",
       "featured": true,
-      "coverImage": "/uploads/cms/adticks-cover.png",
+      "coverImage": "/uploads/cms/adticks-cover.webp",
       "coverImageAlt": "Adticks search and AI visibility measurement platform, designed and built by Madhu Dadi.",
       "client": "Adticks",
       "role": "Founder & Full-stack / AI Engineer",
@@ -638,12 +638,12 @@
       ],
       "gallery": [
         {
-          "url": "/uploads/cms/adticks-dashboard.png",
+          "url": "/uploads/cms/adticks-dashboard.webp",
           "caption": "Adticks SEO & AI Visibility Auditing Dashboard showing parallel crawling insights.",
           "alt": "Adticks SaaS Dashboard"
         },
         {
-          "url": "/uploads/cms/adticks-architecture.png",
+          "url": "/uploads/cms/adticks-architecture.webp",
           "caption": "Abstract system architecture mapping the data pipeline and asynchronous crawler nodes.",
           "alt": "Adticks System Architecture"
         }
@@ -750,7 +750,7 @@
       "liveUrl": "https://madhudadi.in/blog",
       "githubUrl": "",
       "featured": true,
-      "coverImage": "/uploads/cms/technical-blog-cover.png",
+      "coverImage": "/uploads/cms/technical-blog-cover.webp",
       "coverImageAlt": "Technical Blog case study preview showing a RAG-powered learning platform and AI assistant by Madhu Dadi.",
       "client": "madhudadi.in/blog",
       "role": "Designer & Engineer",
@@ -807,7 +807,7 @@
       ],
       "gallery": [
         {
-          "url": "/uploads/cms/tech-blog-cms.png",
+          "url": "/uploads/cms/tech-blog-cms.webp",
           "caption": "Custom headless CMS interface for the technical blog featuring live Markdown previews and metadata extraction.",
           "alt": "Technical Blog Headless CMS"
         }
@@ -912,7 +912,7 @@
       "liveUrl": "https://udemyenroller.madhudadi.in",
       "githubUrl": "https://github.com/madhu2456/udemy_enroller_fastapi",
       "featured": true,
-      "coverImage": "/uploads/cms/udemy-enroller-cover.png",
+      "coverImage": "/uploads/cms/udemy-enroller-cover.webp",
       "coverImageAlt": "Udemy Enroller platform preview showing async browser-workflow orchestration.",
       "client": "Open source / community",
       "role": "Designer & Engineer",
@@ -976,7 +976,7 @@
       ],
       "gallery": [
         {
-          "url": "/uploads/cms/udemy-dashboard.png",
+          "url": "/uploads/cms/udemy-dashboard.webp",
           "caption": "FastAPI automation dashboard showing real-time Celery worker queues and task success metrics.",
           "alt": "FastAPI Task Queue Dashboard"
         }
