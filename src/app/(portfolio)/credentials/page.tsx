@@ -391,7 +391,10 @@ export default async function CredentialsPage() {
 
               <div className="relative border-l border-border/80 pl-6 ml-3 space-y-8">
                 {sortedExperiences.map((exp) => (
-                  <div key={exp.company} className="relative space-y-2">
+                  <div
+                    key={`${exp.company}-${exp.startDate}`}
+                    className="relative space-y-2"
+                  >
                     {/* Circle bullet */}
                     <div
                       aria-hidden="true"

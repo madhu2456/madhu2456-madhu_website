@@ -1,6 +1,6 @@
 "use client";
 
-import { MessageCircle, Sparkles } from "lucide-react";
+import { IconMessageCircle, IconSparkles } from "@tabler/icons-react";
 import { usePathname } from "next/navigation";
 import { useSidebar } from "./ui/sidebar";
 
@@ -20,7 +20,7 @@ function SidebarToggle() {
         className="absolute inset-0 rounded-full bg-primary/20 blur-xl transition-opacity group-hover:opacity-80"
       />
       <div className="absolute -top-1 -right-1 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-glow">
-        <Sparkles className="h-3 w-3" aria-hidden />
+        <IconSparkles className="h-3 w-3" aria-hidden />
       </div>
 
       <div
@@ -37,7 +37,7 @@ function SidebarToggle() {
         className="relative flex h-16 w-16 items-center justify-center rounded-full border border-border bg-primary text-primary-foreground shadow-card transition-transform duration-300 hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary motion-reduce:transition-none motion-reduce:hover:scale-100"
         aria-label="Open AI assistant"
       >
-        <MessageCircle className="h-7 w-7" aria-hidden />
+        <IconMessageCircle className="h-7 w-7" aria-hidden />
       </button>
     </div>
   );

@@ -1,12 +1,6 @@
 import {
   IconArrowRight,
-  IconBrain,
-  IconChartBar,
   IconChevronRight,
-  IconCode,
-  IconCpu,
-  IconDatabase,
-  IconSettings,
   IconSparkles,
 } from "@tabler/icons-react";
 import type { Metadata } from "next";
@@ -16,6 +10,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JsonLdScript } from "@/components/JsonLdScript";
 import { SeoStructuredData } from "@/components/SeoStructuredData";
+import { ServiceIcon } from "@/components/ServiceIcon";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { resolveSiteUrl } from "@/lib/site-url";
 
@@ -46,26 +41,6 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function ServicesHubPage() {
   const { profile, sortedServices, sortedProjects, sortedNavigationItems } =
     await getPortfolioData();
-
-  // Helper to map slugs to premium icons
-  const getServiceIcon = (slug: string) => {
-    switch (slug) {
-      case "ai-llm-application-development":
-        return <IconBrain className="h-6 w-6 text-primary" />;
-      case "rag-consultant-india":
-        return <IconDatabase className="h-6 w-6 text-primary" />;
-      case "ai-agent-development":
-        return <IconCpu className="h-6 w-6 text-primary" />;
-      case "marketing-analytics-consultant":
-        return <IconChartBar className="h-6 w-6 text-primary" />;
-      case "ga4-bigquery-campaign-analytics":
-        return <IconSettings className="h-6 w-6 text-primary" />;
-      case "full-stack-ai-product-development":
-        return <IconCode className="h-6 w-6 text-primary" />;
-      default:
-        return <IconSparkles className="h-6 w-6 text-primary" />;
-    }
-  };
 
   const siteUrl = `${resolveSiteUrl()}/`;
   const breadcrumbSchema = {
@@ -117,7 +92,6 @@ export default async function ServicesHubPage() {
           {/* Services Grid */}
           <section className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {sortedServices.map((service, index) => {
-              const Icon = getServiceIcon(service.slug);
               const stack = service.technologies?.map((t) => t.name) ?? [];
 
               return (
@@ -131,7 +105,10 @@ export default async function ServicesHubPage() {
                     {/* Header */}
                     <div className="flex items-center justify-between">
                       <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/15 text-primary border border-primary/10 shadow-inner group-hover:scale-105 transition-transform duration-300">
-                        {Icon}
+                        <ServiceIcon
+                          slug={service.slug}
+                          className="h-6 w-6 text-primary"
+                        />
                       </div>
                       <span
                         aria-hidden="true"

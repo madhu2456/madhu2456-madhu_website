@@ -269,7 +269,7 @@ export const buildV2PageContentDefaults = (): PageContentSchema => {
       seo: {
         title: "Contact Madhu Dadi | AI & Analytics Engineer",
         description:
-          "Get in touch with Madhu Dadi for freelance consulting, full-time opportunities, or collaborations.",
+          "Contact Madhu Dadi — AI, RAG & marketing analytics consultant. Available for freelance AI projects, full-time roles, and consulting. Response within 24 hours.",
         canonicalPath: "/contact/",
       },
       heroTitle: "Contact Me",

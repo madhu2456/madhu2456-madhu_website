@@ -20,7 +20,7 @@ export async function GET() {
     },
     logo_url: `${siteUrl}/favicon.ico`,
     contact_email: "madhu.kumar245@gmail.com",
-    legal_info_url: `${siteUrl}/`,
+    legal_info_url: `${siteUrl}/privacy/`,
   };
 
   return Response.json(manifest, {

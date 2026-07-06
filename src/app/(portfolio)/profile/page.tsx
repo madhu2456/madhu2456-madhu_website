@@ -73,6 +73,10 @@ export default async function ProfilePage() {
     siteSettings,
   } = await getPortfolioData();
   const siteUrl = `${resolveSiteUrl()}/`;
+  const peerlistProfile = pageContent.credentials.externalProfiles.find(
+    (p) => p.name.toLowerCase() === "peerlist",
+  );
+  const peerlistUrl = peerlistProfile?.url || "https://peerlist.io/madhudadi";
 
   // Build the full Person schema via the shared builder to ensure parity with
   // the homepage and other pages (hasCredential, makesOffer, seeks, etc.).
@@ -595,7 +599,7 @@ export default async function ProfilePage() {
                 </a>
               )}
               <a
-                href="https://peerlist.io/madhudadi"
+                href={peerlistUrl}
                 target="_blank"
                 rel="noopener noreferrer me"
                 className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-muted-foreground hover:text-foreground border border-border bg-surface/30 rounded-xl hover:border-primary/20 transition-all"

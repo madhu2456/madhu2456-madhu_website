@@ -153,7 +153,7 @@ export default async function ContactPage() {
     url: `${siteUrl}contact/`,
     name: "Contact Madhu Dadi",
     description:
-      "Work with Madhu Dadi on production AI, RAG, AI agents, marketing analytics, or full-stack AI product development.",
+      "Contact Madhu Dadi — AI, RAG & marketing analytics consultant. Available for freelance AI projects, full-time roles, and consulting. Response within 24 hours.",
     mainEntity: { "@id": `${siteUrl}#person` },
     breadcrumb: { "@id": `${siteUrl}contact/#breadcrumb` },
   };

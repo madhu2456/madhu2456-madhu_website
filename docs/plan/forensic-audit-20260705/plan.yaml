@@ -1,0 +1,449 @@
+plan_id: forensic-audit-20260705
+objective: |
+  Forensic audit-only review of https://madhudadi.in and its local repository
+  /media/madhudadi/Storage/LinuxProjects/Codes/Projects/madhu_portfolio.
+  No code changes; produce evidence-backed findings across documentation, codebase,
+  and the live site.
+created_at: "2026-07-05T00:00:00Z"
+created_by: weave-planner
+status: pending
+plan_metrics:
+  wave_1_task_count: 1
+  total_dependencies: 4
+  risk_score: medium
+tldr: |
+  Five-phase sequential forensic audit:
+  documentation baseline (A1) -> repo discovery + command validation (A2) ->
+  static code search + line-by-line review (A3) -> live site crawl + functional
+  verification (A4) -> deep audits + final report synthesis (A5).
+open_questions: []
+gaps: []
+pre_mortem:
+  overall_risk_level: medium
+  critical_failure_modes:
+    - scenario: Live site unreachable or blocks automated crawling
+      likelihood: medium
+      impact: medium
+      mitigation: Record HTTP status, headers, and screenshots; fall back to repo-only findings
+    - scenario: Repository missing local runtime dependencies
+      likelihood: low
+      impact: low
+      mitigation: Audit is read-only; dependency failures are themselves findings
+  assumptions:
+    - The local repo is present at the stated path with committed source.
+    - The site https://madhudadi.in is publicly reachable during the session.
+    - Audit is read-only and will not modify source, env, or deployed state.
+implementation_specification:
+  code_structure: |
+    Next.js application with src/ layout, public assets, Playwright e2e tests,
+    middleware.ts, and CI under .github/. Audit targets: Next.js route handlers,
+    middleware, client components, environment handling, and build configuration.
+  affected_areas:
+    - README.md
+    - next.config.ts
+    - middleware.ts
+    - src/
+    - e2e/
+    - playwright.config.ts
+    - .env example and local files
+    - https://madhudadi.in
+  component_details:
+    - component: Documentation layer
+      responsibility: High-level project intent, setup instructions, API contracts
+      interfaces:
+        - README.md
+      dependencies: []
+      integration_points: []
+    - component: Runtime layer
+      responsibility: Next.js routes, middleware, rendering logic
+      interfaces:
+        - app router pages
+        - API routes
+        - middleware.ts
+      dependencies:
+        - component: Documentation layer
+          relationship: README describes runtime behavior
+      integration_points:
+        - https://madhudadi.in
+    - component: Test/QA layer
+      responsibility: E2E coverage and testability
+      interfaces:
+        - e2e/
+        - playwright.config.ts
+      dependencies:
+        - component: Runtime layer
+          relationship: Tests exercise runtime
+      integration_points: []
+contracts: []
+tasks:
+  - id: A1
+    title: Documentation baseline research
+    description: |
+      Establish a baseline of existing project documentation. Read README.md,
+      docs/ files, and any top-level markdown, then extract stated requirements,
+      setup steps, environment variables, and known constraints.
+    wave: 1
+    agent: weave-researcher
+    prototype: false
+    covers:
+      - README.md
+      - docs/plan/*
+      - Top-level markdown files
+    priority: high
+    status: pending
+    flags:
+      flaky: false
+      retries_used: 0
+    dependencies: []
+    conflicts_with: []
+    context_files:
+      - path: README.md
+        description: Project overview and setup instructions
+    diagnosis:
+      root_cause: null
+      fix_recommendations: null
+      injected_at: null
+    planning_pass: 1
+    planning_history:
+      - pass: 1
+        reason: Initial plan creation
+        timestamp: "2026-07-05T00:00:00Z"
+    estimated_effort: small
+    estimated_files: 3
+    estimated_lines: 200
+    focus_area: documentation
+    verification:
+      - README summary synthesized
+      - Env/config expectations listed
+    acceptance_criteria:
+      - README is read and summarized
+      - Any setup or env gaps are flagged
+      - Outputs are saved to the plan log directory
+    success_criteria:
+      - "documentation_summary.md exists in docs/plan/forensic-audit-20260705/logs/"
+    failure_modes:
+      - scenario: No project documentation present
+        likelihood: low
+        impact: medium
+        mitigation: Record as a finding and proceed to repo discovery
+    implementation_handoff:
+      do_not_reinvestigate:
+        - Already-read README and docs
+      required_test_first: null
+      target_files:
+        - README.md
+      minimal_change: N/A
+      acceptance_checks:
+        - Summarized README content
+        - Listed documented environment variables
+        - Flagged missing or ambiguous setup steps
+
+  - id: A2
+    title: Repository discovery + command validation
+    description: |
+      Inventory the repository structure, tech stack, and available commands.
+      Inspect package.json scripts, next.config.ts, tsconfig.json, CI workflows,
+      and verify that declared commands exist and can run in read-only or
+      validation mode (e.g., pnpm exec next --version, typecheck where safe).
+    wave: 2
+    agent: weave-researcher
+    prototype: false
+    covers:
+      - package.json
+      - next.config.ts
+      - tsconfig.json
+      - .github/workflows
+      - pnpm-workspace.yaml
+      - biome.json
+    priority: high
+    status: pending
+    flags:
+      flaky: false
+      retries_used: 0
+    dependencies:
+      - A1
+    conflicts_with: []
+    context_files:
+      - path: package.json
+        description: Scripts, dependencies, and metadata
+      - path: next.config.ts
+        description: Next.js runtime and build configuration
+    diagnosis:
+      root_cause: null
+      fix_recommendations: null
+      injected_at: null
+    planning_pass: 1
+    planning_history:
+      - pass: 1
+        reason: Initial plan creation
+        timestamp: "2026-07-05T00:00:00Z"
+    estimated_effort: small
+    estimated_files: 5
+    estimated_lines: 300
+    focus_area: repository_inventory
+    verification:
+      - Repo tree captured
+      - Available commands documented
+      - Command validation results logged
+    acceptance_criteria:
+      - File tree inventory saved
+      - package.json scripts listed
+      - CI workflow steps summarized
+    success_criteria:
+      - "repo_inventory.json exists in docs/plan/forensic-audit-20260705/logs/"
+      - "command_validation.log exists in docs/plan/forensic-audit-20260705/logs/"
+    failure_modes:
+      - scenario: Required tooling not installed locally
+        likelihood: low
+        impact: low
+        mitigation: Record tool version as unverified and continue
+    implementation_handoff:
+      do_not_reinvestigate:
+        - Package metadata
+        - Next.js configuration
+      required_test_first: null
+      target_files:
+        - package.json
+        - next.config.ts
+        - .github/workflows
+      minimal_change: N/A
+      acceptance_checks:
+        - Listed all package scripts
+        - Validated that next and other key binaries report versions
+        - Noted any workspace or monorepo structure
+
+  - id: A3
+    title: Static code search + line-by-line review
+    description: |
+      Perform focused static analysis on the local source. Search for secrets,
+      hardcoded credentials, unsafe eval, XSS vectors, missing auth checks,
+      insecure fetch patterns, and Next.js-specific issues. Perform line-by-line
+      review of middleware.ts, key routes, and API handlers.
+    wave: 3
+    agent: weave-reviewer
+    prototype: false
+    covers:
+      - middleware.ts
+      - src/app/**/*.ts
+      - src/app/**/*.tsx
+      - src/components/**/*.tsx
+      - src/lib/**/*.ts
+      - .env.local
+      - .env.example
+    priority: high
+    status: pending
+    flags:
+      flaky: false
+      retries_used: 0
+    dependencies:
+      - A2
+    conflicts_with: []
+    context_files:
+      - path: middleware.ts
+        description: Next.js middleware/request handling
+      - path: src/
+        description: Application source
+    diagnosis:
+      root_cause: null
+      fix_recommendations: null
+      injected_at: null
+    planning_pass: 1
+    planning_history:
+      - pass: 1
+        reason: Initial plan creation
+        timestamp: "2026-07-05T00:00:00Z"
+    estimated_effort: large
+    estimated_files: 3
+    estimated_lines: 300
+    focus_area: security_static_analysis
+    verification:
+      - Secret-like strings flagged
+      - Insecure patterns catalogued
+      - Review notes saved
+    acceptance_criteria:
+      - Per-file review notes for middleware.ts and main entry routes
+      - At least one pass of grep-based secret/credential search
+      - Findings classified by severity
+    success_criteria:
+      - "static_audit_findings.md exists in docs/plan/forensic-audit-20260705/logs/"
+      - "High-severity findings explicitly enumerated or absent with evidence"
+    failure_modes:
+      - scenario: Large source volume exceeds review budget
+        likelihood: low
+        impact: medium
+        mitigation: Prioritize middleware, routes, and API handlers
+    review_depth: full
+    requires_review: true
+    review_security_sensitive: true
+    implementation_handoff:
+      do_not_reinvestigate:
+        - Already-discovered package and config files
+      required_test_first: null
+      target_files:
+        - middleware.ts
+        - src/app/**/*.ts
+        - src/app/**/*.tsx
+        - src/lib/**/*.ts
+      minimal_change: N/A
+      acceptance_checks:
+        - No unflagged hardcoded secrets
+        - Middleware auth/redirect logic reviewed
+        - API route input validation noted
+
+  - id: A4
+    title: Live site crawl + functional verification
+    description: |
+      Crawl https://madhudadi.in to verify deployed behavior against repository
+      expectations. Record HTTP responses, headers, TLS info, response times,
+      and key user flows using Playwright or curl. Capture screenshots of
+      homepage and any error states.
+    wave: 4
+    agent: weave-browser-tester
+    prototype: false
+    covers:
+      - https://madhudadi.in/
+      - Public pages reachable from root
+      - robots.txt / sitemap.xml
+    priority: high
+    status: pending
+    flags:
+      flaky: false
+      retries_used: 0
+    dependencies:
+      - A3
+    conflicts_with: []
+    context_files:
+      - path: README.md
+        description: Site purpose and expected behavior
+    diagnosis:
+      root_cause: null
+      fix_recommendations: null
+      injected_at: null
+    planning_pass: 1
+    planning_history:
+      - pass: 1
+        reason: Initial plan creation
+        timestamp: "2026-07-05T00:00:00Z"
+    estimated_effort: medium
+    estimated_files: 1
+    estimated_lines: 100
+    focus_area: live_site_verification
+    verification:
+      - Homepage reachable (2xx)
+      - Key links functional
+      - Screenshots/artifacts captured
+    validation_matrix:
+      - scenario: Homepage load
+        steps:
+          - GET https://madhudadi.in/
+          - Wait for network idle
+        expected_result: HTTP 200, no console errors
+      - scenario: Linked pages reachable
+        steps:
+          - Discover and GET all same-origin links
+        expected_result: No 4xx/5xx on internal pages
+    flows:
+      - flow_id: root_to_contact
+        description: Navigate from homepage to contact route if present
+        setup: []
+        steps:
+          - Open https://madhudadi.in/
+          - Click contact/portfolio link if present
+        expected_state:
+          url: "https://madhudadi.in/*"
+          status: 200
+        teardown: []
+    fixtures: {}
+    test_data: []
+    cleanup: false
+    visual_regression: {}
+    acceptance_criteria:
+      - Homepage screenshot saved
+      - Crawl log with status codes saved
+      - Console/network error summary saved
+    success_criteria:
+      - "live_crawl_report.json exists in docs/plan/forensic-audit-20260705/logs/"
+      - "homepage.png exists in docs/plan/forensic-audit-20260705/logs/"
+    failure_modes:
+      - scenario: Site blocks automated requests
+        likelihood: medium
+        impact: medium
+        mitigation: Record block details and continue to final report
+    implementation_handoff:
+      do_not_reinvestigate:
+        - Repository structure
+      required_test_first: null
+      target_files: []
+      minimal_change: N/A
+      acceptance_checks:
+        - Homepage loads correctly
+        - Internal links return 2xx
+        - robots.txt/sitemap.xml evaluated
+
+  - id: A5
+    title: Deep audits + final report synthesis
+    description: |
+      Aggregate findings from A1-A4. Perform cross-cutting checks for
+      documentation/code parity, security regressions, performance signals, and
+      regulatory/compliance exposure. Produce a final forensic audit report with
+      executive summary, evidence paths, severity ratings, and recommended next
+      steps.
+    wave: 5
+    agent: weave-reviewer-pro
+    prototype: false
+    covers:
+      - Outputs from A1-A4
+      - Cross-cutting security/quality issues
+      - Docs-vs-code parity
+    priority: high
+    status: pending
+    flags:
+      flaky: false
+      retries_used: 0
+    dependencies:
+      - A4
+    conflicts_with: []
+    context_files:
+      - path: docs/plan/forensic-audit-20260705/logs/static_audit_findings.md
+        description: Static code audit output
+      - path: docs/plan/forensic-audit-20260705/logs/live_crawl_report.json
+        description: Live site crawl output
+    diagnosis:
+      root_cause: null
+      fix_recommendations: null
+      injected_at: null
+    planning_pass: 1
+    planning_history:
+      - pass: 1
+        reason: Initial plan creation
+        timestamp: "2026-07-05T00:00:00Z"
+    estimated_effort: medium
+    estimated_files: 1
+    estimated_lines: 200
+    focus_area: final_audit_report
+    verification:
+      - Final report references evidence files
+      - Findings are classified and prioritized
+      - Recommendations are actionable
+    acceptance_criteria:
+      - Executive summary present
+      - Evidence paths listed per finding
+      - Severity and likelihood noted
+    success_criteria:
+      - "forensic_audit_report.md exists in docs/plan/forensic-audit-20260705/logs/"
+      - "All findings trace to a specific log file or line reference"
+    failure_modes:
+      - scenario: Missing or contradictory evidence from earlier phases
+        likelihood: low
+        impact: medium
+        mitigation: Flag gaps explicitly and scope report to available evidence
+    implementation_handoff:
+      do_not_reinvestigate:
+        - Outputs already produced by A1-A4
+      required_test_first: null
+      target_files: []
+      minimal_change: N/A
+      acceptance_checks:
+        - Report links to A1-A4 artifacts
+        - Each finding has severity, evidence, and recommendation
+        - No code changes recommended unless explicitly out of scope

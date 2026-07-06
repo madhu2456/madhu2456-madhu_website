@@ -3,6 +3,7 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { SafeEmailLink } from "@/components/SafeEmailLink";
+import { SeoStructuredData } from "@/components/SeoStructuredData";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { resolveSiteUrl } from "@/lib/site-url";
 
@@ -56,6 +57,7 @@ export default async function PrivacyPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
+      <SeoStructuredData nodes={["Breadcrumb"]} />
       <Header profile={profile} navigationItems={sortedNavigationItems} />
 
       <main id="main-content" className="flex-1 px-6 py-28 bg-background/50">

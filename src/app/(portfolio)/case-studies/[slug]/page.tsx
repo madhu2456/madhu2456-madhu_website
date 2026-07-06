@@ -1,4 +1,8 @@
-import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
+import {
+  IconArrowLeft,
+  IconArrowRight,
+  IconExternalLink,
+} from "@tabler/icons-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -247,7 +251,7 @@ export default async function CaseStudyPage({
   };
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen bg-[#050505]">
       <Header profile={profile} navigationItems={sortedNavigationItems} />
       <main
         id="main-content"
@@ -260,7 +264,7 @@ export default async function CaseStudyPage({
             href="/case-studies/"
             className="inline-flex items-center gap-2 text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
           >
-            <ArrowLeft className="h-4 w-4" aria-hidden />
+            <IconArrowLeft className="h-4 w-4" aria-hidden />
             All case studies
           </Link>
           {project.relatedServiceSlug && (
@@ -269,7 +273,7 @@ export default async function CaseStudyPage({
               className="inline-flex items-center gap-2 text-sm text-primary underline-offset-4 hover:text-primary/80 hover:underline"
             >
               Related service
-              <ArrowRight className="h-4 w-4" aria-hidden />
+              <IconArrowRight className="h-4 w-4" aria-hidden />
             </Link>
           )}
         </div>
@@ -522,7 +526,7 @@ export default async function CaseStudyPage({
                   className="inline-flex items-center gap-2 rounded-full border border-border bg-white/5 px-4 py-2 text-sm hover:bg-surface-elevated hover:border-primary/30 transition-all duration-300"
                 >
                   {link.label}
-                  <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+                  <IconExternalLink className="h-3.5 w-3.5" aria-hidden />
                 </a>
               </li>
             ))}
@@ -545,7 +549,7 @@ export default async function CaseStudyPage({
                       className="hover:text-primary underline underline-offset-4 flex items-center gap-2"
                     >
                       {citation.label || citation.url}
-                      <ExternalLink
+                      <IconExternalLink
                         className="h-3 w-3 inline-block"
                         aria-hidden
                       />
@@ -569,12 +573,12 @@ export default async function CaseStudyPage({
           url={caseStudyUrl}
           authorName="Madhu Dadi"
         />
-        <Footer
-          profile={profile}
-          navigationItems={sortedNavigationItems}
-          projects={sortedProjects}
-        />
       </main>
-    </>
+      <Footer
+        profile={profile}
+        navigationItems={sortedNavigationItems}
+        projects={sortedProjects}
+      />
+    </div>
   );
 }

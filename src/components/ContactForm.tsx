@@ -205,6 +205,48 @@ export function ContactForm() {
     });
   };
 
+  if (submitted) {
+    return (
+      <div className="space-y-6 rounded-2xl border border-border bg-surface/60 p-8 text-center backdrop-blur-md">
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+          <svg
+            className="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+        </div>
+        <div className="space-y-2">
+          <h3 className="font-bold text-lg text-foreground">Message Sent!</h3>
+          <p className="text-sm text-muted-foreground">
+            Thank you for reaching out. I usually reply within 24 hours.
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={() => {
+            sessionStorage.removeItem("contact_submitted");
+            setSubmitted(false);
+            setStatus(null);
+            setSubject("");
+            setMessage("");
+          }}
+          className="mx-auto inline-flex items-center justify-center rounded-full border border-border bg-background px-6 py-2.5 text-xs font-semibold text-foreground hover:bg-surface-elevated/40 transition-colors"
+        >
+          Send another message
+        </button>
+      </div>
+    );
+  }
+
   return (
     <form
       key={`${querySubject ?? ""}|${queryMessage ?? ""}`}

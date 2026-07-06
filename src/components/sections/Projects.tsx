@@ -1,4 +1,4 @@
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { IconArrowRight, IconExternalLink } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { FormattedText } from "@/components/FormattedText";
@@ -75,7 +75,7 @@ export function Projects({ projects }: { projects: ProjectItem[] }) {
                     prefetch={false}
                     className="inline-flex items-center gap-1 font-medium text-primary underline-offset-4 transition-colors hover:underline"
                   >
-                    Read case study <ArrowRight className="h-3.5 w-3.5" />
+                    Read case study <IconArrowRight className="h-3.5 w-3.5" />
                   </Link>
                   {project.liveUrl ? (
                     <a
@@ -92,7 +92,7 @@ export function Projects({ projects }: { projects: ProjectItem[] }) {
                       }
                       className="inline-flex items-center gap-1 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
                     >
-                      Live <ExternalLink className="h-3.5 w-3.5" />
+                      Live <IconExternalLink className="h-3.5 w-3.5" />
                     </a>
                   ) : null}
                   {project.githubUrl ? (
@@ -110,7 +110,7 @@ export function Projects({ projects }: { projects: ProjectItem[] }) {
                       }
                       className="inline-flex items-center gap-1 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
                     >
-                      GitHub <ExternalLink className="h-3.5 w-3.5" />
+                      GitHub <IconExternalLink className="h-3.5 w-3.5" />
                     </a>
                   ) : null}
                 </div>

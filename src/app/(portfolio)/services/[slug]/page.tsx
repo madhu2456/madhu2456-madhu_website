@@ -1,15 +1,9 @@
 import {
   IconArrowRight,
   IconBookmark,
-  IconBrain,
-  IconChartBar,
   IconChevronLeft,
   IconCircleCheck,
   IconClock,
-  IconCode,
-  IconCpu,
-  IconDatabase,
-  IconSettings,
   IconSparkles,
 } from "@tabler/icons-react";
 import type { Metadata } from "next";
@@ -18,6 +12,7 @@ import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JsonLdScript } from "@/components/JsonLdScript";
+import { ServiceIcon } from "@/components/ServiceIcon";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { resolveSiteUrl } from "@/lib/site-url";
 
@@ -101,27 +96,9 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
     notFound();
   }
 
-  // Helper to map slugs to premium icons
-  const getServiceIcon = (slug: string) => {
-    switch (slug) {
-      case "ai-llm-application-development":
-        return <IconBrain className="h-8 w-8 text-primary" />;
-      case "rag-consultant-india":
-        return <IconDatabase className="h-8 w-8 text-primary" />;
-      case "ai-agent-development":
-        return <IconCpu className="h-8 w-8 text-primary" />;
-      case "marketing-analytics-consultant":
-        return <IconChartBar className="h-8 w-8 text-primary" />;
-      case "ga4-bigquery-campaign-analytics":
-        return <IconSettings className="h-8 w-8 text-primary" />;
-      case "full-stack-ai-product-development":
-        return <IconCode className="h-8 w-8 text-primary" />;
-      default:
-        return <IconSparkles className="h-8 w-8 text-primary" />;
-    }
-  };
-
-  const Icon = getServiceIcon(service.slug);
+  const Icon = (
+    <ServiceIcon slug={service.slug} className="h-8 w-8 text-primary" />
+  );
   const stack = service.technologies?.map((t) => t.name) ?? [];
 
   // Map service slug to contact intent hash

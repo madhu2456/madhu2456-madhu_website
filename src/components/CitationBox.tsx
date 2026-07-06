@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, Copy } from "lucide-react";
+import { IconCheck, IconCopy } from "@tabler/icons-react";
 import { useState } from "react";
 
 interface CitationBoxProps {
@@ -47,9 +47,9 @@ export function CitationBox({ title, url, authorName }: CitationBoxProps) {
               className="group flex items-center gap-1.5 rounded-md px-2 py-1 text-xs text-muted-foreground transition-colors hover:bg-surface-elevated hover:text-foreground"
             >
               {copiedType === "markdown" ? (
-                <Check className="h-3.5 w-3.5 text-green-500" />
+                <IconCheck className="h-3.5 w-3.5 text-green-500" />
               ) : (
-                <Copy className="h-3.5 w-3.5 group-hover:text-primary" />
+                <IconCopy className="h-3.5 w-3.5 group-hover:text-primary" />
               )}
               {copiedType === "markdown" ? "Copied!" : "Copy"}
             </button>
@@ -71,9 +71,9 @@ export function CitationBox({ title, url, authorName }: CitationBoxProps) {
               className="group flex items-center gap-1.5 rounded-md px-2 py-1 text-xs text-muted-foreground transition-colors hover:bg-surface-elevated hover:text-foreground"
             >
               {copiedType === "html" ? (
-                <Check className="h-3.5 w-3.5 text-green-500" />
+                <IconCheck className="h-3.5 w-3.5 text-green-500" />
               ) : (
-                <Copy className="h-3.5 w-3.5 group-hover:text-primary" />
+                <IconCopy className="h-3.5 w-3.5 group-hover:text-primary" />
               )}
               {copiedType === "html" ? "Copied!" : "Copy"}
             </button>

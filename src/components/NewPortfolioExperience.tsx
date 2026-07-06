@@ -1,15 +1,17 @@
 "use client";
 
 import {
+  IconArrowRight,
   IconAward,
   IconBrandGithub,
   IconBrandLinkedin,
   IconBrandX,
   IconChartBar,
+  IconChevronRight,
+  IconExternalLink,
   IconSparkles,
   IconTrendingUp,
 } from "@tabler/icons-react";
-import { ArrowRight, ChevronRight, ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -154,7 +156,7 @@ function DirectAnswer({ pageContent }: { pageContent: PageContent }) {
             className="group inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-primary-hover transition-colors"
           >
             Full profile
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            <IconArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </Link>
           <span className="text-muted-foreground/30 select-none" aria-hidden>
             |
@@ -165,7 +167,7 @@ function DirectAnswer({ pageContent }: { pageContent: PageContent }) {
             className="group inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-primary-hover transition-colors"
           >
             Credentials
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            <IconArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </Link>
         </div>
       </div>
@@ -322,7 +324,7 @@ function Services({ services }: { services: ServiceItem[] }) {
                 <ul className="mt-5 space-y-2 text-sm">
                   {service.features.map((feature) => (
                     <li key={feature} className="flex gap-2">
-                      <ChevronRight
+                      <IconChevronRight
                         className="h-4 w-4 text-primary shrink-0 mt-0.5"
                         aria-hidden="true"
                       />
@@ -355,7 +357,7 @@ function Services({ services }: { services: ServiceItem[] }) {
                 className="group mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-transform hover:scale-[1.02]"
               >
                 Explore {service.title.split(" ")[0]}
-                <ArrowRight
+                <IconArrowRight
                   className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
                   aria-hidden
                 />
@@ -431,7 +433,7 @@ function Certifications({
             <p className="mt-1 text-sm text-foreground">{certification.name}</p>
             <p className="mt-3 inline-flex items-center gap-1 text-xs text-primary opacity-80 group-hover:opacity-100">
               View credential
-              <ExternalLink className="h-3 w-3" aria-hidden />
+              <IconExternalLink className="h-3 w-3" aria-hidden />
             </p>
           </a>
         ))}
@@ -817,7 +819,7 @@ function SocialLink({
       {icon}
       {children}
       {label}
-      <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+      <IconExternalLink className="h-3.5 w-3.5" aria-hidden />
     </a>
   );
 }

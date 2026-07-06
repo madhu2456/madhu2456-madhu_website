@@ -1,4 +1,4 @@
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { IconArrowRight, IconExternalLink } from "@tabler/icons-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -47,8 +47,11 @@ export default async function CaseStudiesPage() {
   const itemListElement = sortedProjects.map((project, index) => ({
     "@type": "ListItem",
     position: index + 1,
-    name: project.title,
-    url: `${collectionUrl}${project.slug}/`,
+    item: {
+      "@type": "CreativeWork",
+      name: project.title,
+      url: `${collectionUrl}${project.slug}/`,
+    },
   }));
 
   const collectionSchema = {
@@ -297,7 +300,7 @@ export default async function CaseStudiesPage() {
                       href={`/case-studies/${project.slug}/`}
                       className="inline-flex items-center gap-1 font-medium text-primary underline-offset-4 hover:underline"
                     >
-                      Read case study <ArrowRight className="h-3.5 w-3.5" />
+                      Read case study <IconArrowRight className="h-3.5 w-3.5" />
                     </Link>
                     {project.liveUrl ? (
                       <a
@@ -306,7 +309,7 @@ export default async function CaseStudiesPage() {
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
                       >
-                        Live <ExternalLink className="h-3.5 w-3.5" />
+                        Live <IconExternalLink className="h-3.5 w-3.5" />
                       </a>
                     ) : null}
                   </div>
@@ -331,7 +334,7 @@ export default async function CaseStudiesPage() {
               className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all"
             >
               Hire me for your next project
-              <ArrowRight className="h-4 w-4" />
+              <IconArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </section>

@@ -430,7 +430,7 @@ export function buildProfessionalServiceSchema({
   siteUrl: string;
 }) {
   return {
-    "@type": "ProfessionalService",
+    "@type": "Service",
     "@id": `${siteUrl}#service`,
     name: "Madhu Dadi - AI & Analytics Engineering",
     url: siteUrl,
