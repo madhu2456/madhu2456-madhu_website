@@ -63,3 +63,7 @@ Data/*.backup-*.json
 # Playwright generated artifacts
 playwright-report/
 test-results/
+
+# playwright-cli sessions and snapshots
+.playwright-cli/
+/*.yml
