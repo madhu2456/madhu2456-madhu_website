@@ -67,3 +67,6 @@ test-results/
 # playwright-cli sessions and snapshots
 .playwright-cli/
 /*.yml
+
+# generated documentation and audit artifacts
+/docs/
