@@ -7,7 +7,7 @@ import type { ReactNode } from "react";
 const MotionSection = dynamic(
   () => import("motion/react").then((mod) => mod.motion.section),
   {
-    ssr: false,
+    ssr: true,
   },
 );
 
@@ -26,9 +26,9 @@ export function AnimatedSection({
       data-motion-initial
       initial={prefersReducedMotion ? undefined : { opacity: 0, y: 20 }}
       whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.5 }}
-      className="w-full"
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: prefersReducedMotion ? 0 : 0.7 }}
+      className="scroll-mt-28 py-8 md:py-12"
     >
       {children}
     </MotionSection>
