@@ -8,7 +8,7 @@ const securityHeaders = [
   {
     key: "Permissions-Policy",
     value:
-      "geolocation=(), microphone=(), camera=(), otp-credentials=(self), payment=(), usb=(), midi=(), display-capture=(), accelerometer=(), gyroscope=(), magnetometer=()",
+      "geolocation=(), microphone=(), camera=(), payment=(), usb=(), midi=(), display-capture=(), accelerometer=(), gyroscope=(), magnetometer=()",
   },
   {
     key: "Strict-Transport-Security",
@@ -39,7 +39,7 @@ const nextConfig: NextConfig = {
 
   experimental: {
     globalNotFound: true,
-    optimizePackageImports: ["@tabler/icons-react", "motion"],
+    optimizePackageImports: ["@tabler/icons-react"],
     // Inline CSS for first-load paint to reduce render-blocking stylesheet requests.
     inlineCss: true,
   },

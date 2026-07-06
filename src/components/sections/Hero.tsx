@@ -117,7 +117,7 @@ export function Hero({
           <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-tr from-accent/30 via-transparent to-primary/20 blur-2xl sm:-inset-6" />
           <div className="overflow-hidden rounded-[1.5rem] border border-border shadow-card sm:rounded-[1.75rem]">
             <Image
-              src="/new-ui/hero-portrait.jpg"
+              src="/new-ui/hero-portrait.webp"
               alt={`Portrait of ${profile.firstName} ${profile.lastName}, ${profile.headline}`}
               width={694}
               height={925}

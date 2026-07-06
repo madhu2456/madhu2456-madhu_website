@@ -1,5 +1,27 @@
 import type { PortfolioData } from "@/lib/portfolio-data";
 
+function sanitizeInput(input: string): string {
+  return input
+    .replace(/<[^>]*>/g, "")
+    .replace(/[<>&"']/g, (c) => {
+      switch (c) {
+        case "<":
+          return "&lt;";
+        case ">":
+          return "&gt;";
+        case "&":
+          return "&amp;";
+        case '"':
+          return "&quot;";
+        case "'":
+          return "&#039;";
+        default:
+          return c;
+      }
+    })
+    .trim();
+}
+
 export type ChatTurn = {
   role: "user" | "assistant";
   content: string;
@@ -648,6 +670,11 @@ export async function answerWithAgenticRag(
   history: ChatTurn[],
   data: PortfolioData,
 ) {
+  const sanitizedMessage = sanitizeInput(message);
+  const sanitizedHistory = history.map((entry) => ({
+    ...entry,
+    content: sanitizeInput(entry.content),
+  }));
   if (!isProfileQuestion(message, history)) {
     return {
       blocked: true,
@@ -696,7 +723,7 @@ export async function answerWithAgenticRag(
         `Chunk ${index + 1}\nSection: ${chunk.section}\nTitle: ${chunk.title}\nContent: ${chunk.content}`,
     )
     .join("\n\n");
-  const historyBlock = history
+  const historyBlock = sanitizedHistory
     .slice(-8)
     .map((turn) => `${turn.role.toUpperCase()}: ${turn.content}`)
     .join("\n");
@@ -739,7 +766,7 @@ ${escapeXml(historyBlock) || "No prior conversation."}
 </history>
 
 <user_question>
-${escapeXml(message)}
+${escapeXml(sanitizedMessage)}
 </user_question>
 
 <context>

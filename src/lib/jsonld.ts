@@ -762,6 +762,38 @@ export function buildWorkExperienceSchema({
 }
 
 // ---------------------------------------------------------------------------
+// CaseStudy
+// ---------------------------------------------------------------------------
+export function buildCaseStudySchema(
+  caseStudy: {
+    title: string;
+    description: string;
+    slug: string;
+    datePublished: string;
+    keywords: string[];
+  },
+  siteUrl: string,
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CaseStudy",
+    name: caseStudy.title,
+    description: caseStudy.description,
+    url: `${siteUrl}case-studies/${caseStudy.slug}/`,
+    datePublished: caseStudy.datePublished,
+    keywords: caseStudy.keywords,
+    about: {
+      "@type": "Thing",
+      name: caseStudy.title,
+    },
+    author: {
+      "@type": "Person",
+      name: "Madhu Dadi",
+    },
+  };
+}
+
+// ---------------------------------------------------------------------------
 // BreadcrumbList
 // ---------------------------------------------------------------------------
 export function buildBreadcrumbSchema(
