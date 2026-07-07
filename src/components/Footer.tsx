@@ -3,11 +3,18 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { SafeEmailLink } from "@/components/SafeEmailLink";
 import { TrackedLink } from "@/components/TrackedLink";
+import { EXTERNAL_REL, IDENTITY_EXTERNAL_REL } from "@/lib/link-rel";
 import type {
   NavigationItem,
   Profile,
   ProjectItem,
 } from "@/lib/portfolio-data";
+
+type FooterSitemapLink = {
+  label: string;
+  href: string;
+  rel?: string;
+};
 
 type FooterProps = {
   profile: Profile;
@@ -16,7 +23,7 @@ type FooterProps = {
 };
 
 export function Footer({ profile, projects, navigationItems }: FooterProps) {
-  const sitemap = [
+  const sitemap: Array<{ heading: string; links: FooterSitemapLink[] }> = [
     {
       heading: "Explore",
       links: [
@@ -47,22 +54,58 @@ export function Footer({ profile, projects, navigationItems }: FooterProps) {
       links: [
         { label: "Email", href: `mailto:${profile.email}` },
         ...(profile.socialLinks.linkedin
-          ? [{ label: "LinkedIn", href: profile.socialLinks.linkedin }]
+          ? [
+              {
+                label: "LinkedIn",
+                href: profile.socialLinks.linkedin,
+                rel: IDENTITY_EXTERNAL_REL,
+              },
+            ]
           : []),
         ...(profile.socialLinks.github
-          ? [{ label: "GitHub", href: profile.socialLinks.github }]
+          ? [
+              {
+                label: "GitHub",
+                href: profile.socialLinks.github,
+                rel: IDENTITY_EXTERNAL_REL,
+              },
+            ]
           : []),
         ...(profile.socialLinks.website
-          ? [{ label: "Blog", href: profile.socialLinks.website }]
+          ? [
+              {
+                label: "Blog",
+                href: profile.socialLinks.website,
+                rel: IDENTITY_EXTERNAL_REL,
+              },
+            ]
           : []),
         ...(profile.socialLinks.medium
-          ? [{ label: "Medium", href: profile.socialLinks.medium }]
+          ? [
+              {
+                label: "Medium",
+                href: profile.socialLinks.medium,
+                rel: IDENTITY_EXTERNAL_REL,
+              },
+            ]
           : []),
         ...(profile.socialLinks.devto
-          ? [{ label: "Dev.to", href: profile.socialLinks.devto }]
+          ? [
+              {
+                label: "Dev.to",
+                href: profile.socialLinks.devto,
+                rel: IDENTITY_EXTERNAL_REL,
+              },
+            ]
           : []),
         ...(profile.socialLinks.youtube
-          ? [{ label: "YouTube", href: profile.socialLinks.youtube }]
+          ? [
+              {
+                label: "YouTube",
+                href: profile.socialLinks.youtube,
+                rel: IDENTITY_EXTERNAL_REL,
+              },
+            ]
           : []),
         ...(profile.socialLinks.googleBusiness
           ? [
@@ -121,7 +164,9 @@ export function Footer({ profile, projects, navigationItems }: FooterProps) {
               <ul className="space-y-3 text-sm">
                 {column.links.map((link) => (
                   <li key={`${column.heading}-${link.href}`}>
-                    <FooterLink href={link.href}>{link.label}</FooterLink>
+                    <FooterLink href={link.href} rel={link.rel}>
+                      {link.label}
+                    </FooterLink>
                   </li>
                 ))}
               </ul>
@@ -184,7 +229,15 @@ function normalizeFooterHref(href: string) {
   return href.startsWith("#") ? `/${href}` : href;
 }
 
-function FooterLink({ href, children }: { href: string; children: ReactNode }) {
+function FooterLink({
+  href,
+  rel = EXTERNAL_REL,
+  children,
+}: {
+  href: string;
+  rel?: string;
+  children: ReactNode;
+}) {
   const isExternal =
     href.startsWith("http") ||
     href.startsWith("mailto:") ||
@@ -206,7 +259,7 @@ function FooterLink({ href, children }: { href: string; children: ReactNode }) {
       <TrackedLink
         href={href}
         target="_blank"
-        rel="noopener noreferrer"
+        rel={rel}
         gtmEvent="outbound_click"
         gtmData={{ link_url: href, click_location: "footer" }}
         className="text-muted-foreground hover:text-foreground transition-colors"

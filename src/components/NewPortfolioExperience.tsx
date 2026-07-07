@@ -32,6 +32,7 @@ import { Experience } from "@/components/sections/Experience";
 import { Hero } from "@/components/sections/Hero";
 import { Projects } from "@/components/sections/Projects";
 import { pushToDataLayer } from "@/lib/gtm";
+import { IDENTITY_EXTERNAL_REL } from "@/lib/link-rel";
 import type {
   CertificationItem,
   ExperienceItem,
@@ -806,7 +807,7 @@ function SocialLink({
     <a
       href={href}
       target="_blank"
-      rel="noopener noreferrer"
+      rel={IDENTITY_EXTERNAL_REL}
       onClick={() => {
         pushToDataLayer({
           event: "social_click",

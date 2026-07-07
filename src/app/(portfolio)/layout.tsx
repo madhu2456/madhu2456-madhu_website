@@ -156,9 +156,6 @@ export async function generateMetadata(): Promise<Metadata> {
         site: `@${twitterHandle}`,
       }),
     },
-    other: {
-      "ai-crawl-rate": "fast",
-    },
     // Explicit icon declarations so Google Search picks up the favicon
     // (file-based conventions alone can be missed if generateMetadata overrides them)
     icons: {

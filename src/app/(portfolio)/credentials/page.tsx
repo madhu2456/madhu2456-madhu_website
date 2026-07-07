@@ -19,6 +19,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { SeoStructuredData } from "@/components/SeoStructuredData";
 import { TrackedLink } from "@/components/TrackedLink";
+import { IDENTITY_EXTERNAL_REL } from "@/lib/link-rel";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { resolveSiteUrl } from "@/lib/site-url";
 import { formatMonthYear } from "@/lib/utils";
@@ -575,7 +576,7 @@ export default async function CredentialsPage() {
                   key={profile.name}
                   href={profile.url}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel={IDENTITY_EXTERNAL_REL}
                   className="group flex flex-col justify-between p-5 border border-border bg-surface/20 rounded-xl hover:border-primary/30 transition-all duration-300 backdrop-blur-md"
                 >
                   <div className="space-y-1">

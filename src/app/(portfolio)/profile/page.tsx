@@ -19,6 +19,7 @@ import { TrackedLink } from "@/components/TrackedLink";
 import { buildDiscoveryKeywords } from "@/lib/discovery-keywords";
 import { resolveAbsoluteImageUrl } from "@/lib/image-source";
 import { buildPersonSchema } from "@/lib/jsonld";
+import { EXTERNAL_REL, IDENTITY_EXTERNAL_REL } from "@/lib/link-rel";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { resolveSiteUrl } from "@/lib/site-url";
 import { formatMonthYear } from "@/lib/utils";
@@ -30,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const canonicalUrl = `${siteUrl}${canonicalPath.replace(/^\//, "")}`;
   const title =
     pageContent.profile.seo?.title ||
-    "Madhu Dadi - Generative AI, RAG & Marketing Analytics Engineer";
+    "Madhu Dadi - AI, RAG & Marketing Analytics Engineer";
   const description =
     pageContent.profile.seo?.description ||
     "Profile of Madhu Dadi, AI & marketing analytics engineer with 9+ years across Novartis, redBus, and GroupM (WPP). Specializing in LLM/RAG apps, AI agents, and marketing analytics.";
@@ -562,7 +563,7 @@ export default async function ProfilePage() {
                 <a
                   href={profile.socialLinks.github}
                   target="_blank"
-                  rel="noopener noreferrer me"
+                  rel={IDENTITY_EXTERNAL_REL}
                   className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-muted-foreground hover:text-foreground border border-border bg-surface/30 rounded-xl hover:border-primary/20 transition-all"
                 >
                   GitHub <IconExternalLink className="h-3 w-3" />
@@ -572,7 +573,7 @@ export default async function ProfilePage() {
                 <a
                   href={profile.socialLinks.linkedin}
                   target="_blank"
-                  rel="noopener noreferrer me"
+                  rel={IDENTITY_EXTERNAL_REL}
                   className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-muted-foreground hover:text-foreground border border-border bg-surface/30 rounded-xl hover:border-primary/20 transition-all"
                 >
                   LinkedIn <IconExternalLink className="h-3 w-3" />
@@ -582,7 +583,7 @@ export default async function ProfilePage() {
                 <a
                   href={profile.socialLinks.twitter}
                   target="_blank"
-                  rel="noopener noreferrer me"
+                  rel={IDENTITY_EXTERNAL_REL}
                   className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-muted-foreground hover:text-foreground border border-border bg-surface/30 rounded-xl hover:border-primary/20 transition-all"
                 >
                   Twitter/X <IconExternalLink className="h-3 w-3" />
@@ -592,7 +593,7 @@ export default async function ProfilePage() {
                 <a
                   href={profile.socialLinks.wikidata}
                   target="_blank"
-                  rel="noopener noreferrer me"
+                  rel={IDENTITY_EXTERNAL_REL}
                   className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-muted-foreground hover:text-foreground border border-border bg-surface/30 rounded-xl hover:border-primary/20 transition-all"
                 >
                   Wikidata <IconExternalLink className="h-3 w-3" />
@@ -601,7 +602,7 @@ export default async function ProfilePage() {
               <a
                 href={peerlistUrl}
                 target="_blank"
-                rel="noopener noreferrer me"
+                rel={IDENTITY_EXTERNAL_REL}
                 className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-muted-foreground hover:text-foreground border border-border bg-surface/30 rounded-xl hover:border-primary/20 transition-all"
               >
                 Peerlist <IconExternalLink className="h-3 w-3" />
@@ -614,7 +615,7 @@ export default async function ProfilePage() {
             <TrackedLink
               href="/resume.pdf"
               target="_blank"
-              rel="noopener noreferrer"
+              rel={EXTERNAL_REL}
               className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/30 px-6 py-3 text-sm font-semibold text-muted-foreground hover:text-foreground hover:border-primary/20 transition-all"
               gtmEvent="resume_download"
               gtmData={{ download_type: "pdf", download_location: "profile" }}

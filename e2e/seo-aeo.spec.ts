@@ -1,4 +1,8 @@
 import { expect, test } from "@playwright/test";
+import {
+  collectPageUrlsFromSitemap,
+  isValidSitemapXml,
+} from "./helpers/sitemap";
 
 const indexablePaths = [
   "/",
@@ -65,8 +69,12 @@ test.describe("SEO/AEO pre-deploy checks", () => {
     const sitemap = await request.get("/sitemap.xml");
     expect(sitemap.ok()).toBe(true);
     const sitemapText = await sitemap.text();
-    expect(sitemapText).toContain("<urlset");
-    expect(sitemapText).toContain("/services/rag-consultant-india/");
+    expect(isValidSitemapXml(sitemapText)).toBe(true);
+
+    const pageUrls = await collectPageUrlsFromSitemap(request, "/sitemap.xml");
+    expect(
+      pageUrls.some((url) => url.includes("/services/rag-consultant-india/")),
+    ).toBe(true);
   });
 });
 

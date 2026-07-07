@@ -71,7 +71,7 @@ export async function generateMetadata({
       follow: true,
     },
     openGraph: {
-      title,
+      title: { absolute: title },
       description,
       url,
       type: "website",

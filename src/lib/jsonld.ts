@@ -747,15 +747,20 @@ export function buildWorkExperienceSchema({
       "@type": "ListItem",
       position: i + 1,
       item: {
-        "@type": "Organization",
-        name: e.company,
-        description: e.position,
-        ...(e.location && {
-          location: {
-            "@type": "PostalAddress",
-            addressLocality: e.location,
-          },
-        }),
+        "@type": "WorkExperience",
+        name: e.position,
+        ...(e.startDate && { startDate: e.startDate }),
+        ...(!e.current && e.endDate && { endDate: e.endDate }),
+        worksFor: {
+          "@type": "Organization",
+          name: e.company,
+          ...(e.location && {
+            location: {
+              "@type": "PostalAddress",
+              addressLocality: e.location,
+            },
+          }),
+        },
       },
     })),
   };

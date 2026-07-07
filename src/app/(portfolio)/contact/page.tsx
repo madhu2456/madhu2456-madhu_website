@@ -18,6 +18,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JsonLdScript } from "@/components/JsonLdScript";
 import { SafeEmailLink } from "@/components/SafeEmailLink";
+import { IDENTITY_EXTERNAL_REL } from "@/lib/link-rel";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { resolveSiteUrl } from "@/lib/site-url";
 
@@ -41,7 +42,7 @@ export async function generateMetadata({
     "Contact Madhu Dadi - Generative AI & Marketing Analytics Engineer";
   const description =
     pageContent.contact.seo?.description ||
-    "Work with Madhu Dadi on production AI, RAG, AI agents, marketing analytics, or full-stack AI product development. Response time is usually within 24 hours.";
+    "Contact Madhu Dadi — AI, RAG and marketing analytics consultant. Freelance AI projects, full-time roles, and consulting. Response within 24 hours.";
   return {
     title,
     description,
@@ -316,7 +317,7 @@ export default async function ContactPage() {
                       <a
                         href={linkedinUrl}
                         target="_blank"
-                        rel="noopener noreferrer"
+                        rel={IDENTITY_EXTERNAL_REL}
                         className="font-semibold text-foreground hover:text-primary transition-colors"
                       >
                         linkedin.com/in/madhu-dadi

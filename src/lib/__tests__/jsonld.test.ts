@@ -5,6 +5,7 @@ import {
   buildProjectsListSchema,
   buildServicesListSchema,
   buildWebSiteSchema,
+  buildWorkExperienceSchema,
 } from "../jsonld";
 import { serializeJsonLd } from "../seo/json-ld";
 
@@ -248,6 +249,47 @@ describe("buildServicesListSchema", () => {
       "@type": "Service",
       "@id": "https://madhudadi.com/services/rag-consultant-india/#service",
       url: "https://madhudadi.com/services/rag-consultant-india/",
+    });
+  });
+});
+
+describe("buildWorkExperienceSchema", () => {
+  test("maps experiences to ItemList of WorkExperience nodes", () => {
+    const schema = buildWorkExperienceSchema({
+      siteUrl: "https://madhudadi.com/",
+      experiences: [
+        {
+          company: "Novartis",
+          position: "Marketing Analytics Engineer",
+          startDate: "2021-03",
+          endDate: "2024-06",
+          location: "Hyderabad",
+        },
+      ],
+    });
+
+    expect(schema).toMatchObject({
+      "@type": "ItemList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          item: {
+            "@type": "WorkExperience",
+            name: "Marketing Analytics Engineer",
+            startDate: "2021-03",
+            endDate: "2024-06",
+            worksFor: {
+              "@type": "Organization",
+              name: "Novartis",
+              location: {
+                "@type": "PostalAddress",
+                addressLocality: "Hyderabad",
+              },
+            },
+          },
+        },
+      ],
     });
   });
 });

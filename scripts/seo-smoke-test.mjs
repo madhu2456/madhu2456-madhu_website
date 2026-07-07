@@ -4,6 +4,8 @@
  * Live SEO Smoke Test
  *
  * Validates key SEO/AEO signals across all sitemap URLs on the deployed site.
+ * Production robots.txt is nginx-managed; checks below target the live edge file.
+ * Sitemap audit is full-site: portfolio + blog child sitemaps (owner decision).
  * Run after deploy to catch metadata regressions before Googlebot does.
  *
  * Usage:
@@ -54,6 +56,54 @@ function countElements(html, tag) {
   return (html.match(re) || []).length;
 }
 
+function extractLocs(xml) {
+  return [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1].trim());
+}
+
+function isSitemapIndex(xml) {
+  return xml.includes("<sitemapindex");
+}
+
+function isUrlSet(xml) {
+  return xml.includes("<urlset");
+}
+
+/**
+ * Resolve page URLs from a sitemap or sitemap index (recurses into child sitemaps).
+ */
+async function collectPageUrlsFromSitemap(sitemapUrl, visited = new Set()) {
+  const normalized = sitemapUrl.replace(/\/$/, "");
+  if (visited.has(normalized)) return [];
+  visited.add(normalized);
+
+  const { status, text } = await fetchText(sitemapUrl);
+  if (status !== 200 || (!isSitemapIndex(text) && !isUrlSet(text))) {
+    throw new Error(
+      `${sitemapUrl} returned status ${status} or invalid sitemap XML`,
+    );
+  }
+
+  if (isSitemapIndex(text)) {
+    const childSitemaps = extractLocs(text);
+    const pageUrls = [];
+    for (const childUrl of childSitemaps) {
+      pageUrls.push(...(await collectPageUrlsFromSitemap(childUrl, visited)));
+    }
+    return pageUrls;
+  }
+
+  return extractLocs(text);
+}
+
+function isBlogIssue(issue) {
+  return /\/blog[:/]/.test(issue);
+}
+
+function scopeBreakdown(items) {
+  const blog = items.filter(isBlogIssue).length;
+  return { portfolio: items.length - blog, blog, total: items.length };
+}
+
 // ─── Main ───────────────────────────────────────────────────────────────────
 
 async function main() {
@@ -71,22 +121,68 @@ async function main() {
     process.exit(1);
   }
 
-  const urls = [...smText.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1]);
-  console.log(`  Found ${urls.length} URLs in sitemap\n`);
+  let urls;
+  try {
+    urls = await collectPageUrlsFromSitemap(sitemapUrl);
+  } catch (err) {
+    console.error(`❌ FAIL: ${err.message}`);
+    process.exit(1);
+  }
+  urls = [...new Set(urls)];
+  const sitemapKind = isSitemapIndex(smText) ? "sitemap index" : "urlset";
+  console.log(
+    `  Root sitemap is a ${sitemapKind}; found ${urls.length} page URL(s)\n`,
+  );
 
-  // 2. Check robots.txt
+  const issues = { critical: [], warning: [], info: [] };
+
+  // 2. Check robots.txt (nginx-served on production)
   const { text: robotsText } = await fetchText(`${SITE_URL}/robots.txt`);
   const robotsChecks = [
-    ["Has sitemap reference", robotsText.includes("Sitemap:")],
-    ["Allows /llms.txt", robotsText.includes("Allow: /llms.txt")],
-    [
-      "No old blog API sitemap",
-      !robotsText.includes("blog/api/v1/sitemap-index.xml"),
-    ],
+    {
+      label: "Has sitemap reference",
+      ok: robotsText.includes("Sitemap:"),
+      severity: "critical",
+    },
+    {
+      label: "Allows /llms.txt",
+      ok: robotsText.includes("Allow: /llms.txt"),
+      severity: "critical",
+    },
+    {
+      label: "References root portfolio sitemap",
+      ok: robotsText.includes(`${SITE_URL}/sitemap.xml`),
+      severity: "warning",
+    },
+    {
+      label: "No stale blog API sitemap (nginx hygiene)",
+      ok: !robotsText.includes("blog/api/v1/sitemap-index.xml"),
+      severity: "warning",
+    },
+    {
+      label: "Blog sitemap referenced (nginx consolidated)",
+      ok: robotsText.includes("blog/sitemap.xml"),
+      severity: "info",
+    },
+    {
+      label: "OAI-SearchBot welcomed (GEO)",
+      ok: robotsText.includes("OAI-SearchBot"),
+      severity: "info",
+    },
   ];
-  console.log("📋 robots.txt");
-  for (const [label, ok] of robotsChecks) {
-    console.log(`  ${ok ? "✅" : "❌"} ${label}`);
+  console.log("📋 robots.txt (nginx on production)");
+  for (const check of robotsChecks) {
+    const icon = check.ok
+      ? "✅"
+      : check.severity === "critical"
+        ? "❌"
+        : check.severity === "warning"
+          ? "⚠️"
+          : "ℹ️";
+    console.log(`  ${icon} ${check.label}`);
+    if (!check.ok) {
+      issues[check.severity].push(`robots.txt: ${check.label}`);
+    }
   }
 
   // 3. Check discovery endpoints
@@ -107,17 +203,11 @@ async function main() {
   }
 
   // 4. Check each sitemap URL
-  const issues = { critical: [], warning: [], info: [] };
   const MAX_DESC_LEN = 160;
   let maxDescLen = 0;
 
   console.log("\n📄 Page metadata");
   for (const url of urls) {
-    // Skip XML sitemap files — they're not HTML pages
-    if (url.endsWith(".xml") || url.includes("sitemap")) {
-      continue;
-    }
-
     const path = url.replace(SITE_URL, "") || "/";
     const { status, text: html } = await fetchText(url);
 
@@ -204,8 +294,20 @@ async function main() {
 
   // 6. Summary
   console.log(`\n${"═".repeat(50)}`);
-  console.log("📊 Summary");
+  console.log("📊 Summary (full-site: portfolio + blog)");
   console.log(`${"═".repeat(50)}`);
+
+  for (const [label, items] of [
+    ["CRITICAL", issues.critical],
+    ["Warnings", issues.warning],
+    ["Info", issues.info],
+  ]) {
+    if (items.length === 0) continue;
+    const { portfolio, blog } = scopeBreakdown(items);
+    console.log(
+      `\n${label} scope: ${portfolio} portfolio, ${blog} blog (${items.length} total)`,
+    );
+  }
 
   if (issues.critical.length > 0) {
     console.log(`\n🚨 CRITICAL (${issues.critical.length}):`);
