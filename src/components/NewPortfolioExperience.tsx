@@ -3,16 +3,12 @@
 import {
   IconArrowRight,
   IconAward,
-  IconBrandGithub,
-  IconBrandLinkedin,
-  IconBrandX,
   IconChartBar,
   IconChevronRight,
   IconExternalLink,
   IconSparkles,
   IconTrendingUp,
 } from "@tabler/icons-react";
-import Image from "next/image";
 import Link from "next/link";
 import {
   type FormEvent,
@@ -28,11 +24,12 @@ import { FormField } from "@/components/FormField";
 import { Header } from "@/components/Header";
 import { SafeEmailLink } from "@/components/SafeEmailLink";
 import { Section } from "@/components/Section";
+import { SocialIconStrip } from "@/components/SocialIconStrip";
 import { Experience } from "@/components/sections/Experience";
 import { Hero } from "@/components/sections/Hero";
 import { Projects } from "@/components/sections/Projects";
 import { pushToDataLayer } from "@/lib/gtm";
-import { IDENTITY_EXTERNAL_REL } from "@/lib/link-rel";
+
 import type {
   CertificationItem,
   ExperienceItem,
@@ -619,46 +616,15 @@ function Contact({ profile }: { profile: Profile }) {
             ) : null}
             <ContactRow label="Location" value={profile.location} />
           </ul>
-          <div className="flex flex-wrap gap-3 pt-2">
-            {profile.socialLinks.github ? (
-              <SocialLink
-                href={profile.socialLinks.github}
-                label="GitHub"
-                icon={<IconBrandGithub className="h-4 w-4" />}
-              />
-            ) : null}
-            {profile.socialLinks.linkedin ? (
-              <SocialLink
-                href={profile.socialLinks.linkedin}
-                label="LinkedIn"
-                icon={<IconBrandLinkedin className="h-4 w-4" />}
-              />
-            ) : null}
-            {profile.socialLinks.twitter ? (
-              <SocialLink
-                href={profile.socialLinks.twitter}
-                label="Twitter"
-                icon={<IconBrandX className="h-4 w-4" />}
-              />
-            ) : null}
-            {profile.socialLinks.website ? (
-              <SocialLink
-                href={profile.socialLinks.website}
-                label="Blog"
-                icon={
-                  <div className="flex h-4 w-4 items-center justify-center overflow-hidden rounded-full border border-border/50 bg-surface shadow-inner">
-                    <Image
-                      src="/new-ui/logo.png"
-                      alt=""
-                      aria-hidden="true"
-                      width={16}
-                      height={16}
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                }
-              />
-            ) : null}
+          <div className="space-y-3 pt-1">
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+              Connect
+            </p>
+            <SocialIconStrip
+              profile={profile}
+              clickLocation="homepage_contact"
+              emailTrackingLocation="homepage_email"
+            />
           </div>
         </div>
 
@@ -789,39 +755,6 @@ function ContactRow({
     </li>
   ) : (
     <li>{content}</li>
-  );
-}
-
-function SocialLink({
-  href,
-  label,
-  children,
-  icon,
-}: {
-  href: string;
-  label: string;
-  children?: ReactNode;
-  icon?: ReactNode;
-}) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel={IDENTITY_EXTERNAL_REL}
-      onClick={() => {
-        pushToDataLayer({
-          event: "social_click",
-          social_platform: label.toLowerCase(),
-          click_location: "homepage_contact",
-        });
-      }}
-      className="inline-flex items-center gap-2 rounded-full border border-border bg-white/5 px-4 py-2 text-sm hover:bg-surface-elevated hover:border-primary/30 transition-all duration-300"
-    >
-      {icon}
-      {children}
-      {label}
-      <IconExternalLink className="h-3.5 w-3.5" aria-hidden />
-    </a>
   );
 }
 

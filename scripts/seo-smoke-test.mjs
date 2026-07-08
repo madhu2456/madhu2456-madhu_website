@@ -22,13 +22,34 @@ const TIMEOUT_MS = 15_000;
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
-async function fetchText(url) {
+async function fetchText(url, { redirect = "follow" } = {}) {
   const res = await fetch(url, {
     headers: { "User-Agent": UA },
     signal: AbortSignal.timeout(TIMEOUT_MS),
-    redirect: "follow",
+    redirect,
   });
   return { status: res.status, text: await res.text(), headers: res.headers };
+}
+
+function decodeHtmlEntities(text) {
+  return text
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#x27;/g, "'")
+    .replace(/&#39;/g, "'");
+}
+
+function hasDuplicateBrandSuffix(ogTitle) {
+  const decoded = decodeHtmlEntities(ogTitle);
+  const pipeSuffixMatches =
+    decoded.match(/\|\s*Madhu Dadi(?:\s*[—–-]\s*[^|]+)?/g) || [];
+  if (pipeSuffixMatches.length > 1) return true;
+
+  const fullBrandMatches =
+    decoded.match(/Madhu Dadi — AI, Python & Analytics Hub/g) || [];
+  return fullBrandMatches.length > 1;
 }
 
 function extractTag(html, tag) {
@@ -217,8 +238,12 @@ async function main() {
     }
 
     const title = extractTag(html, "title");
-    const desc = extractMetaContent(html, "name", "description");
-    const ogTitle = extractMetaContent(html, "property", "og:title");
+    const desc = decodeHtmlEntities(
+      extractMetaContent(html, "name", "description"),
+    );
+    const ogTitle = decodeHtmlEntities(
+      extractMetaContent(html, "property", "og:title"),
+    );
     const robots = extractMetaContent(html, "name", "robots");
 
     const canonicalMatch = html.match(
@@ -232,12 +257,9 @@ async function main() {
     if (desc.length > maxDescLen) maxDescLen = desc.length;
 
     // Checks
-    if (
-      ogTitle.includes("Madhu Dadi") &&
-      ogTitle.split("Madhu Dadi").length > 2
-    ) {
+    if (hasDuplicateBrandSuffix(ogTitle)) {
       issues.critical.push(
-        `${path}: og:title has duplicate "Madhu Dadi" → "${ogTitle}"`,
+        `${path}: og:title has duplicate brand suffix → "${ogTitle}"`,
       );
     }
     if (!title.includes("Madhu Dadi")) {
@@ -281,9 +303,10 @@ async function main() {
   // 5. Check old sitemap URL redirect
   const { status: oldStatus } = await fetchText(
     `${SITE_URL}/sitemap-portfolio.xml`,
+    { redirect: "manual" },
   );
   if (oldStatus === 301 || oldStatus === 308) {
-    console.log("\n✅ /sitemap-portfolio.xml → 301 redirect");
+    console.log("\n✅ /sitemap-portfolio.xml → redirect");
   } else if (oldStatus === 404) {
     issues.warning.push(
       "/sitemap-portfolio.xml returns 404 (should be 301 redirect)",
