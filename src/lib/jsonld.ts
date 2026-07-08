@@ -726,7 +726,7 @@ export function buildProjectsListSchema({
 }
 
 // ---------------------------------------------------------------------------
-// WorkExperience - ItemList of WorkExperience nodes
+// WorkExperience - ItemList of OrganizationRole nodes
 // ---------------------------------------------------------------------------
 export function buildWorkExperienceSchema({
   siteUrl,
@@ -747,11 +747,11 @@ export function buildWorkExperienceSchema({
       "@type": "ListItem",
       position: i + 1,
       item: {
-        "@type": "WorkExperience",
-        name: e.position,
+        "@type": "OrganizationRole",
+        roleName: e.position,
         ...(e.startDate && { startDate: e.startDate }),
         ...(!e.current && e.endDate && { endDate: e.endDate }),
-        worksFor: {
+        memberOf: {
           "@type": "Organization",
           name: e.company,
           ...(e.location && {
@@ -763,38 +763,6 @@ export function buildWorkExperienceSchema({
         },
       },
     })),
-  };
-}
-
-// ---------------------------------------------------------------------------
-// CaseStudy
-// ---------------------------------------------------------------------------
-export function buildCaseStudySchema(
-  caseStudy: {
-    title: string;
-    description: string;
-    slug: string;
-    datePublished: string;
-    keywords: string[];
-  },
-  siteUrl: string,
-) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "CaseStudy",
-    name: caseStudy.title,
-    description: caseStudy.description,
-    url: `${siteUrl}case-studies/${caseStudy.slug}/`,
-    datePublished: caseStudy.datePublished,
-    keywords: caseStudy.keywords,
-    about: {
-      "@type": "Thing",
-      name: caseStudy.title,
-    },
-    author: {
-      "@type": "Person",
-      name: "Madhu Dadi",
-    },
   };
 }
 

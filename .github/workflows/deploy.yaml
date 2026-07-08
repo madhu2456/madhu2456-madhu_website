@@ -145,7 +145,17 @@ jobs:
               exit 1
             fi
 
-
+            echo "🔍 Verifying sitemap-portfolio.xml"
+            PORTFOLIO_SITEMAP_XML=$(curl --fail --show-error http://localhost:3000/sitemap-portfolio.xml)
+            if ! echo "$PORTFOLIO_SITEMAP_XML" | grep -q '<urlset'; then
+              echo 'sitemap-portfolio.xml MISSING or invalid'
+              exit 1
+            fi
+            if ! echo "$PORTFOLIO_SITEMAP_XML" | grep -qF "$PORTFOLIO_MARKER"; then
+              echo 'portfolio URL missing from sitemap-portfolio.xml'
+              exit 1
+            fi
+            echo 'sitemap-portfolio.xml OK'
 
             echo "✅ Deployment successful"
 

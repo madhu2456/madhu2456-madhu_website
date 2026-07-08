@@ -141,7 +141,7 @@ export function SocialIconStrip({
   }
 
   return (
-    <div className={className} aria-label={ariaLabel}>
+    <section className={className} aria-label={ariaLabel}>
       {links.map((link) => (
         <SocialIconButton
           key={link.label}
@@ -150,7 +150,7 @@ export function SocialIconStrip({
           emailTrackingLocation={emailTrackingLocation ?? clickLocation}
         />
       ))}
-    </div>
+    </section>
   );
 }
 

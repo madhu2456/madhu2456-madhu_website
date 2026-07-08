@@ -58,8 +58,8 @@ export const config = {
      * - api (API routes), UNLESS starting with api/cms
      * - _next/static (static files)
      * - _next/image (image optimization files)
-     * - favicon.ico, sitemap.xml, robots.txt (metadata files)
+     * - favicon.ico, sitemap.xml, sitemap-portfolio.xml, robots.txt (metadata files)
      */
-    "/((?!api(?!/cms)|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
+    "/((?!api(?!/cms)|_next/static|_next/image|favicon.ico|sitemap.xml|sitemap-portfolio.xml|robots.txt).*)",
   ],
 };

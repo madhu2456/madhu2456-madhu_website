@@ -71,11 +71,6 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: "/sitemap-portfolio.xml",
-        destination: "/sitemap.xml",
-        permanent: true,
-      },
-      {
         source: "/about",
         destination: "/profile",
         permanent: true,
@@ -181,6 +176,15 @@ const nextConfig: NextConfig = {
       // Sitemap - revalidate hourly, serve stale for a day
       {
         source: "/sitemap.xml",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=3600, stale-while-revalidate=86400",
+          },
+        ],
+      },
+      {
+        source: "/sitemap-portfolio.xml",
         headers: [
           {
             key: "Cache-Control",

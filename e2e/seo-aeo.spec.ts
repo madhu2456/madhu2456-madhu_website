@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
 import {
   collectPageUrlsFromSitemap,
+  isUrlSet,
   isValidSitemapXml,
 } from "./helpers/sitemap";
 
@@ -71,10 +72,23 @@ test.describe("SEO/AEO pre-deploy checks", () => {
     const sitemapText = await sitemap.text();
     expect(isValidSitemapXml(sitemapText)).toBe(true);
 
+    // Local sitemap only (127.0.0.1:3000). Production topology is checked by
+    // scripts/seo-smoke-test.mjs against the deployed SITE_URL.
     const pageUrls = await collectPageUrlsFromSitemap(request, "/sitemap.xml");
     expect(
       pageUrls.some((url) => url.includes("/services/rag-consultant-india/")),
     ).toBe(true);
+  });
+
+  test("portfolio child sitemap serves urlset with marker URL", async ({
+    request,
+  }) => {
+    const response = await request.get("/sitemap-portfolio.xml");
+    expect(response.ok()).toBe(true);
+
+    const text = await response.text();
+    expect(isUrlSet(text)).toBe(true);
+    expect(text).toContain("/services/rag-consultant-india/");
   });
 });
 

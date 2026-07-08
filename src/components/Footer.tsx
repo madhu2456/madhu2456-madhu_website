@@ -67,8 +67,8 @@ export function Footer({ profile, projects, navigationItems }: FooterProps) {
                 Have an idea?
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                Let&apos;s build something meaningful. Available for AI, RAG, and
-                full-stack engineering.
+                Let&apos;s build something meaningful. Available for AI, RAG,
+                and full-stack engineering.
               </p>
             </div>
 
@@ -148,7 +148,9 @@ export function Footer({ profile, projects, navigationItems }: FooterProps) {
           </address>
 
           <div className="flex flex-col gap-1 text-sm text-muted-foreground lg:text-right">
-            <p>© {new Date().getFullYear()} Madhu Dadi. Built with intention.</p>
+            <p>
+              © {new Date().getFullYear()} Madhu Dadi. Built with intention.
+            </p>
             <p className="flex items-center gap-2 lg:justify-end">
               <span
                 className="h-2 w-2 rounded-full bg-primary animate-pulse"

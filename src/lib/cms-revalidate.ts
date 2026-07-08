@@ -9,4 +9,5 @@ export const revalidatePortfolioRoutes = () => {
   revalidatePath("/llms-full.txt");
   revalidatePath("/ai-profile.json");
   revalidatePath("/sitemap.xml");
+  revalidatePath("/sitemap-portfolio.xml");
 };

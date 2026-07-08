@@ -254,7 +254,7 @@ describe("buildServicesListSchema", () => {
 });
 
 describe("buildWorkExperienceSchema", () => {
-  test("maps experiences to ItemList of WorkExperience nodes", () => {
+  test("maps experiences to ItemList of OrganizationRole nodes", () => {
     const schema = buildWorkExperienceSchema({
       siteUrl: "https://madhudadi.com/",
       experiences: [
@@ -275,11 +275,11 @@ describe("buildWorkExperienceSchema", () => {
           "@type": "ListItem",
           position: 1,
           item: {
-            "@type": "WorkExperience",
-            name: "Marketing Analytics Engineer",
+            "@type": "OrganizationRole",
+            roleName: "Marketing Analytics Engineer",
             startDate: "2021-03",
             endDate: "2024-06",
-            worksFor: {
+            memberOf: {
               "@type": "Organization",
               name: "Novartis",
               location: {

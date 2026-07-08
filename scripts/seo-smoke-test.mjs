@@ -19,6 +19,8 @@ const SITE_URL = (process.env.SITE_URL || "https://madhudadi.in").replace(
 );
 const UA = "Mozilla/5.0 SEO-Smoke-Test/1.0";
 const TIMEOUT_MS = 15_000;
+const ROOT_SITEMAP_URL = `${SITE_URL}/sitemap.xml`;
+const PORTFOLIO_SITEMAP_MARKER = "/services/rag-consultant-india/";
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
@@ -89,6 +91,41 @@ function isUrlSet(xml) {
   return xml.includes("<urlset");
 }
 
+function normalizeSitemapUrl(url) {
+  return url.replace(/\/$/, "");
+}
+
+function resolveLocation(location) {
+  if (!location) return "";
+  if (location.startsWith("http")) return location;
+  return `${SITE_URL}${location.startsWith("/") ? location : `/${location}`}`;
+}
+
+function isRootSitemapRedirect(location) {
+  return (
+    normalizeSitemapUrl(resolveLocation(location)) ===
+    normalizeSitemapUrl(ROOT_SITEMAP_URL)
+  );
+}
+
+/**
+ * Fail when a child sitemap redirects back to the root index (portfolio unreachable).
+ */
+async function auditChildSitemaps(indexXml, issues) {
+  for (const childUrl of extractLocs(indexXml)) {
+    const { status, headers } = await fetchText(childUrl, {
+      redirect: "manual",
+    });
+    const location = headers.get("location") || "";
+
+    if ((status === 301 || status === 308) && isRootSitemapRedirect(location)) {
+      issues.critical.push(
+        `Sitemap child ${childUrl} redirects (${status}) to root index — portfolio URLs unreachable`,
+      );
+    }
+  }
+}
+
 /**
  * Resolve page URLs from a sitemap or sitemap index (recurses into child sitemaps).
  */
@@ -156,6 +193,26 @@ async function main() {
   );
 
   const issues = { critical: [], warning: [], info: [] };
+
+  const portfolioUrlCount = urls.filter((url) => !url.includes("/blog")).length;
+  const blogUrlCount = urls.length - portfolioUrlCount;
+  console.log("🗺️  Sitemap topology");
+  console.log(`  Portfolio URLs in crawl: ${portfolioUrlCount}`);
+  console.log(`  Blog URLs in crawl: ${blogUrlCount}`);
+
+  if (isSitemapIndex(smText)) {
+    await auditChildSitemaps(smText, issues);
+  }
+
+  if (!urls.some((url) => url.includes(PORTFOLIO_SITEMAP_MARKER))) {
+    issues.critical.push(
+      `Sitemap missing portfolio marker URL (${PORTFOLIO_SITEMAP_MARKER})`,
+    );
+    console.log(`  ❌ Portfolio marker missing (${PORTFOLIO_SITEMAP_MARKER})`);
+  } else {
+    console.log(`  ✅ Portfolio marker present (${PORTFOLIO_SITEMAP_MARKER})`);
+  }
+  console.log();
 
   // 2. Check robots.txt (nginx-served on production)
   const { text: robotsText } = await fetchText(`${SITE_URL}/robots.txt`);
@@ -300,16 +357,34 @@ async function main() {
 
   console.log(`  Max description length: ${maxDescLen} chars`);
 
-  // 5. Check old sitemap URL redirect
-  const { status: oldStatus } = await fetchText(
-    `${SITE_URL}/sitemap-portfolio.xml`,
-    { redirect: "manual" },
-  );
-  if (oldStatus === 301 || oldStatus === 308) {
-    console.log("\n✅ /sitemap-portfolio.xml → redirect");
+  // 5. Check portfolio child sitemap (must not recurse to root index)
+  const portfolioSitemapUrl = `${SITE_URL}/sitemap-portfolio.xml`;
+  const {
+    status: oldStatus,
+    headers: oldHeaders,
+    text: portfolioSitemapText,
+  } = await fetchText(portfolioSitemapUrl, { redirect: "manual" });
+  const portfolioLocation = oldHeaders.get("location") || "";
+
+  if (
+    (oldStatus === 301 || oldStatus === 308) &&
+    isRootSitemapRedirect(portfolioLocation)
+  ) {
+    issues.critical.push(
+      "/sitemap-portfolio.xml redirects to root sitemap index (recursion — should serve urlset)",
+    );
+    console.log(
+      "\n❌ /sitemap-portfolio.xml → redirects to root index (recursion)",
+    );
+  } else if (oldStatus === 200 && isUrlSet(portfolioSitemapText)) {
+    console.log("\n✅ /sitemap-portfolio.xml → urlset");
+  } else if (oldStatus === 301 || oldStatus === 308) {
+    console.log(
+      `\n✅ /sitemap-portfolio.xml → redirect (${oldStatus}) to ${portfolioLocation || "unknown"}`,
+    );
   } else if (oldStatus === 404) {
     issues.warning.push(
-      "/sitemap-portfolio.xml returns 404 (should be 301 redirect)",
+      "/sitemap-portfolio.xml returns 404 (should serve urlset or redirect)",
     );
   } else {
     issues.info.push(`/sitemap-portfolio.xml returns ${oldStatus}`);
