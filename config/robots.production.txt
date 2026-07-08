@@ -1,0 +1,74 @@
+# MadhuDadi Master Robots.txt — Consolidated (Blog & Portfolio)
+# Last Updated: 2026-07-08
+# Production deploy source: madhudadi.in/blog_platform/nginx/robots.txt → /opt/madhudadi-blog/nginx/robots.txt
+# This file mirrors the blog nginx robots for local dev / CI (see docs/seo-source-of-truth.md)
+# Policy: allow traditional + AI search/citation crawlers; disallow model-training crawlers.
+
+User-agent: *
+Allow: /
+# Portfolio Protections
+Disallow: /studio/
+Disallow: /api/
+# Blog Protections (Consolidated)
+Disallow: /blog/admin/
+Disallow: /blog/api/v1/admin/
+# Shared/Auth Protections
+Disallow: /blog/api/v1/auth/
+Disallow: /blog/api/v1/payments/
+Disallow: /cdn-cgi/
+
+
+# ── Bing/Yahoo — keep minimal delay ────────────────────────────────
+User-agent: bingbot
+User-agent: adidxbot
+User-agent: slurp
+Crawl-delay: 1
+
+# ── Model-training / dataset crawlers — DISALLOW (opt out of training use) ─
+# Does NOT block Google Search (Googlebot) or ChatGPT Search (OAI-SearchBot).
+User-agent: GPTBot
+User-agent: Google-Extended
+User-agent: Googlebot-Extended
+User-agent: Applebot-Extended
+User-agent: anthropic-ai
+User-agent: ClaudeBot
+User-agent: CCBot
+User-agent: cohere-ai
+User-agent: Diffbot
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+# ── AI search, citation, previews, and user-triggered fetchers — ALLOW ─────
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Claude-SearchBot
+User-agent: Claude-Web
+User-agent: Applebot
+User-agent: BraveBot
+User-agent: YouBot
+User-agent: facebookexternalhit
+User-agent: Meta-ExternalFetcher
+Allow: /blog/api/og
+Allow: /blog
+Allow: /blog/posts
+Allow: /blog/series
+Allow: /blog/tags
+Allow: /blog/ask
+Allow: /blog/llms.txt
+Allow: /blog/llms-full.txt
+Allow: /blog/ai-profile.json
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /ai-profile.json
+Disallow: /blog/admin
+Disallow: /blog/api/v1/admin
+Disallow: /blog/api/v1/payments
+Disallow: /studio/
+Disallow: /api/
+Disallow: /cdn-cgi/
+
+# Sitemaps
+Sitemap: https://madhudadi.in/sitemap.xml
+Sitemap: https://madhudadi.in/blog/sitemap.xml

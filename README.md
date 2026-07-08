@@ -92,7 +92,7 @@ Data/
 - AI-readable endpoints:
   - `src/app/llms.txt/route.ts`
   - `src/app/ai-profile.json/route.ts`
-- AI crawler-aware robots policy in `src/app/robots.ts`
+- Production robots.txt: canonical file is `madhudadi.in/blog_platform/nginx/robots.txt` (nginx alias → `/opt/madhudadi-blog/nginx/robots.txt`); portfolio `config/robots.production.txt` mirrors it for local dev via `src/app/robots.txt/route.ts` — see `docs/seo-source-of-truth.md`
 
 ## Security
 

@@ -13,6 +13,9 @@ import { getPortfolioData } from "@/lib/portfolio-data";
 import "../globals.css";
 import { resolveSiteUrl } from "@/lib/site-url";
 
+// Revalidate portfolio pages hourly; CMS saves call revalidatePortfolioRoutes().
+export const revalidate = 3600;
+
 const THEME_COLOR = "#1a1410";
 const MAX_META_DESCRIPTION_LENGTH = 160;
 

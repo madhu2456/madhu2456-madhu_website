@@ -267,12 +267,15 @@ export const buildV2PageContentDefaults = (): PageContentSchema => {
     },
     contact: {
       seo: {
-        title: "Contact Madhu Dadi | AI & Analytics Engineer",
+        title: "Contact Madhu Dadi | AI, RAG & Analytics Consulting",
         description:
-          "Contact Madhu Dadi — AI, RAG and marketing analytics consultant. Freelance AI projects, full-time roles, and consulting. Response within 24 hours.",
+          "Contact Madhu Dadi for AI consulting, RAG systems, and marketing analytics. Freelance projects, full-time roles, and FastAPI/Next.js builds. Reply within 24 hours.",
         canonicalPath: "/contact/",
       },
-      heroTitle: "Contact Me",
+      eyebrow: "Consulting & roles",
+      heroTitle: "Contact Madhu Dadi for AI, RAG & Analytics Consulting",
+      heroSubtitle:
+        "Share your project for AI agents, RAG applications, marketing analytics, or full-stack AI products. Freelance consulting, contract work, and full-time roles welcome.",
       bestFitAreas: [
         "AI agents",
         "RAG applications",

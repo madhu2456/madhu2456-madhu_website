@@ -247,6 +247,23 @@ async function main() {
       ok: robotsText.includes("OAI-SearchBot"),
       severity: "info",
     },
+    {
+      label: "GPTBot training crawler disallowed",
+      ok: /User-agent:\s*GPTBot[\s\S]*?Disallow:\s*\//i.test(robotsText),
+      severity: "warning",
+    },
+    {
+      label: "Google-Extended training crawler disallowed",
+      ok: /User-agent:\s*Google-Extended[\s\S]*?Disallow:\s*\//i.test(
+        robotsText,
+      ),
+      severity: "warning",
+    },
+    {
+      label: "Claude-SearchBot allowed (search/citation)",
+      ok: robotsText.includes("Claude-SearchBot"),
+      severity: "info",
+    },
   ];
   console.log("📋 robots.txt (nginx on production)");
   for (const check of robotsChecks) {

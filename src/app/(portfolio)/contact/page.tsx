@@ -39,10 +39,10 @@ export async function generateMetadata({
 
   const title =
     pageContent.contact.seo?.title ||
-    "Contact Madhu Dadi - Generative AI & Marketing Analytics Engineer";
+    "Contact Madhu Dadi | AI, RAG & Analytics Consulting";
   const description =
     pageContent.contact.seo?.description ||
-    "Contact Madhu Dadi — AI, RAG and marketing analytics consultant. Freelance AI projects, full-time roles, and consulting. Response within 24 hours.";
+    "Contact Madhu Dadi for AI consulting, RAG systems, and marketing analytics. Freelance projects, full-time roles, and FastAPI/Next.js builds. Reply within 24 hours.";
   return {
     title,
     description,
@@ -152,9 +152,9 @@ export default async function ContactPage() {
     "@type": "ContactPage",
     "@id": `${siteUrl}contact/#webpage`,
     url: `${siteUrl}contact/`,
-    name: "Contact Madhu Dadi",
+    name: "Contact Madhu Dadi for AI, RAG & Analytics Consulting",
     description:
-      "Contact Madhu Dadi — AI, RAG & marketing analytics consultant. Available for freelance AI projects, full-time roles, and consulting. Response within 24 hours.",
+      "Contact Madhu Dadi for AI consulting, RAG systems, and marketing analytics. Freelance projects, full-time roles, and FastAPI/Next.js builds. Reply within 24 hours.",
     mainEntity: { "@id": `${siteUrl}#person` },
     breadcrumb: { "@id": `${siteUrl}contact/#breadcrumb` },
   };
@@ -180,14 +180,15 @@ export default async function ContactPage() {
               <section className="space-y-4">
                 <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
                   <IconSparkles className="h-3.5 w-3.5 animate-pulse" />{" "}
-                  {pageContent.contact.eyebrow || "Collaboration"}
+                  {pageContent.contact.eyebrow || "Consulting & roles"}
                 </span>
                 <h1 className="text-3xl md:text-5xl font-bold tracking-tight">
-                  {pageContent.contact.heroTitle || "Contact Me"}
+                  {pageContent.contact.heroTitle ||
+                    "Contact Madhu Dadi for AI, RAG & Analytics Consulting"}
                 </h1>
                 <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
                   {pageContent.contact.heroSubtitle ||
-                    "Work with me on production AI, RAG, AI agents, marketing analytics, or full-stack AI product development."}
+                    "Share your project for AI agents, RAG applications, marketing analytics, or full-stack AI products. Freelance consulting, contract work, and full-time roles welcome."}
                 </p>
               </section>
 
