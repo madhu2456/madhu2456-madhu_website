@@ -4,6 +4,15 @@ import proxy from "./src/proxy";
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+
+  // F-01: single-hop legacy /about → canonical /profile/ (before trailingSlash can
+  // insert an intermediate /about/ hop from bare /about).
+  if (pathname === "/about" || pathname === "/about/") {
+    const url = request.nextUrl.clone();
+    url.pathname = "/profile/";
+    return NextResponse.redirect(url, 308);
+  }
+
   if (pathname.startsWith("/cms") || pathname.startsWith("/api/cms")) {
     const authResponse = proxy(request);
     if (authResponse.status === 401) {

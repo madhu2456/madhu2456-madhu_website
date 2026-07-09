@@ -1,5 +1,5 @@
 # MadhuDadi Master Robots.txt — Consolidated (Blog & Portfolio)
-# Last Updated: 2026-07-08
+# Last Updated: 2026-07-09
 # Production deploy source: madhudadi.in/blog_platform/nginx/robots.txt → /opt/madhudadi-blog/nginx/robots.txt
 # This file mirrors the blog nginx robots for local dev / CI (see docs/seo-source-of-truth.md)
 # Policy: allow traditional + AI search/citation crawlers; disallow model-training crawlers.
@@ -44,6 +44,7 @@ User-agent: ChatGPT-User
 User-agent: PerplexityBot
 User-agent: Perplexity-User
 User-agent: Claude-SearchBot
+User-agent: Claude-User
 User-agent: Claude-Web
 User-agent: Applebot
 User-agent: BraveBot

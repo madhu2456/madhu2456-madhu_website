@@ -72,7 +72,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/about",
-        destination: "/profile",
+        destination: "/profile/",
         permanent: true,
       },
       {

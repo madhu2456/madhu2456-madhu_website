@@ -42,7 +42,7 @@ export async function generateMetadata({
     "Contact Madhu Dadi | AI, RAG & Analytics Consulting";
   const description =
     pageContent.contact.seo?.description ||
-    "Contact Madhu Dadi for AI consulting, RAG systems, and marketing analytics. Freelance projects, full-time roles, and FastAPI/Next.js builds. Reply within 24 hours.";
+    "Contact Madhu Dadi for AI consulting, RAG systems, and marketing analytics. Freelance, full-time roles, FastAPI/Next.js builds. Reply within 24 hours.";
   return {
     title,
     description,
@@ -154,7 +154,7 @@ export default async function ContactPage() {
     url: `${siteUrl}contact/`,
     name: "Contact Madhu Dadi for AI, RAG & Analytics Consulting",
     description:
-      "Contact Madhu Dadi for AI consulting, RAG systems, and marketing analytics. Freelance projects, full-time roles, and FastAPI/Next.js builds. Reply within 24 hours.",
+      "Contact Madhu Dadi for AI consulting, RAG systems, and marketing analytics. Freelance, full-time roles, FastAPI/Next.js builds. Reply within 24 hours.",
     mainEntity: { "@id": `${siteUrl}#person` },
     breadcrumb: { "@id": `${siteUrl}contact/#breadcrumb` },
   };

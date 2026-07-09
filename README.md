@@ -92,7 +92,8 @@ Data/
 - AI-readable endpoints:
   - `src/app/llms.txt/route.ts`
   - `src/app/ai-profile.json/route.ts`
-- Production robots.txt: canonical file is `madhudadi.in/blog_platform/nginx/robots.txt` (nginx alias → `/opt/madhudadi-blog/nginx/robots.txt`); portfolio `config/robots.production.txt` mirrors it for local dev via `src/app/robots.txt/route.ts` — see `docs/seo-source-of-truth.md`
+- Production robots.txt: canonical file is `madhudadi.in/blog_platform/nginx/robots.txt` (nginx alias → `/opt/madhudadi-blog/nginx/robots.txt`); portfolio `config/robots.production.txt` mirrors it for local dev via `src/app/robots.txt/route.ts`. **Always update both** (nginx = live; mirror = local/CI). Pre-deploy checklist: `docs/seo-source-of-truth.md` (PROC-01 dual-path rule).
+- Production `/sitemap.xml` is typically a **sitemap index** (nginx/edge); portfolio URL list is `/sitemap-portfolio.xml` from this app. Do not confuse index `lastmod` with page freshness — see `docs/seo-source-of-truth.md` (SEO-INDEX-01).
 
 ## Security
 

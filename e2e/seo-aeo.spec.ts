@@ -90,6 +90,45 @@ test.describe("SEO/AEO pre-deploy checks", () => {
     expect(isUrlSet(text)).toBe(true);
     expect(text).toContain("/services/rag-consultant-india/");
   });
+
+  // F-01: legacy /about must land on canonical /profile/.
+  // With trailingSlash: true, bare /about first 308s to /about/ (Next built-in),
+  // then to /profile/ (middleware or next.config) → 2 hops. /about/ is 1 hop.
+  test("/about legacy paths resolve to /profile/", async ({ baseURL }) => {
+    expect(baseURL, "Playwright baseURL must be set").toBeTruthy();
+
+    for (const path of ["/about", "/about/"] as const) {
+      let url = new URL(path, baseURL).toString();
+      let hops = 0;
+      let status = 0;
+      const locations: string[] = [];
+
+      for (let i = 0; i < 5; i++) {
+        const res = await fetch(url, { redirect: "manual" });
+        status = res.status;
+        if (status >= 300 && status < 400) {
+          const loc = res.headers.get("location");
+          expect(loc, `${path} missing Location header`).toBeTruthy();
+          locations.push(loc as string);
+          url = new URL(loc as string, url).toString();
+          hops += 1;
+          continue;
+        }
+        break;
+      }
+
+      expect(status, `${path} final status`).toBe(200);
+      expect(new URL(url).pathname, `${path} final path`).toBe("/profile/");
+
+      if (path === "/about/") {
+        expect(hops, `${path} should be a single redirect hop`).toBe(1);
+      } else {
+        // bare /about: trailingSlash hop + profile redirect
+        expect(hops, `${path} hop count`).toBe(2);
+        expect(locations[0], `${path} first hop`).toMatch(/\/about\/?$/);
+      }
+    }
+  });
 });
 
 test.describe("No-JS crawler visibility", () => {

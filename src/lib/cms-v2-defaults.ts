@@ -269,7 +269,7 @@ export const buildV2PageContentDefaults = (): PageContentSchema => {
       seo: {
         title: "Contact Madhu Dadi | AI, RAG & Analytics Consulting",
         description:
-          "Contact Madhu Dadi for AI consulting, RAG systems, and marketing analytics. Freelance projects, full-time roles, and FastAPI/Next.js builds. Reply within 24 hours.",
+          "Contact Madhu Dadi for AI consulting, RAG systems, and marketing analytics. Freelance, full-time roles, FastAPI/Next.js builds. Reply within 24 hours.",
         canonicalPath: "/contact/",
       },
       eyebrow: "Consulting & roles",

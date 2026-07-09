@@ -9,7 +9,7 @@ const siteUrl = `${resolveSiteUrl()}/`;
 export const metadata: Metadata = {
   title: "Madhu Dadi - AI, RAG & Marketing Analytics Consultant",
   description:
-    "AI and marketing analytics engineer. 9+ years exp (Novartis, redBus, GroupM (WPP)). I build production LLM/RAG apps, AI agents, FastAPI, Next.js, and analytics",
+    "AI and marketing analytics engineer with 9+ years (Novartis, redBus, GroupM). Production LLM/RAG apps, AI agents, FastAPI, Next.js, and analytics systems.",
   alternates: {
     canonical: siteUrl,
     languages: {
