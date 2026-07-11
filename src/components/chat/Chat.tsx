@@ -13,7 +13,7 @@ import { useSidebar } from "@/components/ui/sidebar";
 import { trackChatInteraction } from "@/lib/gtm";
 import { MessageBubble } from "./chat-message";
 import type { ChatProfile } from "./chat-profile";
-import type { ChatMessage } from "./chat-types";
+import type { ChatMessage, ChatSourceRef } from "./chat-types";
 import { ChatInitSkeleton, TypingDots } from "./chat-ui";
 
 const TYPEWRITER_TICK_MS = 12;
@@ -23,7 +23,50 @@ type ChatApiResponse = {
   reply?: string;
   blocked?: boolean;
   suggestedPrompts?: string[];
+  sources?: unknown;
   error?: string;
+};
+
+const isAllowedSourceUrl = (url: string) => {
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== "http:" && parsed.protocol !== "https:") {
+      return false;
+    }
+    const host = parsed.hostname.toLowerCase();
+    return (
+      host === "madhudadi.in" ||
+      host === "www.madhudadi.in" ||
+      host === "localhost" ||
+      host === "127.0.0.1"
+    );
+  } catch {
+    return false;
+  }
+};
+
+const parseSources = (value: unknown): ChatSourceRef[] => {
+  if (!Array.isArray(value)) return [];
+  const sources: ChatSourceRef[] = [];
+  for (const item of value) {
+    if (!item || typeof item !== "object") continue;
+    const row = item as Record<string, unknown>;
+    const id = typeof row.id === "string" ? row.id.trim() : "";
+    const section = typeof row.section === "string" ? row.section.trim() : "";
+    const title = typeof row.title === "string" ? row.title.trim() : "";
+    const url = typeof row.url === "string" ? row.url.trim() : "";
+    if (!id || !title || !url) continue;
+    // Client allowlist: portfolio host only (no arbitrary open redirects)
+    if (!isAllowedSourceUrl(url)) continue;
+    sources.push({
+      id,
+      section: section || "profile",
+      title: title.slice(0, 120),
+      url,
+    });
+    if (sources.length >= 5) break;
+  }
+  return sources;
 };
 
 const STARTER_PROMPTS = [
@@ -105,7 +148,12 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
   }, [input, resizeTextarea]);
 
   const startTypewriter = useCallback(
-    (fullText: string, msgId: string, suggestions: string[]) => {
+    (
+      fullText: string,
+      msgId: string,
+      suggestions: string[],
+      sources: ChatSourceRef[],
+    ) => {
       if (typewriterRef.current) clearInterval(typewriterRef.current);
       setStreamingId(msgId);
       setStreamedText("");
@@ -114,7 +162,7 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
         setStreamedText(fullText);
         setStreamingId(null);
         setMessages((p) =>
-          p.map((m) => (m.id === msgId ? { ...m, suggestions } : m)),
+          p.map((m) => (m.id === msgId ? { ...m, suggestions, sources } : m)),
         );
         return;
       }
@@ -132,7 +180,7 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
           setStreamedText(fullText);
           setStreamingId(null);
           setMessages((p) =>
-            p.map((m) => (m.id === msgId ? { ...m, suggestions } : m)),
+            p.map((m) => (m.id === msgId ? { ...m, suggestions, sources } : m)),
           );
         }
       }, TYPEWRITER_TICK_MS);
@@ -201,13 +249,20 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
             .filter((s): s is string => typeof s === "string")
             .slice(0, 3)
         : [];
+      const sources = parseSources(payload.sources);
 
       const newId = createId();
       setMessages((p) => [
         ...p,
-        { id: newId, role: "assistant", text: reply, suggestions: [] },
+        {
+          id: newId,
+          role: "assistant",
+          text: reply,
+          suggestions: [],
+          sources: [],
+        },
       ]);
-      startTypewriter(reply, newId, suggestions);
+      startTypewriter(reply, newId, suggestions, sources);
     } catch (err) {
       let msg = "I couldn\u2019t answer right now. Please try again.";
       if (err instanceof Error) {

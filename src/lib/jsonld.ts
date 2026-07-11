@@ -789,7 +789,10 @@ export function buildBreadcrumbSchema(
 }
 
 // ---------------------------------------------------------------------------
-// FAQPage - answer-engine friendly Q&A summary for portfolio intent
+// FAQPage — visible on-page FAQ only (mirrors pageContent.home.faqItems).
+// Not used to chase Google FAQ rich results: that feature is restricted /
+// deprecated for general sites. Keep schema only while FAQs remain visible
+// and useful for humans; do not add FAQ markup solely for SERP gadgets.
 // ---------------------------------------------------------------------------
 export function buildFaqSchema({
   siteUrl,

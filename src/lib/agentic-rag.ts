@@ -1,4 +1,5 @@
 import type { PortfolioData } from "@/lib/portfolio-data";
+import { resolveSiteUrl } from "@/lib/site-url";
 
 function sanitizeInput(input: string): string {
   return input
@@ -45,8 +46,154 @@ type KnowledgeChunk = {
   searchable: string;
 };
 
+/** Client-safe citation chip — never includes chunk body/content. */
+export type ChatSource = {
+  id: string;
+  section: ChatSection | "blog";
+  title: string;
+  url: string;
+};
+
+const MAX_CLIENT_SOURCES = 5;
+const SAFE_SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/i;
+
+/**
+ * Map retrieved chunks to allowlisted portfolio URLs only.
+ * Does not expose chunk content or arbitrary CMS external URLs.
+ */
+export const toClientSources = (
+  chunks: KnowledgeChunk[],
+  siteUrl = resolveSiteUrl(),
+): ChatSource[] => {
+  const base = siteUrl.replace(/\/+$/, "");
+  const seen = new Set<string>();
+  const sources: ChatSource[] = [];
+
+  for (const chunk of chunks) {
+    if (sources.length >= MAX_CLIENT_SOURCES) break;
+    if (seen.has(chunk.id)) continue;
+    seen.add(chunk.id);
+
+    const mapped = mapChunkToSource(chunk, base);
+    if (!mapped) continue;
+    sources.push(mapped);
+  }
+
+  return sources;
+};
+
+const mapChunkToSource = (
+  chunk: KnowledgeChunk,
+  base: string,
+): ChatSource | null => {
+  const title = chunk.title.replace(/\s+/g, " ").trim().slice(0, 120);
+  if (!title) return null;
+
+  if (chunk.id === "blog-summary") {
+    return {
+      id: chunk.id,
+      section: "blog",
+      title,
+      url: `${base}/blog`,
+    };
+  }
+
+  if (chunk.id === "profile-contact" || chunk.section === "contact") {
+    return {
+      id: chunk.id,
+      section: "contact",
+      title,
+      url: `${base}/contact/`,
+    };
+  }
+
+  if (chunk.id === "profile-summary") {
+    return {
+      id: chunk.id,
+      section: "profile",
+      title,
+      url: `${base}/`,
+    };
+  }
+
+  if (chunk.id.startsWith("project-")) {
+    const slug = chunk.id.slice("project-".length);
+    if (!SAFE_SLUG.test(slug)) return null;
+    return {
+      id: chunk.id,
+      section: "project",
+      title,
+      url: `${base}/case-studies/${slug}/`,
+    };
+  }
+
+  if (chunk.id.startsWith("service-")) {
+    const slug = chunk.id.slice("service-".length);
+    if (!SAFE_SLUG.test(slug)) return null;
+    return {
+      id: chunk.id,
+      section: "service",
+      title,
+      url: `${base}/services/${slug}/`,
+    };
+  }
+
+  switch (chunk.section) {
+    case "experience":
+      return {
+        id: chunk.id,
+        section: "experience",
+        title,
+        url: `${base}/#experience`,
+      };
+    case "skills":
+      return {
+        id: chunk.id,
+        section: "skills",
+        title,
+        url: `${base}/#skills`,
+      };
+    case "education":
+    case "certification":
+      return {
+        id: chunk.id,
+        section: chunk.section,
+        title,
+        url: `${base}/credentials/`,
+      };
+    case "project":
+      return {
+        id: chunk.id,
+        section: "project",
+        title,
+        url: `${base}/case-studies/`,
+      };
+    case "service":
+      return {
+        id: chunk.id,
+        section: "service",
+        title,
+        url: `${base}/services/`,
+      };
+    default:
+      return {
+        id: chunk.id,
+        section: "profile",
+        title,
+        url: `${base}/`,
+      };
+  }
+};
+
+/**
+ * Strong on-topic tokens only. Do NOT include open-class words like
+ * what/who/your/tell/about/work — those leak weather, injection, and
+ * general chit-chat past the topic gate (see Phase 5A F-5A-01).
+ * Intro and recruiter phrasings live in PROFILE_INTENT_PHRASES.
+ */
 const PROFILE_KEYWORDS = new Set([
   "madhu",
+  "dadi",
   "profile",
   "portfolio",
   "experience",
@@ -63,7 +210,6 @@ const PROFILE_KEYWORDS = new Set([
   "stack",
   "service",
   "offer",
-
   "education",
   "certification",
   "credential",
@@ -72,26 +218,41 @@ const PROFILE_KEYWORDS = new Set([
   "phone",
   "location",
   "availability",
+  "available",
   "hire",
-  "work",
+  "hiring",
   "background",
   "summary",
-  "about",
   "linkedin",
   "github",
   "blog",
   "article",
-  "post",
-  "write",
-  "writing",
-  "read",
-  "technical",
-  "your",
-  "yourself",
-  // common intro-question words that should always resolve as on-topic
-  "who",
-  "what",
-  "tell",
+  "resume",
+  "cv",
+  "consulting",
+  "consultant",
+  "freelance",
+  "freelancer",
+  "analytics",
+  "engineer",
+  "developer",
+  "llm",
+  "rag",
+  "agentic",
+  "langchain",
+  "novartis",
+  "redbus",
+  "groupm",
+  "adticks",
+  "iim",
+  "amritsar",
+  "visakhapatnam",
+  "vizag",
+  "hyderabad",
+  "bengaluru",
+  "bangalore",
+  "gurugram",
+  "gurgaon",
 ]);
 
 const FOLLOW_UP_HINTS = new Set([
@@ -113,11 +274,39 @@ const FOLLOW_UP_HINTS = new Set([
 
 const PROFILE_INTENT_PHRASES = [
   "who are you",
+  "who is madhu",
+  "who is this",
   "tell me about yourself",
+  "tell me about you",
+  "tell me about madhu",
   "introduce yourself",
+  "introduce you",
   "what do you do",
   "what can you do",
   "what is your background",
+  "what's your background",
+  "where are you based",
+  "where do you live",
+  "where do you work",
+  "are you available",
+  "can i hire you",
+  "how can i reach you",
+  "how do i contact you",
+];
+
+/** Hard block phrases — evaluated before keyword allowlist (F-5A-01). */
+const TOPIC_BLOCK_PHRASES = [
+  "system prompt",
+  "developer message",
+  "developer messages",
+  "ignore all previous",
+  "ignore previous instructions",
+  "ignore all instructions",
+  "reveal your system",
+  "openai_api_key",
+  "api key",
+  "cms password",
+  "cms_auth",
 ];
 
 const OFF_TOPIC_REPLY =
@@ -277,7 +466,16 @@ const isFollowUpPrompt = (text: string) => {
   return toTokens(normalized).some((token) => FOLLOW_UP_HINTS.has(token));
 };
 
+const isBlockedTopic = (text: string) => {
+  const normalized = text.toLowerCase();
+  return TOPIC_BLOCK_PHRASES.some((phrase) => normalized.includes(phrase));
+};
+
 const isProfileQuestion = (message: string, history: ChatTurn[]) => {
+  if (isBlockedTopic(message)) {
+    return false;
+  }
+
   const normalized = message.toLowerCase();
   if (PROFILE_INTENT_PHRASES.some((phrase) => normalized.includes(phrase))) {
     return true;
@@ -294,6 +492,7 @@ const isProfileQuestion = (message: string, history: ChatTurn[]) => {
   for (let index = history.length - 1; index >= 0; index -= 1) {
     const turn = history[index];
     if (turn.role !== "user") continue;
+    if (isBlockedTopic(turn.content)) continue;
     return hasProfileKeyword(turn.content);
   }
 
@@ -681,6 +880,7 @@ export async function answerWithAgenticRag(
       reply: OFF_TOPIC_REPLY,
       suggestedPrompts: SECTION_SUGGESTIONS.profile.slice(0, 3),
       usedChunks: [] as KnowledgeChunk[],
+      sources: [] as ChatSource[],
     };
   }
 
@@ -708,12 +908,24 @@ export async function answerWithAgenticRag(
       reply: UNKNOWN_REPLY,
       suggestedPrompts: SECTION_SUGGESTIONS.profile.slice(0, 3),
       usedChunks: [] as KnowledgeChunk[],
+      sources: [] as ChatSource[],
     };
   }
 
-  const apiKey = process.env.OPENAI_API_KEY;
+  const primarySection = inferPrimarySection(relevantChunks);
+  const sources = toClientSources(relevantChunks);
+  const apiKey = process.env.OPENAI_API_KEY?.trim();
+
+  // Without a provider key, still return grounded portfolio facts instead of 500.
+  // Same path used when the provider call fails or returns empty content.
   if (!apiKey) {
-    throw new Error("OPENAI_API_KEY not configured");
+    return {
+      blocked: false,
+      reply: fallbackReplyFromChunks(relevantChunks),
+      suggestedPrompts: SECTION_SUGGESTIONS[primarySection].slice(0, 3),
+      usedChunks: relevantChunks,
+      sources,
+    };
   }
 
   const model = process.env.OPENAI_CHAT_MODEL?.trim() || "gpt-4o-mini";
@@ -805,12 +1017,11 @@ ${contextBlock}
     reply = "";
   }
 
-  const primarySection = inferPrimarySection(relevantChunks);
-
   return {
     blocked: false,
     reply: reply || fallbackReplyFromChunks(relevantChunks),
     suggestedPrompts: SECTION_SUGGESTIONS[primarySection].slice(0, 3),
     usedChunks: relevantChunks,
+    sources,
   };
 }

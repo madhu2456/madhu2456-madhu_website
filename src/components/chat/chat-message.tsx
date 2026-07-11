@@ -1,6 +1,6 @@
 "use client";
 
-import { IconSparkles } from "@tabler/icons-react";
+import { IconExternalLink, IconSparkles } from "@tabler/icons-react";
 import { motion, useReducedMotion } from "motion/react";
 import type { ChatMessage } from "./chat-types";
 import { CopyButton, MarkdownText } from "./chat-ui";
@@ -26,6 +26,7 @@ export function MessageBubble({
   const isUser = msg.role === "user";
   const displayText = isStreaming ? streamedText : msg.text;
   const suggestionCounts = new Map<string, number>();
+  const sources = msg.sources ?? [];
 
   return (
     <motion.div
@@ -101,6 +102,50 @@ export function MessageBubble({
           )}
         </div>
       </div>
+
+      {/* Source chips — allowlisted portfolio URLs only */}
+      {!isUser && !isStreaming && sources.length > 0 && (
+        <nav
+          className="ml-8 space-y-1.5"
+          aria-label="Sources used for this answer"
+        >
+          <p className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground/70">
+            Sources
+          </p>
+          <ul className="flex flex-wrap gap-1.5">
+            {sources.map((source, idx) => (
+              <motion.li
+                key={`${msg.id}-src-${source.id}`}
+                initial={
+                  prefersReducedMotion ? undefined : { opacity: 0, y: 4 }
+                }
+                animate={
+                  prefersReducedMotion ? undefined : { opacity: 1, y: 0 }
+                }
+                transition={{
+                  delay: prefersReducedMotion ? 0 : idx * 0.04,
+                  duration: prefersReducedMotion ? 0 : 0.16,
+                }}
+              >
+                <a
+                  href={source.url}
+                  className="inline-flex max-w-full items-center gap-1 rounded-full border border-foreground/10 bg-background/80 px-2.5 py-1 text-[11px] font-medium text-foreground/70 transition-colors hover:border-primary/30 hover:bg-primary/5 hover:text-foreground"
+                  title={`${source.section}: ${source.title}`}
+                >
+                  <span className="truncate">{source.title}</span>
+                  <IconExternalLink
+                    className="h-3 w-3 shrink-0 opacity-50"
+                    aria-hidden
+                  />
+                  <span className="sr-only">
+                    {` Open ${source.title} (${source.section})`}
+                  </span>
+                </a>
+              </motion.li>
+            ))}
+          </ul>
+        </nav>
+      )}
 
       {/* Suggestion chips - staggered in */}
       {!isUser && !isStreaming && (msg.suggestions?.length ?? 0) > 0 && (

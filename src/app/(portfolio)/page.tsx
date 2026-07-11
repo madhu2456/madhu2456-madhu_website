@@ -7,7 +7,8 @@ import { resolveSiteUrl } from "@/lib/site-url";
 const siteUrl = `${resolveSiteUrl()}/`;
 
 export const metadata: Metadata = {
-  title: "Madhu Dadi - AI, RAG & Marketing Analytics Consultant",
+  // DG-06 C: dual Engineer & Consultant brand (owner decision 2026-07-11)
+  title: "Madhu Dadi - AI Engineer & Analytics Consultant",
   description:
     "AI and marketing analytics engineer with 9+ years (Novartis, redBus, GroupM). Production LLM/RAG apps, AI agents, FastAPI, Next.js, and analytics systems.",
   alternates: {
@@ -18,8 +19,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: {
-      absolute:
-        "Madhu Dadi - Generative AI, RAG & Marketing Analytics Consultant",
+      absolute: "Madhu Dadi - AI Engineer & Analytics Consultant",
     },
     description:
       "Production LLM/RAG apps, AI agents, FastAPI/Next.js products, and marketing analytics systems.",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
         url: `${siteUrl}opengraph-image/?ext=.png`,
         width: 1200,
         height: 630,
-        alt: "Madhu Dadi - Generative AI, RAG & Marketing Analytics Consultant",
+        alt: "Madhu Dadi - AI Engineer & Analytics Consultant",
       },
     ],
   },

@@ -129,6 +129,12 @@ CMS_AUTH_PASSWORD=...
 NEXT_PUBLIC_SITE_URL=https://madhudadi.in
 
 OPENAI_API_KEY=sk-...
+# Optional: OPENAI_CHAT_MODEL=gpt-4o-mini
+
+# Chat rate limit (default 10 req / 60s per IP). For multi-instance deploys, set:
+# UPSTASH_REDIS_REST_URL=https://xxxx.upstash.io
+# UPSTASH_REDIS_REST_TOKEN=...
+# Optional overrides: CHAT_RATE_LIMIT_MAX, CHAT_RATE_LIMIT_WINDOW_SEC
 
 RESEND_API_KEY=re_...
 CONTACT_FORM_TO=madhu.kumar245@gmail.com
@@ -160,6 +166,21 @@ pnpm start
 pnpm lint
 pnpm format
 ```
+
+## Requirements
+
+- **Node.js** 24.x (see `.node-version`; CI and production use Node 24)
+- **pnpm** 10.x (see `packageManager` in `package.json`)
+
+## Content data (CMS)
+
+Portfolio content lives in `Data/portfolio-content.json` (edited via `/cms`).
+
+If `pageContent` is absent from that file, the app merges **built-in defaults** from
+`src/lib/cms-v2-defaults.ts` (home SEO, FAQs, CTAs, etc.) at load time via
+`src/lib/portfolio-data.ts`. Edits to FAQ/home page fields in CMS only persist when
+`pageContent` is saved into the JSON file—confirm save behavior before relying on
+CMS-only FAQ changes in production.
 
 ## Development
 

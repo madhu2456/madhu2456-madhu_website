@@ -189,6 +189,8 @@ export async function SeoStructuredData({
       ? buildCertificationsListSchema({ siteUrl, certifications })
       : null,
     includeNode("Breadcrumb") ? buildBreadcrumbSchema(siteUrl) : null,
+    // FAQ JSON-LD: only when "FAQ" node requested; content must match visible FAQ UI.
+    // Not a Google FAQ rich-result optimization (see buildFaqSchema note).
     includeNode("FAQ")
       ? buildFaqSchema({
           siteUrl,

@@ -96,7 +96,10 @@ export function NewPortfolioExperience({
         <Projects projects={projects} />
         <Services services={services} />
         <Skills skills={skills} />
-        <Experience experiences={experiences} />
+        <Experience
+          experiences={experiences}
+          yearsOfExperience={profile.yearsOfExperience}
+        />
         <Certifications certifications={certifications} />
         <Faq items={faqItems} />
         <Contact profile={profile} />

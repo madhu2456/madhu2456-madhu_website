@@ -2,7 +2,7 @@
   "profile": {
     "firstName": "Madhu",
     "lastName": "Dadi",
-    "headline": "AI & Marketing Analytics Engineer",
+    "headline": "AI Engineer & Analytics Consultant",
     "headlineStaticText": "I build",
     "headlineAnimatedWords": [
       "AI Engineering & LLM Applications",
@@ -10,7 +10,7 @@
       "Full-stack Web Product Development"
     ],
     "headlineAnimationDuration": 3000,
-    "shortBio": "Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India. He has 9+ years of experience across Novartis, redBus, GroupM (WPP), and Absolinsoft, and builds production LLM/RAG applications, AI agents, FastAPI/Next.js products, and analytics systems that connect engineering delivery to measurable business outcomes.",
+    "shortBio": "Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India, with professional experience in Hyderabad, Bengaluru, and Gurugram. He has 9+ years of experience across Novartis, redBus, GroupM (WPP), and Absolinsoft, and builds production LLM/RAG applications, AI agents, FastAPI/Next.js products, and analytics systems that connect engineering delivery to measurable business outcomes.",
     "fullBioParagraphs": [
       "I build AI. I don't just talk about it. My work splits in two. I help teams put LLMs, RAG, and AI agents into real products without the demo-to-prod cliff. And I clean up the marketing data that's meant to tell them whether any of it actually works.",
       "I write Python and TypeScript every day. I live in FastAPI, Next.js, and SQL. I care about the boring things that keep AI shipping: evals, guardrails, logs, p95s, and who gets paged at 2am. If a project doesn't have a number attached to it, I'll ask for one before we start.",
@@ -19,7 +19,7 @@
     ],
     "email": "madhu.kumar245@gmail.com",
     "phone": "+91 9985422444",
-    "location": "Visakhapatnam, India",
+    "location": "Visakhapatnam, India; professional experience includes Hyderabad, Bengaluru, and Gurugram",
     "availability": "open",
     "socialLinks": {
       "github": "https://github.com/madhu2456",
@@ -56,8 +56,8 @@
     "updatedAt": "2026-05-31T14:09:41.323Z"
   },
   "siteSettings": {
-    "siteTitle": "Madhu Dadi - AI, RAG & Marketing Analytics Engineer",
-    "siteDescription": "Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India. He has 9+ years of experience across Novartis, redBus, GroupM (WPP), and Absolinsoft, and builds production LLM/RAG applications, AI agents, FastAPI/Next.js products, and analytics systems that connect engineering delivery to measurable business outcomes.",
+    "siteTitle": "Madhu Dadi - AI Engineer & Analytics Consultant",
+    "siteDescription": "Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India, with professional experience in Hyderabad, Bengaluru, and Gurugram. He has 9+ years of experience across Novartis, redBus, GroupM (WPP), and Absolinsoft, and builds production LLM/RAG applications, AI agents, FastAPI/Next.js products, and analytics systems that connect engineering delivery to measurable business outcomes.",
     "siteKeywords": [
       "Madhu Dadi",
       "AI consultant",

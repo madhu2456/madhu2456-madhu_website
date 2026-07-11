@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server";
 import { answerWithAgenticRag, type ChatTurn } from "@/lib/agentic-rag";
 import { getPortfolioData } from "@/lib/portfolio-data";
+import {
+  checkChatRateLimit,
+  rateLimitResponseHeaders,
+  resolveClientIp,
+} from "@/lib/rate-limit";
 import { resolveSiteUrl } from "@/lib/site-url";
 
 export const dynamic = "force-dynamic";
@@ -36,46 +41,6 @@ const parseHistory = (value: unknown): ChatTurn[] => {
   return turns.slice(-12);
 };
 
-// Basic in-memory rate limiting for serverless-ish environments.
-// For production, use Upstash, Redis, or an edge-level WAF.
-const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
-const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
-const MAX_REQUESTS_PER_WINDOW = 10;
-const MAX_RATE_LIMIT_ENTRIES = 10_000;
-
-function isRateLimited(ip: string): boolean {
-  const now = Date.now();
-
-  // Evict expired rate limit records on-demand during new requests
-  // instead of using a setInterval timer to avoid memory leaks in serverless.
-  for (const [key, value] of rateLimitMap.entries()) {
-    if (now > value.resetAt) {
-      rateLimitMap.delete(key);
-    }
-  }
-
-  // Bounded eviction: if the map is still too large after cleanup, drop the
-  // oldest entries (first inserted) to cap memory usage on long-lived servers.
-  if (rateLimitMap.size >= MAX_RATE_LIMIT_ENTRIES) {
-    const evictCount = MAX_RATE_LIMIT_ENTRIES >> 2; // evict 25%
-    let evicted = 0;
-    for (const key of rateLimitMap.keys()) {
-      if (evicted >= evictCount) break;
-      rateLimitMap.delete(key);
-      evicted++;
-    }
-  }
-
-  const record = rateLimitMap.get(ip);
-  if (!record) {
-    rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
-    return false;
-  }
-
-  record.count += 1;
-  return record.count > MAX_REQUESTS_PER_WINDOW;
-}
-
 export async function POST(request: Request) {
   const origin = request.headers.get("origin");
   const siteUrl = resolveSiteUrl();
@@ -94,18 +59,17 @@ export async function POST(request: Request) {
     );
   }
 
-  const cfConnectingIp = request.headers.get("cf-connecting-ip");
-  const forwardedFor = request.headers.get("x-forwarded-for");
-  const ip =
-    cfConnectingIp?.trim() ||
-    (forwardedFor ? forwardedFor.split(",")[0].trim() : "anonymous");
-
-  if (isRateLimited(ip)) {
+  const ip = resolveClientIp(request);
+  const rate = await checkChatRateLimit(ip);
+  if (rate.limited) {
     return NextResponse.json(
       {
         error: "Too many requests. Please wait a minute before trying again.",
       },
-      { status: 429, headers: { "Cache-Control": "no-store" } },
+      {
+        status: 429,
+        headers: rateLimitResponseHeaders(rate),
+      },
     );
   }
 
@@ -146,9 +110,18 @@ export async function POST(request: Request) {
         reply: result.reply,
         blocked: result.blocked,
         suggestedPrompts: result.suggestedPrompts ?? [],
+        // Allowlisted title/section/url only — never full chunk bodies
+        sources: result.sources ?? [],
         updatedAt: portfolioData.portfolioLastUpdatedAt,
       },
-      { headers: { "Cache-Control": "no-store" } },
+      {
+        headers: {
+          "Cache-Control": "no-store",
+          "X-RateLimit-Limit": String(rate.limit),
+          "X-RateLimit-Remaining": String(Math.max(0, rate.remaining)),
+          "X-RateLimit-Reset": String(Math.ceil(rate.resetAt / 1000)),
+        },
+      },
     );
   } catch (error) {
     console.error("Chat API error:", error);

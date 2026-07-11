@@ -2,15 +2,27 @@ import { Section } from "@/components/Section";
 import type { ExperienceItem } from "@/lib/portfolio-data";
 import { formatPeriod, normalizeCompanyName } from "@/lib/utils";
 
-export function Experience({ experiences }: { experiences: ExperienceItem[] }) {
+type ExperienceProps = {
+  experiences: ExperienceItem[];
+  /** CMS profile.yearsOfExperience — display only; do not invent a new value. */
+  yearsOfExperience?: number | null;
+};
+
+export function Experience({
+  experiences,
+  yearsOfExperience,
+}: ExperienceProps) {
   if (experiences.length === 0) return null;
 
+  const yearsLabel =
+    typeof yearsOfExperience === "number" &&
+    Number.isFinite(yearsOfExperience) &&
+    yearsOfExperience > 0
+      ? `${yearsOfExperience}+ years across analytics and AI.`
+      : "Experience across analytics and AI.";
+
   return (
-    <Section
-      id="experience"
-      eyebrow="Experience"
-      title="Nine years across analytics and AI."
-    >
+    <Section id="experience" eyebrow="Experience" title={yearsLabel}>
       <ol className="relative space-y-8 border-l border-border pl-6">
         {experiences.map((experience) => (
           <li

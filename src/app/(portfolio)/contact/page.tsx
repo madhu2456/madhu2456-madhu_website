@@ -326,41 +326,45 @@ export default async function ContactPage() {
                     </div>
                   </li>
 
-                  <li className="flex items-center gap-3 p-4 rounded-xl border border-border/60 bg-surface/20">
-                    <div className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-green-600/15 text-green-500 border border-green-600/10 shrink-0">
-                      <IconBrandWhatsapp className="h-4.5 w-4.5" />
-                    </div>
-                    <div>
-                      <span className="text-xs text-muted-foreground block uppercase font-mono">
-                        WhatsApp
-                      </span>
-                      <a
-                        href={`https://wa.me/${profile.phone?.replace(/[^\d]/g, "") || "919985422444"}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-semibold text-foreground hover:text-green-500 transition-colors"
-                      >
-                        {profile.phone || "+91 9985422444"}
-                      </a>
-                    </div>
-                  </li>
+                  {profile.phone ? (
+                    <li className="flex items-center gap-3 p-4 rounded-xl border border-border/60 bg-surface/20">
+                      <div className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-green-600/15 text-green-500 border border-green-600/10 shrink-0">
+                        <IconBrandWhatsapp className="h-4.5 w-4.5" />
+                      </div>
+                      <div>
+                        <span className="text-xs text-muted-foreground block uppercase font-mono">
+                          WhatsApp
+                        </span>
+                        <a
+                          href={`https://wa.me/${profile.phone.replace(/[^\d]/g, "")}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-semibold text-foreground hover:text-green-500 transition-colors"
+                        >
+                          {profile.phone}
+                        </a>
+                      </div>
+                    </li>
+                  ) : null}
 
-                  <li className="flex items-center gap-3 p-4 rounded-xl border border-border/60 bg-surface/20">
-                    <div className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-primary/15 text-primary border border-primary/10 shrink-0">
-                      <IconPhone className="h-4.5 w-4.5" />
-                    </div>
-                    <div>
-                      <span className="text-xs text-muted-foreground block uppercase font-mono">
-                        Phone
-                      </span>
-                      <a
-                        href={`tel:${(profile.phone || "+91 9985422444").replace(/[^\d+]/g, "")}`}
-                        className="font-semibold text-foreground hover:text-primary transition-colors"
-                      >
-                        {profile.phone || "+91 9985422444"}
-                      </a>
-                    </div>
-                  </li>
+                  {profile.phone ? (
+                    <li className="flex items-center gap-3 p-4 rounded-xl border border-border/60 bg-surface/20">
+                      <div className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-primary/15 text-primary border border-primary/10 shrink-0">
+                        <IconPhone className="h-4.5 w-4.5" />
+                      </div>
+                      <div>
+                        <span className="text-xs text-muted-foreground block uppercase font-mono">
+                          Phone
+                        </span>
+                        <a
+                          href={`tel:${profile.phone.replace(/[^\d+]/g, "")}`}
+                          className="font-semibold text-foreground hover:text-primary transition-colors"
+                        >
+                          {profile.phone}
+                        </a>
+                      </div>
+                    </li>
+                  ) : null}
 
                   <li className="flex items-center gap-3 p-4 rounded-xl border border-border/60 bg-surface/20">
                     <div className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-primary/15 text-primary border border-primary/10 shrink-0">
