@@ -6,6 +6,8 @@ export type ChatSourceRef = {
   section: string;
   title: string;
   url: string;
+  /** 1-based claim marker [n] in the answer body */
+  n: number;
 };
 
 export type ChatMessage = {

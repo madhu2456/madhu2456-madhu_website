@@ -14,8 +14,19 @@ export const pushToDataLayer = (payload: Record<string, unknown>) => {
   }
 };
 
+export type ChatInteractionAction =
+  | "open"
+  | "close"
+  | "send_message"
+  | "click_suggestion"
+  | "click_source";
+
+/**
+ * Chat analytics. Never pass raw user messages or model replies —
+ * use lengths / ids / sections only.
+ */
 export const trackChatInteraction = (
-  action: "open" | "close" | "send_message" | "click_suggestion",
+  action: ChatInteractionAction,
   details?: Record<string, unknown>,
 ) => {
   pushToDataLayer({

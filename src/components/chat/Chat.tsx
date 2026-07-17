@@ -58,15 +58,23 @@ const parseSources = (value: unknown): ChatSourceRef[] => {
     if (!id || !title || !url) continue;
     // Client allowlist: portfolio host only (no arbitrary open redirects)
     if (!isAllowedSourceUrl(url)) continue;
+    const nRaw = row.n;
+    const n =
+      typeof nRaw === "number" && Number.isFinite(nRaw)
+        ? Math.trunc(nRaw)
+        : sources.length + 1;
+    if (n < 1 || n > 20) continue;
     sources.push({
       id,
       section: section || "profile",
       title: title.slice(0, 120),
       url,
+      n,
     });
     if (sources.length >= 5) break;
   }
-  return sources;
+  // Stable 1..k if API omitted n
+  return sources.map((s, i) => ({ ...s, n: s.n > 0 ? s.n : i + 1 }));
 };
 
 const STARTER_PROMPTS = [
@@ -310,14 +318,33 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
               Chat with {profile?.firstName || "Me"}
             </p>
             <p className="mt-0.5 text-[11px] text-muted-foreground">
-              AI &middot; Agentic RAG
+              Portfolio facts &middot; reply animation
             </p>
           </div>
           <div className="flex items-center gap-2">
-            <div className="flex shrink-0 items-center gap-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/8 px-2.5 py-1">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
-              <span className="text-[11px] font-medium text-emerald-600 dark:text-emerald-400">
-                Live
+            <div
+              className={`flex shrink-0 items-center gap-1.5 rounded-full border px-2.5 py-1 ${
+                sending || streamingId
+                  ? "border-amber-500/25 bg-amber-500/8"
+                  : "border-foreground/12 bg-foreground/5"
+              }`}
+              aria-live="polite"
+            >
+              <span
+                className={`h-1.5 w-1.5 rounded-full ${
+                  sending || streamingId
+                    ? "animate-pulse bg-amber-500"
+                    : "bg-foreground/35"
+                }`}
+              />
+              <span
+                className={`text-[11px] font-medium ${
+                  sending || streamingId
+                    ? "text-amber-700 dark:text-amber-400"
+                    : "text-muted-foreground"
+                }`}
+              >
+                {sending ? "Answering…" : streamingId ? "Animating…" : "Ready"}
               </span>
             </div>
             <button
@@ -453,7 +480,8 @@ export function Chat({ profile }: { profile: ChatProfile | null }) {
           </div>
           <p className="mt-1.5 text-[11px] text-muted-foreground/55">
             Enter to send &middot; Shift+Enter for new line &middot; Portfolio
-            facts only
+            facts only &middot; Replies animate after the full answer arrives
+            (not a live token stream)
           </p>
         </div>
       </div>

@@ -25,15 +25,20 @@ Production portfolio built with Next.js 16, React 19, TypeScript, and Tailwind C
 - TypeScript 5.9
 - Tailwind CSS v4
 - Biome (lint/format)
-- `motion` (animations)
+- `motion` (animations; Framer Motion successor)
 - `@tabler/icons-react` (icons)
+- Radix UI (`@radix-ui/react-dialog` for sheet/dialog patterns)
+- Zod + React Hook Form (CMS/contact validation)
+- Vitest + Playwright (unit / e2e)
+
+**Not used:** `react-markdown`, `remark`, or `rehype`. The portfolio chat renders a **limited** subset only (bold, bare `https` links, list lines, and `[n]` claim citations) via `src/components/chat/chat-ui.tsx` — not a full Markdown pipeline.
 
 ## Key features
 
 1. Portfolio sections (hero, about, experience, projects, services, education, certifications, contact)
 2. Dedicated case studies (`/case-studies` and `/case-studies/[slug]`)
 3. Site search route (`/search?q=...`) used by schema `SearchAction`
-4. AI chat sidebar (`/api/chat`) with topic guardrails and RAG retrieval
+4. AI chat sidebar (`/api/chat`) with topic guardrails, lexical RAG retrieval, claim markers `[n]`, and allowlisted source chips
 5. Machine-readable discovery endpoints:
    - `/llms.txt`
    - `/ai-profile.json`
@@ -69,14 +74,23 @@ src/
     cms/
   lib/
     portfolio-data.ts
-    agentic-rag.ts
+    agentic-rag.ts      # live system prompt + retrieval SoT (no src/prompts/)
+    rate-limit.ts
     jsonld.ts
     discovery-keywords.ts
     image-source.ts
     cms-live-import.ts
+    gtm.ts
 Data/
   portfolio-content.json
 ```
+
+### Chat / RAG notes
+
+- **System prompt SoT:** inline in `src/lib/agentic-rag.ts` (there is no wired `src/prompts/` directory).
+- **Retrieval:** lexical keyword scoring over CMS chunks (not embeddings / vector DB).
+- **Citations:** model and fallback answers use `[n]` markers; UI links them to allowlisted portfolio URLs. Client never receives full chunk bodies.
+- **Streaming:** the UI typewriter is a **reply animation** after the full JSON response arrives — not token streaming from the provider.
 
 ## Data model and content source
 

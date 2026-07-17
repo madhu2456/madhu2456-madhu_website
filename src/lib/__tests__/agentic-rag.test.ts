@@ -4,6 +4,7 @@ import {
   buildKnowledgeChunks,
   type ChatTurn,
   retrieveRelevantChunks,
+  sanitizeCitationMarkers,
   toClientSources,
 } from "../agentic-rag";
 import { defaultPortfolioContent, type PortfolioData } from "../portfolio-data";
@@ -395,12 +396,18 @@ describe("answerWithAgenticRag topic guard and offline paths", () => {
     expect(result.reply).not.toMatch(/OPENAI_API_KEY/i);
     expect(result.sources.length).toBeGreaterThan(0);
     expect(result.sources.every((s) => s.url.startsWith("http"))).toBe(true);
-    // Never leak full chunk bodies on sources
+    // Never leak full chunk bodies on sources; claim indices 1..k
     expect(
       result.sources.every(
-        (s) => !("content" in s) && s.title.length > 0 && s.id.length > 0,
+        (s) =>
+          !("content" in s) &&
+          s.title.length > 0 &&
+          s.id.length > 0 &&
+          typeof s.n === "number" &&
+          s.n >= 1,
       ),
     ).toBe(true);
+    expect(result.reply).toMatch(/\[\d+\]/);
   });
 
   it("RAG-H01: off-topic responses have empty sources", async () => {
@@ -447,9 +454,19 @@ describe("toClientSources (F-5A-02)", () => {
     ]);
     for (const source of sources) {
       expect(Object.keys(source).sort()).toEqual(
-        ["id", "section", "title", "url"].sort(),
+        ["id", "n", "section", "title", "url"].sort(),
       );
     }
+    expect(sources.map((s) => s.n)).toEqual([1, 2]);
+  });
+
+  it("sanitizeCitationMarkers drops out-of-range cites", () => {
+    expect(
+      sanitizeCitationMarkers("Worked at Novartis [1] and fake [9].", 2),
+    ).toBe("Worked at Novartis [1] and fake .");
+    expect(sanitizeCitationMarkers("No cites [3]", 0).includes("[3]")).toBe(
+      false,
+    );
   });
 
   it("caps sources at 5 and rejects unsafe project slugs", () => {

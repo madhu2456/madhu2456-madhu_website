@@ -2,7 +2,8 @@
 
 import { IconExternalLink, IconSparkles } from "@tabler/icons-react";
 import { motion, useReducedMotion } from "motion/react";
-import type { ChatMessage } from "./chat-types";
+import { trackChatInteraction } from "@/lib/gtm";
+import type { ChatMessage, ChatSourceRef } from "./chat-types";
 import { CopyButton, MarkdownText } from "./chat-ui";
 
 export type { ChatMessage };
@@ -13,6 +14,22 @@ type Props = {
   streamedText: string;
   sending: boolean;
   onSuggestionClick: (text: string) => void;
+};
+
+const trackSourceClick = (source: ChatSourceRef) => {
+  let path = source.url;
+  try {
+    path = new URL(source.url).pathname;
+  } catch {
+    // keep raw allowlisted url
+  }
+  trackChatInteraction("click_source", {
+    source_id: source.id,
+    source_section: source.section,
+    source_n: source.n,
+    source_path: path,
+    // never: full prompt, reply body, or raw titles if sensitive — title is public CMS
+  });
 };
 
 export function MessageBubble({
@@ -47,7 +64,6 @@ export function MessageBubble({
       <div
         className={`flex items-end gap-2 ${isUser ? "justify-end" : "justify-start"}`}
       >
-        {/* AI avatar */}
         {!isUser && (
           <div className="mb-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
             <IconSparkles className="h-3.5 w-3.5" />
@@ -70,7 +86,11 @@ export function MessageBubble({
               </span>
             ) : (
               <>
-                <MarkdownText text={displayText || "\u00a0"} />
+                <MarkdownText
+                  text={displayText || "\u00a0"}
+                  sources={sources}
+                  onCiteClick={trackSourceClick}
+                />
                 {isStreaming && (
                   <motion.span
                     animate={
@@ -94,7 +114,6 @@ export function MessageBubble({
             )}
           </div>
 
-          {/* Copy on hover - completed AI messages only */}
           {!isUser && !isStreaming && displayText && (
             <div className="absolute -bottom-1.5 right-1 opacity-0 transition-opacity duration-150 group-hover:opacity-100">
               <CopyButton text={displayText} />
@@ -103,7 +122,6 @@ export function MessageBubble({
         </div>
       </div>
 
-      {/* Source chips — allowlisted portfolio URLs only */}
       {!isUser && !isStreaming && sources.length > 0 && (
         <nav
           className="ml-8 space-y-1.5"
@@ -129,9 +147,13 @@ export function MessageBubble({
               >
                 <a
                   href={source.url}
+                  onClick={() => trackSourceClick(source)}
                   className="inline-flex max-w-full items-center gap-1 rounded-full border border-foreground/10 bg-background/80 px-2.5 py-1 text-[11px] font-medium text-foreground/70 transition-colors hover:border-primary/30 hover:bg-primary/5 hover:text-foreground"
                   title={`${source.section}: ${source.title}`}
                 >
+                  <span className="tabular-nums text-primary/80">
+                    [{source.n}]
+                  </span>
                   <span className="truncate">{source.title}</span>
                   <IconExternalLink
                     className="h-3 w-3 shrink-0 opacity-50"
@@ -147,7 +169,6 @@ export function MessageBubble({
         </nav>
       )}
 
-      {/* Suggestion chips - staggered in */}
       {!isUser && !isStreaming && (msg.suggestions?.length ?? 0) > 0 && (
         <div className="ml-8 flex flex-wrap gap-1.5">
           {msg.suggestions?.map((s, idx) => {

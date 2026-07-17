@@ -4,16 +4,34 @@ import { IconCheck, IconCopy, IconSparkles } from "@tabler/icons-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useMemo, useState } from "react";
 import type { ChatProfile } from "./chat-profile";
+import type { ChatSourceRef } from "./chat-types";
 import { buildProfileFacts } from "./profile-facts";
 
 const FACT_ROTATION_INTERVAL_MS = 2600;
 
-// ─── Inline Markdown ──────────────────────────────────────────────────────────
+// ─── Inline Markdown (+ claim markers [n]) ────────────────────────────────────
 
-function InlineMarkdown({ text }: { text: string }) {
+function InlineMarkdown({
+  text,
+  sources = [],
+  onCiteClick,
+}: {
+  text: string;
+  sources?: ChatSourceRef[];
+  onCiteClick?: (source: ChatSourceRef) => void;
+}) {
+  const sourceByN = useMemo(() => {
+    const map = new Map<number, ChatSourceRef>();
+    for (const s of sources) {
+      if (typeof s.n === "number" && s.n > 0) map.set(s.n, s);
+    }
+    return map;
+  }, [sources]);
+
   const parts = text
-    .split(/(\*\*[^*]+\*\*|\bhttps?:\/\/\S+)/g)
+    .split(/(\*\*[^*]+\*\*|\[\d+\]|\bhttps?:\/\/\S+)/g)
     .map((part, index) => ({ part, id: String(index) }));
+
   return (
     <>
       {parts.map(({ part, id }) => {
@@ -22,6 +40,26 @@ function InlineMarkdown({ text }: { text: string }) {
             <strong key={id} className="font-semibold">
               {part.slice(2, -2)}
             </strong>
+          );
+        }
+        const citeMatch = /^\[(\d+)\]$/.exec(part);
+        if (citeMatch) {
+          const n = Number.parseInt(citeMatch[1], 10);
+          const source = sourceByN.get(n);
+          if (!source) {
+            return null;
+          }
+          return (
+            <a
+              key={id}
+              href={source.url}
+              onClick={() => onCiteClick?.(source)}
+              className="ml-0.5 inline-flex min-h-5 min-w-5 items-center justify-center rounded px-0.5 align-super text-[10px] font-semibold text-primary underline-offset-2 hover:underline"
+              title={`${source.title} (${source.section})`}
+              aria-label={`Citation ${n}: ${source.title}`}
+            >
+              [{n}]
+            </a>
           );
         }
         if (/^https?:\/\//.test(part)) {
@@ -43,7 +81,15 @@ function InlineMarkdown({ text }: { text: string }) {
   );
 }
 
-export function MarkdownText({ text }: { text: string }) {
+export function MarkdownText({
+  text,
+  sources,
+  onCiteClick,
+}: {
+  text: string;
+  sources?: ChatSourceRef[];
+  onCiteClick?: (source: ChatSourceRef) => void;
+}) {
   const lines = text
     .split("\n")
     .map((line, index) => ({ line, id: String(index) }));
@@ -58,14 +104,22 @@ export function MarkdownText({ text }: { text: string }) {
             <div key={id} className="flex items-start gap-2">
               <span className="mt-[5px] h-1.5 w-1.5 shrink-0 rounded-full bg-foreground/40" />
               <span className="leading-relaxed">
-                <InlineMarkdown text={line.replace(/^[-*]\s/, "")} />
+                <InlineMarkdown
+                  text={line.replace(/^[-*]\s/, "")}
+                  sources={sources}
+                  onCiteClick={onCiteClick}
+                />
               </span>
             </div>
           );
         }
         return (
           <p key={id} className="leading-relaxed">
-            <InlineMarkdown text={line} />
+            <InlineMarkdown
+              text={line}
+              sources={sources}
+              onCiteClick={onCiteClick}
+            />
           </p>
         );
       })}
@@ -198,48 +252,35 @@ export function ChatInitSkeleton({ profile }: { profile: ChatProfile | null }) {
 
       {/* Fact card */}
       <div className="flex flex-1 flex-col items-center justify-center gap-4 px-5">
-        <div className="w-full max-w-xs overflow-hidden rounded-2xl border border-primary/15 bg-primary/5 p-4">
-          <p className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-primary/70">
-            <IconSparkles className="h-3 w-3" />
-            Did you know?
-          </p>
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={cycleKey}
-              initial={prefersReducedMotion ? undefined : { opacity: 0, y: 6 }}
-              animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-              exit={prefersReducedMotion ? undefined : { opacity: 0, y: -6 }}
-              transition={{
-                duration: prefersReducedMotion ? 0 : 0.28,
-                ease: "easeOut",
-              }}
-              className="mt-2 text-sm leading-relaxed text-foreground/80"
-            >
-              {activeFact}
-            </motion.p>
-          </AnimatePresence>
+        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+          <IconSparkles className="h-5 w-5" />
         </div>
-        <p className="text-xs text-foreground/50">
-          {name ? `Connecting to ${name}'s AI\u2026` : "Connecting\u2026"}
-        </p>
-      </div>
-
-      {/* Skeleton prompt chips */}
-      <div className="flex flex-col gap-2 px-4 pb-3">
-        {chips.map(({ w, id }) => {
-          return (
+        {name ? (
+          <p className="text-sm font-medium text-foreground/80">
+            Loading chat with {name}
+          </p>
+        ) : (
+          <p className="text-sm font-medium text-foreground/80">
+            Loading assistant
+          </p>
+        )}
+        <motion.p
+          key={cycleKey}
+          initial={prefersReducedMotion ? undefined : { opacity: 0, y: 4 }}
+          animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+          className="max-w-xs text-center text-xs text-muted-foreground"
+        >
+          {activeFact}
+        </motion.p>
+        <div className="flex flex-wrap justify-center gap-2">
+          {chips.map(({ w, id }) => (
             <div
               key={id}
-              className="h-9 animate-pulse rounded-xl bg-foreground/8"
-              style={{ width: `${w}%` }}
+              className="h-6 animate-pulse rounded-full bg-foreground/8"
+              style={{ width: w }}
             />
-          );
-        })}
-      </div>
-
-      {/* Skeleton input */}
-      <div className="border-t border-foreground/8 px-4 py-3">
-        <div className="h-11 w-full animate-pulse rounded-xl bg-foreground/8" />
+          ))}
+        </div>
       </div>
     </div>
   );
