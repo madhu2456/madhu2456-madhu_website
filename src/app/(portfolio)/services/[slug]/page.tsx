@@ -53,7 +53,7 @@ export async function generateMetadata({
     ? rawTitle
     : `${rawTitle} | Madhu Dadi`;
   const description = service.shortDescription || service.fullDescription;
-  const image = `${siteUrl}opengraph-image/?ext=.png`;
+  const image = `${siteUrl}opengraph-image/`;
 
   return {
     title,
@@ -119,7 +119,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
     "@id": `${siteUrl}services/${slug}/#service`,
     name: service.title,
     serviceType: service.title,
-    image: `${siteUrl}opengraph-image/?ext=.png`,
+    image: `${siteUrl}opengraph-image/`,
     description: service.shortDescription || service.fullDescription || "",
     provider: {
       "@id": `${siteUrl}#person`,
@@ -163,6 +163,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
     ],
   };
 
+  // FAQPage: kept only because FAQs are visible & useful for humans/AEO (dl/dt/dd).
+  // Google FAQ rich result deprecated May 7 2026 per https://developers.google.com/search/updates
+  // (Changelog: Deprecating FAQ rich result + June 15 removing docs) — no rich-result guarantee.
+  // Do not add FAQPage solely to chase rich result; verify eligibility and usefulness per Shared Control Block.
   const faqSchema =
     service.faqs && service.faqs.length > 0
       ? {
@@ -186,7 +190,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
     description: service.shortDescription || service.fullDescription,
     datePublished: service.updatedAt ?? new Date().toISOString(),
     dateModified: service.updatedAt ?? new Date().toISOString(),
-    image: `${siteUrl}opengraph-image/?ext=.png`,
+    image: `${siteUrl}opengraph-image/`,
     author: {
       "@type": "Person",
       "@id": `${siteUrl}#person`,

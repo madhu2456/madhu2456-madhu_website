@@ -197,7 +197,7 @@ export default async function CaseStudyPage({
         description,
         datePublished: project.updatedAt ?? new Date().toISOString(),
         dateModified: project.updatedAt ?? new Date().toISOString(),
-        image: `${siteUrl}opengraph-image/?ext=.png`,
+        image: `${siteUrl}opengraph-image/`,
         about: project.category || "Case Study",
         url: caseStudyUrl,
         author: {

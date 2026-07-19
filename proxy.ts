@@ -1,8 +1,8 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import proxy from "./src/proxy";
+import cmsAuthProxy from "./src/proxy";
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   // F-01: single-hop legacy /about → canonical /profile/ (before trailingSlash can
@@ -14,8 +14,8 @@ export function middleware(request: NextRequest) {
   }
 
   if (pathname.startsWith("/cms") || pathname.startsWith("/api/cms")) {
-    const authResponse = proxy(request);
-    if (authResponse.status === 401) {
+    const authResponse = cmsAuthProxy(request);
+    if (authResponse.status === 401 || authResponse.status === 429) {
       return authResponse;
     }
   }

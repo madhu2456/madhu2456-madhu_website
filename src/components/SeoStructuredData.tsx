@@ -190,7 +190,10 @@ export async function SeoStructuredData({
       : null,
     includeNode("Breadcrumb") ? buildBreadcrumbSchema(siteUrl) : null,
     // FAQ JSON-LD: only when "FAQ" node requested; content must match visible FAQ UI.
-    // Not a Google FAQ rich-result optimization (see buildFaqSchema note).
+    // FAQ rich result deprecated May 7 2026 per https://developers.google.com/search/updates
+    // (May: Deprecating FAQ rich result + June 15: Removing docs). No rich-result guarantee.
+    // Keep schema only if FAQs remain visible & useful for humans/AEO - do not chase rich result
+    // per Shared Control Block Structured data guidance.
     includeNode("FAQ")
       ? buildFaqSchema({
           siteUrl,

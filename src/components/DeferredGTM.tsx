@@ -11,6 +11,18 @@
  *
  * requestIdleCallback is used so even the first-interaction load
  * happens during idle time and doesn't block anything.
+ *
+ * AUDIT DECISION DR-07 (2026-07-19): Owner chose Option A — KEEP CURRENT,
+ * no cookie consent banner and no Google Consent Mode v2. Rationale:
+ * (1) DPDPA 2023 (India) compliance is already in place via the privacy
+ * page which discloses _ga/_gid cookies and lists the right to withdraw
+ * consent; (2) GTM deferral below means bots, crawlers, and PageSpeed
+ * auditors never set cookies; (3) personal portfolio with India-focused
+ * traffic, so practical GDPR enforcement risk is negligible; (4) per
+ * shared-block guidance: "do not add cookie banner merely fashionable".
+ * If EU traffic materializes (>5% of sessions) revisit Option B
+ * (Consent Mode v2 default-deny) or Option C (full banner). Do NOT
+ * re-flag analytics consent posture in future audits.
  */
 
 import { GoogleTagManager } from "@next/third-parties/google";

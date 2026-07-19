@@ -7,7 +7,13 @@ import { resolveSiteUrl } from "@/lib/site-url";
 const siteUrl = `${resolveSiteUrl()}/`;
 
 export const metadata: Metadata = {
-  // DG-06 C: dual Engineer & Consultant brand (owner decision 2026-07-11)
+  // DG-06 C: dual Engineer & Consultant brand (owner decision 2026-07-11).
+  // AUDIT DECISION DR-02 (2026-07-19): Owner chose Option C — KEEP DUAL.
+  // "Hire me" CTAs (full-time angle) and "Consultant" title/keywords (services
+  // angle) intentionally coexist. Both funnels routed via /contact/ and
+  // /contact/#intent=full-time hash. FAQ explicitly states "freelance
+  // consulting, part-time engagements, and full-time roles". Do NOT re-flag
+  // CTA hierarchy / messaging tension in future audits.
   title: "Madhu Dadi - AI Engineer & Analytics Consultant",
   description:
     "AI and marketing analytics engineer with 9+ years (Novartis, redBus, GroupM). Production LLM/RAG apps, AI agents, FastAPI, Next.js, and analytics systems.",
@@ -28,7 +34,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: `${siteUrl}opengraph-image/?ext=.png`,
+        url: `${siteUrl}opengraph-image/`,
         width: 1200,
         height: 630,
         alt: "Madhu Dadi - AI Engineer & Analytics Consultant",

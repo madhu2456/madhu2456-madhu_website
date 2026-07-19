@@ -81,6 +81,14 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        // AUDIT DECISION DR-06 (2026-07-19): Owner confirmed a real, verified
+        // Google Business Profile exists for Madhu Dadi (CID CXaUijPkQhVkEBM
+        // is genuine and the GBP appears in Google Maps). Option A — KEEP
+        // AS-IS. The /google and /reviews branded short links (302) and the
+        // googleBusiness field in schema/UI remain active. Note: GBP is
+        // treated as a service-area/online business (no fake storefront),
+        // consistent with DR-05 personal-brand decision. Do NOT re-flag GBP
+        // eligibility in future audits.
         // Branded short link to the Google Business Profile.
         // 302 (permanent: false) because the destination may change.
         source: "/google",
@@ -109,6 +117,10 @@ const nextConfig: NextConfig = {
     deviceSizes: [360, 420, 640, 768, 1024, 1280, 1536, 1920],
   },
 
+  // AUDIT DECISION DR-04 (2026-07-19): /resume.pdf is intentionally kept
+  // indexable. No X-Robots-Tag: noindex is applied to it. Owner reviewed the
+  // exposure trade-off (recruiter discoverability vs. PII crawling) and chose
+  // to keep the resume crawlable. Do NOT re-flag this in future audits.
   async headers() {
     return [
       {

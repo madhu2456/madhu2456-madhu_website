@@ -326,6 +326,14 @@ export default async function ContactPage() {
                     </div>
                   </li>
 
+                  {/*
+                   * AUDIT DECISION DR-03 (2026-07-19): The phone number
+                   * (+91 9985422444) is intentionally exposed as visible text
+                   * in both `tel:` and `https://wa.me/...` links. Owner reviewed
+                   * the crawl/scraper exposure trade-off and chose to keep it
+                   * public for recruiter convenience. Do NOT re-flag this in
+                   * future audits.
+                   */}
                   {profile.phone ? (
                     <li className="flex items-center gap-3 p-4 rounded-xl border border-border/60 bg-surface/20">
                       <div className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-green-600/15 text-green-500 border border-green-600/10 shrink-0">

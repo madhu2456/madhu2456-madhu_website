@@ -66,6 +66,9 @@ test.describe("Portfolio Audit UI Checks", () => {
   });
 
   test("Resume PDF is linked and available", async ({ page, request }) => {
+    // AUDIT DECISION DR-04 (2026-07-19): Resume is intentionally kept
+    // indexable (no X-Robots-Tag: noindex). This test asserts availability,
+    // not indexing status. Do NOT re-flag indexability in future audits.
     await page.goto("/");
 
     await expect(

@@ -433,6 +433,7 @@ describe("toClientSources (F-5A-02)", () => {
     expect(project).toBeDefined();
     expect(service).toBeDefined();
     const sources = toClientSources(
+      // biome-ignore lint/style/noNonNullAssertion: guarded by toBeDefined() above; TS can't narrow after jest expect
       [project!, service!],
       "https://madhudadi.in",
     );
@@ -447,6 +448,7 @@ describe("toClientSources (F-5A-02)", () => {
   it("maps contact and blog without exposing chunk content fields", () => {
     const contact = chunks.find((c) => c.id === "profile-contact");
     const blog = chunks.find((c) => c.id === "blog-summary");
+    // biome-ignore lint/style/noNonNullAssertion: guarded by expect().toBeDefined() on each; TypeScript can't narrow after jest matcher
     const sources = toClientSources([contact!, blog!], "https://madhudadi.in");
     expect(sources.map((s) => s.url)).toEqual([
       "https://madhudadi.in/contact/",

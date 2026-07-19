@@ -1,4 +1,258 @@
 {
+  "contentVersion": 3,
+  "pageContent": {
+    "home": {
+      "seo": {
+        "title": "Madhu Dadi - AI, RAG & Marketing Analytics Engineer",
+        "description": "Profile of Madhu Dadi, AI & analytics engineer. 9+ years exp across Novartis, redBus, and GroupM (WPP). Expert in LLM/RAG, FastAPI, Next.js, and GA4."
+      },
+      "heroTitle": "Build reliable AI agents & analytics infrastructure.",
+      "primaryCta": {
+        "label": "Contact Me",
+        "href": "/contact",
+        "variant": "primary"
+      },
+      "secondaryCta": {
+        "label": "View Services",
+        "href": "/services",
+        "variant": "secondary"
+      },
+      "heroAvailabilityText": "Available for new projects",
+      "workedAtLabel": "Previously built systems at",
+      "directAnswer": {
+        "title": "Who is Madhu Dadi?",
+        "paragraphs": [
+          "Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India. He builds production LLM/RAG applications, AI agents, FastAPI/Next.js products, and analytics systems.",
+          "With 9+ years of experience across Novartis, redBus, GroupM (WPP), and Absolinsoft, he specializes in high-confidence data pipelines, secure workflow automation, and sophisticated search-intent architectures."
+        ]
+      },
+      "faqItems": [
+        {
+          "question": "What is your core tech stack?",
+          "answer": "Python (FastAPI), TypeScript (Next.js, React), SQL (PostgreSQL, BigQuery), AI/LLMs (OpenAI, LangChain, RAG), and analytics tools (GA4, GTM)."
+        },
+        {
+          "question": "Do you take freelance projects?",
+          "answer": "Yes, I am available for freelance consulting, part-time engagements, and full-time roles depending on project fit."
+        },
+        {
+          "question": "Are you available for new projects?",
+          "answer": "Yes. I am currently open to full-time roles, freelance consulting, and part-time engagements. You can reach out via the contact form or email me directly."
+        },
+        {
+          "question": "Do you work remotely?",
+          "answer": "Yes. I am remote-first and available worldwide. Relocation is also possible for the right full-time role."
+        },
+        {
+          "question": "What industries have you worked in?",
+          "answer": "Healthcare (Novartis), travel-tech (redBus), media and advertising (GroupM / WPP), SaaS, and education. I adapt quickly to new domains."
+        },
+        {
+          "question": "How can I contact you?",
+          "answer": "Use the contact form on this site, email madhu.kumar245@gmail.com, or message me on LinkedIn. I usually respond within 24 hours."
+        },
+        {
+          "question": "What is your typical project timeline?",
+          "answer": "It depends on scope. A focused RAG or analytics engagement can be 2–6 weeks. A full-stack product build is typically 4–12 weeks. I share a clear timeline after the discovery call."
+        },
+        {
+          "question": "Do you build AI agents and RAG systems?",
+          "answer": "Yes. I build production-grade AI agents with tool calling and guardrails, and RAG systems with hybrid search, cross-encoder reranking, and citation verification."
+        }
+      ]
+    },
+    "profile": {
+      "seo": {
+        "title": "Madhu Dadi - AI, RAG & Marketing Analytics Engineer",
+        "description": "Profile of Madhu Dadi, AI & analytics engineer. 9+ years exp across Novartis, redBus, and GroupM (WPP). Expert in LLM/RAG, FastAPI, Next.js, and GA4.",
+        "canonicalPath": "/profile/"
+      },
+      "heroTitle": "Madhu Dadi",
+      "coreStackGroups": [
+        {
+          "title": "ai",
+          "items": [
+            "OpenAI API",
+            "RAG",
+            "LangChain",
+            "LangSmith",
+            "AI Agents",
+            "Model Evals"
+          ]
+        },
+        {
+          "title": "backend",
+          "items": ["Python", "FastAPI", "SQL", "Postgres", "Redis", "Celery"]
+        },
+        {
+          "title": "frontend",
+          "items": ["Next.js", "React", "TypeScript", "Tailwind CSS"]
+        },
+        {
+          "title": "analytics",
+          "items": [
+            "GA4",
+            "BigQuery",
+            "Campaign Analytics",
+            "BI Dashboards",
+            "Attribution"
+          ]
+        }
+      ]
+    },
+    "servicesIndex": {
+      "seo": {
+        "title": "Services - AI, RAG & Full-Stack Development | Madhu Dadi",
+        "description": "Professional services across AI agent development, RAG systems, marketing analytics, and full-stack product development by Madhu Dadi.",
+        "canonicalPath": "/services/"
+      },
+      "heroTitle": "Professional Services & Capabilities",
+      "heroSubtitle": "Strategic consulting, engineering, and implementation for AI and analytics.",
+      "outcomeCallout": {
+        "title": "Ready to scale your technical capabilities?",
+        "description": "Whether you need a custom LLM integration or robust marketing analytics, I deliver reliable, production-ready systems.",
+        "cta": {
+          "label": "Discuss your project",
+          "href": "/contact",
+          "variant": "primary"
+        }
+      }
+    },
+    "caseStudiesIndex": {
+      "seo": {
+        "title": "Case Studies & Projects | Madhu Dadi",
+        "description": "Technical case studies, system architecture, and production impact metrics for AI, RAG, and analytics projects by Madhu Dadi.",
+        "canonicalPath": "/case-studies/"
+      },
+      "heroTitle": "Case Studies & Engineering Projects",
+      "heroSubtitle": "Detailed technical breakdowns of production systems and automated workflows."
+    },
+    "credentials": {
+      "seo": {
+        "title": "Credentials & Certifications | Madhu Dadi",
+        "description": "Verified professional credentials, certifications, and awards for Madhu Dadi. Includes Azure AI, MongoDB, and RAG certifications.",
+        "canonicalPath": "/credentials/"
+      },
+      "heroTitle": "Verified Credentials & Professional Proof",
+      "resumeCallout": {
+        "title": "Curated PDF Resume",
+        "description": "Download a clean, printer-friendly PDF containing comprehensive project history and technical details.",
+        "href": "/resume.pdf"
+      },
+      "proofLinks": [
+        {
+          "type": "Credential",
+          "proof": "Certified LLM Security Professional (CLLMSP)",
+          "linkText": "Red Team Leaders Credential",
+          "linkUrl": "https://courses.redteamleaders.com/exam-completion/18f1aed947dcd334"
+        },
+        {
+          "type": "Credential",
+          "proof": "Ultimate RAG Bootcamp",
+          "linkText": "Udemy Credential",
+          "linkUrl": "https://www.udemy.com/certificate/UC-23e59045-812e-4b6c-9411-9a74284bf425/"
+        },
+        {
+          "type": "Credential",
+          "proof": "Azure AI Fundamentals",
+          "linkText": "Microsoft Credential",
+          "linkUrl": "https://learn.microsoft.com/en-us/users/madhudadi-6748/credentials/838cb018adda8dc8"
+        },
+        {
+          "type": "Credential",
+          "proof": "MongoDB Python Developer Path",
+          "linkText": "MongoDB Credential",
+          "linkUrl": "https://learn.mongodb.com/c/3c7f90f2-9d33-4f89-8d62-f703672b1da7"
+        },
+        {
+          "type": "Credential",
+          "proof": "GitHub Actions Professional",
+          "linkText": "Credly Badge",
+          "linkUrl": "https://www.credly.com/badges/df23e5a5-91ab-4411-b0e2-f7123bf045ca"
+        },
+        {
+          "type": "Credential",
+          "proof": "Dataiku Core Designer",
+          "linkText": "Skilljar Verification",
+          "linkUrl": "https://verify.skilljar.com/c/bm4dvx7mymim"
+        },
+        {
+          "type": "Award",
+          "proof": "Best Performer of the Quarter Q1 2024",
+          "linkText": "Novartis Context",
+          "linkUrl": "#awards-recognition"
+        },
+        {
+          "type": "Award",
+          "proof": "Q3 Trailblazer, redBus",
+          "linkText": "redBus Context",
+          "linkUrl": "#awards-recognition"
+        },
+        {
+          "type": "Award",
+          "proof": "Performer of the Year 2020–21, WPP NextGen",
+          "linkText": "GroupM (WPP) Context",
+          "linkUrl": "#awards-recognition"
+        }
+      ],
+      "awards": [
+        {
+          "title": "Best Performer of the Quarter Q1 2024",
+          "organization": "Novartis",
+          "description": "Awarded for lead engineering role in designing Novartis' global Patient Support warehouse telemetry. Mapped complex patient onboarding workflows, established strict schema validation checks, and delivered highly trusted operations dashboards for senior leaders."
+        },
+        {
+          "title": "Q3 Trailblazer",
+          "organization": "redBus",
+          "description": "Recognized for architecting redBus' campaign measurement and transaction CAC attribution databases. Unified disparate multi-million dollar marketing campaigns under a structured, source-of-truth SQL analytics layer."
+        },
+        {
+          "title": "Performer of the Year 2020–21",
+          "organization": "WPP NextGen (GroupM)",
+          "description": "Awarded for exceptional engineering delivery during Google Ads Data Hub (ADH) pilot integrations. Developed secure SQL attribution pipelines, preserving cross-channel insights under GDPR-compliant criteria."
+        }
+      ],
+      "externalProfiles": [
+        {
+          "name": "GitHub",
+          "url": "https://github.com/madhu2456",
+          "description": "Open-source projects, automation utilities, and code patterns."
+        },
+        {
+          "name": "LinkedIn",
+          "url": "https://linkedin.com/in/madhu-dadi-54684531",
+          "description": "Professional background, verified credentials, and client references."
+        },
+        {
+          "name": "DEV Community",
+          "url": "https://dev.to/madhudadi",
+          "description": "Technical articles covering FastAPI, Next.js, and RAG systems."
+        },
+        {
+          "name": "Peerlist",
+          "url": "https://peerlist.io/madhudadi",
+          "description": "Work verification history, professional profile, and product launches."
+        }
+      ]
+    },
+    "contact": {
+      "seo": {
+        "title": "Contact Madhu Dadi | AI, RAG & Analytics Consulting",
+        "description": "Contact Madhu Dadi for AI consulting, RAG systems, and marketing analytics. Freelance, full-time roles, FastAPI/Next.js builds. Reply within 24 hours.",
+        "canonicalPath": "/contact/"
+      },
+      "eyebrow": "Consulting & roles",
+      "heroTitle": "Contact Madhu Dadi for AI, RAG & Analytics Consulting",
+      "heroSubtitle": "Share your project for AI agents, RAG applications, marketing analytics, or full-stack AI products. Freelance consulting, contract work, and full-time roles welcome.",
+      "bestFitAreas": [
+        "AI agents",
+        "RAG applications",
+        "marketing analytics",
+        "FastAPI/Next.js products"
+      ],
+      "responseTimeText": "I usually respond within 24 hours."
+    }
+  },
   "profile": {
     "firstName": "Madhu",
     "lastName": "Dadi",
@@ -568,9 +822,9 @@
     {
       "title": "Adticks - Real-time AI Visibility & SERP Intelligence Platform",
       "slug": "adticks",
-      "relatedServiceSlug": "rag-consultant-india",
       "tagline": "Real-time AI Visibility & SERP Intelligence Platform",
       "category": "SaaS - SEO / AEO / GEO",
+      "relatedServiceSlug": "rag-consultant-india",
       "impactSummary": "Crawls 10,000+ pages in parallel with Playwright. Compares server HTML to the rendered DOM. Returns a ranked fix list for SEO, AEO, and GEO. Audits that took a week now take an afternoon.",
       "liveUrl": "https://adticks.com",
       "githubUrl": "",
@@ -608,6 +862,8 @@
       ],
       "problemStatement": "The rapid shift from traditional search engines to generative AI answer engines (like ChatGPT, Claude, Gemini, and Perplexity) has created a significant visibility gap for enterprise brands. Standard SEO crawlers fail to diagnose accessibility issues specific to generative crawlers (GPTBot, ClaudeBot, PerplexityBot). Furthermore, modern web architectures heavily rely on client-side JavaScript rendering, which often hides critical semantic content, entity relationships, and schema.org markup from LLM crawlers. This discrepancy between the raw server HTML and the fully rendered DOM leads to catastrophic omission from AI citations, directly impacting organic traffic and brand authority. Organizations needed a way to measure, monitor, and optimize their 'AI Readiness' and Generative Engine Optimization (GEO) posture at scale.",
       "solutionApproach": "To solve this, I designed and developed Adticks from the ground up as a unified, inside-out site auditing engine.\n**Parallel Headless Crawling:** I implemented parallel headless crawling using Playwright. This allows the system to fetch both the raw server-side HTML and the fully executed client-side DOM simultaneously, capturing the exact state that LLMs and search engines see.\n**Diagnostic Pipeline:** I built a robust, rules-based diagnostic pipeline that compares these two states, identifying render-parity gaps. If critical content, metadata, or schema.org markup exists only in the rendered DOM, the system flags it as a high-priority risk.\n**Comprehensive Auditing:** I integrated comprehensive auditing for robots.txt configurations, XML sitemaps, structured data schemas, and the newly emerging llms.txt standard.\n**FastAPI & Celery Backend:** The backend was architected with FastAPI and Celery to schedule and manage deep, recursive crawls, utilizing selectolax for ultra-fast HTML parsing.\n**Prioritized Fix Queues:** The system aggregates the findings and outputs severity-prioritized fix queues, explicitly tailored and segmented for traditional SEO, Answer Engine Optimization (AEO), and Generative Engine Optimization (GEO).",
+      "architecture": "The architecture of Adticks was designed to prioritize concurrency, resilience, and rapid data extraction.\n\n**Frontend:** The user interface is built with Next.js (App Router) and React, heavily utilizing Tailwind CSS for styling. This ensures a highly responsive, intuitive dashboard where users can monitor crawl progress in real-time and review complex diagnostic reports without performance degradation.\n\n**Backend Services:** The core application logic and API layer are powered by FastAPI (Python). FastAPI was chosen for its native asynchronous capabilities, automatic OpenAPI documentation, and high performance, which is critical when coordinating thousands of simultaneous network requests.\n\n**Crawling & Execution:** The crawling engine relies on Playwright orchestrated via Celery task queues. This distributed approach allows Adticks to scale crawler nodes horizontally. Redis serves as the message broker, managing the state and distribution of Celery tasks to ensure reliable execution and retry logic.\n\n**Data Parsing & Storage:** HTML parsing is handled by selectolax, a high-performance C-based parser for Python, which drastically reduces the CPU overhead compared to BeautifulSoup. The parsed data, diagnostic results, and user configurations are stored in a highly normalized PostgreSQL database. \n\n**Infrastructure:** The entire stack is containerized using Docker, allowing for seamless deployment and horizontal scaling of the Celery worker nodes based on the crawling load.",
+      "lessonsLearned": "Building Adticks presented several unique technical challenges, and if I were to architect it again from scratch, there are a few key areas I would approach differently.\n\n**Memory Management in Headless Browsers:** Initially, scaling Playwright to handle thousands of parallel pages led to severe memory bloat and frequent worker crashes. I learned the hard way that browser contexts need aggressive garbage collection and strict timeout enforcements. In the future, I would implement a more robust browser pool manager to recycle contexts proactively before they hit memory limits.\n\n**Parsing Bottlenecks:** While selectolax is incredibly fast, running complex XPath queries across massive DOM trees still created CPU bottlenecks. If rebuilding the system, I would explore offloading the heaviest parsing tasks to Rust-based microservices or utilizing WebAssembly to parse the DOM directly within the crawler execution environment, reducing the data transfer overhead between the crawler and the backend.\n\n**State Management for Large Reports:** Generating and serving the final diagnostic reports, which can contain tens of thousands of individual data points, initially strained the frontend. Implementing virtualized lists and infinite scrolling was necessary, but I would design the data aggregation pipeline differently from day one to pre-calculate and cache summary statistics, rather than computing them on the fly.",
       "impactMetrics": [
         {
           "label": "pages per audit with parallel headless rendering",
@@ -636,20 +892,6 @@
           "url": "https://arxiv.org/abs/2311.09735"
         }
       ],
-      "gallery": [
-        {
-          "url": "/uploads/cms/adticks-dashboard.webp",
-          "caption": "Adticks SEO & AI Visibility Auditing Dashboard showing parallel crawling insights.",
-          "alt": "Adticks SaaS Dashboard"
-        },
-        {
-          "url": "/uploads/cms/adticks-architecture.webp",
-          "caption": "Abstract system architecture mapping the data pipeline and asynchronous crawler nodes.",
-          "alt": "Adticks System Architecture"
-        }
-      ],
-      "order": 1,
-      "updatedAt": "2026-06-07T00:00:00Z",
       "citableFacts": [
         {
           "label": "Project",
@@ -737,15 +979,27 @@
           "answer": "With a bounded worker pool of 15 Chromium browsers, an audit completes in approximately 45–60 minutes, ensuring detailed render diagnostic checking for every individual URL."
         }
       ],
-      "architecture": "The architecture of Adticks was designed to prioritize concurrency, resilience, and rapid data extraction.\n\n**Frontend:** The user interface is built with Next.js (App Router) and React, heavily utilizing Tailwind CSS for styling. This ensures a highly responsive, intuitive dashboard where users can monitor crawl progress in real-time and review complex diagnostic reports without performance degradation.\n\n**Backend Services:** The core application logic and API layer are powered by FastAPI (Python). FastAPI was chosen for its native asynchronous capabilities, automatic OpenAPI documentation, and high performance, which is critical when coordinating thousands of simultaneous network requests.\n\n**Crawling & Execution:** The crawling engine relies on Playwright orchestrated via Celery task queues. This distributed approach allows Adticks to scale crawler nodes horizontally. Redis serves as the message broker, managing the state and distribution of Celery tasks to ensure reliable execution and retry logic.\n\n**Data Parsing & Storage:** HTML parsing is handled by selectolax, a high-performance C-based parser for Python, which drastically reduces the CPU overhead compared to BeautifulSoup. The parsed data, diagnostic results, and user configurations are stored in a highly normalized PostgreSQL database. \n\n**Infrastructure:** The entire stack is containerized using Docker, allowing for seamless deployment and horizontal scaling of the Celery worker nodes based on the crawling load.",
-      "lessonsLearned": "Building Adticks presented several unique technical challenges, and if I were to architect it again from scratch, there are a few key areas I would approach differently.\n\n**Memory Management in Headless Browsers:** Initially, scaling Playwright to handle thousands of parallel pages led to severe memory bloat and frequent worker crashes. I learned the hard way that browser contexts need aggressive garbage collection and strict timeout enforcements. In the future, I would implement a more robust browser pool manager to recycle contexts proactively before they hit memory limits.\n\n**Parsing Bottlenecks:** While selectolax is incredibly fast, running complex XPath queries across massive DOM trees still created CPU bottlenecks. If rebuilding the system, I would explore offloading the heaviest parsing tasks to Rust-based microservices or utilizing WebAssembly to parse the DOM directly within the crawler execution environment, reducing the data transfer overhead between the crawler and the backend.\n\n**State Management for Large Reports:** Generating and serving the final diagnostic reports, which can contain tens of thousands of individual data points, initially strained the frontend. Implementing virtualized lists and infinite scrolling was necessary, but I would design the data aggregation pipeline differently from day one to pre-calculate and cache summary statistics, rather than computing them on the fly."
+      "gallery": [
+        {
+          "url": "/uploads/cms/adticks-dashboard.webp",
+          "alt": "Adticks SaaS Dashboard",
+          "caption": "Adticks SEO & AI Visibility Auditing Dashboard showing parallel crawling insights."
+        },
+        {
+          "url": "/uploads/cms/adticks-architecture.webp",
+          "alt": "Adticks System Architecture",
+          "caption": "Abstract system architecture mapping the data pipeline and asynchronous crawler nodes."
+        }
+      ],
+      "order": 1,
+      "updatedAt": "2026-06-07T00:00:00Z"
     },
     {
       "title": "Python & AI Learning Platform",
       "slug": "technical-blog",
-      "relatedServiceSlug": "full-stack-ai-product-development",
       "tagline": "Python & AI Learning Platform with AI Assistant",
       "category": "Education - RAG / AI assistant",
+      "relatedServiceSlug": "full-stack-ai-product-development",
       "impactSummary": "A series-based tech blog with an assistant that has actually read the blog. Vector-grounded answers with citations. Instant in-page search. Designed for both human readers and AI-assisted retrieval.",
       "liveUrl": "https://madhudadi.in/blog",
       "githubUrl": "",
@@ -805,15 +1059,6 @@
           "url": "https://arxiv.org/abs/2005.11401"
         }
       ],
-      "gallery": [
-        {
-          "url": "/uploads/cms/tech-blog-cms.webp",
-          "caption": "Custom headless CMS interface for the technical blog featuring live Markdown previews and metadata extraction.",
-          "alt": "Technical Blog Headless CMS"
-        }
-      ],
-      "order": 2,
-      "updatedAt": "2026-06-07T00:00:00Z",
       "citableFacts": [
         {
           "label": "Project",
@@ -900,14 +1145,23 @@
           "question": "What happens if a user asks a non-technical or off-topic question?",
           "answer": "The LLM prompt pipeline is locked down with strict guardrails. It identifies off-topic queries instantly and outputs a polite refusal: 'Cannot be determined reliably from local portfolio context.', avoiding generic pre-trained hallucinations."
         }
-      ]
+      ],
+      "gallery": [
+        {
+          "url": "/uploads/cms/tech-blog-cms.webp",
+          "alt": "Technical Blog Headless CMS",
+          "caption": "Custom headless CMS interface for the technical blog featuring live Markdown previews and metadata extraction."
+        }
+      ],
+      "order": 2,
+      "updatedAt": "2026-06-07T00:00:00Z"
     },
     {
       "title": "Udemy Enroller via FastAPI",
       "slug": "udemy-enroller-fastapi",
-      "relatedServiceSlug": "ai-agent-development",
       "tagline": "Automated Course Enrollment System via FastAPI Automation Platform",
       "category": "Production FastAPI Automation Platform",
+      "relatedServiceSlug": "ai-agent-development",
       "impactSummary": "Udemy Enroller is a live production FastAPI and Playwright automation platform that orchestrates asynchronous workflow runs, bounded worker concurrency, secure session-state handling, telemetry logging, and background processing with Celery, Redis, PostgreSQL, and Docker.",
       "liveUrl": "https://udemyenroller.madhudadi.in",
       "githubUrl": "https://github.com/madhu2456/udemy_enroller_fastapi",
@@ -939,13 +1193,6 @@
       ],
       "problemStatement": "Browser-based workflows often involve repetitive, highly-structured tasks with narrow execution windows. Manually checking, updating parameters, and verifying execution steps across different pages creates severe bottlenecks, reduces overall productivity, and introduces the risk of human error. The system needed a robust, high-availability architecture to coordinate async queues, manage headless browser instances concurrently, handle stateful authentication sessions securely, and respect strict rate-limiting policies across target platforms gracefully. Furthermore, standard cron jobs were insufficient due to the need for distributed worker nodes and real-time execution telemetry to monitor the health and performance of the automation suite across hundreds of daily parallel executions.",
       "solutionApproach": "**FastAPI Architecture:** We designed and deployed a FastAPI service to act as the core API layer, providing secure REST endpoints for workflow initialization and telemetry aggregation. To handle the background processing load without blocking the main thread, we integrated Celery alongside Redis as the message broker, creating robust async task execution queues. A comprehensive validation pipeline was engineered to authenticate session state dynamically, verify input constraints, and execute long-running browser tasks via Playwright without requiring any manual intervention. We also implemented comprehensive telemetry logging and monitoring to track success rates, handle unexpected session expirations gracefully, respect external rate limits via exponential backoff strategies, and alert stakeholders of any critical failures via automated webhooks.",
-      "features": [
-        "Architected a robust FastAPI REST backend to handle secure session management, incoming webhook triggers, and real-time execution telemetry monitoring.",
-        "Integrated a distributed Celery task queue with Redis to orchestrate asynchronous Playwright browser workflows concurrently across multiple worker nodes.",
-        "Implemented secure credential storage, strict rate-limiting strategies with exponential backoff, and robust error handling to gracefully manage unexpected session expirations or DOM changes.",
-        "Containerized the entire platform utilizing Docker and Docker Compose, ensuring consistent deployment environments and simplified scalability.",
-        "Established comprehensive CI/CD pipelines via GitHub Actions for automated linting, testing, and zero-downtime production deployments."
-      ],
       "impactMetrics": [
         {
           "label": "reduction in manual effort",
@@ -974,15 +1221,6 @@
           "url": "https://fastapi.tiangolo.com/tutorial/background-tasks/"
         }
       ],
-      "gallery": [
-        {
-          "url": "/uploads/cms/udemy-dashboard.webp",
-          "caption": "FastAPI automation dashboard showing real-time Celery worker queues and task success metrics.",
-          "alt": "FastAPI Task Queue Dashboard"
-        }
-      ],
-      "order": 3,
-      "updatedAt": "2026-06-07T00:00:00Z",
       "citableFacts": [
         {
           "label": "Project",
@@ -1069,7 +1307,16 @@
           "question": "Can this automation pipeline be deployed in a Docker container?",
           "answer": "Absolutely. I created a multi-stage Dockerfile containing all necessary Playwright Chromium system dependencies. It deploys smoothly as an isolated, containerized microservice."
         }
-      ]
+      ],
+      "gallery": [
+        {
+          "url": "/uploads/cms/udemy-dashboard.webp",
+          "alt": "FastAPI Task Queue Dashboard",
+          "caption": "FastAPI automation dashboard showing real-time Celery worker queues and task success metrics."
+        }
+      ],
+      "order": 3,
+      "updatedAt": "2026-06-07T00:00:00Z"
     }
   ],
   "services": [
@@ -1116,115 +1363,22 @@
       "featured": true,
       "order": 1,
       "updatedAt": "2026-06-07T00:00:00Z",
-      "audience": [
-        "SaaS teams adding AI features",
-        "Founders building AI-first products",
-        "Analytics/product teams building internal AI copilots",
-        "Content-heavy businesses that need grounded Q&A",
-        "Teams stuck between AI demo and production"
+      "seoTitle": "Generative AI & LLM Application Development | Madhu Dadi",
+      "seoDescription": "Production-grade generative AI applications, bespoke custom chat interfaces, and LLM integrations built for reliability. Not just happy-path demos.",
+      "heroTitle": "Generative AI & LLM Application Development",
+      "heroEyebrow": "Service",
+      "directAnswerParagraphs": [
+        "High-performance generative AI systems utilizing modern LLMs (GPT-4o, Claude 3.5 Sonnet, Llama 3), structured outputs (Pydantic), robust prompt engineering pipelines, runtime evaluation frameworks, and guardrails to mitigate hallucination and data leakage."
       ],
-      "problemsSolved": [
-        "RAG systems hallucinate or cite weak sources",
-        "AI agents loop or fail silently",
-        "Chatbots do not connect to real business workflows",
-        "LLM costs are unpredictable",
-        "No evals, logs, guardrails, or user analytics",
-        "AI prototypes are not production-ready"
-      ],
-      "capabilityCards": [
-        {
-          "title": "RAG Chat Systems",
-          "description": "High-precision conversational interfaces backed by multi-stage retrieval pipelines."
-        },
-        {
-          "title": "Source-Cited AI Assistants",
-          "description": "Assistants that ground every response in verifiable documents with click-through citations."
-        },
-        {
-          "title": "AI Agents with Tools",
-          "description": "Controlled workflows featuring sandboxed execution, validation, fallback behavior, and state management."
-        },
-        {
-          "title": "Prompt & Eval Pipelines",
-          "description": "Versioned prompt assets paired with automated evaluation suites to validate accuracy."
-        },
-        {
-          "title": "FastAPI AI Backends",
-          "description": "High-performance backends featuring asynchronous queuing, stream parsing, and Pydantic validation."
-        },
-        {
-          "title": "Next.js AI Product Interfaces",
-          "description": "Ultra-fast frontend layouts supporting streaming chat UI, markdown, and reactive state management."
-        },
-        {
-          "title": "Vector Search Systems",
-          "description": "Ingestion and extraction pipelines utilizing specialized dense/sparse semantic architectures."
-        },
-        {
-          "title": "Admin & Observability Dashboards",
-          "description": "Comprehensive instrumentation tracking model runs, telemetry traces, and token costs."
-        },
-        {
-          "title": "Analytics Instrumentation",
-          "description": "Custom tracking pipelines designed to connect AI application telemetry directly to GA4 and BigQuery metrics."
-        }
-      ],
-      "techStackGroups": [
-        {
-          "category": "Core Language",
-          "items": ["Python", "TypeScript"]
-        },
-        {
-          "category": "Web Frameworks",
-          "items": ["FastAPI", "Next.js", "React"]
-        },
-        {
-          "category": "Databases & Cache",
-          "items": ["Postgres", "Redis"]
-        },
-        {
-          "category": "Task Queuing",
-          "items": ["Celery"]
-        },
-        {
-          "category": "AI Orchestration",
-          "items": ["OpenAI API", "LangChain", "LangSmith"]
-        },
-        {
-          "category": "Vector Storage",
-          "items": ["Pinecone", "Qdrant", "pgvector"]
-        },
-        {
-          "category": "Analytics & Telemetry",
-          "items": ["GA4", "BigQuery"]
-        }
-      ],
-      "faqs": [
-        {
-          "question": "Can Madhu Dadi build a RAG system with citations?",
-          "answer": "Yes. Madhu builds RAG systems that retrieve source content, generate grounded answers, display citations, and include evals, logging, and analytics."
-        },
-        {
-          "question": "Can Madhu Dadi improve an existing AI chatbot?",
-          "answer": "Yes. He can audit retrieval quality, prompts, latency, hallucination behavior, observability, and analytics before rebuilding."
-        },
-        {
-          "question": "How long does a production-ready AI application take to build?",
-          "answer": "A typical production-ready minimum viable product (MVP) takes between 4 to 8 weeks depending on the complexity of your custom tools, document schemas, and evaluation protocols."
-        },
-        {
-          "question": "Do you work with OpenAI only?",
-          "answer": "No. While OpenAI is a standard foundation, I construct model-agnostic orchestration patterns leveraging Anthropic Claude, Google Gemini, and open-source models like Llama 3 depending on your budget and accuracy requirements."
-        },
-        {
-          "question": "Do you include evals and guardrails?",
-          "answer": "Yes. Building AI without guardrails is like shipping code without compilation. Every project includes structured input/output validation guardrails (Pydantic, JSON schemas) and automated evaluation rigs before launch."
-        },
-        {
-          "question": "Can you connect AI usage to analytics?",
-          "answer": "Yes. This is my core differentiator. I instrument downstream analytics hooks tracking LLM tokens, model latencies, and user engagement, routing telemetry cleanly into server-side GA4 and BigQuery."
-        }
-      ]
+      "targetQueries": [],
+      "audience": [],
+      "problemsSolved": [],
+      "capabilityCards": [],
+      "techStackGroups": [],
+      "faqs": [],
+      "proofProjectSlugs": [],
+      "contactIntent": "Inquiry regarding Generative AI & LLM Application Development",
+      "offerCatalog": []
     },
     {
       "title": "RAG System Development",
@@ -1269,7 +1423,16 @@
       "seoDescription": "Hire a specialized RAG consultant in India to build high-precision vector search pipelines, enterprise LLM applications, and semantic retrieval systems.",
       "heroTitle": "RAG Consultant & AI Search Engineer",
       "heroEyebrow": "ENTERPRISE RETRIEVAL-AUGMENTED GENERATION",
-      "contactIntent": "rag-consultant-india",
+      "directAnswerParagraphs": [
+        "A RAG (Retrieval-Augmented Generation) consultant designs backend systems that connect large language models securely to your private enterprise data.",
+        "I build these pipelines using vector databases and hybrid search techniques to ensure that AI applications only return factually grounded answers based on your internal documentation, significantly reducing hallucination risks."
+      ],
+      "targetQueries": [
+        "rag consultant india",
+        "vector database expert",
+        "enterprise semantic search consulting",
+        "langchain developer india"
+      ],
       "audience": [
         "CTOs needing to securely expose private data to LLMs",
         "Engineering Managers scaling vector databases",
@@ -1280,16 +1443,6 @@
         "High latency and cost from inefficient context window packing",
         "Inaccurate semantic search across dense domain-specific documents",
         "Lack of citation traceability in AI-generated answers"
-      ],
-      "targetQueries": [
-        "rag consultant india",
-        "vector database expert",
-        "enterprise semantic search consulting",
-        "langchain developer india"
-      ],
-      "directAnswerParagraphs": [
-        "A RAG (Retrieval-Augmented Generation) consultant designs backend systems that connect large language models securely to your private enterprise data.",
-        "I build these pipelines using vector databases and hybrid search techniques to ensure that AI applications only return factually grounded answers based on your internal documentation, significantly reducing hallucination risks."
       ],
       "faqs": [
         {
@@ -1316,7 +1469,8 @@
           "question": "Can RAG systems handle complex tables and charts?",
           "answer": "Yes. I integrate advanced parsing models (like LlamaParse or specialized vision models) that can extract context from complex tabular data and images within documents."
         }
-      ]
+      ],
+      "contactIntent": "rag-consultant-india"
     },
     {
       "title": "AI Agent Development",
@@ -1505,7 +1659,6 @@
     },
     {
       "title": "GA4 & BigQuery Analytics Consultant for Campaign Measurement",
-      "seoTitle": "GA4 & BigQuery Analytics Consultant | Madhu Dadi",
       "slug": "ga4-bigquery-campaign-analytics",
       "icon": "/icon-512.png",
       "shortDescription": "End-to-end server-side tracking, GA4 custom schemas, Google Cloud BigQuery warehouses, and campaign measurement workflows that leaders trust.",
@@ -1543,6 +1696,7 @@
       "featured": true,
       "order": 5,
       "updatedAt": "2026-06-07T00:00:00Z",
+      "seoTitle": "GA4 & BigQuery Analytics Consultant | Madhu Dadi",
       "audience": [
         "Marketing teams looking for a single source of truth for media spend and conversions",
         "Growth engineering teams needing server-side tracking setups (sGTM)",
@@ -1792,6 +1946,5 @@
       "order": 7,
       "updatedAt": "2026-06-07T00:00:00Z"
     }
-  ],
-  "contentVersion": 1
+  ]
 }

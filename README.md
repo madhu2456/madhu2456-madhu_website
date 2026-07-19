@@ -119,9 +119,10 @@ Data/
 
 - CMS uploads: `POST /api/cms/upload`
 - Supported upload MIME types:
-  - `image/jpeg`, `image/png`, `image/webp`, `image/avif`, `image/gif`, `image/svg+xml`
+  - `image/jpeg`, `image/png`, `image/webp`, `image/avif`, `image/gif`
 - Stored under `public/uploads/cms/`
-- `src/lib/image-source.ts` normalizes image paths and avoids optimizer issues for SVG/external/data URLs.
+- `src/lib/image-source.ts` normalizes image paths and avoids optimizer issues for external/data URLs as well as safe handling of SVG when displayed elsewhere.
+- Note: `image/svg+xml` is intentionally disallowed for uploads to prevent XSS via `<svg><script>` payloads (see QA-F-NEW-01).
 
 ## CMS authentication
 

@@ -281,6 +281,16 @@ export function buildPersonSchema({
       ],
     }),
     ...(location && {
+      // AUDIT DECISION DR-01 / C-01 (2026-07-19): Owner chose to KEEP BOTH
+      // Visakhapatnam and Hyderabad. The `location` field intentionally reads
+      // "Visakhapatnam, India; professional experience includes Hyderabad,
+      // Bengaluru, and Gurugram" — Visakhapatnam is the permanent home base,
+      // Hyderabad is the current Novartis work location, Bengaluru/Gurugram
+      // are past work locations. This is NOT a contradiction; base city and
+      // current job city are distinct concepts. The shortBio/siteDescription
+      // "based in Visakhapatnam" wording is intentional and accurate. Do NOT
+      // re-flag the Visakhapatnam-vs-Hyderabad location as a contradiction
+      // in future audits.
       address: {
         "@type": "PostalAddress",
         addressLocality: location,
@@ -390,6 +400,15 @@ export function buildOccupationSchema({
 
 // ---------------------------------------------------------------------------
 // Organization
+//
+// AUDIT DECISION DR-05 (2026-07-19): Owner confirmed "Madhu Dadi" is a
+// PERSONAL BRAND — no registered business entity (no Pvt Ltd, LLP, or GST
+// registration). Option A chosen. Organization name intentionally mirrors
+// Person name; no legalName, taxID, foundingDate, or registered address is
+// added. No LocalBusiness node is emitted (would require real premises and
+// risks Google manual action). Founder link connects Organization → Person
+// per Google's canonical personal-portfolio pattern. Do NOT re-flag the
+// Organization == Person name overlap in future audits.
 // ---------------------------------------------------------------------------
 export function buildOrganizationSchema({
   siteUrl,
