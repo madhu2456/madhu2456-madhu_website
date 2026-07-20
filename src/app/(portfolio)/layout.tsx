@@ -47,6 +47,7 @@ const toMetaDescription = (text: string, maxLength: number) => {
 
 export const viewport: Viewport = {
   themeColor: THEME_COLOR,
+  viewportFit: "cover",
 };
 
 export async function generateMetadata(): Promise<Metadata> {

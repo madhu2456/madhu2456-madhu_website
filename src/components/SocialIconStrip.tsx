@@ -32,7 +32,7 @@ type SocialIconStripProps = {
 };
 
 const iconButtonClassName =
-  "inline-flex h-10 w-10 items-center justify-center rounded-full border border-border/80 bg-surface/50 text-muted-foreground transition-colors hover:border-primary/40 hover:bg-surface hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50";
+  "inline-flex h-11 w-11 items-center justify-center rounded-full border border-border/80 bg-surface/50 text-muted-foreground transition-colors hover:border-primary/40 hover:bg-surface hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50";
 
 export function buildSocialIconLinks(profile: Profile): SocialIconLink[] {
   const links: SocialIconLink[] = [

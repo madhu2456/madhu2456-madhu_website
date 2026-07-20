@@ -158,7 +158,7 @@ export function Header({ profile, navigationItems }: HeaderProps) {
                 target={isExternal ? "_blank" : undefined}
                 rel={isExternal ? "noopener noreferrer" : undefined}
                 aria-current={isActive ? "page" : undefined}
-                className={`rounded-full px-3.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-300 ${
+                className={`rounded-full px-3.5 py-2 text-xs font-semibold tracking-wide transition-all duration-300 ${
                   isActive
                     ? "bg-primary/15 text-primary border border-primary/20 shadow-sm"
                     : "text-muted-foreground border border-transparent hover:bg-white/5 hover:text-foreground"
@@ -177,7 +177,7 @@ export function Header({ profile, navigationItems }: HeaderProps) {
             rel="noopener noreferrer"
             gtmEvent="resume_download"
             gtmData={{ download_type: "pdf", download_location: "header" }}
-            className="hidden sm:inline-block rounded-full border border-border/80 bg-surface/50 px-4 py-2 text-xs font-semibold text-foreground shadow-sm transition-all duration-300 hover:scale-[1.04] hover:bg-surface-elevated hover:border-primary/30 sm:px-5 sm:text-sm"
+            className="inline-block rounded-full border border-border/80 bg-surface/50 px-4 py-2 text-xs font-semibold text-foreground shadow-sm transition-all duration-300 hover:scale-[1.04] hover:bg-surface-elevated hover:border-primary/30 sm:px-5 sm:text-sm"
           >
             Resume
           </TrackedLink>
