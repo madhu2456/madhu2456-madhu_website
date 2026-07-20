@@ -272,7 +272,7 @@ export default async function CaseStudyPage({
               href={`/services/${project.relatedServiceSlug}/`}
               className="inline-flex items-center gap-2 text-sm text-primary underline-offset-4 hover:text-primary/80 hover:underline"
             >
-              Related service
+              Related service page
               <IconArrowRight className="h-4 w-4" aria-hidden />
             </Link>
           )}

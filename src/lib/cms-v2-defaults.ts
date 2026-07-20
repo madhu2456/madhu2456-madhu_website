@@ -4,18 +4,19 @@ export const buildV2PageContentDefaults = (): PageContentSchema => {
   return {
     home: {
       seo: {
-        title: "Madhu Dadi - AI, RAG & Marketing Analytics Engineer",
+        title: "Madhu Dadi | AI Engineer, RAG & Analytics Consultant",
         description:
-          "Profile of Madhu Dadi, AI & analytics engineer. 9+ years exp across Novartis, redBus, and GroupM (WPP). Expert in LLM/RAG, FastAPI, Next.js, and GA4.",
+          "AI engineer and RAG consultant with 9+ years (Novartis, redBus, GroupM). Production AI agents, RAG systems, FastAPI/Next.js products, and marketing analytics.",
       },
-      heroTitle: "Build reliable AI agents & analytics infrastructure.",
+      heroTitle:
+        "Production AI Agents, RAG Systems and Analytics Infrastructure.",
       heroAvailabilityText: "Available for new projects",
       workedAtLabel: "Previously built systems at",
       directAnswer: {
         title: "Who is Madhu Dadi?",
         paragraphs: [
-          "Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India. He builds production LLM/RAG applications, AI agents, FastAPI/Next.js products, and analytics systems.",
-          "With 9+ years of experience across Novartis, redBus, GroupM (WPP), and Absolinsoft, he specializes in high-confidence data pipelines, secure workflow automation, and sophisticated search-intent architectures.",
+          "Madhu Dadi is an AI engineer and RAG & analytics consultant based in Visakhapatnam, India. He builds production AI agents, RAG systems, FastAPI/Next.js products, and marketing analytics infrastructure.",
+          "With 9+ years of experience across Novartis, redBus, GroupM (WPP), and Absolinsoft, he focuses on high-confidence retrieval systems, secure agent workflows, and analytics pipelines that connect engineering delivery to measurable business outcomes.",
         ],
       },
       faqItems: [
@@ -73,12 +74,16 @@ export const buildV2PageContentDefaults = (): PageContentSchema => {
     },
     profile: {
       seo: {
-        title: "Madhu Dadi - AI, RAG & Marketing Analytics Engineer",
+        title: "Professional Profile | Madhu Dadi — Experience, Stack & Credentials",
         description:
-          "Profile of Madhu Dadi, AI & analytics engineer. 9+ years exp across Novartis, redBus, and GroupM (WPP). Expert in LLM/RAG, FastAPI, Next.js, and GA4.",
+          "Detailed professional profile for Madhu Dadi: work history, core stack, education, and credentials. Services and case studies live under /services/ and /case-studies/.",
         canonicalPath: "/profile/",
       },
-      heroTitle: "Madhu Dadi",
+      heroTitle: "Professional profile & career history",
+      introParagraphs: [
+        "This page is the long-form professional record: employers, roles, stack groups, and proof links.",
+        "For buyer-oriented services and outcomes, start on the homepage or /services/. For tutorials and engineering write-ups, use the learning platform at /blog/.",
+      ],
       coreStackGroups: [
         {
           title: "ai",

@@ -25,14 +25,19 @@ export async function GET() {
       llmsTxt: `${siteUrl}/llms.txt`,
       sitemap: `${siteUrl}/sitemap.xml`,
       preferredCitation: `${siteUrl}/`,
+      // Proprietary convenience file for optional clients — not a Google ranking
+      // signal and not documented as a required discovery file by major AI platforms.
+      experimental: true,
+      purpose:
+        "Site-authored machine-readable profile experiment. Prefer HTML pages + sitemaps for discovery.",
     },
     person: {
       name: "Madhu Dadi",
-      headline: "Generative AI, RAG & Marketing Analytics Engineer",
+      headline: "AI Engineer, RAG & Analytics Consultant",
       url: `${siteUrl}/profile/`,
       location: "Visakhapatnam, India",
       summary:
-        "Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India. He has 9+ years of experience across Novartis, redBus, GroupM (WPP), and Absolinsoft, and builds production LLM/RAG applications, AI agents, FastAPI/Next.js products, and analytics systems.",
+        "Madhu Dadi is an AI engineer and RAG & analytics consultant based in Visakhapatnam, India. He has 9+ years of experience across Novartis, redBus, GroupM (WPP), and Absolinsoft, and builds production AI agents, RAG systems, FastAPI/Next.js products, and marketing analytics infrastructure.",
       primaryExpertise: [
         "LLM application development",
         "Retrieval-Augmented Generation",

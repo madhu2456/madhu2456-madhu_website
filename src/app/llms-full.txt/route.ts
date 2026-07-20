@@ -81,7 +81,8 @@ ${e.responsibilities ? e.responsibilities.map((r) => `- ${r}`).join("\n") : ""}`
 
   const body = `# Madhu Dadi (Full Profile)
 
-> Authoritative full-text profile for AI systems, search engines, recruiters, clients, and collaborators. This document serves as the canonical ground truth for Madhu Dadi's capabilities, case studies, and professional history.
+> Optional full-text profile for tools that voluntarily support llms.txt / llms-full.txt.
+> Not a Google ranking or AI Overview signal. Prefer the HTML site as canonical when formats disagree.
 
 Last updated: ${new Date(portfolioLastUpdatedAt).toISOString().split("T")[0]}
 

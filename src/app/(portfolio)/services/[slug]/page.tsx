@@ -112,6 +112,9 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
   };
   const intent = SERVICE_INTENT_BY_SLUG[service.slug];
   const prefillContactUrl = intent ? `/contact/#intent=${intent}` : "/contact/";
+  const relatedCaseStudies = sortedProjects.filter(
+    (project) => project.relatedServiceSlug === service.slug,
+  );
 
   const siteUrl = `${resolveSiteUrl()}/`;
   const serviceSchema = {
@@ -428,6 +431,39 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             </div>
           </div>
 
+          {/* Related case studies (hub → spoke commercial linking) */}
+          {relatedCaseStudies.length > 0 && (
+            <section className="mt-6 space-y-4">
+              <h2 className="text-xl font-bold tracking-tight border-b border-border/80 pb-2">
+                Related case studies
+              </h2>
+              <ul className="grid gap-4 md:grid-cols-2">
+                {relatedCaseStudies.map((project) => (
+                  <li key={project.slug}>
+                    <Link
+                      href={`/case-studies/${project.slug}/`}
+                      className="block h-full rounded-xl border border-border/50 bg-surface/20 p-5 transition-colors hover:border-primary/40"
+                    >
+                      <p className="text-xs font-semibold uppercase tracking-wider text-primary">
+                        {project.category || "Case study"}
+                      </p>
+                      <p className="mt-2 font-semibold text-foreground">
+                        {project.title}
+                      </p>
+                      <p className="mt-2 text-sm text-muted-foreground line-clamp-3">
+                        {project.impactSummary || project.tagline}
+                      </p>
+                      <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-primary">
+                        Read the case study
+                        <IconArrowRight className="h-4 w-4" />
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
           {/* FAQs Section */}
           {service.faqs && service.faqs.length > 0 && (
             <div className="mt-6 md:col-span-3 space-y-4">
@@ -457,27 +493,36 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-64 w-64 bg-primary/5 rounded-full blur-[100px] -z-10" />
             <div className="max-w-2xl mx-auto space-y-6">
               <h2 className="text-2xl md:text-3xl font-bold tracking-tight">
-                Let&apos;s build together
+                Discuss this service
               </h2>
               <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-                Send a summary of your requirements, current tech stack, and
-                goals. I respond with a structured initial proposal within 24
-                hours.
+                Send the problem statement, current stack, timeline, and desired
+                outcome. I reply within 24 hours with fit, constraints, and a
+                recommended next step—not a generic sales pitch.
               </p>
               <div className="pt-4 flex flex-col items-center gap-4">
                 <Link
                   href={prefillContactUrl}
                   className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 hover:scale-[1.02] hover:shadow-glow transition-all"
                 >
-                  Book {service.title.split(" ")[0]} project consultation
+                  Request consultation
                   <IconArrowRight className="h-4 w-4" />
                 </Link>
                 <div className="flex flex-wrap items-center justify-center gap-3 text-xs text-muted-foreground mt-2">
                   <Link
+                    href="/case-studies/"
+                    className="hover:text-primary transition-colors"
+                  >
+                    Case studies
+                  </Link>
+                  <span className="text-muted-foreground/30 select-none">
+                    |
+                  </span>
+                  <Link
                     href="/profile/"
                     className="hover:text-primary transition-colors"
                   >
-                    About Madhu Dadi (Profile)
+                    Professional profile
                   </Link>
                   <span className="text-muted-foreground/30 select-none">
                     |
@@ -486,7 +531,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                     href="/credentials/"
                     className="hover:text-primary transition-colors"
                   >
-                    Verified Credentials & Proof
+                    Verified credentials
                   </Link>
                 </div>
               </div>

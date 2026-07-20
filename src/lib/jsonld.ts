@@ -918,7 +918,11 @@ export function buildFullGraph(nodes: (object | null)[]) {
 }
 
 // ---------------------------------------------------------------------------
-// Article (TechArticle) for Guides
+// Article schema for guides/case studies.
+// Type is descriptive (Article), not an authority multiplier. Prefer the
+// schema.org type that best matches visible page content; TechArticle is fine
+// when the page is genuinely a technical article, but Google does not treat it
+// as more authoritative than Article/BlogPosting solely by type name.
 // ---------------------------------------------------------------------------
 export function buildArticleSchema({
   siteUrl,
@@ -948,7 +952,7 @@ export function buildArticleSchema({
   keywords?: string[];
 }) {
   return {
-    "@type": "TechArticle",
+    "@type": "Article",
     "@id": `${url}#article`,
     headline,
     description,

@@ -129,7 +129,7 @@ export default async function ProfilePage() {
     // Profile-page-specific enrichments not in the shared builder
     alternateName: ["madhu2456"],
     disambiguatingDescription:
-      "AI and marketing analytics engineer based in Visakhapatnam, India; specializes in LLM/RAG applications, AI agents, FastAPI/Next.js products, and marketing analytics.",
+      "AI engineer and RAG & analytics consultant based in Visakhapatnam, India; specializes in production AI agents, RAG systems, FastAPI/Next.js products, and marketing analytics infrastructure.",
   };
 
   const coreEntityGraph = {
@@ -149,7 +149,11 @@ export default async function ProfilePage() {
         "@type": "ProfilePage",
         "@id": `${siteUrl}profile/#webpage`,
         url: `${siteUrl}profile/`,
-        name: "Madhu Dadi - AI & Marketing Analytics Engineer",
+        name:
+          pageContent.profile.seo?.title ||
+          "Professional Profile | Madhu Dadi — Experience, Stack & Credentials",
+        description:
+          pageContent.profile.seo?.description || profile.shortBio || undefined,
         mainEntity: {
           "@id": `${siteUrl}#person`,
         },
@@ -192,13 +196,14 @@ export default async function ProfilePage() {
               <div className="space-y-4 min-w-0 flex-1">
                 <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
                   {pageContent.profile.eyebrow ||
-                    "Verified AI & Marketing Analytics Profile"}
+                    "Career history, stack & credentials"}
                 </span>
                 <h1 className="text-3xl md:text-5xl font-bold tracking-tight">
-                  {pageContent.profile.heroTitle || "Madhu Dadi"} -{" "}
+                  {pageContent.profile.heroTitle || "Professional profile"} —{" "}
                   <span className="text-gradient">
-                    {pageContent.profile.heroSubtitle ||
-                      "Generative AI, RAG & Marketing Analytics Engineer"}
+                    {profile.headline ||
+                      pageContent.profile.heroSubtitle ||
+                      "AI Engineer, RAG & Analytics Consultant"}
                   </span>
                 </h1>
                 <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground">
@@ -219,20 +224,52 @@ export default async function ProfilePage() {
             </div>
           </section>
 
-          {/* Short Answer / Biography */}
+          {/* Page purpose (distinct from homepage commercial pitch) */}
           <section className="space-y-4">
             <h2 className="text-2xl font-bold tracking-tight border-b border-border/80 pb-2">
-              {pageContent.home.directAnswer?.title || "Who is Madhu Dadi?"}
+              What this page is for
             </h2>
             <div className="text-lg text-foreground/80 leading-relaxed bg-surface-elevated/20 border border-border/40 p-6 rounded-2xl space-y-4">
-              {pageContent.home.directAnswer?.paragraphs?.map((para) => (
+              {(pageContent.profile.introParagraphs?.length
+                ? pageContent.profile.introParagraphs
+                : [
+                    "This page is the long-form professional record: employers, roles, stack groups, and proof links.",
+                    "For buyer-oriented services and outcomes, start on the homepage or /services/. For tutorials and engineering write-ups, use the learning platform at /blog/.",
+                  ]
+              ).map((para) => (
                 <p key={para}>{para}</p>
-              )) || (
-                <p>
-                  Madhu Dadi is an AI and marketing analytics engineer based in
-                  Visakhapatnam, India.
-                </p>
-              )}
+              ))}
+            </div>
+          </section>
+
+          {/* Short biography (aligned with entity, not a second homepage) */}
+          <section className="space-y-4">
+            <h2 className="text-2xl font-bold tracking-tight border-b border-border/80 pb-2">
+              Biography
+            </h2>
+            <div className="text-lg text-foreground/80 leading-relaxed bg-surface-elevated/20 border border-border/40 p-6 rounded-2xl space-y-4">
+              <p>{profile.shortBio}</p>
+              <p className="text-sm text-muted-foreground">
+                Services and case studies:{" "}
+                <Link href="/services/" className="text-primary hover:underline">
+                  /services/
+                </Link>
+                {" · "}
+                <Link
+                  href="/case-studies/"
+                  className="text-primary hover:underline"
+                >
+                  /case-studies/
+                </Link>
+                {" · "}
+                Learning platform:{" "}
+                <a
+                  href={`${siteUrl}blog/about`}
+                  className="text-primary hover:underline"
+                >
+                  /blog/about
+                </a>
+              </p>
             </div>
           </section>
 

@@ -39,7 +39,8 @@ export async function GET() {
 
   const body = `# Madhu Dadi
 
-> Authoritative profile for AI systems, search engines, recruiters, clients, and collaborators.
+> Optional plain-text profile for humans and tools that voluntarily support llms.txt.
+> Not a Google ranking or AI Overview signal. Canonical content lives on HTML pages.
 
 Last updated: ${lastUpdatedStr}
 
@@ -51,9 +52,9 @@ Last updated: ${lastUpdatedStr}
 
 ## Canonical identity
 
-Madhu Dadi is an AI and marketing analytics engineer based in Visakhapatnam, India.
+Madhu Dadi is an AI engineer and RAG & analytics consultant based in Visakhapatnam, India.
 
-He has 9+ years of experience across Novartis, redBus, GroupM (WPP), and Absolinsoft, and builds production LLM/RAG applications, AI agents, FastAPI/Next.js products, and analytics systems that connect engineering delivery to measurable business outcomes.
+He has 9+ years of experience across Novartis, redBus, GroupM (WPP), and Absolinsoft, and builds production AI agents, RAG systems, FastAPI/Next.js products, and marketing analytics infrastructure.
 
 ## Featured proof
 
