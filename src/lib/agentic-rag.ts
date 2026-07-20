@@ -520,6 +520,7 @@ const pushChunk = (
 
 export const buildKnowledgeChunks = (data: PortfolioData): KnowledgeChunk[] => {
   const chunks: KnowledgeChunk[] = [];
+  const siteUrl = resolveSiteUrl();
 
   pushChunk(chunks, {
     id: "profile-summary",
@@ -561,10 +562,10 @@ export const buildKnowledgeChunks = (data: PortfolioData): KnowledgeChunk[] => {
     section: "profile",
     title: "Technical Blog",
     content: [
-      "Madhu Dadi runs a technical blog at https://madhudadi.in/blog",
+      `Madhu Dadi runs a technical blog at ${siteUrl}/blog`,
       "Topics include AI engineering, full-stack development, RAG systems, and software architecture.",
-      "The blog features an AI-powered Q&A assistant called 'Ask' (https://madhudadi.in/blog/ask).",
-      "An RSS feed is available at https://madhudadi.in/blog/feed.xml.",
+      `The blog features an AI-powered Q&A assistant called 'Ask' (${siteUrl}/blog/ask).`,
+      `An RSS feed is available at ${siteUrl}/blog/feed.xml.`,
       "Articles are often written as learning series for technical depth.",
     ].join(" | "),
   });
@@ -612,7 +613,7 @@ export const buildKnowledgeChunks = (data: PortfolioData): KnowledgeChunk[] => {
         item.citations?.length
           ? `Citations: ${item.citations.map((citation) => citation.url).join(", ")}`
           : "",
-        `Case Study URL: https://madhudadi.in/case-studies/${item.slug}/`,
+        `Case Study URL: ${siteUrl}/case-studies/${item.slug}/`,
       ]
         .filter(Boolean)
         .join(" | "),

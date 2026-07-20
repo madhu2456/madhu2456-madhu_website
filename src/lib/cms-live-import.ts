@@ -12,6 +12,7 @@ import type {
   SkillItem,
   Technology,
 } from "@/lib/portfolio-data";
+import { resolveSiteUrl } from "@/lib/site-url";
 
 type RemoteProjectLink = {
   label?: unknown;
@@ -128,7 +129,7 @@ export type LiveImportResult = {
   importedAt: string;
 };
 
-const DEFAULT_SOURCE_URL = "https://madhudadi.in";
+const DEFAULT_SOURCE_URL = resolveSiteUrl();
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null && !Array.isArray(value);

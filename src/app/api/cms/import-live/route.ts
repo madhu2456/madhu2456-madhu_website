@@ -69,7 +69,7 @@ const toSourceUrl = (value?: string) => {
   const rawUrl = (
     value?.trim() ||
     process.env.CMS_IMPORT_SOURCE_URL ||
-    "https://madhudadi.in"
+    resolveSiteUrl()
   ).replace(/\/+$/, "");
 
   try {
@@ -104,7 +104,7 @@ const toSourceUrl = (value?: string) => {
 
     return rawUrl;
   } catch (_error) {
-    return process.env.CMS_IMPORT_SOURCE_URL || "https://madhudadi.in";
+    return process.env.CMS_IMPORT_SOURCE_URL || resolveSiteUrl();
   }
 };
 

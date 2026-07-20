@@ -248,14 +248,14 @@ export default async function ProfilePage() {
             </p>
             <div className="flex flex-wrap gap-3">
               <a
-                href="https://madhudadi.in/blog/about"
+                href={`${siteUrl}blog/about`}
                 className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-xs font-semibold text-primary-foreground transition-all hover:scale-[1.02]"
               >
                 About the learning platform
                 <IconExternalLink className="h-3.5 w-3.5" />
               </a>
               <a
-                href="https://madhudadi.in/blog/posts"
+                href={`${siteUrl}blog/posts`}
                 className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/30 px-5 py-2.5 text-xs font-semibold text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground"
               >
                 Explore technical tutorials

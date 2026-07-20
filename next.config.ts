@@ -36,6 +36,7 @@ const nextConfig: NextConfig = {
   // Ensure all URLs have a trailing slash to avoid duplicate content SEO issues.
   trailingSlash: true,
   poweredByHeader: false,
+  reactStrictMode: true,
 
   experimental: {
     globalNotFound: true,
