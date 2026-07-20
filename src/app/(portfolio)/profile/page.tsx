@@ -251,7 +251,10 @@ export default async function ProfilePage() {
               <p>{profile.shortBio}</p>
               <p className="text-sm text-muted-foreground">
                 Services and case studies:{" "}
-                <Link href="/services/" className="text-primary hover:underline">
+                <Link
+                  href="/services/"
+                  className="text-primary hover:underline"
+                >
                   /services/
                 </Link>
                 {" · "}

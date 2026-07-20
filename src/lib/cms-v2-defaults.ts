@@ -74,7 +74,8 @@ export const buildV2PageContentDefaults = (): PageContentSchema => {
     },
     profile: {
       seo: {
-        title: "Professional Profile | Madhu Dadi — Experience, Stack & Credentials",
+        title:
+          "Professional Profile | Madhu Dadi — Experience, Stack & Credentials",
         description:
           "Detailed professional profile for Madhu Dadi: work history, core stack, education, and credentials. Services and case studies live under /services/ and /case-studies/.",
         canonicalPath: "/profile/",
