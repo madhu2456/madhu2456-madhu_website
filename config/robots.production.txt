@@ -12,6 +12,10 @@ Disallow: /api/
 # Blog Protections (Consolidated)
 Disallow: /blog/admin/
 Disallow: /blog/api/v1/admin/
+Disallow: /blog/leaderboard
+Disallow: /blog/leaderboard/
+Disallow: /blog/profile
+Disallow: /blog/profile/
 # Shared/Auth Protections
 Disallow: /blog/api/v1/auth/
 Disallow: /blog/api/v1/payments/

@@ -521,6 +521,28 @@ function Contact({ profile }: { profile: Profile }) {
     event.preventDefault();
     const form = event.currentTarget;
     const formData = new FormData(form);
+    // Structured discovery fields → one message body for the existing API schema.
+    const problem = String(formData.get("problem") ?? "").trim();
+    const stack = String(formData.get("stack") ?? "").trim();
+    const timeline = String(formData.get("timeline") ?? "").trim();
+    const outcome = String(formData.get("outcome") ?? "").trim();
+    const extra = String(formData.get("message") ?? "").trim();
+    const sections = [
+      problem && `Problem statement:\n${problem}`,
+      stack && `Current stack:\n${stack}`,
+      timeline && `Timeline:\n${timeline}`,
+      outcome && `Desired business outcome:\n${outcome}`,
+      extra && `Additional context:\n${extra}`,
+    ].filter(Boolean);
+    formData.set(
+      "message",
+      sections.join("\n\n") ||
+        "Contact form submitted without additional details.",
+    );
+    formData.delete("problem");
+    formData.delete("stack");
+    formData.delete("timeline");
+    formData.delete("outcome");
     setStatus(null);
     setFieldErrors({});
 
@@ -557,10 +579,8 @@ function Contact({ profile }: { profile: Profile }) {
       <div className="grid gap-10 lg:grid-cols-2">
         <div className="space-y-6">
           <p className="text-lg leading-relaxed text-muted-foreground">
-            Have an AI, RAG, analytics, or full-stack product problem? Send me
-            the problem statement, current stack, timeline, and desired business
-            outcome. I will reply within 24 hours with whether I can help and
-            what the best next step should be.
+            Have an AI, RAG, analytics, or full-stack product problem? Fill in
+            the fields below — I reply within 24 hours with fit and next steps.
           </p>
           <ul className="space-y-3 text-sm">
             <ContactRow
@@ -627,13 +647,38 @@ function Contact({ profile }: { profile: Profile }) {
             error={fieldErrors.subject}
           />
           <FormField
-            label="Message"
+            label="Problem statement"
+            name="problem"
+            textarea
+            placeholder="What are you trying to ship or fix?"
+          />
+          <FormField
+            label="Current stack"
+            name="stack"
+            placeholder="e.g. Next.js, FastAPI, Postgres, existing LLM provider"
+          />
+          <FormField
+            label="Timeline"
+            name="timeline"
+            placeholder="e.g. 4–6 weeks, discovery this month"
+          />
+          <FormField
+            label="Desired business outcome"
+            name="outcome"
+            placeholder="e.g. reduce support tickets, ship RAG in production"
+          />
+          <FormField
+            label="Additional context"
             name="message"
             textarea
             required
             defaultValue={prefill.message}
             error={fieldErrors.message}
           />
+          <p className="text-xs text-muted-foreground">
+            Typical reply within{" "}
+            <strong className="text-foreground">24 hours</strong>.
+          </p>
           <button
             type="submit"
             disabled={isPending || submitted}

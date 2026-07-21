@@ -19,6 +19,8 @@ type FormFieldProps = {
   rows?: number;
   /** HTML autocomplete attribute for form fields. */
   autoComplete?: string;
+  /** Optional placeholder text. */
+  placeholder?: string;
   /** Per-field validation error message rendered with aria-invalid/aria-describedby. */
   error?: string;
 } & (
@@ -38,6 +40,7 @@ export function FormField({
   value,
   onChange,
   autoComplete,
+  placeholder,
   error,
 }: FormFieldProps) {
   const id = `${idPrefix}-${name}`;
@@ -71,6 +74,7 @@ export function FormField({
             rows={rows}
             maxLength={5000}
             className={className}
+            placeholder={placeholder}
             {...ariaProps}
             {...(value !== undefined ? { value } : { defaultValue })}
             onChange={onChange ? (e) => onChange(e.target.value) : undefined}
@@ -85,6 +89,7 @@ export function FormField({
             maxLength={name === "subject" ? 300 : 200}
             className={className}
             autoComplete={autoComplete}
+            placeholder={placeholder}
             {...ariaProps}
             {...(value !== undefined ? { value } : { defaultValue })}
             onChange={onChange ? (e) => onChange(e.target.value) : undefined}

@@ -69,7 +69,32 @@ export default async function PrivacyPage() {
           </h1>
 
           <p className="text-sm text-muted-foreground">
-            Last updated: June 2026
+            Last updated: July 2026
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            This policy covers the portfolio site at{" "}
+            <a
+              href="https://madhudadi.in/"
+              className="text-primary hover:underline"
+            >
+              madhudadi.in
+            </a>
+            . The technical learning platform at{" "}
+            <a
+              href="https://madhudadi.in/blog"
+              className="text-primary hover:underline"
+            >
+              madhudadi.in/blog
+            </a>{" "}
+            has a separate{" "}
+            <a
+              href="https://madhudadi.in/blog/privacy-policy"
+              className="text-primary hover:underline"
+            >
+              Privacy Policy
+            </a>{" "}
+            for accounts, quizzes, and payments. Keep both dates in mind when
+            reviewing data practices.
           </p>
 
           <section className="space-y-4">
