@@ -137,10 +137,16 @@ export async function generateMetadata({
     };
   }
 
-  const title =
-    project.slug === "adticks"
-      ? "Adticks AI Visibility Case Study | Madhu Dadi"
-      : `${project.title} Case Study | Madhu Dadi`;
+  // Phase 2 keyword-led titles (Semrush plan); keep brand suffix for entity.
+  const titleBySlug: Record<string, string> = {
+    adticks: "Adticks — SEO & AI Visibility SaaS",
+    "technical-blog": "Production RAG on a Technical Blog",
+    "udemy-enroller-fastapi": "Udemy Enroller — FastAPI Async at Scale",
+  };
+  const baseTitle = titleBySlug[project.slug] || `${project.title} Case Study`;
+  const title = baseTitle.includes("Madhu Dadi")
+    ? baseTitle
+    : `${baseTitle} | Madhu Dadi`;
   const description = toDescription(project.tagline, project.impactSummary);
   const url = `/case-studies/${slug}/`;
 

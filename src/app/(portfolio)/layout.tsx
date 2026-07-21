@@ -10,6 +10,7 @@ import { WebVitals } from "@/components/WebVitals";
 import { geistMono, inter } from "@/lib/fonts";
 
 import { getPortfolioData } from "@/lib/portfolio-data";
+import { siteLanguageAlternates } from "@/lib/seo/hreflang";
 import "../globals.css";
 import { resolveSiteUrl } from "@/lib/site-url";
 
@@ -125,14 +126,13 @@ export async function generateMetadata(): Promise<Metadata> {
       },
     },
     alternates: {
-      languages: {
-        "x-default": siteUrl,
-      },
+      // en-IN primary (India demand), en + x-default fallbacks
+      languages: siteLanguageAlternates("/"),
       types: {
         "application/rss+xml": [
           {
             url: `${siteUrl}blog/feed.xml`,
-            title: "MadhuDadi Blog - RSS Feed",
+            title: "Madhu Dadi Blog - RSS Feed",
           },
         ],
       },

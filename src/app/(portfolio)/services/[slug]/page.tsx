@@ -44,15 +44,30 @@ export async function generateMetadata({
   const siteUrl = `${resolveSiteUrl()}/`;
   const canonicalUrl = `${siteUrl}services/${slug}/`;
 
+  // India-qualified titles where the plan targets IN commercial intent.
+  const indiaTitles: Record<string, string> = {
+    "rag-consultant-india": "RAG Consultant in India",
+    "ai-llm-application-development": "LLM Developer & Consultant in India",
+    "marketing-analytics-consultant": "Marketing Analytics Consultant in India",
+    "ai-agent-development": "AI Agent Development Consultant in India",
+    "ga4-bigquery-campaign-analytics":
+      "GA4 & BigQuery Analytics Consultant India",
+    "full-stack-ai-product-development":
+      "Full-Stack AI Product Development India",
+  };
   const rawTitle =
     service.seoTitle ||
+    indiaTitles[slug] ||
     (service.title.length > 45
       ? service.title
       : `${service.title} | Madhu Dadi`);
   const title = rawTitle.includes("Madhu Dadi")
     ? rawTitle
     : `${rawTitle} | Madhu Dadi`;
-  const description = service.shortDescription || service.fullDescription;
+  const description =
+    service.seoDescription ||
+    service.shortDescription ||
+    service.fullDescription;
   const image = `${siteUrl}opengraph-image/`;
 
   return {

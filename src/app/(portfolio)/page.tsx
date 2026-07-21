@@ -1,35 +1,29 @@
 import type { Metadata } from "next";
 import PortfolioContent from "@/components/PortfolioContent";
 import { SeoStructuredData } from "@/components/SeoStructuredData";
-
+import { siteLanguageAlternates } from "@/lib/seo/hreflang";
 import { resolveSiteUrl } from "@/lib/site-url";
 
 const siteUrl = `${resolveSiteUrl()}/`;
 
+/** ≤60 chars, brand + commercial intent (Semrush plan Phase 2). */
+const HOME_TITLE = "Madhu Dadi – AI Consultant & Analytics Leader";
+const HOME_DESCRIPTION =
+  "AI consultant and marketing analytics leader with 9+ years (Novartis, redBus, GroupM). Production RAG, AI agents, FastAPI/Next.js. Hire for India or remote.";
+
 export const metadata: Metadata = {
-  // DG-06 C: dual Engineer & Consultant brand (owner decision 2026-07-11).
-  // AUDIT DECISION DR-02 (2026-07-19): Owner chose Option C — KEEP DUAL.
-  // "Hire me" CTAs (full-time angle) and "Consultant" title/keywords (services
-  // angle) intentionally coexist. Both funnels routed via /contact/ and
-  // /contact/#intent=full-time hash. FAQ explicitly states "freelance
-  // consulting, part-time engagements, and full-time roles". Do NOT re-flag
-  // CTA hierarchy / messaging tension in future audits.
-  // Homepage: brand-first title. All other routes use "Topic | Madhu Dadi".
-  title: "Madhu Dadi | AI Engineer, RAG & Analytics Consultant",
-  description:
-    "AI and marketing analytics engineer with 9+ years (Novartis, redBus, GroupM). Production LLM/RAG apps, AI agents, FastAPI, Next.js, and analytics systems.",
+  // DG-06 C / DR-02: dual full-time + consulting funnels coexist via /contact/.
+  title: HOME_TITLE,
+  description: HOME_DESCRIPTION,
   alternates: {
     canonical: siteUrl,
-    languages: {
-      "x-default": siteUrl,
-    },
+    languages: siteLanguageAlternates("/"),
   },
   openGraph: {
     title: {
-      absolute: "Madhu Dadi | AI Engineer, RAG & Analytics Consultant",
+      absolute: HOME_TITLE,
     },
-    description:
-      "Production LLM/RAG apps, AI agents, FastAPI/Next.js products, and marketing analytics systems.",
+    description: HOME_DESCRIPTION,
     url: siteUrl,
     siteName: "Madhu Dadi",
     type: "website",
@@ -38,7 +32,7 @@ export const metadata: Metadata = {
         url: `${siteUrl}opengraph-image/`,
         width: 1200,
         height: 630,
-        alt: "Madhu Dadi | AI Engineer, RAG & Analytics Consultant",
+        alt: HOME_TITLE,
       },
     ],
   },

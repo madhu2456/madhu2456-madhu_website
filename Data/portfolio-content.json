@@ -3,8 +3,8 @@
   "pageContent": {
     "home": {
       "seo": {
-        "title": "Madhu Dadi | AI Engineer, RAG & Analytics Consultant",
-        "description": "AI engineer and RAG consultant with 9+ years (Novartis, redBus, GroupM). Production AI agents, RAG systems, FastAPI/Next.js products, and marketing analytics."
+        "title": "Madhu Dadi – AI Consultant & Analytics Leader",
+        "description": "AI consultant and marketing analytics leader with 9+ years (Novartis, redBus, GroupM). Production RAG, AI agents, FastAPI/Next.js. Hire for India or remote."
       },
       "heroTitle": "Production AI agents, RAG systems & analytics infrastructure",
       "primaryCta": {
@@ -106,7 +106,7 @@
     },
     "servicesIndex": {
       "seo": {
-        "title": "AI, RAG, AI Agents & Analytics Services | Madhu Dadi",
+        "title": "AI, RAG & Analytics Services | Madhu Dadi",
         "description": "Consulting and implementation: production RAG systems, AI agents, generative AI apps, full-stack AI products, marketing analytics, and GA4/BigQuery measurement.",
         "canonicalPath": "/services/"
       },
@@ -314,7 +314,7 @@
     "updatedAt": "2026-07-20T14:51:29Z"
   },
   "siteSettings": {
-    "siteTitle": "Madhu Dadi | AI Engineer, RAG & Analytics Consultant",
+    "siteTitle": "Madhu Dadi – AI Consultant & Analytics Leader",
     "siteDescription": "Madhu Dadi is an AI engineer and RAG & analytics consultant based in Visakhapatnam, India, with professional experience in Hyderabad, Bengaluru, and Gurugram. He has 9+ years of experience across Novartis, redBus, GroupM (WPP), and Absolinsoft, and builds production AI agents, RAG systems, FastAPI/Next.js products, and marketing analytics infrastructure.",
     "siteKeywords": [
       "Madhu Dadi",
@@ -1375,8 +1375,8 @@
       "featured": true,
       "order": 1,
       "updatedAt": "2026-07-20T14:51:29Z",
-      "seoTitle": "Generative AI & LLM Application Development | Madhu Dadi",
-      "seoDescription": "Production-grade generative AI applications, bespoke custom chat interfaces, and LLM integrations built for reliability. Not just happy-path demos.",
+      "seoTitle": "LLM Developer & Consultant in India | Madhu Dadi",
+      "seoDescription": "LLM developer and consultant in India for production generative AI apps, structured outputs, guardrails, and FastAPI/Next.js delivery.",
       "heroTitle": "Generative AI & LLM Application Development",
       "heroEyebrow": "Service",
       "directAnswerParagraphs": [
@@ -1452,8 +1452,8 @@
       "featured": true,
       "order": 2,
       "updatedAt": "2026-07-20T14:51:29Z",
-      "seoTitle": "RAG development consultant | Madhu Dadi",
-      "seoDescription": "Hire a specialized RAG consultant in India to build high-precision vector search pipelines, enterprise LLM applications, and semantic retrieval systems.",
+      "seoTitle": "RAG Consultant in India | Madhu Dadi",
+      "seoDescription": "Hire a RAG consultant in India for production retrieval systems: hybrid search, reranking, citations, and evals. Built for real product latency and cost.",
       "heroTitle": "RAG Consultant & AI Search Engineer",
       "heroEyebrow": "ENTERPRISE RETRIEVAL-AUGMENTED GENERATION",
       "directAnswerParagraphs": [
@@ -1541,7 +1541,7 @@
       "featured": true,
       "order": 3,
       "updatedAt": "2026-07-20T14:51:29Z",
-      "seoTitle": "AI workflow automation consultant | Madhu Dadi",
+      "seoTitle": "AI Agent Development Consultant in India | Madhu Dadi",
       "faqs": [
         {
           "question": "How do you prevent agents from getting stuck in infinite loops?",
@@ -1567,7 +1567,8 @@
           "question": "How do you test and evaluate AI Agents for reliability?",
           "answer": "I implement strict evaluation frameworks (evals) that programmatically test agents against hundreds of edge cases, ensuring tool-calling accuracy and adherence to safety guardrails."
         }
-      ]
+      ],
+      "seoDescription": "AI agent development consultant: tool calling, multi-agent workflows, guardrails, and production telemetry for business tasks."
     },
     {
       "title": "Marketing Analytics & Decision Intelligence",
@@ -1608,7 +1609,7 @@
       "featured": true,
       "order": 4,
       "updatedAt": "2026-07-20T14:51:29Z",
-      "seoTitle": "GA4 BigQuery analytics consultant | Madhu Dadi",
+      "seoTitle": "Marketing Analytics Consultant in India | Madhu Dadi",
       "audience": [
         "Marketing teams mapping complex customer journeys",
         "Growth teams needing multi-touch attribution models",
@@ -1688,7 +1689,8 @@
           "question": "Do you integrate marketing data with CRM systems?",
           "answer": "Absolutely. I routinely build pipelines that sync ad spend and behavioral data directly into Salesforce, HubSpot, or custom CRMs to calculate true ROI and Customer Lifetime Value."
         }
-      ]
+      ],
+      "seoDescription": "Marketing analytics consultant in India: GA4, BigQuery, attribution, and decision systems that connect engineering delivery to revenue."
     },
     {
       "title": "GA4 & BigQuery Analytics Consultant for Campaign Measurement",

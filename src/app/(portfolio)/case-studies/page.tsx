@@ -14,25 +14,27 @@ import {
 } from "@/lib/image-source";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { getDistinctProjectTagline } from "@/lib/project-display";
+import { siteLanguageAlternates } from "@/lib/seo/hreflang";
 import { resolveSiteUrl } from "@/lib/site-url";
 
+const CASE_STUDIES_TITLE = "AI, RAG & Analytics Case Studies";
 const CASE_STUDIES_DESCRIPTION =
-  "Selected case studies by Madhu Dadi across AI visibility, RAG-powered learning, automation, marketing analytics, and full-stack engineering.";
+  "Case studies by Madhu Dadi: Adticks AI visibility, production RAG on a technical blog, and FastAPI async automation — stack, architecture, and outcomes.";
 
 const getSiteUrl = () => {
   return `${resolveSiteUrl()}/`;
 };
 
 export const metadata: Metadata = {
-  // Pattern: Primary keyword(s) | Madhu Dadi
-  title: "AI, RAG & Analytics Case Studies | Madhu Dadi",
+  title: CASE_STUDIES_TITLE,
   description: CASE_STUDIES_DESCRIPTION,
   alternates: {
     canonical: `${getSiteUrl()}case-studies/`,
+    languages: siteLanguageAlternates("/case-studies/"),
   },
   openGraph: {
     title: {
-      absolute: "AI, RAG & Analytics Case Studies | Madhu Dadi",
+      absolute: `${CASE_STUDIES_TITLE} | Madhu Dadi`,
     },
     description: CASE_STUDIES_DESCRIPTION,
     url: `${getSiteUrl()}case-studies/`,
