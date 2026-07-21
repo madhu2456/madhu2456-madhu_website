@@ -591,10 +591,8 @@ export function buildProfilePageSchema({
         url: profileImageUrl,
       },
     }),
-    speakable: {
-      "@type": "SpeakableSpecification",
-      cssSelector: ["#main-content h1", "#main-content h2", "#main-content p"],
-    },
+    // speakable omitted: Google Speakable is BETA / news-only (not eligible for
+    // a personal engineering portfolio). Not used for AI Overviews.
   };
 }
 

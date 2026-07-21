@@ -65,7 +65,8 @@ export default async function ServicesHubPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <JsonLdScript data={breadcrumbSchema} />
-      <SeoStructuredData nodes={["ServicesList", "HowToHire"]} />
+      {/* HowTo JSON-LD omitted: HowTo rich results retired (Google, Sept 2023). */}
+      <SeoStructuredData nodes={["ServicesList"]} />
       <Header profile={profile} navigationItems={sortedNavigationItems} />
 
       <main id="main-content" className="flex-1 px-6 py-28 bg-background/50">

@@ -1,90 +1,102 @@
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { resolveSiteUrl } from "@/lib/site-url";
 
+/**
+ * Root /llms.txt per https://llmstxt.org/
+ * Optional convenience for agents that voluntarily support the format.
+ * Not a Google AI Overviews / ranking signal (Search Central, 2026).
+ */
 export async function GET() {
   const {
     sortedCertifications,
     portfolioLastUpdatedAt,
     sortedProjects,
+    sortedServices,
     pageContent,
   } = await getPortfolioData();
-  const siteUrl = resolveSiteUrl();
+  const siteUrl = resolveSiteUrl().replace(/\/$/, "");
   const lastUpdatedStr = portfolioLastUpdatedAt
     ? new Date(portfolioLastUpdatedAt).toISOString().split("T")[0]
     : "2026-06-06";
-  const certificationLines = sortedCertifications
-    .map((certification) => {
-      const parts = [
-        certification.name,
-        certification.issuer ? `issuer: ${certification.issuer}` : null,
-        certification.issueDate ? `issued: ${certification.issueDate}` : null,
-        certification.credentialUrl
-          ? `verify: ${certification.credentialUrl}`
-          : null,
-      ].filter(Boolean);
 
-      return `- ${parts.join(" | ")}`;
-    })
-    .join("\n");
-
-  const featuredProof = sortedProjects
+  const serviceLines = sortedServices
     .map(
-      (p) => `- [${p.title}](${siteUrl}/case-studies/${p.slug}/): ${p.tagline}`,
+      (s) =>
+        `- [${s.title}](${siteUrl}/services/${s.slug}/): ${s.shortDescription || s.title}`,
     )
     .join("\n");
 
-  const faqs = (pageContent?.home?.faqItems || [])
-    .map((item) => `Q: ${item.question}\nA: ${item.answer}`)
-    .join("\n\n");
+  const caseStudyLines = sortedProjects
+    .map(
+      (p) =>
+        `- [${p.title}](${siteUrl}/case-studies/${p.slug}/): ${p.tagline || p.impactSummary || p.title}`,
+    )
+    .join("\n");
+
+  const certificationLines = sortedCertifications
+    .slice(0, 8)
+    .map((c) => {
+      const note = [c.issuer, c.issueDate].filter(Boolean).join(", ");
+      return `- [${c.name}](${c.credentialUrl || `${siteUrl}/credentials/`}): ${note || "Credential"}`;
+    })
+    .join("\n");
+
+  const faqLines = (pageContent?.home?.faqItems || [])
+    .slice(0, 6)
+    .map((item) => `- ${item.question}: ${item.answer}`)
+    .join("\n");
 
   const body = `# Madhu Dadi
 
-> Optional plain-text profile for humans and tools that voluntarily support llms.txt.
-> Not a Google ranking or AI Overview signal. Canonical content lives on HTML pages.
+> AI engineer and RAG & analytics consultant (Visakhapatnam, India). Optional llms.txt for tools that support the format. Canonical content is the HTML site — not a Google ranking or AI Overview file.
+
+Madhu Dadi builds production AI agents, RAG systems, FastAPI/Next.js products, and marketing analytics infrastructure, with 9+ years across Novartis, redBus, GroupM (WPP), and Absolinsoft.
 
 Last updated: ${lastUpdatedStr}
 
-- [Canonical URL](${siteUrl}/): Canonical identity.
-- [Profile URL](${siteUrl}/profile/): Profile page.
-- [Services](${siteUrl}/services/): AI, RAG, agents & analytics services.
-- [Case studies](${siteUrl}/case-studies/): Selected production work.
-- [AI consultant in India](${siteUrl}/ai-consultant-india/): Visakhapatnam, Hyderabad & remote delivery.
-- [Contact](${siteUrl}/contact/): Hire / project inquiry.
-- [Wikidata](https://www.wikidata.org/wiki/Q139807441): Wikidata entity.
-- [Learning platform about page](${siteUrl}/blog/about): Learning platform about page.
-- [Blog llms.txt](${siteUrl}/blog/llms.txt): Blog-scoped machine-readable index.
-- Preferred Citation: [Madhu Dadi](${siteUrl}/)
+## Primary pages
 
-## Canonical identity
+- [Home](${siteUrl}/): Identity, services overview, case studies, FAQ, contact
+- [Profile](${siteUrl}/profile/): Career history, stack, credentials
+- [Services](${siteUrl}/services/): AI, RAG, agents, analytics consulting
+- [Case studies](${siteUrl}/case-studies/): Production systems and architecture write-ups
+- [AI consultant in India](${siteUrl}/ai-consultant-india/): Visakhapatnam, Hyderabad, remote delivery
+- [Contact](${siteUrl}/contact/): Project inquiries (typical reply within 24 hours)
+- [Credentials](${siteUrl}/credentials/): Certifications and public proof
+- [Resume PDF](${siteUrl}/resume.pdf): Downloadable résumé
 
-Madhu Dadi is an AI engineer and RAG & analytics consultant based in Visakhapatnam, India.
+## Services
 
-He has 9+ years of experience across Novartis, redBus, GroupM (WPP), and Absolinsoft, and builds production AI agents, RAG systems, FastAPI/Next.js products, and marketing analytics infrastructure.
+${serviceLines || `- [Services hub](${siteUrl}/services/): Consulting and implementation`}
 
-## Featured proof
+## Case studies
 
-${featuredProof}
+${caseStudyLines || `- [Case studies hub](${siteUrl}/case-studies/): Selected work`}
 
-## Frequently asked questions
+## Learning platform (blog)
 
-${faqs}
-
-## Technical learning platform
-
-Madhu Dadi also maintains an AI, Python, and analytics learning platform with production-informed tutorials, guided learning paths, projects, and a source-grounded AI assistant.
-
-- [About the learning platform](${siteUrl}/blog/about): AI, Python, and analytics learning platform about page.
-- [Technical tutorials](${siteUrl}/blog/posts): Production-informed tutorials.
-- [Hands-on projects](${siteUrl}/blog/projects): Guided learning paths and projects.
-- [AI assistant](${siteUrl}/blog/ask): Source-grounded AI assistant.
+- [Blog home](${siteUrl}/blog): AI, Python, analytics tutorials
+- [Posts](${siteUrl}/blog/posts): Technical articles
+- [About the learning platform](${siteUrl}/blog/about): Platform overview
+- [Ask AI](${siteUrl}/blog/ask): Source-grounded assistant over blog content
+- [Blog llms.txt](${siteUrl}/blog/llms.txt): Blog-scoped file list
 
 ## Certifications
 
-${certificationLines}
+${certificationLines || `- [Credentials](${siteUrl}/credentials/): Full list`}
+
+## FAQ (visible on homepage)
+
+${faqLines || "- See the FAQ section on the homepage for current questions and answers."}
 
 ## Optional
 
-- [Full Profile](${siteUrl}/llms-full.txt): Detailed biography, full services, and comprehensive case study breakdowns.
+- [llms-full.txt](${siteUrl}/llms-full.txt): Longer biography and service detail
+- [ai-profile.json](${siteUrl}/ai-profile.json): Site experiment (not an industry standard)
+- [Wikidata](https://www.wikidata.org/wiki/Q139807441): Entity page
+- [Privacy (portfolio)](${siteUrl}/privacy/): Portfolio privacy policy
+- [Privacy (blog)](${siteUrl}/blog/privacy-policy): Learning platform privacy
+- [Terms (blog)](${siteUrl}/blog/terms): Learning platform terms
 `;
 
   return new Response(body, {

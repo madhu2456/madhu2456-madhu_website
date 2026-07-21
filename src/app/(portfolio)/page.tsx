@@ -55,9 +55,7 @@ export default async function Home() {
           "Occupation",
           "WebSite",
           "WebPage",
-          "ProfilePage",
           "Breadcrumb",
-          "FAQ",
         ]}
       />
       <PortfolioContent />

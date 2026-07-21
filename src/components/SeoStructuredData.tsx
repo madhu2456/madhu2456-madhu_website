@@ -166,14 +166,8 @@ export async function SeoStructuredData({
           dateModified: dateModified,
           isPartOf: { "@id": `${siteUrl}#website` },
           about: { "@id": `${siteUrl}#person` },
-          speakable: {
-            "@type": "SpeakableSpecification",
-            cssSelector: [
-              "#main-content h1",
-              "#main-content h2",
-              "#main-content p",
-            ],
-          },
+          // speakable omitted: Google BETA is news-content / Assistant only —
+          // not an AI Overview selector (Search Central, 2026).
         }
       : null,
     includeNode("ProjectsList")

@@ -1,5 +1,5 @@
 # MadhuDadi Master Robots.txt — Consolidated (Blog & Portfolio)
-# Last Updated: 2026-07-09
+# Last Updated: 2026-07-21
 # Production deploy source: madhudadi.in/blog_platform/nginx/robots.txt → /opt/madhudadi-blog/nginx/robots.txt
 # This file mirrors the blog nginx robots for local dev / CI (see docs/seo-source-of-truth.md)
 # Policy: allow traditional + AI search/citation crawlers; disallow model-training crawlers.
@@ -12,10 +12,8 @@ Disallow: /api/
 # Blog Protections (Consolidated)
 Disallow: /blog/admin/
 Disallow: /blog/api/v1/admin/
-Disallow: /blog/leaderboard
-Disallow: /blog/leaderboard/
-Disallow: /blog/profile
-Disallow: /blog/profile/
+# Leaderboard + /blog/profile: de-index via X-Robots-Tag noindex (blog next.config),
+# not robots Disallow (Google: disallow ≠ de-index).
 # Shared/Auth Protections
 Disallow: /blog/api/v1/auth/
 Disallow: /blog/api/v1/payments/
@@ -43,6 +41,7 @@ User-agent: Meta-ExternalAgent
 Disallow: /
 
 # ── AI search, citation, previews, and user-triggered fetchers — ALLOW ─────
+# Explicit allow-list (independent of GPTBot/ClaudeBot training opt-out above).
 User-agent: OAI-SearchBot
 User-agent: ChatGPT-User
 User-agent: PerplexityBot
@@ -55,6 +54,7 @@ User-agent: BraveBot
 User-agent: YouBot
 User-agent: facebookexternalhit
 User-agent: Meta-ExternalFetcher
+Allow: /
 Allow: /blog/api/og
 Allow: /blog
 Allow: /blog/posts
