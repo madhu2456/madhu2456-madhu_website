@@ -140,10 +140,12 @@ test.describe("No-JS crawler visibility", () => {
     await page.goto("/", { waitUntil: "domcontentloaded" });
 
     await expect(page.locator("main#main-content")).toHaveCount(1);
+    // H1 is the value prop only (brand lives in logo/title); keep legacy
+    // variants so older CMS content still passes if temporarily restored.
     await expect(
       page.getByRole("heading", {
         level: 1,
-        name: /Madhu Dadi|Build reliable AI agents/i,
+        name: /Production AI agents|Madhu Dadi|Build reliable AI agents/i,
       }),
     ).toBeVisible();
     await expect(page.getByText("Who is Madhu Dadi?")).toBeVisible();
