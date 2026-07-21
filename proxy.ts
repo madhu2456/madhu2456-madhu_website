@@ -20,44 +20,19 @@ export function proxy(request: NextRequest) {
     }
   }
 
-  // Edge-safe nonce (no Node Buffer — Buffer crashes Edge and can drop CSP entirely).
+  // CSP is emitted by next.config.ts headers() — not here.
+  // (Next 16.2 App Router does not reliably merge CSP set on NextResponse.next()
+  // onto the final HTML response; verified locally 2026-07-21.)
+  // Keep a request nonce for components that still read x-nonce (optional).
   const nonce = btoa(crypto.randomUUID()).replace(/=+$/, "");
-  const isProd = process.env.NODE_ENV === "production";
-  const cspReportUri = process.env.CSP_REPORT_URI?.trim() || "/api/csp-report/";
-
-  // Blog-compatible baseline that works even if a script misses a nonce:
-  // nonce + strict-dynamic for modern browsers, 'unsafe-inline' ignored when
-  // a nonce is present (CSP3), still allows GTM/CF insights hosts.
-  const cspHeader = [
-    "default-src 'self'",
-    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com${isProd ? "" : " 'unsafe-eval'"}`,
-    "script-src-attr 'none'",
-    `connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com https://api.resend.com${isProd ? "" : " ws: wss:"}`,
-    "style-src 'self' 'unsafe-inline'",
-    "img-src 'self' blob: data: https://images.unsplash.com https://www.googletagmanager.com https://www.google-analytics.com",
-    "font-src 'self' data:",
-    "object-src 'none'",
-    "base-uri 'self'",
-    "form-action 'self'",
-    "frame-ancestors 'none'",
-    "frame-src 'self' https://www.googletagmanager.com",
-    ...(isProd ? ["upgrade-insecure-requests"] : []),
-  ].join("; ");
-
-  const cspWithReport = `${cspHeader}; report-uri ${cspReportUri}`;
-
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-nonce", nonce);
 
-  const response = NextResponse.next({
+  return NextResponse.next({
     request: {
       headers: requestHeaders,
     },
   });
-
-  response.headers.set("Content-Security-Policy", cspWithReport);
-
-  return response;
 }
 
 export const config = {

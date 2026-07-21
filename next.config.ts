@@ -1,5 +1,28 @@
 import type { NextConfig } from "next";
 
+// Portfolio CSP is set here (next.config headers), not only in proxy.ts.
+// Root cause (2026-07-21): Next 16.2 proxy bundles and runs, but CSP headers set
+// on NextResponse.next() are not merged onto the final HTML response for App
+// Router pages. next.config headers() always apply — same pattern as other
+// security headers below. Aligned with blog's working non-nonce marketing CSP.
+const portfolioCsp = [
+  "default-src 'self'",
+  "upgrade-insecure-requests",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "frame-ancestors 'none'",
+  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com",
+  "script-src-attr 'none'",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' blob: data: https://images.unsplash.com https://www.googletagmanager.com https://www.google-analytics.com",
+  "font-src 'self' data:",
+  "connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com https://api.resend.com",
+  "frame-src 'self' https://www.googletagmanager.com",
+  "worker-src 'self' blob:",
+  "report-uri /api/csp-report/",
+].join("; ");
+
 const securityHeaders = [
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "X-Frame-Options", value: "DENY" },
@@ -29,6 +52,10 @@ const securityHeaders = [
   {
     key: "Cross-Origin-Resource-Policy",
     value: "same-site",
+  },
+  {
+    key: "Content-Security-Policy",
+    value: portfolioCsp,
   },
 ];
 
