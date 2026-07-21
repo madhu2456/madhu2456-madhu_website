@@ -12,6 +12,7 @@ import { JsonLdScript } from "@/components/JsonLdScript";
 import { SeoStructuredData } from "@/components/SeoStructuredData";
 import { ServiceIcon } from "@/components/ServiceIcon";
 import { getPortfolioData } from "@/lib/portfolio-data";
+import { siteLanguageAlternates } from "@/lib/seo/hreflang";
 import { resolveSiteUrl } from "@/lib/site-url";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -24,6 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
       "Hire Madhu Dadi for production AI/LLM development, RAG systems, AI agents, marketing analytics, GA4/BigQuery pipelines, and full-stack FastAPI/Next.js apps.",
     alternates: {
       canonical: canonicalUrl,
+      languages: siteLanguageAlternates("/services/"),
     },
     openGraph: {
       title: {

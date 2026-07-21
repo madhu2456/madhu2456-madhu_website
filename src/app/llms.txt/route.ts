@@ -69,6 +69,17 @@ Last updated: ${lastUpdatedStr}
 
 ${serviceLines || `- [Services hub](${siteUrl}/services/): Consulting and implementation`}
 
+## India service landers
+
+- [LLM Developer in India](${siteUrl}/services/llm-developer-india/): India-intent LLM consulting lander
+- [Marketing Analytics Consultant in India](${siteUrl}/services/marketing-analytics-consultant-india/): India-intent analytics lander
+- [AI Consultant Visakhapatnam](${siteUrl}/services/ai-consultant-visakhapatnam/): City-intent lander
+
+## Optional markdown twins
+
+- [Homepage MD](${siteUrl}/md/): Markdown twin of the homepage (noindex; HTML is canonical)
+- [Services MD index](${siteUrl}/md/services): Markdown index of services
+
 ## Case studies
 
 ${caseStudyLines || `- [Case studies hub](${siteUrl}/case-studies/): Selected work`}

@@ -21,6 +21,7 @@ import { resolveAbsoluteImageUrl } from "@/lib/image-source";
 import { buildPersonSchema } from "@/lib/jsonld";
 import { EXTERNAL_REL, IDENTITY_EXTERNAL_REL } from "@/lib/link-rel";
 import { getPortfolioData } from "@/lib/portfolio-data";
+import { siteLanguageAlternates } from "@/lib/seo/hreflang";
 import { resolveSiteUrl } from "@/lib/site-url";
 import { formatMonthYear } from "@/lib/utils";
 
@@ -39,6 +40,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description,
     alternates: {
       canonical: canonicalUrl,
+      languages: siteLanguageAlternates("/profile/"),
     },
     openGraph: {
       title: { absolute: title },

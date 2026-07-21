@@ -13,7 +13,11 @@ const indexablePaths = [
   "/services/",
   "/case-studies/",
   "/services/rag-consultant-india/",
+  "/services/llm-developer-india/",
+  "/services/marketing-analytics-consultant-india/",
+  "/services/ai-consultant-visakhapatnam/",
   "/case-studies/adticks/",
+  "/ai-consultant-india/",
 ];
 
 test.describe("SEO/AEO pre-deploy checks", () => {
@@ -78,6 +82,9 @@ test.describe("SEO/AEO pre-deploy checks", () => {
     expect(
       pageUrls.some((url) => url.includes("/services/rag-consultant-india/")),
     ).toBe(true);
+    expect(
+      pageUrls.some((url) => url.includes("/services/llm-developer-india/")),
+    ).toBe(true);
   });
 
   test("portfolio child sitemap serves urlset with marker URL", async ({
@@ -89,6 +96,31 @@ test.describe("SEO/AEO pre-deploy checks", () => {
     const text = await response.text();
     expect(isUrlSet(text)).toBe(true);
     expect(text).toContain("/services/rag-consultant-india/");
+    expect(text).toContain("/services/llm-developer-india/");
+    expect(text).toContain('hreflang="en-IN"');
+  });
+
+  test("markdown twins are reachable and noindex", async ({ request }) => {
+    const response = await request.get("/md/");
+    expect(response.ok()).toBe(true);
+    expect(response.headers()["content-type"] || "").toMatch(/markdown|plain/);
+    expect(response.headers()["x-robots-tag"] || "").toMatch(/noindex/i);
+    const body = await response.text();
+    expect(body).toContain("Madhu Dadi");
+  });
+
+  test("India landers are 200 not redirects", async ({ baseURL }) => {
+    expect(baseURL).toBeTruthy();
+    for (const path of [
+      "/services/llm-developer-india/",
+      "/services/marketing-analytics-consultant-india/",
+      "/services/ai-consultant-visakhapatnam/",
+    ] as const) {
+      const res = await fetch(new URL(path, baseURL).toString(), {
+        redirect: "manual",
+      });
+      expect(res.status, path).toBe(200);
+    }
   });
 
   // F-01: legacy /about must land on canonical /profile/.

@@ -20,6 +20,7 @@ import { JsonLdScript } from "@/components/JsonLdScript";
 import { SafeEmailLink } from "@/components/SafeEmailLink";
 import { IDENTITY_EXTERNAL_REL } from "@/lib/link-rel";
 import { getPortfolioData } from "@/lib/portfolio-data";
+import { siteLanguageAlternates } from "@/lib/seo/hreflang";
 import { resolveSiteUrl } from "@/lib/site-url";
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
@@ -48,6 +49,7 @@ export async function generateMetadata({
     description,
     alternates: {
       canonical: canonicalUrl,
+      languages: siteLanguageAlternates("/contact/"),
     },
     robots: hasSearchParams
       ? {

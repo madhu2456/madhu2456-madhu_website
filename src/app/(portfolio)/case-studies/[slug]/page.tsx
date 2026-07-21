@@ -7,6 +7,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { AuthorBio } from "@/components/AuthorBio";
 import { CitationBox } from "@/components/CitationBox";
 import { Footer } from "@/components/Footer";
 import { FormattedText } from "@/components/FormattedText";
@@ -19,6 +20,7 @@ import {
 } from "@/lib/image-source";
 import { getPortfolioData, type ProjectItem } from "@/lib/portfolio-data";
 import { getDistinctProjectTagline } from "@/lib/project-display";
+import { siteLanguageAlternates } from "@/lib/seo/hreflang";
 import { resolveSiteUrl } from "@/lib/site-url";
 
 const getSiteUrl = () => {
@@ -153,7 +155,10 @@ export async function generateMetadata({
   return {
     title,
     description,
-    alternates: { canonical: url },
+    alternates: {
+      canonical: url,
+      languages: siteLanguageAlternates(url),
+    },
     openGraph: {
       title: { absolute: title },
       description,
@@ -198,7 +203,7 @@ export default async function CaseStudyPage({
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "Article",
+        "@type": "TechArticle",
         "@id": `${caseStudyUrl}#case-study`,
         headline: project.title,
         description,
@@ -207,6 +212,7 @@ export default async function CaseStudyPage({
         image: `${siteUrl}opengraph-image/`,
         about: project.category || "Case Study",
         url: caseStudyUrl,
+        inLanguage: "en-IN",
         author: {
           "@type": "Person",
           "@id": `${siteUrl}#person`,
@@ -226,14 +232,7 @@ export default async function CaseStudyPage({
           "@id": `${siteUrl}case-studies/`,
         },
         citation: evidenceLinks.map((link) => link.url),
-        speakable: {
-          "@type": "SpeakableSpecification",
-          cssSelector: [
-            "#main-content h1",
-            "#main-content h2",
-            "#main-content p",
-          ],
-        },
+        // speakable omitted: Google Speakable is BETA / news-only.
       },
       {
         "@type": "BreadcrumbList",
@@ -570,6 +569,8 @@ export default async function CaseStudyPage({
             </ul>
           </section>
         ) : null}
+
+        <AuthorBio profile={profile} className="mt-12" />
 
         <ShareButtons
           url={caseStudyUrl}

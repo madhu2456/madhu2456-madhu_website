@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JsonLdScript } from "@/components/JsonLdScript";
 import { getPortfolioData } from "@/lib/portfolio-data";
+import { siteLanguageAlternates } from "@/lib/seo/hreflang";
 import { resolveSiteUrl } from "@/lib/site-url";
 
 const PAGE_TITLE =
@@ -20,7 +21,10 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: PAGE_TITLE,
     description: PAGE_DESCRIPTION,
-    alternates: { canonical: canonicalUrl },
+    alternates: {
+      canonical: canonicalUrl,
+      languages: siteLanguageAlternates("/ai-consultant-india/"),
+    },
     openGraph: {
       title: { absolute: PAGE_TITLE },
       description: PAGE_DESCRIPTION,

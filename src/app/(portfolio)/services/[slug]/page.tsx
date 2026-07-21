@@ -9,11 +9,13 @@ import {
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { AuthorBio } from "@/components/AuthorBio";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JsonLdScript } from "@/components/JsonLdScript";
 import { ServiceIcon } from "@/components/ServiceIcon";
 import { getPortfolioData } from "@/lib/portfolio-data";
+import { siteLanguageAlternates } from "@/lib/seo/hreflang";
 import { resolveSiteUrl } from "@/lib/site-url";
 
 interface ServicePageProps {
@@ -75,6 +77,7 @@ export async function generateMetadata({
     description,
     alternates: {
       canonical: canonicalUrl,
+      languages: siteLanguageAlternates(`/services/${slug}/`),
     },
     openGraph: {
       title: { absolute: title },
@@ -181,26 +184,8 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
     ],
   };
 
-  // FAQPage: kept only because FAQs are visible & useful for humans/AEO (dl/dt/dd).
-  // Google FAQ rich result deprecated May 7 2026 per https://developers.google.com/search/updates
-  // (Changelog: Deprecating FAQ rich result + June 15 removing docs) — no rich-result guarantee.
-  // Do not add FAQPage solely to chase rich result; verify eligibility and usefulness per Shared Control Block.
-  const faqSchema =
-    service.faqs && service.faqs.length > 0
-      ? {
-          "@type": "FAQPage",
-          "@id": `${siteUrl}services/${slug}/#faq`,
-          mainEntity: service.faqs.map((faq) => ({
-            "@type": "Question",
-            name: faq.question,
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: faq.answer,
-            },
-          })),
-        }
-      : null;
-
+  // FAQPage / HowTo / speakable omitted (2026 Google docs): not used as growth levers.
+  // Visible FAQ HTML remains for humans and AEO extractors.
   const webpageSchema = {
     "@type": "WebPage",
     "@id": `${siteUrl}services/${slug}/#webpage`,
@@ -209,6 +194,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
     datePublished: service.updatedAt ?? new Date().toISOString(),
     dateModified: service.updatedAt ?? new Date().toISOString(),
     image: `${siteUrl}opengraph-image/`,
+    inLanguage: "en-IN",
     author: {
       "@type": "Person",
       "@id": `${siteUrl}#person`,
@@ -230,10 +216,6 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
     mainEntity: {
       "@id": `${siteUrl}services/${slug}/#service`,
     },
-    speakable: {
-      "@type": "SpeakableSpecification",
-      cssSelector: ["#main-content h1", "#main-content h2", "#main-content p"],
-    },
   };
 
   return (
@@ -241,12 +223,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
       <JsonLdScript
         data={{
           "@context": "https://schema.org",
-          "@graph": [
-            serviceSchema,
-            webpageSchema,
-            breadcrumbSchema,
-            ...(faqSchema ? [faqSchema] : []),
-          ],
+          "@graph": [serviceSchema, webpageSchema, breadcrumbSchema],
         }}
       />
       <Header profile={profile} navigationItems={sortedNavigationItems} />
@@ -479,11 +456,11 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             </section>
           )}
 
-          {/* FAQs Section */}
+          {/* Visible FAQs (question H2s / AEO) — no FAQPage JSON-LD growth lever */}
           {service.faqs && service.faqs.length > 0 && (
             <div className="mt-6 md:col-span-3 space-y-4">
               <h2 className="text-xl font-bold tracking-tight border-b border-border/80 pb-2">
-                Frequently Asked Questions
+                Common questions about {service.title}
               </h2>
               <dl className="grid gap-4 md:grid-cols-2">
                 {service.faqs.map((faq) => (
@@ -502,6 +479,8 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               </dl>
             </div>
           )}
+
+          <AuthorBio profile={profile} className="mt-6" />
 
           {/* Conversion Section */}
           <section className="relative rounded-3xl border border-border/80 bg-surface/20 p-8 md:p-12 overflow-hidden text-center max-w-4xl mx-auto mt-8">

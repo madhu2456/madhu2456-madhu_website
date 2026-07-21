@@ -108,37 +108,8 @@ const nextConfig: NextConfig = {
         destination: "/profile/",
         permanent: true,
       },
-      // Phase 5 India URL aliases (Semrush plan) → existing service / location hubs
-      {
-        source: "/services/llm-developer-india",
-        destination: "/services/ai-llm-application-development/",
-        permanent: true,
-      },
-      {
-        source: "/services/llm-developer-india/",
-        destination: "/services/ai-llm-application-development/",
-        permanent: true,
-      },
-      {
-        source: "/services/marketing-analytics-consultant-india",
-        destination: "/services/marketing-analytics-consultant/",
-        permanent: true,
-      },
-      {
-        source: "/services/marketing-analytics-consultant-india/",
-        destination: "/services/marketing-analytics-consultant/",
-        permanent: true,
-      },
-      {
-        source: "/services/ai-consultant-visakhapatnam",
-        destination: "/ai-consultant-india/",
-        permanent: true,
-      },
-      {
-        source: "/services/ai-consultant-visakhapatnam/",
-        destination: "/ai-consultant-india/",
-        permanent: true,
-      },
+      // Phase 5 India landers are real pages under /services/*-india|visakhapatnam/
+      // (not 301s). See src/lib/seo/service-aliases.ts and dedicated page routes.
       {
         // AUDIT DECISION DR-06 (2026-07-19): Owner confirmed a real, verified
         // Google Business Profile exists for Madhu Dadi (CID CXaUijPkQhVkEBM
