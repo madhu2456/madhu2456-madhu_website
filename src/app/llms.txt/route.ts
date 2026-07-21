@@ -46,8 +46,13 @@ Last updated: ${lastUpdatedStr}
 
 - [Canonical URL](${siteUrl}/): Canonical identity.
 - [Profile URL](${siteUrl}/profile/): Profile page.
+- [Services](${siteUrl}/services/): AI, RAG, agents & analytics services.
+- [Case studies](${siteUrl}/case-studies/): Selected production work.
+- [AI consultant in India](${siteUrl}/ai-consultant-india/): Visakhapatnam, Hyderabad & remote delivery.
+- [Contact](${siteUrl}/contact/): Hire / project inquiry.
 - [Wikidata](https://www.wikidata.org/wiki/Q139807441): Wikidata entity.
 - [Learning platform about page](${siteUrl}/blog/about): Learning platform about page.
+- [Blog llms.txt](${siteUrl}/blog/llms.txt): Blog-scoped machine-readable index.
 - Preferred Citation: [Madhu Dadi](${siteUrl}/)
 
 ## Canonical identity

@@ -294,7 +294,7 @@ function Services({ services }: { services: ServiceItem[] }) {
     <Section
       id="services"
       eyebrow="Services"
-      title="Generative AI & engineering services."
+      title="Generative AI & engineering services"
     >
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {services.map((service) => {
@@ -356,7 +356,7 @@ function Services({ services }: { services: ServiceItem[] }) {
                 }
                 className="group mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-transform hover:scale-[1.02]"
               >
-                Explore {service.title.split(" ")[0]}
+                Explore {service.title}
                 <IconArrowRight
                   className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
                   aria-hidden
@@ -376,11 +376,7 @@ function Skills({ skills }: { skills: SkillItem[] }) {
   if (groups.length === 0) return null;
 
   return (
-    <Section
-      id="skills"
-      eyebrow="Skills"
-      title="The stack I work in every day."
-    >
+    <Section id="skills" eyebrow="Skills" title="The stack I work in every day">
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {groups.map((group) => (
           <div
@@ -415,7 +411,7 @@ function Certifications({
   if (certifications.length === 0) return null;
 
   return (
-    <Section id="certifications" eyebrow="Credentials" title="Certifications.">
+    <Section id="certifications" eyebrow="Credentials" title="Certifications">
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {certifications.map((certification) => (
           <a
@@ -455,68 +451,31 @@ function Certifications({
 }
 
 function Faq({ items }: { items: Array<{ q: string; a: string }> }) {
-  const [open, setOpen] = useState<number | null>(null);
-
+  // Native <details>/<summary>: answers stay in the HTML for crawlers and
+  // no-JS users (no JS-injected bodies, no [hidden] stripping). Keyboard and
+  // screen-reader support is built in.
   return (
-    <Section id="faq" eyebrow="FAQ" title="Frequently asked questions.">
-      {/* Interactive accordion for JS-enabled users */}
+    <Section id="faq" eyebrow="FAQ" title="Frequently asked questions">
       <div className="mx-auto max-w-3xl divide-y divide-border rounded-2xl border border-border bg-surface/50">
-        {items.map((item, index) => {
-          const isOpen = open === index;
-          const panelId = `faq-panel-${index}`;
-          const buttonId = `faq-trigger-${index}`;
-
-          return (
-            <div key={item.q}>
-              <h3 className="m-0">
-                <button
-                  id={buttonId}
-                  type="button"
-                  onClick={() => setOpen(isOpen ? null : index)}
-                  className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
-                  aria-expanded={isOpen}
-                  aria-controls={panelId}
-                >
-                  <span className="font-display text-lg font-semibold">
-                    {item.q}
-                  </span>
-                  <span
-                    aria-hidden
-                    className={`text-primary transition-transform ${
-                      isOpen ? "rotate-45" : ""
-                    }`}
-                  >
-                    +
-                  </span>
-                </button>
-              </h3>
-              <section
-                id={panelId}
-                aria-labelledby={buttonId}
-                hidden={!isOpen}
-                className="px-6 pb-5 text-sm leading-relaxed text-muted-foreground"
+        {items.map((item) => (
+          <details key={item.q} className="group px-6 open:pb-5">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-left marker:content-none [&::-webkit-details-marker]:hidden">
+              <span className="font-display text-lg font-semibold">
+                {item.q}
+              </span>
+              <span
+                aria-hidden
+                className="shrink-0 text-primary transition-transform group-open:rotate-45"
               >
-                {item.a}
-              </section>
-            </div>
-          );
-        })}
+                +
+              </span>
+            </summary>
+            <p className="pb-1 text-sm leading-relaxed text-muted-foreground">
+              {item.a}
+            </p>
+          </details>
+        ))}
       </div>
-      {/* No-JS fallback: show all answers for AI crawlers, search engines, and users without JavaScript */}
-      <noscript>
-        <div className="mx-auto max-w-3xl divide-y divide-border rounded-2xl border border-border bg-surface/50">
-          <dl className="space-y-0">
-            {items.map((item) => (
-              <div key={item.q} className="px-6 py-5">
-                <dt className="font-display text-lg font-semibold">{item.q}</dt>
-                <dd className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {item.a}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </noscript>
     </Section>
   );
 }
@@ -594,7 +553,7 @@ function Contact({ profile }: { profile: Profile }) {
   };
 
   return (
-    <Section id="contact" eyebrow="Contact" title="Let's work together.">
+    <Section id="contact" eyebrow="Contact" title="Let's work together">
       <div className="grid gap-10 lg:grid-cols-2">
         <div className="space-y-6">
           <p className="text-lg leading-relaxed text-muted-foreground">

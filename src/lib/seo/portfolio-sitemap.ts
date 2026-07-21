@@ -63,6 +63,12 @@ export async function buildPortfolioSitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
+      url: `${siteUrl}ai-consultant-india/`,
+      lastModified: baseDate,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: `${siteUrl}privacy/`,
       lastModified: baseDate,
       changeFrequency: "monthly" as const,

@@ -271,12 +271,22 @@ export function buildPersonSchema({
           "@type": "ContactPoint",
           contactType: "professional",
           email,
-          url: `${siteUrl}#contact`,
+          url: `${siteUrl}contact/`,
           availableLanguage: ["English"],
-          areaServed: {
-            "@type": "Country",
-            name: "India",
-          },
+          areaServed: [
+            {
+              "@type": "City",
+              name: "Visakhapatnam",
+              containedInPlace: { "@type": "Country", name: "India" },
+            },
+            {
+              "@type": "City",
+              name: "Hyderabad",
+              containedInPlace: { "@type": "Country", name: "India" },
+            },
+            { "@type": "Country", name: "India" },
+            { "@type": "Place", name: "Worldwide (remote)" },
+          ],
         },
       ],
     }),
@@ -452,10 +462,28 @@ export function buildProfessionalServiceSchema({
     "@type": "Service",
     "@id": `${siteUrl}#service`,
     name: "Madhu Dadi - AI & Analytics Engineering",
-    url: siteUrl,
+    url: `${siteUrl}ai-consultant-india/`,
     description:
       "AI and marketing analytics engineering consulting — LLM/RAG applications, AI agents, FastAPI/Next.js products, and marketing analytics systems.",
-    areaServed: "Worldwide",
+    areaServed: [
+      {
+        "@type": "City",
+        name: "Visakhapatnam",
+        containedInPlace: { "@type": "Country", name: "India" },
+      },
+      {
+        "@type": "City",
+        name: "Hyderabad",
+        containedInPlace: { "@type": "Country", name: "India" },
+      },
+      {
+        "@type": "City",
+        name: "Bengaluru",
+        containedInPlace: { "@type": "Country", name: "India" },
+      },
+      { "@type": "Country", name: "India" },
+      { "@type": "Place", name: "Worldwide (remote)" },
+    ],
     provider: { "@id": `${siteUrl}#person` },
   };
 }

@@ -13,7 +13,7 @@ import {
   shouldUseUnoptimizedImage,
 } from "@/lib/image-source";
 import { getPortfolioData } from "@/lib/portfolio-data";
-
+import { getDistinctProjectTagline } from "@/lib/project-display";
 import { resolveSiteUrl } from "@/lib/site-url";
 
 const CASE_STUDIES_DESCRIPTION =
@@ -24,6 +24,7 @@ const getSiteUrl = () => {
 };
 
 export const metadata: Metadata = {
+  // Pattern: Primary keyword(s) | Madhu Dadi
   title: "AI, RAG & Analytics Case Studies | Madhu Dadi",
   description: CASE_STUDIES_DESCRIPTION,
   alternates: {
@@ -242,6 +243,10 @@ export default async function CaseStudiesPage() {
         <section className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {sortedProjects.map((project) => {
             const stack = project.technologies?.map((tech) => tech.name) ?? [];
+            const tagline = getDistinctProjectTagline(
+              project.title,
+              project.tagline,
+            );
 
             return (
               <article
@@ -275,9 +280,9 @@ export default async function CaseStudiesPage() {
                   <h2 className="mt-3 font-display text-2xl font-semibold leading-tight">
                     {project.title}
                   </h2>
-                  {project.tagline ? (
+                  {tagline ? (
                     <p className="mt-2 text-sm font-medium text-foreground/80">
-                      <FormattedText text={project.tagline} />
+                      <FormattedText text={tagline} />
                     </p>
                   ) : null}
                   {project.impactSummary ? (

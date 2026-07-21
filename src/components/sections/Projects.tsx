@@ -9,6 +9,7 @@ import {
   shouldUseUnoptimizedImage,
 } from "@/lib/image-source";
 import type { ProjectItem } from "@/lib/portfolio-data";
+import { getDistinctProjectTagline } from "@/lib/project-display";
 
 export function Projects({ projects }: { projects: ProjectItem[] }) {
   if (projects.length === 0) return null;
@@ -17,11 +18,15 @@ export function Projects({ projects }: { projects: ProjectItem[] }) {
     <Section
       id="projects"
       eyebrow="Selected work"
-      title="Case studies: AI, RAG & full-stack engineering."
+      title="Case studies: AI, RAG & full-stack engineering"
     >
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {projects.map((project) => {
           const stack = project.technologies?.map((tech) => tech.name) ?? [];
+          const tagline = getDistinctProjectTagline(
+            project.title,
+            project.tagline,
+          );
 
           return (
             <article
@@ -51,9 +56,11 @@ export function Projects({ projects }: { projects: ProjectItem[] }) {
                 <h3 className="mt-2 min-h-15 font-display text-xl font-semibold leading-tight sm:text-2xl">
                   {project.title}
                 </h3>
-                <p className="mt-2 text-sm font-medium text-foreground/80">
-                  <FormattedText text={project.tagline} />
-                </p>
+                {tagline ? (
+                  <p className="mt-2 text-sm font-medium text-foreground/80">
+                    <FormattedText text={tagline} />
+                  </p>
+                ) : null}
                 {project.impactSummary ? (
                   <p className="mt-3 min-h-36 text-sm leading-relaxed text-muted-foreground">
                     <FormattedText text={project.impactSummary} />

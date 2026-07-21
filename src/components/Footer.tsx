@@ -61,14 +61,14 @@ export function Footer({ profile, projects, navigationItems }: FooterProps) {
 
       <div className="mx-auto flex w-[min(1400px,92%)] flex-col gap-5">
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(260px,340px)_1fr]">
-          <div className="flex flex-col gap-6 rounded-3xl border border-border/80 bg-surface/30 p-6 lg:p-8 backdrop-blur-md shadow-card hover:border-border transition-colors">
+          <div className="flex flex-col gap-5 rounded-3xl border border-border/80 bg-surface/30 p-6 lg:p-8 backdrop-blur-md shadow-card hover:border-border transition-colors">
             <div>
               <h2 className="font-display text-2xl font-bold text-foreground">
-                Have an idea?
+                Ready to talk?
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                Let&apos;s build something meaningful. Available for AI, RAG,
-                and full-stack engineering.
+                Prefer the full form and project brief? Use the contact page —
+                one place for email, phone, and a 24-hour reply commitment.
               </p>
             </div>
 
@@ -77,7 +77,7 @@ export function Footer({ profile, projects, navigationItems }: FooterProps) {
                 href="/contact/"
                 className="group inline-flex w-fit items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-transform hover:scale-[1.03]"
               >
-                Hire me
+                Go to contact
                 <IconArrowRight
                   className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
                   aria-hidden
@@ -134,17 +134,21 @@ export function Footer({ profile, projects, navigationItems }: FooterProps) {
             >
               <span itemProp="addressLocality">{profile.location}</span>
             </div>
-            {profile.phone ? (
-              <TrackedLink
-                href={`tel:${profile.phone.replace(/\s+/g, "")}`}
-                gtmEvent="contact_click"
-                gtmData={{ contact_type: "phone", contact_location: "footer" }}
-                className="mt-1 block transition-colors hover:text-foreground"
-                itemProp="telephone"
+            <p className="mt-1">
+              <Link
+                href="/contact/"
+                className="text-primary underline-offset-4 hover:underline"
               >
-                {profile.phone}
-              </TrackedLink>
-            ) : null}
+                Contact details
+              </Link>
+              <span className="text-muted-foreground/50"> · </span>
+              <Link
+                href="/ai-consultant-india/"
+                className="underline-offset-4 hover:text-foreground hover:underline"
+              >
+                AI consultant in India
+              </Link>
+            </p>
           </address>
 
           <div className="flex flex-col gap-1 text-sm text-muted-foreground lg:text-right">
@@ -156,7 +160,7 @@ export function Footer({ profile, projects, navigationItems }: FooterProps) {
                 className="h-2 w-2 rounded-full bg-primary animate-pulse"
                 aria-hidden
               />
-              Available worldwide
+              Available worldwide · remote-first
             </p>
           </div>
         </div>

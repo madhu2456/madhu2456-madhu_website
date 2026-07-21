@@ -48,7 +48,7 @@ export const buildV2PageContentDefaults = (): PageContentSchema => {
         {
           question: "How can I contact you?",
           answer:
-            "Use the contact form on this site, email madhu.kumar245@gmail.com, or message me on LinkedIn. I usually respond within 24 hours.",
+            "Use the contact form on this site, email madhu.kumar245 [at] gmail.com, or message me on LinkedIn. I usually respond within 24 hours.",
         },
         {
           question: "What is your typical project timeline?",

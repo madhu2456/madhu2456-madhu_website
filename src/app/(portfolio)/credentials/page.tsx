@@ -32,7 +32,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const canonicalUrl = `${siteUrl}${canonicalPath.replace(/^\//, "")}`;
   const title =
     pageContent.credentials.seo?.title ||
-    "Madhu Dadi Credentials - AI, RAG, GA4 & Analytics Certifications";
+    "Credentials & Certifications | Madhu Dadi";
   const description =
     pageContent.credentials.seo?.description ||
     "Verified credentials, certifications, awards, work history, and public proof for Madhu Dadi, AI and marketing analytics engineer.";

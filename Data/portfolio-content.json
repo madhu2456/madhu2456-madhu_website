@@ -6,7 +6,7 @@
         "title": "Madhu Dadi | AI Engineer, RAG & Analytics Consultant",
         "description": "AI engineer and RAG consultant with 9+ years (Novartis, redBus, GroupM). Production AI agents, RAG systems, FastAPI/Next.js products, and marketing analytics."
       },
-      "heroTitle": "Production AI Agents, RAG Systems and Analytics Infrastructure.",
+      "heroTitle": "Production AI agents, RAG systems & analytics infrastructure",
       "primaryCta": {
         "label": "Contact Me",
         "href": "/contact",
@@ -49,7 +49,7 @@
         },
         {
           "question": "How can I contact you?",
-          "answer": "Use the contact form on this site, email madhu.kumar245@gmail.com, or message me on LinkedIn. I usually respond within 24 hours."
+          "answer": "Use the contact form on this site, email madhu.kumar245 [at] gmail.com, or message me on LinkedIn. I usually respond within 24 hours."
         },
         {
           "question": "What is your typical project timeline?",
@@ -63,7 +63,7 @@
     },
     "profile": {
       "seo": {
-        "title": "Professional Profile | Madhu Dadi — Experience, Stack & Credentials",
+        "title": "Professional Profile | Madhu Dadi",
         "description": "Detailed professional profile for Madhu Dadi: work history, core stack, education, and credentials. For services and case studies use the homepage and /services/. For learning content use /blog/.",
         "canonicalPath": "/profile/"
       },
@@ -82,11 +82,23 @@
         },
         {
           "title": "backend",
-          "items": ["Python", "FastAPI", "SQL", "Postgres", "Redis", "Celery"]
+          "items": [
+            "Python",
+            "FastAPI",
+            "SQL",
+            "Postgres",
+            "Redis",
+            "Celery"
+          ]
         },
         {
           "title": "frontend",
-          "items": ["Next.js", "React", "TypeScript", "Tailwind CSS"]
+          "items": [
+            "Next.js",
+            "React",
+            "TypeScript",
+            "Tailwind CSS"
+          ]
         },
         {
           "title": "analytics",
@@ -106,7 +118,7 @@
     },
     "servicesIndex": {
       "seo": {
-        "title": "AI, RAG & Analytics Services | Madhu Dadi",
+        "title": "AI, RAG, AI Agents & Analytics Services | Madhu Dadi",
         "description": "Consulting and implementation: production RAG systems, AI agents, generative AI apps, full-stack AI products, marketing analytics, and GA4/BigQuery measurement.",
         "canonicalPath": "/services/"
       },
@@ -124,7 +136,7 @@
     },
     "caseStudiesIndex": {
       "seo": {
-        "title": "Case Studies & Projects | Madhu Dadi",
+        "title": "AI, RAG & Analytics Case Studies | Madhu Dadi",
         "description": "Technical case studies, system architecture, and production impact metrics for AI, RAG, and analytics projects by Madhu Dadi.",
         "canonicalPath": "/case-studies/"
       },
@@ -241,7 +253,7 @@
     },
     "contact": {
       "seo": {
-        "title": "Contact Madhu Dadi | AI, RAG & Analytics Consulting",
+        "title": "Contact | Madhu Dadi",
         "description": "Contact Madhu Dadi for AI consulting, RAG systems, and marketing analytics. Freelance, full-time roles, FastAPI/Next.js builds. Reply within 24 hours.",
         "canonicalPath": "/contact/"
       },
@@ -295,7 +307,7 @@
     "stats": [
       {
         "label": "AI, analytics, and product engineering experience",
-        "value": "9+"
+        "value": "9+ years"
       },
       {
         "label": "URLs per Adticks audit (parallel Playwright crawl capacity)",
@@ -733,7 +745,9 @@
         "Presented analytical findings and strategic recommendations to senior leadership, facilitating informed decision-making and business growth within the Patient Support Services division.",
         "Utilized advanced analytics tools (e.g., Google Analytics, Power BI, Advanced Modelling, etc.) to measure and improve digital engagement, patient satisfaction, and operational efficiency."
       ],
-      "achievements": ["Best Performer of the Quarter, Q1 2024"],
+      "achievements": [
+        "Best Performer of the Quarter, Q1 2024"
+      ],
       "order": 1,
       "updatedAt": "2026-06-07T00:00:00Z"
     },
@@ -753,7 +767,9 @@
         "Led the Marketing Analytics team in redBus to provide measurement solutions for ATL, BTL and Digital Campaigns.",
         "Created Brand Playbooks for Digital, Social and Owned media to effectively optimise the campaign budgets and increase the ROI of Brand initiatives."
       ],
-      "achievements": ["Q3 Trailblazer, 30% new-customer growth"],
+      "achievements": [
+        "Q3 Trailblazer, 30% new-customer growth"
+      ],
       "order": 2,
       "updatedAt": "2026-06-07T00:00:00Z"
     },
@@ -772,7 +788,9 @@
         "Performed brand lift study, identified the most optimal consumer journey from first touch point to last touch point and measured the performance in terms of conversion lift.",
         "Brought awareness of 1st party data solutions to increase the targeting by using cluster analysis, cost benefit analysis and pricing analytics to the clients."
       ],
-      "achievements": ["Performer of the Year 2020-21 - WPP NextGen"],
+      "achievements": [
+        "Performer of the Year 2020-21 - WPP NextGen"
+      ],
       "order": 3,
       "updatedAt": "2026-06-07T00:00:00Z"
     },
@@ -791,7 +809,9 @@
         "Implemented, Analyzed and Optimized organic and paid search engine marketing activities and increase the CTR by 20%.",
         "Formulated and documented the project/product plan for web applications."
       ],
-      "achievements": ["Foundations in analytics + engineering"],
+      "achievements": [
+        "Foundations in analytics + engineering"
+      ],
       "order": 4,
       "updatedAt": "2026-06-07T00:00:00Z"
     }
@@ -1161,12 +1181,12 @@
       "updatedAt": "2026-07-20T14:51:29Z"
     },
     {
-      "title": "Udemy Enroller via FastAPI",
+      "title": "Async Browser Workflow Platform (Udemy Enroller)",
       "slug": "udemy-enroller-fastapi",
-      "tagline": "Automated Course Enrollment System via FastAPI Automation Platform",
-      "category": "Production FastAPI Automation Platform",
+      "tagline": "FastAPI · Playwright · Celery orchestration for high-volume browser workflows",
+      "category": "Production automation & async orchestration",
       "relatedServiceSlug": "ai-agent-development",
-      "impactSummary": "Udemy Enroller is a live production FastAPI and Playwright automation platform that orchestrates asynchronous workflow runs, bounded worker concurrency, secure session-state handling, telemetry logging, and background processing with Celery, Redis, PostgreSQL, and Docker.",
+      "impactSummary": "Production FastAPI + Playwright platform for orchestrating asynchronous browser workflows: bounded worker pools, secure session-state handling, Celery/Redis queues, PostgreSQL telemetry, and Dockerized workers. Built as a systems exercise in reliability, concurrency, and observability—not as a guide to violate third-party terms of service.",
       "liveUrl": "https://udemyenroller.madhudadi.in",
       "githubUrl": "https://github.com/madhu2456/udemy_enroller_fastapi",
       "featured": true,
@@ -1195,20 +1215,20 @@
           "name": "Google Analytics"
         }
       ],
-      "problemStatement": "Browser-based workflows often involve repetitive, highly-structured tasks with narrow execution windows. Manually checking, updating parameters, and verifying execution steps across different pages creates severe bottlenecks, reduces overall productivity, and introduces the risk of human error. The system needed a robust, high-availability architecture to coordinate async queues, manage headless browser instances concurrently, handle stateful authentication sessions securely, and respect strict rate-limiting policies across target platforms gracefully. Furthermore, standard cron jobs were insufficient due to the need for distributed worker nodes and real-time execution telemetry to monitor the health and performance of the automation suite across hundreds of daily parallel executions.",
-      "solutionApproach": "**FastAPI Architecture:** We designed and deployed a FastAPI service to act as the core API layer, providing secure REST endpoints for workflow initialization and telemetry aggregation. To handle the background processing load without blocking the main thread, we integrated Celery alongside Redis as the message broker, creating robust async task execution queues. A comprehensive validation pipeline was engineered to authenticate session state dynamically, verify input constraints, and execute long-running browser tasks via Playwright without requiring any manual intervention. We also implemented comprehensive telemetry logging and monitoring to track success rates, handle unexpected session expirations gracefully, respect external rate limits via exponential backoff strategies, and alert stakeholders of any critical failures via automated webhooks.",
+      "problemStatement": "Teams often need reliable automation for highly structured, multi-step browser workflows under tight time windows. Hand-running those steps does not scale: sessions expire, steps drift, and there is no shared telemetry. The engineering problem was to design a high-availability control plane—async job queues, bounded concurrency, durable task state, and safe session handling—that can run thousands of workflow executions without operator babysitting.",
+      "solutionApproach": "**Control plane (FastAPI):** REST endpoints for job creation, status, and telemetry aggregation. **Workers (Celery + Redis):** async task queues so the API never blocks on browser work. **Browsers (Playwright):** isolated headless contexts with strict concurrency caps to avoid Chromium resource leaks. **Data plane (PostgreSQL):** durable run history and failure taxonomy. **Ops:** Docker packaging, retries with backoff, webhook alerts. The case study emphasizes orchestration architecture, rate-limit respect, and observability—applicable to many enterprise browser-automation and agent-tooling problems.",
       "impactMetrics": [
         {
-          "label": "reduction in manual effort",
-          "value": "90%"
+          "label": "reduction in manual operator steps for covered workflows",
+          "value": "~90%"
         },
         {
-          "label": "workflow executions logged in six months",
+          "label": "workflow executions logged (six months)",
           "value": "20,000+"
         },
         {
-          "label": "estimated value created",
-          "value": "Significant"
+          "label": "hard concurrency cap per host (browser tabs)",
+          "value": "5"
         }
       ],
       "citations": [
@@ -1236,7 +1256,7 @@
         },
         {
           "label": "Category",
-          "val": "FastAPI browser-workflow automation"
+          "val": "Async browser-workflow orchestration (FastAPI/Playwright)"
         },
         {
           "label": "Role",
@@ -1248,7 +1268,7 @@
         },
         {
           "label": "Core capability",
-          "val": "Distributed asynchronous workflow orchestration and secure session-state handling"
+          "val": "Distributed async orchestration, session handling, and telemetry"
         },
         {
           "label": "Scale",
@@ -1310,6 +1330,14 @@
         {
           "question": "Can this automation pipeline be deployed in a Docker container?",
           "answer": "Absolutely. I created a multi-stage Dockerfile containing all necessary Playwright Chromium system dependencies. It deploys smoothly as an isolated, containerized microservice."
+        },
+        {
+          "question": "How do you keep browser workers from melting the host?",
+          "answer": "A hard Celery concurrency ceiling (five active browser tabs per host), isolated Playwright contexts, and structured failure handling so a stuck page cannot exhaust RAM."
+        },
+        {
+          "question": "What telemetry does the platform emit?",
+          "answer": "Per-run status, timing, failure class, and queue depth in PostgreSQL, with webhook alerts for critical failures—enough to debug production automation without SSH archaeology."
         }
       ],
       "gallery": [
@@ -1320,7 +1348,7 @@
         }
       ],
       "order": 3,
-      "updatedAt": "2026-07-20T14:51:29Z"
+      "updatedAt": "2026-07-21T04:00:00Z"
     }
   ],
   "services": [
@@ -1444,7 +1472,7 @@
       "featured": true,
       "order": 2,
       "updatedAt": "2026-07-20T14:51:29Z",
-      "seoTitle": "RAG development consultant",
+      "seoTitle": "RAG development consultant | Madhu Dadi",
       "seoDescription": "Hire a specialized RAG consultant in India to build high-precision vector search pipelines, enterprise LLM applications, and semantic retrieval systems.",
       "heroTitle": "RAG Consultant & AI Search Engineer",
       "heroEyebrow": "ENTERPRISE RETRIEVAL-AUGMENTED GENERATION",
@@ -1533,7 +1561,7 @@
       "featured": true,
       "order": 3,
       "updatedAt": "2026-07-20T14:51:29Z",
-      "seoTitle": "AI workflow automation consultant",
+      "seoTitle": "AI workflow automation consultant | Madhu Dadi",
       "faqs": [
         {
           "question": "How do you prevent agents from getting stuck in infinite loops?",
@@ -1600,7 +1628,7 @@
       "featured": true,
       "order": 4,
       "updatedAt": "2026-07-20T14:51:29Z",
-      "seoTitle": "GA4 BigQuery analytics consultant",
+      "seoTitle": "GA4 BigQuery analytics consultant | Madhu Dadi",
       "audience": [
         "Marketing teams mapping complex customer journeys",
         "Growth teams needing multi-touch attribution models",
@@ -1830,7 +1858,7 @@
       "featured": true,
       "order": 6,
       "updatedAt": "2026-07-20T14:51:29Z",
-      "seoTitle": "FastAPI/Next.js AI product development",
+      "seoTitle": "FastAPI/Next.js AI product development | Madhu Dadi",
       "capabilityCards": [
         {
           "title": "SaaS MVPs",

@@ -14,7 +14,8 @@ export const metadata: Metadata = {
   // /contact/#intent=full-time hash. FAQ explicitly states "freelance
   // consulting, part-time engagements, and full-time roles". Do NOT re-flag
   // CTA hierarchy / messaging tension in future audits.
-  title: "Madhu Dadi - AI Engineer & Analytics Consultant",
+  // Homepage: brand-first title. All other routes use "Topic | Madhu Dadi".
+  title: "Madhu Dadi | AI Engineer, RAG & Analytics Consultant",
   description:
     "AI and marketing analytics engineer with 9+ years (Novartis, redBus, GroupM). Production LLM/RAG apps, AI agents, FastAPI, Next.js, and analytics systems.",
   alternates: {
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: {
-      absolute: "Madhu Dadi - AI Engineer & Analytics Consultant",
+      absolute: "Madhu Dadi | AI Engineer, RAG & Analytics Consultant",
     },
     description:
       "Production LLM/RAG apps, AI agents, FastAPI/Next.js products, and marketing analytics systems.",
@@ -37,7 +38,7 @@ export const metadata: Metadata = {
         url: `${siteUrl}opengraph-image/`,
         width: 1200,
         height: 630,
-        alt: "Madhu Dadi - AI Engineer & Analytics Consultant",
+        alt: "Madhu Dadi | AI Engineer, RAG & Analytics Consultant",
       },
     ],
   },

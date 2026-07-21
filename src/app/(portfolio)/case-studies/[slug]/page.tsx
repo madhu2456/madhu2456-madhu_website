@@ -18,6 +18,7 @@ import {
   shouldUseUnoptimizedImage,
 } from "@/lib/image-source";
 import { getPortfolioData, type ProjectItem } from "@/lib/portfolio-data";
+import { getDistinctProjectTagline } from "@/lib/project-display";
 import { resolveSiteUrl } from "@/lib/site-url";
 
 const getSiteUrl = () => {
@@ -299,7 +300,8 @@ export default async function CaseStudyPage({
           {project.title}
         </h1>
         <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-          {project.tagline || description}
+          {getDistinctProjectTagline(project.title, project.tagline) ||
+            description}
         </p>
 
         {/* AI Answer Block / Executive Summary */}

@@ -30,8 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const canonicalPath = pageContent.profile.seo?.canonicalPath || "/profile/";
   const canonicalUrl = `${siteUrl}${canonicalPath.replace(/^\//, "")}`;
   const title =
-    pageContent.profile.seo?.title ||
-    "Madhu Dadi - AI, RAG & Marketing Analytics Engineer";
+    pageContent.profile.seo?.title || "Professional Profile | Madhu Dadi";
   const description =
     pageContent.profile.seo?.description ||
     "Profile of Madhu Dadi, AI & marketing analytics engineer with 9+ years across Novartis, redBus, and GroupM (WPP). Specializing in LLM/RAG apps, AI agents, and marketing analytics.";

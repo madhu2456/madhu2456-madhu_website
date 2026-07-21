@@ -44,8 +44,9 @@ export function Hero({
             {pageContent.home.eyebrow}
           </p>
           <h1 className="font-display text-[clamp(2rem,6vw,4rem)] leading-[1.15] font-bold tracking-tight sm:leading-[1.1]">
-            {profile.firstName} {profile.lastName} -{" "}
-            <span className="text-gradient">{pageContent.home.heroTitle}</span>
+            <span className="text-gradient">
+              {pageContent.home.heroTitle.replace(/\.$/, "")}
+            </span>
           </h1>
           <div className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:mt-6 sm:text-lg space-y-4">
             {(pageContent.home.introParagraphs || []).map((para) => (
@@ -69,16 +70,6 @@ export function Hero({
                 aria-hidden
               />
             </Link>
-            <TrackedLink
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              gtmEvent="resume_download"
-              gtmData={{ download_type: "pdf", download_location: "hero" }}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-white/5 px-5 py-3 text-sm font-medium hover:bg-surface-elevated hover:border-primary/30 sm:px-6 transition-all duration-300"
-            >
-              Resume
-            </TrackedLink>
             <Link
               href="/case-studies/"
               onClick={() =>
@@ -91,6 +82,16 @@ export function Hero({
             >
               See case studies
             </Link>
+            <TrackedLink
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              gtmEvent="resume_download"
+              gtmData={{ download_type: "pdf", download_location: "hero" }}
+              className="inline-flex items-center justify-center gap-1 px-1 py-3 text-sm font-medium text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline sm:px-2"
+            >
+              Resume
+            </TrackedLink>
           </div>
           {workedAt.length > 0 ? (
             <div className="mt-8 sm:mt-10">
