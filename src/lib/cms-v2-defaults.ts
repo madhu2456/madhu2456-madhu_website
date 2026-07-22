@@ -10,7 +10,8 @@ export const buildV2PageContentDefaults = (): PageContentSchema => {
       },
       heroTitle:
         "Production AI Agents, RAG Systems and Analytics Infrastructure.",
-      heroAvailabilityText: "Available for new projects",
+      heroAvailabilityText:
+        "Full-time at Novartis · open to consulting & roles",
       workedAtLabel: "Previously built systems at",
       directAnswer: {
         title: "Who is Madhu Dadi?",

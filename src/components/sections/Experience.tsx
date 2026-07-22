@@ -18,11 +18,17 @@ export function Experience({
     typeof yearsOfExperience === "number" &&
     Number.isFinite(yearsOfExperience) &&
     yearsOfExperience > 0
-      ? `${yearsOfExperience}+ years across analytics and AI.`
+      ? `${yearsOfExperience}+ years since first full-time role (2016).`
       : "Experience across analytics and AI.";
 
   return (
     <Section id="experience" eyebrow="Experience" title={yearsLabel}>
+      <p className="mb-8 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+        Timeline matches the résumé: industry roles from May 2016, MBA at IIM
+        Amritsar (2018–2020) in the Education section below, then GroupM →
+        redBus → Novartis (current full-time). Independent consulting is offered
+        alongside where policy allows—not instead of disclosing the day job.
+      </p>
       <ol className="relative space-y-8 border-l border-border pl-6">
         {experiences.map((experience) => (
           <li
@@ -39,6 +45,11 @@ export function Experience({
                 <span className="text-muted-foreground">
                   · {normalizeCompanyName(experience.company)}
                 </span>
+                {experience.current ? (
+                  <span className="ml-2 align-middle text-xs font-medium tracking-wide text-primary uppercase">
+                    Current full-time
+                  </span>
+                ) : null}
               </h3>
               <p className="text-xs text-muted-foreground">
                 {formatPeriod(

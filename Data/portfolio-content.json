@@ -4,7 +4,7 @@
     "home": {
       "seo": {
         "title": "Madhu Dadi – AI Consultant & Analytics Leader",
-        "description": "AI consultant and marketing analytics leader with 9+ years (Novartis, redBus, GroupM). Production RAG, AI agents, FastAPI/Next.js. Hire for India or remote."
+        "description": "AI consultant & analytics leader: 9+ years since 2016 (Novartis full-time + consulting). Production RAG, agents, FastAPI/Next.js. India & remote."
       },
       "heroTitle": "Production AI agents, RAG systems & analytics infrastructure",
       "primaryCta": {
@@ -17,13 +17,13 @@
         "href": "/services",
         "variant": "secondary"
       },
-      "heroAvailabilityText": "Available for new projects",
+      "heroAvailabilityText": "Full-time at Novartis · open to consulting & roles",
       "workedAtLabel": "Previously built systems at",
       "directAnswer": {
         "title": "Who is Madhu Dadi?",
         "paragraphs": [
           "Madhu Dadi is an AI engineer and RAG & analytics consultant based in Visakhapatnam, India. He builds production AI agents, RAG systems, FastAPI/Next.js products, and marketing analytics infrastructure.",
-          "With 9+ years of experience across Novartis, redBus, GroupM (WPP), and Absolinsoft, he focuses on high-confidence retrieval systems, secure agent workflows, and analytics pipelines that connect engineering delivery to measurable business outcomes."
+          "He has 9+ years of professional experience since his first full-time role in May 2016 (Absolinsoft, GroupM/WPP, redBus, Novartis), including an MBA at IIM Amritsar (2018–2020). He focuses on high-confidence retrieval systems, secure agent workflows, and analytics pipelines that connect engineering delivery to measurable business outcomes."
         ]
       },
       "faqItems": [
@@ -32,16 +32,20 @@
           "answer": "Python (FastAPI), TypeScript (Next.js, React), SQL (PostgreSQL, BigQuery), AI/LLMs (OpenAI, LangChain, RAG, agents), and analytics tools (GA4, GTM)."
         },
         {
-          "question": "Do you take freelance projects?",
-          "answer": "Yes, I am available for freelance consulting, part-time engagements, and full-time roles depending on project fit."
+          "question": "Do you take freelance projects while at Novartis?",
+          "answer": "Yes, for select independent consulting—scoped engagements outside my full-time duties, with employer IP, confidentiality, and conflict-of-interest policies respected. If a project is not a fit under those constraints, I will say so on the discovery call."
         },
         {
-          "question": "Are you available for new projects?",
-          "answer": "Yes. I am currently open to full-time roles, freelance consulting, and part-time engagements. You can reach out via the contact form or email me directly."
+          "question": "Are you available for new projects or full-time roles?",
+          "answer": "Yes. This site supports two paths: (1) independent consulting / contract work on AI, RAG, agents, and analytics; (2) full-time opportunities where I can own AI and analytics end-to-end. Use the contact form and pick the intent that matches."
+        },
+        {
+          "question": "How do you count 9+ years of experience?",
+          "answer": "Professional career since May 2016 (first full-time role). That spans Absolinsoft, GroupM (WPP), redBus, and Novartis, plus an MBA at IIM Amritsar (2018–2020) that sits between early industry work and analytics leadership roles. The résumé states 9+ years the same way."
         },
         {
           "question": "Do you work remotely?",
-          "answer": "Yes. I am remote-first and available worldwide. Relocation is also possible for the right full-time role."
+          "answer": "Yes. I am remote-first for consulting and available worldwide. Relocation is possible for the right full-time role."
         },
         {
           "question": "What industries have you worked in?",
@@ -242,12 +246,12 @@
     "contact": {
       "seo": {
         "title": "Contact | Madhu Dadi",
-        "description": "Contact Madhu Dadi for AI consulting, RAG systems, and marketing analytics. Freelance, full-time roles, FastAPI/Next.js builds. Reply within 24 hours.",
+        "description": "Contact Madhu Dadi for AI consulting or full-time hiring. Current full-time role at Novartis; select independent consulting and full-time moves both welcome. Reply within 24 hours.",
         "canonicalPath": "/contact/"
       },
       "eyebrow": "Consulting & roles",
       "heroTitle": "Contact Madhu Dadi for AI, RAG & Analytics Consulting",
-      "heroSubtitle": "Share your project for AI agents, RAG applications, marketing analytics, or full-stack AI products. Freelance consulting, contract work, and full-time roles welcome.",
+      "heroSubtitle": "Two paths: select independent consulting (scoped outside employment duties) or full-time hiring conversations. Share AI agents, RAG, marketing analytics, or FastAPI/Next.js needs.",
       "bestFitAreas": [
         "AI agents",
         "RAG applications",
@@ -268,12 +272,12 @@
       "Full-stack Web Product Development"
     ],
     "headlineAnimationDuration": 3000,
-    "shortBio": "Madhu Dadi is an AI engineer and RAG & analytics consultant based in Visakhapatnam, India, with professional experience in Hyderabad, Bengaluru, and Gurugram. He has 9+ years of experience across Novartis, redBus, GroupM (WPP), and Absolinsoft, and builds production AI agents, RAG systems, FastAPI/Next.js products, and marketing analytics infrastructure.",
+    "shortBio": "Madhu Dadi is an AI engineer and RAG & analytics consultant based in Visakhapatnam, India, with professional experience in Hyderabad, Bengaluru, and Gurugram. He has 9+ years of professional experience since May 2016 across Novartis, redBus, GroupM (WPP), and Absolinsoft (plus an MBA at IIM Amritsar, 2018–2020), and builds production AI agents, RAG systems, FastAPI/Next.js products, and marketing analytics infrastructure.",
     "fullBioParagraphs": [
       "I build AI. I don't just talk about it. My work splits in two. I help teams put LLMs, RAG, and AI agents into real products without the demo-to-prod cliff. And I clean up the marketing data that's meant to tell them whether any of it actually works.",
       "I write Python and TypeScript every day. I live in FastAPI, Next.js, and SQL. I care about the boring things that keep AI shipping: evals, guardrails, logs, p95s, and who gets paged at 2am. If a project doesn't have a number attached to it, I'll ask for one before we start.",
       "My work has crossed healthcare, travel, media, SaaS, and education. I like systems that are useful after the demo, understandable after handoff, and measurable after launch.",
-      "I'm open to a full-time role where I can own AI and analytics end-to-end on a serious product team. Remote is ideal, relocation is possible for the right team, and practical impact matters more than buzzwords."
+      "I am currently Senior Analytics Manager at Novartis (full-time, since March 2023). I also take select independent consulting and am open to full-time moves where I can own AI and analytics end-to-end. Consulting is scoped outside employment duties; employer IP, confidentiality, and conflict policies come first. Remote is ideal; relocation is possible for the right full-time team."
     ],
     "email": "madhu.kumar245@gmail.com",
     "phone": "+91 9985422444",
@@ -294,7 +298,7 @@
     "yearsOfExperience": 9,
     "stats": [
       {
-        "label": "AI, analytics, and product engineering experience",
+        "label": "Professional experience since first full-time role (2016)",
         "value": "9+ years"
       },
       {
@@ -315,7 +319,7 @@
   },
   "siteSettings": {
     "siteTitle": "Madhu Dadi – AI Consultant & Analytics Leader",
-    "siteDescription": "Madhu Dadi is an AI engineer and RAG & analytics consultant based in Visakhapatnam, India, with professional experience in Hyderabad, Bengaluru, and Gurugram. He has 9+ years of experience across Novartis, redBus, GroupM (WPP), and Absolinsoft, and builds production AI agents, RAG systems, FastAPI/Next.js products, and marketing analytics infrastructure.",
+    "siteDescription": "Madhu Dadi is an AI engineer and RAG & analytics consultant based in Visakhapatnam, India. 9+ years of professional experience since 2016 (Novartis, redBus, GroupM, Absolinsoft; MBA IIM Amritsar). Production AI agents, RAG, FastAPI/Next.js. Consulting and full-time paths via contact.",
     "siteKeywords": [
       "Madhu Dadi",
       "AI consultant",
@@ -723,7 +727,7 @@
       "location": "Hyderabad, India",
       "startDate": "2023-03-20",
       "current": true,
-      "description": "Lead digital analytics strategy for Novartis Patient Support Services, driving data-informed decisions across patient-engagement platforms.",
+      "description": "Full-time role (current). Lead digital analytics strategy for Novartis Patient Support Services. Independent consulting listed on this site is separate, scoped outside employment duties, and subject to IP and conflict policies.",
       "responsibilities": [
         "Led the digital analytics strategy and analytics for Novartis Patient Support Services, ensuring data-driven decision-making across digital platforms to enhance patient engagement and support services.",
         "Developed and implemented key performance indicators (KPIs) and metrics to track the success and impact of digital initiatives, contributing to the optimization of patient support programs.",

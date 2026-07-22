@@ -9,7 +9,7 @@ const siteUrl = `${resolveSiteUrl()}/`;
 /** ≤60 chars, brand + commercial intent (Semrush plan Phase 2). */
 const HOME_TITLE = "Madhu Dadi – AI Consultant & Analytics Leader";
 const HOME_DESCRIPTION =
-  "AI consultant and marketing analytics leader with 9+ years (Novartis, redBus, GroupM). Production RAG, AI agents, FastAPI/Next.js. Hire for India or remote.";
+  "AI consultant & analytics leader: 9+ years since 2016 (Novartis full-time + consulting). Production RAG, agents, FastAPI/Next.js. India & remote.";
 
 export const metadata: Metadata = {
   // DG-06 C / DR-02: dual full-time + consulting funnels coexist via /contact/.
