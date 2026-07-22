@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getPortfolioData } from "@/lib/portfolio-data";
+import { COMMERCIAL_LANDERS } from "@/lib/seo/commercial-landers";
 import { INDIA_SERVICE_ALIASES } from "@/lib/seo/service-aliases";
 import { resolveSiteUrl } from "@/lib/site-url";
 
@@ -132,6 +133,15 @@ export async function buildPortfolioSitemap(): Promise<MetadataRoute.Sitemap> {
         0.85,
       ),
     ),
+    // Commercial keyword landers at site root (content strategy)
+    ...COMMERCIAL_LANDERS.map((lander) =>
+      entry(
+        toCanonicalSitemapUrl(origin, `/${lander.slug}/`),
+        effectiveHubDate,
+        "monthly",
+        0.86,
+      ),
+    ),
     ...sortedProjects.map((project) =>
       entry(
         toCanonicalSitemapUrl(origin, `/case-studies/${project.slug}/`),
@@ -165,6 +175,9 @@ export const PORTFOLIO_SITEMAP_STATIC_PATHS = [
   "/credentials/",
   "/contact/",
   "/ai-consultant-india/",
+  "/ga4-consultant/",
+  "/google-analytics-consultant/",
+  "/marketing-analytics-consultant/",
   "/privacy/",
   "/resume.pdf",
 ] as const;

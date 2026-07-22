@@ -1,4 +1,5 @@
 import { describe, expect, test } from "vitest";
+import { COMMERCIAL_LANDERS } from "@/lib/seo/commercial-landers";
 import {
   buildPortfolioSitemap,
   PORTFOLIO_SITEMAP_STATIC_PATHS,
@@ -50,6 +51,10 @@ describe("buildPortfolioSitemap", () => {
 
     for (const alias of INDIA_SERVICE_ALIASES) {
       expect(locs).toContain(`https://madhudadi.in/services/${alias.slug}/`);
+    }
+
+    for (const lander of COMMERCIAL_LANDERS) {
+      expect(locs).toContain(`https://madhudadi.in/${lander.slug}/`);
     }
 
     // Must not index thin/auth surfaces

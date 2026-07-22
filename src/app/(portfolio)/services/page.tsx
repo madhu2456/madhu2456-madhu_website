@@ -246,6 +246,43 @@ export default async function ServicesHubPage() {
             })}
           </section>
 
+          {/* Commercial keyword landers (content plan) */}
+          <section className="max-w-4xl mx-auto space-y-4">
+            <h2 className="text-xl md:text-2xl font-bold tracking-tight text-center">
+              Hire by specialty
+            </h2>
+            <p className="text-sm text-muted-foreground text-center max-w-2xl mx-auto">
+              Exact-match consulting pages for common search intents. Each links
+              to the full capability service for stack and deliverables.
+            </p>
+            <ul className="grid gap-3 sm:grid-cols-3">
+              <li>
+                <Link
+                  href="/ga4-consultant/"
+                  className="block rounded-xl border border-border/60 bg-surface/20 p-4 text-sm font-semibold text-foreground transition-colors hover:border-primary/40 hover:text-primary"
+                >
+                  GA4 consultant
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/google-analytics-consultant/"
+                  className="block rounded-xl border border-border/60 bg-surface/20 p-4 text-sm font-semibold text-foreground transition-colors hover:border-primary/40 hover:text-primary"
+                >
+                  Google Analytics consultant
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/marketing-analytics-consultant/"
+                  className="block rounded-xl border border-border/60 bg-surface/20 p-4 text-sm font-semibold text-foreground transition-colors hover:border-primary/40 hover:text-primary"
+                >
+                  Marketing analytics consultant
+                </Link>
+              </li>
+            </ul>
+          </section>
+
           {/* Outcomes Summary Callout */}
           <section className="relative rounded-3xl border border-border/80 bg-surface/20 p-8 md:p-12 overflow-hidden text-center max-w-4xl mx-auto">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-64 w-64 bg-primary/5 rounded-full blur-[100px] -z-10" />

@@ -75,6 +75,12 @@ ${serviceLines || `- [Services hub](${siteUrl}/services/): Consulting and implem
 - [Marketing Analytics Consultant in India](${siteUrl}/services/marketing-analytics-consultant-india/): India-intent analytics lander
 - [AI Consultant Visakhapatnam](${siteUrl}/services/ai-consultant-visakhapatnam/): City-intent lander
 
+## Commercial keyword landers
+
+- [GA4 Consultant](${siteUrl}/ga4-consultant/): GA4 audit, migration, sGTM, BigQuery
+- [Google Analytics Consultant](${siteUrl}/google-analytics-consultant/): Independent GA4/GTM/BigQuery consulting
+- [Marketing Analytics Consultant](${siteUrl}/marketing-analytics-consultant/): Attribution, CLV, measurement systems
+
 ## Optional markdown twins
 
 - [Homepage MD](${siteUrl}/md/): Markdown twin of the homepage (noindex; HTML is canonical)
