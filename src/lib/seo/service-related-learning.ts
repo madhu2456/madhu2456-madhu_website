@@ -56,14 +56,19 @@ export const SERVICE_RELATED_LEARNING: Record<string, RelatedLearningLink[]> = {
   ],
   "marketing-analytics-consultant": [
     {
+      href: "/guides/marketing-mix-modeling-2026/",
+      label: "Guide: MMM in 2026 (Robyn vs Meridian vs custom)",
+      kind: "tool",
+    },
+    {
+      href: "/marketing-mix-modeling-consultant/",
+      label: "MMM consultant lander",
+      kind: "tool",
+    },
+    {
       href: "/case-studies/adticks/",
       label: "Case study: Adticks AI visibility & measurement",
       kind: "case-study",
-    },
-    {
-      href: `${BLOG}/`,
-      label: "Technical blog: analytics & product engineering",
-      kind: "blog",
     },
   ],
   "ga4-bigquery-campaign-analytics": [
