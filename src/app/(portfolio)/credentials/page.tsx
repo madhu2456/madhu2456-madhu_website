@@ -109,11 +109,11 @@ export default async function CredentialsPage() {
           {/* Downloadable Resume Callout */}
           <section className="rounded-2xl border border-primary/20 bg-surface/20 p-6 md:p-8 backdrop-blur-sm flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="space-y-1.5 text-center md:text-left">
-              <h3 className="font-bold text-lg text-foreground flex items-center justify-center md:justify-start gap-2">
+              <h2 className="font-bold text-lg text-foreground flex items-center justify-center md:justify-start gap-2">
                 <IconFileText className="h-5 w-5 text-primary" />{" "}
                 {pageContent.credentials.resumeCallout?.title ||
                   "Curated PDF Resume"}
-              </h3>
+              </h2>
               <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
                 {pageContent.credentials.resumeCallout?.description ||
                   "Download a clean, printer-friendly PDF containing comprehensive project history and technical details."}
@@ -379,9 +379,9 @@ export default async function CredentialsPage() {
                       <IconAward className="h-4.5 w-4.5" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-xs text-muted-foreground uppercase font-mono tracking-wider">
+                      <p className="font-bold text-xs text-muted-foreground uppercase font-mono tracking-wider">
                         {award.organization}
-                      </h4>
+                      </p>
                     </div>
                   </div>
                   <h3 className="font-bold text-sm text-foreground leading-snug">
