@@ -10,8 +10,7 @@ import { siteLanguageAlternates } from "@/lib/seo/hreflang";
 import { resolveSiteUrl } from "@/lib/site-url";
 
 // ≤60 chars for SERP (v2 audit): front-load AI/RAG + India; cities stay in body/desc
-const PAGE_TITLE =
-  "AI & RAG Consultant in India | Visakhapatnam | Madhu Dadi";
+const PAGE_TITLE = "AI & RAG Consultant in India | Visakhapatnam | Madhu Dadi";
 const PAGE_DESCRIPTION =
   "AI & RAG consultant in Visakhapatnam and remote India. Production LLM apps, agents, and analytics by Madhu Dadi.";
 
