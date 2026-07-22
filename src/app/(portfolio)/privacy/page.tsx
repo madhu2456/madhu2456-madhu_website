@@ -75,23 +75,17 @@ export default async function PrivacyPage() {
           </p>
           <p className="text-sm text-muted-foreground leading-relaxed">
             This policy covers the portfolio site at{" "}
-            <a
-              href="https://madhudadi.in/"
-              className="text-primary hover:underline"
-            >
+            <a href="https://madhudadi.in/" className="inline-link">
               madhudadi.in
             </a>
             . The technical learning platform at{" "}
-            <a
-              href="https://madhudadi.in/blog"
-              className="text-primary hover:underline"
-            >
+            <a href="https://madhudadi.in/blog" className="inline-link">
               madhudadi.in/blog
             </a>{" "}
             has a separate{" "}
             <a
               href="https://madhudadi.in/blog/privacy-policy"
-              className="text-primary hover:underline"
+              className="inline-link"
             >
               Privacy Policy
             </a>{" "}
@@ -193,10 +187,7 @@ export default async function PrivacyPage() {
             </ul>
             <p className="text-muted-foreground leading-relaxed">
               To exercise any of these rights, please contact me at{" "}
-              <SafeEmailLink
-                email={profile.email}
-                className="text-primary hover:underline"
-              >
+              <SafeEmailLink email={profile.email} className="inline-link">
                 {profile.email}
               </SafeEmailLink>
               .
@@ -208,10 +199,7 @@ export default async function PrivacyPage() {
             <p className="text-muted-foreground leading-relaxed">
               If you have questions about this privacy policy, please contact me
               at{" "}
-              <SafeEmailLink
-                email={profile.email}
-                className="text-primary hover:underline"
-              >
+              <SafeEmailLink email={profile.email} className="inline-link">
                 {profile.email}
               </SafeEmailLink>
               .

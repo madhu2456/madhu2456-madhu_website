@@ -286,25 +286,16 @@ export default async function ProfilePage() {
               <p>{profile.shortBio}</p>
               <p className="text-sm text-muted-foreground">
                 Services and case studies:{" "}
-                <Link
-                  href="/services/"
-                  className="text-primary hover:underline"
-                >
+                <Link href="/services/" className="inline-link">
                   /services/
                 </Link>
                 {" · "}
-                <Link
-                  href="/case-studies/"
-                  className="text-primary hover:underline"
-                >
+                <Link href="/case-studies/" className="inline-link">
                   /case-studies/
                 </Link>
                 {" · "}
                 Learning platform:{" "}
-                <a
-                  href={`${siteUrl}blog/about`}
-                  className="text-primary hover:underline"
-                >
+                <a href={`${siteUrl}blog/about`} className="inline-link">
                   /blog/about
                 </a>
               </p>

@@ -159,9 +159,49 @@
     background: oklch(0.78 0.14 65 / 35%);
     color: var(--foreground);
   }
+
+  /*
+   * WCAG 2.2 §1.4.1 (axe link-in-text-block): links in body copy must not rely
+   * on color alone. Underline + offset on paragraph / list / definition text.
+   * Button-like CTAs (rounded-full, solid bg) are excluded via :not().
+   */
+  /* WCAG 1.4.1: body links need non-color cue (underline). */
+  main p a:not([class*="rounded-full"]):not([class*="bg-primary"]),
+  main
+    li
+    a:not([class*="rounded-full"]):not([class*="bg-primary"]):not(
+      [class*="inline-flex"]
+    ),
+  main dd a:not([class*="rounded-full"]):not([class*="bg-primary"]) {
+    text-decoration-line: underline;
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: from-font;
+  }
+
+  main p a:not([class*="rounded-full"]):not([class*="bg-primary"]):hover,
+  main
+    li
+    a:not([class*="rounded-full"]):not([class*="bg-primary"]):not(
+      [class*="inline-flex"]
+    ):hover,
+  main dd a:not([class*="rounded-full"]):not([class*="bg-primary"]):hover {
+    text-decoration-thickness: 2px;
+  }
 }
 
 @layer utilities {
+  /** Explicit class for body/inline links (profile, privacy, footnotes). */
+  .inline-link {
+    color: var(--color-primary);
+    text-decoration-line: underline;
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: from-font;
+  }
+
+  .inline-link:hover {
+    text-decoration-thickness: 2px;
+  }
+
   .text-gradient {
     background: var(--gradient-text);
     background-clip: text;
