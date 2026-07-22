@@ -18,20 +18,15 @@ test.describe("Portfolio Audit UI Checks", () => {
   test("Contact page FAQ rendering correctly from schema", async ({ page }) => {
     await page.goto("/contact");
 
-    // The FAQ questions were extracted to a map in the fix
-    // We should expect the definitions list <dl> and terms <dt> to be present
+    // Visible contact FAQs (3 after removing Novartis-specific Q&A)
     const faqTerms = page.locator("dt");
-
-    // There are 4 FAQs in the schema, we expect to see at least 4 items
     const count = await faqTerms.count();
-    expect(count).toBeGreaterThanOrEqual(4);
+    expect(count).toBeGreaterThanOrEqual(3);
 
-    // Check if the FAQ answers are rendered
     const faqAnswers = page.locator("dd");
     const answerCount = await faqAnswers.count();
-    expect(answerCount).toBeGreaterThanOrEqual(4);
+    expect(answerCount).toBeGreaterThanOrEqual(3);
 
-    // Check visibility of a known FAQ question
     await expect(
       page.locator("text=What is your typical turnaround time?"),
     ).toBeVisible();
