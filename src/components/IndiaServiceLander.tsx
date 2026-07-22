@@ -9,7 +9,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JsonLdScript } from "@/components/JsonLdScript";
 import { LastUpdated } from "@/components/LastUpdated";
-import { type PageTocItem, PageToc } from "@/components/PageToc";
+import { PageToc, type PageTocItem } from "@/components/PageToc";
 import type { PortfolioData } from "@/lib/portfolio-data";
 import type { IndiaServiceAlias } from "@/lib/seo/service-aliases";
 import { resolveSiteUrl } from "@/lib/site-url";
@@ -30,13 +30,9 @@ export function IndiaServiceLander({ alias, data }: IndiaServiceLanderProps) {
   const tocItems: PageTocItem[] = [
     { id: "lander-summary", label: "Summary" },
     { id: "why-india", label: "Why India" },
-    ...(baseService
-      ? [{ id: "full-capability", label: "Capability" }]
-      : []),
+    ...(baseService ? [{ id: "full-capability", label: "Capability" }] : []),
     { id: "lander-engagement", label: "Engagement" },
-    ...(alias.faqs.length > 0
-      ? [{ id: "lander-faqs", label: "FAQ" }]
-      : []),
+    ...(alias.faqs.length > 0 ? [{ id: "lander-faqs", label: "FAQ" }] : []),
     { id: "lander-contact", label: "Contact" },
   ];
   const baseUrl = baseService

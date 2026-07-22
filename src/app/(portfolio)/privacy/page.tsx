@@ -98,10 +98,7 @@ export default async function PrivacyPage() {
                     </a>{" "}
                     (contact form, portfolio assistant, analytics). The learning
                     platform at{" "}
-                    <a
-                      href="https://madhudadi.in/blog"
-                      className="inline-link"
-                    >
+                    <a href="https://madhudadi.in/blog" className="inline-link">
                       madhudadi.in/blog
                     </a>{" "}
                     has a separate{" "}
@@ -143,15 +140,11 @@ export default async function PrivacyPage() {
             </p>
             <ul className="list-disc list-inside text-muted-foreground space-y-1">
               <li>
-                <strong className="text-foreground font-semibold">
-                  Name:
-                </strong>{" "}
+                <strong className="text-foreground font-semibold">Name:</strong>{" "}
                 Madhu Dadi
               </li>
               <li>
-                <strong className="text-foreground font-semibold">
-                  Role:
-                </strong>{" "}
+                <strong className="text-foreground font-semibold">Role:</strong>{" "}
                 Data Fiduciary and Grievance Officer (sole proprietor /
                 individual operator)
               </li>
@@ -173,11 +166,12 @@ export default async function PrivacyPage() {
             <p className="text-muted-foreground leading-relaxed">
               To raise a privacy grievance or exercise your rights as a Data
               Principal, email the Grievance Officer at the address above with
-              the subject line &quot;DPDP grievance&quot; or &quot;Data Principal
-              request&quot;. I aim to acknowledge within 72 hours and resolve
-              within the timelines prescribed under applicable DPDP rules. If
-              you are not satisfied with the response, you may escalate to the
-              Data Protection Board of India as provided under the Act.
+              the subject line &quot;DPDP grievance&quot; or &quot;Data
+              Principal request&quot;. I aim to acknowledge within 72 hours and
+              resolve within the timelines prescribed under applicable DPDP
+              rules. If you are not satisfied with the response, you may
+              escalate to the Data Protection Board of India as provided under
+              the Act.
             </p>
           </section>
 
@@ -350,8 +344,8 @@ export default async function PrivacyPage() {
               portfolio assistant, you understand that the personal data you
               provide may be transferred to and processed in jurisdictions
               outside India solely for the purposes described in this policy
-              (DPDP Act considerations on cross-border transfer, including
-              §16). I do not sell personal data.
+              (DPDP Act considerations on cross-border transfer, including §16).
+              I do not sell personal data.
             </p>
           </section>
 

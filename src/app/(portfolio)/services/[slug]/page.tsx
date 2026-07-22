@@ -14,11 +14,11 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JsonLdScript } from "@/components/JsonLdScript";
 import { LastUpdated } from "@/components/LastUpdated";
-import { type PageTocItem, PageToc } from "@/components/PageToc";
+import { PageToc, type PageTocItem } from "@/components/PageToc";
 import { ServiceIcon } from "@/components/ServiceIcon";
 import { getPortfolioData } from "@/lib/portfolio-data";
-import { siteLanguageAlternates } from "@/lib/seo/hreflang";
 import { getCaseStudyLinkLabel } from "@/lib/project-display";
+import { siteLanguageAlternates } from "@/lib/seo/hreflang";
 import { getRelatedLearning } from "@/lib/seo/service-related-learning";
 import { resolveSiteUrl } from "@/lib/site-url";
 
@@ -351,7 +351,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             <div className="md:col-span-2 space-y-8">
               {/* Detailed narrative description */}
               {service.fullDescription && (
-                <section id="service-overview" className="scroll-mt-28 space-y-4">
+                <section
+                  id="service-overview"
+                  className="scroll-mt-28 space-y-4"
+                >
                   <h2 className="text-xl font-bold tracking-tight border-b border-border/80 pb-2">
                     Service Overview
                   </h2>
@@ -363,7 +366,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
               {/* Service Features / Core Offerings */}
               {service.features && service.features.length > 0 && (
-                <section id="key-capabilities" className="scroll-mt-28 space-y-4">
+                <section
+                  id="key-capabilities"
+                  className="scroll-mt-28 space-y-4"
+                >
                   <h2 className="text-xl font-bold tracking-tight border-b border-border/80 pb-2">
                     Key Focus Capabilities
                   </h2>

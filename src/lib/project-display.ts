@@ -5,8 +5,10 @@
 export function getCaseStudyLinkLabel(title: string, maxLen = 40): string {
   const raw = title?.trim() || "Case study";
   const head =
-    raw.split(/\s+[—–-]\s+/).find((part) => part.trim().length > 0)?.trim() ||
-    raw;
+    raw
+      .split(/\s+[—–-]\s+/)
+      .find((part) => part.trim().length > 0)
+      ?.trim() || raw;
   const short =
     head.length > maxLen ? `${head.slice(0, maxLen - 1).trimEnd()}…` : head;
   if (/case\s*stud(y|ies)/i.test(short)) return short;
