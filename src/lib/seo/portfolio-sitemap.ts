@@ -3,7 +3,8 @@ import { getPortfolioData } from "@/lib/portfolio-data";
 import { INDIA_SERVICE_ALIASES } from "@/lib/seo/service-aliases";
 import { resolveSiteUrl } from "@/lib/site-url";
 
-const FALLBACK_LAST_MODIFIED = "2026-06-02";
+/** Floor when content has no valid updatedAt timestamps. */
+const FALLBACK_LAST_MODIFIED = "2026-07-22";
 
 const toSitemapDate = (value: string | null | undefined, fallback: string) => {
   if (!value) return fallback;
@@ -12,7 +13,18 @@ const toSitemapDate = (value: string | null | undefined, fallback: string) => {
   return new Date(timestamp).toISOString().split("T")[0];
 };
 
-/** India-primary hreflang set for every sitemap URL (Phase 1.3 / 5.7). */
+/** Absolute apex URL with trailing slash (except files like resume.pdf). */
+export function toCanonicalSitemapUrl(origin: string, path: string): string {
+  const base = origin.replace(/\/$/, "");
+  if (!path || path === "/") return `${base}/`;
+  if (path.endsWith(".pdf") || path.endsWith(".xml") || path.endsWith(".txt")) {
+    return `${base}${path.startsWith("/") ? path : `/${path}`}`;
+  }
+  const withSlash = path.startsWith("/") ? path : `/${path}`;
+  return `${base}${withSlash.endsWith("/") ? withSlash : `${withSlash}/`}`;
+}
+
+/** India-primary hreflang set (Phase 1.3 / 5.7). */
 const languageAlternates = (url: string) => ({
   "en-IN": url,
   en: url,
@@ -34,45 +46,125 @@ const entry = (
   },
 });
 
+/**
+ * Indexable portfolio URLs only (no /cms/, /search/, noindex thin pages).
+ * Includes CMS services, case studies, and Phase 5 India landers.
+ */
 export async function buildPortfolioSitemap(): Promise<MetadataRoute.Sitemap> {
-  const siteUrl = `${resolveSiteUrl()}/`;
+  const origin = resolveSiteUrl().replace(/\/$/, "");
+  const siteUrl = `${origin}/`;
   const { sortedServices, sortedProjects, portfolioLastUpdatedAt } =
     await getPortfolioData();
+
   const baseDate = toSitemapDate(
     portfolioLastUpdatedAt,
     FALLBACK_LAST_MODIFIED,
   );
+  // Fresher of CMS-derived max and known content floor (this remediation cycle).
+  const effectiveHubDate =
+    baseDate >= FALLBACK_LAST_MODIFIED ? baseDate : FALLBACK_LAST_MODIFIED;
 
-  const entries: MetadataRoute.Sitemap = [
-    entry(siteUrl, baseDate, "weekly", 1.0),
-    entry(`${siteUrl}profile/`, baseDate, "monthly", 0.9),
-    entry(`${siteUrl}services/`, baseDate, "monthly", 0.9),
-    entry(`${siteUrl}case-studies/`, baseDate, "monthly", 0.85),
-    entry(`${siteUrl}credentials/`, baseDate, "monthly", 0.7),
-    entry(`${siteUrl}contact/`, baseDate, "monthly", 0.7),
-    entry(`${siteUrl}ai-consultant-india/`, baseDate, "monthly", 0.8),
-    entry(`${siteUrl}privacy/`, baseDate, "monthly", 0.3),
+  const raw: MetadataRoute.Sitemap = [
+    entry(siteUrl, effectiveHubDate, "weekly", 1.0),
+    entry(
+      toCanonicalSitemapUrl(origin, "/profile/"),
+      effectiveHubDate,
+      "monthly",
+      0.9,
+    ),
+    entry(
+      toCanonicalSitemapUrl(origin, "/services/"),
+      effectiveHubDate,
+      "monthly",
+      0.9,
+    ),
+    entry(
+      toCanonicalSitemapUrl(origin, "/case-studies/"),
+      effectiveHubDate,
+      "monthly",
+      0.85,
+    ),
+    entry(
+      toCanonicalSitemapUrl(origin, "/credentials/"),
+      effectiveHubDate,
+      "monthly",
+      0.7,
+    ),
+    entry(
+      toCanonicalSitemapUrl(origin, "/contact/"),
+      effectiveHubDate,
+      "monthly",
+      0.7,
+    ),
+    entry(
+      toCanonicalSitemapUrl(origin, "/ai-consultant-india/"),
+      effectiveHubDate,
+      "monthly",
+      0.8,
+    ),
+    entry(
+      toCanonicalSitemapUrl(origin, "/privacy/"),
+      effectiveHubDate,
+      "monthly",
+      0.3,
+    ),
+    // Resume is intentionally indexable (DR-04)
+    entry(
+      toCanonicalSitemapUrl(origin, "/resume.pdf"),
+      effectiveHubDate,
+      "yearly",
+      0.4,
+    ),
     ...sortedServices.map((service) =>
       entry(
-        `${siteUrl}services/${service.slug}/`,
-        toSitemapDate(service.updatedAt, baseDate),
+        toCanonicalSitemapUrl(origin, `/services/${service.slug}/`),
+        toSitemapDate(service.updatedAt, effectiveHubDate),
         "monthly",
         0.85,
       ),
     ),
     // India-intent landers (real pages, not redirects)
     ...INDIA_SERVICE_ALIASES.map((alias) =>
-      entry(`${siteUrl}services/${alias.slug}/`, baseDate, "monthly", 0.85),
+      entry(
+        toCanonicalSitemapUrl(origin, `/services/${alias.slug}/`),
+        effectiveHubDate,
+        "monthly",
+        0.85,
+      ),
     ),
     ...sortedProjects.map((project) =>
       entry(
-        `${siteUrl}case-studies/${project.slug}/`,
-        toSitemapDate(project.updatedAt, baseDate),
+        toCanonicalSitemapUrl(origin, `/case-studies/${project.slug}/`),
+        toSitemapDate(project.updatedAt, effectiveHubDate),
         "monthly",
         0.8,
       ),
     ),
   ];
 
-  return entries;
+  // Dedupe by loc (last write wins), then stable sort: priority desc, then URL.
+  const byUrl = new Map<string, MetadataRoute.Sitemap[number]>();
+  for (const item of raw) {
+    byUrl.set(item.url, item);
+  }
+
+  return Array.from(byUrl.values()).sort((a, b) => {
+    const pa = a.priority ?? 0;
+    const pb = b.priority ?? 0;
+    if (pb !== pa) return pb - pa;
+    return a.url.localeCompare(b.url);
+  });
 }
+
+/** Expected static path prefixes for tests / ops checks (no host). */
+export const PORTFOLIO_SITEMAP_STATIC_PATHS = [
+  "/",
+  "/profile/",
+  "/services/",
+  "/case-studies/",
+  "/credentials/",
+  "/contact/",
+  "/ai-consultant-india/",
+  "/privacy/",
+  "/resume.pdf",
+] as const;
