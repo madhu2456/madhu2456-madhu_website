@@ -2,6 +2,7 @@ import { IconArrowRight, IconExternalLink } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { FormattedText } from "@/components/FormattedText";
+import { ImpactMetricStrip } from "@/components/ImpactMetricStrip";
 import { Section } from "@/components/Section";
 import { pushToDataLayer } from "@/lib/gtm";
 import {
@@ -56,13 +57,18 @@ export function Projects({ projects }: { projects: ProjectItem[] }) {
                 <h3 className="mt-2 min-h-15 font-display text-xl font-semibold leading-tight sm:text-2xl">
                   {project.title}
                 </h3>
+                <ImpactMetricStrip
+                  metrics={project.impactMetrics}
+                  className="mt-3"
+                  max={3}
+                />
                 {tagline ? (
-                  <p className="mt-2 text-sm font-medium text-foreground/80">
+                  <p className="mt-3 text-sm font-medium text-foreground/80">
                     <FormattedText text={tagline} />
                   </p>
                 ) : null}
                 {project.impactSummary ? (
-                  <p className="mt-3 min-h-36 text-sm leading-relaxed text-muted-foreground">
+                  <p className="mt-3 min-h-24 text-sm leading-relaxed text-muted-foreground line-clamp-4">
                     <FormattedText text={project.impactSummary} />
                   </p>
                 ) : null}

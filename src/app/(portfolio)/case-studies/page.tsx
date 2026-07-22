@@ -6,6 +6,7 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { Footer } from "@/components/Footer";
 import { FormattedText } from "@/components/FormattedText";
 import { Header } from "@/components/Header";
+import { ImpactMetricStrip } from "@/components/ImpactMetricStrip";
 import { JsonLdScript } from "@/components/JsonLdScript";
 import { SeoStructuredData } from "@/components/SeoStructuredData";
 import {
@@ -282,13 +283,17 @@ export default async function CaseStudiesPage() {
                   <h2 className="mt-3 font-display text-2xl font-semibold leading-tight">
                     {project.title}
                   </h2>
+                  <ImpactMetricStrip
+                    metrics={project.impactMetrics}
+                    className="mt-3"
+                  />
                   {tagline ? (
-                    <p className="mt-2 text-sm font-medium text-foreground/80">
+                    <p className="mt-3 text-sm font-medium text-foreground/80">
                       <FormattedText text={tagline} />
                     </p>
                   ) : null}
                   {project.impactSummary ? (
-                    <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
+                    <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
                       <FormattedText text={project.impactSummary} />
                     </p>
                   ) : null}

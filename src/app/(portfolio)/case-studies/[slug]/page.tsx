@@ -12,6 +12,7 @@ import { CitationBox } from "@/components/CitationBox";
 import { Footer } from "@/components/Footer";
 import { FormattedText } from "@/components/FormattedText";
 import { Header } from "@/components/Header";
+import { ImpactMetricStrip } from "@/components/ImpactMetricStrip";
 import { JsonLdScript } from "@/components/JsonLdScript";
 import { LastUpdated } from "@/components/LastUpdated";
 import { ShareButtons } from "@/components/ShareButtons";
@@ -303,6 +304,11 @@ export default async function CaseStudyPage({
         <h1 className="mt-3 font-display text-4xl font-bold text-gradient md:text-6xl">
           {project.title}
         </h1>
+        <ImpactMetricStrip
+          metrics={project.impactMetrics}
+          size="md"
+          className="mt-6"
+        />
         <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
           {getDistinctProjectTagline(project.title, project.tagline) ||
             description}
