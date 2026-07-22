@@ -309,7 +309,54 @@ export default async function PrivacyPage() {
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-xl font-semibold">7. Contact</h2>
+            <h2 className="text-xl font-semibold">7. Children&apos;s Data</h2>
+            <p className="text-muted-foreground leading-relaxed">
+              This portfolio is intended for adult professionals exploring
+              consulting, hiring, or technical collaboration. It is not directed
+              at children (individuals under 18). I do not knowingly collect
+              personal data from children. If you believe a child has submitted
+              personal data through the contact form or portfolio assistant,
+              contact the Grievance Officer and I will delete that data promptly
+              where required under the DPDP Act, 2023 (including §9 on
+              children&apos;s data and verifiable parental consent).
+            </p>
+          </section>
+
+          <section className="space-y-4">
+            <h2 className="text-xl font-semibold">
+              8. Cross-Border Data Transfers
+            </h2>
+            <p className="text-muted-foreground leading-relaxed">
+              I am based in India. Some processing needed to operate this site
+              may occur outside India when you use third-party services listed
+              above:
+            </p>
+            <ul className="list-disc list-inside text-muted-foreground space-y-1">
+              <li>
+                <strong>Resend</strong> — delivers contact-form email
+              </li>
+              <li>
+                <strong>OpenAI</strong> — processes portfolio assistant messages
+                when you use the assistant
+              </li>
+              <li>
+                <strong>Google (GTM / Analytics)</strong> — aggregated usage and
+                Core Web Vitals measurement after you interact with the page
+              </li>
+            </ul>
+            <p className="text-muted-foreground leading-relaxed">
+              Cross-border processing is limited to what those providers need to
+              provide their service. By submitting the contact form or using the
+              portfolio assistant, you understand that the personal data you
+              provide may be transferred to and processed in jurisdictions
+              outside India solely for the purposes described in this policy
+              (DPDP Act considerations on cross-border transfer, including
+              §16). I do not sell personal data.
+            </p>
+          </section>
+
+          <section className="space-y-4">
+            <h2 className="text-xl font-semibold">9. Contact</h2>
             <p className="text-muted-foreground leading-relaxed">
               If you have questions about this privacy policy, please contact
               Madhu Dadi (Data Fiduciary) at{" "}
