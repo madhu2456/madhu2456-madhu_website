@@ -131,6 +131,12 @@
     scroll-behavior: smooth;
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
@@ -235,14 +241,27 @@
   *,
   ::before,
   ::after {
-    animation-duration: 0.01ms;
-    animation-iteration-count: 1;
-    scroll-behavior: auto;
-    transition-duration: 0.01ms;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .animate-fade-up {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 
+/* High-contrast keyboard focus for dark theme (audit a11y) */
 :focus-visible {
   outline: 2px solid #f4a34b;
   outline-offset: 2px;
+}
+
+summary:focus-visible {
+  outline: 2px solid #f4a34b;
+  outline-offset: 2px;
+  border-radius: 0.25rem;
 }

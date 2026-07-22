@@ -275,6 +275,7 @@ export function ContactForm() {
       key={`${querySubject ?? ""}|${queryMessage ?? ""}`}
       className="space-y-4 rounded-2xl border border-border bg-surface/60 p-6 backdrop-blur-md"
       onSubmit={handleSubmit}
+      aria-label="Contact Madhu Dadi"
     >
       <input
         type="text"

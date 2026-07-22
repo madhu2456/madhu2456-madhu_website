@@ -45,7 +45,7 @@ export function FormField({
 }: FormFieldProps) {
   const id = `${idPrefix}-${name}`;
   const errorId = `${id}-error`;
-  const className = `w-full rounded-lg border bg-background/60 px-4 py-3 text-sm outline-none transition-all focus:border-primary focus:bg-background ${
+  const className = `w-full rounded-lg border bg-background/60 px-4 py-3 text-sm outline-none transition-all focus:border-primary focus:bg-background focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
     error ? "border-destructive" : "border-border"
   }`;
 

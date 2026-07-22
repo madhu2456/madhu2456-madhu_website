@@ -482,19 +482,19 @@ function Certifications({
 function Faq({ items }: { items: Array<{ q: string; a: string }> }) {
   // Native <details>/<summary>: answers stay in the HTML for crawlers and
   // no-JS users (no JS-injected bodies, no [hidden] stripping). Keyboard and
-  // screen-reader support is built in.
+  // screen-reader support is built in (Enter/Space on summary).
   return (
     <Section id="faq" eyebrow="FAQ" title="Frequently asked questions">
       <div className="mx-auto max-w-3xl divide-y divide-border rounded-2xl border border-border bg-surface/50">
         {items.map((item) => (
           <details key={item.q} className="group px-6 open:pb-5">
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-left marker:content-none [&::-webkit-details-marker]:hidden">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 rounded-sm py-5 text-left marker:content-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary [&::-webkit-details-marker]:hidden">
               <span className="font-display text-lg font-semibold">
                 {item.q}
               </span>
               <span
                 aria-hidden
-                className="shrink-0 text-primary transition-transform group-open:rotate-45"
+                className="shrink-0 text-primary transition-transform group-open:rotate-45 motion-reduce:transition-none"
               >
                 +
               </span>
@@ -639,107 +639,154 @@ function Contact({ profile }: { profile: Profile }) {
           </div>
         </div>
 
-        <form
-          key={`${prefill.subject ?? ""}|${prefill.message ?? ""}`}
-          className="space-y-4 rounded-2xl border border-border bg-surface/60 p-6"
-          onSubmit={handleSubmit}
-        >
-          <input
-            type="text"
-            name="hp_field"
-            className="hidden"
-            tabIndex={-1}
-            autoComplete="off"
-            aria-hidden="true"
-          />
-          <FormField
-            label="Name"
-            name="name"
-            required
-            defaultValue={prefill.name}
-            autoComplete="name"
-            error={fieldErrors.name}
-          />
-          <FormField
-            label="Email"
-            name="email"
-            type="email"
-            required
-            defaultValue={prefill.email}
-            autoComplete="email"
-            error={fieldErrors.email}
-          />
-          <FormField
-            label="Subject"
-            name="subject"
-            required
-            defaultValue={prefill.subject}
-            error={fieldErrors.subject}
-          />
-          <FormField
-            label="Problem statement"
-            name="problem"
-            textarea
-            placeholder="What are you trying to ship or fix?"
-          />
-          <FormField
-            label="Current stack"
-            name="stack"
-            placeholder="e.g. Next.js, FastAPI, Postgres, existing LLM provider"
-          />
-          <FormField
-            label="Timeline"
-            name="timeline"
-            placeholder="e.g. 4–6 weeks, discovery this month"
-          />
-          <FormField
-            label="Desired business outcome"
-            name="outcome"
-            placeholder="e.g. reduce support tickets, ship RAG in production"
-          />
-          <FormField
-            label="Additional context"
-            name="message"
-            textarea
-            required
-            defaultValue={prefill.message}
-            error={fieldErrors.message}
-          />
-          <p className="text-xs text-muted-foreground">
-            Typical reply within{" "}
-            <strong className="text-foreground">24 hours</strong>.
-          </p>
-          <button
-            type="submit"
-            disabled={isPending || submitted}
-            className="w-full rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-transform hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-60"
+        {submitted ? (
+          <div
+            className="space-y-6 rounded-2xl border border-border bg-surface/60 p-8 text-center"
+            role="status"
+            aria-live="polite"
           >
-            {isPending ? "Sending..." : submitted ? "Sent!" : "Send message"}
-          </button>
-          {status ? (
-            <p
-              role={status.tone === "error" ? "alert" : "status"}
-              aria-live={status.tone === "error" ? "assertive" : "polite"}
-              className={`rounded-lg border px-4 py-3 text-sm ${
-                status.tone === "success"
-                  ? "border-emerald-400/30 bg-emerald-400/10 text-emerald-200"
-                  : "border-destructive/30 bg-destructive/10 text-destructive-foreground"
-              }`}
+            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+            </div>
+            <div className="space-y-2">
+              <h3 className="font-bold text-lg text-foreground">
+                Message sent
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                Thank you for reaching out. I usually reply within 24 hours.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                sessionStorage.removeItem("contact_submitted");
+                setSubmitted(false);
+                setStatus(null);
+                setPrefill({});
+              }}
+              className="mx-auto inline-flex items-center justify-center rounded-full border border-border bg-background px-6 py-2.5 text-xs font-semibold text-foreground transition-colors hover:bg-surface-elevated/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
-              {status.message}
+              Send another message
+            </button>
+          </div>
+        ) : (
+          <form
+            key={`${prefill.subject ?? ""}|${prefill.message ?? ""}`}
+            className="space-y-4 rounded-2xl border border-border bg-surface/60 p-6"
+            onSubmit={handleSubmit}
+            noValidate={false}
+            aria-label="Contact Madhu Dadi"
+          >
+            <input
+              type="text"
+              name="hp_field"
+              className="hidden"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+            />
+            <FormField
+              label="Name"
+              name="name"
+              required
+              defaultValue={prefill.name}
+              autoComplete="name"
+              error={fieldErrors.name}
+            />
+            <FormField
+              label="Email"
+              name="email"
+              type="email"
+              required
+              defaultValue={prefill.email}
+              autoComplete="email"
+              error={fieldErrors.email}
+            />
+            <FormField
+              label="Subject"
+              name="subject"
+              required
+              defaultValue={prefill.subject}
+              error={fieldErrors.subject}
+            />
+            <FormField
+              label="Problem statement"
+              name="problem"
+              textarea
+              placeholder="What are you trying to ship or fix?"
+            />
+            <FormField
+              label="Current stack"
+              name="stack"
+              placeholder="e.g. Next.js, FastAPI, Postgres, existing LLM provider"
+            />
+            <FormField
+              label="Timeline"
+              name="timeline"
+              placeholder="e.g. 4–6 weeks, discovery this month"
+            />
+            <FormField
+              label="Desired business outcome"
+              name="outcome"
+              placeholder="e.g. reduce support tickets, ship RAG in production"
+            />
+            <FormField
+              label="Additional context"
+              name="message"
+              textarea
+              required
+              defaultValue={prefill.message}
+              error={fieldErrors.message}
+            />
+            <p className="text-xs text-muted-foreground">
+              Typical reply within{" "}
+              <strong className="text-foreground">24 hours</strong>.
             </p>
-          ) : null}
-          <p className="text-xs text-muted-foreground/60">
-            By submitting, you agree to the{" "}
-            <Link
-              href="/privacy/"
-              className="underline hover:text-foreground transition-colors"
+            <button
+              type="submit"
+              disabled={isPending}
+              className="w-full rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-transform hover:scale-[1.02] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-60 motion-reduce:transition-none motion-reduce:hover:scale-100"
             >
-              privacy policy
-            </Link>
-            .
-          </p>
-        </form>
+              {isPending ? "Sending..." : "Send message"}
+            </button>
+            {status ? (
+              <p
+                role={status.tone === "error" ? "alert" : "status"}
+                aria-live={status.tone === "error" ? "assertive" : "polite"}
+                className={`rounded-lg border px-4 py-3 text-sm ${
+                  status.tone === "success"
+                    ? "border-emerald-400/30 bg-emerald-400/10 text-emerald-200"
+                    : "border-destructive/30 bg-destructive/10 text-destructive-foreground"
+                }`}
+              >
+                {status.message}
+              </p>
+            ) : null}
+            <p className="text-xs text-muted-foreground/60">
+              By submitting, you agree to the{" "}
+              <Link
+                href="/privacy/"
+                className="underline hover:text-foreground transition-colors"
+              >
+                privacy policy
+              </Link>
+              .
+            </p>
+          </form>
+        )}
       </div>
     </Section>
   );
