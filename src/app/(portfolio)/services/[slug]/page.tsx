@@ -18,6 +18,7 @@ import { type PageTocItem, PageToc } from "@/components/PageToc";
 import { ServiceIcon } from "@/components/ServiceIcon";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { siteLanguageAlternates } from "@/lib/seo/hreflang";
+import { getCaseStudyLinkLabel } from "@/lib/project-display";
 import { getRelatedLearning } from "@/lib/seo/service-related-learning";
 import { resolveSiteUrl } from "@/lib/site-url";
 
@@ -596,7 +597,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                         {project.impactSummary || project.tagline}
                       </p>
                       <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-primary">
-                        Read the case study
+                        {getCaseStudyLinkLabel(project.title)}
                         <IconArrowRight className="h-4 w-4" />
                       </span>
                     </Link>

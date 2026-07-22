@@ -10,7 +10,10 @@ import {
   shouldUseUnoptimizedImage,
 } from "@/lib/image-source";
 import type { ProjectItem } from "@/lib/portfolio-data";
-import { getDistinctProjectTagline } from "@/lib/project-display";
+import {
+  getCaseStudyLinkLabel,
+  getDistinctProjectTagline,
+} from "@/lib/project-display";
 
 export function Projects({ projects }: { projects: ProjectItem[] }) {
   if (projects.length === 0) return null;
@@ -88,7 +91,8 @@ export function Projects({ projects }: { projects: ProjectItem[] }) {
                     prefetch={false}
                     className="inline-flex items-center gap-1 font-medium text-primary underline-offset-4 transition-colors hover:underline"
                   >
-                    Read case study <IconArrowRight className="h-3.5 w-3.5" />
+                    {getCaseStudyLinkLabel(project.title)}{" "}
+                    <IconArrowRight className="h-3.5 w-3.5" />
                   </Link>
                   {project.liveUrl ? (
                     <a

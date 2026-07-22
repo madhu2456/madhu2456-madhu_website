@@ -2,6 +2,7 @@ import { IconAward, IconExternalLink, IconQuote } from "@tabler/icons-react";
 import Link from "next/link";
 import { Section } from "@/components/Section";
 import type { PageContent, ProjectItem } from "@/lib/portfolio-data";
+import { getCaseStudyLinkLabel } from "@/lib/project-display";
 
 type Testimonial = NonNullable<
   NonNullable<PageContent["home"]["testimonials"]>[number]
@@ -115,7 +116,7 @@ export function SocialProof({
                     {card.line}
                   </p>
                   <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-primary">
-                    Read case study
+                    {getCaseStudyLinkLabel(card.title)}
                     <IconExternalLink className="h-3 w-3" aria-hidden />
                   </span>
                 </Link>

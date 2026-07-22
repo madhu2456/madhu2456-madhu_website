@@ -14,7 +14,10 @@ import {
   shouldUseUnoptimizedImage,
 } from "@/lib/image-source";
 import { getPortfolioData } from "@/lib/portfolio-data";
-import { getDistinctProjectTagline } from "@/lib/project-display";
+import {
+  getCaseStudyLinkLabel,
+  getDistinctProjectTagline,
+} from "@/lib/project-display";
 import { siteLanguageAlternates } from "@/lib/seo/hreflang";
 import { resolveSiteUrl } from "@/lib/site-url";
 
@@ -312,7 +315,8 @@ export default async function CaseStudiesPage() {
                       href={`/case-studies/${project.slug}/`}
                       className="inline-flex items-center gap-1 font-medium text-primary underline-offset-4 hover:underline"
                     >
-                      Read case study <IconArrowRight className="h-3.5 w-3.5" />
+                      {getCaseStudyLinkLabel(project.title)}{" "}
+                      <IconArrowRight className="h-3.5 w-3.5" />
                     </Link>
                     {project.liveUrl ? (
                       <a
