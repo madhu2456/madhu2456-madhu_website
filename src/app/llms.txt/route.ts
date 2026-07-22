@@ -84,6 +84,7 @@ ${serviceLines || `- [Services hub](${siteUrl}/services/): Consulting and implem
 - [Attribution Modeling Consultant](${siteUrl}/attribution-modeling-consultant/): Post-cookie attribution, GA4 paths, tests
 - [Fractional AI Consultant](${siteUrl}/fractional-ai-consultant/): Retainer AI roadmap, RAG, evals, LLM ops
 - [AI Consultant for Startups](${siteUrl}/ai-consultant-for-startups/): Seed–Series B pilots, RAG/LLM shipping
+- [AI Automation Consultant](${siteUrl}/ai-automation-consultant/): Agent workflows, copilots, production automation
 
 ## Optional markdown twins
 

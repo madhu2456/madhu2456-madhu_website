@@ -435,6 +435,64 @@ export const COMMERCIAL_LANDERS: CommercialLander[] = [
     timeline: "4–12 week pilot or capped monthly advisory",
     proofProjectSlug: "technical-blog",
   },
+  {
+    slug: "ai-automation-consultant",
+    baseServiceSlug: "ai-agent-development",
+    title: "AI Automation Consultant",
+    seoTitle: "AI Automation Consultant — Workflows & Agents | Madhu Dadi",
+    seoDescription:
+      "AI automation consultant: agent workflows, RAG, internal copilots. Production builds with evals. India & remote.",
+    heroEyebrow: "AI automation · Agents · Ops",
+    shortDescription:
+      "Design and ship AI automation that cuts operational cost—agent workflows, RAG pipelines, and internal copilots with logging and evals—not demo-only Zapier chains.",
+    directAnswer: [
+      "An AI automation consultant maps repetitive workflows, designs agent or LLM-assisted steps, and implements production-shaped systems with guardrails, logs, and ownership handover—so automation survives contact with real tickets and data.",
+      "I take select consulting work alongside full-time employment. Default stack leans custom agents, APIs, and RAG where needed; n8n/Zapier may glue edges when they fit, but the core is measurable, reviewable automation. Visakhapatnam-based; remote-first.",
+    ],
+    valueProps: [
+      "Prioritize workflows with clear volume and failure cost—not “automate everything”",
+      "Agents and structured LLM steps with tool boundaries and human-in-the-loop where risk is high",
+      "Evals, logs, and runbooks so ops can debug without the original builder",
+      "Honest tool choice: glue tools for edges, custom code when control and scale matter",
+    ],
+    focusTags: [
+      "AI automation",
+      "Agents",
+      "Workflows",
+      "RAG / copilots",
+      "India & remote",
+    ],
+    faqs: [
+      {
+        question: "What does an AI automation consultant do?",
+        answer:
+          "Discover high-value workflows, design the automation boundary (rules vs LLM vs agent), implement a thin production path, and leave monitoring and docs. Not a permanent outsourced ops team unless you buy ongoing advisory separately.",
+      },
+      {
+        question: "How much do AI automation projects cost?",
+        answer:
+          "Custom quotes after discovery—no public rate card. Cost tracks workflow complexity, integrations, and risk (especially write-actions to production systems).",
+      },
+      {
+        question: "Which workflows are worth automating with AI first?",
+        answer:
+          "High volume, structured inputs, clear success checks, and expensive human failure modes—e.g. triage, extraction, routing, draft generation with review. Avoid open-ended “do my job” agents as the first deploy.",
+      },
+      {
+        question: "n8n vs Zapier vs custom LangGraph — how to choose?",
+        answer:
+          "Use glue tools for simple, low-risk integrations. Use custom agent/workflow code when you need evals, complex tools, multi-step control, or strict data boundaries. Discovery picks the lightest stack that meets the risk profile.",
+      },
+      {
+        question: "How do you measure ROI on an AI automation build?",
+        answer:
+          "Baseline handle time, error rate, or queue depth before ship; instrument the same metrics after. ROI is hours saved or errors avoided—not demo delight.",
+      },
+    ],
+    contactIntent: "ai-agent",
+    timeline: "2–8 weeks (scoped workflow)",
+    proofProjectSlug: "udemy-enroller-fastapi",
+  },
 ];
 
 export function getCommercialLander(
