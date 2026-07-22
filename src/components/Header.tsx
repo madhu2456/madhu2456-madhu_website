@@ -91,6 +91,9 @@ export function Header({ profile, navigationItems }: HeaderProps) {
     // If the link is external, return as is
     if (href.startsWith("http")) return href;
 
+    // Static assets (resume PDF) must not get a trailing slash
+    if (href.endsWith(".pdf")) return href;
+
     // Handle hash links (anchor links)
     if (href.startsWith("#")) {
       // If we are not on the homepage, prefix with / so it navigates back home first
@@ -102,8 +105,10 @@ export function Header({ profile, navigationItems }: HeaderProps) {
     return href.endsWith("/") ? href : `${href}/`;
   };
 
+  const isFileAsset = (href: string) => href.endsWith(".pdf");
+
   const isLinkActive = (href: string) => {
-    if (href.startsWith("http")) return false;
+    if (href.startsWith("http") || isFileAsset(href)) return false;
 
     // Check match for root
     if (href === "/" && pathname === "/") return true;
@@ -149,20 +154,44 @@ export function Header({ profile, navigationItems }: HeaderProps) {
         >
           {navigationItems.map((link) => {
             const isActive = isLinkActive(link.href);
-            const isExternal = link.isExternal || link.href.startsWith("http");
+            const isExternal =
+              link.isExternal ||
+              link.href.startsWith("http") ||
+              isFileAsset(link.href);
+            const href = getHref(link.href);
+            const className = `rounded-full px-3.5 py-2 text-xs font-semibold tracking-wide transition-all duration-300 ${
+              isActive
+                ? "bg-primary/15 text-primary border border-primary/20 shadow-sm"
+                : "text-muted-foreground border border-transparent hover:bg-white/5 hover:text-foreground"
+            }`;
+
+            if (isFileAsset(link.href)) {
+              return (
+                <TrackedLink
+                  key={link.href}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  gtmEvent="resume_download"
+                  gtmData={{
+                    download_type: "pdf",
+                    download_location: "header_nav",
+                  }}
+                  className={className}
+                >
+                  {link.title}
+                </TrackedLink>
+              );
+            }
 
             return (
               <Link
                 key={link.href}
-                href={getHref(link.href)}
+                href={href}
                 target={isExternal ? "_blank" : undefined}
                 rel={isExternal ? "noopener noreferrer" : undefined}
                 aria-current={isActive ? "page" : undefined}
-                className={`rounded-full px-3.5 py-2 text-xs font-semibold tracking-wide transition-all duration-300 ${
-                  isActive
-                    ? "bg-primary/15 text-primary border border-primary/20 shadow-sm"
-                    : "text-muted-foreground border border-transparent hover:bg-white/5 hover:text-foreground"
-                }`}
+                className={className}
               >
                 {link.title}
               </Link>
@@ -171,17 +200,7 @@ export function Header({ profile, navigationItems }: HeaderProps) {
         </nav>
 
         <div className="flex items-center gap-1.5 sm:gap-2">
-          {/* Resume demoted to text link — one solid primary (Hire me) per audit CRO */}
-          <TrackedLink
-            href="/resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            gtmEvent="resume_download"
-            gtmData={{ download_type: "pdf", download_location: "header" }}
-            className="hidden rounded-full px-2 py-2 text-xs font-medium text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:inline-block sm:px-3 sm:text-sm"
-          >
-            Resume
-          </TrackedLink>
+          {/* Single solid primary CTA — Resume lives in primary nav */}
           <TrackedLink
             href="/contact/#intent=full-time"
             gtmEvent="hire_me_click"
@@ -222,21 +241,45 @@ export function Header({ profile, navigationItems }: HeaderProps) {
             {navigationItems.map((link) => {
               const isActive = isLinkActive(link.href);
               const isExternal =
-                link.isExternal || link.href.startsWith("http");
+                link.isExternal ||
+                link.href.startsWith("http") ||
+                isFileAsset(link.href);
+              const href = getHref(link.href);
+              const className = `rounded-xl px-4 py-3 text-sm font-semibold tracking-wide transition-all ${
+                isActive
+                  ? "bg-primary/15 text-primary border border-primary/20"
+                  : "text-muted-foreground border border-transparent hover:bg-white/5 hover:text-foreground"
+              }`;
+
+              if (isFileAsset(link.href)) {
+                return (
+                  <TrackedLink
+                    key={link.href}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    gtmEvent="resume_download"
+                    gtmData={{
+                      download_type: "pdf",
+                      download_location: "mobile_nav",
+                    }}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={className}
+                  >
+                    {link.title}
+                  </TrackedLink>
+                );
+              }
 
               return (
                 <Link
                   key={link.href}
-                  href={getHref(link.href)}
+                  href={href}
                   target={isExternal ? "_blank" : undefined}
                   rel={isExternal ? "noopener noreferrer" : undefined}
                   aria-current={isActive ? "page" : undefined}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`rounded-xl px-4 py-3 text-sm font-semibold tracking-wide transition-all ${
-                    isActive
-                      ? "bg-primary/15 text-primary border border-primary/20"
-                      : "text-muted-foreground border border-transparent hover:bg-white/5 hover:text-foreground"
-                  }`}
+                  className={className}
                 >
                   {link.title}
                 </Link>
@@ -250,20 +293,6 @@ export function Header({ profile, navigationItems }: HeaderProps) {
               className="mt-2 text-center rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground shadow-sm shadow-primary/25 transition-all hover:scale-[1.02]"
             >
               Hire me
-            </TrackedLink>
-            <TrackedLink
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              gtmEvent="resume_download"
-              gtmData={{
-                download_type: "pdf",
-                download_location: "mobile_nav",
-              }}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="text-center rounded-xl px-4 py-3 text-sm font-medium text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
-            >
-              Resume
             </TrackedLink>
           </nav>
         </div>

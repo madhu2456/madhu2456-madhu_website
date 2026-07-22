@@ -29,7 +29,12 @@ export function Footer({ profile, projects, navigationItems }: FooterProps) {
       heading: "Explore",
       links: [
         ...navigationItems
-          .filter((item) => item.title !== "Blog" && item.title !== "GitHub")
+          .filter(
+            (item) =>
+              item.title !== "Blog" &&
+              !item.href.endsWith(".pdf") &&
+              !item.href.startsWith("http"),
+          )
           .map((item) => ({
             label: item.title,
             href: normalizeFooterHref(item.href),

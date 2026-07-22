@@ -382,46 +382,25 @@
       "order": 3
     },
     {
-      "title": "Skills",
-      "href": "#skills",
-      "icon": "IconSparkles",
-      "isExternal": false,
-      "order": 4
-    },
-    {
-      "title": "Experience",
-      "href": "#experience",
-      "icon": "IconTimeline",
-      "isExternal": false,
-      "order": 5
-    },
-    {
-      "title": "FAQ",
-      "href": "#faq",
-      "icon": "IconQuestionMark",
-      "isExternal": false,
-      "order": 6
-    },
-    {
       "title": "Contact",
-      "href": "#contact",
+      "href": "/contact/",
       "icon": "IconMail",
       "isExternal": false,
-      "order": 7
+      "order": 4
     },
     {
       "title": "Blog",
       "href": "https://madhudadi.in/blog",
       "icon": "IconNews",
       "isExternal": true,
-      "order": 8
+      "order": 5
     },
     {
-      "title": "GitHub",
-      "href": "https://github.com/madhu2456",
-      "icon": "IconBrandGithub",
+      "title": "Resume",
+      "href": "/resume.pdf",
+      "icon": "IconFileText",
       "isExternal": true,
-      "order": 9
+      "order": 6
     }
   ],
   "skills": [
