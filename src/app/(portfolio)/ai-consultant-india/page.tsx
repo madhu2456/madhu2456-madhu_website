@@ -17,6 +17,7 @@ const PAGE_DESCRIPTION =
 export async function generateMetadata(): Promise<Metadata> {
   const siteUrl = `${resolveSiteUrl()}/`;
   const canonicalUrl = `${siteUrl}ai-consultant-india/`;
+  const image = `${siteUrl}opengraph-image/`;
 
   return {
     title: PAGE_TITLE,
@@ -31,11 +32,20 @@ export async function generateMetadata(): Promise<Metadata> {
       url: canonicalUrl,
       siteName: "Madhu Dadi",
       type: "website",
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: PAGE_TITLE,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: PAGE_TITLE,
       description: PAGE_DESCRIPTION,
+      images: [image],
     },
   };
 }
