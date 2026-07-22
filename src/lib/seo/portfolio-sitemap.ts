@@ -142,6 +142,13 @@ export async function buildPortfolioSitemap(): Promise<MetadataRoute.Sitemap> {
         0.86,
       ),
     ),
+    // Pillar guides
+    entry(
+      toCanonicalSitemapUrl(origin, "/guides/ga4-bigquery/"),
+      effectiveHubDate,
+      "monthly",
+      0.82,
+    ),
     ...sortedProjects.map((project) =>
       entry(
         toCanonicalSitemapUrl(origin, `/case-studies/${project.slug}/`),
@@ -183,6 +190,7 @@ export const PORTFOLIO_SITEMAP_STATIC_PATHS = [
   "/fractional-ai-consultant/",
   "/ai-consultant-for-startups/",
   "/ai-automation-consultant/",
+  "/guides/ga4-bigquery/",
   "/privacy/",
   "/resume.pdf",
 ] as const;

@@ -246,6 +246,19 @@ export default async function ServicesHubPage() {
             })}
           </section>
 
+          <section className="max-w-4xl mx-auto space-y-3 text-center">
+            <h2 className="text-xl md:text-2xl font-bold tracking-tight">
+              Guides
+            </h2>
+            <Link
+              href="/guides/ga4-bigquery/"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-primary underline-offset-4 hover:underline"
+            >
+              GA4 + BigQuery setup guide (2026)
+              <IconArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          </section>
+
           {/* Commercial keyword landers (content plan) */}
           <section className="max-w-4xl mx-auto space-y-4">
             <h2 className="text-xl md:text-2xl font-bold tracking-tight text-center">

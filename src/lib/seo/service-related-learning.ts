@@ -68,14 +68,19 @@ export const SERVICE_RELATED_LEARNING: Record<string, RelatedLearningLink[]> = {
   ],
   "ga4-bigquery-campaign-analytics": [
     {
+      href: "/guides/ga4-bigquery/",
+      label: "Guide: GA4 + BigQuery setup (2026)",
+      kind: "tool",
+    },
+    {
+      href: "/ga4-consultant/",
+      label: "GA4 consultant lander",
+      kind: "tool",
+    },
+    {
       href: "/case-studies/adticks/",
       label: "Case study: crawl/audit measurement systems",
       kind: "case-study",
-    },
-    {
-      href: `${BLOG}/`,
-      label: "Blog: data & analytics writing",
-      kind: "blog",
     },
   ],
   "full-stack-ai-product-development": [

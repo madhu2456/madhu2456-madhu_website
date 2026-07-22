@@ -75,6 +75,10 @@ ${serviceLines || `- [Services hub](${siteUrl}/services/): Consulting and implem
 - [Marketing Analytics Consultant in India](${siteUrl}/services/marketing-analytics-consultant-india/): India-intent analytics lander
 - [AI Consultant Visakhapatnam](${siteUrl}/services/ai-consultant-visakhapatnam/): City-intent lander
 
+## Guides (pillars)
+
+- [GA4 + BigQuery setup guide (2026)](${siteUrl}/guides/ga4-bigquery/): Export, schema, costs, campaign tables
+
 ## Commercial keyword landers
 
 - [GA4 Consultant](${siteUrl}/ga4-consultant/): GA4 audit, migration, sGTM, BigQuery
