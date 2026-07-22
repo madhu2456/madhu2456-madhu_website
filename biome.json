@@ -30,6 +30,9 @@
       "suspicious": {
         "noUnknownAtRules": "off",
         "noExplicitAny": "warn"
+      },
+      "complexity": {
+        "noImportantStyles": "off"
       }
     },
     "domains": {

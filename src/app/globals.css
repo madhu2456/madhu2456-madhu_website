@@ -277,6 +277,7 @@
   }
 }
 
+/* WCAG 2.2 reduced-motion: !important required to override utility animations */
 @media (prefers-reduced-motion: reduce) {
   *,
   ::before,
