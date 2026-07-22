@@ -1,7 +1,8 @@
+import { discoveryBodyResponse } from "@/lib/http-conditional";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { resolveSiteUrl } from "@/lib/site-url";
 
-export async function GET() {
+export async function GET(request: Request) {
   const {
     sortedCertifications,
     sortedServices,
@@ -15,7 +16,7 @@ export async function GET() {
     ? new Date(portfolioLastUpdatedAt).toISOString()
     : "2026-06-06T00:00:00Z";
 
-  return Response.json({
+  const payload = {
     meta: {
       generatedAt: lastUpdatedStr,
       dateModified: lastUpdatedStr,
@@ -104,5 +105,10 @@ export async function GET() {
       endDate: edu.endDate,
       description: edu.description,
     })),
+  };
+
+  return discoveryBodyResponse(request, JSON.stringify(payload), {
+    contentType: "application/json; charset=utf-8",
+    lastModifiedAt: lastUpdatedStr,
   });
 }

@@ -1,3 +1,4 @@
+import { discoveryBodyResponse } from "@/lib/http-conditional";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { resolveSiteUrl } from "@/lib/site-url";
 
@@ -6,7 +7,7 @@ import { resolveSiteUrl } from "@/lib/site-url";
  * Optional convenience for agents that voluntarily support the format.
  * Not a Google AI Overviews / ranking signal (Search Central, 2026).
  */
-export async function GET() {
+export async function GET(request: Request) {
   const {
     sortedCertifications,
     portfolioLastUpdatedAt,
@@ -15,9 +16,8 @@ export async function GET() {
     pageContent,
   } = await getPortfolioData();
   const siteUrl = resolveSiteUrl().replace(/\/$/, "");
-  const lastUpdatedStr = portfolioLastUpdatedAt
-    ? new Date(portfolioLastUpdatedAt).toISOString().split("T")[0]
-    : "2026-06-06";
+  const lastModifiedAt = portfolioLastUpdatedAt || "2026-06-06T00:00:00.000Z";
+  const lastUpdatedStr = new Date(lastModifiedAt).toISOString().split("T")[0];
 
   const serviceLines = sortedServices
     .map(
@@ -110,10 +110,8 @@ ${faqLines || "- See the FAQ section on the homepage for current questions and a
 - [Terms (blog)](${siteUrl}/blog/terms): Learning platform terms
 `;
 
-  return new Response(body, {
-    headers: {
-      "Content-Type": "text/plain; charset=utf-8",
-      "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
-    },
+  return discoveryBodyResponse(request, body, {
+    contentType: "text/plain; charset=utf-8",
+    lastModifiedAt,
   });
 }

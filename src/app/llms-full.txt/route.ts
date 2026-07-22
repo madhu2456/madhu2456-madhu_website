@@ -1,7 +1,8 @@
+import { discoveryBodyResponse } from "@/lib/http-conditional";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { resolveSiteUrl } from "@/lib/site-url";
 
-export async function GET() {
+export async function GET(request: Request) {
   const {
     profile,
     sortedProjects,
@@ -14,6 +15,7 @@ export async function GET() {
   } = await getPortfolioData();
 
   const siteUrl = resolveSiteUrl();
+  const lastModifiedAt = portfolioLastUpdatedAt || "2026-06-06T00:00:00.000Z";
 
   const fullBio = profile.fullBioParagraphs?.join("\n\n") || profile.shortBio;
 
@@ -84,7 +86,7 @@ ${e.responsibilities ? e.responsibilities.map((r) => `- ${r}`).join("\n") : ""}`
 > Optional full-text profile for tools that voluntarily support llms.txt / llms-full.txt.
 > Not a Google ranking or AI Overview signal. Prefer the HTML site as canonical when formats disagree.
 
-Last updated: ${new Date(portfolioLastUpdatedAt).toISOString().split("T")[0]}
+Last updated: ${new Date(lastModifiedAt).toISOString().split("T")[0]}
 
 - [Canonical URL](${siteUrl}/): Canonical URL.
 - [Profile URL](${siteUrl}/profile/): Profile page.
@@ -129,10 +131,8 @@ Madhu Dadi also maintains an AI, Python, and analytics learning platform with pr
 ${certificationLines}
 `;
 
-  return new Response(body, {
-    headers: {
-      "Content-Type": "text/plain; charset=utf-8",
-      "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
-    },
+  return discoveryBodyResponse(request, body, {
+    contentType: "text/plain; charset=utf-8",
+    lastModifiedAt,
   });
 }
