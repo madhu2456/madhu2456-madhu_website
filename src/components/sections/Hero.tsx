@@ -30,7 +30,7 @@ export function Hero({
   return (
     <section
       id="home"
-      className="relative isolate bg-hero-glow pt-24 pb-16 sm:pt-32 sm:pb-20 lg:min-h-[100svh]"
+      className="relative isolate bg-hero-glow pt-24 pb-16 sm:pt-32 sm:pb-20"
     >
       <div className="grain absolute inset-0 -z-10" aria-hidden />
       <div className="mx-auto grid w-[min(1400px,92%)] gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-14">
@@ -91,7 +91,7 @@ export function Hero({
                   click_location: "hero",
                 })
               }
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-white/5 px-5 py-3 text-sm font-medium transition-all duration-300 hover:border-primary/30 hover:bg-surface-elevated focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary motion-reduce:transition-none sm:px-6"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-border/80 bg-transparent px-5 py-3 text-sm font-medium text-foreground/90 transition-all duration-300 hover:border-primary/40 hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary motion-reduce:transition-none sm:px-6"
             >
               See case studies
             </Link>
