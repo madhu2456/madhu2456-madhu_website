@@ -54,6 +54,7 @@ export function Hero({
             ))}
           </div>
           <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center">
+            {/* Primary CTA only — audit: avoid competing equal-weight CTAs */}
             <Link
               href="/contact/"
               onClick={() =>
@@ -62,11 +63,11 @@ export function Hero({
                   click_location: "hero",
                 })
               }
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-transform hover:scale-[1.03] sm:px-6"
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-transform hover:scale-[1.03] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary motion-reduce:transition-none motion-reduce:hover:scale-100 sm:px-6"
             >
-              Hire me
+              Contact me
               <IconArrowRight
-                className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+                className="h-4 w-4 transition-transform group-hover:translate-x-0.5 motion-reduce:group-hover:translate-x-0"
                 aria-hidden
               />
             </Link>
@@ -78,7 +79,7 @@ export function Hero({
                   click_location: "hero",
                 })
               }
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-white/5 px-5 py-3 text-sm font-medium hover:bg-surface-elevated hover:border-primary/30 sm:px-6 transition-all duration-300"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-white/5 px-5 py-3 text-sm font-medium transition-all duration-300 hover:border-primary/30 hover:bg-surface-elevated focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary motion-reduce:transition-none sm:px-6"
             >
               See case studies
             </Link>
@@ -88,11 +89,15 @@ export function Hero({
               rel="noopener noreferrer"
               gtmEvent="resume_download"
               gtmData={{ download_type: "pdf", download_location: "hero" }}
-              className="inline-flex items-center justify-center gap-1 px-1 py-3 text-sm font-medium text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline sm:px-2"
+              className="inline-flex items-center justify-center gap-1 px-1 py-3 text-sm font-medium text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:px-2"
             >
               Resume
             </TrackedLink>
           </div>
+          <p className="mt-3 max-w-xl text-xs text-muted-foreground">
+            Consulting discovery or full-time conversations — both welcome.
+            Reply typically within 24 hours.
+          </p>
           {workedAt.length > 0 ? (
             <div className="mt-8 sm:mt-10">
               <p className="mb-3 text-[11px] tracking-[0.18em] text-muted-foreground uppercase">

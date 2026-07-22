@@ -21,6 +21,7 @@ import { SeoStructuredData } from "@/components/SeoStructuredData";
 import { TrackedLink } from "@/components/TrackedLink";
 import { IDENTITY_EXTERNAL_REL } from "@/lib/link-rel";
 import { getPortfolioData } from "@/lib/portfolio-data";
+import { siteLanguageAlternates } from "@/lib/seo/hreflang";
 import { resolveSiteUrl } from "@/lib/site-url";
 import { formatMonthYear } from "@/lib/utils";
 
@@ -41,6 +42,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description,
     alternates: {
       canonical: canonicalUrl,
+      languages: siteLanguageAlternates("/credentials/"),
     },
     openGraph: {
       title: { absolute: title },

@@ -14,6 +14,7 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JsonLdScript } from "@/components/JsonLdScript";
+import { LastUpdated } from "@/components/LastUpdated";
 import { SafeEmailLink } from "@/components/SafeEmailLink";
 import { TrackedLink } from "@/components/TrackedLink";
 import { buildDiscoveryKeywords } from "@/lib/discovery-keywords";
@@ -248,6 +249,12 @@ export default async function ProfilePage() {
                     </span>
                   )}
                 </div>
+                <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                  Currently full-time at Novartis; open to select independent
+                  consulting and full-time moves. See the experience section for
+                  the career timeline and education for the 2018–2020 MBA gap.
+                </p>
+                <LastUpdated date={profile.updatedAt} />
               </div>
             </div>
           </section>
