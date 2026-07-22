@@ -33,10 +33,6 @@
           "answer": "Python (FastAPI), TypeScript (Next.js, React), SQL (PostgreSQL, BigQuery), AI/LLMs (OpenAI, LangChain, RAG, agents), and analytics tools (GA4, GTM)."
         },
         {
-          "question": "Do you take freelance projects while at Novartis?",
-          "answer": "Yes, for select independent consulting—scoped engagements outside my full-time duties, with employer IP, confidentiality, and conflict-of-interest policies respected. If a project is not a fit under those constraints, I will say so on the discovery call."
-        },
-        {
           "question": "Are you available for new projects or full-time roles?",
           "answer": "Yes. This site supports two paths: (1) independent consulting / contract work on AI, RAG, agents, and analytics; (2) full-time opportunities where I can own AI and analytics end-to-end. Use the contact form and pick the intent that matches."
         },

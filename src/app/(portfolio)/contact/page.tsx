@@ -113,10 +113,6 @@ export default async function ContactPage() {
       name: "What projects are the best fit?",
       text: "I specialize in LLM/RAG applications, AI agents, FastAPI/Next.js product builds, and marketing analytics pipelines.",
     },
-    {
-      name: "Do you take consulting while at Novartis?",
-      text: "Yes, for select independent consulting scoped outside full-time duties, with employer IP, confidentiality, and conflict policies respected. Full-time moves are also welcome.",
-    },
   ];
 
   const bestFitAreas = pageContent.contact.bestFitAreas || [
