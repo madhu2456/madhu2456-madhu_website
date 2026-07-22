@@ -246,17 +246,30 @@ export default async function ServicesHubPage() {
             })}
           </section>
 
-          <section className="max-w-4xl mx-auto space-y-3 text-center">
+          <section className="max-w-4xl mx-auto space-y-4 text-center">
             <h2 className="text-xl md:text-2xl font-bold tracking-tight">
               Guides
             </h2>
-            <Link
-              href="/guides/ga4-bigquery/"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-primary underline-offset-4 hover:underline"
-            >
-              GA4 + BigQuery setup guide (2026)
-              <IconArrowRight className="h-4 w-4" aria-hidden />
-            </Link>
+            <ul className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 text-sm font-semibold">
+              <li>
+                <Link
+                  href="/guides/ga4-bigquery/"
+                  className="inline-flex items-center gap-2 text-primary underline-offset-4 hover:underline"
+                >
+                  GA4 + BigQuery setup (2026)
+                  <IconArrowRight className="h-4 w-4" aria-hidden />
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/guides/marketing-mix-modeling-2026/"
+                  className="inline-flex items-center gap-2 text-primary underline-offset-4 hover:underline"
+                >
+                  Marketing mix modeling (2026)
+                  <IconArrowRight className="h-4 w-4" aria-hidden />
+                </Link>
+              </li>
+            </ul>
           </section>
 
           {/* Commercial keyword landers (content plan) */}
