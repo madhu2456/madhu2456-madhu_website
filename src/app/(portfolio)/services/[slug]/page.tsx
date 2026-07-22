@@ -13,6 +13,7 @@ import { AuthorBio } from "@/components/AuthorBio";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JsonLdScript } from "@/components/JsonLdScript";
+import { LastUpdated } from "@/components/LastUpdated";
 import { ServiceIcon } from "@/components/ServiceIcon";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { siteLanguageAlternates } from "@/lib/seo/hreflang";
@@ -260,6 +261,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 <p className="text-lg md:text-xl text-foreground/80 leading-relaxed font-medium">
                   {service.shortDescription}
                 </p>
+                <LastUpdated
+                  date={service.updatedAt}
+                  className="pt-2 text-xs text-muted-foreground"
+                />
               </div>
             </div>
           </section>

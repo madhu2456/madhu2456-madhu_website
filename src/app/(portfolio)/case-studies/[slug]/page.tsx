@@ -13,6 +13,7 @@ import { Footer } from "@/components/Footer";
 import { FormattedText } from "@/components/FormattedText";
 import { Header } from "@/components/Header";
 import { JsonLdScript } from "@/components/JsonLdScript";
+import { LastUpdated } from "@/components/LastUpdated";
 import { ShareButtons } from "@/components/ShareButtons";
 import {
   normalizeImageSource,
@@ -289,18 +290,16 @@ export default async function CaseStudyPage({
             {project.category}
           </p>
         ) : null}
-        <p className="mt-6 text-sm text-muted-foreground/80">
-          By Madhu Dadi &middot; Updated{" "}
-          <time dateTime={project.updatedAt ?? new Date().toISOString()}>
-            {new Date(project.updatedAt ?? new Date()).toLocaleDateString(
-              "en-US",
-              {
-                month: "long",
-                year: "numeric",
-              },
-            )}
-          </time>
-        </p>
+        <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground/80">
+          <span>By Madhu Dadi</span>
+          <span className="text-muted-foreground/40" aria-hidden>
+            ·
+          </span>
+          <LastUpdated
+            date={project.updatedAt}
+            className="text-sm text-muted-foreground/80"
+          />
+        </div>
         <h1 className="mt-3 font-display text-4xl font-bold text-gradient md:text-6xl">
           {project.title}
         </h1>

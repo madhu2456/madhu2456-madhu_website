@@ -16,6 +16,18 @@ export function formatMonthYear(value?: string) {
   }).format(date);
 }
 
+/** Visible “Last updated” stamps (GEO freshness). UTC month + year. */
+export function formatLastUpdated(value?: string | null) {
+  if (!value) return null;
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+  return new Intl.DateTimeFormat("en", {
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(date);
+}
+
 export function normalizeCompanyName(company: string) {
   if (/redbus/i.test(company)) return "redBus";
   if (/groupm/i.test(company)) return "GroupM (WPP)";

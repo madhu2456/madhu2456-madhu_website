@@ -6,10 +6,10 @@ import { resolveSiteUrl } from "@/lib/site-url";
 
 const siteUrl = `${resolveSiteUrl()}/`;
 
-/** ≤60 chars, brand + commercial intent (Semrush plan Phase 2). */
-const HOME_TITLE = "Madhu Dadi – AI Consultant & Analytics Leader";
+/** ~58–60 chars: brand + money queries (audit §5 / Semrush Phase 2). */
+const HOME_TITLE = "Madhu Dadi — AI Engineer: RAG, AI Agents & Analytics";
 const HOME_DESCRIPTION =
-  "AI consultant & analytics leader: 9+ years since 2016 (Novartis full-time + consulting). Production RAG, agents, FastAPI/Next.js. India & remote.";
+  "AI engineer & consultant: production RAG, AI agents, FastAPI/Next.js, marketing analytics. 9+ years since 2016. India & remote. Hire or full-time.";
 
 export const metadata: Metadata = {
   // DG-06 C / DR-02: dual full-time + consulting funnels coexist via /contact/.

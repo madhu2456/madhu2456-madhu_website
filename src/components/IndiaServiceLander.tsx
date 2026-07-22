@@ -8,6 +8,7 @@ import { AuthorBio } from "@/components/AuthorBio";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JsonLdScript } from "@/components/JsonLdScript";
+import { LastUpdated } from "@/components/LastUpdated";
 import type { PortfolioData } from "@/lib/portfolio-data";
 import type { IndiaServiceAlias } from "@/lib/seo/service-aliases";
 import { resolveSiteUrl } from "@/lib/site-url";
@@ -117,6 +118,10 @@ export function IndiaServiceLander({ alias, data }: IndiaServiceLanderProps) {
             <p className="mt-4 text-lg text-foreground/80 leading-relaxed">
               {alias.shortDescription}
             </p>
+            <LastUpdated
+              date={baseService?.updatedAt || data.portfolioLastUpdatedAt}
+              className="mt-3 text-xs text-muted-foreground"
+            />
             <ul className="mt-6 flex flex-wrap gap-2">
               {alias.locationFocus.map((loc) => (
                 <li

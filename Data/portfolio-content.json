@@ -3,8 +3,8 @@
   "pageContent": {
     "home": {
       "seo": {
-        "title": "Madhu Dadi – AI Consultant & Analytics Leader",
-        "description": "AI consultant & analytics leader: 9+ years since 2016 (Novartis full-time + consulting). Production RAG, agents, FastAPI/Next.js. India & remote."
+        "title": "Madhu Dadi — AI Engineer: RAG, AI Agents & Analytics",
+        "description": "AI engineer & consultant: production RAG, AI agents, FastAPI/Next.js, marketing analytics. 9+ years since 2016. India & remote. Hire or full-time."
       },
       "heroTitle": "Production AI agents, RAG systems & analytics infrastructure",
       "primaryCta": {
@@ -316,10 +316,10 @@
       }
     ],
     "profileImage": "/new-ui/hero-portrait.jpg",
-    "updatedAt": "2026-07-20T14:51:29Z"
+    "updatedAt": "2026-07-22T00:00:00Z"
   },
   "siteSettings": {
-    "siteTitle": "Madhu Dadi – AI Consultant & Analytics Leader",
+    "siteTitle": "Madhu Dadi — AI Engineer: RAG, AI Agents & Analytics",
     "siteDescription": "Madhu Dadi is an AI engineer and RAG & analytics consultant based in Visakhapatnam, India. 9+ years of professional experience since 2016 (Novartis, redBus, GroupM, Absolinsoft; MBA IIM Amritsar). Production AI agents, RAG, FastAPI/Next.js. Consulting and full-time paths via contact.",
     "siteKeywords": [
       "Madhu Dadi",
@@ -357,7 +357,7 @@
       "business intelligence consultant"
     ],
     "twitterHandle": "madhu245",
-    "updatedAt": "2026-07-20T14:51:29Z"
+    "updatedAt": "2026-07-22T00:00:00Z"
   },
   "navigationItems": [
     {
@@ -1006,7 +1006,7 @@
         }
       ],
       "order": 1,
-      "updatedAt": "2026-07-20T14:51:29Z"
+      "updatedAt": "2026-07-22T00:00:00Z"
     },
     {
       "title": "Python & AI Learning Platform",
@@ -1168,7 +1168,7 @@
         }
       ],
       "order": 2,
-      "updatedAt": "2026-07-20T14:51:29Z"
+      "updatedAt": "2026-07-22T00:00:00Z"
     },
     {
       "title": "Async Browser Workflow Platform (Udemy Enroller)",
@@ -1338,7 +1338,7 @@
         }
       ],
       "order": 3,
-      "updatedAt": "2026-07-21T04:00:00Z"
+      "updatedAt": "2026-07-22T00:00:00Z"
     }
   ],
   "services": [
@@ -1384,7 +1384,7 @@
       "timeline": "3-8 weeks",
       "featured": true,
       "order": 1,
-      "updatedAt": "2026-07-20T14:51:29Z",
+      "updatedAt": "2026-07-22T00:00:00Z",
       "seoTitle": "LLM Developer & Consultant in India | Madhu Dadi",
       "seoDescription": "LLM developer and consultant in India for production generative AI apps, structured outputs, guardrails, and FastAPI/Next.js delivery.",
       "heroTitle": "Generative AI & LLM Application Development",
@@ -1461,7 +1461,7 @@
       "timeline": "4-10 weeks",
       "featured": true,
       "order": 2,
-      "updatedAt": "2026-07-20T14:51:29Z",
+      "updatedAt": "2026-07-22T00:00:00Z",
       "seoTitle": "RAG Consultant in India | Madhu Dadi",
       "seoDescription": "Hire a RAG consultant in India for production retrieval systems: hybrid search, reranking, citations, and evals. Built for real product latency and cost.",
       "heroTitle": "RAG Consultant & AI Search Engineer",
@@ -1550,7 +1550,7 @@
       "timeline": "4-12 weeks",
       "featured": true,
       "order": 3,
-      "updatedAt": "2026-07-20T14:51:29Z",
+      "updatedAt": "2026-07-22T00:00:00Z",
       "seoTitle": "AI Agent Development Consultant in India | Madhu Dadi",
       "faqs": [
         {
@@ -1618,7 +1618,7 @@
       "timeline": "4-8 weeks",
       "featured": true,
       "order": 4,
-      "updatedAt": "2026-07-20T14:51:29Z",
+      "updatedAt": "2026-07-22T00:00:00Z",
       "seoTitle": "Marketing Analytics Consultant in India | Madhu Dadi",
       "audience": [
         "Marketing teams mapping complex customer journeys",
@@ -1740,7 +1740,7 @@
       "timeline": "3-6 weeks",
       "featured": true,
       "order": 5,
-      "updatedAt": "2026-07-20T14:51:29Z",
+      "updatedAt": "2026-07-22T00:00:00Z",
       "seoTitle": "GA4 & BigQuery Analytics Consultant | Madhu Dadi",
       "audience": [
         "Marketing teams looking for a single source of truth for media spend and conversions",
@@ -1849,7 +1849,7 @@
       "timeline": "4-12 weeks",
       "featured": true,
       "order": 6,
-      "updatedAt": "2026-07-20T14:51:29Z",
+      "updatedAt": "2026-07-22T00:00:00Z",
       "seoTitle": "FastAPI/Next.js AI product development | Madhu Dadi",
       "capabilityCards": [
         {
