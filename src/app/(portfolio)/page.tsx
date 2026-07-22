@@ -39,7 +39,8 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  // Hero image preload is handled by Next.js Image `priority` prop in Hero.tsx
+  // Hero LCP: Next.js Image `priority` in Hero.tsx injects imageSrcSet preload.
+  // Do not add a raw <link rel="preload" href="/new-ui/hero-portrait.webp">.
 
   return (
     <div className="min-h-screen">

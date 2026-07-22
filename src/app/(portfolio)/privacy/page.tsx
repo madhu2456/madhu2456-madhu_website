@@ -70,31 +70,119 @@ export default async function PrivacyPage() {
             Privacy Policy
           </h1>
 
-          <p className="text-sm text-muted-foreground">
-            Last updated: July 2026
-          </p>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            This policy covers the portfolio site at{" "}
-            <a href="https://madhudadi.in/" className="inline-link">
-              madhudadi.in
-            </a>
-            . The technical learning platform at{" "}
-            <a href="https://madhudadi.in/blog" className="inline-link">
-              madhudadi.in/blog
-            </a>{" "}
-            has a separate{" "}
-            <a
-              href="https://madhudadi.in/blog/privacy-policy"
-              className="inline-link"
-            >
-              Privacy Policy
-            </a>{" "}
-            for accounts, quizzes, and payments. Keep both dates in mind when
-            reviewing data practices.
-          </p>
+          <div className="overflow-x-auto rounded-xl border border-border bg-surface/20">
+            <table className="min-w-full text-sm">
+              <tbody className="divide-y divide-border/60">
+                <tr>
+                  <th
+                    scope="row"
+                    className="px-4 py-3 text-left font-semibold text-foreground whitespace-nowrap"
+                  >
+                    Last updated
+                  </th>
+                  <td className="px-4 py-3 text-muted-foreground">
+                    22 July 2026
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="row"
+                    className="px-4 py-3 text-left font-semibold text-foreground whitespace-nowrap"
+                  >
+                    Scope
+                  </th>
+                  <td className="px-4 py-3 text-muted-foreground">
+                    Portfolio site at{" "}
+                    <a href="https://madhudadi.in/" className="inline-link">
+                      madhudadi.in
+                    </a>{" "}
+                    (contact form, portfolio assistant, analytics). The learning
+                    platform at{" "}
+                    <a
+                      href="https://madhudadi.in/blog"
+                      className="inline-link"
+                    >
+                      madhudadi.in/blog
+                    </a>{" "}
+                    has a separate{" "}
+                    <a
+                      href="https://madhudadi.in/blog/privacy-policy"
+                      className="inline-link"
+                    >
+                      Privacy Policy
+                    </a>
+                    .
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="row"
+                    className="px-4 py-3 text-left font-semibold text-foreground whitespace-nowrap"
+                  >
+                    Data Fiduciary
+                  </th>
+                  <td className="px-4 py-3 text-muted-foreground">
+                    Madhu Dadi (sole operator of madhudadi.in)
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
           <section className="space-y-4">
-            <h2 className="text-xl font-semibold">1. Information I Collect</h2>
+            <h2 className="text-xl font-semibold">
+              1. Data Fiduciary &amp; Grievance Redressal
+            </h2>
+            <p className="text-muted-foreground leading-relaxed">
+              Under India&apos;s Digital Personal Data Protection Act, 2023
+              (DPDP Act / DPDPA), the{" "}
+              <strong className="text-foreground font-semibold">
+                Data Fiduciary
+              </strong>{" "}
+              for personal data processed through this portfolio site is:
+            </p>
+            <ul className="list-disc list-inside text-muted-foreground space-y-1">
+              <li>
+                <strong className="text-foreground font-semibold">
+                  Name:
+                </strong>{" "}
+                Madhu Dadi
+              </li>
+              <li>
+                <strong className="text-foreground font-semibold">
+                  Role:
+                </strong>{" "}
+                Data Fiduciary and Grievance Officer (sole proprietor /
+                individual operator)
+              </li>
+              <li>
+                <strong className="text-foreground font-semibold">
+                  Contact:
+                </strong>{" "}
+                <SafeEmailLink email={profile.email} className="inline-link">
+                  {profile.email}
+                </SafeEmailLink>
+              </li>
+              <li>
+                <strong className="text-foreground font-semibold">
+                  Address for notices:
+                </strong>{" "}
+                Visakhapatnam, Andhra Pradesh, India (remote-first practice)
+              </li>
+            </ul>
+            <p className="text-muted-foreground leading-relaxed">
+              To raise a privacy grievance or exercise your rights as a Data
+              Principal, email the Grievance Officer at the address above with
+              the subject line &quot;DPDP grievance&quot; or &quot;Data Principal
+              request&quot;. I aim to acknowledge within 72 hours and resolve
+              within the timelines prescribed under applicable DPDP rules. If
+              you are not satisfied with the response, you may escalate to the
+              Data Protection Board of India as provided under the Act.
+            </p>
+          </section>
+
+          <section className="space-y-4">
+            <h2 className="text-xl font-semibold">2. Information I Collect</h2>
             <p className="text-muted-foreground leading-relaxed">
               When you use the contact form or portfolio assistant on this
               website, I collect the following information:
@@ -109,18 +197,22 @@ export default async function PrivacyPage() {
               </li>
             </ul>
             <p className="text-muted-foreground leading-relaxed">
-              I use Google Tag Manager for anonymous usage analytics and Core
-              Web Vitals monitoring. Google Tag Manager may set functional
-              cookies (such as _ga, _gid) for analytics purposes. These cookies
-              do not contain personally identifiable information. No personally
-              identifiable information is collected through these technologies
-              for the purpose of identifying you individually.
+              I use Google Tag Manager for aggregated usage analytics and Core
+              Web Vitals monitoring. After you interact with the page (scroll,
+              click, or keypress), GTM may set analytics cookies such as{" "}
+              <code className="text-xs">_ga</code> and{" "}
+              <code className="text-xs">_gid</code>. These are used for
+              statistical measurement, not for selling personal data or building
+              advertising profiles on this site. There is no separate cookie
+              consent banner (owner decision DR-07): analytics load only after
+              first interaction, and this policy discloses the cookies and your
+              right to withdraw. You can also block cookies in your browser.
             </p>
           </section>
 
           <section className="space-y-4">
             <h2 className="text-xl font-semibold">
-              2. How I Use Your Information
+              3. How I Use Your Information
             </h2>
             <p className="text-muted-foreground leading-relaxed">
               The information you submit through the contact form is used to
@@ -137,7 +229,7 @@ export default async function PrivacyPage() {
 
           <section className="space-y-4">
             <h2 className="text-xl font-semibold">
-              3. Data Storage and Security
+              4. Data Storage and Security
             </h2>
             <p className="text-muted-foreground leading-relaxed">
               Contact form submissions are delivered via email using Resend (a
@@ -152,7 +244,7 @@ export default async function PrivacyPage() {
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-xl font-semibold">4. Third-Party Services</h2>
+            <h2 className="text-xl font-semibold">5. Third-Party Services</h2>
             <p className="text-muted-foreground leading-relaxed">
               This website uses the following third-party services:
             </p>
@@ -174,19 +266,41 @@ export default async function PrivacyPage() {
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-xl font-semibold">5. Your Rights</h2>
+            <h2 className="text-xl font-semibold">
+              6. Your Rights as a Data Principal
+            </h2>
             <p className="text-muted-foreground leading-relaxed">
-              Under India&apos;s Digital Personal Data Protection Act (DPDPA)
-              2023, you have the right to:
+              Under India&apos;s Digital Personal Data Protection Act, 2023, as
+              a Data Principal you have the right to:
             </p>
             <ul className="list-disc list-inside text-muted-foreground space-y-1">
-              <li>Access the personal data I hold about you</li>
-              <li>Request correction of inaccurate data</li>
-              <li>Request erasure of your data</li>
-              <li>Withdraw consent for data processing</li>
+              <li>
+                Right to access a summary of personal data I process about you
+                and the processing activities involved
+              </li>
+              <li>
+                Right to correction and erasure of inaccurate or incomplete
+                personal data
+              </li>
+              <li>
+                Right to data erasure when the purpose is served or consent is
+                withdrawn (subject to legal retention needs)
+              </li>
+              <li>
+                Right to withdraw consent for processing that relies on consent
+                (for example, optional analytics cookies)
+              </li>
+              <li>
+                Right to nominate another individual to exercise your rights in
+                the event of death or incapacity, where applicable
+              </li>
+              <li>
+                Right to grievance redressal with the Data Fiduciary and, if
+                unresolved, complaint to the Data Protection Board of India
+              </li>
             </ul>
             <p className="text-muted-foreground leading-relaxed">
-              To exercise any of these rights, please contact me at{" "}
+              To exercise any of these rights, contact the Grievance Officer at{" "}
               <SafeEmailLink email={profile.email} className="inline-link">
                 {profile.email}
               </SafeEmailLink>
@@ -195,10 +309,10 @@ export default async function PrivacyPage() {
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-xl font-semibold">6. Contact</h2>
+            <h2 className="text-xl font-semibold">7. Contact</h2>
             <p className="text-muted-foreground leading-relaxed">
-              If you have questions about this privacy policy, please contact me
-              at{" "}
+              If you have questions about this privacy policy, please contact
+              Madhu Dadi (Data Fiduciary) at{" "}
               <SafeEmailLink email={profile.email} className="inline-link">
                 {profile.email}
               </SafeEmailLink>

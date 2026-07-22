@@ -192,13 +192,13 @@ export default async function RootLayout({
       <head>
         <link rel="llms" href={`${SITE_URL}llms.txt`} />
         <link rel="ai-profile" href={`${SITE_URL}ai-profile.json`} />
-        {/* LCP: preload hero portrait (CWV Phase 1.7); Image also uses priority */}
-        <link
-          rel="preload"
-          as="image"
-          href="/new-ui/hero-portrait.webp"
-          type="image/webp"
-        />
+        {/*
+          Hero LCP: do NOT preload /new-ui/hero-portrait.webp raw.
+          Hero.tsx uses next/image with priority + fetchPriority="high", which
+          injects the correct imageSrcSet preload for /_next/image. A raw
+          preload of the static path is unused (Chrome warning) and wastes
+          bandwidth — see audit 2026-07-22 preload waste finding.
+        */}
         {/* Make motion/react sections visible when JS is disabled (AI crawlers, no-JS users) */}
         <noscript>
           <style
