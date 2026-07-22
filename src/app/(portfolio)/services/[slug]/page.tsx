@@ -17,6 +17,7 @@ import { LastUpdated } from "@/components/LastUpdated";
 import { ServiceIcon } from "@/components/ServiceIcon";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { siteLanguageAlternates } from "@/lib/seo/hreflang";
+import { getRelatedLearning } from "@/lib/seo/service-related-learning";
 import { resolveSiteUrl } from "@/lib/site-url";
 
 interface ServicePageProps {
@@ -134,6 +135,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
   const relatedCaseStudies = sortedProjects.filter(
     (project) => project.relatedServiceSlug === service.slug,
   );
+  const relatedLearning = getRelatedLearning(service.slug);
 
   const siteUrl = `${resolveSiteUrl()}/`;
   const serviceSchema = {
@@ -446,16 +448,81 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                   </div>
                 )}
 
-                <div className="pt-4 border-t border-border/60">
+                <div className="space-y-2 border-t border-border/60 pt-4">
+                  <p className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
+                    Engagement model
+                  </p>
+                  <ul className="space-y-2 text-sm text-muted-foreground">
+                    <li>
+                      <span className="font-medium text-foreground">
+                        Discovery call
+                      </span>{" "}
+                      — free fit check (problem, stack, constraints).
+                    </li>
+                    <li>
+                      <span className="font-medium text-foreground">
+                        Scoped build
+                      </span>{" "}
+                      — fixed outcome and timeline after discovery; custom quote
+                      (no public price list).
+                    </li>
+                    <li>
+                      <span className="font-medium text-foreground">
+                        Part-time / advisory
+                      </span>{" "}
+                      — available when ongoing guidance fits better than a
+                      project sprint.
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="pt-2">
                   <Link
                     href={prefillContactUrl}
                     className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all"
                   >
-                    Start a project
+                    Request discovery call
                     <IconArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
               </div>
+
+              {/* Related learning */}
+              {relatedLearning.length > 0 && (
+                <div className="rounded-2xl border border-border bg-surface/30 p-6 space-y-4">
+                  <h3 className="font-semibold text-sm tracking-widest text-muted-foreground uppercase">
+                    Related learning & proof
+                  </h3>
+                  <ul className="space-y-2.5">
+                    {relatedLearning.map((link) => (
+                      <li key={link.href}>
+                        <Link
+                          href={link.href}
+                          className="group inline-flex items-start gap-2 text-sm text-foreground/90 underline-offset-4 hover:text-primary hover:underline"
+                          {...(link.href.startsWith("http")
+                            ? {
+                                target: "_blank",
+                                rel: "noopener noreferrer",
+                              }
+                            : {})}
+                        >
+                          <IconArrowRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" />
+                          <span>
+                            {link.label}
+                            <span className="mt-0.5 block text-[10px] font-semibold tracking-wider text-muted-foreground uppercase">
+                              {link.kind === "blog"
+                                ? "Blog"
+                                : link.kind === "tool"
+                                  ? "Live tool"
+                                  : "Case study"}
+                            </span>
+                          </span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
               {/* Technologies card */}
               {stack.length > 0 && (
