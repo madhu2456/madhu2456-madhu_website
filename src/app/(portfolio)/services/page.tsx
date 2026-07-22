@@ -92,6 +92,72 @@ export default async function ServicesHubPage() {
             </p>
           </section>
 
+          {/* Pricing / engagement anchor — no public rate card; clear how work is bought */}
+          <section
+            id="engagement-model"
+            aria-labelledby="engagement-model-heading"
+            className="scroll-mt-28 max-w-4xl mx-auto rounded-2xl border border-border/80 bg-surface/30 p-6 md:p-8 backdrop-blur-md"
+          >
+            <div className="space-y-2 text-center md:text-left">
+              <p className="text-xs font-semibold tracking-widest text-primary uppercase">
+                How engagements work
+              </p>
+              <h2
+                id="engagement-model-heading"
+                className="text-xl md:text-2xl font-bold tracking-tight"
+              >
+                Pricing model: scoped quotes after a free discovery call
+              </h2>
+              <p className="text-sm text-muted-foreground leading-relaxed max-w-2xl">
+                There is no public rate card. Work is quoted from problem,
+                stack, constraints, and success metrics—not a one-size package.
+                Full-time employment continues in parallel; consulting is scoped
+                so employer IP and conflict policies are respected.
+              </p>
+            </div>
+            <ul className="mt-6 grid gap-4 sm:grid-cols-3">
+              <li className="rounded-xl border border-border/60 bg-background/40 p-4 text-left">
+                <p className="text-sm font-semibold text-foreground">
+                  1. Discovery
+                </p>
+                <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
+                  Free fit check: problem statement, current stack, timeline,
+                  and whether consulting is the right model.
+                </p>
+              </li>
+              <li className="rounded-xl border border-border/60 bg-background/40 p-4 text-left">
+                <p className="text-sm font-semibold text-foreground">
+                  2. Scoped build
+                </p>
+                <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
+                  Fixed outcome and timeline after discovery. Custom written
+                  quote—no public price list.
+                </p>
+              </li>
+              <li className="rounded-xl border border-border/60 bg-background/40 p-4 text-left">
+                <p className="text-sm font-semibold text-foreground">
+                  3. Advisory option
+                </p>
+                <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
+                  Part-time guidance when ongoing architecture or analytics
+                  support fits better than a project sprint.
+                </p>
+              </li>
+            </ul>
+            <div className="mt-6 flex flex-col sm:flex-row items-center gap-3 sm:justify-between">
+              <p className="text-xs text-muted-foreground">
+                Typical reply within 24 hours. India and remote-first.
+              </p>
+              <Link
+                href="/contact/"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-md shadow-primary/20 hover:scale-[1.02] transition-all"
+              >
+                Request discovery call
+                <IconArrowRight className="h-4 w-4" aria-hidden />
+              </Link>
+            </div>
+          </section>
+
           {/* Services Grid */}
           <section className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {sortedServices.map((service, index) => {
