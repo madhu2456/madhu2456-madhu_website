@@ -35,11 +35,23 @@ export function Hero({
       <div className="grain absolute inset-0 -z-10" aria-hidden />
       <div className="mx-auto grid w-[min(1400px,92%)] gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-14">
         <div className="animate-fade-up">
-          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-[11px] text-emerald-300 sm:mb-5 sm:text-xs">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
+          <Link
+            href="/contact/"
+            onClick={() =>
+              pushToDataLayer({
+                event: "hire_me_click",
+                click_location: "hero_availability",
+              })
+            }
+            className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-[11px] text-emerald-300 transition-colors hover:border-emerald-400/50 hover:bg-emerald-400/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-400/60 sm:mb-5 sm:text-xs"
+          >
+            <span
+              className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400"
+              aria-hidden
+            />
             {pageContent.home.heroAvailabilityText ||
               "Available for new projects"}
-          </p>
+          </Link>
           <p className="mb-3 font-display text-[11px] tracking-[0.18em] text-primary uppercase sm:text-sm sm:tracking-[0.2em] font-semibold">
             {pageContent.home.eyebrow}
           </p>
