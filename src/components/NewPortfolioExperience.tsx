@@ -119,7 +119,7 @@ function DirectAnswer({ pageContent }: { pageContent: PageContent }) {
   return (
     <Section
       id="about"
-      eyebrow="Direct Answer"
+      eyebrow="In brief"
       title={pageContent.home.directAnswer?.title || "Who is Madhu Dadi?"}
     >
       <div className="relative flex min-h-56 flex-col justify-between overflow-hidden rounded-3xl border border-border/80 bg-surface/35 p-8 backdrop-blur-md md:p-10">

@@ -134,11 +134,11 @@ export function IndiaServiceLander({ alias, data }: IndiaServiceLanderProps) {
           </section>
 
           <section
-            aria-label="Quick answer"
+            aria-label="Service summary"
             className="p-6 rounded-2xl bg-primary/5 border border-primary/20 space-y-3"
           >
             <h2 className="text-sm font-bold uppercase tracking-wider text-primary">
-              Quick answer
+              In brief
             </h2>
             {alias.directAnswer.map((para) => (
               <p

@@ -134,12 +134,12 @@ export default async function CredentialsPage() {
 
           {/* AI Answer Block / Executive Summary */}
           <section
-            aria-label="Quick Answer"
+            aria-label="Credentials summary"
             className="rounded-2xl border border-primary/20 bg-primary/5 p-6 md:p-8 backdrop-blur-sm space-y-6"
           >
             <h2 className="font-bold text-lg text-foreground flex items-center gap-2">
-              <IconSparkles className="h-5 w-5 text-primary" /> Quick Answer:
-              Credentials Summary
+              <IconSparkles className="h-5 w-5 text-primary" /> In brief:
+              credentials summary
             </h2>
             <dl className="space-y-4">
               <div>

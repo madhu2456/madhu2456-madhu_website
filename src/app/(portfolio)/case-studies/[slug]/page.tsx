@@ -311,11 +311,11 @@ export default async function CaseStudyPage({
 
         {/* AI Answer Block / Executive Summary */}
         <section
-          aria-label="Quick Answer"
+          aria-label="Case study summary"
           className="mt-8 p-6 rounded-2xl bg-surface/40 border border-border/60 space-y-4"
         >
           <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-2">
-            Quick Answer: Case Study Summary
+            In brief: case study summary
           </h2>
           <dl className="space-y-4">
             {project.category && (

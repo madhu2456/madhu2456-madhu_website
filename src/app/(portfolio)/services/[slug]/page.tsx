@@ -266,11 +266,11 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
           {/* AI Answer Block / TL;DR Summary */}
           <section
-            aria-label="Quick Answer"
+            aria-label="Service summary"
             className="p-6 rounded-2xl bg-primary/5 border border-primary/20 space-y-4"
           >
             <h2 className="text-sm font-bold uppercase tracking-wider text-primary flex items-center gap-2">
-              <IconSparkles className="h-4 w-4" /> Quick Answer: Service Summary
+              <IconSparkles className="h-4 w-4" /> In brief: service summary
             </h2>
             <dl className="space-y-4">
               <div>
