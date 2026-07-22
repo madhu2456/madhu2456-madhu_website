@@ -296,6 +296,14 @@ export default async function ServicesHubPage() {
                   Attribution modeling
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/fractional-ai-consultant/"
+                  className="block rounded-xl border border-border/60 bg-surface/20 p-4 text-sm font-semibold text-foreground transition-colors hover:border-primary/40 hover:text-primary"
+                >
+                  Fractional AI consultant
+                </Link>
+              </li>
             </ul>
           </section>
 

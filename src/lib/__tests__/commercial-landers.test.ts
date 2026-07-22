@@ -13,6 +13,7 @@ describe("commercial landers", () => {
       "marketing-analytics-consultant",
       "marketing-mix-modeling-consultant",
       "attribution-modeling-consultant",
+      "fractional-ai-consultant",
     ]);
   });
 

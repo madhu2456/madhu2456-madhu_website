@@ -316,6 +316,64 @@ export const COMMERCIAL_LANDERS: CommercialLander[] = [
     timeline: "3–8 weeks (scoped)",
     proofProjectSlug: "adticks",
   },
+  {
+    slug: "fractional-ai-consultant",
+    baseServiceSlug: "ai-llm-application-development",
+    title: "Fractional AI Consultant on Retainer",
+    seoTitle: "Fractional AI Consultant — Strategy, RAG, Ops | Madhu Dadi",
+    seoDescription:
+      "Hire a fractional AI consultant: roadmap, RAG, evals, LLM ops on retainer. Dual full-time+consult; India & remote.",
+    heroEyebrow: "Fractional AI · Retainer · RAG / LLM",
+    shortDescription:
+      "Senior AI consulting on a monthly retainer: roadmap, RAG design, evals, and LLM ops—without a full-time hire. Scoped hours, written deliverables, clear boundaries.",
+    directAnswer: [
+      "A fractional AI consultant is a senior practitioner who joins your product or data leadership on a part-time retainer to set AI direction, design RAG/LLM systems, run evals, and unblock shipping—without replacing an in-house engineering team.",
+      "I offer select retainers and scoped projects alongside full-time employment. Expect written roadmaps, architecture notes, and review cadence—not unlimited “fractional CTO” bandwidth. Visakhapatnam-based; remote-first.",
+    ],
+    valueProps: [
+      "Roadmap and build-vs-buy decisions grounded in production constraints",
+      "RAG, structured outputs, evals, and logging patterns your team can own",
+      "Vendor and model selection without locking you into a single agency stack",
+      "Hours and outcomes agreed up front; dual-role availability is explicit",
+    ],
+    focusTags: [
+      "Fractional AI",
+      "Retainer",
+      "RAG / LLM ops",
+      "Evals",
+      "India & remote",
+    ],
+    faqs: [
+      {
+        question: "What is a fractional AI consultant?",
+        answer:
+          "A part-time senior AI specialist embedded with your team for strategy and hands-on design/implementation guidance. Different from a full-time hire (no employment benefits stack) and from a large agency (you work with one engineer-consultant, not account layers).",
+      },
+      {
+        question: "Fractional AI consultant vs agency vs full-time hire?",
+        answer:
+          "Hire full-time when AI is a permanent core competency and you need daily ownership. Use an agency for large multi-role packages. Use fractional consulting when you need senior judgment and shipping patterns a few days per week or month, with a clear end state or ongoing advisory cap.",
+      },
+      {
+        question: "How many hours a month is a typical retainer?",
+        answer:
+          "Varies by scope—often a fixed block after discovery (for example design reviews + architecture + async support). Exact hours are written into the engagement; this is not an open-ended “call anytime” CTO seat.",
+      },
+      {
+        question: "What are common 90-day fractional AI outcomes?",
+        answer:
+          "Examples: prioritized AI roadmap, a production-shaped RAG or LLM vertical slice with evals, logging baseline, and a handover plan for your engineers. Outcomes are scoped in discovery—not generic transformation decks.",
+      },
+      {
+        question: "How do you measure ROI on a fractional AI engagement?",
+        answer:
+          "Pick 1–2 decision metrics up front (time-to-first-safe-deploy, support deflection, latency/cost targets, or a revenue experiment). We review those at checkpoints rather than vanity demo metrics.",
+      },
+    ],
+    contactIntent: "ai-llm",
+    timeline: "Retainer or 4–12 week scoped build",
+    proofProjectSlug: "technical-blog",
+  },
 ];
 
 export function getCommercialLander(

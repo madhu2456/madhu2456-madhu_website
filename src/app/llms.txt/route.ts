@@ -82,6 +82,7 @@ ${serviceLines || `- [Services hub](${siteUrl}/services/): Consulting and implem
 - [Marketing Analytics Consultant](${siteUrl}/marketing-analytics-consultant/): Attribution, CLV, measurement systems
 - [Marketing Mix Modeling Consultant](${siteUrl}/marketing-mix-modeling-consultant/): MMM, media mix, incrementality inputs
 - [Attribution Modeling Consultant](${siteUrl}/attribution-modeling-consultant/): Post-cookie attribution, GA4 paths, tests
+- [Fractional AI Consultant](${siteUrl}/fractional-ai-consultant/): Retainer AI roadmap, RAG, evals, LLM ops
 
 ## Optional markdown twins
 
