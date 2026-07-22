@@ -269,6 +269,15 @@ export default async function ServicesHubPage() {
                   <IconArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/guides/attribution-after-cookies/"
+                  className="inline-flex items-center gap-2 text-primary underline-offset-4 hover:underline"
+                >
+                  Attribution after cookies
+                  <IconArrowRight className="h-4 w-4" aria-hidden />
+                </Link>
+              </li>
             </ul>
           </section>
 

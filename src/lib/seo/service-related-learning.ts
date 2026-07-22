@@ -78,6 +78,11 @@ export const SERVICE_RELATED_LEARNING: Record<string, RelatedLearningLink[]> = {
       kind: "tool",
     },
     {
+      href: "/guides/attribution-after-cookies/",
+      label: "Guide: attribution after cookies",
+      kind: "tool",
+    },
+    {
       href: "/ga4-consultant/",
       label: "GA4 consultant lander",
       kind: "tool",

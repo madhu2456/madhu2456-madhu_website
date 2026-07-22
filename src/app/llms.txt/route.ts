@@ -79,6 +79,7 @@ ${serviceLines || `- [Services hub](${siteUrl}/services/): Consulting and implem
 
 - [GA4 + BigQuery setup guide (2026)](${siteUrl}/guides/ga4-bigquery/): Export, schema, costs, campaign tables
 - [MMM in 2026 guide](${siteUrl}/guides/marketing-mix-modeling-2026/): Robyn vs Meridian vs custom, data needs
+- [Attribution after cookies](${siteUrl}/guides/attribution-after-cookies/): MTA vs MMM vs incrementality
 
 ## Commercial keyword landers
 
