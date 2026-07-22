@@ -5,6 +5,7 @@ import { Header } from "@/components/Header";
 import { SafeEmailLink } from "@/components/SafeEmailLink";
 import { SeoStructuredData } from "@/components/SeoStructuredData";
 import { getPortfolioData } from "@/lib/portfolio-data";
+import { siteLanguageAlternates } from "@/lib/seo/hreflang";
 import { resolveSiteUrl } from "@/lib/site-url";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -20,6 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description,
     alternates: {
       canonical: url,
+      languages: siteLanguageAlternates("/privacy/"),
     },
     robots: {
       index: true,

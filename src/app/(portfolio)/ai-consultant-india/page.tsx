@@ -145,36 +145,7 @@ export default async function AiConsultantIndiaPage() {
           "FastAPI / Next.js products",
         ],
       },
-      {
-        "@type": "FAQPage",
-        "@id": `${pageUrl}#faq`,
-        mainEntity: [
-          {
-            "@type": "Question",
-            name: "Do you work with teams outside Visakhapatnam?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Yes. Delivery is remote-first worldwide. Visakhapatnam is the home base; professional experience includes Hyderabad, Bengaluru, and Gurugram. On-site kickoffs in India are possible for the right full-time or multi-week engagement.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "What local search intent does this page answer?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Teams searching for an AI engineer, RAG consultant, or analytics consultant in Visakhapatnam, Hyderabad, or remote India who can ship production systems—not only prototypes.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "How do I hire Madhu Dadi for an India-based or remote project?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Use the contact form with problem, stack, timeline, and outcome. Typical reply is within 24 hours with fit assessment and next steps.",
-            },
-          },
-        ],
-      },
+      // FAQPage omitted (2026 policy): visible FAQ HTML below only.
     ],
   };
 

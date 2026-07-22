@@ -97,46 +97,27 @@ export default async function ContactPage() {
     ],
   };
 
-  const faqSchema = {
-    "@type": "FAQPage",
-    "@id": `${siteUrl}contact/#faq`,
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: "What is your typical turnaround time?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text:
-            pageContent.contact.responseTimeText ||
-            "I usually reply within 24 hours.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Are you open to remote work?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Yes, I am remote-first and available worldwide. Relocation is also possible for the right full-time role.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "What projects are the best fit?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "I specialize in LLM/RAG applications, AI agents, FastAPI/Next.js product builds, and marketing analytics pipelines.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Do you take on freelance or contract work?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Yes, I am available for freelance consulting, contract roles, and full-time opportunities depending on the scope.",
-        },
-      },
-    ],
-  };
+  // Visible FAQ HTML only — no FAQPage JSON-LD (2026 Google docs / plan).
+  const contactFaqs = [
+    {
+      name: "What is your typical turnaround time?",
+      text:
+        pageContent.contact.responseTimeText ||
+        "I usually reply within 24 hours.",
+    },
+    {
+      name: "Are you open to remote work?",
+      text: "Yes, I am remote-first and available worldwide. Relocation is also possible for the right full-time role.",
+    },
+    {
+      name: "What projects are the best fit?",
+      text: "I specialize in LLM/RAG applications, AI agents, FastAPI/Next.js product builds, and marketing analytics pipelines.",
+    },
+    {
+      name: "Do you take consulting while at Novartis?",
+      text: "Yes, for select independent consulting scoped outside full-time duties, with employer IP, confidentiality, and conflict policies respected. Full-time moves are also welcome.",
+    },
+  ];
 
   const bestFitAreas = pageContent.contact.bestFitAreas || [
     "LLM/RAG applications",
@@ -166,7 +147,7 @@ export default async function ContactPage() {
       <JsonLdScript
         data={{
           "@context": "https://schema.org",
-          "@graph": [breadcrumbSchema, faqSchema, contactPageSchema],
+          "@graph": [breadcrumbSchema, contactPageSchema],
         }}
       />
       <Header profile={profile} navigationItems={sortedNavigationItems} />
@@ -261,7 +242,7 @@ export default async function ContactPage() {
                   Frequently Asked Questions
                 </h2>
                 <dl className="space-y-4 text-sm">
-                  {faqSchema.mainEntity.map((faq, index) => {
+                  {contactFaqs.map((faq, index) => {
                     const icons = [
                       IconClock,
                       IconGlobe,
@@ -279,7 +260,7 @@ export default async function ContactPage() {
                           {faq.name}
                         </dt>
                         <dd className="text-muted-foreground leading-relaxed pl-6.5">
-                          {faq.acceptedAnswer.text}
+                          {faq.text}
                         </dd>
                       </div>
                     );

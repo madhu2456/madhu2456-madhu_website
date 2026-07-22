@@ -4,9 +4,7 @@ import { resolveAbsoluteImageUrl } from "@/lib/image-source";
 import {
   buildBreadcrumbSchema,
   buildCertificationsListSchema,
-  buildFaqSchema,
   buildFullGraph,
-  buildHowToHireSchema,
   buildOccupationSchema,
   buildOrganizationSchema,
   buildPersonSchema,
@@ -32,8 +30,6 @@ export type SeoGraphNode =
   | "WorkExperience"
   | "CertificationsList"
   | "Breadcrumb"
-  | "FAQ"
-  | "HowToHire"
   | "ProfessionalService";
 
 interface SeoStructuredDataProps {
@@ -52,7 +48,6 @@ export async function SeoStructuredData({
     sortedEducation: education,
     sortedExperiences: experience,
     sortedServices: services,
-    pageContent,
   } = await getPortfolioData();
 
   const siteUrl = `${resolveSiteUrl()}/`;
@@ -183,27 +178,8 @@ export async function SeoStructuredData({
       ? buildCertificationsListSchema({ siteUrl, certifications })
       : null,
     includeNode("Breadcrumb") ? buildBreadcrumbSchema(siteUrl) : null,
-    // FAQ JSON-LD: only when "FAQ" node requested; content must match visible FAQ UI.
-    // FAQ rich result deprecated May 7 2026 per https://developers.google.com/search/updates
-    // (May: Deprecating FAQ rich result + June 15: Removing docs). No rich-result guarantee.
-    // Keep schema only if FAQs remain visible & useful for humans/AEO - do not chase rich result
-    // per Shared Control Block Structured data guidance.
-    includeNode("FAQ")
-      ? buildFaqSchema({
-          siteUrl,
-          fullName,
-          headline: profile?.headline,
-          location: profile?.location,
-          yearsOfExperience: profile?.yearsOfExperience,
-          projects,
-          services,
-          seoKeywords: discoveryKeywords,
-          faqItems: pageContent.home.faqItems,
-        })
-      : null,
-    includeNode("HowToHire")
-      ? buildHowToHireSchema({ siteUrl, fullName })
-      : null,
+    // FAQPage / HowTo intentionally not emitted as growth schema (Search Central 2026).
+    // Visible FAQ HTML remains on pages; builders kept in jsonld.ts for optional tooling only.
     includeNode("ProfessionalService")
       ? buildProfessionalServiceSchema({ siteUrl })
       : null,
