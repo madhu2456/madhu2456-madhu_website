@@ -255,7 +255,7 @@ export default async function ServicesHubPage() {
               Exact-match consulting pages for common search intents. Each links
               to the full capability service for stack and deliverables.
             </p>
-            <ul className="grid gap-3 sm:grid-cols-3">
+            <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               <li>
                 <Link
                   href="/ga4-consultant/"
@@ -278,6 +278,14 @@ export default async function ServicesHubPage() {
                   className="block rounded-xl border border-border/60 bg-surface/20 p-4 text-sm font-semibold text-foreground transition-colors hover:border-primary/40 hover:text-primary"
                 >
                   Marketing analytics consultant
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/marketing-mix-modeling-consultant/"
+                  className="block rounded-xl border border-border/60 bg-surface/20 p-4 text-sm font-semibold text-foreground transition-colors hover:border-primary/40 hover:text-primary"
+                >
+                  Marketing mix modeling (MMM)
                 </Link>
               </li>
             </ul>

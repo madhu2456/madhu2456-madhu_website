@@ -80,6 +80,7 @@ ${serviceLines || `- [Services hub](${siteUrl}/services/): Consulting and implem
 - [GA4 Consultant](${siteUrl}/ga4-consultant/): GA4 audit, migration, sGTM, BigQuery
 - [Google Analytics Consultant](${siteUrl}/google-analytics-consultant/): Independent GA4/GTM/BigQuery consulting
 - [Marketing Analytics Consultant](${siteUrl}/marketing-analytics-consultant/): Attribution, CLV, measurement systems
+- [Marketing Mix Modeling Consultant](${siteUrl}/marketing-mix-modeling-consultant/): MMM, media mix, incrementality inputs
 
 ## Optional markdown twins
 

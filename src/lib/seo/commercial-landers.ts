@@ -201,6 +201,63 @@ export const COMMERCIAL_LANDERS: CommercialLander[] = [
     contactIntent: "marketing-analytics",
     timeline: "4–8 weeks (scoped)",
   },
+  {
+    slug: "marketing-mix-modeling-consultant",
+    baseServiceSlug: "marketing-analytics-consultant",
+    title: "Marketing Mix Modeling (MMM) Consultant",
+    seoTitle: "Marketing Mix Modeling Consultant (MMM) | Madhu Dadi",
+    seoDescription:
+      "MMM consultant for D2C and SaaS: measure paid media without cookies. Bayesian MMM, Robyn/Meridian options, warehouse-ready inputs.",
+    heroEyebrow: "MMM · Media mix · Incrementality",
+    shortDescription:
+      "Marketing mix modeling consulting for brands that need paid-media impact without third-party cookies—honest data requirements, scoped implementation, clear handover.",
+    directAnswer: [
+      "A marketing mix modeling consultant helps you estimate how media and other drivers affect outcomes (revenue, leads) using aggregated historical data—useful when cookie-level multi-touch attribution is incomplete after iOS and third-party cookie loss.",
+      "I scope MMM as select consulting: assess data readiness, choose an approach (custom Bayesian, open-source Robyn-style, or vendor tools like Meridian when appropriate), and leave models and docs your team can re-run. Visakhapatnam-based; remote-first; dual full-time + consulting boundaries apply.",
+    ],
+    valueProps: [
+      "Data-readiness audit before promising a full MMM (many teams need cost and outcome history cleaned first)",
+      "MMM vs multi-touch attribution framed as complements, not a single silver bullet",
+      "Warehouse-friendly inputs (often BigQuery) so models retrain without a black box",
+      "Honest about sample size: thin spend history may mean start with incrementality tests or simpler mix views",
+    ],
+    focusTags: [
+      "Marketing mix modeling",
+      "MMM",
+      "Robyn / Meridian options",
+      "Incrementality",
+      "India & remote",
+    ],
+    faqs: [
+      {
+        question: "What is marketing mix modeling in 2026?",
+        answer:
+          "MMM uses historical aggregated media, price, promo, and control variables to estimate contribution and response curves. In 2026 it is often paired with experiments because cookie-based user paths are weaker—not a replacement for clean first-party collection.",
+      },
+      {
+        question: "MMM vs multi-touch attribution — which do I need?",
+        answer:
+          "MTA (or path models) explains user journeys when identity is reliable. MMM explains channel contribution at aggregate level when cookies and user stitching fail. Many mid-market brands need both: warehouse paths for digital detail, MMM for mix and budget questions.",
+      },
+      {
+        question: "How much data does MMM actually require?",
+        answer:
+          "Typically months of consistent weekly or daily spend and outcome series across major channels. Exact thresholds depend on volatility and channel count. If history is thin, we may recommend fixing measurement and running geo or holdout tests before a heavy MMM.",
+      },
+      {
+        question: "How much does an MMM engagement cost?",
+        answer:
+          "Custom quote after discovery—no public rate card. Cost depends on data prep, number of channels, and whether the deliverable is a one-time model, a retrainable pipeline, or advisory only.",
+      },
+      {
+        question: "Robyn vs Meridian vs a custom Bayesian MMM?",
+        answer:
+          "Choice depends on data shape, team skills, and whether you need open-source control vs managed tooling. Discovery picks the lightest stack that answers the decision—not the trendiest logo.",
+      },
+    ],
+    contactIntent: "marketing-analytics",
+    timeline: "6–12 weeks (data-ready scoped MMM)",
+  },
 ];
 
 export function getCommercialLander(

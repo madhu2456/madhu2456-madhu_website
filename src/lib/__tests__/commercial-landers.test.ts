@@ -11,6 +11,7 @@ describe("commercial landers", () => {
       "ga4-consultant",
       "google-analytics-consultant",
       "marketing-analytics-consultant",
+      "marketing-mix-modeling-consultant",
     ]);
   });
 
