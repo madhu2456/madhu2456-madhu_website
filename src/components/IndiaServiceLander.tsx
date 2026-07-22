@@ -9,6 +9,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JsonLdScript } from "@/components/JsonLdScript";
 import { LastUpdated } from "@/components/LastUpdated";
+import { type PageTocItem, PageToc } from "@/components/PageToc";
 import type { PortfolioData } from "@/lib/portfolio-data";
 import type { IndiaServiceAlias } from "@/lib/seo/service-aliases";
 import { resolveSiteUrl } from "@/lib/site-url";
@@ -26,6 +27,18 @@ export function IndiaServiceLander({ alias, data }: IndiaServiceLanderProps) {
   const baseService = sortedServices.find(
     (s) => s.slug === alias.baseServiceSlug,
   );
+  const tocItems: PageTocItem[] = [
+    { id: "lander-summary", label: "Summary" },
+    { id: "why-india", label: "Why India" },
+    ...(baseService
+      ? [{ id: "full-capability", label: "Capability" }]
+      : []),
+    { id: "lander-engagement", label: "Engagement" },
+    ...(alias.faqs.length > 0
+      ? [{ id: "lander-faqs", label: "FAQ" }]
+      : []),
+    { id: "lander-contact", label: "Contact" },
+  ];
   const baseUrl = baseService
     ? `${siteUrl}services/${baseService.slug}/`
     : `${siteUrl}services/`;
@@ -138,9 +151,12 @@ export function IndiaServiceLander({ alias, data }: IndiaServiceLanderProps) {
             </ul>
           </section>
 
+          <PageToc items={tocItems} />
+
           <section
+            id="lander-summary"
             aria-label="Service summary"
-            className="p-6 rounded-2xl bg-primary/5 border border-primary/20 space-y-3"
+            className="scroll-mt-28 p-6 rounded-2xl bg-primary/5 border border-primary/20 space-y-3"
           >
             <h2 className="text-sm font-bold uppercase tracking-wider text-primary">
               In brief
@@ -163,7 +179,7 @@ export function IndiaServiceLander({ alias, data }: IndiaServiceLanderProps) {
             ) : null}
           </section>
 
-          <section className="space-y-4">
+          <section id="why-india" className="scroll-mt-28 space-y-4">
             <h2 className="text-xl font-bold tracking-tight border-b border-border/80 pb-2">
               Why hire from India for this work?
             </h2>
@@ -180,7 +196,7 @@ export function IndiaServiceLander({ alias, data }: IndiaServiceLanderProps) {
           </section>
 
           {baseService ? (
-            <section className="space-y-4">
+            <section id="full-capability" className="scroll-mt-28 space-y-4">
               <h2 className="text-xl font-bold tracking-tight border-b border-border/80 pb-2">
                 Full capability detail
               </h2>
@@ -213,7 +229,7 @@ export function IndiaServiceLander({ alias, data }: IndiaServiceLanderProps) {
             </section>
           ) : null}
 
-          <section className="space-y-4">
+          <section id="lander-engagement" className="scroll-mt-28 space-y-4">
             <h2 className="text-xl font-bold tracking-tight border-b border-border/80 pb-2">
               How does engagement work?
             </h2>
@@ -243,7 +259,7 @@ export function IndiaServiceLander({ alias, data }: IndiaServiceLanderProps) {
             </ul>
           </section>
 
-          <section className="space-y-4">
+          <section id="lander-faqs" className="scroll-mt-28 space-y-4">
             <h2 className="text-xl font-bold tracking-tight border-b border-border/80 pb-2">
               Common questions about {alias.title}
             </h2>
@@ -266,7 +282,10 @@ export function IndiaServiceLander({ alias, data }: IndiaServiceLanderProps) {
 
           <AuthorBio profile={profile} />
 
-          <section className="relative rounded-3xl border border-border/80 bg-surface/20 p-8 md:p-12 text-center">
+          <section
+            id="lander-contact"
+            className="relative scroll-mt-28 rounded-3xl border border-border/80 bg-surface/20 p-8 md:p-12 text-center"
+          >
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight">
               Discuss this engagement
             </h2>

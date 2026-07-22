@@ -14,6 +14,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JsonLdScript } from "@/components/JsonLdScript";
 import { LastUpdated } from "@/components/LastUpdated";
+import { type PageTocItem, PageToc } from "@/components/PageToc";
 import { ServiceIcon } from "@/components/ServiceIcon";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { siteLanguageAlternates } from "@/lib/seo/hreflang";
@@ -136,6 +137,27 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
     (project) => project.relatedServiceSlug === service.slug,
   );
   const relatedLearning = getRelatedLearning(service.slug);
+
+  const tocItems: PageTocItem[] = [
+    { id: "service-summary", label: "Summary" },
+    ...(service.fullDescription
+      ? [{ id: "service-overview", label: "Overview" }]
+      : []),
+    ...(service.features && service.features.length > 0
+      ? [{ id: "key-capabilities", label: "Capabilities" }]
+      : []),
+    ...(service.deliverables && service.deliverables.length > 0
+      ? [{ id: "deliverables", label: "Deliverables" }]
+      : []),
+    { id: "engagement", label: "Engagement" },
+    ...(relatedCaseStudies.length > 0
+      ? [{ id: "related-case-studies", label: "Case studies" }]
+      : []),
+    ...(service.faqs && service.faqs.length > 0
+      ? [{ id: "service-faqs", label: "FAQ" }]
+      : []),
+    { id: "discuss-service", label: "Contact" },
+  ];
 
   const siteUrl = `${resolveSiteUrl()}/`;
   const serviceSchema = {
@@ -271,10 +293,13 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             </div>
           </section>
 
+          <PageToc items={tocItems} />
+
           {/* AI Answer Block / TL;DR Summary */}
           <section
+            id="service-summary"
             aria-label="Service summary"
-            className="p-6 rounded-2xl bg-primary/5 border border-primary/20 space-y-4"
+            className="scroll-mt-28 p-6 rounded-2xl bg-primary/5 border border-primary/20 space-y-4"
           >
             <h2 className="text-sm font-bold uppercase tracking-wider text-primary flex items-center gap-2">
               <IconSparkles className="h-4 w-4" /> In brief: service summary
@@ -325,7 +350,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             <div className="md:col-span-2 space-y-8">
               {/* Detailed narrative description */}
               {service.fullDescription && (
-                <section className="space-y-4">
+                <section id="service-overview" className="scroll-mt-28 space-y-4">
                   <h2 className="text-xl font-bold tracking-tight border-b border-border/80 pb-2">
                     Service Overview
                   </h2>
@@ -337,7 +362,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
               {/* Service Features / Core Offerings */}
               {service.features && service.features.length > 0 && (
-                <section className="space-y-4">
+                <section id="key-capabilities" className="scroll-mt-28 space-y-4">
                   <h2 className="text-xl font-bold tracking-tight border-b border-border/80 pb-2">
                     Key Focus Capabilities
                   </h2>
@@ -359,7 +384,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
               {/* Deliverables List */}
               {service.deliverables && service.deliverables.length > 0 && (
-                <section className="space-y-4">
+                <section id="deliverables" className="scroll-mt-28 space-y-4">
                   <h2 className="text-xl font-bold tracking-tight border-b border-border/80 pb-2">
                     Expected Deliverables & Handover
                   </h2>
@@ -378,7 +403,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               )}
 
               {/* Engagement process — answer-engine friendly steps */}
-              <section className="space-y-4">
+              <section id="engagement" className="scroll-mt-28 space-y-4">
                 <h2 className="text-xl font-bold tracking-tight border-b border-border/80 pb-2">
                   How does a typical engagement work?
                 </h2>
@@ -547,7 +572,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
           {/* Related case studies (hub → spoke commercial linking) */}
           {relatedCaseStudies.length > 0 && (
-            <section className="mt-6 space-y-4">
+            <section
+              id="related-case-studies"
+              className="mt-6 scroll-mt-28 space-y-4"
+            >
               <h2 className="text-xl font-bold tracking-tight border-b border-border/80 pb-2">
                 Related case studies
               </h2>
@@ -580,7 +608,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
           {/* Visible FAQs (question H2s / AEO) — no FAQPage JSON-LD growth lever */}
           {service.faqs && service.faqs.length > 0 && (
-            <div className="mt-6 md:col-span-3 space-y-4">
+            <div
+              id="service-faqs"
+              className="mt-6 scroll-mt-28 md:col-span-3 space-y-4"
+            >
               <h2 className="text-xl font-bold tracking-tight border-b border-border/80 pb-2">
                 Common questions about {service.title}
               </h2>
@@ -605,7 +636,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           <AuthorBio profile={profile} className="mt-6" />
 
           {/* Conversion Section */}
-          <section className="relative rounded-3xl border border-border/80 bg-surface/20 p-8 md:p-12 overflow-hidden text-center max-w-4xl mx-auto mt-8">
+          <section
+            id="discuss-service"
+            className="relative scroll-mt-28 rounded-3xl border border-border/80 bg-surface/20 p-8 md:p-12 overflow-hidden text-center max-w-4xl mx-auto mt-8"
+          >
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-64 w-64 bg-primary/5 rounded-full blur-[100px] -z-10" />
             <div className="max-w-2xl mx-auto space-y-6">
               <h2 className="text-2xl md:text-3xl font-bold tracking-tight">
