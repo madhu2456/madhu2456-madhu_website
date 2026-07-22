@@ -6,6 +6,7 @@ async function PortfolioContent() {
     profile,
     skills,
     sortedExperiences,
+    sortedEducation,
     sortedProjects,
     sortedServices,
     sortedCertifications,
@@ -21,6 +22,7 @@ async function PortfolioContent() {
       profile={profile}
       skills={skills}
       experiences={sortedExperiences}
+      education={sortedEducation}
       projects={sortedProjects}
       services={sortedServices}
       certifications={sortedCertifications}

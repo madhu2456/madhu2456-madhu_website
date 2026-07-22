@@ -24,6 +24,7 @@ import { Header } from "@/components/Header";
 import { SafeEmailLink } from "@/components/SafeEmailLink";
 import { Section } from "@/components/Section";
 import { SocialIconStrip } from "@/components/SocialIconStrip";
+import { Education } from "@/components/sections/Education";
 import { Experience } from "@/components/sections/Experience";
 import { Hero } from "@/components/sections/Hero";
 import { Projects } from "@/components/sections/Projects";
@@ -31,6 +32,7 @@ import { pushToDataLayer } from "@/lib/gtm";
 
 import type {
   CertificationItem,
+  EducationItem,
   ExperienceItem,
   NavigationItem,
   PageContent,
@@ -48,6 +50,7 @@ type NewPortfolioExperienceProps = {
   profile: Profile;
   skills: SkillItem[];
   experiences: ExperienceItem[];
+  education: EducationItem[];
   projects: ProjectItem[];
   services: ServiceItem[];
   certifications: CertificationItem[];
@@ -68,6 +71,7 @@ export function NewPortfolioExperience({
   navigationItems,
   skills,
   experiences,
+  education,
   projects,
   services,
   certifications,
@@ -100,6 +104,7 @@ export function NewPortfolioExperience({
           experiences={experiences}
           yearsOfExperience={profile.yearsOfExperience}
         />
+        <Education education={education} />
         <Certifications certifications={certifications} />
         <Faq items={faqItems} />
         <Contact profile={profile} />

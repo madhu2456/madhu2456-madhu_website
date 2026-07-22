@@ -350,6 +350,8 @@ export function buildPersonSchema({
     }),
     ...(alumniOf &&
       alumniOf.length > 0 && {
+        // CollegeOrUniversity nodes — degrees also surface as hasCredential
+        // when certification-style credentials are present.
         alumniOf: alumniOf.map((edu) => ({
           "@type": "CollegeOrUniversity",
           name: edu.name,

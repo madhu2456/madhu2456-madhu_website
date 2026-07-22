@@ -799,27 +799,32 @@
   "education": [
     {
       "institution": "Indian Institute of Management (IIM), Amritsar",
-      "degree": "Master of Business Administration",
-      "fieldOfStudy": "Marketing & Analytics",
-      "startDate": "2018-07-23",
-      "endDate": "2020-02-28",
+      "degree": "MBA",
+      "fieldOfStudy": "Marketing / Analytics",
+      "startDate": "2018-07-01",
+      "endDate": "2020-06-30",
       "current": false,
-      "gpa": "",
-      "website": "",
+      "gpa": "3.371/4.33",
+      "description": "MBA with Marketing / Analytics focus. Fills the 2018–2020 career gap between Absolinsoft and GroupM.",
+      "achievements": [
+        "Special Recognition Award for work as Manager in Aarunya fest, IIM Amritsar"
+      ],
+      "website": "https://iimamritsar.ac.in/",
       "order": 1,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
+      "updatedAt": "2026-07-22T00:00:00Z"
     },
     {
       "institution": "MVGR College of Engineering",
-      "degree": "Bachelor of Technology",
+      "degree": "B.Tech.",
       "fieldOfStudy": "Electrical and Electronics Engineering",
-      "startDate": "2012-05-21",
-      "endDate": "2016-05-31",
+      "startDate": "2012-07-01",
+      "endDate": "2016-06-30",
       "current": false,
-      "gpa": "",
+      "gpa": "79.75%",
+      "description": "Bachelor of Technology in Electrical and Electronics Engineering.",
       "website": "",
       "order": 2,
-      "updatedAt": "2026-05-31T14:09:41.323Z"
+      "updatedAt": "2026-07-22T00:00:00Z"
     }
   ],
   "projects": [

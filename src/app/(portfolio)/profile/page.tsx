@@ -97,40 +97,67 @@ export default async function ProfilePage() {
   });
   const currentRole = sortedExperiences.find((e) => e.current);
 
+  const basePersonSchema = buildPersonSchema({
+    fullName,
+    headline: profile.headline,
+    bio: profile.shortBio,
+    email: profile.email,
+    location: profile.location,
+    profileImageUrl,
+    siteUrl,
+    socialLinks: profile.socialLinks ?? undefined,
+    yearsOfExperience: profile.yearsOfExperience,
+    nationality: "India",
+    alumniOf: sortedEducation
+      .filter((edu) => edu.institution)
+      .map((edu) => ({
+        name: edu.institution,
+        url: edu.website ?? undefined,
+      })),
+    seoKeywords: discoveryKeywords,
+    certifications,
+    services,
+    currentRole: currentRole
+      ? {
+          company: currentRole.company,
+          position: currentRole.position,
+          startDate: currentRole.startDate,
+          location: currentRole.location,
+        }
+      : undefined,
+  });
+
+  const degreeCredentials = sortedEducation
+    .filter((edu) => edu.institution && edu.degree)
+    .map((edu, i) => ({
+      "@type": "EducationalOccupationalCredential",
+      "@id": `${siteUrl}#degree-${i + 1}`,
+      name: edu.fieldOfStudy
+        ? `${edu.degree} (${edu.fieldOfStudy})`
+        : edu.degree,
+      credentialCategory: "degree",
+      recognizedBy: {
+        "@type": "CollegeOrUniversity",
+        name: edu.institution,
+        ...(edu.website ? { url: edu.website } : {}),
+      },
+    }));
+
+  const existingCredentials = Array.isArray(basePersonSchema.hasCredential)
+    ? basePersonSchema.hasCredential
+    : basePersonSchema.hasCredential
+      ? [basePersonSchema.hasCredential]
+      : [];
+
   const personSchema = {
-    ...buildPersonSchema({
-      fullName,
-      headline: profile.headline,
-      bio: profile.shortBio,
-      email: profile.email,
-      location: profile.location,
-      profileImageUrl,
-      siteUrl,
-      socialLinks: profile.socialLinks ?? undefined,
-      yearsOfExperience: profile.yearsOfExperience,
-      nationality: "India",
-      alumniOf: sortedEducation
-        .filter((edu) => edu.institution)
-        .map((edu) => ({
-          name: edu.institution,
-          url: edu.website ?? undefined,
-        })),
-      seoKeywords: discoveryKeywords,
-      certifications,
-      services,
-      currentRole: currentRole
-        ? {
-            company: currentRole.company,
-            position: currentRole.position,
-            startDate: currentRole.startDate,
-            location: currentRole.location,
-          }
-        : undefined,
-    }),
+    ...basePersonSchema,
     // Profile-page-specific enrichments not in the shared builder
     alternateName: ["madhu2456"],
     disambiguatingDescription:
-      "AI engineer and RAG & analytics consultant based in Visakhapatnam, India; specializes in production AI agents, RAG systems, FastAPI/Next.js products, and marketing analytics infrastructure.",
+      "AI engineer and RAG & analytics consultant based in Visakhapatnam, India; specializes in production AI agents, RAG systems, FastAPI/Next.js products, and marketing analytics infrastructure. MBA (IIM Amritsar); B.Tech. (MVGR College of Engineering).",
+    ...(degreeCredentials.length > 0 && {
+      hasCredential: [...existingCredentials, ...degreeCredentials],
+    }),
   };
 
   const coreEntityGraph = {
@@ -460,12 +487,17 @@ export default async function ProfilePage() {
             </div>
           </section>
 
-          {/* Academic Profile */}
+          {/* Academic Profile — resume.pdf SoT (MBA IIM Amritsar; B.Tech. MVGR) */}
           {sortedEducation.length > 0 && (
-            <section className="space-y-4">
+            <section className="space-y-4" id="education">
               <h2 className="text-2xl font-bold tracking-tight border-b border-border/80 pb-2 flex items-center gap-2">
-                <IconSchool className="h-6 w-6 text-primary" /> Academic Profile
+                <IconSchool className="h-6 w-6 text-primary" /> Education
               </h2>
+              <p className="text-sm text-muted-foreground max-w-2xl">
+                Formal education matching the résumé: MBA at IIM Amritsar
+                (2018–2020) explains the gap between Absolinsoft and GroupM;
+                B.Tech. from MVGR College of Engineering (2012–2016).
+              </p>
               <div className="grid gap-4 sm:grid-cols-2">
                 {sortedEducation.map((edu) => (
                   <div
@@ -473,21 +505,40 @@ export default async function ProfilePage() {
                     className="p-5 border border-border bg-surface/20 rounded-xl space-y-1"
                   >
                     <div className="flex items-center gap-2 text-primary">
-                      <IconSchool className="h-5 w-5" />
+                      <IconSchool className="h-5 w-5" aria-hidden />
                       <h3 className="font-semibold text-foreground">
-                        {edu.institution}
+                        {edu.degree}
+                        {edu.fieldOfStudy ? ` · ${edu.fieldOfStudy}` : ""}
                       </h3>
                     </div>
-                    <p className="text-sm text-muted-foreground">
-                      {edu.degree}
+                    <p className="text-sm text-foreground/90">
+                      {edu.website ? (
+                        <a
+                          href={edu.website}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline-offset-4 hover:text-primary hover:underline"
+                        >
+                          {edu.institution}
+                        </a>
+                      ) : (
+                        edu.institution
+                      )}
                     </p>
-                    <p className="text-xs text-muted-foreground">
-                      {edu.fieldOfStudy}
-                    </p>
+                    {edu.gpa ? (
+                      <p className="text-xs text-muted-foreground">
+                        Grade: {edu.gpa}
+                      </p>
+                    ) : null}
                     <p className="text-xs font-mono text-muted-foreground pt-1">
                       {formatMonthYear(edu.startDate)} –{" "}
                       {formatMonthYear(edu.endDate)}
                     </p>
+                    {edu.achievements?.[0] ? (
+                      <p className="pt-2 text-xs text-primary">
+                        ★ {edu.achievements[0]}
+                      </p>
+                    ) : null}
                   </div>
                 ))}
               </div>
