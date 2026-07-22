@@ -7,10 +7,9 @@ export const metadata: Metadata = {
   title: "Page Not Found | Madhu Dadi",
   description:
     "The requested page could not be found. Return to Madhu Dadi's portfolio, services, case studies, or contact page.",
-  robots: {
-    index: false,
-    follow: true,
-  },
+  // Do NOT set robots here. Next.js already injects <meta name="robots" content="noindex">
+  // for not-found / global-not-found. Adding robots again produces a second meta tag
+  // (e.g. "noindex" + "noindex, follow") which auditors flag as duplicate/conflicting.
 };
 
 const recoveryLinks = [

@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  robots: { index: false },
+  title: "Page Not Found | Madhu Dadi",
+  description:
+    "The requested page could not be found. Return to Madhu Dadi's portfolio, services, case studies, or contact page.",
+  // Robots meta omitted: Next injects a single noindex for not-found routes.
+  // Setting robots here duplicates the tag (audit: noindex + noindex, follow).
 };
 
 const recoveryLinks = [
