@@ -1,4 +1,4 @@
-# MadhuDadi Master Robots.txt — Consolidated (Blog & Portfolio)
+# Madhu Dadi Master Robots.txt — Consolidated (Blog & Portfolio)
 # Last Updated: 2026-07-21
 # Production deploy source: madhudadi.in/blog_platform/nginx/robots.txt → /opt/madhudadi-blog/nginx/robots.txt
 # This file mirrors the blog nginx robots for local dev / CI (see docs/seo-source-of-truth.md)

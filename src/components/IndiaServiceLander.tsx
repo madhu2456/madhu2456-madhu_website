@@ -215,6 +215,36 @@ export function IndiaServiceLander({ alias, data }: IndiaServiceLanderProps) {
 
           <section className="space-y-4">
             <h2 className="text-xl font-bold tracking-tight border-b border-border/80 pb-2">
+              How does engagement work?
+            </h2>
+            <ul className="grid gap-3 sm:grid-cols-3 text-sm text-muted-foreground">
+              <li className="rounded-xl border border-border/50 bg-surface/20 p-4">
+                <p className="font-semibold text-foreground">Discovery</p>
+                <p className="mt-1">
+                  Free fit check: problem, stack, constraints, and whether
+                  consulting is appropriate alongside full-time duties.
+                </p>
+              </li>
+              <li className="rounded-xl border border-border/50 bg-surface/20 p-4">
+                <p className="font-semibold text-foreground">Scoped build</p>
+                <p className="mt-1">
+                  Custom quote after discovery
+                  {alias.timeline ? ` · typical ${alias.timeline}` : ""}. No
+                  public price list.
+                </p>
+              </li>
+              <li className="rounded-xl border border-border/50 bg-surface/20 p-4">
+                <p className="font-semibold text-foreground">Handover</p>
+                <p className="mt-1">
+                  Docs, deploy notes, and ownership so your team can run the
+                  system after ship.
+                </p>
+              </li>
+            </ul>
+          </section>
+
+          <section className="space-y-4">
+            <h2 className="text-xl font-bold tracking-tight border-b border-border/80 pb-2">
               Common questions about {alias.title}
             </h2>
             <dl className="grid gap-4 md:grid-cols-2">
@@ -250,7 +280,7 @@ export function IndiaServiceLander({ alias, data }: IndiaServiceLanderProps) {
                 href={prefillContactUrl}
                 className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 hover:scale-[1.02] transition-all"
               >
-                Request consultation
+                Request discovery call
                 <IconArrowRight className="h-4 w-4" aria-hidden />
               </Link>
               <Link

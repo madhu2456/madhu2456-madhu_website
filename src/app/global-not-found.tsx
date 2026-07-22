@@ -13,10 +13,19 @@ export const metadata: Metadata = {
   },
 };
 
+const recoveryLinks = [
+  { href: "/", label: "Home", primary: true },
+  { href: "/services/", label: "Services" },
+  { href: "/case-studies/", label: "Case studies" },
+  { href: "/profile/", label: "Profile" },
+  { href: "/contact/", label: "Contact" },
+  { href: "/credentials/", label: "Credentials" },
+] as const;
+
 export default function GlobalNotFound() {
   return (
     <html
-      lang="en"
+      lang="en-IN"
       className={`${inter.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >
@@ -25,7 +34,7 @@ export default function GlobalNotFound() {
           <div className="grain absolute inset-0" aria-hidden />
           <div className="bg-hero-glow absolute inset-0" aria-hidden />
 
-          <div className="relative max-w-md text-center">
+          <div className="relative max-w-lg text-center">
             <p className="text-xs tracking-[0.25em] text-primary uppercase">
               404
             </p>
@@ -34,22 +43,26 @@ export default function GlobalNotFound() {
             </h1>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
               The page you&apos;re looking for doesn&apos;t exist or has been
-              moved.
+              moved. Try one of these destinations:
             </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Link
-                href="/"
-                className="rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-transform hover:scale-[1.03]"
-              >
-                Go home
-              </Link>
-              <Link
-                href="/case-studies/"
-                className="rounded-full border border-border bg-surface/60 px-5 py-3 text-sm font-medium hover:bg-surface-elevated"
-              >
-                View case studies
-              </Link>
-            </div>
+            <nav
+              aria-label="Recovery links"
+              className="mt-8 flex flex-wrap justify-center gap-2"
+            >
+              {recoveryLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={
+                    "primary" in link && link.primary
+                      ? "rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-transform hover:scale-[1.03] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                      : "rounded-full border border-border bg-surface/60 px-4 py-2.5 text-sm font-medium hover:bg-surface-elevated focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                  }
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
           </div>
         </main>
       </body>
