@@ -258,6 +258,64 @@ export const COMMERCIAL_LANDERS: CommercialLander[] = [
     contactIntent: "marketing-analytics",
     timeline: "6–12 weeks (data-ready scoped MMM)",
   },
+  {
+    slug: "attribution-modeling-consultant",
+    baseServiceSlug: "ga4-bigquery-campaign-analytics",
+    title: "Attribution Modeling Consultant",
+    seoTitle: "Attribution Modeling Consultant — Post-Cookie | Madhu Dadi",
+    seoDescription:
+      "Attribution consultant for post-cookie stacks: GA4 paths, incrementality, MMM overlays. Independent; India & remote.",
+    heroEyebrow: "Attribution · GA4 · Incrementality",
+    shortDescription:
+      "Independent attribution consulting after cookies and iOS: GA4 path models, warehouse multi-touch tables, and when to add MMM or experiments—not a single last-click number.",
+    directAnswer: [
+      "An attribution modeling consultant designs how you assign credit for conversions across channels when user identity is incomplete—using first-party paths in GA4/BigQuery, rules or data-driven models where they hold, and incrementality or MMM where cookies fail.",
+      "I scope select consulting alongside full-time work: audit current claims, fix collection where needed, then ship path tables or experiment design your team can run. Visakhapatnam-based; remote-first.",
+    ],
+    valueProps: [
+      "Post-cookie framing: first-party collection before fancy multi-touch math",
+      "GA4 + BigQuery path models when identity is good enough; honest limits when it is not",
+      "Clear MTA vs MMM vs geo/holdout tests—so budget questions get the right tool",
+      "Works with media, analytics, and engineering owners; written handover",
+    ],
+    focusTags: [
+      "Multi-touch attribution",
+      "GA4 paths",
+      "Incrementality",
+      "MTA vs MMM",
+      "India & remote",
+    ],
+    faqs: [
+      {
+        question: "What is the best attribution model in 2026?",
+        answer:
+          "There is no universal best. Last-click is simple but biased. Data-driven or position-based path models help when identity is reliable. For budget mix under cookie loss, pair digital paths with MMM or incrementality tests. Discovery picks the lightest model that answers your decision.",
+      },
+      {
+        question: "How does GA4 data-driven attribution actually work?",
+        answer:
+          "GA4’s data-driven model uses conversion paths in Google’s property when volume and eligibility thresholds are met. It is not a full warehouse MTA. For custom windows, CRM joins, or cost data, we usually rebuild paths in BigQuery on top of clean events.",
+      },
+      {
+        question: "MTA vs MMM — which one for a mid-market brand?",
+        answer:
+          "Use path/MTA-style models for digital journey diagnosis when stitching works. Use MMM for aggregate media mix and offline-heavy brands. Many teams need both: paths for ops, MMM or tests for board-level mix. See also the MMM consultant lander for mix-focused work.",
+      },
+      {
+        question: "How do I run incrementality tests on Meta and Google?",
+        answer:
+          "Typical patterns are geo splits, audience holdouts, or platform lift studies with pre-registered metrics and enough power. I help design the test and measurement, not run black-box media buying. Fit depends on spend level and operational ability to hold out traffic.",
+      },
+      {
+        question: "What does an attribution engagement look like end-to-end?",
+        answer:
+          "Discovery and audit → identity and event readiness → path or rule model in the warehouse (or GA4 config fixes) → optional experiment design → docs and dashboard views. Timeline depends on data quality; often a few weeks after access is granted.",
+      },
+    ],
+    contactIntent: "ga4-bigquery",
+    timeline: "3–8 weeks (scoped)",
+    proofProjectSlug: "adticks",
+  },
 ];
 
 export function getCommercialLander(

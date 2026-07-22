@@ -81,6 +81,7 @@ ${serviceLines || `- [Services hub](${siteUrl}/services/): Consulting and implem
 - [Google Analytics Consultant](${siteUrl}/google-analytics-consultant/): Independent GA4/GTM/BigQuery consulting
 - [Marketing Analytics Consultant](${siteUrl}/marketing-analytics-consultant/): Attribution, CLV, measurement systems
 - [Marketing Mix Modeling Consultant](${siteUrl}/marketing-mix-modeling-consultant/): MMM, media mix, incrementality inputs
+- [Attribution Modeling Consultant](${siteUrl}/attribution-modeling-consultant/): Post-cookie attribution, GA4 paths, tests
 
 ## Optional markdown twins
 
