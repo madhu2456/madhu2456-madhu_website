@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { type FormEvent, useEffect, useState, useTransition } from "react";
 import { submitContactForm } from "@/app/actions/submit-contact-form";
 import { FormField } from "@/components/FormField";
-import { pushToDataLayer } from "@/lib/gtm";
+import { trackContactFormError, trackContactFormSuccess } from "@/lib/gtm";
 
 type ContactIntent = {
   subject: string;
@@ -203,9 +203,11 @@ export function ContactForm() {
         form.reset();
         sessionStorage.setItem("contact_submitted", "true");
         setSubmitted(true);
-        pushToDataLayer({
-          event: "contact_form_submit",
-          form_location: "contact_page",
+        const intent = getHashIntent() || queryIntent;
+        trackContactFormSuccess({
+          formLocation: "contact_page",
+          formId: "contact_page_form",
+          intent,
         });
         setSubject("");
         setMessage("");
@@ -218,10 +220,10 @@ export function ContactForm() {
 
       setStatus({ tone: "error", message: result.error });
       setFieldErrors(result.fieldErrors ?? {});
-      pushToDataLayer({
-        event: "contact_form_error",
-        form_location: "contact_page",
-        error_message: result.error,
+      trackContactFormError({
+        formLocation: "contact_page",
+        formId: "contact_page_form",
+        errorMessage: result.error,
       });
     });
   };

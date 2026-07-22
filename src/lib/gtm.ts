@@ -14,6 +14,45 @@ export const pushToDataLayer = (payload: Record<string, unknown>) => {
   }
 };
 
+/**
+ * Successful contact form submission (not button click).
+ * Use for GA4 conversion + Google Ads import: map `generate_lead` / `contact_form_submit`.
+ */
+export const trackContactFormSuccess = (details: {
+  formLocation: string;
+  formId?: string;
+  intent?: string | null;
+}) => {
+  pushToDataLayer({
+    event: "contact_form_submit",
+    form_location: details.formLocation,
+    form_id: details.formId ?? "contact",
+    form_intent: details.intent || "general",
+  });
+  // GA4 recommended event name for lead forms (configure as conversion in GA4/Ads).
+  pushToDataLayer({
+    event: "generate_lead",
+    form_location: details.formLocation,
+    form_id: details.formId ?? "contact",
+    form_intent: details.intent || "general",
+    currency: "USD",
+    value: 0,
+  });
+};
+
+export const trackContactFormError = (details: {
+  formLocation: string;
+  formId?: string;
+  errorMessage?: string;
+}) => {
+  pushToDataLayer({
+    event: "contact_form_error",
+    form_location: details.formLocation,
+    form_id: details.formId ?? "contact",
+    error_message: details.errorMessage ?? "unknown",
+  });
+};
+
 export type ChatInteractionAction =
   | "open"
   | "close"

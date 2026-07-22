@@ -29,7 +29,11 @@ import { Experience } from "@/components/sections/Experience";
 import { Hero } from "@/components/sections/Hero";
 import { Projects } from "@/components/sections/Projects";
 import { SocialProof } from "@/components/sections/SocialProof";
-import { pushToDataLayer } from "@/lib/gtm";
+import {
+  pushToDataLayer,
+  trackContactFormError,
+  trackContactFormSuccess,
+} from "@/lib/gtm";
 
 import type {
   CertificationItem,
@@ -578,9 +582,10 @@ function Contact({ profile }: { profile: Profile }) {
         setPrefill({});
         sessionStorage.setItem("contact_submitted", "true");
         setSubmitted(true);
-        pushToDataLayer({
-          event: "contact_form_submit",
-          form_location: "homepage",
+        trackContactFormSuccess({
+          formLocation: "homepage",
+          formId: "homepage_contact_form",
+          intent: "general",
         });
         setStatus({
           tone: "success",
@@ -591,10 +596,10 @@ function Contact({ profile }: { profile: Profile }) {
 
       setStatus({ tone: "error", message: result.error });
       setFieldErrors(result.fieldErrors ?? {});
-      pushToDataLayer({
-        event: "contact_form_error",
-        form_location: "homepage",
-        error_message: result.error,
+      trackContactFormError({
+        formLocation: "homepage",
+        formId: "homepage_contact_form",
+        errorMessage: result.error,
       });
     });
   };

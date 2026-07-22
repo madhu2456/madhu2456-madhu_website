@@ -374,6 +374,56 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                   </ul>
                 </section>
               )}
+
+              {/* Engagement process — answer-engine friendly steps */}
+              <section className="space-y-4">
+                <h2 className="text-xl font-bold tracking-tight border-b border-border/80 pb-2">
+                  How does a typical engagement work?
+                </h2>
+                <ol className="space-y-3">
+                  {[
+                    {
+                      step: "1",
+                      title: "Discovery",
+                      body: "Problem statement, constraints, stack, risk, and success metrics. You get a fit assessment—not a generic pitch deck.",
+                    },
+                    {
+                      step: "2",
+                      title: "Architecture & plan",
+                      body: "Written approach, interfaces, eval hooks, and delivery milestones before heavy build spend.",
+                    },
+                    {
+                      step: "3",
+                      title: "Build & review",
+                      body: "Thin vertical slice first, then iterate with logs, tests, and review checkpoints you can hand to your team.",
+                    },
+                    {
+                      step: "4",
+                      title: "Ship & handover",
+                      body: service.timeline
+                        ? `Deploy notes, docs, and ownership transfer. Typical window: ${service.timeline} depending on scope.`
+                        : "Deploy notes, docs, and ownership transfer so the system survives after the engagement ends.",
+                    },
+                  ].map((item) => (
+                    <li
+                      key={item.step}
+                      className="flex gap-3 rounded-xl border border-border/50 bg-surface/20 p-4"
+                    >
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/15 text-xs font-bold text-primary">
+                        {item.step}
+                      </span>
+                      <div>
+                        <p className="text-sm font-semibold text-foreground">
+                          {item.title}
+                        </p>
+                        <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                          {item.body}
+                        </p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </section>
             </div>
 
             {/* Sidebar metadata column */}
