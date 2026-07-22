@@ -1682,16 +1682,18 @@
       "seoDescription": "Marketing analytics consultant in India: GA4, BigQuery, attribution, and decision systems that connect engineering delivery to revenue."
     },
     {
-      "title": "GA4 & BigQuery Analytics Consultant for Campaign Measurement",
+      "title": "GA4 + BigQuery Campaign Analytics",
       "slug": "ga4-bigquery-campaign-analytics",
       "icon": "/icon-512.png",
-      "shortDescription": "End-to-end server-side tracking, GA4 custom schemas, Google Cloud BigQuery warehouses, and campaign measurement workflows that leaders trust.",
-      "fullDescription": "Enterprise digital measurement for teams that cannot trust platform-reported conversions. I design server-side Google Tag Manager (sGTM), custom GA4 event schemas, BigQuery export models, and campaign dashboards with explicit privacy, consent, and attribution trade-offs. Engagements start with a tracking audit, then a prioritized fix plan and implementation notes your marketing and data teams can own. Related proof appears under case studies (Adticks measurement patterns) and on the technical blog.",
+      "shortDescription": "Turn GA4 raw exports into paid-media truth: unified campaign, cost, and conversion tables in BigQuery, with sGTM and dashboards finance can trust.",
+      "fullDescription": "Enterprise digital measurement for teams that cannot trust platform-reported conversions alone. I design server-side Google Tag Manager (sGTM), custom GA4 event schemas, BigQuery export models, and campaign dashboards with explicit privacy, consent, and attribution trade-offs.\n\nEngagements start with a tracking audit, then a prioritized fix plan and implementation notes. The goal is a single source of truth for spend and outcomes—not another vanity dashboard.\n\nGA4 UI vs BigQuery: the UI is excellent for exploration and standard reports; BigQuery is for unsampled analysis, joining CRM and cost data, custom multi-touch models, and MMM-ready extracts. Most growth-stage teams need both: clean collection in GA4/sGTM, deep analysis in BigQuery.\n\nWork is India and remote-first from Visakhapatnam, with Hyderabad experience. Typical scoped builds land in 3–6 weeks after discovery.",
       "features": [
-        "Server-side Google Tag Manager (sGTM) setup",
-        "Custom GA4 telemetry schemas & event structures",
-        "Google Cloud BigQuery warehouse integrations",
-        "Automated campaign performance dashboards"
+        "GA4 → BigQuery export design and cost-aware schemas",
+        "Server-side Google Tag Manager (sGTM) when accuracy requires it",
+        "Custom GA4 event schemas and item/user properties",
+        "Campaign cost + conversion truth tables in BigQuery",
+        "Looker Studio / BI layers on curated views",
+        "Meta CAPI & Google Enhanced Conversions via first-party flows"
       ],
       "technologies": [
         {
@@ -1711,31 +1713,31 @@
         }
       ],
       "deliverables": [
-        "Server-side tracking & sGTM container files",
-        "Documented GA4 custom event & schema registry",
-        "BigQuery SQL extraction & transformation scripts",
-        "Polished campaign performance BI dashboards"
+        "Tracking audit + prioritized fix plan",
+        "Documented GA4 event & parameter registry",
+        "sGTM container notes (when in scope)",
+        "BigQuery SQL models / views for campaign analysis",
+        "Looker Studio or BI dashboard pack on curated tables",
+        "Handover docs your marketing and data teams can own"
       ],
-      "timeline": "3-6 weeks",
+      "timeline": "3–6 weeks",
       "featured": true,
       "order": 5,
       "updatedAt": "2026-07-22T00:00:00Z",
-      "seoTitle": "GA4 & BigQuery Analytics Consultant in India | Madhu Dadi",
+      "seoTitle": "GA4 + BigQuery Campaign Analytics | Madhu Dadi",
       "audience": [
-        "Marketing teams looking for a single source of truth for media spend and conversions",
-        "Growth engineering teams needing server-side tracking setups (sGTM)",
-        "Data leaders aiming to feed raw GA4 event streams into BigQuery",
-        "E-commerce brands seeking accurate checkout and purchase attribution",
-        "Agencies running search and social ad campaigns needing precise conversion API signals",
-        "B2B enterprises tracking lead gen channels and lifecycle progression"
+        "Marketing and growth teams that need a single source of truth for media spend and conversions",
+        "Data and analytics leaders feeding raw GA4 streams into BigQuery",
+        "E-commerce and lead-gen brands fixing broken funnels and revenue values",
+        "Agencies needing reliable conversion API signals without black-box stacks"
       ],
       "problemsSolved": [
-        "Mismatched and bloated ad platform reporting numbers",
-        "Missing checkout funnel events and incorrect revenue values in GA4",
-        "Incomplete measurement caused by browser privacy controls, consent constraints, and client-side blocking",
-        "Slow and inefficient BI dashboards reading from raw unoptimized tables",
-        "Lack of user lifecycle tracking across domain transitions",
-        "Broken lead forms or conversion signals that fail silently without alerting"
+        "Platform-reported conversions that do not match finance or CRM",
+        "Sampled or incomplete analysis limited to the GA4 UI",
+        "Client-side loss from browsers, ad blockers, and consent constraints",
+        "Expensive BigQuery queries on unpartitioned raw export tables",
+        "Attribution models that collapse after iOS and cookie changes",
+        "Dashboards that look polished but cannot be reconciled"
       ],
       "capabilityCards": [
         {
@@ -1765,31 +1767,39 @@
       ],
       "faqs": [
         {
-          "question": "Why do I need a server-side tracking (sGTM) setup?",
-          "answer": "Client-side tracking is increasingly blocked by browsers, ad blockers, and network controls. Server-side tracking (sGTM) moves the tag execution process to your server, allowing you to route clean first-party data streams to GA4 and ad platforms. This improves data accuracy, page load speeds, and security."
+          "question": "Why export GA4 to BigQuery instead of using the GA4 UI?",
+          "answer": "The GA4 UI samples and limits complex analysis. BigQuery gives event-level rows you can join to CRM, ad costs, and offline conversions for attribution, cohorting, and finance-grade reporting without API quota walls."
         },
         {
-          "question": "How does the GA4 export to BigQuery help with marketing?",
-          "answer": "The standard GA4 UI limits your ability to query raw data, perform user-level cohort analysis, or run custom attribution. By exporting to BigQuery, you gain access to raw event logs. This allows you to combine GA4 data with CRM databases, build custom models in SQL, and design dashboards in Looker Studio that don't hit GA4 API quota limits."
+          "question": "What is the true cost of GA4 BigQuery export at high volume?",
+          "answer": "Export itself is free within Google’s GA4→BigQuery integration; cost is storage and query bytes. Partitioning, clustering, and incremental transforms usually matter more than export flags. I design schemas to keep monthly query spend predictable."
         },
         {
-          "question": "Do you configure Conversion APIs for Meta, Google, and TikTok?",
-          "answer": "Yes. I set up server-side conversion signals (such as Meta Conversions API and Google Enhanced Conversions) via sGTM. I map user identifiers (hashed email, phone) to maximize match rates, leading to more accurate attribution and lower cost-per-acquisition (CPA). All user identifiers should be handled only with appropriate consent, hashing, data minimization, and platform-policy compliance."
+          "question": "How do I model channel attribution from GA4 raw events?",
+          "answer": "Start with clean identity and session keys, then build channel paths from UTMs and first-party identifiers in BigQuery. Multi-touch tables and incrementality tests sit on that base—not on sampled UI reports."
         },
         {
-          "question": "Can you help optimize our Google Cloud BigQuery query costs?",
-          "answer": "Yes. Raw GA4 exports can quickly become expensive to query if tables are not partitioned and clustered correctly. I optimize schemas, build incremental transformation tables, and design views that limit scanned bytes, significantly reducing monthly GCP analytics costs."
+          "question": "Can I keep GA4 sampled UI reports in sync with BigQuery?",
+          "answer": "They will never match byte-for-byte because of sampling and processing differences. We document expected deltas, use BigQuery as the system of record for deep analysis, and keep the UI for operational checks."
         },
         {
-          "question": "Why should we export GA4 data to BigQuery?",
-          "answer": "Exporting to BigQuery bypasses the strict sampling limits in the standard GA4 interface, giving you access to raw event-level data for precise, custom attribution modeling."
+          "question": "What Looker Studio setup works best on GA4 BigQuery data?",
+          "answer": "Connect to curated views—not raw export tables—with pre-aggregated marts for campaigns, sessions, and revenue. That keeps dashboards fast and query costs low for marketing stakeholders."
         },
         {
-          "question": "Can you help migrate existing Universal Analytics reports to GA4?",
-          "answer": "Yes. I reconstruct equivalent—and often superior—reporting views using GA4 event data in BigQuery and visualize them via Looker Studio or custom BI dashboards."
+          "question": "Do I need server-side GTM for GA4 BigQuery work?",
+          "answer": "Not always. sGTM helps when client-side loss, consent, or ad-platform match rates are the bottleneck. We only add sGTM when the audit shows a measurable accuracy or resilience win."
         }
       ],
-      "seoDescription": "GA4 & BigQuery consultant for server-side GTM, custom event schemas, warehouses, and campaign measurement leaders can trust. India & remote."
+      "seoDescription": "GA4 BigQuery consultant for raw exports, campaign truth tables, sGTM, and dashboards finance trusts. India & remote.",
+      "heroTitle": "GA4 + BigQuery Campaign Analytics",
+      "heroEyebrow": "Measurement · GA4 · BigQuery",
+      "directAnswerParagraphs": [
+        "A GA4 BigQuery consultant designs the export, warehouse schema, and analysis layers that turn raw GA4 events into campaign, cost, and conversion tables you can query without sampling walls in the GA4 UI—so marketing and finance share one measurement truth.",
+        "I implement server-side GTM only when accuracy requires it, document event schemas, and leave SQL views plus Looker-ready layers your teams can own. Work is scoped select consulting alongside full-time employment, India and remote-first from Visakhapatnam."
+      ],
+      "proofProjectSlugs": ["adticks"],
+      "contactIntent": "ga4-bigquery"
     },
     {
       "title": "Full-Stack AI Product Development",

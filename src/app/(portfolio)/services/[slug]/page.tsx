@@ -70,14 +70,22 @@ export async function generateMetadata({
   const title = rawTitle.includes("Madhu Dadi")
     ? rawTitle
     : `${rawTitle} | Madhu Dadi`;
-  const description =
+  const rawDescription =
     service.seoDescription ||
     service.shortDescription ||
-    service.fullDescription;
+    service.fullDescription ||
+    "";
+  const description =
+    rawDescription.length > 160
+      ? `${rawDescription
+          .slice(0, 157)
+          .trim()
+          .replace(/[,\s;:!?-]+$/u, "")}...`
+      : rawDescription;
   const image = `${siteUrl}opengraph-image/`;
 
   return {
-    title,
+    title: { absolute: title },
     description,
     alternates: {
       canonical: canonicalUrl,
@@ -134,19 +142,45 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
   };
   const intent = SERVICE_INTENT_BY_SLUG[service.slug];
   const prefillContactUrl = intent ? `/contact/#intent=${intent}` : "/contact/";
-  const relatedCaseStudies = sortedProjects.filter(
-    (project) => project.relatedServiceSlug === service.slug,
-  );
+  const relatedCaseStudies = (() => {
+    const proofSlugs = service.proofProjectSlugs ?? [];
+    if (proofSlugs.length > 0) {
+      return sortedProjects.filter((project) =>
+        proofSlugs.includes(project.slug),
+      );
+    }
+    return sortedProjects.filter(
+      (project) => project.relatedServiceSlug === service.slug,
+    );
+  })();
   const relatedLearning = getRelatedLearning(service.slug);
+  const displayTitle = service.heroTitle || service.title;
+  const overviewParagraphs = (service.fullDescription || "")
+    .split(/\n{2,}/)
+    .map((p) => p.trim())
+    .filter(Boolean);
+  const directAnswers =
+    service.directAnswerParagraphs && service.directAnswerParagraphs.length > 0
+      ? service.directAnswerParagraphs
+      : null;
 
   const tocItems: PageTocItem[] = [
     { id: "service-summary", label: "Summary" },
-    ...(service.fullDescription
+    ...(directAnswers ? [{ id: "direct-answer", label: "Definition" }] : []),
+    ...(service.audience && service.audience.length > 0
+      ? [{ id: "who-for", label: "Who it's for" }]
+      : []),
+    ...(service.problemsSolved && service.problemsSolved.length > 0
+      ? [{ id: "problems", label: "Problems" }]
+      : []),
+    ...(overviewParagraphs.length > 0
       ? [{ id: "service-overview", label: "Overview" }]
       : []),
-    ...(service.features && service.features.length > 0
-      ? [{ id: "key-capabilities", label: "Capabilities" }]
-      : []),
+    ...(service.capabilityCards && service.capabilityCards.length > 0
+      ? [{ id: "capability-detail", label: "Capabilities" }]
+      : service.features && service.features.length > 0
+        ? [{ id: "key-capabilities", label: "Capabilities" }]
+        : []),
     ...(service.deliverables && service.deliverables.length > 0
       ? [{ id: "deliverables", label: "Deliverables" }]
       : []),
@@ -281,7 +315,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                   </span>
                 </div>
                 <h1 className="text-3xl md:text-5xl font-bold tracking-tight">
-                  {service.title}
+                  {displayTitle}
                 </h1>
                 <p className="text-lg md:text-xl text-foreground/80 leading-relaxed font-medium">
                   {service.shortDescription}
@@ -295,6 +329,26 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           </section>
 
           <PageToc items={tocItems} />
+
+          {/* Direct answer — 40–60 word AEO block (content plan template) */}
+          {directAnswers ? (
+            <section
+              id="direct-answer"
+              className="scroll-mt-28 space-y-3 rounded-2xl border border-border/60 bg-surface/20 p-6"
+            >
+              <h2 className="text-sm font-bold uppercase tracking-wider text-primary">
+                In one paragraph
+              </h2>
+              {directAnswers.map((para) => (
+                <p
+                  key={para.slice(0, 48)}
+                  className="text-base leading-relaxed text-foreground/90"
+                >
+                  {para}
+                </p>
+              ))}
+            </section>
+          ) : null}
 
           {/* AI Answer Block / TL;DR Summary */}
           <section
@@ -311,7 +365,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                   What is the service?
                 </dt>
                 <dd className="text-sm text-foreground/90 mt-1">
-                  {service.title}
+                  {displayTitle}
                 </dd>
               </div>
               <div>
@@ -349,8 +403,45 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           <div className="grid gap-10 md:grid-cols-3">
             {/* Main detail content column */}
             <div className="md:col-span-2 space-y-8">
+              {service.audience && service.audience.length > 0 ? (
+                <section id="who-for" className="scroll-mt-28 space-y-4">
+                  <h2 className="text-xl font-bold tracking-tight border-b border-border/80 pb-2">
+                    Who is this for?
+                  </h2>
+                  <ul className="space-y-2.5">
+                    {service.audience.map((item) => (
+                      <li
+                        key={item}
+                        className="flex gap-2.5 items-start text-sm text-muted-foreground"
+                      >
+                        <IconCircleCheck className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                        <span className="text-foreground/90">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ) : null}
+
+              {service.problemsSolved && service.problemsSolved.length > 0 ? (
+                <section id="problems" className="scroll-mt-28 space-y-4">
+                  <h2 className="text-xl font-bold tracking-tight border-b border-border/80 pb-2">
+                    Problems this engagement solves
+                  </h2>
+                  <ul className="grid gap-3 sm:grid-cols-2">
+                    {service.problemsSolved.map((item) => (
+                      <li
+                        key={item}
+                        className="rounded-xl border border-border/50 bg-surface/20 p-4 text-sm leading-relaxed text-muted-foreground"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ) : null}
+
               {/* Detailed narrative description */}
-              {service.fullDescription && (
+              {overviewParagraphs.length > 0 && (
                 <section
                   id="service-overview"
                   className="scroll-mt-28 space-y-4"
@@ -358,14 +449,39 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                   <h2 className="text-xl font-bold tracking-tight border-b border-border/80 pb-2">
                     Service Overview
                   </h2>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {service.fullDescription}
-                  </p>
+                  <div className="space-y-4 text-muted-foreground leading-relaxed">
+                    {overviewParagraphs.map((para) => (
+                      <p key={para.slice(0, 64)}>{para}</p>
+                    ))}
+                  </div>
                 </section>
               )}
 
-              {/* Service Features / Core Offerings */}
-              {service.features && service.features.length > 0 && (
+              {service.capabilityCards && service.capabilityCards.length > 0 ? (
+                <section
+                  id="capability-detail"
+                  className="scroll-mt-28 space-y-4"
+                >
+                  <h2 className="text-xl font-bold tracking-tight border-b border-border/80 pb-2">
+                    Key Focus Capabilities
+                  </h2>
+                  <ul className="grid gap-4 sm:grid-cols-2">
+                    {service.capabilityCards.map((card) => (
+                      <li
+                        key={card.title}
+                        className="rounded-xl border border-border/50 bg-surface/20 p-5 space-y-2"
+                      >
+                        <p className="font-semibold text-foreground">
+                          {card.title}
+                        </p>
+                        <p className="text-sm leading-relaxed text-muted-foreground">
+                          {card.description}
+                        </p>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ) : service.features && service.features.length > 0 ? (
                 <section
                   id="key-capabilities"
                   className="scroll-mt-28 space-y-4"
@@ -387,7 +503,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                     ))}
                   </ul>
                 </section>
-              )}
+              ) : null}
 
               {/* Deliverables List */}
               {service.deliverables && service.deliverables.length > 0 && (
