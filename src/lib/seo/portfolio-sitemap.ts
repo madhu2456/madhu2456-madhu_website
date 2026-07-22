@@ -181,6 +181,7 @@ export const PORTFOLIO_SITEMAP_STATIC_PATHS = [
   "/marketing-mix-modeling-consultant/",
   "/attribution-modeling-consultant/",
   "/fractional-ai-consultant/",
+  "/ai-consultant-for-startups/",
   "/privacy/",
   "/resume.pdf",
 ] as const;

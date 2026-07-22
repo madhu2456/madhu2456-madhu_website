@@ -304,6 +304,14 @@ export default async function ServicesHubPage() {
                   Fractional AI consultant
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/ai-consultant-for-startups/"
+                  className="block rounded-xl border border-border/60 bg-surface/20 p-4 text-sm font-semibold text-foreground transition-colors hover:border-primary/40 hover:text-primary"
+                >
+                  AI consultant for startups
+                </Link>
+              </li>
             </ul>
           </section>
 

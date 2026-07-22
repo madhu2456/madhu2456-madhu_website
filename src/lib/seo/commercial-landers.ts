@@ -374,6 +374,67 @@ export const COMMERCIAL_LANDERS: CommercialLander[] = [
     timeline: "Retainer or 4–12 week scoped build",
     proofProjectSlug: "technical-blog",
   },
+  {
+    slug: "ai-consultant-for-startups",
+    baseServiceSlug: "ai-llm-application-development",
+    title: "Fractional AI Consultant for Startups",
+    seoTitle: "AI Consultant for Startups — RAG & Shipping | Madhu Dadi",
+    seoDescription:
+      "Fractional AI consultant for seed to Series B: roadmap, RAG, LLM integration, evals—without a full-time hire. India & remote.",
+    heroEyebrow: "Startups · Fractional AI · Ship",
+    shortDescription:
+      "AI consulting for seed to Series B teams that need a roadmap and a shippable RAG/LLM slice—without hiring a full-time AI lead yet.",
+    directAnswer: [
+      "An AI consultant for startups helps early product teams choose what to build, design RAG or LLM integrations, and ship a thin production slice with evals—so founders do not burn a full-time senior hire on the first experiment.",
+      "I take select consulting work alongside full-time employment: discovery, a written pilot plan, then scoped build or fractional advisory. Visakhapatnam-based; remote-first for US, EU, and India teams.",
+    ],
+    valueProps: [
+      "Pilot scope that fits runway: one vertical slice, clear kill criteria",
+      "RAG vs fine-tune vs rules—picked for data and latency, not hype",
+      "Evals and logging so “demo works” becomes “ops can run it”",
+      "Path to hand off to your first AI/full-stack engineer",
+    ],
+    focusTags: [
+      "Startups",
+      "Seed–Series B",
+      "RAG / LLM",
+      "Pilot → production",
+      "India & remote",
+    ],
+    faqs: [
+      {
+        question:
+          "What does a fractional AI consultant actually do for startups?",
+        answer:
+          "Prioritize use cases, design the architecture, help implement a first safe deploy (often RAG or structured LLM workflows), and leave docs/evals your team can extend. Not a replacement for product/engineering ownership.",
+      },
+      {
+        question: "How much does a startup AI consultant cost per month?",
+        answer:
+          "Custom quote after discovery—no public rate card. Options include short pilots or a capped monthly advisory block. Cost tracks scope and access, not a generic package.",
+      },
+      {
+        question:
+          "When should a startup hire an AI consultant vs an AI engineer?",
+        answer:
+          "Hire an engineer when AI is a standing product surface needing daily ownership. Use a consultant to set the first architecture, ship a pilot, and de-risk the hire—or to unblock a specific integration while your team stays generalist.",
+      },
+      {
+        question:
+          "What can a fractional AI consultant realistically ship in 90 days?",
+        answer:
+          "Examples: prioritized roadmap, production-shaped RAG or agent vertical slice with basic evals, and a handover plan. Multi-product “AI transformation” in 90 days is not a credible default.",
+      },
+      {
+        question: "How do you scope an AI pilot that will not stall?",
+        answer:
+          "One user job, one data source set, success metrics, and a time box. We write kill criteria before build. If data or access is missing, discovery stops at a readiness report instead of an endless prototype.",
+      },
+    ],
+    contactIntent: "ai-llm",
+    timeline: "4–12 week pilot or capped monthly advisory",
+    proofProjectSlug: "technical-blog",
+  },
 ];
 
 export function getCommercialLander(

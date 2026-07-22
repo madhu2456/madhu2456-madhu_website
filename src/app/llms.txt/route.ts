@@ -83,6 +83,7 @@ ${serviceLines || `- [Services hub](${siteUrl}/services/): Consulting and implem
 - [Marketing Mix Modeling Consultant](${siteUrl}/marketing-mix-modeling-consultant/): MMM, media mix, incrementality inputs
 - [Attribution Modeling Consultant](${siteUrl}/attribution-modeling-consultant/): Post-cookie attribution, GA4 paths, tests
 - [Fractional AI Consultant](${siteUrl}/fractional-ai-consultant/): Retainer AI roadmap, RAG, evals, LLM ops
+- [AI Consultant for Startups](${siteUrl}/ai-consultant-for-startups/): Seed–Series B pilots, RAG/LLM shipping
 
 ## Optional markdown twins
 

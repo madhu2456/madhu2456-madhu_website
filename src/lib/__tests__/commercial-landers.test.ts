@@ -14,6 +14,7 @@ describe("commercial landers", () => {
       "marketing-mix-modeling-consultant",
       "attribution-modeling-consultant",
       "fractional-ai-consultant",
+      "ai-consultant-for-startups",
     ]);
   });
 
