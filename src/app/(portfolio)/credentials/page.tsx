@@ -256,82 +256,99 @@ export default async function CredentialsPage() {
                 Registries
               </h2>
               <p className="text-xs md:text-sm text-muted-foreground">
-                Official licensing details and credentials retrieved directly
-                from professional issuer databases.
+                Ordered by issuer authority: exam and vendor credentials first,
+                then platform coursework (Udemy) labeled as coursework so it
+                does not outrank Microsoft, GitHub, MongoDB, or Dataiku.
               </p>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
-              {sortedCertifications.map((cert) => (
-                <div
-                  key={cert.name}
-                  className="group flex flex-col justify-between p-6 border border-border bg-surface/20 rounded-2xl hover:border-primary/30 transition-all duration-300 backdrop-blur-md"
-                >
-                  <div className="space-y-3">
-                    <div className="flex items-start gap-3">
-                      <div className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary shrink-0">
-                        <IconCertificate className="h-4.5 w-4.5" />
+              {sortedCertifications.map((cert) => {
+                const isCoursework =
+                  cert.issuer?.toLowerCase() === "udemy" ||
+                  /coursework/i.test(cert.description || "");
+                return (
+                  <div
+                    key={cert.name}
+                    className="group flex flex-col justify-between p-6 border border-border bg-surface/20 rounded-2xl hover:border-primary/30 transition-all duration-300 backdrop-blur-md"
+                  >
+                    <div className="space-y-3">
+                      <div className="flex items-start gap-3">
+                        <div className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary shrink-0">
+                          <IconCertificate className="h-4.5 w-4.5" />
+                        </div>
+                        <div>
+                          <div className="flex flex-wrap items-center gap-2">
+                            <h3 className="font-bold text-foreground leading-snug group-hover:text-primary transition-colors">
+                              {cert.name}
+                            </h3>
+                            {isCoursework ? (
+                              <span className="inline-flex items-center rounded-full border border-border/50 bg-background/40 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                                Coursework
+                              </span>
+                            ) : (
+                              <span className="inline-flex items-center rounded-full border border-primary/25 bg-primary/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-primary">
+                                Credential
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-xs text-muted-foreground mt-0.5">
+                            Issued by{" "}
+                            <span className="font-medium text-foreground/80">
+                              {cert.issuer}
+                            </span>
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <h3 className="font-bold text-foreground leading-snug group-hover:text-primary transition-colors">
-                          {cert.name}
-                        </h3>
-                        <p className="text-xs text-muted-foreground mt-0.5">
-                          Issued by{" "}
-                          <span className="font-medium text-foreground/80">
-                            {cert.issuer}
-                          </span>
-                        </p>
+
+                      <div className="pl-12 space-y-2 text-xs">
+                        {cert.credentialId && (
+                          <p className="font-mono text-[10px] text-muted-foreground bg-surface-elevated/40 border border-border/30 px-2 py-0.5 rounded w-fit">
+                            ID: {cert.credentialId}
+                          </p>
+                        )}
+                        {cert.issueDate && (
+                          <p className="text-muted-foreground">
+                            Issue Date:{" "}
+                            <span className="font-mono text-foreground">
+                              {formatMonthYear(cert.issueDate)}
+                            </span>
+                          </p>
+                        )}
+                        {cert.description && (
+                          <p className="text-muted-foreground leading-relaxed pt-1">
+                            {cert.description}
+                          </p>
+                        )}
                       </div>
                     </div>
 
-                    <div className="pl-12 space-y-2 text-xs">
-                      {cert.credentialId && (
-                        <p className="font-mono text-[10px] text-muted-foreground bg-surface-elevated/40 border border-border/30 px-2 py-0.5 rounded w-fit">
-                          ID: {cert.credentialId}
-                        </p>
-                      )}
-                      {cert.issueDate && (
-                        <p className="text-muted-foreground">
-                          Issue Date:{" "}
-                          <span className="font-mono text-foreground">
-                            {formatMonthYear(cert.issueDate)}
+                    <div className="pl-12 mt-6 pt-4 border-t border-border/40 flex items-center justify-between gap-4">
+                      <div className="flex flex-wrap gap-1">
+                        {cert.skills?.slice(0, 3).map((skill) => (
+                          <span
+                            key={skill.name}
+                            className="rounded-full border border-border/35 bg-background/20 px-2 py-0.5 text-[9px] font-mono text-muted-foreground"
+                          >
+                            {skill.name}
                           </span>
-                        </p>
-                      )}
-                      {cert.description && (
-                        <p className="text-muted-foreground leading-relaxed pt-1">
-                          {cert.description}
-                        </p>
-                      )}
-                    </div>
-                  </div>
+                        ))}
+                      </div>
 
-                  <div className="pl-12 mt-6 pt-4 border-t border-border/40 flex items-center justify-between gap-4">
-                    <div className="flex flex-wrap gap-1">
-                      {cert.skills?.slice(0, 3).map((skill) => (
-                        <span
-                          key={skill.name}
-                          className="rounded-full border border-border/35 bg-background/20 px-2 py-0.5 text-[9px] font-mono text-muted-foreground"
+                      {cert.credentialUrl && (
+                        <a
+                          href={cert.credentialUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:text-primary-hover transition-colors whitespace-nowrap"
                         >
-                          {skill.name}
-                        </span>
-                      ))}
+                          Verify <IconExternalLink className="h-3 w-3" />
+                        </a>
+                      )}
                     </div>
-
-                    {cert.credentialUrl && (
-                      <a
-                        href={cert.credentialUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:text-primary-hover transition-colors whitespace-nowrap"
-                      >
-                        Verify <IconExternalLink className="h-3 w-3" />
-                      </a>
-                    )}
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </section>
 

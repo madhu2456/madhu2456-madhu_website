@@ -417,27 +417,40 @@ function Certifications({
 
   return (
     <Section id="certifications" eyebrow="Credentials" title="Certifications">
+      <p className="mb-6 max-w-3xl text-sm text-muted-foreground">
+        Ordered by issuer authority for enterprise trust: exam/vendor
+        credentials first (LLM security, Microsoft, GitHub, MongoDB, Dataiku),
+        then platform coursework certificates.
+      </p>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {certifications.map((certification) => (
-          <a
-            key={`${certification.name}-${certification.issuer}`}
-            href={certification.credentialUrl || LINKEDIN_CERTS_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`View ${certification.name} certification`}
-            className="group flex flex-col rounded-xl border border-border bg-surface/50 p-5 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-surface-elevated/60"
-          >
-            <p className="text-xs text-muted-foreground">
-              {formatMonthYear(certification.issueDate)}
-              {certification.issuer ? ` · ${certification.issuer}` : ""}
-            </p>
-            <p className="mt-1 text-sm text-foreground">{certification.name}</p>
-            <p className="mt-3 inline-flex items-center gap-1 text-xs text-primary opacity-80 group-hover:opacity-100">
-              View credential
-              <IconExternalLink className="h-3 w-3" aria-hidden />
-            </p>
-          </a>
-        ))}
+        {certifications.map((certification) => {
+          const isCoursework =
+            certification.issuer?.toLowerCase() === "udemy" ||
+            /coursework/i.test(certification.description || "");
+          return (
+            <a
+              key={`${certification.name}-${certification.issuer}`}
+              href={certification.credentialUrl || LINKEDIN_CERTS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`View ${certification.name} certification`}
+              className="group flex flex-col rounded-xl border border-border bg-surface/50 p-5 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-surface-elevated/60"
+            >
+              <p className="text-xs text-muted-foreground">
+                {formatMonthYear(certification.issueDate)}
+                {certification.issuer ? ` · ${certification.issuer}` : ""}
+                {isCoursework ? " · Coursework" : ""}
+              </p>
+              <p className="mt-1 text-sm text-foreground">
+                {certification.name}
+              </p>
+              <p className="mt-3 inline-flex items-center gap-1 text-xs text-primary opacity-80 group-hover:opacity-100">
+                View credential
+                <IconExternalLink className="h-3 w-3" aria-hidden />
+              </p>
+            </a>
+          );
+        })}
       </div>
       <p className="mt-4 text-xs text-muted-foreground">
         All credentials are listed on{" "}
