@@ -278,6 +278,15 @@ export default async function ServicesHubPage() {
                   <IconArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/guides/fractional-ai-playbook/"
+                  className="inline-flex items-center gap-2 text-primary underline-offset-4 hover:underline"
+                >
+                  Fractional AI playbook
+                  <IconArrowRight className="h-4 w-4" aria-hidden />
+                </Link>
+              </li>
             </ul>
           </section>
 

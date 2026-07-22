@@ -27,6 +27,16 @@ export const SERVICE_RELATED_LEARNING: Record<string, RelatedLearningLink[]> = {
   ],
   "ai-llm-application-development": [
     {
+      href: "/guides/fractional-ai-playbook/",
+      label: "Guide: fractional AI pricing & 90-day playbook",
+      kind: "tool",
+    },
+    {
+      href: "/fractional-ai-consultant/",
+      label: "Fractional AI consultant lander",
+      kind: "tool",
+    },
+    {
       href: `${BLOG}/posts/rag-vs-fine-tuning-which-llm-approach`,
       label: "RAG vs fine-tuning comparison",
       kind: "blog",
