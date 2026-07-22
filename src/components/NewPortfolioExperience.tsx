@@ -635,6 +635,7 @@ function Contact({ profile }: { profile: Profile }) {
               profile={profile}
               clickLocation="homepage_contact"
               emailTrackingLocation="homepage_email"
+              aria-label="Homepage contact social links"
             />
           </div>
         </div>

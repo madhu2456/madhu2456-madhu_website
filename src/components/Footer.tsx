@@ -88,6 +88,7 @@ export function Footer({ profile, projects, navigationItems }: FooterProps) {
                 profile={profile}
                 clickLocation="footer_social"
                 emailTrackingLocation="footer"
+                aria-label="Footer social links"
               />
             </div>
           </div>

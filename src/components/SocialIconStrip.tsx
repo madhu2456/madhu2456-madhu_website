@@ -127,21 +127,34 @@ export function buildSocialIconLinks(profile: Profile): SocialIconLink[] {
   return links;
 }
 
+/** Unique landmark names when multiple strips share a page (axe landmark-unique). */
+function defaultSocialLandmarkLabel(clickLocation: string): string {
+  const known: Record<string, string> = {
+    homepage_contact: "Homepage contact social links",
+    footer_social: "Footer social links",
+    footer: "Footer social links",
+  };
+  if (known[clickLocation]) return known[clickLocation];
+  const human = clickLocation.replace(/_/g, " ").trim();
+  return human ? `Social links (${human})` : "Connect on social platforms";
+}
+
 export function SocialIconStrip({
   profile,
   clickLocation,
   emailTrackingLocation,
   className = "flex flex-wrap gap-2",
-  "aria-label": ariaLabel = "Connect on social platforms",
+  "aria-label": ariaLabel,
 }: SocialIconStripProps) {
   const links = buildSocialIconLinks(profile);
+  const landmarkLabel = ariaLabel ?? defaultSocialLandmarkLabel(clickLocation);
 
   if (links.length === 0) {
     return null;
   }
 
   return (
-    <section className={className} aria-label={ariaLabel}>
+    <section className={className} aria-label={landmarkLabel}>
       {links.map((link) => (
         <SocialIconButton
           key={link.label}
