@@ -260,6 +260,18 @@ export const pageContentSchema = z.object({
       })
       .optional(),
     faqItems: z.array(faqItemSchema).optional(),
+    /** Named quotes only with permission — leave empty rather than inventing. */
+    testimonials: z
+      .array(
+        z.object({
+          quote: z.string().min(1),
+          name: z.string().min(1),
+          role: z.string().optional(),
+          company: z.string().optional(),
+          sourceUrl: z.string().url().optional().or(z.literal("")),
+        }),
+      )
+      .optional(),
   }),
   profile: richTextPageSchema.extend({
     coreStackGroups: z

@@ -28,6 +28,7 @@ import { Education } from "@/components/sections/Education";
 import { Experience } from "@/components/sections/Experience";
 import { Hero } from "@/components/sections/Hero";
 import { Projects } from "@/components/sections/Projects";
+import { SocialProof } from "@/components/sections/SocialProof";
 import { pushToDataLayer } from "@/lib/gtm";
 
 import type {
@@ -97,6 +98,12 @@ export function NewPortfolioExperience({
         />
         <DirectAnswer pageContent={pageContent} />
         <Stats stats={profile.stats} />
+        <SocialProof
+          awards={pageContent.credentials?.awards || []}
+          projects={projects}
+          testimonials={pageContent.home.testimonials}
+          linkedInUrl={profile.socialLinks?.linkedin}
+        />
         <Projects projects={projects} />
         <Services services={services} />
         <Skills skills={skills} />
