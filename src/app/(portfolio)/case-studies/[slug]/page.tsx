@@ -21,39 +21,15 @@ import {
   shouldUseUnoptimizedImage,
 } from "@/lib/image-source";
 import { getPortfolioData, type ProjectItem } from "@/lib/portfolio-data";
-import { getDistinctProjectTagline } from "@/lib/project-display";
+import {
+  buildCaseStudyMetaDescription,
+  getDistinctProjectTagline,
+} from "@/lib/project-display";
 import { siteLanguageAlternates } from "@/lib/seo/hreflang";
 import { resolveSiteUrl } from "@/lib/site-url";
 
 const getSiteUrl = () => {
   return `${resolveSiteUrl()}/`;
-};
-
-const toDescription = (...values: Array<string | null | undefined>) => {
-  const merged = values
-    .map((value) => value?.trim())
-    .filter((value): value is string => Boolean(value))
-    .join(" - ")
-    .replace(/\s+/g, " ")
-    .trim();
-
-  if (!merged) {
-    return "Case study detailing implementation approach, stack, and measurable delivery outcomes.";
-  }
-
-  if (merged.length <= 160) return merged;
-
-  const sentenceBoundary = merged.lastIndexOf(".", 160);
-  if (sentenceBoundary >= 80) {
-    return merged.slice(0, sentenceBoundary + 1).trim();
-  }
-
-  const boundary = merged.lastIndexOf(" ", 157);
-  const safeBoundary = boundary > 0 ? boundary : 157;
-  return `${merged
-    .slice(0, safeBoundary)
-    .trim()
-    .replace(/[,\s;:!?-]+$/, "")}...`;
 };
 
 const splitIntoList = (value?: string) => {
@@ -151,7 +127,7 @@ export async function generateMetadata({
   const title = baseTitle.includes("Madhu Dadi")
     ? baseTitle
     : `${baseTitle} | Madhu Dadi`;
-  const description = toDescription(project.tagline, project.impactSummary);
+  const description = buildCaseStudyMetaDescription(project);
   const url = `/case-studies/${slug}/`;
 
   return {
@@ -190,7 +166,11 @@ export default async function CaseStudyPage({
 
   const siteUrl = getSiteUrl();
   const caseStudyUrl = `${siteUrl}case-studies/${slug}/`;
-  const description = toDescription(project.tagline, project.impactSummary);
+  // Page/JSON-LD can use full impact prose; meta tags use buildCaseStudyMetaDescription.
+  const description =
+    project.impactSummary?.trim() ||
+    project.tagline?.trim() ||
+    "Case study detailing implementation approach, stack, and measurable delivery outcomes.";
   const evidenceLinks = makeEvidenceLinks(project, siteUrl);
   const meta = getProjectMeta(project);
   const approach = splitIntoList(project.solutionApproach);

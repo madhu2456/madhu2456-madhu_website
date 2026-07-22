@@ -1,8 +1,52 @@
 import { describe, expect, it } from "vitest";
 import {
+  buildCaseStudyMetaDescription,
+  clampMetaDescription,
   getCaseStudyLinkLabel,
   getDistinctProjectTagline,
 } from "../project-display";
+
+describe("clampMetaDescription", () => {
+  it("returns short text unchanged", () => {
+    expect(clampMetaDescription("Short outcome line.")).toBe(
+      "Short outcome line.",
+    );
+  });
+
+  it("never exceeds 160 characters", () => {
+    const long =
+      "Real-time AI Visibility & SERP Intelligence Platform - Parallel Playwright crawls at 10,000+ URLs per audit (bounded worker pool), comparing server HTML to the rendered DOM. Returns a ranked fix list for SEO, AEO, and GEO so multi-day audits can finish in hours.";
+    const out = clampMetaDescription(long);
+    expect(out.length).toBeLessThanOrEqual(160);
+    expect(out.length).toBeGreaterThan(40);
+  });
+});
+
+describe("buildCaseStudyMetaDescription", () => {
+  it("prefers impact metrics and stays within 160 chars", () => {
+    const desc = buildCaseStudyMetaDescription({
+      title: "Adticks - Real-time AI Visibility & SERP Intelligence Platform",
+      tagline: "Real-time AI Visibility & SERP Intelligence Platform",
+      impactSummary:
+        "Parallel Playwright crawls at 10,000+ URLs per audit (bounded worker pool), comparing server HTML to the rendered DOM.",
+      impactMetrics: [
+        {
+          value: "10,000+",
+          label:
+            "URLs crawled per audit (parallel headless rendering capacity)",
+        },
+        {
+          value: "85%",
+          label: "reduction in technical audit cycle time",
+        },
+      ],
+    });
+    expect(desc.length).toBeLessThanOrEqual(160);
+    expect(desc).toMatch(/10,000\+/);
+    expect(desc).toMatch(/85%/);
+    expect(desc.toLowerCase()).toContain("adticks");
+  });
+});
 
 describe("getCaseStudyLinkLabel", () => {
   it("uses the brand head before a dash", () => {
