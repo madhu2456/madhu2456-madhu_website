@@ -43,7 +43,7 @@ export async function generateMetadata({
     "Contact Madhu Dadi | AI, RAG & Analytics Consulting";
   const description =
     pageContent.contact.seo?.description ||
-    "Contact Madhu Dadi for AI consulting, RAG systems, and marketing analytics. Freelance, full-time roles, FastAPI/Next.js builds. Reply within 24 hours.";
+    "Contact Madhu Dadi for AI consulting, RAG, or full-time roles. FastAPI/Next.js builds. Reply within 24 hours.";
   return {
     title,
     description,

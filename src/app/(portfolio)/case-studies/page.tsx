@@ -30,7 +30,10 @@ const getSiteUrl = () => {
 };
 
 export const metadata: Metadata = {
-  title: CASE_STUDIES_TITLE,
+  // Absolute title: guarantee brand in <title> even if parent template is skipped
+  title: {
+    absolute: `${CASE_STUDIES_TITLE} | Madhu Dadi`,
+  },
   description: CASE_STUDIES_DESCRIPTION,
   alternates: {
     canonical: `${getSiteUrl()}case-studies/`,

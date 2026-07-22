@@ -69,7 +69,7 @@
     "profile": {
       "seo": {
         "title": "Professional Profile | Madhu Dadi",
-        "description": "Detailed professional profile for Madhu Dadi: work history, core stack, education, and credentials. For services and case studies use the homepage and /services/. For learning content use /blog/.",
+        "description": "Professional profile of Madhu Dadi: work history, stack, education, and credentials for AI, RAG, and analytics roles.",
         "canonicalPath": "/profile/"
       },
       "heroTitle": "Professional profile & career history",
@@ -87,11 +87,23 @@
         },
         {
           "title": "backend",
-          "items": ["Python", "FastAPI", "SQL", "Postgres", "Redis", "Celery"]
+          "items": [
+            "Python",
+            "FastAPI",
+            "SQL",
+            "Postgres",
+            "Redis",
+            "Celery"
+          ]
         },
         {
           "title": "frontend",
-          "items": ["Next.js", "React", "TypeScript", "Tailwind CSS"]
+          "items": [
+            "Next.js",
+            "React",
+            "TypeScript",
+            "Tailwind CSS"
+          ]
         },
         {
           "title": "analytics",
@@ -247,7 +259,7 @@
     "contact": {
       "seo": {
         "title": "Contact | Madhu Dadi",
-        "description": "Contact Madhu Dadi for AI consulting or full-time hiring. Current full-time role at Novartis; select independent consulting and full-time moves both welcome. Reply within 24 hours.",
+        "description": "Contact Madhu Dadi for AI consulting, RAG systems, or full-time roles. Full-time at Novartis; select freelance available.",
         "canonicalPath": "/contact/"
       },
       "eyebrow": "Consulting & roles",
@@ -717,7 +729,9 @@
         "Presented analytical findings and strategic recommendations to senior leadership, facilitating informed decision-making and business growth within the Patient Support Services division.",
         "Utilized advanced analytics tools (e.g., Google Analytics, Power BI, Advanced Modelling, etc.) to measure and improve digital engagement, patient satisfaction, and operational efficiency."
       ],
-      "achievements": ["Best Performer of the Quarter, Q1 2024"],
+      "achievements": [
+        "Best Performer of the Quarter, Q1 2024"
+      ],
       "order": 1,
       "updatedAt": "2026-06-07T00:00:00Z"
     },
@@ -737,7 +751,9 @@
         "Led the Marketing Analytics team in redBus to provide measurement solutions for ATL, BTL and Digital Campaigns.",
         "Created Brand Playbooks for Digital, Social and Owned media to effectively optimise the campaign budgets and increase the ROI of Brand initiatives."
       ],
-      "achievements": ["Q3 Trailblazer, 30% new-customer growth"],
+      "achievements": [
+        "Q3 Trailblazer, 30% new-customer growth"
+      ],
       "order": 2,
       "updatedAt": "2026-06-07T00:00:00Z"
     },
@@ -756,7 +772,9 @@
         "Performed brand lift study, identified the most optimal consumer journey from first touch point to last touch point and measured the performance in terms of conversion lift.",
         "Brought awareness of 1st party data solutions to increase the targeting by using cluster analysis, cost benefit analysis and pricing analytics to the clients."
       ],
-      "achievements": ["Performer of the Year 2020-21 - WPP NextGen"],
+      "achievements": [
+        "Performer of the Year 2020-21 - WPP NextGen"
+      ],
       "order": 3,
       "updatedAt": "2026-06-07T00:00:00Z"
     },
@@ -775,7 +793,9 @@
         "Implemented, Analyzed and Optimized organic and paid search engine marketing activities and increase the CTR by 20%.",
         "Formulated and documented the project/product plan for web applications."
       ],
-      "achievements": ["Foundations in analytics + engineering"],
+      "achievements": [
+        "Foundations in analytics + engineering"
+      ],
       "order": 4,
       "updatedAt": "2026-06-07T00:00:00Z"
     }

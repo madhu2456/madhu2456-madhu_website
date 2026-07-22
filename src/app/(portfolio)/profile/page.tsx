@@ -35,7 +35,7 @@ export async function generateMetadata(): Promise<Metadata> {
     pageContent.profile.seo?.title || "Professional Profile | Madhu Dadi";
   const description =
     pageContent.profile.seo?.description ||
-    "Profile of Madhu Dadi, AI & marketing analytics engineer with 9+ years across Novartis, redBus, and GroupM (WPP). Specializing in LLM/RAG apps, AI agents, and marketing analytics.";
+    "Profile of Madhu Dadi, AI & analytics engineer: Novartis, redBus, GroupM. LLM/RAG apps, agents, marketing analytics.";
   return {
     title,
     description,

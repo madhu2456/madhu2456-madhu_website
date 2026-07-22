@@ -39,7 +39,7 @@ export const INDIA_SERVICE_ALIASES: IndiaServiceAlias[] = [
     title: "LLM Developer & Consultant in India",
     seoTitle: "LLM Developer & Consultant in India | Madhu Dadi",
     seoDescription:
-      "Hire an LLM developer in India for production generative AI apps: structured outputs, guardrails, FastAPI/Next.js delivery, and evals. Visakhapatnam-based, remote-ready.",
+      "Hire an LLM developer in India for production generative AI: structured outputs, FastAPI/Next.js, evals. Remote-ready.",
     heroEyebrow: "India · Generative AI",
     shortDescription:
       "Production LLM applications for India and remote teams — structured outputs, prompt pipelines, guardrails, and handover — not demo notebooks.",
@@ -90,7 +90,7 @@ export const INDIA_SERVICE_ALIASES: IndiaServiceAlias[] = [
     title: "Marketing Analytics Consultant in India",
     seoTitle: "Marketing Analytics Consultant in India | Madhu Dadi",
     seoDescription:
-      "Marketing analytics consultant in India for attribution, CLV, GA4/BigQuery pipelines, and decision intelligence. Novartis, redBus, GroupM background. Remote-ready.",
+      "Marketing analytics consultant in India for GA4/BigQuery, attribution, and CLV. Novartis, redBus, GroupM background.",
     heroEyebrow: "India · Marketing Analytics",
     shortDescription:
       "Attribution, CLV, and marketing decision systems for India and remote teams — pipelines leaders can trust, not vanity dashboards.",

@@ -12,7 +12,7 @@ import { resolveSiteUrl } from "@/lib/site-url";
 const PAGE_TITLE =
   "AI & RAG Consultant in Visakhapatnam, Hyderabad & Remote India | Madhu Dadi";
 const PAGE_DESCRIPTION =
-  "Hire Madhu Dadi — AI engineer and RAG & analytics consultant based in Visakhapatnam, India, with experience in Hyderabad, Bengaluru, and Gurugram. Remote-first production AI, RAG, and analytics delivery.";
+  "AI & RAG consultant in Visakhapatnam and remote India. Production LLM apps, agents, and analytics by Madhu Dadi.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const siteUrl = `${resolveSiteUrl()}/`;

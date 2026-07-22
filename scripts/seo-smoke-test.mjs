@@ -108,6 +108,16 @@ function isRootSitemapRedirect(location) {
   );
 }
 
+/** Binary/file URLs in sitemap must not run HTML meta/main/h1 checks. */
+function isNonHtmlAssetUrl(url) {
+  return /\.(pdf|png|jpe?g|webp|gif|svg|ico|woff2?|ttf|zip)(\?|#|$)/i.test(url);
+}
+
+function isHtmlContentType(contentType) {
+  const ct = (contentType || "").toLowerCase();
+  return ct.includes("text/html") || ct.includes("application/xhtml");
+}
+
 /**
  * Fail when a child sitemap redirects back to the root index (portfolio unreachable).
  */
@@ -304,14 +314,37 @@ async function main() {
   console.log("\n📄 Page metadata");
   for (const url of urls) {
     const path = url.replace(SITE_URL, "") || "/";
-    const { status, text: html } = await fetchText(url);
+    const { status, text: html, headers } = await fetchText(url);
 
     if (status !== 200) {
       issues.critical.push(`${path}: HTTP ${status}`);
       continue;
     }
 
-    const title = extractTag(html, "title");
+    const contentType = headers.get("content-type") || "";
+
+    // PDFs and other non-HTML assets are valid sitemap entries (e.g. /resume.pdf)
+    // but must not be scored as HTML documents.
+    if (isNonHtmlAssetUrl(url) || !isHtmlContentType(contentType)) {
+      if (isNonHtmlAssetUrl(url) && path.toLowerCase().endsWith(".pdf")) {
+        if (!contentType.toLowerCase().includes("pdf")) {
+          issues.warning.push(
+            `${path}: expected application/pdf, got "${contentType.split(";")[0] || "unknown"}"`,
+          );
+        } else {
+          console.log(
+            `  ✅ ${path} → 200 (application/pdf, HTML checks skipped)`,
+          );
+        }
+      } else if (!isHtmlContentType(contentType)) {
+        console.log(
+          `  ℹ️  ${path} → 200 (non-HTML ${contentType.split(";")[0] || "unknown"}, HTML checks skipped)`,
+        );
+      }
+      continue;
+    }
+
+    const title = decodeHtmlEntities(extractTag(html, "title"));
     const desc = decodeHtmlEntities(
       extractMetaContent(html, "name", "description"),
     );
