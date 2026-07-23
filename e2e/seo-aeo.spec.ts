@@ -16,6 +16,7 @@ const indexablePaths = [
   "/services/llm-developer-india/",
   "/services/marketing-analytics-consultant-india/",
   "/services/ai-consultant-visakhapatnam/",
+  "/services/ai-consultant-hyderabad/",
   "/case-studies/adticks/",
   "/ai-consultant-india/",
 ];
@@ -177,7 +178,7 @@ test.describe("No-JS crawler visibility", () => {
     await expect(
       page.getByRole("heading", {
         level: 1,
-        name: /Production AI agents|Madhu Dadi|Build reliable AI agents/i,
+        name: /Ship the AI system|Production AI agents|Madhu Dadi|Build reliable AI agents/i,
       }),
     ).toBeVisible();
     await expect(page.getByText("Who is Madhu Dadi?")).toBeVisible();

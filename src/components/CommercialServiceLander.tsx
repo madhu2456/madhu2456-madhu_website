@@ -6,8 +6,11 @@ import { Header } from "@/components/Header";
 import { JsonLdScript } from "@/components/JsonLdScript";
 import { LastUpdated } from "@/components/LastUpdated";
 import { PageToc, type PageTocItem } from "@/components/PageToc";
+import { RelatedReading } from "@/components/RelatedReading";
+import { TrackedLink } from "@/components/TrackedLink";
 import type { PortfolioData } from "@/lib/portfolio-data";
 import type { CommercialLander } from "@/lib/seo/commercial-landers";
+import { getRelatedLearning } from "@/lib/seo/service-related-learning";
 import { resolveSiteUrl } from "@/lib/site-url";
 
 type CommercialServiceLanderProps = {
@@ -29,6 +32,8 @@ export function CommercialServiceLander({
   const proofProject = lander.proofProjectSlug
     ? sortedProjects.find((p) => p.slug === lander.proofProjectSlug)
     : undefined;
+  const prefillContactUrl = `/contact/#intent=${lander.contactIntent}`;
+  const relatedReading = getRelatedLearning(lander.baseServiceSlug);
   const tocItems: PageTocItem[] = [
     { id: "lander-summary", label: "Summary" },
     { id: "value-props", label: "Why this" },
@@ -36,12 +41,14 @@ export function CommercialServiceLander({
     ...(proofProject ? [{ id: "proof", label: "Proof" }] : []),
     { id: "lander-engagement", label: "Engagement" },
     ...(lander.faqs.length > 0 ? [{ id: "lander-faqs", label: "FAQ" }] : []),
+    ...(relatedReading.length > 0
+      ? [{ id: "related-reading", label: "Related reading" }]
+      : []),
     { id: "lander-contact", label: "Contact" },
   ];
   const baseUrl = baseService
     ? `${siteUrl}services/${baseService.slug}/`
     : `${siteUrl}services/`;
-  const prefillContactUrl = `/contact/#intent=${lander.contactIntent}`;
 
   const graph = {
     "@context": "https://schema.org",
@@ -299,6 +306,10 @@ export function CommercialServiceLander({
 
           <AuthorBio profile={profile} />
 
+          {relatedReading.length > 0 ? (
+            <RelatedReading items={relatedReading} className="mt-2" />
+          ) : null}
+
           <section
             id="lander-contact"
             className="relative scroll-mt-28 rounded-3xl border border-border/80 bg-surface/20 p-8 md:p-12 text-center"
@@ -319,13 +330,26 @@ export function CommercialServiceLander({
                 Request discovery call
                 <IconArrowRight className="h-4 w-4" aria-hidden />
               </Link>
+              <TrackedLink
+                href="/contact/#intent=intro"
+                gtmEvent="intro_call_click"
+                gtmData={{
+                  click_location: "commercial_lander",
+                  lander_slug: lander.slug,
+                }}
+                className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium hover:border-primary/40 transition-colors"
+              >
+                Book a 20-min intro call
+              </TrackedLink>
+            </div>
+            <p className="mt-3 text-xs text-muted-foreground">
               <Link
                 href="/services/"
-                className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium hover:border-primary/40 transition-colors"
+                className="underline-offset-4 hover:text-primary hover:underline"
               >
                 All services
               </Link>
-            </div>
+            </p>
             <p className="mt-4 text-xs text-muted-foreground">
               Capability deep-dive:{" "}
               <a href={baseUrl} className="text-primary hover:underline">

@@ -6,18 +6,24 @@ import {
 } from "@/lib/seo/service-aliases";
 
 describe("India service aliases", () => {
-  test("defines the three Phase 5 landers", () => {
+  test("defines India + city landers", () => {
     const slugs = INDIA_SERVICE_ALIASES.map((a) => a.slug);
     expect(slugs).toEqual([
       "llm-developer-india",
       "marketing-analytics-consultant-india",
       "ai-consultant-visakhapatnam",
+      "ai-consultant-hyderabad",
+      "ai-consultant-bengaluru",
+      "ai-consultant-chennai",
+      "ai-consultant-mumbai",
     ]);
   });
 
   test("each lander has unique India copy and FAQs", () => {
     for (const alias of INDIA_SERVICE_ALIASES) {
       expect(alias.seoTitle.length).toBeGreaterThan(20);
+      expect(alias.seoTitle.length).toBeLessThanOrEqual(60);
+      expect(alias.seoDescription.length).toBeLessThanOrEqual(160);
       expect(alias.directAnswer.length).toBeGreaterThan(0);
       expect(alias.faqs.length).toBeGreaterThanOrEqual(3);
       expect(alias.baseServiceSlug.length).toBeGreaterThan(0);

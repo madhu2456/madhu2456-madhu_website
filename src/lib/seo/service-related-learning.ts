@@ -1,8 +1,8 @@
-/** Related learning / proof links per service (blog topical authority). */
+/** Related learning / proof links per service (blog + guides + case studies). */
 export type RelatedLearningLink = {
   href: string;
   label: string;
-  kind: "blog" | "case-study" | "tool";
+  kind: "blog" | "guide" | "case-study" | "tool";
 };
 
 const BLOG = "https://madhudadi.in/blog";
@@ -10,14 +10,14 @@ const BLOG = "https://madhudadi.in/blog";
 export const SERVICE_RELATED_LEARNING: Record<string, RelatedLearningLink[]> = {
   "rag-consultant-india": [
     {
-      href: `${BLOG}/posts/rag-vs-fine-tuning-which-llm-approach`,
-      label: "RAG vs fine-tuning: which approach to use",
-      kind: "blog",
+      href: "/guides/rag-vs-fine-tuning-2026/",
+      label: "Guide: RAG vs fine-tuning in 2026",
+      kind: "guide",
     },
     {
-      href: `${BLOG}/ask`,
-      label: "Try the production Ask RAG assistant",
-      kind: "tool",
+      href: "/guides/ai-search-optimization-2026/",
+      label: "Guide: AI search optimization (AEO/GEO)",
+      kind: "guide",
     },
     {
       href: "/case-studies/technical-blog/",
@@ -27,24 +27,14 @@ export const SERVICE_RELATED_LEARNING: Record<string, RelatedLearningLink[]> = {
   ],
   "ai-llm-application-development": [
     {
+      href: "/guides/rag-vs-fine-tuning-2026/",
+      label: "Guide: RAG vs fine-tuning decision framework",
+      kind: "guide",
+    },
+    {
       href: "/guides/fractional-ai-playbook/",
       label: "Guide: fractional AI pricing & 90-day playbook",
-      kind: "tool",
-    },
-    {
-      href: "/fractional-ai-consultant/",
-      label: "Fractional AI consultant lander",
-      kind: "tool",
-    },
-    {
-      href: `${BLOG}/posts/rag-vs-fine-tuning-which-llm-approach`,
-      label: "RAG vs fine-tuning comparison",
-      kind: "blog",
-    },
-    {
-      href: `${BLOG}/posts/fastapi-vs-django-vs-flask-which-to-choose`,
-      label: "FastAPI vs Django vs Flask",
-      kind: "blog",
+      kind: "guide",
     },
     {
       href: "/case-studies/technical-blog/",
@@ -59,6 +49,11 @@ export const SERVICE_RELATED_LEARNING: Record<string, RelatedLearningLink[]> = {
       kind: "case-study",
     },
     {
+      href: "/guides/fractional-ai-playbook/",
+      label: "Guide: fractional AI shipping playbook",
+      kind: "guide",
+    },
+    {
       href: `${BLOG}/ask`,
       label: "Production AI assistant on the blog",
       kind: "tool",
@@ -68,12 +63,12 @@ export const SERVICE_RELATED_LEARNING: Record<string, RelatedLearningLink[]> = {
     {
       href: "/guides/marketing-mix-modeling-2026/",
       label: "Guide: MMM in 2026 (Robyn vs Meridian vs custom)",
-      kind: "tool",
+      kind: "guide",
     },
     {
-      href: "/marketing-mix-modeling-consultant/",
-      label: "MMM consultant lander",
-      kind: "tool",
+      href: "/guides/attribution-after-cookies/",
+      label: "Guide: attribution after cookies",
+      kind: "guide",
     },
     {
       href: "/case-studies/adticks/",
@@ -85,17 +80,12 @@ export const SERVICE_RELATED_LEARNING: Record<string, RelatedLearningLink[]> = {
     {
       href: "/guides/ga4-bigquery/",
       label: "Guide: GA4 + BigQuery setup (2026)",
-      kind: "tool",
+      kind: "guide",
     },
     {
-      href: "/guides/attribution-after-cookies/",
-      label: "Guide: attribution after cookies",
-      kind: "tool",
-    },
-    {
-      href: "/ga4-consultant/",
-      label: "GA4 consultant lander",
-      kind: "tool",
+      href: "/guides/consent-mode-v2-india/",
+      label: "Guide: Consent Mode v2 for India",
+      kind: "guide",
     },
     {
       href: "/case-studies/adticks/",
@@ -122,15 +112,39 @@ export const SERVICE_RELATED_LEARNING: Record<string, RelatedLearningLink[]> = {
   ],
 };
 
-export function getRelatedLearning(slug: string): RelatedLearningLink[] {
-  return (
-    SERVICE_RELATED_LEARNING[slug] ?? [
-      { href: `${BLOG}/`, label: "Technical blog", kind: "blog" as const },
-      {
-        href: "/case-studies/",
-        label: "All case studies",
-        kind: "case-study" as const,
-      },
-    ]
-  );
+const FALLBACK_LINKS: RelatedLearningLink[] = [
+  { href: `${BLOG}/`, label: "Technical blog", kind: "blog" },
+  {
+    href: "/guides/ga4-bigquery/",
+    label: "Guide: GA4 + BigQuery setup",
+    kind: "guide",
+  },
+  {
+    href: "/case-studies/",
+    label: "All case studies",
+    kind: "case-study",
+  },
+];
+
+export function getRelatedLearning(
+  slug: string,
+  max = 3,
+): RelatedLearningLink[] {
+  const links = SERVICE_RELATED_LEARNING[slug] ?? FALLBACK_LINKS;
+  return links.slice(0, max);
+}
+
+export function relatedLearningKindLabel(
+  kind: RelatedLearningLink["kind"],
+): string {
+  switch (kind) {
+    case "blog":
+      return "Blog";
+    case "guide":
+      return "Guide";
+    case "tool":
+      return "Live tool";
+    default:
+      return "Case study";
+  }
 }

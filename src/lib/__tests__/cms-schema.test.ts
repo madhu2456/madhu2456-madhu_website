@@ -77,4 +77,40 @@ describe("portfolioContentSchema", () => {
     const result = portfolioContentSchema.safeParse(invalidData);
     expect(result.success).toBe(false);
   });
+
+  it("accepts optional howMeasured on stats and impact metrics", () => {
+    const withProof = {
+      ...validData,
+      profile: {
+        ...validData.profile,
+        stats: [
+          {
+            label: "Workflows",
+            value: "20,000+",
+            howMeasured: "Logged executions over six months.",
+          },
+        ],
+      },
+      projects: [
+        {
+          title: "Sample",
+          slug: "sample",
+          tagline: "Tag",
+          category: "AI",
+          featured: false,
+          order: 1,
+          updatedAt: new Date().toISOString(),
+          impactMetrics: [
+            {
+              label: "cycle time cut",
+              value: "85%",
+              howMeasured: "Before/after on client runs.",
+            },
+          ],
+        },
+      ],
+    };
+    const result = portfolioContentSchema.safeParse(withProof);
+    expect(result.success).toBe(true);
+  });
 });

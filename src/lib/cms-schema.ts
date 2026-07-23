@@ -37,6 +37,8 @@ export const socialLinksSchema = z.object({
 export const profileStatSchema = z.object({
   label: z.string().min(1, "Label is required"),
   value: z.string().min(1, "Value is required"),
+  /** Short citable note on how the figure was measured (AEO/GEO proof). */
+  howMeasured: z.string().optional().or(z.literal("")),
 });
 
 export const profileSchema = z.object({
@@ -112,6 +114,8 @@ export const educationSchema = z.object({
 export const impactMetricSchema = z.object({
   label: z.string().min(1),
   value: z.string().min(1),
+  /** Short citable note on how the figure was measured (AEO/GEO proof). */
+  howMeasured: z.string().optional().or(z.literal("")),
 });
 export type ImpactMetric = z.infer<typeof impactMetricSchema>;
 

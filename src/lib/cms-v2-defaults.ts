@@ -8,10 +8,22 @@ export const buildV2PageContentDefaults = (): PageContentSchema => {
         description:
           "AI engineer and RAG consultant with 9+ years (Novartis, redBus, GroupM). Production AI agents, RAG systems, FastAPI/Next.js products, and marketing analytics.",
       },
-      heroTitle:
-        "Production AI Agents, RAG Systems and Analytics Infrastructure.",
-      heroAvailabilityText:
-        "Full-time at Novartis · open to consulting & roles",
+      heroTitle: "Ship the AI system your business needed six months ago",
+      heroAvailabilityText: "Full-time at Novartis · select consulting open",
+      eyebrow: "Fractional AI + analytics · India & remote",
+      introParagraphs: [
+        "Fractional AI and analytics consulting. Ex-Novartis, redBus, GroupM. Production RAG, agents, GA4→BigQuery, and MMM — measured, evaluated, and handed over so your team can run it.",
+      ],
+      primaryCta: {
+        label: "Book a 20-min intro call",
+        href: "/contact/#intent=intro",
+        variant: "primary",
+      },
+      secondaryCta: {
+        label: "See case studies",
+        href: "/case-studies/",
+        variant: "secondary",
+      },
       workedAtLabel: "Previously built systems at",
       directAnswer: {
         title: "Who is Madhu Dadi?",
@@ -62,16 +74,6 @@ export const buildV2PageContentDefaults = (): PageContentSchema => {
             "Yes. I build production-grade AI agents with tool calling and guardrails, and RAG systems with hybrid search, cross-encoder reranking, and citation verification.",
         },
       ],
-      primaryCta: {
-        label: "Contact Me",
-        href: "/contact",
-        variant: "primary",
-      },
-      secondaryCta: {
-        label: "View Services",
-        href: "/services",
-        variant: "secondary",
-      },
     },
     profile: {
       seo: {

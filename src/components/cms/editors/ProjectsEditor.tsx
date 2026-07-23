@@ -249,7 +249,10 @@ export function ProjectsEditor() {
             />
           </FormField>
 
-          <FormField label="Impact metrics" hint="One per line as label|value.">
+          <FormField
+            label="Impact metrics"
+            hint="One per line as label|value or label|value|howMeasured."
+          >
             <Controller
               control={control}
               name={`projects.${index}.impactMetrics`}

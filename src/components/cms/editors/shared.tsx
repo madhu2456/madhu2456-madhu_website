@@ -86,17 +86,29 @@ export const toTechnologyLines = (items?: Technology[]) =>
 export const parseImpactMetrics = (value: string): ImpactMetric[] =>
   parseLines(value)
     .map((line) => {
-      const [label, metricValue] = line.split("|").map((p) => p.trim());
+      const [label, metricValue, howMeasured] = line
+        .split("|")
+        .map((p) => p.trim());
       if (!label || !metricValue) {
         return null;
       }
 
-      return { label, value: metricValue };
+      return {
+        label,
+        value: metricValue,
+        ...(howMeasured ? { howMeasured } : {}),
+      };
     })
     .filter((item): item is ImpactMetric => Boolean(item));
 
 export const toImpactMetricLines = (items?: ImpactMetric[]) =>
-  (items ?? []).map((item) => `${item.label}|${item.value}`).join("\n");
+  (items ?? [])
+    .map((item) =>
+      [item.label, item.value, item.howMeasured ?? ""]
+        .filter((part, index) => index < 2 || Boolean(part))
+        .join("|"),
+    )
+    .join("\n");
 
 export const parseCitations = (value: string): Citation[] =>
   parseLines(value)

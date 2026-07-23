@@ -33,16 +33,17 @@ export const COMMERCIAL_LANDERS: CommercialLander[] = [
   {
     slug: "ga4-consultant",
     baseServiceSlug: "ga4-bigquery-campaign-analytics",
-    title: "GA4 Consultant for SaaS & D2C Teams",
-    seoTitle: "GA4 Consultant — Audit, Migration & BigQuery | Madhu Dadi",
+    title: "GA4 Consultant — Measurement Finance Can Trust",
+    seoTitle: "GA4 Consultant — Audit, Migration, BigQuery | Madhu Dadi",
     seoDescription:
       "GA4 consultant for migration, event audits, sGTM, and BigQuery export. Independent, India & remote. Scoped quotes after discovery.",
     heroEyebrow: "GA4 · Measurement · Consulting",
     shortDescription:
       "Hire a hands-on GA4 consultant for migration, event tracking fixes, server-side tagging, and pipelines that match finance—not vanity UI reports.",
     directAnswer: [
-      "A GA4 consultant is a specialist who designs, audits, and implements Google Analytics 4 measurement so events, conversions, and exports are accurate enough for growth and finance decisions.",
-      "I work select consulting alongside full-time employment: discovery, a written fix plan, then scoped implementation (GA4 schemas, sGTM when needed, BigQuery export). Based in Visakhapatnam, India; remote-first worldwide.",
+      "GA4 out of the box gives you sampled UI reports, a short retention window for many analyses, and no clean join of marketing spend to LTV. Piping events into BigQuery—with a coherent schema, optional sGTM, and curated tables—fixes the decisions that actually matter.",
+      "A GA4 consultant designs, audits, and implements that stack so conversions and exports are accurate enough for growth and finance—not only media vanity metrics.",
+      "I work select consulting alongside full-time employment: discovery, a written fix plan, then scoped implementation. Based in Visakhapatnam, India; remote-first worldwide. Custom quote after discovery—no public rate card.",
     ],
     valueProps: [
       "Tracking audits that prioritize broken revenue and lead events first",
@@ -92,7 +93,7 @@ export const COMMERCIAL_LANDERS: CommercialLander[] = [
     slug: "google-analytics-consultant",
     baseServiceSlug: "ga4-bigquery-campaign-analytics",
     title: "Independent Google Analytics Consultant",
-    seoTitle: "Google Analytics Consultant — GA4 & BigQuery | Madhu Dadi",
+    seoTitle: "Google Analytics Consultant — GA4 & BQ | Madhu Dadi",
     seoDescription:
       "Independent Google Analytics consultant: GA4 audits, GTM/sGTM, BigQuery pipelines, and dashboards finance trusts. India & remote.",
     heroEyebrow: "Google Analytics · GA4 · GTM",
@@ -319,22 +320,25 @@ export const COMMERCIAL_LANDERS: CommercialLander[] = [
   {
     slug: "fractional-ai-consultant",
     baseServiceSlug: "ai-llm-application-development",
-    title: "Fractional AI Consultant on Retainer",
+    title:
+      "Fractional AI Consultant — the Senior Hire You Cannot Staff Full-Time",
     seoTitle: "Fractional AI Consultant — Strategy, RAG, Ops | Madhu Dadi",
     seoDescription:
-      "Hire a fractional AI consultant: roadmap, RAG, evals, LLM ops on retainer. Dual full-time+consult; India & remote.",
+      "Hire a fractional AI consultant on retainer: roadmap, RAG, evals, and LLM ops. Select consulting alongside full-time role. India, remote-first.",
     heroEyebrow: "Fractional AI · Retainer · RAG / LLM",
     shortDescription:
       "Senior AI consulting on a monthly retainer: roadmap, RAG design, evals, and LLM ops—without a full-time hire. Scoped hours, written deliverables, clear boundaries.",
     directAnswer: [
-      "A fractional AI consultant is a senior practitioner who joins your product or data leadership on a part-time retainer to set AI direction, design RAG/LLM systems, run evals, and unblock shipping—without replacing an in-house engineering team.",
-      "I offer select retainers and scoped projects alongside full-time employment. Expect written roadmaps, architecture notes, and review cadence—not unlimited “fractional CTO” bandwidth. Visakhapatnam-based; remote-first.",
+      "A senior AI engineer in India is expensive and slow to hire full-time. Most Series A–B teams do not need one every day—they need two or three focused days a week for 3–12 months while the product and team catch up.",
+      "That is fractional AI consulting: one senior operator, part-time retainer or scoped build, written roadmap, first production slice, eval harness, and coaching for whoever inherits it. Not unlimited “virtual CTO” bandwidth—and not an agency account team.",
+      "I take select retainers and projects alongside full-time employment. Expect architecture notes, review cadence, and dual-role boundaries stated up front. Visakhapatnam-based; remote-first for India, US, and EU teams.",
     ],
     valueProps: [
       "Roadmap and build-vs-buy decisions grounded in production constraints",
       "RAG, structured outputs, evals, and logging patterns your team can own",
       "Vendor and model selection without locking you into a single agency stack",
       "Hours and outcomes agreed up front; dual-role availability is explicit",
+      "Typical 90-day shape: discovery → thin production slice → handover docs",
     ],
     focusTags: [
       "Fractional AI",
@@ -377,7 +381,8 @@ export const COMMERCIAL_LANDERS: CommercialLander[] = [
   {
     slug: "ai-consultant-for-startups",
     baseServiceSlug: "ai-llm-application-development",
-    title: "Fractional AI Consultant for Startups",
+    title:
+      "AI Consultant for Startups — Founding AI Engineer Capacity Without the Hire Lag",
     seoTitle: "AI Consultant for Startups — RAG & Shipping | Madhu Dadi",
     seoDescription:
       "Fractional AI consultant for seed to Series B: roadmap, RAG, LLM integration, evals—without a full-time hire. India & remote.",
@@ -385,14 +390,16 @@ export const COMMERCIAL_LANDERS: CommercialLander[] = [
     shortDescription:
       "AI consulting for seed to Series B teams that need a roadmap and a shippable RAG/LLM slice—without hiring a full-time AI lead yet.",
     directAnswer: [
-      "An AI consultant for startups helps early product teams choose what to build, design RAG or LLM integrations, and ship a thin production slice with evals—so founders do not burn a full-time senior hire on the first experiment.",
-      "I take select consulting work alongside full-time employment: discovery, a written pilot plan, then scoped build or fractional advisory. Visakhapatnam-based; remote-first for US, EU, and India teams.",
+      "You raised on an AI story. Your team is small and has never shipped an eval harness. Hiring a senior AI engineer can take months of runway before code lands. That is the problem this engagement solves.",
+      "I run a time-boxed pilot as your founding AI engineer capacity: one production capability shipped (usually RAG, an agent, or extraction), evals and monitoring in place, and a hand-off doc so your next hire is productive early—not after a second rebuild.",
+      "Select consulting only, alongside full-time employment. Discovery is free and can end in “not yet” if data or product readiness is missing. Visakhapatnam-based; remote-first for US, EU, and India teams.",
     ],
     valueProps: [
       "Pilot scope that fits runway: one vertical slice, clear kill criteria",
       "RAG vs fine-tune vs rules—picked for data and latency, not hype",
       "Evals and logging so “demo works” becomes “ops can run it”",
       "Path to hand off to your first AI/full-stack engineer",
+      "Optional help writing the JD and screening the first AI hire",
     ],
     focusTags: [
       "Startups",
@@ -438,15 +445,17 @@ export const COMMERCIAL_LANDERS: CommercialLander[] = [
   {
     slug: "ai-automation-consultant",
     baseServiceSlug: "ai-agent-development",
-    title: "AI Automation Consultant",
-    seoTitle: "AI Automation Consultant — Workflows & Agents | Madhu Dadi",
+    title:
+      "AI Automation Consultant — Turn Repetitive Ops Into Evaluated Workflows",
+    seoTitle: "AI Automation Consultant — Agents & Workflows | Madhu Dadi",
     seoDescription:
-      "AI automation consultant: agent workflows, RAG, internal copilots. Production builds with evals. India & remote.",
+      "AI automation consultant for agent workflows, RAG, and internal copilots. Production builds with evals and monitoring. Select consulting, India & remote.",
     heroEyebrow: "AI automation · Agents · Ops",
     shortDescription:
       "Design and ship AI automation that cuts operational cost—agent workflows, RAG pipelines, and internal copilots with logging and evals—not demo-only Zapier chains.",
     directAnswer: [
-      "An AI automation consultant maps repetitive workflows, designs agent or LLM-assisted steps, and implements production-shaped systems with guardrails, logs, and ownership handover—so automation survives contact with real tickets and data.",
+      "Most AI automation projects fail because they automate the wrong process. The best first target is a task done many times a week, with a clear success signal, where a small error rate is tolerable—triage, drafting, extraction, routing. Not every finance or compliance workflow belongs in an agent.",
+      "An AI automation consultant maps those workflows, chooses deterministic vs agentic steps honestly, and implements production-shaped systems with guardrails, logs, and ownership handover—so automation survives real tickets and data.",
       "I take select consulting work alongside full-time employment. Default stack leans custom agents, APIs, and RAG where needed; n8n/Zapier may glue edges when they fit, but the core is measurable, reviewable automation. Visakhapatnam-based; remote-first.",
     ],
     valueProps: [
@@ -454,6 +463,7 @@ export const COMMERCIAL_LANDERS: CommercialLander[] = [
       "Agents and structured LLM steps with tool boundaries and human-in-the-loop where risk is high",
       "Evals, logs, and runbooks so ops can debug without the original builder",
       "Honest tool choice: glue tools for edges, custom code when control and scale matter",
+      "2-week discovery to pick the highest-leverage automation before a multi-week build",
     ],
     focusTags: [
       "AI automation",

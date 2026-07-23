@@ -10,8 +10,11 @@ import { Header } from "@/components/Header";
 import { JsonLdScript } from "@/components/JsonLdScript";
 import { LastUpdated } from "@/components/LastUpdated";
 import { PageToc, type PageTocItem } from "@/components/PageToc";
+import { RelatedReading } from "@/components/RelatedReading";
+import { TrackedLink } from "@/components/TrackedLink";
 import type { PortfolioData } from "@/lib/portfolio-data";
 import type { IndiaServiceAlias } from "@/lib/seo/service-aliases";
+import { getRelatedLearning } from "@/lib/seo/service-related-learning";
 import { resolveSiteUrl } from "@/lib/site-url";
 
 type IndiaServiceLanderProps = {
@@ -27,18 +30,38 @@ export function IndiaServiceLander({ alias, data }: IndiaServiceLanderProps) {
   const baseService = sortedServices.find(
     (s) => s.slug === alias.baseServiceSlug,
   );
+  const prefillContactUrl = `/contact/#intent=${alias.contactIntent}`;
+  const relatedReading = getRelatedLearning(alias.baseServiceSlug);
+  const cityFromSlug = alias.slug.match(/^ai-consultant-(.+)$/)?.[1];
+  const cityLabel =
+    cityFromSlug === "visakhapatnam"
+      ? "Visakhapatnam"
+      : cityFromSlug === "hyderabad"
+        ? "Hyderabad"
+        : cityFromSlug === "bengaluru"
+          ? "Bengaluru"
+          : cityFromSlug === "chennai"
+            ? "Chennai"
+            : cityFromSlug === "mumbai"
+              ? "Mumbai"
+              : null;
+  const areaServed = cityLabel
+    ? ["India", cityLabel, "Visakhapatnam", "Remote", "Worldwide"]
+    : ["India", "Visakhapatnam", "Hyderabad", "Remote", "Worldwide"];
   const tocItems: PageTocItem[] = [
     { id: "lander-summary", label: "Summary" },
     { id: "why-india", label: "Why India" },
     ...(baseService ? [{ id: "full-capability", label: "Capability" }] : []),
     { id: "lander-engagement", label: "Engagement" },
     ...(alias.faqs.length > 0 ? [{ id: "lander-faqs", label: "FAQ" }] : []),
+    ...(relatedReading.length > 0
+      ? [{ id: "related-reading", label: "Related reading" }]
+      : []),
     { id: "lander-contact", label: "Contact" },
   ];
   const baseUrl = baseService
     ? `${siteUrl}services/${baseService.slug}/`
     : `${siteUrl}services/`;
-  const prefillContactUrl = `/contact/#intent=${alias.contactIntent}`;
 
   const graph = {
     "@context": "https://schema.org",
@@ -50,13 +73,7 @@ export function IndiaServiceLander({ alias, data }: IndiaServiceLanderProps) {
         serviceType: alias.title,
         description: alias.seoDescription,
         provider: { "@id": `${siteUrl}#person` },
-        areaServed: [
-          "India",
-          "Visakhapatnam",
-          "Hyderabad",
-          "Remote",
-          "Worldwide",
-        ],
+        areaServed,
         url: pageUrl,
         offers: {
           "@type": "Offer",
@@ -278,6 +295,10 @@ export function IndiaServiceLander({ alias, data }: IndiaServiceLanderProps) {
 
           <AuthorBio profile={profile} />
 
+          {relatedReading.length > 0 ? (
+            <RelatedReading items={relatedReading} className="mt-2" />
+          ) : null}
+
           <section
             id="lander-contact"
             className="relative scroll-mt-28 rounded-3xl border border-border/80 bg-surface/20 p-8 md:p-12 text-center"
@@ -298,13 +319,26 @@ export function IndiaServiceLander({ alias, data }: IndiaServiceLanderProps) {
                 Request discovery call
                 <IconArrowRight className="h-4 w-4" aria-hidden />
               </Link>
+              <TrackedLink
+                href="/contact/#intent=intro"
+                gtmEvent="intro_call_click"
+                gtmData={{
+                  click_location: "india_lander",
+                  lander_slug: alias.slug,
+                }}
+                className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium hover:border-primary/40 transition-colors"
+              >
+                Book a 20-min intro call
+              </TrackedLink>
+            </div>
+            <p className="mt-3 text-xs text-muted-foreground">
               <Link
                 href="/ai-consultant-india/"
-                className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium hover:border-primary/40 transition-colors"
+                className="underline-offset-4 hover:text-primary hover:underline"
               >
                 India location hub
               </Link>
-            </div>
+            </p>
             <p className="mt-4 text-xs text-muted-foreground">
               Canonical deep-dive:{" "}
               <a href={baseUrl} className="text-primary hover:underline">

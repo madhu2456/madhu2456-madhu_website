@@ -1,6 +1,7 @@
 import { describe, expect, test } from "vitest";
 import {
   getRelatedLearning,
+  relatedLearningKindLabel,
   SERVICE_RELATED_LEARNING,
 } from "@/lib/seo/service-related-learning";
 
@@ -19,9 +20,21 @@ describe("service related learning", () => {
     }
   });
 
-  test("fallback returns blog + case studies hub", () => {
+  test("returns at most three links for card layouts", () => {
+    const links = getRelatedLearning("ai-llm-application-development");
+    expect(links.length).toBeLessThanOrEqual(3);
+    expect(links.length).toBeGreaterThan(0);
+  });
+
+  test("fallback returns blog + guide + case studies hub", () => {
     const links = getRelatedLearning("unknown-service");
     expect(links.some((l) => l.href.includes("/blog"))).toBe(true);
     expect(links.some((l) => l.href.includes("/case-studies"))).toBe(true);
+    expect(links.length).toBeLessThanOrEqual(3);
+  });
+
+  test("kind labels cover guide", () => {
+    expect(relatedLearningKindLabel("guide")).toBe("Guide");
+    expect(relatedLearningKindLabel("blog")).toBe("Blog");
   });
 });

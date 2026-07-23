@@ -24,6 +24,10 @@ import { Header } from "@/components/Header";
 import { SafeEmailLink } from "@/components/SafeEmailLink";
 import { Section } from "@/components/Section";
 import { SocialIconStrip } from "@/components/SocialIconStrip";
+import {
+  StickyJumpNav,
+  type StickyJumpNavItem,
+} from "@/components/StickyJumpNav";
 import { Education } from "@/components/sections/Education";
 import { Experience } from "@/components/sections/Experience";
 import { Hero } from "@/components/sections/Hero";
@@ -48,6 +52,18 @@ import type {
 } from "@/lib/portfolio-data";
 import { useInView } from "@/lib/useInView";
 import { formatMonthYear } from "@/lib/utils";
+
+const HOME_JUMP_NAV: StickyJumpNavItem[] = [
+  { id: "about", label: "About" },
+  { id: "proof", label: "Proof" },
+  { id: "projects", label: "Case studies" },
+  { id: "services", label: "Services" },
+  { id: "skills", label: "Skills" },
+  { id: "experience", label: "Experience" },
+  { id: "certifications", label: "Credentials" },
+  { id: "faq", label: "FAQ" },
+  { id: "contact", label: "Contact" },
+];
 
 type NewPortfolioExperienceProps = {
   navigationItems: NavigationItem[];
@@ -94,6 +110,7 @@ export function NewPortfolioExperience({
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
       <Header profile={profile} navigationItems={navigationItems} />
+      <StickyJumpNav items={HOME_JUMP_NAV} />
       <main id="main-content" className="min-h-screen">
         <Hero
           profile={profile}
@@ -207,6 +224,7 @@ function Stats({ stats }: { stats: Profile["stats"] }) {
             key={stat.label}
             value={stat.value}
             label={stat.label}
+            howMeasured={stat.howMeasured}
             start={inView}
             delay={index * 80}
           />
@@ -219,11 +237,13 @@ function Stats({ stats }: { stats: Profile["stats"] }) {
 function StatItem({
   value,
   label,
+  howMeasured,
   start,
   delay,
 }: {
   value: string;
   label: string;
+  howMeasured?: string;
   start: boolean;
   delay: number;
 }) {
@@ -299,6 +319,14 @@ function StatItem({
       <span className="mt-3 text-xs font-semibold text-foreground/90 tracking-wider uppercase sm:text-sm">
         {label}
       </span>
+      {howMeasured ? (
+        <p className="mt-2 max-w-[16rem] text-[11px] leading-snug text-muted-foreground/80">
+          <span className="font-medium text-muted-foreground">
+            How measured:{" "}
+          </span>
+          {howMeasured}
+        </p>
+      ) : null}
     </div>
   );
 }

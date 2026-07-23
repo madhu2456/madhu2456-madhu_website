@@ -134,6 +134,10 @@ export async function generateMetadata(): Promise<Metadata> {
             url: `${siteUrl}blog/feed.xml`,
             title: "Madhu Dadi Blog - RSS Feed",
           },
+          {
+            url: `${siteUrl}guides/rss.xml`,
+            title: "Madhu Dadi Guides - RSS Feed",
+          },
         ],
       },
     },

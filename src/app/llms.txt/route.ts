@@ -73,7 +73,11 @@ ${serviceLines || `- [Services hub](${siteUrl}/services/): Consulting and implem
 
 - [LLM Developer in India](${siteUrl}/services/llm-developer-india/): India-intent LLM consulting lander
 - [Marketing Analytics Consultant in India](${siteUrl}/services/marketing-analytics-consultant-india/): India-intent analytics lander
-- [AI Consultant Visakhapatnam](${siteUrl}/services/ai-consultant-visakhapatnam/): City-intent lander
+- [AI Consultant Visakhapatnam](${siteUrl}/services/ai-consultant-visakhapatnam/): City-intent lander (home base)
+- [AI Consultant Hyderabad](${siteUrl}/services/ai-consultant-hyderabad/): City-intent lander (remote-first, on-site on request)
+- [AI Consultant Bengaluru](${siteUrl}/services/ai-consultant-bengaluru/): City-intent lander (remote-first, on-site on request)
+- [AI Consultant Chennai](${siteUrl}/services/ai-consultant-chennai/): City-intent lander (remote-first, on-site on request)
+- [AI Consultant Mumbai](${siteUrl}/services/ai-consultant-mumbai/): City-intent lander (remote-first, on-site on request)
 
 ## Guides (pillars)
 
@@ -81,6 +85,10 @@ ${serviceLines || `- [Services hub](${siteUrl}/services/): Consulting and implem
 - [MMM in 2026 guide](${siteUrl}/guides/marketing-mix-modeling-2026/): Robyn vs Meridian vs custom, data needs
 - [Attribution after cookies](${siteUrl}/guides/attribution-after-cookies/): MTA vs MMM vs incrementality
 - [Fractional AI playbook](${siteUrl}/guides/fractional-ai-playbook/): Pricing drivers, scope, 90-day plan
+- [RAG vs fine-tuning 2026](${siteUrl}/guides/rag-vs-fine-tuning-2026/): Decision framework for retrieval vs weight updates
+- [Consent Mode v2 for India](${siteUrl}/guides/consent-mode-v2-india/): DPDP-aligned GA4 consent defaults and GTM notes
+- [AI search optimization 2026](${siteUrl}/guides/ai-search-optimization-2026/): AEO + GEO + AIO playbook
+- [Guides RSS](${siteUrl}/guides/rss.xml): RSS 2.0 feed of portfolio guides
 
 ## Commercial keyword landers
 

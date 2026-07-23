@@ -10,9 +10,9 @@ import { siteLanguageAlternates } from "@/lib/seo/hreflang";
 import { resolveSiteUrl } from "@/lib/site-url";
 
 // ≤60 chars for SERP (v2 audit): front-load AI/RAG + India; cities stay in body/desc
-const PAGE_TITLE = "AI & RAG Consultant in India | Visakhapatnam | Madhu Dadi";
+const PAGE_TITLE = "AI Consultant in India | RAG, Agents, GA4 | Madhu Dadi";
 const PAGE_DESCRIPTION =
-  "AI & RAG consultant in Visakhapatnam and remote India. Production LLM apps, agents, and analytics by Madhu Dadi.";
+  "Fractional AI consultant in India. Production RAG, LLM apps, agents, and GA4→BigQuery analytics for startups and enterprise. Book a discovery call.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const siteUrl = `${resolveSiteUrl()}/`;
@@ -61,11 +61,31 @@ export default async function AiConsultantIndiaPage() {
       name: "Visakhapatnam",
       role: "Home base",
       copy: "Based in Visakhapatnam, Andhra Pradesh. Ideal for teams that want an India-based AI engineer with production delivery habits—not slideware.",
+      href: "/services/ai-consultant-visakhapatnam/",
     },
     {
       name: "Hyderabad",
-      role: "Professional experience",
-      copy: "Deep professional experience includes Hyderabad. Available for hybrid discovery calls, stakeholder workshops, and on-site kickoffs when the engagement warrants it.",
+      role: "On-site on request",
+      copy: "Professional experience includes Hyderabad. Hybrid discovery, stakeholder workshops, and on-site kickoffs when the engagement warrants it.",
+      href: "/services/ai-consultant-hyderabad/",
+    },
+    {
+      name: "Bengaluru",
+      role: "On-site on request",
+      copy: "Remote-first fractional AI for product teams; on-site workshops available for founder and engineering alignment.",
+      href: "/services/ai-consultant-bengaluru/",
+    },
+    {
+      name: "Chennai",
+      role: "On-site on request",
+      copy: "Production RAG, LLM apps, and analytics for Chennai teams — async delivery with optional kickoffs.",
+      href: "/services/ai-consultant-chennai/",
+    },
+    {
+      name: "Mumbai",
+      role: "On-site on request",
+      copy: "Fractional AI plus measurement (attribution, MMM) for Mumbai brands and growth teams.",
+      href: "/services/ai-consultant-mumbai/",
     },
     {
       name: "Remote India & worldwide",
@@ -139,6 +159,22 @@ export default async function AiConsultantIndiaPage() {
             },
           },
           {
+            "@type": "City",
+            name: "Chennai",
+            containedInPlace: {
+              "@type": "Country",
+              name: "India",
+            },
+          },
+          {
+            "@type": "City",
+            name: "Mumbai",
+            containedInPlace: {
+              "@type": "Country",
+              name: "India",
+            },
+          },
+          {
             "@type": "Country",
             name: "India",
           },
@@ -175,34 +211,62 @@ export default async function AiConsultantIndiaPage() {
             Local & remote delivery
           </p>
           <h1 className="font-display text-4xl font-bold tracking-tight text-gradient md:text-5xl">
-            AI & RAG consultant in Visakhapatnam, Hyderabad & remote India
+            AI Consultant in India — RAG, Agents, and Analytics That Ship
           </h1>
           <p className="text-lg leading-relaxed text-muted-foreground">
-            Madhu Dadi is an AI engineer and RAG & analytics consultant based in
-            Visakhapatnam, India, with professional experience in Hyderabad,
-            Bengaluru, and Gurugram. Engagements are remote-first and focused on
-            production systems: agents, RAG pipelines, FastAPI/Next.js products,
-            and marketing analytics infrastructure.
+            Most “AI consulting” is either a slide deck or a POC that never
+            leaves a notebook. I ship production systems—evaluated, monitored,
+            and cheap enough to run—for companies that have decided AI is a line
+            item, not an experiment.
+          </p>
+          <p className="text-base leading-relaxed text-muted-foreground">
+            Madhu Dadi is an AI engineer and RAG &amp; analytics consultant
+            based in Visakhapatnam, India, with professional experience in
+            Hyderabad, Bengaluru, and Gurugram. Remote-first delivery: agents,
+            RAG pipelines, FastAPI/Next.js products, and marketing analytics
+            infrastructure. Select consulting alongside full-time employment.
           </p>
         </header>
 
-        <section className="mt-14 grid gap-6 md:grid-cols-3">
-          {areas.map((area) => (
-            <article
-              key={area.name}
-              className="rounded-2xl border border-border bg-surface/50 p-6 shadow-card"
-            >
-              <p className="text-xs font-semibold tracking-widest text-primary uppercase">
-                {area.role}
-              </p>
-              <h2 className="mt-2 font-display text-xl font-semibold">
-                {area.name}
-              </h2>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                {area.copy}
-              </p>
-            </article>
-          ))}
+        <section className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {areas.map((area) => {
+            const body = (
+              <>
+                <p className="text-xs font-semibold tracking-widest text-primary uppercase">
+                  {area.role}
+                </p>
+                <h2 className="mt-2 font-display text-xl font-semibold">
+                  {area.name}
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  {area.copy}
+                </p>
+                {"href" in area && area.href ? (
+                  <p className="mt-4 text-sm font-semibold text-primary">
+                    City page →
+                  </p>
+                ) : null}
+              </>
+            );
+            return (
+              <article
+                key={area.name}
+                className="rounded-2xl border border-border bg-surface/50 p-6 shadow-card transition-colors hover:border-primary/30"
+              >
+                {"href" in area && area.href ? (
+                  <Link
+                    href={area.href}
+                    prefetch={false}
+                    className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                  >
+                    {body}
+                  </Link>
+                ) : (
+                  body
+                )}
+              </article>
+            );
+          })}
         </section>
 
         <section className="mt-16 space-y-6">
@@ -295,13 +359,19 @@ export default async function AiConsultantIndiaPage() {
           </dl>
         </section>
 
-        <section className="mt-12 text-center">
+        <section className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-3">
           <Link
-            href="/contact/"
+            href="/contact/#intent=ai-llm"
             className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition-transform hover:scale-[1.02]"
           >
             Discuss an India or remote engagement
             <IconArrowRight className="h-4 w-4" aria-hidden />
+          </Link>
+          <Link
+            href="/contact/#intent=intro"
+            className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium hover:border-primary/40 transition-colors"
+          >
+            Book a 20-min intro call
           </Link>
         </section>
       </main>

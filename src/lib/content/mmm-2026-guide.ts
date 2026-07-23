@@ -9,7 +9,7 @@ export const MMM_2026_GUIDE = {
   title: "Marketing mix modeling in 2026: Robyn vs Meridian vs custom Bayesian",
   seoTitle: "MMM in 2026: Robyn, Meridian & Custom | Madhu Dadi",
   seoDescription:
-    "MMM in 2026: when to use marketing mix modeling, Robyn vs Meridian vs custom, data needs, and MTA. Consultant guide.",
+    "Marketing mix modeling in 2026: when MMM beats MTA, Robyn vs Meridian vs custom Bayesian, data needs, and how consultants ship usable ROI models.",
   publishedAt: "2026-07-22",
   updatedAt: "2026-07-22",
   directAnswer:

@@ -19,6 +19,14 @@ Grounded in the July 21–22, 2026 audits. **Do not re-enable** Google-retired r
 | a11y FAQ/focus/reduced-motion/form success | Shipped |
 | Meta gaps (GA4/full-stack), India engagement, 404 | Shipped |
 | Hero CTA hierarchy + dual-path microcopy | This cycle |
+| Homepage sticky jump nav + how-measured proof lines | This cycle |
+| Audit v3 M1–M6 + A5 hero rewrite | This cycle |
+| Print stylesheet (L7) | This cycle |
+| Guides RSS /guides/rss.xml (L8) | This cycle |
+| Pillar: RAG vs fine-tuning 2026 (B3) | This cycle |
+| Pillar: Consent Mode v2 India (B3) | This cycle |
+| Pillar: AI search optimization 2026 (B3) | This cycle |
+| B2 lander openers (no invented pricing) | This cycle |
 
 ## Ops / owner (not pure code)
 

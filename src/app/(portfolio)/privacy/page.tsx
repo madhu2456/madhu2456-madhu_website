@@ -81,7 +81,7 @@ export default async function PrivacyPage() {
                     Last updated
                   </th>
                   <td className="px-4 py-3 text-muted-foreground">
-                    22 July 2026
+                    23 July 2026
                   </td>
                 </tr>
                 <tr>
@@ -238,7 +238,108 @@ export default async function PrivacyPage() {
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-xl font-semibold">5. Third-Party Services</h2>
+            <h2 className="text-xl font-semibold">5. Data Retention</h2>
+            <p className="text-muted-foreground leading-relaxed">
+              Personal data is kept only as long as needed for the purpose it
+              was collected, or longer when a legal obligation requires it.
+              Default retention periods for this portfolio site:
+            </p>
+            <div className="overflow-x-auto rounded-xl border border-border bg-surface/20">
+              <table className="min-w-full text-sm">
+                <thead>
+                  <tr className="border-b border-border/60 text-left">
+                    <th
+                      scope="col"
+                      className="px-4 py-3 font-semibold text-foreground"
+                    >
+                      Data category
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-4 py-3 font-semibold text-foreground"
+                    >
+                      Retention period
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-4 py-3 font-semibold text-foreground"
+                    >
+                      Notes
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border/60">
+                  <tr>
+                    <td className="px-4 py-3 text-foreground font-medium">
+                      Contact form submissions
+                    </td>
+                    <td className="px-4 py-3 text-muted-foreground whitespace-nowrap">
+                      24 months
+                    </td>
+                    <td className="px-4 py-3 text-muted-foreground">
+                      Held in email (Resend delivery + inbox) for active
+                      correspondence and follow-up. Erased earlier on valid Data
+                      Principal request where no legal hold applies.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-3 text-foreground font-medium">
+                      GA4 / GTM analytics
+                    </td>
+                    <td className="px-4 py-3 text-muted-foreground whitespace-nowrap">
+                      14 months
+                    </td>
+                    <td className="px-4 py-3 text-muted-foreground">
+                      Aggregated usage and conversion events in Google Analytics
+                      4 (standard event data retention). Not used to sell
+                      personal data or build ad profiles on this site.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-3 text-foreground font-medium">
+                      Server / application logs
+                    </td>
+                    <td className="px-4 py-3 text-muted-foreground whitespace-nowrap">
+                      30 days
+                    </td>
+                    <td className="px-4 py-3 text-muted-foreground">
+                      Operational logs (errors, rate limits, security signals)
+                      rotated or deleted after about 30 days unless needed for
+                      an active incident investigation.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-3 text-foreground font-medium">
+                      Portfolio assistant messages
+                    </td>
+                    <td className="px-4 py-3 text-muted-foreground whitespace-nowrap">
+                      Session only
+                    </td>
+                    <td className="px-4 py-3 text-muted-foreground">
+                      Processed to answer your question; not stored in a website
+                      database by this app. Third-party model providers process
+                      messages under their own terms for the request.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-3 text-foreground font-medium">
+                      Core Web Vitals beacons
+                    </td>
+                    <td className="px-4 py-3 text-muted-foreground whitespace-nowrap">
+                      90 days
+                    </td>
+                    <td className="px-4 py-3 text-muted-foreground">
+                      Performance metrics (LCP, INP, CLS) used to improve site
+                      speed; not used for advertising profiles.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section className="space-y-4">
+            <h2 className="text-xl font-semibold">6. Third-Party Services</h2>
             <p className="text-muted-foreground leading-relaxed">
               This website uses the following third-party services:
             </p>
@@ -261,7 +362,7 @@ export default async function PrivacyPage() {
 
           <section className="space-y-4">
             <h2 className="text-xl font-semibold">
-              6. Your Rights as a Data Principal
+              7. Your Rights as a Data Principal
             </h2>
             <p className="text-muted-foreground leading-relaxed">
               Under India&apos;s Digital Personal Data Protection Act, 2023, as
@@ -303,7 +404,7 @@ export default async function PrivacyPage() {
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-xl font-semibold">7. Children&apos;s Data</h2>
+            <h2 className="text-xl font-semibold">8. Children&apos;s Data</h2>
             <p className="text-muted-foreground leading-relaxed">
               This portfolio is intended for adult professionals exploring
               consulting, hiring, or technical collaboration. It is not directed
@@ -318,7 +419,7 @@ export default async function PrivacyPage() {
 
           <section className="space-y-4">
             <h2 className="text-xl font-semibold">
-              8. Cross-Border Data Transfers
+              9. Cross-Border Data Transfers
             </h2>
             <p className="text-muted-foreground leading-relaxed">
               I am based in India. Some processing needed to operate this site
@@ -350,7 +451,7 @@ export default async function PrivacyPage() {
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-xl font-semibold">9. Contact</h2>
+            <h2 className="text-xl font-semibold">10. Contact</h2>
             <p className="text-muted-foreground leading-relaxed">
               If you have questions about this privacy policy, please contact
               Madhu Dadi (Data Fiduciary) at{" "}

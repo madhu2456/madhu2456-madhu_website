@@ -27,6 +27,21 @@ export function Hero({
     ),
   ).slice(0, 5);
 
+  const primaryHref =
+    pageContent.home.primaryCta?.href || "/contact/#intent=intro";
+  const primaryLabel =
+    pageContent.home.primaryCta?.label || "Book a 20-min intro call";
+  const secondaryHref = pageContent.home.secondaryCta?.href || "/case-studies/";
+  const secondaryLabel =
+    pageContent.home.secondaryCta?.label || "See case studies";
+  const intro =
+    pageContent.home.introParagraphs &&
+    pageContent.home.introParagraphs.length > 0
+      ? pageContent.home.introParagraphs
+      : [
+          "Fractional AI and analytics consulting. Ex-Novartis, redBus, GroupM. Production RAG, agents, GA4→BigQuery, and MMM — measured, evaluated, and handed over so your team can run it.",
+        ];
+
   return (
     <section
       id="home"
@@ -36,10 +51,10 @@ export function Hero({
       <div className="mx-auto grid w-[min(1400px,92%)] gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-14">
         <div className="animate-fade-up">
           <Link
-            href="/contact/"
+            href={primaryHref}
             onClick={() =>
               pushToDataLayer({
-                event: "hire_me_click",
+                event: "intro_call_click",
                 click_location: "hero_availability",
               })
             }
@@ -50,41 +65,42 @@ export function Hero({
               aria-hidden
             />
             {pageContent.home.heroAvailabilityText ||
-              "Available for new projects"}
+              "Full-time at Novartis · select consulting open"}
           </Link>
-          <p className="mb-3 font-display text-[11px] tracking-[0.18em] text-primary uppercase sm:text-sm sm:tracking-[0.2em] font-semibold">
-            {pageContent.home.eyebrow}
-          </p>
+          {pageContent.home.eyebrow ? (
+            <p className="mb-3 font-display text-[11px] tracking-[0.18em] text-primary uppercase sm:text-sm sm:tracking-[0.2em] font-semibold">
+              {pageContent.home.eyebrow}
+            </p>
+          ) : null}
           <h1 className="font-display text-[clamp(2rem,6vw,4rem)] leading-[1.15] font-bold tracking-tight sm:leading-[1.1]">
             <span className="text-gradient">
               {pageContent.home.heroTitle.replace(/\.$/, "")}
             </span>
           </h1>
           <div className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:mt-6 sm:text-lg space-y-4">
-            {(pageContent.home.introParagraphs || []).map((para) => (
+            {intro.map((para) => (
               <p key={para}>{para}</p>
             ))}
           </div>
           <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center">
-            {/* Primary CTA only — audit: avoid competing equal-weight CTAs */}
             <Link
-              href="/contact/"
+              href={primaryHref}
               onClick={() =>
                 pushToDataLayer({
-                  event: "hire_me_click",
-                  click_location: "hero",
+                  event: "intro_call_click",
+                  click_location: "hero_primary",
                 })
               }
               className="group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-transform hover:scale-[1.03] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary motion-reduce:transition-none motion-reduce:hover:scale-100 sm:px-6"
             >
-              Contact me
+              {primaryLabel}
               <IconArrowRight
                 className="h-4 w-4 transition-transform group-hover:translate-x-0.5 motion-reduce:group-hover:translate-x-0"
                 aria-hidden
               />
             </Link>
             <Link
-              href="/case-studies/"
+              href={secondaryHref}
               onClick={() =>
                 pushToDataLayer({
                   event: "case_study_click",
@@ -93,7 +109,7 @@ export function Hero({
               }
               className="inline-flex items-center justify-center gap-2 rounded-full border border-border/80 bg-transparent px-5 py-3 text-sm font-medium text-foreground/90 transition-all duration-300 hover:border-primary/40 hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary motion-reduce:transition-none sm:px-6"
             >
-              See case studies
+              {secondaryLabel}
             </Link>
             <TrackedLink
               href="/resume.pdf"
@@ -106,9 +122,14 @@ export function Hero({
               Resume
             </TrackedLink>
           </div>
-          <p className="mt-3 max-w-xl text-xs text-muted-foreground">
-            Consulting discovery or full-time conversations — both welcome.
-            Reply typically within 24 hours.
+          <p className="mt-3 max-w-xl text-xs leading-relaxed text-muted-foreground">
+            Proof anchors:{" "}
+            <span className="text-foreground/80">
+              10,000+ URLs/audit · ~90% fewer manual steps · 20,000+ workflow
+              runs
+            </span>
+            . Consulting discovery or full-time conversations — reply typically
+            within 24 hours.
           </p>
           {workedAt.length > 0 ? (
             <div className="mt-8 sm:mt-10">
@@ -147,7 +168,7 @@ export function Hero({
           </div>
           <div className="glass absolute right-3 bottom-3 left-3 rounded-xl p-3 sm:right-5 sm:bottom-5 sm:left-5 sm:rounded-2xl sm:p-4">
             <p className="font-display text-base italic sm:text-lg">
-              Let's build something meaningful.
+              Measured systems. Clear handover.
             </p>
             <p className="mt-1 text-[11px] text-muted-foreground sm:text-xs">
               AI · LLM · RAG · Analytics · Full-stack

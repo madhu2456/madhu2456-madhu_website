@@ -15,11 +15,16 @@ import { Header } from "@/components/Header";
 import { JsonLdScript } from "@/components/JsonLdScript";
 import { LastUpdated } from "@/components/LastUpdated";
 import { PageToc, type PageTocItem } from "@/components/PageToc";
+import { RelatedReading } from "@/components/RelatedReading";
 import { ServiceIcon } from "@/components/ServiceIcon";
+import { TrackedLink } from "@/components/TrackedLink";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { getCaseStudyLinkLabel } from "@/lib/project-display";
 import { siteLanguageAlternates } from "@/lib/seo/hreflang";
-import { getRelatedLearning } from "@/lib/seo/service-related-learning";
+import {
+  getRelatedLearning,
+  relatedLearningKindLabel,
+} from "@/lib/seo/service-related-learning";
 import { resolveSiteUrl } from "@/lib/site-url";
 
 interface ServicePageProps {
@@ -187,6 +192,9 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
     { id: "engagement", label: "Engagement" },
     ...(relatedCaseStudies.length > 0
       ? [{ id: "related-case-studies", label: "Case studies" }]
+      : []),
+    ...(relatedLearning.length > 0
+      ? [{ id: "related-reading", label: "Related reading" }]
       : []),
     ...(service.faqs && service.faqs.length > 0
       ? [{ id: "service-faqs", label: "FAQ" }]
@@ -624,7 +632,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                   </ul>
                 </div>
 
-                <div className="pt-2">
+                <div className="pt-2 flex flex-col gap-2">
                   <Link
                     href={prefillContactUrl}
                     className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all"
@@ -632,6 +640,17 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                     Request discovery call
                     <IconArrowRight className="h-4 w-4" />
                   </Link>
+                  <TrackedLink
+                    href="/contact/#intent=intro"
+                    gtmEvent="intro_call_click"
+                    gtmData={{
+                      click_location: "service_sidebar",
+                      service_slug: service.slug,
+                    }}
+                    className="w-full inline-flex items-center justify-center gap-2 rounded-full border border-border px-4 py-2.5 text-sm font-medium hover:border-primary/40 transition-colors"
+                  >
+                    Book a 20-min intro call
+                  </TrackedLink>
                 </div>
               </div>
 
@@ -658,11 +677,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                           <span>
                             {link.label}
                             <span className="mt-0.5 block text-[10px] font-semibold tracking-wider text-muted-foreground uppercase">
-                              {link.kind === "blog"
-                                ? "Blog"
-                                : link.kind === "tool"
-                                  ? "Live tool"
-                                  : "Case study"}
+                              {relatedLearningKindLabel(link.kind)}
                             </span>
                           </span>
                         </Link>
@@ -692,6 +707,14 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               )}
             </div>
           </div>
+
+          {relatedLearning.length > 0 ? (
+            <RelatedReading
+              items={relatedLearning}
+              className="mt-6"
+              title="Related reading"
+            />
+          ) : null}
 
           {/* Related case studies (hub → spoke commercial linking) */}
           {relatedCaseStudies.length > 0 && (
@@ -773,7 +796,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 outcome. I reply within 24 hours with fit, constraints, and a
                 recommended next step—not a generic sales pitch.
               </p>
-              <div className="pt-4 flex flex-col items-center gap-4">
+              <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
                 <Link
                   href={prefillContactUrl}
                   className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 hover:scale-[1.02] hover:shadow-glow transition-all"
@@ -781,32 +804,39 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                   Request consultation
                   <IconArrowRight className="h-4 w-4" />
                 </Link>
-                <div className="flex flex-wrap items-center justify-center gap-3 text-xs text-muted-foreground mt-2">
-                  <Link
-                    href="/case-studies/"
-                    className="hover:text-primary transition-colors"
-                  >
-                    Case studies
-                  </Link>
-                  <span className="text-muted-foreground/30 select-none">
-                    |
-                  </span>
-                  <Link
-                    href="/profile/"
-                    className="hover:text-primary transition-colors"
-                  >
-                    Professional profile
-                  </Link>
-                  <span className="text-muted-foreground/30 select-none">
-                    |
-                  </span>
-                  <Link
-                    href="/credentials/"
-                    className="hover:text-primary transition-colors"
-                  >
-                    Verified credentials
-                  </Link>
-                </div>
+                <TrackedLink
+                  href="/contact/#intent=intro"
+                  gtmEvent="intro_call_click"
+                  gtmData={{
+                    click_location: "service_footer_cta",
+                    service_slug: service.slug,
+                  }}
+                  className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium hover:border-primary/40 transition-colors"
+                >
+                  Book a 20-min intro call
+                </TrackedLink>
+              </div>
+              <div className="flex flex-wrap items-center justify-center gap-3 text-xs text-muted-foreground">
+                <Link
+                  href="/case-studies/"
+                  className="hover:text-primary transition-colors"
+                >
+                  Case studies
+                </Link>
+                <span className="text-muted-foreground/30 select-none">|</span>
+                <Link
+                  href="/profile/"
+                  className="hover:text-primary transition-colors"
+                >
+                  Professional profile
+                </Link>
+                <span className="text-muted-foreground/30 select-none">|</span>
+                <Link
+                  href="/credentials/"
+                  className="hover:text-primary transition-colors"
+                >
+                  Verified credentials
+                </Link>
               </div>
             </div>
           </section>

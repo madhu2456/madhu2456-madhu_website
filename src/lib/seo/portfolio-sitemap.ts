@@ -167,6 +167,24 @@ export async function buildPortfolioSitemap(): Promise<MetadataRoute.Sitemap> {
       "monthly",
       0.82,
     ),
+    entry(
+      toCanonicalSitemapUrl(origin, "/guides/rag-vs-fine-tuning-2026/"),
+      effectiveHubDate,
+      "monthly",
+      0.84,
+    ),
+    entry(
+      toCanonicalSitemapUrl(origin, "/guides/consent-mode-v2-india/"),
+      effectiveHubDate,
+      "monthly",
+      0.84,
+    ),
+    entry(
+      toCanonicalSitemapUrl(origin, "/guides/ai-search-optimization-2026/"),
+      effectiveHubDate,
+      "monthly",
+      0.84,
+    ),
     ...sortedProjects.map((project) =>
       entry(
         toCanonicalSitemapUrl(origin, `/case-studies/${project.slug}/`),
@@ -212,6 +230,9 @@ export const PORTFOLIO_SITEMAP_STATIC_PATHS = [
   "/guides/marketing-mix-modeling-2026/",
   "/guides/attribution-after-cookies/",
   "/guides/fractional-ai-playbook/",
+  "/guides/rag-vs-fine-tuning-2026/",
+  "/guides/consent-mode-v2-india/",
+  "/guides/ai-search-optimization-2026/",
   "/privacy/",
   "/resume.pdf",
 ] as const;

@@ -6,18 +6,18 @@
         "title": "Madhu Dadi — AI Engineer: RAG, AI Agents & Analytics",
         "description": "AI engineer & consultant: production RAG, AI agents, FastAPI/Next.js, marketing analytics. 9+ years since 2016. India & remote. Hire or full-time."
       },
-      "heroTitle": "Production AI agents, RAG systems & analytics infrastructure",
+      "heroTitle": "Ship the AI system your business needed six months ago",
       "primaryCta": {
-        "label": "Contact Me",
-        "href": "/contact",
+        "label": "Book a 20-min intro call",
+        "href": "/contact/#intent=intro",
         "variant": "primary"
       },
       "secondaryCta": {
-        "label": "View Services",
-        "href": "/services",
+        "label": "See case studies",
+        "href": "/case-studies/",
         "variant": "secondary"
       },
-      "heroAvailabilityText": "Full-time at Novartis · open to consulting & roles",
+      "heroAvailabilityText": "Full-time at Novartis · select consulting open",
       "workedAtLabel": "Previously built systems at",
       "directAnswer": {
         "title": "Who is Madhu Dadi?",
@@ -60,12 +60,16 @@
           "question": "Do you build AI agents and RAG systems?",
           "answer": "Yes. Primary focus is production AI agents with tool calling and guardrails, and RAG systems with hybrid search, reranking, and citation verification—plus supporting analytics and full-stack delivery when the product requires it."
         }
+      ],
+      "eyebrow": "Fractional AI + analytics · India & remote",
+      "introParagraphs": [
+        "Fractional AI and analytics consulting. Ex-Novartis, redBus, GroupM. Production RAG, agents, GA4→BigQuery, and MMM — measured, evaluated, and handed over so your team can run it."
       ]
     },
     "profile": {
       "seo": {
-        "title": "Professional Profile | Madhu Dadi",
-        "description": "Professional profile of Madhu Dadi: work history, stack, education, and credentials for AI, RAG, and analytics roles.",
+        "title": "Madhu Dadi — AI Engineer Profile | RAG & Analytics",
+        "description": "Professional profile of Madhu Dadi: 9+ years AI & analytics (Novartis, redBus, GroupM). Work history, stack, education, and credentials for RAG and agents.",
         "canonicalPath": "/profile/"
       },
       "heroTitle": "Professional profile & career history",
@@ -296,19 +300,23 @@
     "stats": [
       {
         "label": "Professional experience since first full-time role (2016)",
-        "value": "9+ years"
+        "value": "9+ years",
+        "howMeasured": "Calendar years from first full-time software role (2016) to present."
       },
       {
         "label": "URLs per Adticks audit (parallel Playwright crawl capacity)",
-        "value": "10,000+"
+        "value": "10,000+",
+        "howMeasured": "Adticks bounded Playwright worker pool ceiling per audit run in production configs."
       },
       {
         "label": "Automated browser workflow executions logged",
-        "value": "20,000+"
+        "value": "20,000+",
+        "howMeasured": "Sum of logged Udemy Enroller workflow executions over a six-month window."
       },
       {
         "label": "Healthcare, travel-tech, media, and SaaS/product engineering",
-        "value": "4 domains"
+        "value": "4 domains",
+        "howMeasured": "Distinct industry verticals from full-time employment history (healthcare, travel-tech, media, SaaS/product)."
       }
     ],
     "profileImage": "/new-ui/hero-portrait.jpg",
@@ -856,15 +864,18 @@
       "impactMetrics": [
         {
           "label": "URLs crawled per audit (parallel headless rendering capacity)",
-          "value": "10,000+"
+          "value": "10,000+",
+          "howMeasured": "Configured parallel headless crawl capacity per audit job (worker pool cap)."
         },
         {
           "label": "reduction in technical audit cycle time",
-          "value": "85%"
+          "value": "85%",
+          "howMeasured": "Before/after comparison of end-to-end technical audit cycle time on representative client runs."
         },
         {
           "label": "indexing and AI Overview citation readiness through render-parity diagnostics",
-          "value": "Higher"
+          "value": "Higher",
+          "howMeasured": "Qualitative outcome from render-parity diagnostics that surface indexing and AI Overview blockers."
         }
       ],
       "citations": [
@@ -1023,15 +1034,18 @@
       "impactMetrics": [
         {
           "label": "ranking on high-intent AI and engineering topics",
-          "value": "Organic"
+          "value": "Organic",
+          "howMeasured": "Observed ranking movement on tracked AI/engineering queries after content + technical SEO work."
         },
         {
           "label": "lower user search latency through grounded RAG answers",
-          "value": "80%"
+          "value": "80%",
+          "howMeasured": "Measured drop in time-to-answer for common queries after grounded RAG replaced manual search."
         },
         {
           "label": "TTFB for bots and humans through CI and cache warming",
-          "value": "Low"
+          "value": "Low",
+          "howMeasured": "CI and cache-warming checks for bot/human TTFB on critical routes."
         }
       ],
       "citations": [
@@ -1185,15 +1199,18 @@
       "impactMetrics": [
         {
           "label": "reduction in manual operator steps for covered workflows",
-          "value": "~90%"
+          "value": "~90%",
+          "howMeasured": "Operator step count for covered workflows before vs after automation (manual checklist vs logged runs)."
         },
         {
           "label": "workflow executions logged (six months)",
-          "value": "20,000+"
+          "value": "20,000+",
+          "howMeasured": "Application logs of completed workflow executions over six months."
         },
         {
           "label": "hard concurrency cap per host (browser tabs)",
-          "value": "5"
+          "value": "5",
+          "howMeasured": "Hard concurrency limit set in the browser automation host config."
         }
       ],
       "citations": [

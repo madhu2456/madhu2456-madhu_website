@@ -106,6 +106,20 @@ Ideal start date:
 
 Looking forward to connecting.`,
   },
+  intro: {
+    subject: "20-min intro call request",
+    message: `Hi Madhu,
+
+I'd like a short 20-minute intro call to see if we are a fit.
+
+Context:
+- Company / role:
+- Problem in one sentence:
+- Timeline:
+- Preferred time window (timezone):
+
+Thanks.`,
+  },
 };
 
 function getHashIntent(): string | null {

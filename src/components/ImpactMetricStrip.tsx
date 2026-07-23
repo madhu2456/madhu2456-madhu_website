@@ -30,6 +30,10 @@ export function ImpactMetricStrip({
     size === "md"
       ? "mt-0.5 text-xs leading-snug text-muted-foreground sm:text-sm"
       : "mt-0.5 text-[10px] leading-snug text-muted-foreground sm:text-[11px]";
+  const howClass =
+    size === "md"
+      ? "mt-1.5 text-[11px] leading-snug text-muted-foreground/80 sm:text-xs"
+      : "mt-1 text-[10px] leading-snug text-muted-foreground/75";
 
   return (
     <dl
@@ -45,6 +49,14 @@ export function ImpactMetricStrip({
           <dd>
             <p className={valueClass}>{metric.value}</p>
             <p className={labelClass}>{metric.label}</p>
+            {metric.howMeasured ? (
+              <p className={howClass}>
+                <span className="font-medium text-muted-foreground/90">
+                  How measured:{" "}
+                </span>
+                {metric.howMeasured}
+              </p>
+            ) : null}
           </dd>
         </div>
       ))}

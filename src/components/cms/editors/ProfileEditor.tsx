@@ -183,7 +183,9 @@ export function ProfileEditor() {
           <h3 className="font-semibold">Stats</h3>
           <button
             type="button"
-            onClick={() => append({ label: "New Stat", value: "" })}
+            onClick={() =>
+              append({ label: "New Stat", value: "", howMeasured: "" })
+            }
             className="rounded-md border px-3 py-1.5 text-sm hover:bg-accent"
           >
             Add stat
@@ -192,7 +194,7 @@ export function ProfileEditor() {
         {fields.map((field, index) => (
           <div
             key={field.id}
-            className="grid gap-3 rounded-md border p-3 md:grid-cols-[1fr_1fr_auto]"
+            className="grid gap-3 rounded-md border p-3 md:grid-cols-[1fr_1fr_1.2fr_auto]"
           >
             <FormField
               label="Label"
@@ -212,6 +214,17 @@ export function ProfileEditor() {
                 className={inputClass}
                 {...register(`profile.stats.${index}.value`)}
                 placeholder="Value"
+              />
+            </FormField>
+            <FormField
+              label="How measured"
+              hint="Optional citable note for AEO/GEO."
+              error={errors.profile?.stats?.[index]?.howMeasured?.message}
+            >
+              <input
+                className={inputClass}
+                {...register(`profile.stats.${index}.howMeasured`)}
+                placeholder="e.g. Counted from production logs"
               />
             </FormField>
             <div className="flex items-end pb-0.5">
