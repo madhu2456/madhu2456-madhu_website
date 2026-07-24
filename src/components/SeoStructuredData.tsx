@@ -63,7 +63,7 @@ export async function SeoStructuredData({
     skills,
     services,
     projects,
-  });
+  }).slice(0, 24);
   const profileImageUrl =
     resolveAbsoluteImageUrl(profile.profileImage) || undefined;
   const updatedAtValues = [

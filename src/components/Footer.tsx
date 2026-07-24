@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import { SafeEmailLink } from "@/components/SafeEmailLink";
 import { SocialIconStrip } from "@/components/SocialIconStrip";
 import { TrackedLink } from "@/components/TrackedLink";
-import type { HomeProfile, HomeProjectCard } from "@/lib/home-page-data";
+import type { FooterProfile, FooterProjectLink } from "@/lib/home-page-data";
 import { EXTERNAL_REL } from "@/lib/link-rel";
 import type { NavigationItem } from "@/lib/portfolio-data";
 
@@ -15,8 +15,8 @@ type FooterSitemapLink = {
 };
 
 type FooterProps = {
-  profile: HomeProfile;
-  projects: HomeProjectCard[];
+  profile: FooterProfile;
+  projects: FooterProjectLink[];
   navigationItems: NavigationItem[];
 };
 

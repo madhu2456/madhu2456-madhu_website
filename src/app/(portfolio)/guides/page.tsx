@@ -5,6 +5,7 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JsonLdScript } from "@/components/JsonLdScript";
+import { slimFooterProfile, slimFooterProjects } from "@/lib/home-page-data";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { PORTFOLIO_GUIDES } from "@/lib/seo/guides-catalog";
 import { siteLanguageAlternates } from "@/lib/seo/hreflang";
@@ -12,7 +13,7 @@ import { resolveSiteUrl } from "@/lib/site-url";
 
 const GUIDES_TITLE = "AI, RAG & Analytics Guides | Madhu Dadi";
 const GUIDES_DESCRIPTION =
-  "Practical guides by Madhu Dadi: GA4/BigQuery, marketing mix modeling, attribution after cookies, fractional AI, RAG vs fine-tuning, Consent Mode v2 India, and AI search optimization.";
+  "Guides by Madhu Dadi: GA4/BigQuery, MMM, attribution, fractional AI, RAG vs fine-tuning, Consent Mode v2 India, and AI search optimization 2026.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const siteUrl = `${resolveSiteUrl()}/`;
@@ -112,7 +113,10 @@ export default async function GuidesIndexPage() {
           "@graph": [collectionSchema, breadcrumbSchema],
         }}
       />
-      <Header profile={profile} navigationItems={sortedNavigationItems} />
+      <Header
+        profile={{ firstName: profile.firstName, lastName: profile.lastName }}
+        navigationItems={sortedNavigationItems}
+      />
       <main
         id="main-content"
         className="flex-1 mx-auto max-w-6xl w-[92%] pt-32 pb-24"
@@ -208,8 +212,8 @@ export default async function GuidesIndexPage() {
         </section>
       </main>
       <Footer
-        profile={profile}
-        projects={sortedProjects}
+        profile={slimFooterProfile(profile)}
+        projects={slimFooterProjects(sortedProjects)}
         navigationItems={sortedNavigationItems}
       />
     </div>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { slimFooterProfile, slimFooterProjects } from "@/lib/home-page-data";
 import { getPortfolioData } from "@/lib/portfolio-data";
 
 const RESULT_LIMIT_PER_SECTION = 6;
@@ -211,7 +212,10 @@ export default async function SearchPage({
 
   return (
     <>
-      <Header profile={profile} navigationItems={sortedNavigationItems} />
+      <Header
+        profile={{ firstName: profile.firstName, lastName: profile.lastName }}
+        navigationItems={sortedNavigationItems}
+      />
       <main id="main-content" className="min-h-screen py-16 px-6 bg-muted/10">
         <div className="container mx-auto max-w-4xl space-y-8">
           <header className="rounded-2xl border bg-background p-6 md:p-8 space-y-4 shadow-sm">
@@ -330,8 +334,8 @@ export default async function SearchPage({
         </div>
       </main>
       <Footer
-        profile={profile}
-        projects={sortedProjects}
+        profile={slimFooterProfile(profile)}
+        projects={slimFooterProjects(sortedProjects)}
         navigationItems={sortedNavigationItems}
       />
     </>

@@ -9,6 +9,7 @@ import { LastUpdated } from "@/components/LastUpdated";
 import { PageToc, type PageTocItem } from "@/components/PageToc";
 import { RelatedReading } from "@/components/RelatedReading";
 import { TrackedLink } from "@/components/TrackedLink";
+import { slimFooterProfile, slimFooterProjects } from "@/lib/home-page-data";
 import type { PortfolioData } from "@/lib/portfolio-data";
 import type { IndiaServiceAlias } from "@/lib/seo/service-aliases";
 import { getRelatedLearning } from "@/lib/seo/service-related-learning";
@@ -168,7 +169,10 @@ export function IndiaServiceLander({ alias, data }: IndiaServiceLanderProps) {
   return (
     <div className="flex flex-col min-h-screen">
       <JsonLdScript data={graph} />
-      <Header profile={profile} navigationItems={sortedNavigationItems} />
+      <Header
+        profile={{ firstName: profile.firstName, lastName: profile.lastName }}
+        navigationItems={sortedNavigationItems}
+      />
 
       <main id="main-content" className="flex-1 px-6 py-28 bg-background/50">
         <div className="container mx-auto max-w-4xl space-y-12">
@@ -368,7 +372,14 @@ export function IndiaServiceLander({ alias, data }: IndiaServiceLanderProps) {
             </dl>
           </section>
 
-          <AuthorBio profile={profile} />
+          <AuthorBio
+            profile={{
+              firstName: profile.firstName,
+              lastName: profile.lastName,
+              headline: profile.headline,
+              shortBio: profile.shortBio,
+            }}
+          />
 
           {relatedReading.length > 0 ? (
             <RelatedReading items={relatedReading} className="mt-2" />
@@ -484,9 +495,9 @@ export function IndiaServiceLander({ alias, data }: IndiaServiceLanderProps) {
       </main>
 
       <Footer
-        profile={profile}
+        profile={slimFooterProfile(profile)}
         navigationItems={sortedNavigationItems}
-        projects={sortedProjects}
+        projects={slimFooterProjects(sortedProjects)}
       />
     </div>
   );

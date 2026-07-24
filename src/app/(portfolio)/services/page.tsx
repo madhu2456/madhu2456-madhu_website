@@ -11,6 +11,7 @@ import { Header } from "@/components/Header";
 import { JsonLdScript } from "@/components/JsonLdScript";
 import { SeoStructuredData } from "@/components/SeoStructuredData";
 import { ServiceIcon } from "@/components/ServiceIcon";
+import { slimFooterProfile, slimFooterProjects } from "@/lib/home-page-data";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { siteLanguageAlternates } from "@/lib/seo/hreflang";
 import { resolveSiteUrl } from "@/lib/site-url";
@@ -69,7 +70,10 @@ export default async function ServicesHubPage() {
       <JsonLdScript data={breadcrumbSchema} />
       {/* HowTo JSON-LD omitted: HowTo rich results retired (Google, Sept 2023). */}
       <SeoStructuredData nodes={["ServicesList"]} />
-      <Header profile={profile} navigationItems={sortedNavigationItems} />
+      <Header
+        profile={{ firstName: profile.firstName, lastName: profile.lastName }}
+        navigationItems={sortedNavigationItems}
+      />
 
       <main id="main-content" className="flex-1 px-6 py-28 bg-background/50">
         <div className="container mx-auto max-w-6xl space-y-16">
@@ -395,9 +399,9 @@ export default async function ServicesHubPage() {
       </main>
 
       <Footer
-        profile={profile}
+        profile={slimFooterProfile(profile)}
         navigationItems={sortedNavigationItems}
-        projects={sortedProjects}
+        projects={slimFooterProjects(sortedProjects)}
       />
     </div>
   );

@@ -19,6 +19,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { SeoStructuredData } from "@/components/SeoStructuredData";
 import { TrackedLink } from "@/components/TrackedLink";
+import { slimFooterProfile, slimFooterProjects } from "@/lib/home-page-data";
 import { IDENTITY_EXTERNAL_REL } from "@/lib/link-rel";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { siteLanguageAlternates } from "@/lib/seo/hreflang";
@@ -70,12 +71,25 @@ export default async function CredentialsPage() {
     pageContent,
   } = await getPortfolioData();
 
+  // Proof cards only need link labels + stack chips (audit v5 payload).
+  const proofProjects = sortedProjects.map((project) => ({
+    slug: project.slug,
+    title: project.title,
+    tagline: project.tagline,
+    technologies: project.technologies?.slice(0, 3).map((tech) => ({
+      name: tech.name,
+    })),
+  }));
+
   return (
     <div className="flex flex-col min-h-screen">
       <SeoStructuredData
         nodes={["Breadcrumb", "CertificationsList", "WorkExperience"]}
       />
-      <Header profile={profile} navigationItems={sortedNavigationItems} />
+      <Header
+        profile={{ firstName: profile.firstName, lastName: profile.lastName }}
+        navigationItems={sortedNavigationItems}
+      />
 
       <main id="main-content" className="flex-1 px-6 py-28 bg-background/50">
         <div className="container mx-auto max-w-4xl space-y-16">
@@ -187,7 +201,12 @@ export default async function CredentialsPage() {
               </p>
             </div>
 
-            <div className="overflow-x-auto rounded-2xl border border-border bg-surface/20 backdrop-blur-md shadow-sm">
+            <section
+              // biome-ignore lint/a11y/noNoninteractiveTabindex: axe scrollable-region-focusable (mobile)
+              tabIndex={0}
+              aria-label="Credentials and proof summary table"
+              className="overflow-x-auto rounded-2xl border border-border bg-surface/20 backdrop-blur-md shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
               <table className="min-w-full divide-y divide-border/60 text-sm">
                 <thead className="bg-surface-elevated/40 text-xs font-semibold tracking-wider text-muted-foreground uppercase">
                   <tr>
@@ -239,7 +258,7 @@ export default async function CredentialsPage() {
                   ))}
                 </tbody>
               </table>
-            </div>
+            </section>
           </section>
 
           {/* Verified Certifications Detail Grid */}
@@ -469,7 +488,7 @@ export default async function CredentialsPage() {
           )}
 
           {/* Dynamic Public Case Studies Projects */}
-          {sortedProjects.length > 0 && (
+          {proofProjects.length > 0 && (
             <section className="space-y-6">
               <div className="space-y-2">
                 <h2 className="text-xl md:text-2xl font-bold tracking-tight flex items-center gap-2">
@@ -483,9 +502,9 @@ export default async function CredentialsPage() {
               </div>
 
               <div className="grid gap-6 sm:grid-cols-2">
-                {sortedProjects.map((project) => (
+                {proofProjects.map((project) => (
                   <div
-                    key={project.title}
+                    key={project.slug}
                     className="group rounded-2xl border border-border bg-surface/20 p-6 flex flex-col justify-between hover:border-primary/30 transition-all duration-300 backdrop-blur-md"
                   >
                     <div className="space-y-3">
@@ -499,7 +518,7 @@ export default async function CredentialsPage() {
 
                     <div className="pt-4 border-t border-border/40 mt-4 flex items-center justify-between gap-4">
                       <div className="flex flex-wrap gap-1">
-                        {project.technologies?.slice(0, 3).map((tech) => (
+                        {project.technologies?.map((tech) => (
                           <span
                             key={tech.name}
                             className="rounded-full border border-border/40 bg-background/20 px-2 py-0.5 text-[9px] font-mono text-muted-foreground"
@@ -643,9 +662,9 @@ export default async function CredentialsPage() {
       </main>
 
       <Footer
-        profile={profile}
+        profile={slimFooterProfile(profile)}
         navigationItems={sortedNavigationItems}
-        projects={sortedProjects}
+        projects={slimFooterProjects(sortedProjects)}
       />
     </div>
   );

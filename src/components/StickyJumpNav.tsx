@@ -87,7 +87,8 @@ export function StickyJumpNav({
     >
       <nav
         aria-label={ariaLabel}
-        className="mx-auto w-[min(1400px,94%)] overflow-x-auto rounded-full border border-border/80 bg-surface-elevated/90 px-2 py-1.5 shadow-lg shadow-black/15 backdrop-blur-md [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        tabIndex={visible ? 0 : -1}
+        className="mx-auto w-[min(1400px,94%)] overflow-x-auto rounded-full border border-border/80 bg-surface-elevated/90 px-2 py-1.5 shadow-lg shadow-black/15 backdrop-blur-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         <ol className="flex min-w-max items-center gap-0.5">
           {items.map((item) => {

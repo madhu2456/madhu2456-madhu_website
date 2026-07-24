@@ -5,6 +5,7 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JsonLdScript } from "@/components/JsonLdScript";
+import { slimFooterProfile, slimFooterProjects } from "@/lib/home-page-data";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { siteLanguageAlternates } from "@/lib/seo/hreflang";
 import { resolveSiteUrl } from "@/lib/site-url";
@@ -197,7 +198,10 @@ export default async function AiConsultantIndiaPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <Header profile={profile} navigationItems={sortedNavigationItems} />
+      <Header
+        profile={{ firstName: profile.firstName, lastName: profile.lastName }}
+        navigationItems={sortedNavigationItems}
+      />
       <main
         id="main-content"
         className="mx-auto w-[min(1100px,92%)] flex-1 pt-32 pb-24"
@@ -376,8 +380,8 @@ export default async function AiConsultantIndiaPage() {
         </section>
       </main>
       <Footer
-        profile={profile}
-        projects={sortedProjects}
+        profile={slimFooterProfile(profile)}
+        projects={slimFooterProjects(sortedProjects)}
         navigationItems={sortedNavigationItems}
       />
     </div>

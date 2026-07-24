@@ -1,62 +1,15 @@
-import { Suspense } from "react";
 import { Sidebar, SidebarContent, SidebarRail } from "@/components/ui/sidebar";
-import { getPortfolioData } from "@/lib/portfolio-data";
 import { ChatSidebarSection } from "./chat/ChatSidebarSection";
-import type { ChatProfile } from "./chat/chat-profile";
 
-function SidebarSkeleton() {
-  return (
-    <div
-      className="flex flex-col h-full w-full overflow-hidden"
-      aria-hidden="true"
-    >
-      <div className="flex items-center gap-3 px-4 py-3 border-b border-foreground/10">
-        <div className="w-7 h-7 rounded-full bg-foreground/15 animate-pulse" />
-        <div className="h-3.5 w-28 rounded-full bg-foreground/15 animate-pulse" />
-      </div>
-      <div className="flex-1 flex flex-col items-center justify-center px-6 gap-3">
-        <div className="h-4 w-3/4 rounded-full bg-foreground/15 animate-pulse" />
-        <div className="h-4 w-1/2 rounded-full bg-foreground/15 animate-pulse" />
-        <div className="h-4 w-4 rounded-full border-2 border-primary/20 border-t-primary animate-spin mt-2" />
-      </div>
-      <div className="flex flex-col gap-2 px-4 pb-2">
-        {[80, 65, 72, 60].map((w) => (
-          <div
-            key={`skeleton-width-${w}`}
-            className="h-10 rounded-xl bg-foreground/10 animate-pulse"
-            style={{ width: `${w}%` }}
-          />
-        ))}
-      </div>
-      <div className="px-4 pb-4 pt-2">
-        <div className="h-11 w-full rounded-xl bg-foreground/10 animate-pulse" />
-      </div>
-    </div>
-  );
-}
-
-export async function AppSidebar({
-  ...props
-}: React.ComponentProps<typeof Sidebar>) {
-  const { profile } = await getPortfolioData();
-  const sidebarProfile: ChatProfile = {
-    firstName: profile.firstName,
-    lastName: profile.lastName,
-    headline: profile.headline,
-    shortBio: profile.shortBio,
-    location: profile.location,
-    availability: profile.availability,
-    yearsOfExperience: profile.yearsOfExperience,
-    socialLinks: profile.socialLinks,
-    stats: profile.stats,
-  };
-
+/**
+ * Chat shell only — no portfolio data on the initial RSC tree (audit v5).
+ * Profile for chat is fetched client-side when the sidebar first opens.
+ */
+export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar {...props}>
       <SidebarContent className="h-full w-full">
-        <Suspense fallback={<SidebarSkeleton />}>
-          <ChatSidebarSection profile={sidebarProfile} />
-        </Suspense>
+        <ChatSidebarSection />
       </SidebarContent>
       <SidebarRail />
     </Sidebar>

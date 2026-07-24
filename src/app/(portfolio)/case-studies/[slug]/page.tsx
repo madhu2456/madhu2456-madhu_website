@@ -13,6 +13,7 @@ import { ImpactMetricStrip } from "@/components/ImpactMetricStrip";
 import { JsonLdScript } from "@/components/JsonLdScript";
 import { LastUpdated } from "@/components/LastUpdated";
 import { ShareButtons } from "@/components/ShareButtons";
+import { slimFooterProfile, slimFooterProjects } from "@/lib/home-page-data";
 import {
   normalizeImageSource,
   shouldUseUnoptimizedImage,
@@ -237,7 +238,10 @@ export default async function CaseStudyPage({
 
   return (
     <div className="flex flex-col min-h-screen bg-[#050505]">
-      <Header profile={profile} navigationItems={sortedNavigationItems} />
+      <Header
+        profile={{ firstName: profile.firstName, lastName: profile.lastName }}
+        navigationItems={sortedNavigationItems}
+      />
       <main
         id="main-content"
         className="mx-auto w-[min(1100px,92%)] pt-32 pb-24"
@@ -551,7 +555,15 @@ export default async function CaseStudyPage({
           </section>
         ) : null}
 
-        <AuthorBio profile={profile} className="mt-12" />
+        <AuthorBio
+          profile={{
+            firstName: profile.firstName,
+            lastName: profile.lastName,
+            headline: profile.headline,
+            shortBio: profile.shortBio,
+          }}
+          className="mt-12"
+        />
 
         <ShareButtons
           url={caseStudyUrl}
@@ -565,9 +577,9 @@ export default async function CaseStudyPage({
         />
       </main>
       <Footer
-        profile={profile}
+        profile={slimFooterProfile(profile)}
         navigationItems={sortedNavigationItems}
-        projects={sortedProjects}
+        projects={slimFooterProjects(sortedProjects)}
       />
     </div>
   );

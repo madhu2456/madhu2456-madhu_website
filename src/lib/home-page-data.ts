@@ -228,3 +228,31 @@ export function slimHomeSkills(skills: SkillItem[]): SkillItem[] {
   // Skills are already small; keep as-is
   return skills;
 }
+
+/** Footer only needs brand contact + case-study link labels. */
+export type FooterProfile = Pick<
+  Profile,
+  "firstName" | "lastName" | "email" | "location" | "socialLinks"
+>;
+
+export type FooterProjectLink = Pick<ProjectItem, "slug" | "title">;
+
+export function slimFooterProfile(profile: Profile): FooterProfile {
+  return {
+    firstName: profile.firstName,
+    lastName: profile.lastName,
+    email: profile.email,
+    location: profile.location,
+    socialLinks: profile.socialLinks,
+  };
+}
+
+export function slimFooterProjects(
+  projects: ProjectItem[],
+  max = 3,
+): FooterProjectLink[] {
+  return projects.slice(0, max).map((p) => ({
+    slug: p.slug,
+    title: p.title,
+  }));
+}

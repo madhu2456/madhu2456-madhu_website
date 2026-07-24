@@ -18,6 +18,7 @@ import { LastUpdated } from "@/components/LastUpdated";
 import { SafeEmailLink } from "@/components/SafeEmailLink";
 import { TrackedLink } from "@/components/TrackedLink";
 import { buildDiscoveryKeywords } from "@/lib/discovery-keywords";
+import { slimFooterProfile, slimFooterProjects } from "@/lib/home-page-data";
 import { resolveAbsoluteImageUrl } from "@/lib/image-source";
 import { buildPersonSchema } from "@/lib/jsonld";
 import { EXTERNAL_REL, IDENTITY_EXTERNAL_REL } from "@/lib/link-rel";
@@ -211,7 +212,10 @@ export default async function ProfilePage() {
   return (
     <div className="flex flex-col min-h-screen">
       <JsonLdScript data={coreEntityGraph} />
-      <Header profile={profile} navigationItems={sortedNavigationItems} />
+      <Header
+        profile={{ firstName: profile.firstName, lastName: profile.lastName }}
+        navigationItems={sortedNavigationItems}
+      />
 
       <main id="main-content" className="flex-1 px-6 py-20 bg-background/50">
         <div className="container mx-auto max-w-4xl space-y-12">
@@ -742,9 +746,9 @@ export default async function ProfilePage() {
         </div>
       </main>
       <Footer
-        profile={profile}
+        profile={slimFooterProfile(profile)}
         navigationItems={sortedNavigationItems}
-        projects={sortedProjects}
+        projects={slimFooterProjects(sortedProjects)}
       />
     </div>
   );

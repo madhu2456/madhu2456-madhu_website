@@ -447,7 +447,7 @@ export const COMMERCIAL_LANDERS: CommercialLander[] = [
     baseServiceSlug: "ai-agent-development",
     title:
       "AI Automation Consultant — Turn Repetitive Ops Into Evaluated Workflows",
-    seoTitle: "AI Automation Consultant — Agents & Workflows | Madhu Dadi",
+    seoTitle: "AI Automation Consultant — Agents & RAG | Madhu Dadi",
     seoDescription:
       "AI automation consultant for agent workflows, RAG, and internal copilots. Production builds with evals and monitoring. Select consulting, India & remote.",
     heroEyebrow: "AI automation · Agents · Ops",

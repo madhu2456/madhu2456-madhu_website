@@ -136,7 +136,7 @@ export function Header({ profile, navigationItems }: HeaderProps) {
           <div className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full border border-border/80 bg-surface shadow-inner transition-all duration-300 group-hover:scale-105 group-hover:border-primary/30">
             <Image
               src="/new-ui/logo.png"
-              alt="Madhu Dadi"
+              alt=""
               width={32}
               height={32}
               priority

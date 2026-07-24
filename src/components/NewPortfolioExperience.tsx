@@ -109,7 +109,10 @@ export function NewPortfolioExperience({
 
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
-      <Header profile={profile} navigationItems={navigationItems} />
+      <Header
+        profile={{ firstName: profile.firstName, lastName: profile.lastName }}
+        navigationItems={navigationItems}
+      />
       <StickyJumpNav items={HOME_JUMP_NAV} />
       <main id="main-content" className="min-h-screen">
         <Hero
@@ -140,8 +143,17 @@ export function NewPortfolioExperience({
       </main>
       <Footer
         navigationItems={navigationItems}
-        profile={profile}
-        projects={projects}
+        profile={{
+          firstName: profile.firstName,
+          lastName: profile.lastName,
+          email: profile.email,
+          location: profile.location,
+          socialLinks: profile.socialLinks,
+        }}
+        projects={projects.map((project) => ({
+          slug: project.slug,
+          title: project.title,
+        }))}
       />
     </div>
   );
@@ -371,7 +383,12 @@ function HowIWork() {
         discovery—no public rate card. Employer IP and conflict policies are
         respected.
       </p>
-      <div className="overflow-x-auto rounded-2xl border border-border bg-surface/40 shadow-card">
+      <section
+        // biome-ignore lint/a11y/noNoninteractiveTabindex: axe scrollable-region-focusable (mobile) needs keyboard focus on overflow region
+        tabIndex={0}
+        aria-label="Engagement phases, what you get in each phase, and typical timelines"
+        className="overflow-x-auto rounded-2xl border border-border bg-surface/40 shadow-card focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+      >
         <table className="w-full min-w-[36rem] border-collapse text-left text-sm">
           <caption className="sr-only">
             Engagement phases, what you get in each phase, and typical timelines
@@ -420,7 +437,7 @@ function HowIWork() {
             ))}
           </tbody>
         </table>
-      </div>
+      </section>
       <p className="mt-5 text-sm text-muted-foreground">
         <Link
           href="/services/#engagement-model"

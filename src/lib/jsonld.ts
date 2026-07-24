@@ -1,5 +1,22 @@
 import { normalizeKeywordList } from "@/lib/discovery-keywords";
 
+/** Cap free-text schema fields for HTML payload (audit v5). */
+function truncateSchemaText(
+  value: string | null | undefined,
+  max = 160,
+): string | undefined {
+  if (!value) return undefined;
+  const normalized = value.replace(/\s+/g, " ").trim();
+  if (normalized.length <= max) return normalized;
+  const slice = normalized.slice(0, max - 1);
+  const boundary = slice.lastIndexOf(" ");
+  const clipped = (boundary > 80 ? slice.slice(0, boundary) : slice).replace(
+    /[,\s;:.-]+$/,
+    "",
+  );
+  return `${clipped}…`;
+}
+
 type SocialLinks = {
   github?: string | null;
   linkedin?: string | null;
@@ -229,7 +246,7 @@ export function buildPersonSchema({
                 ? `${serviceUrl}#offer`
                 : `${siteUrl}#offer-${i + 1}`,
               name: s.title,
-              description: s.shortDescription ?? undefined,
+              description: truncateSchemaText(s.shortDescription),
               url: serviceUrl,
               availability: "https://schema.org/InStock",
               ...(hasPrice && {
@@ -645,7 +662,7 @@ export function buildServicesListSchema({
             : `${siteUrl}services/`,
           provider: { "@id": `${siteUrl}#person` },
           ...(service.shortDescription && {
-            description: service.shortDescription,
+            description: truncateSchemaText(service.shortDescription),
           }),
           ...(hasPrice && {
             offers: {
@@ -698,9 +715,8 @@ export function buildCertificationsListSchema({
         "@id": `${siteUrl}#credential-${i + 1}`,
         name: certification.name,
         credentialCategory: "Professional Certification",
-        ...(certification.description && {
-          description: certification.description,
-        }),
+        // Omit long free-text descriptions from list schema (audit v5 HTML size).
+        // Name + issuer + ids/urls remain for verification.
         ...(certification.issueDate && {
           dateCreated: certification.issueDate,
         }),

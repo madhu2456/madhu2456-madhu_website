@@ -9,6 +9,7 @@ import { Header } from "@/components/Header";
 import { ImpactMetricStrip } from "@/components/ImpactMetricStrip";
 import { JsonLdScript } from "@/components/JsonLdScript";
 import { SeoStructuredData } from "@/components/SeoStructuredData";
+import { slimFooterProfile, slimFooterProjects } from "@/lib/home-page-data";
 import {
   normalizeImageSource,
   shouldUseUnoptimizedImage,
@@ -101,7 +102,10 @@ export default async function CaseStudiesPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <SeoStructuredData nodes={["ProjectsList"]} />
-      <Header profile={profile} navigationItems={sortedNavigationItems} />
+      <Header
+        profile={{ firstName: profile.firstName, lastName: profile.lastName }}
+        navigationItems={sortedNavigationItems}
+      />
       <main
         id="main-content"
         className="flex-1 mx-auto max-w-6xl w-[92%] pt-32 pb-24"
@@ -359,8 +363,8 @@ export default async function CaseStudiesPage() {
         </section>
       </main>
       <Footer
-        profile={profile}
-        projects={sortedProjects}
+        profile={slimFooterProfile(profile)}
+        projects={slimFooterProjects(sortedProjects)}
         navigationItems={sortedNavigationItems}
       />
     </div>

@@ -4,6 +4,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { SafeEmailLink } from "@/components/SafeEmailLink";
 import { SeoStructuredData } from "@/components/SeoStructuredData";
+import { slimFooterProfile, slimFooterProjects } from "@/lib/home-page-data";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { siteLanguageAlternates } from "@/lib/seo/hreflang";
 import { resolveSiteUrl } from "@/lib/site-url";
@@ -60,7 +61,10 @@ export default async function PrivacyPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <SeoStructuredData nodes={["Breadcrumb"]} />
-      <Header profile={profile} navigationItems={sortedNavigationItems} />
+      <Header
+        profile={{ firstName: profile.firstName, lastName: profile.lastName }}
+        navigationItems={sortedNavigationItems}
+      />
 
       <main id="main-content" className="flex-1 px-6 py-28 bg-background/50">
         <div className="container mx-auto max-w-3xl space-y-8">
@@ -70,7 +74,12 @@ export default async function PrivacyPage() {
             Privacy Policy
           </h1>
 
-          <div className="overflow-x-auto rounded-xl border border-border bg-surface/20">
+          <section
+            // biome-ignore lint/a11y/noNoninteractiveTabindex: axe scrollable-region-focusable (mobile)
+            tabIndex={0}
+            aria-label="Privacy policy summary details"
+            className="overflow-x-auto rounded-xl border border-border bg-surface/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          >
             <table className="min-w-full text-sm">
               <tbody className="divide-y divide-border/60">
                 <tr>
@@ -124,7 +133,7 @@ export default async function PrivacyPage() {
                 </tr>
               </tbody>
             </table>
-          </div>
+          </section>
 
           <section className="space-y-4">
             <h2 className="text-xl font-semibold">
@@ -244,7 +253,12 @@ export default async function PrivacyPage() {
               was collected, or longer when a legal obligation requires it.
               Default retention periods for this portfolio site:
             </p>
-            <div className="overflow-x-auto rounded-xl border border-border bg-surface/20">
+            <section
+              // biome-ignore lint/a11y/noNoninteractiveTabindex: axe scrollable-region-focusable (mobile)
+              tabIndex={0}
+              aria-label="Data retention periods"
+              className="overflow-x-auto rounded-xl border border-border bg-surface/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
               <table className="min-w-full text-sm">
                 <thead>
                   <tr className="border-b border-border/60 text-left">
@@ -335,7 +349,7 @@ export default async function PrivacyPage() {
                   </tr>
                 </tbody>
               </table>
-            </div>
+            </section>
           </section>
 
           <section className="space-y-4">
@@ -465,9 +479,9 @@ export default async function PrivacyPage() {
       </main>
 
       <Footer
-        profile={profile}
+        profile={slimFooterProfile(profile)}
         navigationItems={sortedNavigationItems}
-        projects={sortedProjects}
+        projects={slimFooterProjects(sortedProjects)}
       />
     </div>
   );

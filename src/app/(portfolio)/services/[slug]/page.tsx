@@ -18,6 +18,7 @@ import { PageToc, type PageTocItem } from "@/components/PageToc";
 import { RelatedReading } from "@/components/RelatedReading";
 import { ServiceIcon } from "@/components/ServiceIcon";
 import { TrackedLink } from "@/components/TrackedLink";
+import { slimFooterProfile, slimFooterProjects } from "@/lib/home-page-data";
 import { getPortfolioData } from "@/lib/portfolio-data";
 import { getCaseStudyLinkLabel } from "@/lib/project-display";
 import { siteLanguageAlternates } from "@/lib/seo/hreflang";
@@ -294,7 +295,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           "@graph": [serviceSchema, webpageSchema, breadcrumbSchema],
         }}
       />
-      <Header profile={profile} navigationItems={sortedNavigationItems} />
+      <Header
+        profile={{ firstName: profile.firstName, lastName: profile.lastName }}
+        navigationItems={sortedNavigationItems}
+      />
 
       <main id="main-content" className="flex-1 px-6 py-28 bg-background/50">
         <div className="container mx-auto max-w-4xl space-y-12">
@@ -776,7 +780,15 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             </div>
           )}
 
-          <AuthorBio profile={profile} className="mt-6" />
+          <AuthorBio
+            profile={{
+              firstName: profile.firstName,
+              lastName: profile.lastName,
+              headline: profile.headline,
+              shortBio: profile.shortBio,
+            }}
+            className="mt-6"
+          />
 
           {/* Conversion Section */}
           <section
@@ -841,9 +853,9 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
       </main>
 
       <Footer
-        profile={profile}
+        profile={slimFooterProfile(profile)}
         navigationItems={sortedNavigationItems}
-        projects={sortedProjects}
+        projects={slimFooterProjects(sortedProjects)}
       />
     </div>
   );

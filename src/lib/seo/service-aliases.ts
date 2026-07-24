@@ -207,7 +207,7 @@ export const INDIA_SERVICE_ALIASES: IndiaServiceAlias[] = [
     slug: "ai-consultant-hyderabad",
     baseServiceSlug: "rag-consultant-india",
     title: "AI Consultant in Hyderabad — RAG, Agents, GA4",
-    seoTitle: "AI Consultant in Hyderabad | RAG & Analytics | Madhu Dadi",
+    seoTitle: "AI Consultant Hyderabad — RAG & Analytics | Madhu Dadi",
     seoDescription:
       "AI consultant for Hyderabad teams: production RAG, LLM apps, agents, and GA4 analytics. Visakhapatnam-based, remote-first, on-site kickoffs on request.",
     heroEyebrow: "Hyderabad · AI Consulting",

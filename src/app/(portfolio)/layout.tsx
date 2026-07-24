@@ -1,10 +1,8 @@
 import type { Metadata, Viewport } from "next";
 
-import { AppSidebar } from "@/components/app-sidebar";
 import { ClientChrome } from "@/components/ClientChrome";
 import { DeferredGTM } from "@/components/DeferredGTM";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { WebVitals } from "@/components/WebVitals";
 import { geistMono, inter } from "@/lib/fonts";
 
@@ -229,13 +227,7 @@ export default async function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          <SidebarProvider defaultOpen={false}>
-            <SidebarInset>{children}</SidebarInset>
-
-            <AppSidebar side="right" />
-
-            <ClientChrome />
-          </SidebarProvider>
+          <ClientChrome>{children}</ClientChrome>
         </ThemeProvider>
       </body>
     </html>

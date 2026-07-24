@@ -7,6 +7,7 @@ import { Header } from "@/components/Header";
 import { JsonLdScript } from "@/components/JsonLdScript";
 import { LastUpdated } from "@/components/LastUpdated";
 import { PageToc, type PageTocItem } from "@/components/PageToc";
+import { slimFooterProfile, slimFooterProjects } from "@/lib/home-page-data";
 import type { PortfolioData } from "@/lib/portfolio-data";
 import { resolveSiteUrl } from "@/lib/site-url";
 
@@ -102,7 +103,10 @@ export function GuideArticle({ guide, data }: GuideArticleProps) {
   return (
     <div className="flex flex-col min-h-screen">
       <JsonLdScript data={graph} />
-      <Header profile={profile} navigationItems={sortedNavigationItems} />
+      <Header
+        profile={{ firstName: profile.firstName, lastName: profile.lastName }}
+        navigationItems={sortedNavigationItems}
+      />
 
       <main id="main-content" className="flex-1 px-6 py-28 bg-background/50">
         <article className="container mx-auto max-w-3xl space-y-10">
@@ -254,7 +258,14 @@ export function GuideArticle({ guide, data }: GuideArticleProps) {
             </ul>
           </section>
 
-          <AuthorBio profile={profile} />
+          <AuthorBio
+            profile={{
+              firstName: profile.firstName,
+              lastName: profile.lastName,
+              headline: profile.headline,
+              shortBio: profile.shortBio,
+            }}
+          />
 
           <section
             id="guide-cta"
@@ -280,9 +291,9 @@ export function GuideArticle({ guide, data }: GuideArticleProps) {
       </main>
 
       <Footer
-        profile={profile}
+        profile={slimFooterProfile(profile)}
         navigationItems={sortedNavigationItems}
-        projects={sortedProjects}
+        projects={slimFooterProjects(sortedProjects)}
       />
     </div>
   );

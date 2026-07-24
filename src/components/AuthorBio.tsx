@@ -1,8 +1,14 @@
 import Link from "next/link";
-import type { Profile } from "@/lib/portfolio-data";
+
+export type AuthorBioProfile = {
+  firstName?: string | null;
+  lastName?: string | null;
+  headline?: string | null;
+  shortBio?: string | null;
+};
 
 type AuthorBioProps = {
-  profile: Profile;
+  profile: AuthorBioProfile;
   /** Optional short override; defaults to profile.shortBio */
   blurb?: string;
   className?: string;

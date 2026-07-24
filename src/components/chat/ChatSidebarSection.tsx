@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useContext, useEffect, useState } from "react";
+import { getChatProfile } from "@/app/actions/get-chat-profile";
 import { SidebarContext } from "@/components/ui/sidebar";
 import type { ChatProfile } from "./chat-profile";
 
@@ -9,14 +10,12 @@ const ChatWrapper = dynamic(() => import("./ChatWrapper"), {
   ssr: false,
 });
 
-export function ChatSidebarSection({
-  profile,
-}: {
-  profile: ChatProfile | null;
-}) {
+export function ChatSidebarSection() {
   const [mounted, setMounted] = useState(false);
   const sidebarContext = useContext(SidebarContext);
   const [hasOpened, setHasOpened] = useState(false);
+  const [profile, setProfile] = useState<ChatProfile | null>(null);
+  const [profileError, setProfileError] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -33,11 +32,38 @@ export function ChatSidebarSection({
     }
   }, [isOpen, hasOpened]);
 
-  // Render absolutely nothing on the server or when the sidebar has not been opened yet.
-  // This completely eliminates any early placeholder text from the DOM, optimizing indexing priority for primary content.
+  useEffect(() => {
+    if (!hasOpened || profile || profileError) return;
+    let cancelled = false;
+    getChatProfile()
+      .then((data) => {
+        if (!cancelled) setProfile(data);
+      })
+      .catch(() => {
+        if (!cancelled) setProfileError(true);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [hasOpened, profile, profileError]);
+
+  // Nothing on the server or until the sidebar has been opened once.
   if (!mounted || !hasOpened) {
     return null;
   }
 
-  return <ChatWrapper profile={profile} />;
+  if (!profile && !profileError) {
+    return (
+      <div
+        role="status"
+        className="flex h-full w-full items-center justify-center"
+        aria-busy="true"
+        aria-label="Loading assistant"
+      >
+        <div className="h-5 w-5 animate-spin rounded-full border-2 border-primary/20 border-t-primary" />
+      </div>
+    );
+  }
+
+  return <ChatWrapper profile={profileError ? null : profile} />;
 }
