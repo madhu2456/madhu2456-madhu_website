@@ -89,9 +89,11 @@ test.describe("Portfolio Audit UI Checks", () => {
     await expect(
       mobileNav.getByRole("link", { name: "Resume" }),
     ).toHaveAttribute("href", "/resume.pdf");
-    await expect(
-      mobileNav.getByRole("link", { name: "Contact" }),
-    ).toHaveAttribute("href", "/contact/#intent=full-time");
+    // Dual-path: nav item + primary CTA both go to /contact/ (not full-time-only hash)
+    const contactLinks = mobileNav.getByRole("link", { name: "Contact" });
+    await expect(contactLinks).toHaveCount(2);
+    await expect(contactLinks.nth(0)).toHaveAttribute("href", "/contact/");
+    await expect(contactLinks.nth(1)).toHaveAttribute("href", "/contact/");
   });
 
   test("Profile and Credentials pages semantic HTML structure", async ({
