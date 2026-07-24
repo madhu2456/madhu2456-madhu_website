@@ -1,13 +1,10 @@
-import {
-  IconArrowLeft,
-  IconArrowRight,
-  IconExternalLink,
-} from "@tabler/icons-react";
+import { IconArrowRight, IconExternalLink } from "@tabler/icons-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AuthorBio } from "@/components/AuthorBio";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { CitationBox } from "@/components/CitationBox";
 import { Footer } from "@/components/Footer";
 import { FormattedText } from "@/components/FormattedText";
@@ -247,23 +244,22 @@ export default async function CaseStudyPage({
       >
         <JsonLdScript data={graph} />
 
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-8">
-          <Link
-            href="/case-studies/"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-          >
-            <IconArrowLeft className="h-4 w-4" aria-hidden />
-            All case studies
-          </Link>
-          {project.relatedServiceSlug && (
+        <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <Breadcrumb
+            items={[
+              { label: "Case Studies", href: "/case-studies/" },
+              { label: project.title },
+            ]}
+          />
+          {project.relatedServiceSlug ? (
             <Link
               href={`/services/${project.relatedServiceSlug}/`}
-              className="inline-flex items-center gap-2 text-sm text-primary underline-offset-4 hover:text-primary/80 hover:underline"
+              className="inline-flex shrink-0 items-center gap-2 text-sm text-primary underline-offset-4 hover:text-primary/80 hover:underline"
             >
               Related service page
               <IconArrowRight className="h-4 w-4" aria-hidden />
             </Link>
-          )}
+          ) : null}
         </div>
 
         {project.category ? (

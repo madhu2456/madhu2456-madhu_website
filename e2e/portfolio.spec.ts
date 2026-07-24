@@ -90,7 +90,7 @@ test.describe("Portfolio Audit UI Checks", () => {
       mobileNav.getByRole("link", { name: "Resume" }),
     ).toHaveAttribute("href", "/resume.pdf");
     await expect(
-      mobileNav.getByRole("link", { name: "Hire me" }),
+      mobileNav.getByRole("link", { name: "Contact" }),
     ).toHaveAttribute("href", "/contact/#intent=full-time");
   });
 

@@ -265,7 +265,7 @@ export const COMMERCIAL_LANDERS: CommercialLander[] = [
     title: "Attribution Modeling Consultant",
     seoTitle: "Attribution Modeling Consultant — Post-Cookie | Madhu Dadi",
     seoDescription:
-      "Attribution consultant for post-cookie stacks: GA4 paths, incrementality, MMM overlays. Independent; India & remote.",
+      "Attribution modeling consultant for post-cookie stacks: GA4 path models, incrementality tests, and MMM overlays—not last-click alone. India & remote.",
     heroEyebrow: "Attribution · GA4 · Incrementality",
     shortDescription:
       "Independent attribution consulting after cookies and iOS: GA4 path models, warehouse multi-touch tables, and when to add MMM or experiments—not a single last-click number.",

@@ -1,6 +1,7 @@
-import { IconArrowRight, IconChevronLeft } from "@tabler/icons-react";
+import { IconArrowRight } from "@tabler/icons-react";
 import Link from "next/link";
 import { AuthorBio } from "@/components/AuthorBio";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JsonLdScript } from "@/components/JsonLdScript";
@@ -111,15 +112,12 @@ export function CommercialServiceLander({
 
       <main id="main-content" className="flex-1 px-6 py-28 bg-background/50">
         <div className="container mx-auto max-w-4xl space-y-12">
-          <div>
-            <Link
-              href="/services/"
-              className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors"
-            >
-              <IconChevronLeft className="h-4 w-4" aria-hidden /> Back to
-              Services
-            </Link>
-          </div>
+          <Breadcrumb
+            items={[
+              { label: "Services", href: "/services/" },
+              { label: lander.title },
+            ]}
+          />
 
           <section className="relative rounded-2xl border border-border bg-surface/30 p-8 md:p-10">
             <p className="text-xs font-semibold tracking-[0.18em] text-primary uppercase">

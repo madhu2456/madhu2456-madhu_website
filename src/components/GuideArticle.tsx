@@ -1,6 +1,7 @@
-import { IconArrowRight, IconChevronLeft } from "@tabler/icons-react";
+import { IconArrowRight } from "@tabler/icons-react";
 import Link from "next/link";
 import { AuthorBio } from "@/components/AuthorBio";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JsonLdScript } from "@/components/JsonLdScript";
@@ -85,7 +86,7 @@ export function GuideArticle({ guide, data }: GuideArticleProps) {
             "@type": "ListItem",
             position: 2,
             name: "Guides",
-            item: `${siteUrl}guides/ga4-bigquery/`,
+            item: `${siteUrl}guides/`,
           },
           {
             "@type": "ListItem",
@@ -105,14 +106,12 @@ export function GuideArticle({ guide, data }: GuideArticleProps) {
 
       <main id="main-content" className="flex-1 px-6 py-28 bg-background/50">
         <article className="container mx-auto max-w-3xl space-y-10">
-          <div>
-            <Link
-              href="/services/"
-              className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors"
-            >
-              <IconChevronLeft className="h-4 w-4" aria-hidden /> Services
-            </Link>
-          </div>
+          <Breadcrumb
+            items={[
+              { label: "Guides", href: "/guides/" },
+              { label: guide.title },
+            ]}
+          />
 
           <header className="space-y-4">
             <p className="text-xs font-semibold tracking-[0.18em] text-primary uppercase">
@@ -133,8 +132,7 @@ export function GuideArticle({ guide, data }: GuideArticleProps) {
             </div>
           </header>
 
-          <PageToc items={tocItems} />
-
+          {/* Answer-first (AEO): definition before TOC / narrative sections */}
           <section
             id="direct-answer"
             className="scroll-mt-28 rounded-2xl border border-primary/20 bg-primary/5 p-6"
@@ -146,6 +144,8 @@ export function GuideArticle({ guide, data }: GuideArticleProps) {
               {guide.directAnswer}
             </p>
           </section>
+
+          <PageToc items={tocItems} />
 
           {guide.sections.map((section) => (
             <section
@@ -196,7 +196,12 @@ export function GuideArticle({ guide, data }: GuideArticleProps) {
                 </ul>
               ) : null}
               {section.table ? (
-                <div className="overflow-x-auto rounded-xl border border-border/60">
+                <section
+                  // biome-ignore lint/a11y/noNoninteractiveTabindex: axe scrollable-region-focusable (mobile) needs keyboard focus on overflow region
+                  tabIndex={0}
+                  aria-label={section.table.caption}
+                  className="overflow-x-auto rounded-xl border border-border/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                >
                   <table className="min-w-full text-sm">
                     <caption className="sr-only">
                       {section.table.caption}
@@ -225,7 +230,7 @@ export function GuideArticle({ guide, data }: GuideArticleProps) {
                       ))}
                     </tbody>
                   </table>
-                </div>
+                </section>
               ) : null}
             </section>
           ))}

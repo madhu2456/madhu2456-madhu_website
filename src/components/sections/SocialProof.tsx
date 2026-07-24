@@ -1,18 +1,20 @@
 import { IconAward, IconExternalLink, IconQuote } from "@tabler/icons-react";
 import Link from "next/link";
 import { Section } from "@/components/Section";
-import type { PageContent, ProjectItem } from "@/lib/portfolio-data";
+import type { HomePageContent, HomeProjectCard } from "@/lib/home-page-data";
 import { getCaseStudyLinkLabel } from "@/lib/project-display";
 
 type Testimonial = NonNullable<
-  NonNullable<PageContent["home"]["testimonials"]>[number]
+  NonNullable<HomePageContent["home"]["testimonials"]>[number]
 >;
 
-type Award = PageContent["credentials"]["awards"][number];
+type Award = NonNullable<
+  NonNullable<HomePageContent["credentials"]>["awards"]
+>[number];
 
 type SocialProofProps = {
   awards: Award[];
-  projects: ProjectItem[];
+  projects: HomeProjectCard[];
   testimonials?: Testimonial[] | null;
   linkedInUrl?: string | null;
 };

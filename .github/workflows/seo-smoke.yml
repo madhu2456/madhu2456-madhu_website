@@ -21,3 +21,11 @@ jobs:
         run: node scripts/seo-smoke-test.mjs
         env:
           SITE_URL: "https://madhudadi.in"
+
+      - name: Validate live JSON-LD on production pages
+        run: node scripts/validate-portfolio-jsonld.mjs "https://madhudadi.in"
+
+      - name: Bot access probe (key paths + crawler UAs)
+        run: node scripts/bot-access-probe.mjs
+        env:
+          SITE_URL: "https://madhudadi.in"

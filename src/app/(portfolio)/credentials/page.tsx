@@ -2,7 +2,6 @@ import {
   IconAward,
   IconBriefcase,
   IconCertificate,
-  IconChevronLeft,
   IconChevronRight,
   IconDownload,
   IconExternalLink,
@@ -15,6 +14,7 @@ import {
 } from "@tabler/icons-react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { SeoStructuredData } from "@/components/SeoStructuredData";
@@ -79,15 +79,7 @@ export default async function CredentialsPage() {
 
       <main id="main-content" className="flex-1 px-6 py-28 bg-background/50">
         <div className="container mx-auto max-w-4xl space-y-16">
-          {/* Back Button */}
-          <div>
-            <Link
-              href="/"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
-            >
-              <IconChevronLeft className="h-4 w-4" /> Back to Home
-            </Link>
-          </div>
+          <Breadcrumb items={[{ label: "Credentials" }]} />
 
           {/* Hero Header Section */}
           <section className="relative rounded-3xl border border-border bg-surface/30 p-8 md:p-12 shadow-card backdrop-blur-md overflow-hidden text-center space-y-4">

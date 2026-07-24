@@ -10,6 +10,14 @@ export type IndiaServiceFaq = {
   answer: string;
 };
 
+export type IndiaCityProof = {
+  /** City-specific H2 (audit: reduce near-duplicate city landers) */
+  h2: string;
+  bullets: string[];
+  relatedCaseStudyHref?: string;
+  relatedCaseStudyLabel?: string;
+};
+
 export type IndiaServiceAlias = {
   /** URL slug under /services/ */
   slug: string;
@@ -26,6 +34,8 @@ export type IndiaServiceAlias = {
   /** India / city positioning bullets */
   whyIndia: string[];
   locationFocus: string[];
+  /** Optional unique city proof block (city landers only) */
+  cityProof?: IndiaCityProof;
   faqs: IndiaServiceFaq[];
   /** Contact form intent hash */
   contactIntent: string;
@@ -158,6 +168,16 @@ export const INDIA_SERVICE_ALIASES: IndiaServiceAlias[] = [
       "Hyderabad (professional experience)",
       "Remote India & worldwide",
     ],
+    cityProof: {
+      h2: "Working from Visakhapatnam (home base)",
+      bullets: [
+        "Only city page that matches a real home base — no invented local office elsewhere.",
+        "Hybrid discovery and kickoffs in Vizag when they unblock stakeholders; day-to-day build stays remote with written specs.",
+        "Same production stack as every other city page: RAG, agents, LLM apps, GA4/BigQuery — scoped select consulting only.",
+      ],
+      relatedCaseStudyHref: "/case-studies/technical-blog/",
+      relatedCaseStudyLabel: "Python & AI Learning Platform case study",
+    },
     faqs: [
       {
         question: "Are you available for on-site work in Visakhapatnam?",
@@ -207,6 +227,16 @@ export const INDIA_SERVICE_ALIASES: IndiaServiceAlias[] = [
       "Visakhapatnam (home base)",
       "Remote India & worldwide",
     ],
+    cityProof: {
+      h2: "Working with Hyderabad product teams & GCCs",
+      bullets: [
+        "Professional experience in Hyderabad — city-intent positioning is experience-based, not a fake storefront.",
+        "Common pattern: GCC or product squad needs a thin vertical slice (RAG, agents, or measurement) with evals and handover docs.",
+        "On-site kickoffs in Hyderabad when multi-stakeholder workshops unblock scope; build continues remote-first.",
+      ],
+      relatedCaseStudyHref: "/case-studies/adticks/",
+      relatedCaseStudyLabel: "Adticks AI visibility case study",
+    },
     faqs: [
       {
         question: "Do you work with Hyderabad startups and GCCs?",
@@ -256,6 +286,16 @@ export const INDIA_SERVICE_ALIASES: IndiaServiceAlias[] = [
       "Visakhapatnam (home base)",
       "Remote India & worldwide",
     ],
+    cityProof: {
+      h2: "Working with Bengaluru startups & product orgs",
+      bullets: [
+        "Series A–C pattern: fractional AI capacity while hiring the first in-house ML/AI engineer.",
+        "Ship a production slice (RAG, agent workflow, or measurement pipeline) with evals — not a prototype that dies in a demo.",
+        "Optional hiring support: JD input and technical screening so the new hire inherits a running system and docs.",
+      ],
+      relatedCaseStudyHref: "/case-studies/adticks/",
+      relatedCaseStudyLabel: "Adticks SERP & AI visibility platform",
+    },
     faqs: [
       {
         question: "Do you work with Series A/B startups in Bengaluru?",
@@ -305,6 +345,16 @@ export const INDIA_SERVICE_ALIASES: IndiaServiceAlias[] = [
       "Visakhapatnam (home base)",
       "Remote India & worldwide",
     ],
+    cityProof: {
+      h2: "Working with Chennai product & enterprise teams",
+      bullets: [
+        "Enterprise and product orgs that need async-first delivery with India business-day overlap and written handover.",
+        "Typical asks: internal knowledge RAG, structured LLM apps, and measurement cleanup before larger AI bets.",
+        "On-site discovery in Chennai when multi-stakeholder alignment is the bottleneck; implementation stays remote-documented.",
+      ],
+      relatedCaseStudyHref: "/case-studies/technical-blog/",
+      relatedCaseStudyLabel: "RAG learning platform case study",
+    },
     faqs: [
       {
         question: "What AI work do you take in Chennai?",
@@ -354,6 +404,16 @@ export const INDIA_SERVICE_ALIASES: IndiaServiceAlias[] = [
       "Visakhapatnam (home base)",
       "Remote India & worldwide",
     ],
+    cityProof: {
+      h2: "Working with Mumbai brands, D2C & media teams",
+      bullets: [
+        "Growth and brand teams that need engineering-led measurement (GA4/BigQuery, attribution, MMM) plus selective AI builds.",
+        "Default sequence: fix collection and decision tables before large generative AI spend — finance-readable outcomes.",
+        "On-site executive or agency workshops in Mumbai when scoped; day-to-day delivery remote-first with async specs.",
+      ],
+      relatedCaseStudyHref: "/case-studies/adticks/",
+      relatedCaseStudyLabel: "Adticks AI visibility & SERP intelligence",
+    },
     faqs: [
       {
         question: "Do you work with Mumbai D2C and media teams?",

@@ -14,6 +14,7 @@ export async function GET(request: Request) {
     sortedProjects,
     sortedServices,
     pageContent,
+    profile,
   } = await getPortfolioData();
   const siteUrl = resolveSiteUrl().replace(/\/$/, "");
   const lastModifiedAt = portfolioLastUpdatedAt || "2026-06-06T00:00:00.000Z";
@@ -27,10 +28,13 @@ export async function GET(request: Request) {
     .join("\n");
 
   const caseStudyLines = sortedProjects
-    .map(
-      (p) =>
-        `- [${p.title}](${siteUrl}/case-studies/${p.slug}/): ${p.tagline || p.impactSummary || p.title}`,
-    )
+    .map((p) => {
+      const metric = p.impactMetrics?.[0];
+      const proof = metric
+        ? `${metric.value} ${metric.label}`.trim()
+        : p.impactSummary || p.tagline || p.title;
+      return `- [${p.title}](${siteUrl}/case-studies/${p.slug}/): ${proof}`;
+    })
     .join("\n");
 
   const certificationLines = sortedCertifications
@@ -42,28 +46,61 @@ export async function GET(request: Request) {
     .join("\n");
 
   const faqLines = (pageContent?.home?.faqItems || [])
+    .slice(0, 8)
+    .map((item) => `### ${item.question}\n\n${item.answer}`)
+    .join("\n\n");
+
+  const statsLines = (profile.stats || [])
+    .filter((s) => s.value && s.label)
     .slice(0, 6)
-    .map((item) => `- ${item.question}: ${item.answer}`)
+    .map((s) => {
+      const how = s.howMeasured ? ` (${s.howMeasured})` : "";
+      return `- ${s.value} — ${s.label}${how}`;
+    })
     .join("\n");
+
+  const years =
+    typeof profile.yearsOfExperience === "number" &&
+    profile.yearsOfExperience > 0
+      ? `${profile.yearsOfExperience}+ years`
+      : "9+ years";
 
   const body = `# Madhu Dadi
 
-> AI engineer and RAG & analytics consultant (Visakhapatnam, India). Optional llms.txt for tools that support the format. Canonical content is the HTML site — not a Google ranking or AI Overview file.
+> AI engineer and RAG & analytics consultant based in Visakhapatnam, India. Full-time at Novartis; select consulting only. Optional llms.txt for tools that support the format. Canonical content is the HTML site — not a Google ranking or AI Overview file.
 
-Madhu Dadi builds production AI agents, RAG systems, FastAPI/Next.js products, and marketing analytics infrastructure, with 9+ years across Novartis, redBus, GroupM (WPP), and Absolinsoft.
+## Who is Madhu Dadi?
+
+Madhu Dadi is an AI engineer and RAG & analytics consultant based in Visakhapatnam, India. He has ${years} of professional experience since May 2016 across Novartis, redBus, GroupM (WPP), and Absolinsoft (plus an MBA at IIM Amritsar, 2018–2020). He builds production AI agents, RAG systems, FastAPI/Next.js products, and marketing analytics infrastructure that connect engineering delivery to measurable business outcomes.
+
+Availability: dual path — (1) select independent consulting / contract work when capacity allows; (2) full-time opportunities. Typical reply within 24 hours via ${siteUrl}/contact/.
 
 Last updated: ${lastUpdatedStr}
 
+## Citation-friendly stats
+
+${statsLines || `- ${years} professional experience since 2016\n- Production systems across AI, analytics, and full-stack delivery`}
+
 ## Primary pages
 
-- [Home](${siteUrl}/): Identity, services overview, case studies, FAQ, contact
+- [Home](${siteUrl}/): Identity, services overview, case studies, how I work, FAQ, contact
 - [Profile](${siteUrl}/profile/): Career history, stack, credentials
 - [Services](${siteUrl}/services/): AI, RAG, agents, analytics consulting
+- [Guides](${siteUrl}/guides/): Free pillar guides (GA4/BigQuery, MMM, attribution, fractional AI, RAG, consent, AI search)
 - [Case studies](${siteUrl}/case-studies/): Production systems and architecture write-ups
 - [AI consultant in India](${siteUrl}/ai-consultant-india/): Visakhapatnam, Hyderabad, remote delivery
 - [Contact](${siteUrl}/contact/): Project inquiries (typical reply within 24 hours)
 - [Credentials](${siteUrl}/credentials/): Certifications and public proof
 - [Resume PDF](${siteUrl}/resume.pdf): Downloadable résumé
+
+## How engagements work
+
+1. Discovery — free fit check (problem, stack, constraints, success metrics).
+2. Architecture & plan — written approach before heavy build spend.
+3. Scoped build — thin vertical slice first; custom quote after discovery (no public rate card).
+4. Ship & handover — deploy notes, docs, ownership transfer.
+
+Select consulting only alongside full-time employment; employer IP and conflict policies are respected.
 
 ## Services
 
@@ -81,6 +118,7 @@ ${serviceLines || `- [Services hub](${siteUrl}/services/): Consulting and implem
 
 ## Guides (pillars)
 
+- [Guides index](${siteUrl}/guides/): All free guides in one place
 - [GA4 + BigQuery setup guide (2026)](${siteUrl}/guides/ga4-bigquery/): Export, schema, costs, campaign tables
 - [MMM in 2026 guide](${siteUrl}/guides/marketing-mix-modeling-2026/): Robyn vs Meridian vs custom, data needs
 - [Attribution after cookies](${siteUrl}/guides/attribution-after-cookies/): MTA vs MMM vs incrementality
@@ -124,7 +162,7 @@ ${certificationLines || `- [Credentials](${siteUrl}/credentials/): Full list`}
 
 ## FAQ (visible on homepage)
 
-${faqLines || "- See the FAQ section on the homepage for current questions and answers."}
+${faqLines || "See the FAQ section on the homepage for current questions and answers."}
 
 ## Optional
 

@@ -15,7 +15,7 @@ function SidebarToggle() {
 
   return (
     <div className="group fixed right-5 bottom-5 z-50 sm:right-6 sm:bottom-6">
-      {/* Secondary surface FAB: must not match primary "Hire me" terracotta */}
+      {/* Secondary surface FAB: must not match primary Contact CTA terracotta */}
       <div
         aria-hidden
         className="absolute inset-0 rounded-full bg-foreground/5 blur-xl transition-opacity group-hover:opacity-80"

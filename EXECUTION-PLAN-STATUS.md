@@ -27,6 +27,12 @@ Grounded in the July 21–22, 2026 audits. **Do not re-enable** Google-retired r
 | Pillar: Consent Mode v2 India (B3) | This cycle |
 | Pillar: AI search optimization 2026 (B3) | This cycle |
 | B2 lander openers (no invented pricing) | This cycle |
+| Homepage How I work process table | This cycle |
+| CI: QA typecheck+unit; SEO smoke JSON-LD + bot-access probe | This cycle |
+| Dual-path claims + privacy-policy redirect + robots cdn-cgi | This cycle |
+| Audit v4: logo alt, meta lens, table a11y, bare 404, guides hub | This cycle |
+| Audit v4: city ProfessionalService + cityProof + edge cache | This cycle |
+| Audit v4: disable inlineCss (external cacheable CSS) | This cycle |
 
 ## Ops / owner (not pure code)
 
@@ -38,6 +44,8 @@ Grounded in the July 21–22, 2026 audits. **Do not re-enable** Google-retired r
 6. Cal.com / booking URL if desired
 7. Turnstile keys if CAPTCHA required
 8. Manual Lighthouse mobile on 5 URLs
+9. Deploy blog nginx robots.txt (no Disallow /cdn-cgi/)
+10. Cloudflare: disable Email Address Obfuscation
 
 ## Policy locks
 

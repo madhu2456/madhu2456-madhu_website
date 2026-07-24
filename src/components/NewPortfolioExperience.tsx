@@ -40,16 +40,15 @@ import {
 } from "@/lib/gtm";
 
 import type {
-  CertificationItem,
-  EducationItem,
-  ExperienceItem,
-  NavigationItem,
-  PageContent,
-  Profile,
-  ProjectItem,
-  ServiceItem,
-  SkillItem,
-} from "@/lib/portfolio-data";
+  HomeCertificationCard,
+  HomeEducationCard,
+  HomeExperienceCard,
+  HomePageContent,
+  HomeProfile,
+  HomeProjectCard,
+  HomeServiceCard,
+} from "@/lib/home-page-data";
+import type { NavigationItem, SkillItem } from "@/lib/portfolio-data";
 import { useInView } from "@/lib/useInView";
 import { formatMonthYear } from "@/lib/utils";
 
@@ -58,6 +57,7 @@ const HOME_JUMP_NAV: StickyJumpNavItem[] = [
   { id: "proof", label: "Proof" },
   { id: "projects", label: "Case studies" },
   { id: "services", label: "Services" },
+  { id: "how-i-work", label: "How I work" },
   { id: "skills", label: "Skills" },
   { id: "experience", label: "Experience" },
   { id: "certifications", label: "Credentials" },
@@ -67,14 +67,14 @@ const HOME_JUMP_NAV: StickyJumpNavItem[] = [
 
 type NewPortfolioExperienceProps = {
   navigationItems: NavigationItem[];
-  pageContent: PageContent;
-  profile: Profile;
+  pageContent: HomePageContent;
+  profile: HomeProfile;
   skills: SkillItem[];
-  experiences: ExperienceItem[];
-  education: EducationItem[];
-  projects: ProjectItem[];
-  services: ServiceItem[];
-  certifications: CertificationItem[];
+  experiences: HomeExperienceCard[];
+  education: HomeEducationCard[];
+  projects: HomeProjectCard[];
+  services: HomeServiceCard[];
+  certifications: HomeCertificationCard[];
 };
 
 type Prefill = {
@@ -127,6 +127,7 @@ export function NewPortfolioExperience({
         />
         <Projects projects={projects} />
         <Services services={services} />
+        <HowIWork />
         <Skills skills={skills} />
         <Experience
           experiences={experiences}
@@ -148,7 +149,7 @@ export function NewPortfolioExperience({
 
 // Shared Header is imported from @/components/Header
 
-function DirectAnswer({ pageContent }: { pageContent: PageContent }) {
+function DirectAnswer({ pageContent }: { pageContent: HomePageContent }) {
   return (
     <Section
       id="about"
@@ -208,7 +209,7 @@ function DirectAnswer({ pageContent }: { pageContent: PageContent }) {
   );
 }
 
-function Stats({ stats }: { stats: Profile["stats"] }) {
+function Stats({ stats }: { stats: HomeProfile["stats"] }) {
   const { ref, inView } = useInView<HTMLDivElement>();
 
   if (stats.length === 0) return null;
@@ -331,7 +332,115 @@ function StatItem({
   );
 }
 
-function Services({ services }: { services: ServiceItem[] }) {
+function HowIWork() {
+  const rows = [
+    {
+      phase: "Discovery",
+      deliverable:
+        "Free fit check: problem, stack, constraints, success metrics, and whether select consulting is the right model.",
+      window: "1 call · reply ≤24h",
+    },
+    {
+      phase: "Architecture & plan",
+      deliverable:
+        "Written approach, interfaces, eval hooks, and milestones before heavy build spend.",
+      window: "2–5 days",
+    },
+    {
+      phase: "Scoped build",
+      deliverable:
+        "Thin vertical slice first, then iterate with logs, tests, and review checkpoints your team can own.",
+      window: "2–12 weeks",
+    },
+    {
+      phase: "Ship & handover",
+      deliverable:
+        "Deploy notes, docs, and ownership transfer so the system survives after the engagement ends.",
+      window: "End of project",
+    },
+  ] as const;
+
+  return (
+    <Section
+      id="how-i-work"
+      eyebrow="Process"
+      title="How I work: discovery → scoped build → handover"
+    >
+      <p className="mb-6 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+        Full-time at Novartis; select consulting only. Quotes follow
+        discovery—no public rate card. Employer IP and conflict policies are
+        respected.
+      </p>
+      <div className="overflow-x-auto rounded-2xl border border-border bg-surface/40 shadow-card">
+        <table className="w-full min-w-[36rem] border-collapse text-left text-sm">
+          <caption className="sr-only">
+            Engagement phases, what you get in each phase, and typical timelines
+          </caption>
+          <thead>
+            <tr className="border-b border-border bg-surface/70">
+              <th
+                scope="col"
+                className="px-4 py-3 font-semibold text-foreground"
+              >
+                Phase
+              </th>
+              <th
+                scope="col"
+                className="px-4 py-3 font-semibold text-foreground"
+              >
+                What you get
+              </th>
+              <th
+                scope="col"
+                className="px-4 py-3 font-semibold text-foreground"
+              >
+                Typical window
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row) => (
+              <tr
+                key={row.phase}
+                className="border-b border-border/70 last:border-b-0"
+              >
+                <th
+                  scope="row"
+                  className="px-4 py-3 align-top font-semibold text-foreground"
+                >
+                  {row.phase}
+                </th>
+                <td className="px-4 py-3 align-top text-muted-foreground">
+                  {row.deliverable}
+                </td>
+                <td className="px-4 py-3 align-top whitespace-nowrap text-muted-foreground">
+                  {row.window}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p className="mt-5 text-sm text-muted-foreground">
+        <Link
+          href="/services/#engagement-model"
+          className="font-medium text-primary underline-offset-4 hover:underline"
+        >
+          Full engagement model on Services
+        </Link>
+        {" · "}
+        <Link
+          href="/contact/#intent=intro"
+          className="font-medium text-primary underline-offset-4 hover:underline"
+        >
+          Book a 20-min intro call
+        </Link>
+      </p>
+    </Section>
+  );
+}
+
+function Services({ services }: { services: HomeServiceCard[] }) {
   if (services.length === 0) return null;
 
   return (
@@ -450,7 +559,7 @@ function Skills({ skills }: { skills: SkillItem[] }) {
 function Certifications({
   certifications,
 }: {
-  certifications: CertificationItem[];
+  certifications: HomeCertificationCard[];
 }) {
   if (certifications.length === 0) return null;
 
@@ -537,7 +646,7 @@ function Faq({ items }: { items: Array<{ q: string; a: string }> }) {
   );
 }
 
-function Contact({ profile }: { profile: Profile }) {
+function Contact({ profile }: { profile: HomeProfile }) {
   const [prefill, setPrefill] = useState<Prefill>({});
   const [status, setStatus] = useState<{
     tone: "success" | "error";

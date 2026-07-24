@@ -1,5 +1,5 @@
 # Madhu Dadi Master Robots.txt — Consolidated (Blog & Portfolio)
-# Last Updated: 2026-07-21
+# Last Updated: 2026-07-24
 # Production deploy source: madhudadi.in/blog_platform/nginx/robots.txt → /opt/madhudadi-blog/nginx/robots.txt
 # This file mirrors the blog nginx robots for local dev / CI (see docs/seo-source-of-truth.md)
 # Policy: allow traditional + AI search/citation crawlers; disallow model-training crawlers.
@@ -17,7 +17,6 @@ Disallow: /blog/api/v1/admin/
 # Shared/Auth Protections
 Disallow: /blog/api/v1/auth/
 Disallow: /blog/api/v1/payments/
-Disallow: /cdn-cgi/
 
 
 # ── Bing/Yahoo — keep minimal delay ────────────────────────────────
@@ -72,7 +71,6 @@ Disallow: /blog/api/v1/admin
 Disallow: /blog/api/v1/payments
 Disallow: /studio/
 Disallow: /api/
-Disallow: /cdn-cgi/
 
 # Sitemaps
 Sitemap: https://madhudadi.in/sitemap.xml

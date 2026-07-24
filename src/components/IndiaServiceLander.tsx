@@ -1,10 +1,7 @@
-import {
-  IconArrowRight,
-  IconChevronLeft,
-  IconMapPin,
-} from "@tabler/icons-react";
+import { IconArrowRight, IconMapPin } from "@tabler/icons-react";
 import Link from "next/link";
 import { AuthorBio } from "@/components/AuthorBio";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JsonLdScript } from "@/components/JsonLdScript";
@@ -48,24 +45,75 @@ export function IndiaServiceLander({ alias, data }: IndiaServiceLanderProps) {
   const areaServed = cityLabel
     ? ["India", cityLabel, "Visakhapatnam", "Remote", "Worldwide"]
     : ["India", "Visakhapatnam", "Hyderabad", "Remote", "Worldwide"];
+  const cityNames = Array.from(
+    new Set(
+      [cityLabel, "Visakhapatnam", cityLabel ? null : "Hyderabad"].filter(
+        (name): name is string => Boolean(name),
+      ),
+    ),
+  );
+  const areaServedStructured = [
+    ...cityNames.map((name) => ({
+      "@type": "City" as const,
+      name,
+      containedInPlace: { "@type": "Country" as const, name: "India" },
+    })),
+    { "@type": "Country" as const, name: "India" },
+    { "@type": "Place" as const, name: "Worldwide (remote)" },
+  ];
   const tocItems: PageTocItem[] = [
     { id: "lander-summary", label: "Summary" },
     { id: "why-india", label: "Why India" },
+    ...(alias.cityProof ? [{ id: "city-proof", label: "Local focus" }] : []),
     ...(baseService ? [{ id: "full-capability", label: "Capability" }] : []),
     { id: "lander-engagement", label: "Engagement" },
     ...(alias.faqs.length > 0 ? [{ id: "lander-faqs", label: "FAQ" }] : []),
     ...(relatedReading.length > 0
       ? [{ id: "related-reading", label: "Related reading" }]
       : []),
+    { id: "service-area", label: "Service area" },
     { id: "lander-contact", label: "Contact" },
   ];
   const baseUrl = baseService
     ? `${siteUrl}services/${baseService.slug}/`
     : `${siteUrl}services/`;
+  const fullName =
+    [profile.firstName, profile.lastName].filter(Boolean).join(" ") ||
+    "Madhu Dadi";
+  const phone = profile.phone?.trim() || undefined;
+  const email = profile.email?.trim() || undefined;
+  const telHref = phone ? `tel:${phone.replace(/[^\d+]/g, "")}` : undefined;
 
   const graph = {
     "@context": "https://schema.org",
     "@graph": [
+      {
+        "@type": "ProfessionalService",
+        "@id": `${pageUrl}#professional-service`,
+        name: alias.title,
+        url: pageUrl,
+        description: alias.seoDescription,
+        image: `${siteUrl}opengraph-image/`,
+        provider: { "@id": `${siteUrl}#person` },
+        ...(phone ? { telephone: phone } : {}),
+        ...(email ? { email } : {}),
+        priceRange: "$$",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Visakhapatnam",
+          addressRegion: "Andhra Pradesh",
+          addressCountry: "IN",
+        },
+        areaServed: areaServedStructured,
+        serviceType: alias.title,
+        offers: {
+          "@type": "Offer",
+          url: `${siteUrl}contact/`,
+          availability: "https://schema.org/InStock",
+          description:
+            "Custom pricing based on scope, timeline, and delivery model. Select consulting only.",
+        },
+      },
       {
         "@type": "Service",
         "@id": `${pageUrl}#service`,
@@ -92,7 +140,7 @@ export function IndiaServiceLander({ alias, data }: IndiaServiceLanderProps) {
         inLanguage: "en-IN",
         isPartOf: { "@id": `${siteUrl}#website` },
         about: { "@id": `${siteUrl}#person` },
-        mainEntity: { "@id": `${pageUrl}#service` },
+        mainEntity: { "@id": `${pageUrl}#professional-service` },
         dateModified: new Date().toISOString(),
       },
       {
@@ -124,15 +172,12 @@ export function IndiaServiceLander({ alias, data }: IndiaServiceLanderProps) {
 
       <main id="main-content" className="flex-1 px-6 py-28 bg-background/50">
         <div className="container mx-auto max-w-4xl space-y-12">
-          <div>
-            <Link
-              href="/services/"
-              className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors"
-            >
-              <IconChevronLeft className="h-4 w-4" aria-hidden /> Back to
-              Services
-            </Link>
-          </div>
+          <Breadcrumb
+            items={[
+              { label: "Services", href: "/services/" },
+              { label: alias.title },
+            ]}
+          />
 
           <section className="relative rounded-2xl border border-border bg-surface/30 p-8 md:p-10">
             <p className="text-xs font-semibold tracking-[0.18em] text-primary uppercase">
@@ -207,6 +252,36 @@ export function IndiaServiceLander({ alias, data }: IndiaServiceLanderProps) {
               ))}
             </ul>
           </section>
+
+          {alias.cityProof ? (
+            <section id="city-proof" className="scroll-mt-28 space-y-4">
+              <h2 className="text-xl font-bold tracking-tight border-b border-border/80 pb-2">
+                {alias.cityProof.h2}
+              </h2>
+              <ul className="space-y-3">
+                {alias.cityProof.bullets.map((item) => (
+                  <li
+                    key={item}
+                    className="rounded-xl border border-border/50 bg-surface/20 p-4 text-sm text-muted-foreground leading-relaxed"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              {alias.cityProof.relatedCaseStudyHref &&
+              alias.cityProof.relatedCaseStudyLabel ? (
+                <p className="text-sm text-muted-foreground">
+                  Related proof:{" "}
+                  <Link
+                    href={alias.cityProof.relatedCaseStudyHref}
+                    className="font-medium text-primary underline-offset-4 hover:underline"
+                  >
+                    {alias.cityProof.relatedCaseStudyLabel}
+                  </Link>
+                </p>
+              ) : null}
+            </section>
+          ) : null}
 
           {baseService ? (
             <section id="full-capability" className="scroll-mt-28 space-y-4">
@@ -298,6 +373,65 @@ export function IndiaServiceLander({ alias, data }: IndiaServiceLanderProps) {
           {relatedReading.length > 0 ? (
             <RelatedReading items={relatedReading} className="mt-2" />
           ) : null}
+
+          <section
+            id="service-area"
+            className="scroll-mt-28 space-y-3 rounded-2xl border border-border/60 bg-surface/20 p-6"
+          >
+            <h2 className="text-xl font-bold tracking-tight border-b border-border/80 pb-2">
+              Service area &amp; contact
+            </h2>
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              Remote-first professional service. Home base is Visakhapatnam,
+              Andhra Pradesh — not a storefront. On-site in{" "}
+              {cityLabel || "major Indian cities"} only when scoped.
+            </p>
+            <address className="not-italic text-sm leading-relaxed text-foreground/90">
+              <p className="font-semibold text-foreground">{fullName}</p>
+              <p>Visakhapatnam, Andhra Pradesh, India</p>
+              {cityLabel ? (
+                <p className="text-muted-foreground">
+                  Serving {cityLabel} · India · remote worldwide
+                </p>
+              ) : (
+                <p className="text-muted-foreground">
+                  Serving India · remote worldwide
+                </p>
+              )}
+              {phone && telHref ? (
+                <p className="mt-2">
+                  <a
+                    href={telHref}
+                    className="text-primary underline-offset-4 hover:underline"
+                  >
+                    {phone}
+                  </a>
+                </p>
+              ) : null}
+              {email ? (
+                <p>
+                  <a
+                    href={`mailto:${email}`}
+                    className="text-primary underline-offset-4 hover:underline"
+                  >
+                    {email}
+                  </a>
+                </p>
+              ) : null}
+              {profile.socialLinks?.googleBusiness ? (
+                <p className="mt-2">
+                  <a
+                    href={profile.socialLinks.googleBusiness}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary underline-offset-4 hover:underline"
+                  >
+                    View on Google
+                  </a>
+                </p>
+              ) : null}
+            </address>
+          </section>
 
           <section
             id="lander-contact"

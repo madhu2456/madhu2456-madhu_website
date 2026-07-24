@@ -12,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const siteUrl = `${resolveSiteUrl()}/`;
   const title = "Privacy Policy | Madhu Dadi";
   const description =
-    "Privacy policy for madhudadi.in. Learn how personal data collected via the contact form is handled.";
+    "Privacy policy for madhudadi.in: how we handle contact-form data, portfolio assistant messages, analytics, DPDP rights, and retention. Contact for grievances.";
   const url = `${siteUrl}privacy/`;
   const image = `${siteUrl}opengraph-image/`;
 

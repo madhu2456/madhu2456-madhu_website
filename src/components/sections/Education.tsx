@@ -1,9 +1,9 @@
 import { Section } from "@/components/Section";
-import type { EducationItem } from "@/lib/portfolio-data";
+import type { HomeEducationCard } from "@/lib/home-page-data";
 import { formatPeriod } from "@/lib/utils";
 
 type EducationProps = {
-  education: EducationItem[];
+  education: HomeEducationCard[];
 };
 
 /**

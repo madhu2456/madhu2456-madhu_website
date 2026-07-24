@@ -142,7 +142,13 @@ export async function buildPortfolioSitemap(): Promise<MetadataRoute.Sitemap> {
         0.86,
       ),
     ),
-    // Pillar guides
+    // Guides hub + pillar guides
+    entry(
+      toCanonicalSitemapUrl(origin, "/guides/"),
+      effectiveHubDate,
+      "weekly",
+      0.86,
+    ),
     entry(
       toCanonicalSitemapUrl(origin, "/guides/ga4-bigquery/"),
       effectiveHubDate,
@@ -226,6 +232,7 @@ export const PORTFOLIO_SITEMAP_STATIC_PATHS = [
   "/fractional-ai-consultant/",
   "/ai-consultant-for-startups/",
   "/ai-automation-consultant/",
+  "/guides/",
   "/guides/ga4-bigquery/",
   "/guides/marketing-mix-modeling-2026/",
   "/guides/attribution-after-cookies/",

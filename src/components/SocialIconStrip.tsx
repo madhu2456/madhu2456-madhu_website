@@ -13,7 +13,20 @@ import type { ReactNode } from "react";
 import { SafeEmailLink } from "@/components/SafeEmailLink";
 import { TrackedLink } from "@/components/TrackedLink";
 import { EXTERNAL_REL, IDENTITY_EXTERNAL_REL } from "@/lib/link-rel";
-import type { Profile } from "@/lib/portfolio-data";
+
+type SocialProfile = {
+  email?: string | null;
+  socialLinks?: {
+    linkedin?: string | null;
+    github?: string | null;
+    twitter?: string | null;
+    website?: string | null;
+    medium?: string | null;
+    devto?: string | null;
+    youtube?: string | null;
+    googleBusiness?: string | null;
+  } | null;
+};
 
 type SocialIconLink = {
   label: string;
@@ -24,7 +37,7 @@ type SocialIconLink = {
 };
 
 type SocialIconStripProps = {
-  profile: Profile;
+  profile: SocialProfile;
   clickLocation: string;
   emailTrackingLocation?: string;
   className?: string;
@@ -34,7 +47,8 @@ type SocialIconStripProps = {
 const iconButtonClassName =
   "inline-flex h-11 w-11 items-center justify-center rounded-full border border-border/80 bg-surface/50 text-muted-foreground transition-colors hover:border-primary/40 hover:bg-surface hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50";
 
-export function buildSocialIconLinks(profile: Profile): SocialIconLink[] {
+export function buildSocialIconLinks(profile: SocialProfile): SocialIconLink[] {
+  const social = profile.socialLinks ?? {};
   const links: SocialIconLink[] = [
     {
       label: "Email",
@@ -44,37 +58,37 @@ export function buildSocialIconLinks(profile: Profile): SocialIconLink[] {
     },
   ];
 
-  if (profile.socialLinks.linkedin) {
+  if (social.linkedin) {
     links.push({
       label: "LinkedIn",
-      href: profile.socialLinks.linkedin,
+      href: social.linkedin,
       rel: IDENTITY_EXTERNAL_REL,
       icon: <IconBrandLinkedin className="h-4 w-4" stroke={1.75} />,
     });
   }
 
-  if (profile.socialLinks.github) {
+  if (social.github) {
     links.push({
       label: "GitHub",
-      href: profile.socialLinks.github,
+      href: social.github,
       rel: IDENTITY_EXTERNAL_REL,
       icon: <IconBrandGithub className="h-4 w-4" stroke={1.75} />,
     });
   }
 
-  if (profile.socialLinks.twitter) {
+  if (social.twitter) {
     links.push({
       label: "X",
-      href: profile.socialLinks.twitter,
+      href: social.twitter,
       rel: IDENTITY_EXTERNAL_REL,
       icon: <IconBrandX className="h-4 w-4" stroke={1.75} />,
     });
   }
 
-  if (profile.socialLinks.website) {
+  if (social.website) {
     links.push({
       label: "Blog",
-      href: profile.socialLinks.website,
+      href: social.website,
       rel: IDENTITY_EXTERNAL_REL,
       icon: (
         <Image
@@ -89,37 +103,37 @@ export function buildSocialIconLinks(profile: Profile): SocialIconLink[] {
     });
   }
 
-  if (profile.socialLinks.medium) {
+  if (social.medium) {
     links.push({
       label: "Medium",
-      href: profile.socialLinks.medium,
+      href: social.medium,
       rel: IDENTITY_EXTERNAL_REL,
       icon: <IconBrandMedium className="h-4 w-4" stroke={1.75} />,
     });
   }
 
-  if (profile.socialLinks.devto) {
+  if (social.devto) {
     links.push({
       label: "Dev.to",
-      href: profile.socialLinks.devto,
+      href: social.devto,
       rel: IDENTITY_EXTERNAL_REL,
       icon: <IconWriting className="h-4 w-4" stroke={1.75} />,
     });
   }
 
-  if (profile.socialLinks.youtube) {
+  if (social.youtube) {
     links.push({
       label: "YouTube",
-      href: profile.socialLinks.youtube,
+      href: social.youtube,
       rel: IDENTITY_EXTERNAL_REL,
       icon: <IconBrandYoutube className="h-4 w-4" stroke={1.75} />,
     });
   }
 
-  if (profile.socialLinks.googleBusiness) {
+  if (social.googleBusiness) {
     links.push({
       label: "View on Google",
-      href: profile.socialLinks.googleBusiness,
+      href: social.googleBusiness,
       icon: <IconBrandGoogle className="h-4 w-4" stroke={1.75} />,
     });
   }

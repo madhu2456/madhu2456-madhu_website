@@ -95,7 +95,7 @@ export function guidesFeedLastBuildDate(): Date {
 
 export function buildGuidesRssXml(siteUrl: string): string {
   const origin = siteUrl.replace(/\/$/, "");
-  const channelLink = `${origin}/guides/ga4-bigquery/`;
+  const channelLink = `${origin}/guides/`;
   const selfLink = `${origin}/guides/rss.xml`;
   const lastBuild = guidesFeedLastBuildDate().toUTCString();
 

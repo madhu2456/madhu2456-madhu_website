@@ -6,13 +6,13 @@ export const buildV2PageContentDefaults = (): PageContentSchema => {
       seo: {
         title: "Madhu Dadi | AI Engineer, RAG & Analytics Consultant",
         description:
-          "AI engineer and RAG consultant with 9+ years (Novartis, redBus, GroupM). Production AI agents, RAG systems, FastAPI/Next.js products, and marketing analytics.",
+          "AI engineer and RAG consultant with 9+ years (Novartis, redBus, GroupM). Production AI agents, RAG systems, FastAPI/Next.js products, and marketing analytics. Select consulting or full-time.",
       },
       heroTitle: "Ship the AI system your business needed six months ago",
       heroAvailabilityText: "Full-time at Novartis · select consulting open",
       eyebrow: "Fractional AI + analytics · India & remote",
       introParagraphs: [
-        "Fractional AI and analytics consulting. Ex-Novartis, redBus, GroupM. Production RAG, agents, GA4→BigQuery, and MMM — measured, evaluated, and handed over so your team can run it.",
+        "Fractional AI and analytics consulting. Experience at Novartis, redBus, and GroupM. Production RAG, agents, GA4→BigQuery, and MMM — measured, evaluated, and handed over so your team can run it.",
       ],
       primaryCta: {
         label: "Book a 20-min intro call",
@@ -24,7 +24,7 @@ export const buildV2PageContentDefaults = (): PageContentSchema => {
         href: "/case-studies/",
         variant: "secondary",
       },
-      workedAtLabel: "Previously built systems at",
+      workedAtLabel: "Built systems at",
       directAnswer: {
         title: "Who is Madhu Dadi?",
         paragraphs: [
@@ -41,12 +41,12 @@ export const buildV2PageContentDefaults = (): PageContentSchema => {
         {
           question: "Do you take freelance projects?",
           answer:
-            "Yes, I am available for freelance consulting, part-time engagements, and full-time roles depending on project fit.",
+            "Select consulting only. I am full-time at Novartis and take a limited number of scoped AI, RAG, agents, and analytics engagements when capacity fits. Full-time roles are a separate path—use the contact form and choose the matching intent.",
         },
         {
           question: "Are you available for new projects?",
           answer:
-            "Yes. I am currently open to full-time roles, freelance consulting, and part-time engagements. You can reach out via the contact form or email me directly.",
+            "Yes, on a select basis. Full-time at Novartis; open to scoped consulting and full-time opportunities. I typically reply within 24 hours via the contact form or email.",
         },
         {
           question: "Do you work remotely?",
@@ -278,13 +278,13 @@ export const buildV2PageContentDefaults = (): PageContentSchema => {
       seo: {
         title: "Contact Madhu Dadi | AI, RAG & Analytics Consulting",
         description:
-          "Contact Madhu Dadi for AI consulting, RAG systems, and marketing analytics. Freelance, full-time roles, FastAPI/Next.js builds. Reply within 24 hours.",
+          "Contact Madhu Dadi for AI consulting, RAG systems, or full-time roles. Full-time at Novartis; select consulting and full-time paths. Reply within 24 hours.",
         canonicalPath: "/contact/",
       },
       eyebrow: "Consulting & roles",
       heroTitle: "Contact Madhu Dadi for AI, RAG & Analytics Consulting",
       heroSubtitle:
-        "Share your project for AI agents, RAG applications, marketing analytics, or full-stack AI products. Freelance consulting, contract work, and full-time roles welcome.",
+        "Two paths: select independent consulting (scoped outside employment duties) or full-time hiring conversations. Share AI agents, RAG, marketing analytics, or FastAPI/Next.js needs.",
       bestFitAreas: [
         "AI agents",
         "RAG applications",

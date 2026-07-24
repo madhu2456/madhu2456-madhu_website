@@ -4,7 +4,7 @@
     "home": {
       "seo": {
         "title": "Madhu Dadi — AI Engineer: RAG, AI Agents & Analytics",
-        "description": "AI engineer & consultant: production RAG, AI agents, FastAPI/Next.js, marketing analytics. 9+ years since 2016. India & remote. Hire or full-time."
+        "description": "AI engineer & consultant: production RAG, AI agents, FastAPI/Next.js, marketing analytics. 9+ years since 2016. India & remote. Select consulting or full-time."
       },
       "heroTitle": "Ship the AI system your business needed six months ago",
       "primaryCta": {
@@ -18,7 +18,7 @@
         "variant": "secondary"
       },
       "heroAvailabilityText": "Full-time at Novartis · select consulting open",
-      "workedAtLabel": "Previously built systems at",
+      "workedAtLabel": "Built systems at",
       "directAnswer": {
         "title": "Who is Madhu Dadi?",
         "paragraphs": [
@@ -34,7 +34,7 @@
         },
         {
           "question": "Are you available for new projects or full-time roles?",
-          "answer": "Yes. This site supports two paths: (1) independent consulting / contract work on AI, RAG, agents, and analytics; (2) full-time opportunities where I can own AI and analytics end-to-end. Use the contact form and pick the intent that matches."
+          "answer": "Two paths: (1) select independent consulting / contract work on AI, RAG, agents, and analytics when capacity allows (I am full-time at Novartis); (2) full-time opportunities where I can own AI and analytics end-to-end. Use the contact form and pick the intent that matches. I typically reply within 24 hours."
         },
         {
           "question": "How do you count 9+ years of experience?",
@@ -63,7 +63,7 @@
       ],
       "eyebrow": "Fractional AI + analytics · India & remote",
       "introParagraphs": [
-        "Fractional AI and analytics consulting. Ex-Novartis, redBus, GroupM. Production RAG, agents, GA4→BigQuery, and MMM — measured, evaluated, and handed over so your team can run it."
+        "Fractional AI and analytics consulting. Experience at Novartis, redBus, and GroupM. Production RAG, agents, GA4→BigQuery, and MMM — measured, evaluated, and handed over so your team can run it."
       ]
     },
     "profile": {
@@ -87,11 +87,23 @@
         },
         {
           "title": "backend",
-          "items": ["Python", "FastAPI", "SQL", "Postgres", "Redis", "Celery"]
+          "items": [
+            "Python",
+            "FastAPI",
+            "SQL",
+            "Postgres",
+            "Redis",
+            "Celery"
+          ]
         },
         {
           "title": "frontend",
-          "items": ["Next.js", "React", "TypeScript", "Tailwind CSS"]
+          "items": [
+            "Next.js",
+            "React",
+            "TypeScript",
+            "Tailwind CSS"
+          ]
         },
         {
           "title": "analytics",
@@ -247,7 +259,7 @@
     "contact": {
       "seo": {
         "title": "Contact | Madhu Dadi",
-        "description": "Contact Madhu Dadi for AI consulting, RAG systems, or full-time roles. Full-time at Novartis; select freelance available.",
+        "description": "Contact Madhu Dadi for AI consulting, RAG systems, or full-time roles. Full-time at Novartis; select consulting and full-time paths. Reply within 24 hours.",
         "canonicalPath": "/contact/"
       },
       "eyebrow": "Consulting & roles",
@@ -324,7 +336,7 @@
   },
   "siteSettings": {
     "siteTitle": "Madhu Dadi — AI Engineer: RAG, AI Agents & Analytics",
-    "siteDescription": "Madhu Dadi is an AI engineer and RAG & analytics consultant based in Visakhapatnam, India. 9+ years of professional experience since 2016 (Novartis, redBus, GroupM, Absolinsoft; MBA IIM Amritsar). Production AI agents, RAG, FastAPI/Next.js. Consulting and full-time paths via contact.",
+    "siteDescription": "Madhu Dadi is an AI engineer and RAG & analytics consultant based in Visakhapatnam, India. 9+ years of professional experience since 2016 (Novartis, redBus, GroupM, Absolinsoft; MBA IIM Amritsar). Production AI agents, RAG, FastAPI/Next.js. Select consulting or full-time paths via contact.",
     "siteKeywords": [
       "Madhu Dadi",
       "AI consultant",
@@ -386,25 +398,32 @@
       "order": 3
     },
     {
+      "title": "Guides",
+      "href": "/guides/",
+      "icon": "IconBook",
+      "isExternal": false,
+      "order": 4
+    },
+    {
       "title": "Contact",
       "href": "/contact/",
       "icon": "IconMail",
       "isExternal": false,
-      "order": 4
+      "order": 5
     },
     {
       "title": "Blog",
       "href": "https://madhudadi.in/blog",
       "icon": "IconNews",
       "isExternal": true,
-      "order": 5
+      "order": 6
     },
     {
       "title": "Resume",
       "href": "/resume.pdf",
       "icon": "IconFileText",
       "isExternal": true,
-      "order": 6
+      "order": 7
     }
   ],
   "skills": [
@@ -721,7 +740,9 @@
         "Presented analytical findings and strategic recommendations to senior leadership, facilitating informed decision-making and business growth within the Patient Support Services division.",
         "Utilized advanced analytics tools (e.g., Google Analytics, Power BI, Advanced Modelling, etc.) to measure and improve digital engagement, patient satisfaction, and operational efficiency."
       ],
-      "achievements": ["Best Performer of the Quarter, Q1 2024"],
+      "achievements": [
+        "Best Performer of the Quarter, Q1 2024"
+      ],
       "order": 1,
       "updatedAt": "2026-06-07T00:00:00Z"
     },
@@ -741,7 +762,9 @@
         "Led the Marketing Analytics team in redBus to provide measurement solutions for ATL, BTL and Digital Campaigns.",
         "Created Brand Playbooks for Digital, Social and Owned media to effectively optimise the campaign budgets and increase the ROI of Brand initiatives."
       ],
-      "achievements": ["Q3 Trailblazer, 30% new-customer growth"],
+      "achievements": [
+        "Q3 Trailblazer, 30% new-customer growth"
+      ],
       "order": 2,
       "updatedAt": "2026-06-07T00:00:00Z"
     },
@@ -760,7 +783,9 @@
         "Performed brand lift study, identified the most optimal consumer journey from first touch point to last touch point and measured the performance in terms of conversion lift.",
         "Brought awareness of 1st party data solutions to increase the targeting by using cluster analysis, cost benefit analysis and pricing analytics to the clients."
       ],
-      "achievements": ["Performer of the Year 2020-21 - WPP NextGen"],
+      "achievements": [
+        "Performer of the Year 2020-21 - WPP NextGen"
+      ],
       "order": 3,
       "updatedAt": "2026-06-07T00:00:00Z"
     },
@@ -779,7 +804,9 @@
         "Implemented, Analyzed and Optimized organic and paid search engine marketing activities and increase the CTR by 20%.",
         "Formulated and documented the project/product plan for web applications."
       ],
-      "achievements": ["Foundations in analytics + engineering"],
+      "achievements": [
+        "Foundations in analytics + engineering"
+      ],
       "order": 4,
       "updatedAt": "2026-06-07T00:00:00Z"
     }
@@ -1804,14 +1831,16 @@
           "answer": "Not always. sGTM helps when client-side loss, consent, or ad-platform match rates are the bottleneck. We only add sGTM when the audit shows a measurable accuracy or resilience win."
         }
       ],
-      "seoDescription": "GA4 BigQuery consultant for raw exports, campaign truth tables, sGTM, and dashboards finance trusts. India & remote.",
+      "seoDescription": "GA4 to BigQuery consultant: raw export models, campaign cost/conversion truth tables, sGTM, and dashboards finance trusts. Scoped builds; India & remote.",
       "heroTitle": "GA4 + BigQuery Campaign Analytics",
       "heroEyebrow": "Measurement · GA4 · BigQuery",
       "directAnswerParagraphs": [
         "A GA4 BigQuery consultant designs the export, warehouse schema, and analysis layers that turn raw GA4 events into campaign, cost, and conversion tables you can query without sampling walls in the GA4 UI—so marketing and finance share one measurement truth.",
         "I implement server-side GTM only when accuracy requires it, document event schemas, and leave SQL views plus Looker-ready layers your teams can own. Work is scoped select consulting alongside full-time employment, India and remote-first from Visakhapatnam."
       ],
-      "proofProjectSlugs": ["adticks"],
+      "proofProjectSlugs": [
+        "adticks"
+      ],
       "contactIntent": "ga4-bigquery"
     },
     {

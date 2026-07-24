@@ -9,7 +9,7 @@ const siteUrl = `${resolveSiteUrl()}/`;
 /** ~58–60 chars: brand + money queries (audit §5 / Semrush Phase 2). */
 const HOME_TITLE = "Madhu Dadi — AI Engineer: RAG, AI Agents & Analytics";
 const HOME_DESCRIPTION =
-  "AI engineer & consultant: production RAG, AI agents, FastAPI/Next.js, marketing analytics. 9+ years since 2016. India & remote. Hire or full-time.";
+  "AI engineer & consultant: production RAG, AI agents, FastAPI/Next.js, marketing analytics. 9+ years since 2016. India & remote. Select consulting or full-time.";
 
 export const metadata: Metadata = {
   // DG-06 C / DR-02: dual full-time + consulting funnels coexist via /contact/.

@@ -5,17 +5,17 @@ import { FormattedText } from "@/components/FormattedText";
 import { ImpactMetricStrip } from "@/components/ImpactMetricStrip";
 import { Section } from "@/components/Section";
 import { pushToDataLayer } from "@/lib/gtm";
+import type { HomeProjectCard } from "@/lib/home-page-data";
 import {
   normalizeImageSource,
   shouldUseUnoptimizedImage,
 } from "@/lib/image-source";
-import type { ProjectItem } from "@/lib/portfolio-data";
 import {
   getCaseStudyLinkLabel,
   getDistinctProjectTagline,
 } from "@/lib/project-display";
 
-export function Projects({ projects }: { projects: ProjectItem[] }) {
+export function Projects({ projects }: { projects: HomeProjectCard[] }) {
   if (projects.length === 0) return null;
 
   return (

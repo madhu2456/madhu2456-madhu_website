@@ -16,7 +16,8 @@
     "test": "vitest run",
     "test:e2e": "playwright test",
     "typecheck": "tsc --noEmit",
-    "validate:jsonld": "node scripts/validate-portfolio-jsonld.mjs"
+    "validate:jsonld": "node scripts/validate-portfolio-jsonld.mjs",
+    "probe:bots": "node scripts/bot-access-probe.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

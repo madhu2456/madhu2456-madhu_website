@@ -1,9 +1,9 @@
 import { Section } from "@/components/Section";
-import type { ExperienceItem } from "@/lib/portfolio-data";
+import type { HomeExperienceCard } from "@/lib/home-page-data";
 import { formatPeriod, normalizeCompanyName } from "@/lib/utils";
 
 type ExperienceProps = {
-  experiences: ExperienceItem[];
+  experiences: HomeExperienceCard[];
   /** CMS profile.yearsOfExperience — display only; do not invent a new value. */
   yearsOfExperience?: number | null;
 };

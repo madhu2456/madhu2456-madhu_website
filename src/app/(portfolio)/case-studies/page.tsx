@@ -352,7 +352,7 @@ export default async function CaseStudiesPage() {
               href="/contact/"
               className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all"
             >
-              Hire me for your next project
+              Discuss a scoped project
               <IconArrowRight className="h-4 w-4" />
             </Link>
           </div>

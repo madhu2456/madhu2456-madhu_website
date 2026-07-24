@@ -1,7 +1,6 @@
 import {
   IconArrowRight,
   IconBookmark,
-  IconChevronLeft,
   IconCircleCheck,
   IconClock,
   IconSparkles,
@@ -10,6 +9,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AuthorBio } from "@/components/AuthorBio";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JsonLdScript } from "@/components/JsonLdScript";
@@ -298,15 +298,12 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
       <main id="main-content" className="flex-1 px-6 py-28 bg-background/50">
         <div className="container mx-auto max-w-4xl space-y-12">
-          {/* Back Button */}
-          <div>
-            <Link
-              href="/services/"
-              className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors"
-            >
-              <IconChevronLeft className="h-4 w-4" /> Back to Services
-            </Link>
-          </div>
+          <Breadcrumb
+            items={[
+              { label: "Services", href: "/services/" },
+              { label: displayTitle },
+            ]}
+          />
 
           {/* Hero Header Card */}
           <section className="relative rounded-2xl border border-border bg-surface/30 p-8 md:p-10 backdrop-blur-md overflow-hidden">

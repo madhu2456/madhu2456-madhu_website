@@ -363,7 +363,7 @@ export function buildPersonSchema({
     ...(offerNodes.length > 0 && { makesOffer: offerNodes }),
     seeks: {
       "@type": "Demand",
-      name: "Freelance, consulting, and full-time opportunities in AI, analytics, and full-stack engineering",
+      name: "Select consulting and full-time opportunities in AI, analytics, and full-stack engineering",
     },
   };
 }

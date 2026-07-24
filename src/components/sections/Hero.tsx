@@ -4,10 +4,10 @@ import Link from "next/link";
 import { TrackedLink } from "@/components/TrackedLink";
 import { pushToDataLayer } from "@/lib/gtm";
 import type {
-  ExperienceItem,
-  PageContent,
-  Profile,
-} from "@/lib/portfolio-data";
+  HomeExperienceCard,
+  HomePageContent,
+  HomeProfile,
+} from "@/lib/home-page-data";
 import { normalizeCompanyName } from "@/lib/utils";
 
 export function Hero({
@@ -15,9 +15,9 @@ export function Hero({
   experiences,
   pageContent,
 }: {
-  profile: Profile;
-  experiences: ExperienceItem[];
-  pageContent: PageContent;
+  profile: HomeProfile;
+  experiences: HomeExperienceCard[];
+  pageContent: HomePageContent;
 }) {
   const workedAt = Array.from(
     new Set(
@@ -39,7 +39,7 @@ export function Hero({
     pageContent.home.introParagraphs.length > 0
       ? pageContent.home.introParagraphs
       : [
-          "Fractional AI and analytics consulting. Ex-Novartis, redBus, GroupM. Production RAG, agents, GA4→BigQuery, and MMM — measured, evaluated, and handed over so your team can run it.",
+          "Fractional AI and analytics consulting. Experience at Novartis, redBus, and GroupM. Production RAG, agents, GA4→BigQuery, and MMM — measured, evaluated, and handed over so your team can run it.",
         ];
 
   return (

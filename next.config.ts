@@ -59,6 +59,12 @@ const securityHeaders = [
   },
 ];
 
+/** Edge-cache marketing HTML (audit v4). Browser revalidates; CDN holds 1h + SWR. */
+const marketingHtmlCache = {
+  key: "Cache-Control",
+  value: "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400",
+} as const;
+
 const nextConfig: NextConfig = {
   // Ensure all URLs have a trailing slash to avoid duplicate content SEO issues.
   trailingSlash: true,
@@ -68,8 +74,9 @@ const nextConfig: NextConfig = {
   experimental: {
     globalNotFound: true,
     optimizePackageImports: ["@tabler/icons-react"],
-    // Inline CSS for first-load paint to reduce render-blocking stylesheet requests.
-    inlineCss: true,
+    // Do NOT inlineCss: true — it embeds ~100KB Tailwind into every HTML document
+    // (audit v4: home HTML ~499KB). External hashed CSS is cacheable at the edge
+    // and keeps HTML lean; CF/HTTP2 makes the extra request cheap after first hit.
   },
 
   compiler: {
@@ -106,6 +113,16 @@ const nextConfig: NextConfig = {
       {
         source: "/about/",
         destination: "/profile/",
+        permanent: true,
+      },
+      {
+        source: "/privacy-policy",
+        destination: "/privacy/",
+        permanent: true,
+      },
+      {
+        source: "/privacy-policy/",
+        destination: "/privacy/",
         permanent: true,
       },
       // Phase 5 India landers are real pages under /services/*-india|visakhapatnam/
@@ -156,6 +173,97 @@ const nextConfig: NextConfig = {
       {
         source: "/(.*)",
         headers: securityHeaders,
+      },
+      // Marketing HTML — allow Cloudflare edge cache (layout no longer calls headers())
+      {
+        source: "/",
+        headers: [marketingHtmlCache],
+      },
+      {
+        source: "/profile",
+        headers: [marketingHtmlCache],
+      },
+      {
+        source: "/profile/",
+        headers: [marketingHtmlCache],
+      },
+      {
+        source: "/services",
+        headers: [marketingHtmlCache],
+      },
+      {
+        source: "/services/",
+        headers: [marketingHtmlCache],
+      },
+      {
+        source: "/services/:path*",
+        headers: [marketingHtmlCache],
+      },
+      {
+        source: "/case-studies",
+        headers: [marketingHtmlCache],
+      },
+      {
+        source: "/case-studies/",
+        headers: [marketingHtmlCache],
+      },
+      {
+        source: "/case-studies/:path*",
+        headers: [marketingHtmlCache],
+      },
+      {
+        source: "/guides",
+        headers: [marketingHtmlCache],
+      },
+      {
+        source: "/guides/",
+        headers: [marketingHtmlCache],
+      },
+      {
+        source: "/guides/:path*",
+        headers: [marketingHtmlCache],
+      },
+      {
+        source: "/credentials",
+        headers: [marketingHtmlCache],
+      },
+      {
+        source: "/credentials/",
+        headers: [marketingHtmlCache],
+      },
+      {
+        source: "/contact",
+        headers: [marketingHtmlCache],
+      },
+      {
+        source: "/contact/",
+        headers: [marketingHtmlCache],
+      },
+      {
+        source: "/privacy",
+        headers: [marketingHtmlCache],
+      },
+      {
+        source: "/privacy/",
+        headers: [marketingHtmlCache],
+      },
+      {
+        source: "/ai-consultant-india",
+        headers: [marketingHtmlCache],
+      },
+      {
+        source: "/ai-consultant-india/",
+        headers: [marketingHtmlCache],
+      },
+      {
+        source:
+          "/:lander(ga4-consultant|google-analytics-consultant|marketing-analytics-consultant|marketing-mix-modeling-consultant|attribution-modeling-consultant|fractional-ai-consultant|ai-consultant-for-startups|ai-automation-consultant)",
+        headers: [marketingHtmlCache],
+      },
+      {
+        source:
+          "/:lander(ga4-consultant|google-analytics-consultant|marketing-analytics-consultant|marketing-mix-modeling-consultant|attribution-modeling-consultant|fractional-ai-consultant|ai-consultant-for-startups|ai-automation-consultant)/",
+        headers: [marketingHtmlCache],
       },
       // SEO/GEO discovery files - serve as plain text with generous caching
       {

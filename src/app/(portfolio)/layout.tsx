@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { headers } from "next/headers";
 
 import { AppSidebar } from "@/components/app-sidebar";
 import { ClientChrome } from "@/components/ClientChrome";
@@ -189,8 +188,9 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const nonce = (await headers()).get("x-nonce") ?? undefined;
-
+  // Do not call headers()/cookies() here — that forces dynamic no-store and
+  // prevents Cloudflare edge cache (audit v4). CSP allows 'unsafe-inline' for
+  // scripts/styles (next.config), so a per-request nonce is not required.
   return (
     <html lang="en-IN" suppressHydrationWarning>
       <head>
@@ -206,7 +206,6 @@ export default async function RootLayout({
         {/* Make motion/react sections visible when JS is disabled (AI crawlers, no-JS users) */}
         <noscript>
           <style
-            nonce={nonce}
             // biome-ignore lint/security/noDangerouslySetInnerHtml: safe - static noscript CSS for AEO visibility
             dangerouslySetInnerHTML={{
               __html:
@@ -222,17 +221,13 @@ export default async function RootLayout({
         >
           Skip to content
         </a>
-        <DeferredGTM
-          gtmId={process.env.NEXT_PUBLIC_GTM_ID?.trim() ?? ""}
-          nonce={nonce}
-        />
+        <DeferredGTM gtmId={process.env.NEXT_PUBLIC_GTM_ID?.trim() ?? ""} />
         <WebVitals />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem={false}
           disableTransitionOnChange
-          nonce={nonce}
         >
           <SidebarProvider defaultOpen={false}>
             <SidebarInset>{children}</SidebarInset>

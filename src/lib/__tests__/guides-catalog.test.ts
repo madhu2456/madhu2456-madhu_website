@@ -27,6 +27,7 @@ describe("guides RSS catalog", () => {
     expect(xml).toContain('<rss version="2.0"');
     expect(xml).toContain("application/rss+xml");
     expect(xml).toContain("https://madhudadi.in/guides/rss.xml");
+    expect(xml).toContain("<link>https://madhudadi.in/guides/</link>");
     expect(xml).toContain("ai-search-optimization-2026");
     expect(xml).toContain("<item>");
     expect((xml.match(/<item>/g) || []).length).toBe(PORTFOLIO_GUIDES.length);

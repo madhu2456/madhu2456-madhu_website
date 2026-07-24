@@ -6,10 +6,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { TrackedLink } from "@/components/TrackedLink";
-import type { NavigationItem, Profile } from "@/lib/portfolio-data";
+import type { NavigationItem } from "@/lib/portfolio-data";
 
 type HeaderProps = {
-  profile: Profile;
+  profile: { firstName?: string | null; lastName?: string | null };
   navigationItems: NavigationItem[];
 };
 
@@ -136,7 +136,7 @@ export function Header({ profile, navigationItems }: HeaderProps) {
           <div className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full border border-border/80 bg-surface shadow-inner transition-all duration-300 group-hover:scale-105 group-hover:border-primary/30">
             <Image
               src="/new-ui/logo.png"
-              alt=""
+              alt="Madhu Dadi"
               width={32}
               height={32}
               priority
@@ -202,12 +202,12 @@ export function Header({ profile, navigationItems }: HeaderProps) {
         <div className="flex items-center gap-1.5 sm:gap-2">
           {/* Single solid primary CTA — Resume lives in primary nav */}
           <TrackedLink
-            href="/contact/#intent=full-time"
+            href="/contact/"
             gtmEvent="hire_me_click"
             gtmData={{ click_location: "header" }}
             className="rounded-full bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground shadow-sm shadow-primary/25 transition-all duration-300 hover:scale-[1.04] hover:shadow-glow sm:px-5 sm:text-sm"
           >
-            Hire me
+            Contact
           </TrackedLink>
           <button
             type="button"
@@ -286,13 +286,13 @@ export function Header({ profile, navigationItems }: HeaderProps) {
               );
             })}
             <TrackedLink
-              href="/contact/#intent=full-time"
+              href="/contact/"
               gtmEvent="hire_me_click"
               gtmData={{ click_location: "mobile_nav" }}
               onClick={() => setIsMobileMenuOpen(false)}
               className="mt-2 text-center rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground shadow-sm shadow-primary/25 transition-all hover:scale-[1.02]"
             >
-              Hire me
+              Contact
             </TrackedLink>
           </nav>
         </div>

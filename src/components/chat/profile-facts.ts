@@ -4,8 +4,9 @@ const MAX_BIO_FACT_LENGTH = 120;
 
 const AVAILABILITY_FACTS: Record<"available" | "open" | "unavailable", string> =
   {
-    available: "Currently available for hire.",
-    open: "Open to new opportunities.",
+    available:
+      "Full-time role with select consulting capacity when projects fit.",
+    open: "Open to scoped consulting and full-time opportunities.",
     unavailable: "Currently focused on active commitments.",
   };
 
